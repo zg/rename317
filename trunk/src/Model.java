@@ -1347,8 +1347,8 @@ public final class Model extends Animable {
     public void method482(int j, int k, int l, int i1, int j1, int k1)
     {
         int i = 0; //was a parameter
-        int l1 = Texture.textureInt1;
-        int i2 = Texture.textureInt2;
+        int l1 = ThreeDimensionalDrawingArea.textureInt1;
+        int i2 = ThreeDimensionalDrawingArea.textureInt2;
         int j2 = modelIntArray1[i];
         int k2 = modelIntArray2[i];
         int l2 = modelIntArray1[j];
@@ -1460,16 +1460,16 @@ public final class Model extends Animable {
                 k4 /= i3;
                 i5 /= k5;
             }
-            int i6 = anInt1685 - Texture.textureInt1;
-            int k6 = anInt1686 - Texture.textureInt2;
+            int i6 = anInt1685 - ThreeDimensionalDrawingArea.textureInt1;
+            int k6 = anInt1686 - ThreeDimensionalDrawingArea.textureInt2;
             if(i6 > k3 && i6 < l3 && k6 > i5 && k6 < k4)
                 if(aBoolean1659)
                     anIntArray1688[anInt1687++] = i2;
                 else
                     flag1 = true;
         }
-        int l5 = Texture.textureInt1;
-        int j6 = Texture.textureInt2;
+        int l5 = ThreeDimensionalDrawingArea.textureInt1;
+        int j6 = ThreeDimensionalDrawingArea.textureInt2;
         int l6 = 0;
         int i7 = 0;
         if(i != 0)
@@ -1712,11 +1712,11 @@ public final class Model extends Animable {
         int j = anIntArray1631[i];
         int k = anIntArray1632[i];
         int l = anIntArray1633[i];
-        Texture.aBoolean1462 = aBooleanArray1663[i];
+        ThreeDimensionalDrawingArea.aBoolean1462 = aBooleanArray1663[i];
         if(anIntArray1639 == null)
-            Texture.anInt1465 = 0;
+            ThreeDimensionalDrawingArea.anInt1465 = 0;
         else
-            Texture.anInt1465 = anIntArray1639[i];
+            ThreeDimensionalDrawingArea.anInt1465 = anIntArray1639[i];
         int i1;
         if(anIntArray1637 == null)
             i1 = 0;
@@ -1724,12 +1724,12 @@ public final class Model extends Animable {
             i1 = anIntArray1637[i] & 3;
         if(i1 == 0)
         {
-            Texture.method374(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1635[i], anIntArray1636[i]);
+            ThreeDimensionalDrawingArea.method374(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1635[i], anIntArray1636[i]);
             return;
         }
         if(i1 == 1)
         {
-            Texture.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], modelIntArray3[anIntArray1634[i]]);
+            ThreeDimensionalDrawingArea.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], modelIntArray3[anIntArray1634[i]]);
             return;
         }
         if(i1 == 2)
@@ -1738,7 +1738,7 @@ public final class Model extends Animable {
             int l1 = anIntArray1643[j1];
             int j2 = anIntArray1644[j1];
             int l2 = anIntArray1645[j1];
-            Texture.method378(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1635[i], anIntArray1636[i], anIntArray1668[l1], anIntArray1668[j2], anIntArray1668[l2], anIntArray1669[l1], anIntArray1669[j2], anIntArray1669[l2], anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], anIntArray1640[i]);
+            ThreeDimensionalDrawingArea.method378(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1635[i], anIntArray1636[i], anIntArray1668[l1], anIntArray1668[j2], anIntArray1668[l2], anIntArray1669[l1], anIntArray1669[j2], anIntArray1669[l2], anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], anIntArray1640[i]);
             return;
         }
         if(i1 == 3)
@@ -1747,14 +1747,14 @@ public final class Model extends Animable {
             int i2 = anIntArray1643[k1];
             int k2 = anIntArray1644[k1];
             int i3 = anIntArray1645[k1];
-            Texture.method378(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[i2], anIntArray1668[k2], anIntArray1668[i3], anIntArray1669[i2], anIntArray1669[k2], anIntArray1669[i3], anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], anIntArray1640[i]);
+            ThreeDimensionalDrawingArea.method378(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[i2], anIntArray1668[k2], anIntArray1668[i3], anIntArray1669[i2], anIntArray1669[k2], anIntArray1669[i3], anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], anIntArray1640[i]);
         }
     }
 
     private void method485(int i)
     {
-        int j = Texture.textureInt1;
-        int k = Texture.textureInt2;
+        int j = ThreeDimensionalDrawingArea.textureInt1;
+        int k = ThreeDimensionalDrawingArea.textureInt2;
         int l = 0;
         int i1 = anIntArray1631[i];
         int j1 = anIntArray1632[i];
@@ -1845,21 +1845,21 @@ public final class Model extends Animable {
         int k7 = anIntArray1679[2];
         if((j3 - j4) * (k7 - j7) - (i7 - j7) * (j5 - j4) > 0)
         {
-            Texture.aBoolean1462 = false;
+            ThreeDimensionalDrawingArea.aBoolean1462 = false;
             if(l == 3)
             {
                 if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.centerX || j4 > DrawingArea.centerX || j5 > DrawingArea.centerX)
-                    Texture.aBoolean1462 = true;
+                    ThreeDimensionalDrawingArea.aBoolean1462 = true;
                 int l7;
                 if(anIntArray1637 == null)
                     l7 = 0;
                 else
                     l7 = anIntArray1637[i] & 3;
                 if(l7 == 0)
-                    Texture.method374(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
+                    ThreeDimensionalDrawingArea.method374(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
                 else
                 if(l7 == 1)
-                    Texture.method376(i7, j7, k7, j3, j4, j5, modelIntArray3[anIntArray1634[i]]);
+                    ThreeDimensionalDrawingArea.method376(i7, j7, k7, j3, j4, j5, modelIntArray3[anIntArray1634[i]]);
                 else
                 if(l7 == 2)
                 {
@@ -1867,7 +1867,7 @@ public final class Model extends Animable {
                     int k9 = anIntArray1643[j8];
                     int k10 = anIntArray1644[j8];
                     int k11 = anIntArray1645[j8];
-                    Texture.method378(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[k9], anIntArray1668[k10], anIntArray1668[k11], anIntArray1669[k9], anIntArray1669[k10], anIntArray1669[k11], anIntArray1670[k9], anIntArray1670[k10], anIntArray1670[k11], anIntArray1640[i]);
+                    ThreeDimensionalDrawingArea.method378(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[k9], anIntArray1668[k10], anIntArray1668[k11], anIntArray1669[k9], anIntArray1669[k10], anIntArray1669[k11], anIntArray1670[k9], anIntArray1670[k10], anIntArray1670[k11], anIntArray1640[i]);
                 } else
                 if(l7 == 3)
                 {
@@ -1875,13 +1875,13 @@ public final class Model extends Animable {
                     int l9 = anIntArray1643[k8];
                     int l10 = anIntArray1644[k8];
                     int l11 = anIntArray1645[k8];
-                    Texture.method378(i7, j7, k7, j3, j4, j5, anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11], anIntArray1669[l9], anIntArray1669[l10], anIntArray1669[l11], anIntArray1670[l9], anIntArray1670[l10], anIntArray1670[l11], anIntArray1640[i]);
+                    ThreeDimensionalDrawingArea.method378(i7, j7, k7, j3, j4, j5, anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11], anIntArray1669[l9], anIntArray1669[l10], anIntArray1669[l11], anIntArray1670[l9], anIntArray1670[l10], anIntArray1670[l11], anIntArray1640[i]);
                 }
             }
             if(l == 4)
             {
                 if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.centerX || j4 > DrawingArea.centerX || j5 > DrawingArea.centerX || anIntArray1678[3] < 0 || anIntArray1678[3] > DrawingArea.centerX)
-                    Texture.aBoolean1462 = true;
+                    ThreeDimensionalDrawingArea.aBoolean1462 = true;
                 int i8;
                 if(anIntArray1637 == null)
                     i8 = 0;
@@ -1889,15 +1889,15 @@ public final class Model extends Animable {
                     i8 = anIntArray1637[i] & 3;
                 if(i8 == 0)
                 {
-                    Texture.method374(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
-                    Texture.method374(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3]);
+                    ThreeDimensionalDrawingArea.method374(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
+                    ThreeDimensionalDrawingArea.method374(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3]);
                     return;
                 }
                 if(i8 == 1)
                 {
                     int l8 = modelIntArray3[anIntArray1634[i]];
-                    Texture.method376(i7, j7, k7, j3, j4, j5, l8);
-                    Texture.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8);
+                    ThreeDimensionalDrawingArea.method376(i7, j7, k7, j3, j4, j5, l8);
+                    ThreeDimensionalDrawingArea.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8);
                     return;
                 }
                 if(i8 == 2)
@@ -1906,8 +1906,8 @@ public final class Model extends Animable {
                     int i10 = anIntArray1643[i9];
                     int i11 = anIntArray1644[i9];
                     int i12 = anIntArray1645[i9];
-                    Texture.method378(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], anIntArray1669[i10], anIntArray1669[i11], anIntArray1669[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], anIntArray1640[i]);
-                    Texture.method378(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], anIntArray1669[i10], anIntArray1669[i11], anIntArray1669[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], anIntArray1640[i]);
+                    ThreeDimensionalDrawingArea.method378(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], anIntArray1669[i10], anIntArray1669[i11], anIntArray1669[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], anIntArray1640[i]);
+                    ThreeDimensionalDrawingArea.method378(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], anIntArray1669[i10], anIntArray1669[i11], anIntArray1669[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], anIntArray1640[i]);
                     return;
                 }
                 if(i8 == 3)
@@ -1916,8 +1916,8 @@ public final class Model extends Animable {
                     int j10 = anIntArray1643[j9];
                     int j11 = anIntArray1644[j9];
                     int j12 = anIntArray1645[j9];
-                    Texture.method378(i7, j7, k7, j3, j4, j5, anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], anIntArray1669[j10], anIntArray1669[j11], anIntArray1669[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], anIntArray1640[i]);
-                    Texture.method378(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], anIntArray1669[j10], anIntArray1669[j11], anIntArray1669[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], anIntArray1640[i]);
+                    ThreeDimensionalDrawingArea.method378(i7, j7, k7, j3, j4, j5, anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], anIntArray1669[j10], anIntArray1669[j11], anIntArray1669[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], anIntArray1640[i]);
+                    ThreeDimensionalDrawingArea.method378(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1634[i], anIntArray1634[i], anIntArray1634[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], anIntArray1669[j10], anIntArray1669[j11], anIntArray1669[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], anIntArray1640[i]);
                 }
             }
         }
@@ -2008,9 +2008,9 @@ public final class Model extends Animable {
 
     static 
     {
-        modelIntArray1 = Texture.SINE;
-        modelIntArray2 = Texture.COSINE;
-        modelIntArray3 = Texture.anIntArray1482;
-        modelIntArray4 = Texture.anIntArray1469;
+        modelIntArray1 = ThreeDimensionalDrawingArea.SINE;
+        modelIntArray2 = ThreeDimensionalDrawingArea.COSINE;
+        modelIntArray3 = ThreeDimensionalDrawingArea.colourMap;
+        modelIntArray4 = ThreeDimensionalDrawingArea.anIntArray1469;
     }
 }

@@ -227,7 +227,7 @@ public final class Stream extends NodeSub {
             return readUnsignedWord() - 49152;
     }
 
-    public int method422()
+    public int readSpaceSaver()
     {
         int i = buffer[currentOffset] & 0xff;
         if(i < 128)

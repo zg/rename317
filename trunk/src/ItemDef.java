@@ -277,9 +277,9 @@ public final class ItemDef
                 return null;
         }
         Sprite sprite2 = new Sprite(32, 32);
-        int k1 = Texture.textureInt1;
-        int l1 = Texture.textureInt2;
-        int ai[] = Texture.anIntArray1472;
+        int k1 = ThreeDimensionalDrawingArea.textureInt1;
+        int l1 = ThreeDimensionalDrawingArea.textureInt2;
+        int ai[] = ThreeDimensionalDrawingArea.anIntArray1472;
         int ai1[] = DrawingArea.pixels;
         int i2 = DrawingArea.width;
         int j2 = DrawingArea.height;
@@ -287,17 +287,17 @@ public final class ItemDef
         int l2 = DrawingArea.bottomX;
         int i3 = DrawingArea.topY;
         int j3 = DrawingArea.bottomY;
-        Texture.aBoolean1464 = false;
+        ThreeDimensionalDrawingArea.aBoolean1464 = false;
         DrawingArea.initDrawingArea(32, 32, sprite2.myPixels);
         DrawingArea.method336(32, 0, 0, 0, 32);
-        Texture.initialize();
+        ThreeDimensionalDrawingArea.initialize();
         int k3 = definition.modelZoom;
         if(k == -1)
             k3 = (int)((double)k3 * 1.5D);
         if(k > 0)
             k3 = (int)((double)k3 * 1.04D);
-        int l3 = Texture.SINE[definition.sprite_rotation_scale] * k3 >> 16;
-        int i4 = Texture.COSINE[definition.sprite_rotation_scale] * k3 >> 16;
+        int l3 = ThreeDimensionalDrawingArea.SINE[definition.sprite_rotation_scale] * k3 >> 16;
+        int i4 = ThreeDimensionalDrawingArea.COSINE[definition.sprite_rotation_scale] * k3 >> 16;
         model.method482(definition.modelRotation2, definition.anInt204, definition.sprite_rotation_scale, definition.modelOffset1, l3 + model.modelHeight / 2 + definition.modelOffset2, i4 + definition.modelOffset2);
         for(int i5 = 31; i5 >= 0; i5--)
         {
@@ -363,10 +363,10 @@ public final class ItemDef
             mruNodes1.removeFromCache(sprite2, i);
         DrawingArea.initDrawingArea(j2, i2, ai1);
         DrawingArea.setDrawingArea(j3, k2, l2, i3);
-        Texture.textureInt1 = k1;
-        Texture.textureInt2 = l1;
-        Texture.anIntArray1472 = ai;
-        Texture.aBoolean1464 = true;
+        ThreeDimensionalDrawingArea.textureInt1 = k1;
+        ThreeDimensionalDrawingArea.textureInt2 = l1;
+        ThreeDimensionalDrawingArea.anIntArray1472 = ai;
+        ThreeDimensionalDrawingArea.aBoolean1464 = true;
         if(definition.stackable)
             sprite2.anInt1444 = 33;
         else

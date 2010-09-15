@@ -60,10 +60,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="StillGraphics.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/StillGraphics.java">
+      <file leaf-file-name="MapRegion.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MapRegion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="21" selection-start="172" selection-end="172" vertical-scroll-proportion="-0.94750655">
+            <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.86614174">
               <folding />
             </state>
           </provider>
@@ -83,9 +83,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/TextDrawingArea.java" />
-        <option value="$PROJECT_DIR$/Animation.java" />
-        <option value="$PROJECT_DIR$/ItemDef.java" />
         <option value="$PROJECT_DIR$/GameObjectSpawnRequest.java" />
         <option value="$PROJECT_DIR$/RSApplet.java" />
         <option value="$PROJECT_DIR$/TextClass.java" />
@@ -99,6 +96,9 @@
         <option value="$PROJECT_DIR$/identityKit.java" />
         <option value="$PROJECT_DIR$/IdentityKit.java" />
         <option value="$PROJECT_DIR$/StillGraphics.java" />
+        <option value="$PROJECT_DIR$/Projectile.java" />
+        <option value="$PROJECT_DIR$/TileSetting.java" />
+        <option value="$PROJECT_DIR$/MapRegion.java" />
       </list>
     </option>
   </component>
@@ -324,34 +324,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RSApplet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="53" selection-start="2257" selection-end="2257" vertical-scroll-proportion="-4.4435697">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RSFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="12" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TextClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="32" selection-start="1797" selection-end="1797" vertical-scroll-proportion="-1.1863517">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BZIP2Decompressor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="510" column="53" selection-start="18085" selection-end="18085" vertical-scroll-proportion="0.42257217">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MRUNodes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="19" selection-start="193" selection-end="193" vertical-scroll-proportion="-2.5695539">
@@ -429,9 +401,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Projectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="59" selection-start="1980" selection-end="1980" vertical-scroll-proportion="0.19422573">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/StillGraphics.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="21" selection-start="172" selection-end="172" vertical-scroll-proportion="-0.94750655">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TileSetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="572" column="25" selection-start="16653" selection-end="16653" vertical-scroll-proportion="0.847769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="-2.097113">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MapRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.86614174">
           <folding />
         </state>
       </provider>
