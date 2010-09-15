@@ -6562,7 +6562,7 @@ public final class client extends RSApplet {
                             flag1 = true;
                     } else
                     {
-                        Stream stream = Sounds.method241(anIntArray1241[i], anIntArray1207[i]);
+                        Stream stream = Sounds.generateWaveData(anIntArray1241[i], anIntArray1207[i]);
                         if(System.currentTimeMillis() + (long)(stream.currentOffset / 22) > aLong1172 + (long)(anInt1257 / 22))
                         {
                             anInt1257 = stream.currentOffset;

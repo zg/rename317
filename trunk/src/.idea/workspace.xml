@@ -60,10 +60,19 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MapRegion.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapRegion.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MapRegion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.86614174">
+            <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sounds.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Sounds.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="97" column="57" selection-start="3078" selection-end="3078" vertical-scroll-proportion="0.27821523">
               <folding />
             </state>
           </provider>
@@ -83,7 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/GameObjectSpawnRequest.java" />
         <option value="$PROJECT_DIR$/RSApplet.java" />
         <option value="$PROJECT_DIR$/TextClass.java" />
         <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
@@ -99,6 +107,7 @@
         <option value="$PROJECT_DIR$/Projectile.java" />
         <option value="$PROJECT_DIR$/TileSetting.java" />
         <option value="$PROJECT_DIR$/MapRegion.java" />
+        <option value="$PROJECT_DIR$/Sounds.java" />
       </list>
     </option>
   </component>
@@ -324,13 +333,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MRUNodes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="193" selection-end="193" vertical-scroll-proportion="-2.5695539">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JagexArchive.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="53" column="57" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.44094488">
@@ -431,7 +433,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MapRegion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.86614174">
+        <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sounds.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="57" selection-start="3078" selection-end="3078" vertical-scroll-proportion="0.27821523">
           <folding />
         </state>
       </provider>
