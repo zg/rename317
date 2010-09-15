@@ -85,6 +85,7 @@
         <option value="$PROJECT_DIR$/SettingUsagePointers.java" />
         <option value="$PROJECT_DIR$/VarBit.java" />
         <option value="$PROJECT_DIR$/EntityDef.java" />
+        <option value="$PROJECT_DIR$/Flo.java" />
       </list>
     </option>
   </component>
@@ -310,13 +311,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GameObjectSpawnRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="15" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sign/signlink.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="57" column="67" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.9081365">
@@ -418,6 +412,13 @@
     <entry file="file://$PROJECT_DIR$/EntityDef.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="173" column="73" selection-start="5577" selection-end="5577" vertical-scroll-proportion="0.34383202">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="73" selection-start="175" selection-end="175" vertical-scroll-proportion="0.085427135">
           <folding />
         </state>
       </provider>
