@@ -161,7 +161,7 @@ stream = null;
             int j = varBit.configId;
             int k = varBit.rightShiftCount;
             int l = varBit.bit;
-            int i1 = client.anIntArray1232[l - k];
+            int i1 = client.powersOfTwo[l - k];
             i = clientInstance.variousSettings[j] >> k & i1;
         } else
         if(anInt749 != -1)
@@ -196,7 +196,7 @@ stream = null;
                 model = (Model) mruNodes1.insertFromCache(l2);
                 if(model == null)
                 {
-                    model = Model.method462(l2 & 0xffff);
+                    model = Model.getModel(l2 & 0xffff);
                     if(model == null)
                         return null;
                     if(flag1)
@@ -233,7 +233,7 @@ stream = null;
             model = (Model) mruNodes1.insertFromCache(j2);
             if(model == null)
             {
-                model = Model.method462(j2 & 0xffff);
+                model = Model.getModel(j2 & 0xffff);
                 if(model == null)
                     return null;
                 if(flag3)
@@ -248,24 +248,24 @@ stream = null;
         Model model_3 = new Model(modifiedModelColors == null, AnimationFrame.method532(k), l == 0 && k == -1 && !flag && !flag2, model);
         if(k != -1)
         {
-            model_3.method469();
-            model_3.method470(k);
-            model_3.anIntArrayArray1658 = null;
-            model_3.anIntArrayArray1657 = null;
+            model_3.calcSkinning();
+            model_3.applyTransform(k);
+            model_3.triangleSkin = null;
+            model_3.vertexSkin = null;
         }
         while(l-- > 0) 
             model_3.method473();
         if(modifiedModelColors != null)
         {
             for(int k2 = 0; k2 < modifiedModelColors.length; k2++)
-                model_3.method476(modifiedModelColors[k2], originalModelColors[k2]);
+                model_3.recolour(modifiedModelColors[k2], originalModelColors[k2]);
 
         }
         if(flag)
-            model_3.method478(anInt748, anInt740, anInt772);
+            model_3.scaleT(anInt748, anInt740, anInt772);
         if(flag2)
             model_3.method475(anInt738, anInt745, anInt783);
-        model_3.method479(64 + aByte737, 768 + aByte742 * 5, -50, -10, -50, !aBoolean769);
+        model_3.preprocess(64 + aByte737, 768 + aByte742 * 5, -50, -10, -50, !aBoolean769);
         if(anInt760 == 1)
             model_3.anInt1654 = model_3.modelHeight;
         mruNodes2.removeFromCache(model_3, l1);

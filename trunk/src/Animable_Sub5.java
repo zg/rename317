@@ -51,7 +51,7 @@ final class Animable_Sub5 extends Animable {
             int k = varBit.configId;
             int l = varBit.rightShiftCount;
             int i1 = varBit.bit;
-            int j1 = client.anIntArray1232[i1 - l];
+            int j1 = client.powersOfTwo[i1 - l];
             i = clientInstance.variousSettings[k] >> l & j1;
         } else
         if(anInt1602 != -1)

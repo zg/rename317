@@ -70,7 +70,7 @@ public final class IDK {
             return null;
         Model aclass30_sub2_sub4_sub6s[] = new Model[anIntArray658.length];
         for(int i = 0; i < anIntArray658.length; i++)
-            aclass30_sub2_sub4_sub6s[i] = Model.method462(anIntArray658[i]);
+            aclass30_sub2_sub4_sub6s[i] = Model.getModel(anIntArray658[i]);
 
         Model model;
         if(aclass30_sub2_sub4_sub6s.length == 1)
@@ -81,7 +81,7 @@ public final class IDK {
         {
             if(anIntArray659[j] == 0)
                 break;
-            model.method476(anIntArray659[j], anIntArray660[j]);
+            model.recolour(anIntArray659[j], anIntArray660[j]);
         }
 
         return model;
@@ -103,14 +103,14 @@ public final class IDK {
         int j = 0;
         for(int k = 0; k < 5; k++)
             if(anIntArray661[k] != -1)
-                aclass30_sub2_sub4_sub6s[j++] = Model.method462(anIntArray661[k]);
+                aclass30_sub2_sub4_sub6s[j++] = Model.getModel(anIntArray661[k]);
 
         Model model = new Model(j, aclass30_sub2_sub4_sub6s);
         for(int l = 0; l < 6; l++)
         {
             if(anIntArray659[l] == 0)
                 break;
-            model.method476(anIntArray659[l], anIntArray660[l]);
+            model.recolour(anIntArray659[l], anIntArray660[l]);
         }
 
         return model;

@@ -1946,7 +1946,7 @@ public final class client extends RSApplet {
             npc.anInt1555 = npc.desc.anInt58;
             npc.anInt1556 = npc.desc.anInt83;
             npc.anInt1557 = npc.desc.anInt55;
-            npc.anInt1511 = npc.desc.anInt77;
+            npc.anInt1511 = npc.desc.idleAnimation;
             npc.setPos(myPlayer.smallX[0] + i1, myPlayer.smallY[0] + l, j1 == 1);
         }
         stream.finishBitAccess();
@@ -5206,14 +5206,14 @@ public final class client extends RSApplet {
                 for(int l2 = 0; l2 < 5; l2++)
                     if(anIntArray990[l2] != 0)
                     {
-                        model.method476(anIntArrayArray1003[l2][0], anIntArrayArray1003[l2][anIntArray990[l2]]);
+                        model.recolour(anIntArrayArray1003[l2][0], anIntArrayArray1003[l2][anIntArray990[l2]]);
                         if(l2 == 1)
-                            model.method476(anIntArray1204[0], anIntArray1204[anIntArray990[l2]]);
+                            model.recolour(anIntArray1204[0], anIntArray1204[anIntArray990[l2]]);
                     }
 
-                model.method469();
-                model.method470(Animation.anims[myPlayer.anInt1511].frame2IDS[0]);
-                model.method479(64, 850, -30, -50, -30, true);
+                model.calcSkinning();
+                model.applyTransform(Animation.anims[myPlayer.anInt1511].frame2IDS[0]);
+                model.preprocess(64, 850, -30, -50, -30, true);
                 class9.anInt233 = 5;
                 class9.mediaID = 0;
                 RSInterface.method208(aBoolean994, model);
@@ -6342,7 +6342,7 @@ public final class client extends RSApplet {
                 npc.anInt1555 = npc.desc.anInt58;
                 npc.anInt1556 = npc.desc.anInt83;
                 npc.anInt1557 = npc.desc.anInt55;
-                npc.anInt1511 = npc.desc.anInt77;
+                npc.anInt1511 = npc.desc.idleAnimation;
             }
             if((l & 4) != 0)
             {
@@ -9021,7 +9021,7 @@ public final class client extends RSApplet {
                     int l3 = varBit.configId;
                     int i4 = varBit.rightShiftCount;
                     int j4 = varBit.bit;
-                    int k4 = anIntArray1232[j4 - i4];
+                    int k4 = powersOfTwo[j4 - i4];
                     k1 = variousSettings[l3] >> i4 & k4;
                 }
                 if(j1 == 15)
@@ -12166,7 +12166,7 @@ public final class client extends RSApplet {
     private boolean songChanging;
     private final int[] anIntArray1229;
     private Class11[] aClass11Array1230;
-    public static int anIntArray1232[];
+    public static int powersOfTwo[];
     private boolean aBoolean1233;
     private int[] anIntArray1234;
     private int[] anIntArray1235;
@@ -12234,11 +12234,11 @@ public final class client extends RSApplet {
             anIntArray1019[j] = i / 4;
         }
 
-        anIntArray1232 = new int[32];
+        powersOfTwo = new int[32];
         i = 2;
         for(int k = 0; k < 32; k++)
         {
-            anIntArray1232[k] = i - 1;
+            powersOfTwo[k] = i - 1;
             i += i;
         }
 

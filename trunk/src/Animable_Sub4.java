@@ -35,15 +35,15 @@ final class Animable_Sub4 extends Animable {
         Model model_1 = new Model(true, AnimationFrame.method532(j), false, model);
         if(j != -1)
         {
-            model_1.method469();
-            model_1.method470(j);
-            model_1.anIntArrayArray1658 = null;
-            model_1.anIntArrayArray1657 = null;
+            model_1.calcSkinning();
+            model_1.applyTransform(j);
+            model_1.triangleSkin = null;
+            model_1.vertexSkin = null;
         }
         if(aSpotAnim_1592.anInt410 != 128 || aSpotAnim_1592.anInt411 != 128)
-            model_1.method478(aSpotAnim_1592.anInt410, aSpotAnim_1592.anInt410, aSpotAnim_1592.anInt411);
+            model_1.scaleT(aSpotAnim_1592.anInt410, aSpotAnim_1592.anInt410, aSpotAnim_1592.anInt411);
         model_1.method474(anInt1596);
-        model_1.method479(64 + aSpotAnim_1592.anInt413, 850 + aSpotAnim_1592.anInt414, -30, -50, -30, true);
+        model_1.preprocess(64 + aSpotAnim_1592.anInt413, 850 + aSpotAnim_1592.anInt414, -30, -50, -30, true);
             return model_1;
     }
 

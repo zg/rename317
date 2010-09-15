@@ -24,13 +24,13 @@ public final class Player extends Entity
             {
                 Model model_3 = new Model(true, AnimationFrame.method532(super.anInt1521), false, model_2);
                 model_3.method475(0, -super.anInt1524, 0);
-                model_3.method469();
-                model_3.method470(spotAnim.aAnimation_407.frame2IDS[super.anInt1521]);
-                model_3.anIntArrayArray1658 = null;
-                model_3.anIntArrayArray1657 = null;
+                model_3.calcSkinning();
+                model_3.applyTransform(spotAnim.aAnimation_407.frame2IDS[super.anInt1521]);
+                model_3.triangleSkin = null;
+                model_3.vertexSkin = null;
                 if(spotAnim.anInt410 != 128 || spotAnim.anInt411 != 128)
-                    model_3.method478(spotAnim.anInt410, spotAnim.anInt410, spotAnim.anInt411);
-                model_3.method479(64 + spotAnim.anInt413, 850 + spotAnim.anInt414, -30, -50, -30, true);
+                    model_3.scaleT(spotAnim.anInt410, spotAnim.anInt410, spotAnim.anInt411);
+                model_3.preprocess(64 + spotAnim.anInt413, 850 + spotAnim.anInt414, -30, -50, -30, true);
                 Model aclass30_sub2_sub4_sub6_1s[] = {
                         model, model_3
                 };
@@ -259,13 +259,13 @@ public final class Player extends Entity
             for(int j3 = 0; j3 < 5; j3++)
                 if(anIntArray1700[j3] != 0)
                 {
-                    model_1.method476(client.anIntArrayArray1003[j3][0], client.anIntArrayArray1003[j3][anIntArray1700[j3]]);
+                    model_1.recolour(client.anIntArrayArray1003[j3][0], client.anIntArrayArray1003[j3][anIntArray1700[j3]]);
                     if(j3 == 1)
-                        model_1.method476(client.anIntArray1204[0], client.anIntArray1204[anIntArray1700[j3]]);
+                        model_1.recolour(client.anIntArray1204[0], client.anIntArray1204[anIntArray1700[j3]]);
                 }
 
-            model_1.method469();
-            model_1.method479(64, 850, -30, -50, -30, true);
+            model_1.calcSkinning();
+            model_1.preprocess(64, 850, -30, -50, -30, true);
             mruNodes.removeFromCache(model_1, l);
             aLong1697 = l;
         }
@@ -277,10 +277,10 @@ public final class Player extends Entity
             model_2.method471(Animation.anims[super.anim].animationFlowControl, i1, k);
         else
         if(k != -1)
-            model_2.method470(k);
+            model_2.applyTransform(k);
         model_2.method466();
-        model_2.anIntArrayArray1658 = null;
-        model_2.anIntArrayArray1657 = null;
+        model_2.triangleSkin = null;
+        model_2.vertexSkin = null;
         return model_2;
     }
 
@@ -331,9 +331,9 @@ public final class Player extends Entity
         for(int j1 = 0; j1 < 5; j1++)
             if(anIntArray1700[j1] != 0)
             {
-                model.method476(client.anIntArrayArray1003[j1][0], client.anIntArrayArray1003[j1][anIntArray1700[j1]]);
+                model.recolour(client.anIntArrayArray1003[j1][0], client.anIntArrayArray1003[j1][anIntArray1700[j1]]);
                 if(j1 == 1)
-                    model.method476(client.anIntArray1204[0], client.anIntArray1204[anIntArray1700[j1]]);
+                    model.recolour(client.anIntArray1204[0], client.anIntArray1204[anIntArray1700[j1]]);
             }
 
         return model;
