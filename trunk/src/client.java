@@ -6529,23 +6529,23 @@ public final class client extends RSApplet {
         int k = 0;
         int l = 0;
         if(gameObjectSpawnRequest.anInt1296 == 0)
-            i = worldController.method300(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298);
+            i = worldController.method300(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
         if(gameObjectSpawnRequest.anInt1296 == 1)
-            i = worldController.method301(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298);
+            i = worldController.method301(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
         if(gameObjectSpawnRequest.anInt1296 == 2)
-            i = worldController.method302(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298);
+            i = worldController.method302(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
         if(gameObjectSpawnRequest.anInt1296 == 3)
-            i = worldController.method303(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298);
+            i = worldController.method303(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
         if(i != 0)
         {
-            int i1 = worldController.method304(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298, i);
+            int i1 = worldController.method304(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z, i);
             j = i >> 14 & 0x7fff;
             k = i1 & 0x1f;
             l = i1 >> 6;
         }
-        gameObjectSpawnRequest.anInt1299 = j;
-        gameObjectSpawnRequest.anInt1301 = k;
-        gameObjectSpawnRequest.anInt1300 = l;
+        gameObjectSpawnRequest.id = j;
+        gameObjectSpawnRequest.type = k;
+        gameObjectSpawnRequest.face = l;
     }
 
     private void method90()
@@ -8593,23 +8593,23 @@ public final class client extends RSApplet {
                     gameObjectSpawnRequest.anInt1294--;
                 if(gameObjectSpawnRequest.anInt1294 == 0)
                 {
-                    if(gameObjectSpawnRequest.anInt1299 < 0 || ObjectManager.method178(gameObjectSpawnRequest.anInt1299, gameObjectSpawnRequest.anInt1301))
+                    if(gameObjectSpawnRequest.id < 0 || ObjectManager.method178(gameObjectSpawnRequest.id, gameObjectSpawnRequest.type))
                     {
-                        method142(gameObjectSpawnRequest.anInt1298, gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1300, gameObjectSpawnRequest.anInt1301, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1296, gameObjectSpawnRequest.anInt1299);
+                        method142(gameObjectSpawnRequest.z, gameObjectSpawnRequest.plane, gameObjectSpawnRequest.face, gameObjectSpawnRequest.type, gameObjectSpawnRequest.x, gameObjectSpawnRequest.anInt1296, gameObjectSpawnRequest.id);
                         gameObjectSpawnRequest.unlink();
                     }
                 } else
                 {
                     if(gameObjectSpawnRequest.anInt1302 > 0)
                         gameObjectSpawnRequest.anInt1302--;
-                    if(gameObjectSpawnRequest.anInt1302 == 0 && gameObjectSpawnRequest.anInt1297 >= 1 && gameObjectSpawnRequest.anInt1298 >= 1 && gameObjectSpawnRequest.anInt1297 <= 102 && gameObjectSpawnRequest.anInt1298 <= 102 && (gameObjectSpawnRequest.anInt1291 < 0 || ObjectManager.method178(gameObjectSpawnRequest.anInt1291, gameObjectSpawnRequest.anInt1293)))
+                    if(gameObjectSpawnRequest.anInt1302 == 0 && gameObjectSpawnRequest.x >= 1 && gameObjectSpawnRequest.z >= 1 && gameObjectSpawnRequest.x <= 102 && gameObjectSpawnRequest.z <= 102 && (gameObjectSpawnRequest.id2 < 0 || ObjectManager.method178(gameObjectSpawnRequest.id2, gameObjectSpawnRequest.type2)))
                     {
-                        method142(gameObjectSpawnRequest.anInt1298, gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1292, gameObjectSpawnRequest.anInt1293, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1296, gameObjectSpawnRequest.anInt1291);
+                        method142(gameObjectSpawnRequest.z, gameObjectSpawnRequest.plane, gameObjectSpawnRequest.face2, gameObjectSpawnRequest.type2, gameObjectSpawnRequest.x, gameObjectSpawnRequest.anInt1296, gameObjectSpawnRequest.id2);
                         gameObjectSpawnRequest.anInt1302 = -1;
-                        if(gameObjectSpawnRequest.anInt1291 == gameObjectSpawnRequest.anInt1299 && gameObjectSpawnRequest.anInt1299 == -1)
+                        if(gameObjectSpawnRequest.id2 == gameObjectSpawnRequest.id && gameObjectSpawnRequest.id == -1)
                             gameObjectSpawnRequest.unlink();
                         else
-                        if(gameObjectSpawnRequest.anInt1291 == gameObjectSpawnRequest.anInt1299 && gameObjectSpawnRequest.anInt1292 == gameObjectSpawnRequest.anInt1300 && gameObjectSpawnRequest.anInt1293 == gameObjectSpawnRequest.anInt1301)
+                        if(gameObjectSpawnRequest.id2 == gameObjectSpawnRequest.id && gameObjectSpawnRequest.face2 == gameObjectSpawnRequest.face && gameObjectSpawnRequest.type2 == gameObjectSpawnRequest.type)
                             gameObjectSpawnRequest.unlink();
                     }
                 }
@@ -9307,7 +9307,7 @@ public final class client extends RSApplet {
         GameObjectSpawnRequest gameObjectSpawnRequest = null;
         for(GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
         {
-            if(gameObjectSpawnRequest_1.anInt1295 != l1 || gameObjectSpawnRequest_1.anInt1297 != i2 || gameObjectSpawnRequest_1.anInt1298 != j1 || gameObjectSpawnRequest_1.anInt1296 != i1)
+            if(gameObjectSpawnRequest_1.plane != l1 || gameObjectSpawnRequest_1.x != i2 || gameObjectSpawnRequest_1.z != j1 || gameObjectSpawnRequest_1.anInt1296 != i1)
                 continue;
             gameObjectSpawnRequest = gameObjectSpawnRequest_1;
             break;
@@ -9316,16 +9316,16 @@ public final class client extends RSApplet {
         if(gameObjectSpawnRequest == null)
         {
             gameObjectSpawnRequest = new GameObjectSpawnRequest();
-            gameObjectSpawnRequest.anInt1295 = l1;
+            gameObjectSpawnRequest.plane = l1;
             gameObjectSpawnRequest.anInt1296 = i1;
-            gameObjectSpawnRequest.anInt1297 = i2;
-            gameObjectSpawnRequest.anInt1298 = j1;
+            gameObjectSpawnRequest.x = i2;
+            gameObjectSpawnRequest.z = j1;
             method89(gameObjectSpawnRequest);
             aClass19_1179.insertHead(gameObjectSpawnRequest);
         }
-        gameObjectSpawnRequest.anInt1291 = k;
-        gameObjectSpawnRequest.anInt1293 = k1;
-        gameObjectSpawnRequest.anInt1292 = l;
+        gameObjectSpawnRequest.id2 = k;
+        gameObjectSpawnRequest.type2 = k1;
+        gameObjectSpawnRequest.face2 = l;
         gameObjectSpawnRequest.anInt1302 = j2;
         gameObjectSpawnRequest.anInt1294 = j;
     }
@@ -10382,7 +10382,7 @@ public final class client extends RSApplet {
                 }
 
                 for(GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
-                    if(gameObjectSpawnRequest.anInt1297 >= anInt1268 && gameObjectSpawnRequest.anInt1297 < anInt1268 + 8 && gameObjectSpawnRequest.anInt1298 >= anInt1269 && gameObjectSpawnRequest.anInt1298 < anInt1269 + 8 && gameObjectSpawnRequest.anInt1295 == plane)
+                    if(gameObjectSpawnRequest.x >= anInt1268 && gameObjectSpawnRequest.x < anInt1268 + 8 && gameObjectSpawnRequest.z >= anInt1269 && gameObjectSpawnRequest.z < anInt1269 + 8 && gameObjectSpawnRequest.plane == plane)
                         gameObjectSpawnRequest.anInt1294 = 0;
 
                 pktType = -1;
@@ -10742,9 +10742,9 @@ public final class client extends RSApplet {
 
                 for(GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
                 {
-                    gameObjectSpawnRequest_1.anInt1297 -= i17;
-                    gameObjectSpawnRequest_1.anInt1298 -= j21;
-                    if(gameObjectSpawnRequest_1.anInt1297 < 0 || gameObjectSpawnRequest_1.anInt1298 < 0 || gameObjectSpawnRequest_1.anInt1297 >= 104 || gameObjectSpawnRequest_1.anInt1298 >= 104)
+                    gameObjectSpawnRequest_1.x -= i17;
+                    gameObjectSpawnRequest_1.z -= j21;
+                    if(gameObjectSpawnRequest_1.x < 0 || gameObjectSpawnRequest_1.z < 0 || gameObjectSpawnRequest_1.x >= 104 || gameObjectSpawnRequest_1.z >= 104)
                         gameObjectSpawnRequest_1.unlink();
                 }
 
