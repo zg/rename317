@@ -4,9 +4,9 @@
 
 public final class  Varp {
 
-    public static void unpackConfig(StreamLoader streamLoader)
+    public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(streamLoader.getDataForName("varp.dat"));
+        Stream stream = new Stream(jagexArchive.getDataForName("varp.dat"));
         anInt702 = 0;
         int cacheSize = stream.readUnsignedWord();
         if(cache == null)

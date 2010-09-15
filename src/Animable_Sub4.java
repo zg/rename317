@@ -32,7 +32,7 @@ final class Animable_Sub4 extends Animable {
         int j = -1;
         if(aSpotAnim_1592.aAnimation_407 != null)
             j = aSpotAnim_1592.aAnimation_407.anIntArray353[anInt1593];
-        Model model_1 = new Model(true, Class36.method532(j), false, model);
+        Model model_1 = new Model(true, AnimationFrame.method532(j), false, model);
         if(j != -1)
         {
             model_1.method469();

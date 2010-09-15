@@ -22,7 +22,7 @@ public final class Player extends Entity
             Model model_2 = spotAnim.getModel();
             if(model_2 != null)
             {
-                Model model_3 = new Model(true, Class36.method532(super.anInt1521), false, model_2);
+                Model model_3 = new Model(true, AnimationFrame.method532(super.anInt1521), false, model_2);
                 model_3.method475(0, -super.anInt1524, 0);
                 model_3.method469();
                 model_3.method470(spotAnim.aAnimation_407.anIntArray353[super.anInt1521]);
@@ -272,7 +272,7 @@ public final class Player extends Entity
         if(aBoolean1699)
             return model_1;
         Model model_2 = Model.aModel_1621;
-        model_2.method464(model_1, Class36.method532(k) & Class36.method532(i1));
+        model_2.method464(model_1, AnimationFrame.method532(k) & AnimationFrame.method532(i1));
         if(k != -1 && i1 != -1)
             model_2.method471(Animation.anims[super.anim].anIntArray357, i1, k);
         else

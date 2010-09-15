@@ -76,10 +76,10 @@ public final class EntityDef
             return forID(childrenIDs[j]);
     }
 
-    public static void unpackConfig(StreamLoader streamLoader)
+    public static void unpackConfig(JagexArchive jagexArchive)
     {
-        stream = new Stream(streamLoader.getDataForName("npc.dat"));
-        Stream stream2 = new Stream(streamLoader.getDataForName("npc.idx"));
+        stream = new Stream(jagexArchive.getDataForName("npc.dat"));
+        Stream stream2 = new Stream(jagexArchive.getDataForName("npc.idx"));
         int totalNPCs = stream2.readUnsignedWord();
         streamIndices = new int[totalNPCs];
         int i = 2;
@@ -142,7 +142,7 @@ public final class EntityDef
             mruNodes.removeFromCache(model, type);
         }
         Model model_1 = Model.aModel_1621;
-        model_1.method464(model, Class36.method532(k) & Class36.method532(j));
+        model_1.method464(model, AnimationFrame.method532(k) & AnimationFrame.method532(j));
         if(k != -1 && j != -1)
             model_1.method471(ai, j, k);
         else

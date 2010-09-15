@@ -4,9 +4,9 @@
 
 public final class Animation {
 
-    public static void unpackConfig(StreamLoader streamLoader)
+    public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(streamLoader.getDataForName("seq.dat"));
+        Stream stream = new Stream(jagexArchive.getDataForName("seq.dat"));
         int length = stream.readUnsignedWord();
         if(anims == null)
             anims = new Animation[length];
@@ -23,9 +23,9 @@ public final class Animation {
         int j = anIntArray355[i];
         if(j == 0)
         {
-            Class36 class36 = Class36.method531(anIntArray353[i]);
-            if(class36 != null)
-                j = anIntArray355[i] = class36.anInt636;
+            AnimationFrame animationFrame = AnimationFrame.method531(anIntArray353[i]);
+            if(animationFrame != null)
+                j = anIntArray355[i] = animationFrame.anInt636;
         }
         if(j == 0)
             j = 1;

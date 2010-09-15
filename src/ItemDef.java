@@ -33,10 +33,10 @@ public final class ItemDef
         return flag;
     }
 
-    public static void unpackConfig(StreamLoader streamLoader)
+    public static void unpackConfig(JagexArchive jagexArchive)
     {
-        stream = new Stream(streamLoader.getDataForName("obj.dat"));
-        Stream stream = new Stream(streamLoader.getDataForName("obj.idx"));
+        stream = new Stream(jagexArchive.getDataForName("obj.dat"));
+        Stream stream = new Stream(jagexArchive.getDataForName("obj.idx"));
         totalItems = stream.readUnsignedWord();
         streamIndices = new int[totalItems];
         int i = 2;
