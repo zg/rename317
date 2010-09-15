@@ -7,13 +7,13 @@ public final class NPC extends Entity
 
     private Model method450()
     {
-        if(super.anim >= 0 && super.anInt1529 == 0)
+        if(super.animation >= 0 && super.anInt1529 == 0)
         {
-            int k = Animation.anims[super.anim].frame2IDS[super.anInt1527];
+            int k = Animation.anims[super.animation].frame2IDS[super.anInt1527];
             int i1 = -1;
             if(super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511)
                 i1 = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
-            return desc.method164(i1, k, Animation.anims[super.anim].animationFlowControl);
+            return desc.method164(i1, k, Animation.anims[super.animation].animationFlowControl);
         }
         int l = -1;
         if(super.anInt1517 >= 0)

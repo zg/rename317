@@ -3,30 +3,30 @@
 // Decompiler options: packimports(3) 
 
 final class ObjectOnTile extends Animable {
-
+                     //ObjectAnimation
     public Model getRotatedModel()
     {
         int j = -1;
         if(aAnimation_1607 != null)
         {
-            int k = client.loopCycle - anInt1608;
+            int k = client.loopCycle - delay;
             if(k > 100 && aAnimation_1607.frameStep > 0)
                 k = 100;
-            while(k > aAnimation_1607.getFrameLength(anInt1599))
+            while(k > aAnimation_1607.getFrameLength(frame))
             {
-                k -= aAnimation_1607.getFrameLength(anInt1599);
-                anInt1599++;
-                if(anInt1599 < aAnimation_1607.frameCount)
+                k -= aAnimation_1607.getFrameLength(frame);
+                frame++;
+                if(frame < aAnimation_1607.frameCount)
                     continue;
-                anInt1599 -= aAnimation_1607.frameStep;
-                if(anInt1599 >= 0 && anInt1599 < aAnimation_1607.frameCount)
+                frame -= aAnimation_1607.frameStep;
+                if(frame >= 0 && frame < aAnimation_1607.frameCount)
                     continue;
                 aAnimation_1607 = null;
                 break;
             }
-            anInt1608 = client.loopCycle - k;
+            delay = client.loopCycle - k;
             if(aAnimation_1607 != null)
-                j = aAnimation_1607.frame2IDS[anInt1599];
+                j = aAnimation_1607.frame2IDS[frame];
         }
         ObjectDef class46;
         if(anIntArray1600 != null)
@@ -63,7 +63,7 @@ final class ObjectOnTile extends Animable {
     }
 
     public ObjectOnTile(int i, int j, int k, int l, int i1, int j1,
-                         int k1, int l1, boolean flag)
+                         int k1, int l1, boolean randomize)
     {
         anInt1610 = i;
         anInt1611 = k;
@@ -75,12 +75,12 @@ final class ObjectOnTile extends Animable {
         if(l1 != -1)
         {
             aAnimation_1607 = Animation.anims[l1];
-            anInt1599 = 0;
-            anInt1608 = client.loopCycle;
-            if(flag && aAnimation_1607.frameStep != -1)
+            frame = 0;
+            delay = client.loopCycle;
+            if(randomize && aAnimation_1607.frameStep != -1)
             {
-                anInt1599 = (int)(Math.random() * (double) aAnimation_1607.frameCount);
-                anInt1608 -= (int)(Math.random() * (double) aAnimation_1607.getFrameLength(anInt1599));
+                frame = (int)(Math.random() * (double) aAnimation_1607.frameCount);
+                delay -= (int)(Math.random() * (double) aAnimation_1607.getFrameLength(frame));
             }
         }
         ObjectDef class46 = ObjectDef.forID(anInt1610);
@@ -89,7 +89,7 @@ final class ObjectOnTile extends Animable {
         anIntArray1600 = class46.childrenIDs;
     }
 
-    private int anInt1599;
+    private int frame;
     private final int[] anIntArray1600;
     private final int anInt1601;
     private final int anInt1602;
@@ -98,7 +98,7 @@ final class ObjectOnTile extends Animable {
     private final int anInt1605;
     private final int anInt1606;
     private Animation aAnimation_1607;
-    private int anInt1608;
+    private int delay;
     public static client clientInstance;
     private final int anInt1610;
     private final int anInt1611;
