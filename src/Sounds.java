@@ -11,33 +11,33 @@ final class Sounds {
 
     public static void unpack(Stream stream)
     {
-        aByteArray327 = new byte[0x6baa8];
-        aStream_328 = new Stream(aByteArray327);
+        waveGenerationBuffer = new byte[0x6baa8];
+        waveGenerationStream = new Stream(waveGenerationBuffer);
         Class6.method166();
         do
         {
             int j = stream.readUnsignedWord();
             if(j == 65535)
                 return;
-            aSoundsArray325s[j] = new Sounds();
-            aSoundsArray325s[j].method242(stream);
-            anIntArray326[j] = aSoundsArray325s[j].method243();
+            sound_gererator_list[j] = new Sounds();
+            sound_gererator_list[j].load(stream);
+            anIntArray326[j] = sound_gererator_list[j].method243();
         } while(true);
     }
 
-    public static Stream method241(int i, int j)
+    public static Stream generateWaveData(int i, int j)
     {
-        if(aSoundsArray325s[j] != null)
+        if(sound_gererator_list[j] != null)
         {
-            Sounds sounds = aSoundsArray325s[j];
-            return sounds.method244(i);
+            Sounds sounds = sound_gererator_list[j];
+            return sounds.writeWaveHeader(i);
         } else
         {
             return null;
         }
     }
 
-    private void method242(Stream stream)
+    private void load(Stream stream)
     {
         for(int i = 0; i < 10; i++)
         {
@@ -76,25 +76,25 @@ final class Sounds {
         return j;
     }
 
-    private Stream method244(int i)
+    private Stream writeWaveHeader(int i)
     {
         int k = method245(i);
-        aStream_328.currentOffset = 0;
-        aStream_328.writeDWord(0x52494646);
-        aStream_328.method403(36 + k);
-        aStream_328.writeDWord(0x57415645);
-        aStream_328.writeDWord(0x666d7420);
-        aStream_328.method403(16);
-        aStream_328.method400(1);
-        aStream_328.method400(1);
-        aStream_328.method403(22050);
-        aStream_328.method403(22050);
-        aStream_328.method400(1);
-        aStream_328.method400(8);
-        aStream_328.writeDWord(0x64617461);
-        aStream_328.method403(k);
-        aStream_328.currentOffset += k;
-        return aStream_328;
+        waveGenerationStream.currentOffset = 0;
+        waveGenerationStream.writeDWord(0x52494646);//RIFF
+        waveGenerationStream.method403(36 + k);
+        waveGenerationStream.writeDWord(0x57415645);//Wave
+        waveGenerationStream.writeDWord(0x666d7420);//FMT
+        waveGenerationStream.method403(16);//PCM Header size
+        waveGenerationStream.method400(1);//PCM Audio size
+        waveGenerationStream.method400(1);//MONO
+        waveGenerationStream.method403(22050);//SampleRate
+        waveGenerationStream.method403(22050);//ByteRate
+        waveGenerationStream.method400(1);//BlockAlign
+        waveGenerationStream.method400(8);//bitsPerSample
+        waveGenerationStream.writeDWord(0x64617461);//data
+        waveGenerationStream.method403(k);
+        waveGenerationStream.currentOffset += k;
+        return waveGenerationStream;
     }
 
     private int method245(int i)
@@ -113,7 +113,7 @@ final class Sounds {
             i = 0;
         int k1 = l + (j1 - i1) * (i - 1);
         for(int l1 = 44; l1 < k1 + 44; l1++)
-            aByteArray327[l1] = -128;
+            waveGenerationBuffer[l1] = -128;
 
         for(int i2 = 0; i2 < 10; i2++)
             if(aClass6Array329[i2] != null)
@@ -122,7 +122,7 @@ final class Sounds {
                 int i3 = (aClass6Array329[i2].anInt114 * 22050) / 1000;
                 int ai[] = aClass6Array329[i2].method167(j2, aClass6Array329[i2].anInt113);
                 for(int l3 = 0; l3 < j2; l3++)
-                    aByteArray327[l3 + i3 + 44] += (byte)(ai[l3] >> 8);
+                    waveGenerationBuffer[l3 + i3 + 44] += (byte)(ai[l3] >> 8);
 
             }
 
@@ -133,12 +133,12 @@ final class Sounds {
             l += 44;
             int k2 = (k1 += 44) - l;
             for(int j3 = l - 1; j3 >= j1; j3--)
-                aByteArray327[j3 + k2] = aByteArray327[j3];
+                waveGenerationBuffer[j3 + k2] = waveGenerationBuffer[j3];
 
             for(int k3 = 1; k3 < i; k3++)
             {
                 int l2 = (j1 - i1) * k3;
-                System.arraycopy(aByteArray327, i1, aByteArray327, i1 + l2, j1 - i1);
+                System.arraycopy(waveGenerationBuffer, i1, waveGenerationBuffer, i1 + l2, j1 - i1);
 
             }
 
@@ -147,10 +147,10 @@ final class Sounds {
         return k1;
     }
 
-    private static final Sounds[] aSoundsArray325s = new Sounds[5000];
+    private static final Sounds[] sound_gererator_list = new Sounds[5000];
     public static final int[] anIntArray326 = new int[5000];
-    private static byte[] aByteArray327;
-    private static Stream aStream_328;
+    private static byte[] waveGenerationBuffer;
+    private static Stream waveGenerationStream;
     private final Class6[] aClass6Array329;
     private int anInt330;
     private int anInt331;
