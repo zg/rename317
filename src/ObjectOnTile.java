@@ -2,7 +2,7 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-final class Animable_Sub5 extends Animable {
+final class ObjectOnTile extends Animable {
 
     public Model getRotatedModel()
     {
@@ -62,7 +62,7 @@ final class Animable_Sub5 extends Animable {
             return ObjectDef.forID(anIntArray1600[i]);
     }
 
-    public Animable_Sub5(int i, int j, int k, int l, int i1, int j1,
+    public ObjectOnTile(int i, int j, int k, int l, int i1, int j1,
                          int k1, int l1, boolean flag)
     {
         anInt1610 = i;

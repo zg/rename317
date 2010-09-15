@@ -253,16 +253,16 @@ final class Class6
         }
         for(int j = 0; j < 10; j++)
         {
-            int k = stream.method422();
+            int k = stream.readSpaceSaver();
             if(k == 0)
                 break;
             anIntArray106[j] = k;
             anIntArray107[j] = stream.method421();
-            anIntArray108[j] = stream.method422();
+            anIntArray108[j] = stream.readSpaceSaver();
         }
 
-        anInt109 = stream.method422();
-        anInt110 = stream.method422();
+        anInt109 = stream.readSpaceSaver();
+        anInt110 = stream.readSpaceSaver();
         anInt113 = stream.readUnsignedWord();
         anInt114 = stream.readUnsignedWord();
         aClass39_111 = new Class39();

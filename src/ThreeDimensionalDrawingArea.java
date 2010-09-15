@@ -2,7 +2,7 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-final class Texture extends DrawingArea {
+final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     public static void nullLoader()
     {
@@ -17,7 +17,7 @@ final class Texture extends DrawingArea {
         anIntArrayArray1478 = null;
         anIntArrayArray1479 = null;
         anIntArray1480 = null;
-        anIntArray1482 = null;
+        colourMap = null;
         anIntArrayArray1483 = null;
     }
 
@@ -252,7 +252,7 @@ final class Texture extends DrawingArea {
                 k2 = method373(k2, d);
                 if(k2 == 0)
                     k2 = 1;
-                anIntArray1482[j++] = k2;
+                colourMap[j++] = k2;
             }
 
         }
@@ -766,7 +766,7 @@ final class Texture extends DrawingArea {
             {
                 while(--k >= 0) 
                 {
-                    j = anIntArray1482[j1 >> 8];
+                    j = colourMap[j1 >> 8];
                     j1 += l1;
                     ai[i++] = j;
                     ai[i++] = j;
@@ -776,7 +776,7 @@ final class Texture extends DrawingArea {
                 k = i1 - l & 3;
                 if(k > 0)
                 {
-                    j = anIntArray1482[j1 >> 8];
+                    j = colourMap[j1 >> 8];
                     do
                         ai[i++] = j;
                     while(--k > 0);
@@ -788,7 +788,7 @@ final class Texture extends DrawingArea {
                 int l2 = 256 - anInt1465;
                 while(--k >= 0) 
                 {
-                    j = anIntArray1482[j1 >> 8];
+                    j = colourMap[j1 >> 8];
                     j1 += l1;
                     j = ((j & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((j & 0xff00) * l2 >> 8 & 0xff00);
                     ai[i++] = j + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
@@ -799,7 +799,7 @@ final class Texture extends DrawingArea {
                 k = i1 - l & 3;
                 if(k > 0)
                 {
-                    j = anIntArray1482[j1 >> 8];
+                    j = colourMap[j1 >> 8];
                     j = ((j & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((j & 0xff00) * l2 >> 8 & 0xff00);
                     do
                         ai[i++] = j + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
@@ -829,7 +829,7 @@ final class Texture extends DrawingArea {
         {
             do
             {
-                ai[i++] = anIntArray1482[j1 >> 8];
+                ai[i++] = colourMap[j1 >> 8];
                 j1 += i2;
             } while(--k > 0);
             return;
@@ -838,7 +838,7 @@ final class Texture extends DrawingArea {
         int i3 = 256 - anInt1465;
         do
         {
-            j = anIntArray1482[j1 >> 8];
+            j = colourMap[j1 >> 8];
             j1 += i2;
             j = ((j & 0xff00ff) * i3 >> 8 & 0xff00ff) + ((j & 0xff00) * i3 >> 8 & 0xff00);
             ai[i++] = j + ((ai[i] & 0xff00ff) * k2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * k2 >> 8 & 0xff00);
@@ -2191,7 +2191,7 @@ final class Texture extends DrawingArea {
     private static int[][] anIntArrayArray1479 = new int[50][];
     public static int anIntArray1480[] = new int[50];
     public static int anInt1481;
-    public static int anIntArray1482[] = new int[0x10000];
+    public static int colourMap[] = new int[0x10000];
     private static int[][] anIntArrayArray1483 = new int[50][];
 
     static 
