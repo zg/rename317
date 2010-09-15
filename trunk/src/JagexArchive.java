@@ -12,7 +12,7 @@ final class JagexArchive {
         if(rawLength != resultLength)
         {
             byte abyte1[] = new byte[resultLength];
-            BZIP2Decompressor.method225(abyte1, resultLength, abyte0, rawLength, 6);
+            BZIP2Decompressor.decompress(abyte1, resultLength, abyte0, rawLength, 6);
             aByteArray726 = abyte1;
             stream = new Stream(aByteArray726);
             aBoolean732 = true;
@@ -52,7 +52,7 @@ final class JagexArchive {
                     abyte0 = new byte[anIntArray729[k]];
                 if(!aBoolean732)
                 {
-                    BZIP2Decompressor.method225(abyte0, anIntArray729[k], aByteArray726, anIntArray730[k], anIntArray731[k]);
+                    BZIP2Decompressor.decompress(abyte0, anIntArray729[k], aByteArray726, anIntArray730[k], anIntArray731[k]);
                 } else
                 {
                     System.arraycopy(aByteArray726, anIntArray731[k], abyte0, 0, anIntArray729[k]);
