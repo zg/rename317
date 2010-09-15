@@ -2008,8 +2008,8 @@ public final class Model extends Animable {
 
     static 
     {
-        modelIntArray1 = Texture.anIntArray1470;
-        modelIntArray2 = Texture.anIntArray1471;
+        modelIntArray1 = Texture.SINE;
+        modelIntArray2 = Texture.COSINE;
         modelIntArray3 = Texture.anIntArray1482;
         modelIntArray4 = Texture.anIntArray1469;
     }

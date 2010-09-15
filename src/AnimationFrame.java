@@ -2,12 +2,12 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-public final class Class36
+public final class AnimationFrame
 {
 
     public static void method528(int i)
     {
-        aClass36Array635 = new Class36[i + 1];
+        aAnimationFrameArray635 = new AnimationFrame[i + 1];
         aBooleanArray643 = new boolean[i + 1];
         for(int j = 0; j < i + 1; j++)
             aBooleanArray643[j] = true;
@@ -46,9 +46,9 @@ public final class Class36
         for(int l1 = 0; l1 < k1; l1++)
         {
             int i2 = stream_1.readUnsignedWord();
-            Class36 class36 = aClass36Array635[i2] = new Class36();
-            class36.anInt636 = stream_4.readUnsignedByte();
-            class36.aClass18_637 = class18;
+            AnimationFrame animationFrame = aAnimationFrameArray635[i2] = new AnimationFrame();
+            animationFrame.displayLength = stream_4.readUnsignedByte();
+            animationFrame.aClass18_637 = class18;
             int j2 = stream_1.readUnsignedByte();
             int k2 = -1;
             int l2 = 0;
@@ -95,17 +95,17 @@ public final class Class36
                 }
             }
 
-            class36.anInt638 = l2;
-            class36.anIntArray639 = new int[l2];
-            class36.anIntArray640 = new int[l2];
-            class36.anIntArray641 = new int[l2];
-            class36.anIntArray642 = new int[l2];
+            animationFrame.anInt638 = l2;
+            animationFrame.anIntArray639 = new int[l2];
+            animationFrame.anIntArray640 = new int[l2];
+            animationFrame.anIntArray641 = new int[l2];
+            animationFrame.anIntArray642 = new int[l2];
             for(int k3 = 0; k3 < l2; k3++)
             {
-                class36.anIntArray639[k3] = ai[k3];
-                class36.anIntArray640[k3] = ai1[k3];
-                class36.anIntArray641[k3] = ai2[k3];
-                class36.anIntArray642[k3] = ai3[k3];
+                animationFrame.anIntArray639[k3] = ai[k3];
+                animationFrame.anIntArray640[k3] = ai1[k3];
+                animationFrame.anIntArray641[k3] = ai2[k3];
+                animationFrame.anIntArray642[k3] = ai3[k3];
             }
 
         }
@@ -114,15 +114,15 @@ public final class Class36
 
     public static void nullLoader()
     {
-        aClass36Array635 = null;
+        aAnimationFrameArray635 = null;
     }
 
-    public static Class36 method531(int j)
+    public static AnimationFrame forID(int j)
     {
-        if(aClass36Array635 == null)
+        if(aAnimationFrameArray635 == null)
             return null;
         else
-            return aClass36Array635[j];
+            return aAnimationFrameArray635[j];
     }
 
     public static boolean method532(int i)
@@ -130,12 +130,12 @@ public final class Class36
         return i == -1;
     }
 
-    private Class36()
+    private AnimationFrame()
     {
     }
 
-    private static Class36[] aClass36Array635;
-    public int anInt636;
+    private static AnimationFrame[] aAnimationFrameArray635;
+    public int displayLength;
     public Class18 aClass18_637;
     public int anInt638;
     public int anIntArray639[];

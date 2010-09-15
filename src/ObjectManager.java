@@ -1016,7 +1016,7 @@ label0:
 
     private static int method184(int i, int j, int k, int l)
     {
-        int i1 = 0x10000 - Texture.anIntArray1471[(k * 1024) / l] >> 1;
+        int i1 = 0x10000 - Texture.COSINE[(k * 1024) / l] >> 1;
         return (i * (0x10000 - i1) >> 16) + (j * i1 >> 16);
     }
 

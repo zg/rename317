@@ -7017,7 +7017,7 @@ public final class client extends RSApplet {
             {
                 int k8 = 128 + i8 * 32 + 15;
                 int l8 = 600 + k8 * 3;
-                int i9 = Texture.anIntArray1470[k8];
+                int i9 = Texture.SINE[k8];
                 ai[i8] = l8 * i9 >> 16;
             }
 
@@ -7081,8 +7081,8 @@ public final class client extends RSApplet {
                 i -= 73;
                 j -= 75;
                 int k = minimapInt1 + minimapInt2 & 0x7ff;
-                int i1 = Texture.anIntArray1470[k];
-                int j1 = Texture.anIntArray1471[k];
+                int i1 = Texture.SINE[k];
+                int j1 = Texture.COSINE[k];
                 i1 = i1 * (minimapInt3 + 256) >> 8;
                 j1 = j1 * (minimapInt3 + 256) >> 8;
                 int k1 = j * i1 + i * j1 >> 11;
@@ -8045,8 +8045,8 @@ public final class client extends RSApplet {
                     int j4 = Texture.textureInt2;
                     Texture.textureInt1 = k2 + class9_1.width / 2;
                     Texture.textureInt2 = l2 + class9_1.height / 2;
-                    int i5 = Texture.anIntArray1470[class9_1.anInt270] * class9_1.anInt269 >> 16;
-                    int l5 = Texture.anIntArray1471[class9_1.anInt270] * class9_1.anInt269 >> 16;
+                    int i5 = Texture.SINE[class9_1.anInt270] * class9_1.anInt269 >> 16;
+                    int l5 = Texture.COSINE[class9_1.anInt270] * class9_1.anInt269 >> 16;
                     boolean flag2 = interfaceIsSelected(class9_1);
                     int i7;
                     if(flag2)
@@ -11163,7 +11163,7 @@ public final class client extends RSApplet {
                     ItemDef itemDef = ItemDef.forID(k18);
                     RSInterface.interfaceCache[i6].anInt233 = 4;
                     RSInterface.interfaceCache[i6].mediaID = k18;
-                    RSInterface.interfaceCache[i6].anInt270 = itemDef.modelRotation1;
+                    RSInterface.interfaceCache[i6].anInt270 = itemDef.sprite_rotation_scale;
                     RSInterface.interfaceCache[i6].anInt271 = itemDef.modelRotation2;
                     RSInterface.interfaceCache[i6].anInt269 = (itemDef.modelZoom * 100) / i13;
                     pktType = -1;

@@ -87,10 +87,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Animation.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Animation.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Animation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="59" selection-start="3642" selection-end="3642" vertical-scroll-proportion="0.35929647">
+            <state line="115" column="59" selection-start="3642" selection-end="3642" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemDef.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ItemDef.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="302" column="25" selection-start="9059" selection-end="9059" vertical-scroll-proportion="0.65088755">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Texture.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Texture.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -113,6 +131,7 @@
         <option value="$PROJECT_DIR$/TextClass.java" />
         <option value="$PROJECT_DIR$/TextDrawingArea.java" />
         <option value="$PROJECT_DIR$/Animation.java" />
+        <option value="$PROJECT_DIR$/ItemDef.java" />
       </list>
     </option>
   </component>
@@ -357,9 +376,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Texture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Animation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="59" selection-start="3642" selection-end="3642" vertical-scroll-proportion="0.35929647">
+        <state line="115" column="59" selection-start="3642" selection-end="3642" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ItemDef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="25" selection-start="9059" selection-end="9059" vertical-scroll-proportion="0.65088755">
           <folding />
         </state>
       </provider>
