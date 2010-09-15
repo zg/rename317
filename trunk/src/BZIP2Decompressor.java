@@ -4,7 +4,7 @@
 
 import java.io.PrintStream;
 
-final class Class13
+final class BZIP2Decompressor
 {
 
     public static int method225(byte abyte0[], int i, byte abyte1[], int j, int k)
