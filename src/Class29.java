@@ -35,7 +35,7 @@ final class Class29
         anInt545 = 0;
     }
 
-    int method328(int i)
+    int readEnvelope(int i)
     {
         if(anInt545 >= anInt541)
         {

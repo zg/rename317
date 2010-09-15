@@ -6,14 +6,14 @@ final class Sounds {
 
     private Sounds()
     {
-        aClass6Array329 = new Class6[10];
+        aSoundTrackArray329 = new SoundTrack[10];
     }
 
     public static void unpack(Stream stream)
     {
         waveGenerationBuffer = new byte[0x6baa8];
         waveGenerationStream = new Stream(waveGenerationBuffer);
-        Class6.method166();
+        SoundTrack.initialise();
         do
         {
             int j = stream.readUnsignedWord();
@@ -45,8 +45,8 @@ final class Sounds {
             if(j != 0)
             {
                 stream.currentOffset--;
-                aClass6Array329[i] = new Class6();
-                aClass6Array329[i].method169(stream);
+                aSoundTrackArray329[i] = new SoundTrack();
+                aSoundTrackArray329[i].unpack(stream);
             }
         }
         anInt330 = stream.readUnsignedWord();
@@ -57,16 +57,16 @@ final class Sounds {
     {
         int j = 0x98967f;
         for(int k = 0; k < 10; k++)
-            if(aClass6Array329[k] != null && aClass6Array329[k].anInt114 / 20 < j)
-                j = aClass6Array329[k].anInt114 / 20;
+            if(aSoundTrackArray329[k] != null && aSoundTrackArray329[k].anInt114 / 20 < j)
+                j = aSoundTrackArray329[k].anInt114 / 20;
 
         if(anInt330 < anInt331 && anInt330 / 20 < j)
             j = anInt330 / 20;
         if(j == 0x98967f || j == 0)
             return 0;
         for(int l = 0; l < 10; l++)
-            if(aClass6Array329[l] != null)
-                aClass6Array329[l].anInt114 -= j * 20;
+            if(aSoundTrackArray329[l] != null)
+                aSoundTrackArray329[l].anInt114 -= j * 20;
 
         if(anInt330 < anInt331)
         {
@@ -101,8 +101,8 @@ final class Sounds {
     {
         int j = 0;
         for(int k = 0; k < 10; k++)
-            if(aClass6Array329[k] != null && aClass6Array329[k].anInt113 + aClass6Array329[k].anInt114 > j)
-                j = aClass6Array329[k].anInt113 + aClass6Array329[k].anInt114;
+            if(aSoundTrackArray329[k] != null && aSoundTrackArray329[k].msLength + aSoundTrackArray329[k].anInt114 > j)
+                j = aSoundTrackArray329[k].msLength + aSoundTrackArray329[k].anInt114;
 
         if(j == 0)
             return 0;
@@ -116,11 +116,11 @@ final class Sounds {
             waveGenerationBuffer[l1] = -128;
 
         for(int i2 = 0; i2 < 10; i2++)
-            if(aClass6Array329[i2] != null)
+            if(aSoundTrackArray329[i2] != null)
             {
-                int j2 = (aClass6Array329[i2].anInt113 * 22050) / 1000;
-                int i3 = (aClass6Array329[i2].anInt114 * 22050) / 1000;
-                int ai[] = aClass6Array329[i2].method167(j2, aClass6Array329[i2].anInt113);
+                int j2 = (aSoundTrackArray329[i2].msLength * 22050) / 1000;
+                int i3 = (aSoundTrackArray329[i2].anInt114 * 22050) / 1000;
+                int ai[] = aSoundTrackArray329[i2].buildSoundData(j2, aSoundTrackArray329[i2].msLength);
                 for(int l3 = 0; l3 < j2; l3++)
                     waveGenerationBuffer[l3 + i3 + 44] += (byte)(ai[l3] >> 8);
 
@@ -151,7 +151,7 @@ final class Sounds {
     public static final int[] anIntArray326 = new int[5000];
     private static byte[] waveGenerationBuffer;
     private static Stream waveGenerationStream;
-    private final Class6[] aClass6Array329;
+    private final SoundTrack[] aSoundTrackArray329;
     private int anInt330;
     private int anInt331;
 
