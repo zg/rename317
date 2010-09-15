@@ -891,14 +891,14 @@ public final class Model extends Animable {
         AnimationFrame animationFrame = AnimationFrame.forID(i);
         if(animationFrame == null)
             return;
-        Class18 class18 = animationFrame.aClass18_637;
+        ModelTransform modelTransform = animationFrame.aModelTransform_637;
         anInt1681 = 0;
         anInt1682 = 0;
         anInt1683 = 0;
         for(int k = 0; k < animationFrame.anInt638; k++)
         {
             int l = animationFrame.anIntArray639[k];
-            method472(class18.anIntArray342[l], class18.anIntArrayArray343[l], animationFrame.anIntArray640[k], animationFrame.anIntArray641[k], animationFrame.anIntArray642[k]);
+            method472(modelTransform.opcodes[l], modelTransform.skinList[l], animationFrame.anIntArray640[k], animationFrame.anIntArray641[k], animationFrame.anIntArray642[k]);
         }
 
     }
@@ -921,7 +921,7 @@ public final class Model extends Animable {
             applyTransform(k);
             return;
         }
-        Class18 class18 = animationFrame.aClass18_637;
+        ModelTransform modelTransform = animationFrame.aModelTransform_637;
         anInt1681 = 0;
         anInt1682 = 0;
         anInt1683 = 0;
@@ -931,8 +931,8 @@ public final class Model extends Animable {
         {
             int k1;
             for(k1 = animationFrame.anIntArray639[j1]; k1 > i1; i1 = ai[l++]);
-            if(k1 != i1 || class18.anIntArray342[k1] == 0)
-                method472(class18.anIntArray342[k1], class18.anIntArrayArray343[k1], animationFrame.anIntArray640[j1], animationFrame.anIntArray641[j1], animationFrame.anIntArray642[j1]);
+            if(k1 != i1 || modelTransform.opcodes[k1] == 0)
+                method472(modelTransform.opcodes[k1], modelTransform.skinList[k1], animationFrame.anIntArray640[j1], animationFrame.anIntArray641[j1], animationFrame.anIntArray642[j1]);
         }
 
         anInt1681 = 0;
@@ -944,8 +944,8 @@ public final class Model extends Animable {
         {
             int i2;
             for(i2 = animationFrame_1.anIntArray639[l1]; i2 > i1; i1 = ai[l++]);
-            if(i2 == i1 || class18.anIntArray342[i2] == 0)
-                method472(class18.anIntArray342[i2], class18.anIntArrayArray343[i2], animationFrame_1.anIntArray640[l1], animationFrame_1.anIntArray641[l1], animationFrame_1.anIntArray642[l1]);
+            if(i2 == i1 || modelTransform.opcodes[i2] == 0)
+                method472(modelTransform.opcodes[i2], modelTransform.skinList[i2], animationFrame_1.anIntArray640[l1], animationFrame_1.anIntArray641[l1], animationFrame_1.anIntArray642[l1]);
         }
 
     }
