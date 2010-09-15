@@ -2,9 +2,9 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-final class Animable_Sub3 extends Animable {
+final class StillGraphics extends Animable {
 
-    public Animable_Sub3(int i, int j, int l, int i1, int j1, int k1,
+    public StillGraphics(int i, int j, int l, int i1, int j1, int k1,
                          int l1)
     {
         aBoolean1567 = false;
