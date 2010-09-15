@@ -59,7 +59,17 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="StillGraphics.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/StillGraphics.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="21" selection-start="172" selection-end="172" vertical-scroll-proportion="-0.94750655">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -88,6 +98,7 @@
         <option value="$PROJECT_DIR$/Flo.java" />
         <option value="$PROJECT_DIR$/identityKit.java" />
         <option value="$PROJECT_DIR$/IdentityKit.java" />
+        <option value="$PROJECT_DIR$/StillGraphics.java" />
       </list>
     </option>
   </component>
@@ -313,20 +324,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Censor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="43" selection-start="636" selection-end="636" vertical-scroll-proportion="0.53543305">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MouseDetection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="31" selection-start="353" selection-end="353" vertical-scroll-proportion="-0.580402">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RSApplet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="73" column="53" selection-start="2257" selection-end="2257" vertical-scroll-proportion="-4.4435697">
@@ -421,6 +418,20 @@
     <entry file="file://$PROJECT_DIR$/IdentityKit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="72" column="60" selection-start="2258" selection-end="2258" vertical-scroll-proportion="0.45477387">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpotAnim.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="170" selection-end="170" vertical-scroll-proportion="0.085427135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StillGraphics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="21" selection-start="172" selection-end="172" vertical-scroll-proportion="-0.94750655">
           <folding />
         </state>
       </provider>

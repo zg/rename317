@@ -7774,8 +7774,8 @@ public final class client extends RSApplet {
 
     private void method104()
     {
-        Animable_Sub3 class30_sub2_sub4_sub3 = (Animable_Sub3)aClass19_1056.reverseGetFirst();
-        for(; class30_sub2_sub4_sub3 != null; class30_sub2_sub4_sub3 = (Animable_Sub3)aClass19_1056.reverseGetNext())
+        StillGraphics class30_sub2_sub4_sub3 = (StillGraphics)aClass19_1056.reverseGetFirst();
+        for(; class30_sub2_sub4_sub3 != null; class30_sub2_sub4_sub3 = (StillGraphics)aClass19_1056.reverseGetNext())
             if(class30_sub2_sub4_sub3.anInt1560 != plane || class30_sub2_sub4_sub3.aBoolean1567)
                 class30_sub2_sub4_sub3.unlink();
             else
@@ -9897,7 +9897,7 @@ public final class client extends RSApplet {
             {
                 i5 = i5 * 128 + 64;
                 l7 = l7 * 128 + 64;
-                Animable_Sub3 class30_sub2_sub4_sub3 = new Animable_Sub3(plane, loopCycle, j15, k10, method42(plane, l7, i5) - l12, l7, i5);
+                StillGraphics class30_sub2_sub4_sub3 = new StillGraphics(plane, loopCycle, j15, k10, method42(plane, l7, i5) - l12, l7, i5);
                 aClass19_1056.insertHead(class30_sub2_sub4_sub3);
             }
             return;
