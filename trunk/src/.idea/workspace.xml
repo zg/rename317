@@ -60,10 +60,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JagexArchive.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/JagexArchive.java">
+      <file leaf-file-name="OnDemandFetcher.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/OnDemandFetcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="57" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.44094488">
+            <state line="126" column="42" selection-start="4800" selection-end="4800" vertical-scroll-proportion="0.31233597">
               <folding />
             </state>
           </provider>
@@ -91,6 +91,7 @@
         <option value="$PROJECT_DIR$/TextClass.java" />
         <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
         <option value="$PROJECT_DIR$/JagexArchive.java" />
+        <option value="$PROJECT_DIR$/OnDemandFetcher.java" />
       </list>
     </option>
   </component>
@@ -316,20 +317,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Texture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ItemDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="25" selection-start="9059" selection-end="9059" vertical-scroll-proportion="0.65088755">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Animation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="115" column="59" selection-start="3642" selection-end="3642" vertical-scroll-proportion="0.35929647">
@@ -407,9 +394,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MRUNodes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="19" selection-start="193" selection-end="193" vertical-scroll-proportion="-2.5695539">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/JagexArchive.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="53" column="57" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.44094488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RSSocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="12" selection-start="206" selection-end="206" vertical-scroll-proportion="-6.964824">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OnDemandData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.1281407">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OnDemandFetcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="42" selection-start="4800" selection-end="4800" vertical-scroll-proportion="0.31233597">
           <folding />
         </state>
       </provider>
