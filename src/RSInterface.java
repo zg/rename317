@@ -15,7 +15,7 @@ public final class RSInterface
         invStackSizes[j] = k;
     }
 
-    public static void unpack(JagexArchive jagexArchive, TextDrawingArea textDrawingAreas[], JagexArchive jagexArchive_1)
+    public static void unpack(JagexArchive jagexArchive, RSFont RSFonts[], JagexArchive jagexArchive_1)
     {
         aMRUNodes_238 = new MRUNodes(50000);
         Stream stream = new Stream(jagexArchive.getDataForName("data"));
@@ -135,8 +135,8 @@ public final class RSInterface
             {
                 rsInterface.aBoolean223 = stream.readUnsignedByte() == 1;
                 int k2 = stream.readUnsignedByte();
-                if(textDrawingAreas != null)
-                    rsInterface.textDrawingAreas = textDrawingAreas[k2];
+                if(RSFonts != null)
+                    rsInterface.textDrawingAreas = RSFonts[k2];
                 rsInterface.aBoolean268 = stream.readUnsignedByte() == 1;
             }
             if(rsInterface.type == 4)
@@ -201,8 +201,8 @@ public final class RSInterface
                 rsInterface.invStackSizes = new int[rsInterface.width * rsInterface.height];
                 rsInterface.aBoolean223 = stream.readUnsignedByte() == 1;
                 int l2 = stream.readUnsignedByte();
-                if(textDrawingAreas != null)
-                    rsInterface.textDrawingAreas = textDrawingAreas[l2];
+                if(RSFonts != null)
+                    rsInterface.textDrawingAreas = RSFonts[l2];
                 rsInterface.aBoolean268 = stream.readUnsignedByte() == 1;
                 rsInterface.textColor = stream.readDWord();
                 rsInterface.invSpritePadX = stream.readSignedWord();
@@ -356,7 +356,7 @@ public final class RSInterface
     public int children[];
     public int childX[];
     public boolean usableItemInterface;
-    public TextDrawingArea textDrawingAreas;
+    public RSFont textDrawingAreas;
     public int invSpritePadY;
     public int anIntArray245[];
     public int anInt246;

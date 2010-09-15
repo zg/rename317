@@ -4,9 +4,9 @@
 
 import java.util.Random;
 
-public final class TextDrawingArea extends DrawingArea {
+public final class RSFont extends DrawingArea {
 
-    public TextDrawingArea(boolean flag, String s, JagexArchive jagexArchive)
+    public RSFont(boolean flag, String s, JagexArchive jagexArchive)
     {
         glyphPixels = new byte[256][];
         glyphWidth = new int[256];
@@ -15,7 +15,7 @@ public final class TextDrawingArea extends DrawingArea {
         verticalKerning = new int[256];
         rsb = new int[256];
         aRandom1498 = new Random();
-        aBoolean1499 = false;
+        isStrikethrough = false;
         Stream data = new Stream(jagexArchive.getDataForName(s + ".dat"));
         Stream index = new Stream(jagexArchive.getDataForName("index.dat"));
         index.currentOffset = data.readUnsignedWord() + 4;
@@ -47,8 +47,8 @@ public final class TextDrawingArea extends DrawingArea {
                 }
 
             }
-            if(j1 > anInt1497 && l < 128)
-                anInt1497 = j1;
+            if(j1 > charHeight && l < 128)
+                charHeight = j1;
             horizontalKerning[l] = 1;
             rsb[l] = i1 + 2;
             int k2 = 0;
@@ -79,12 +79,12 @@ public final class TextDrawingArea extends DrawingArea {
 
     public void method380(String s, int i, int j, int k)
     {
-        method385(j, s, k, i - method384(s));
+        drawTextHLeftVMid(j, s, k, i - method384(s));
     }
 
     public void drawText(int i, String s, int k, int l)
     {
-        method385(i, s, k, l - method384(s) / 2);
+        drawTextHLeftVMid(i, s, k, l - method384(s) / 2);
     }
 
     public void method382(int i, int j, String s, int l, boolean flag)
@@ -116,11 +116,11 @@ public final class TextDrawingArea extends DrawingArea {
         return j;
     }
 
-    public void method385(int i, String s, int j, int l)
+    public void drawTextHLeftVMid(int i, String s, int j, int l)
     {
         if(s == null)
             return;
-        j -= anInt1497;
+        j -= charHeight;
         for(int i1 = 0; i1 < s.length(); i1++)
         {
             char c = s.charAt(i1);
@@ -135,7 +135,7 @@ public final class TextDrawingArea extends DrawingArea {
         if(s == null)
             return;
         j -= method384(s) / 2;
-        l -= anInt1497;
+        l -= charHeight;
         for(int i1 = 0; i1 < s.length(); i1++)
         {
             char c = s.charAt(i1);
@@ -151,7 +151,7 @@ public final class TextDrawingArea extends DrawingArea {
         if(s == null)
             return;
         i -= method384(s) / 2;
-        k -= anInt1497;
+        k -= charHeight;
         for(int i1 = 0; i1 < s.length(); i1++)
         {
             char c = s.charAt(i1);
@@ -170,7 +170,7 @@ public final class TextDrawingArea extends DrawingArea {
         if(d < 0.0D)
             d = 0.0D;
         l -= method384(s) / 2;
-        k -= anInt1497;
+        k -= charHeight;
         for(int k1 = 0; k1 < s.length(); k1++)
         {
             char c = s.charAt(k1);
@@ -183,11 +183,11 @@ public final class TextDrawingArea extends DrawingArea {
 
     public void method389(boolean flag1, int i, int j, String s, int k)
     {
-        aBoolean1499 = false;
+        isStrikethrough = false;
         int l = i;
         if(s == null)
             return;
-        k -= anInt1497;
+        k -= charHeight;
         for(int i1 = 0; i1 < s.length(); i1++)
             if(s.charAt(i1) == '@' && i1 + 4 < s.length() && s.charAt(i1 + 4) == '@')
             {
@@ -206,31 +206,31 @@ public final class TextDrawingArea extends DrawingArea {
                 }
                 i += rsb[c];
             }
-        if(aBoolean1499)
-            DrawingArea.method339(k + (int)((double)anInt1497 * 0.69999999999999996D), 0x800000, i - l, l);
+        if(isStrikethrough)
+            DrawingArea.drawHLine(k + (int)((double) charHeight * 0.69999999999999996D), 0x800000, i - l, l);
     }
 
-    public void method390(int i, int j, String s, int k, int i1)
+    public void method390(int i, int j, String s, int k, int ypos)
     {
         if(s == null)
             return;
         aRandom1498.setSeed(k);
         int j1 = 192 + (aRandom1498.nextInt() & 0x1f);
-        i1 -= anInt1497;
-        for(int k1 = 0; k1 < s.length(); k1++)
-            if(s.charAt(k1) == '@' && k1 + 4 < s.length() && s.charAt(k1 + 4) == '@')
+        ypos -= charHeight;
+        for(int cpos = 0; cpos < s.length(); cpos++)
+            if(s.charAt(cpos) == '@' && cpos + 4 < s.length() && s.charAt(cpos + 4) == '@')
             {
-                int l1 = getColorByName(s.substring(k1 + 1, k1 + 4));
+                int l1 = getColorByName(s.substring(cpos + 1, cpos + 4));
                 if(l1 != -1)
                     j = l1;
-                k1 += 4;
+                cpos += 4;
             } else
             {
-                char c = s.charAt(k1);
+                char c = s.charAt(cpos);
                 if(c != ' ')
                 {
-                        method394(192, i + horizontalKerning[c] + 1, glyphPixels[c], glyphWidth[c], i1 + verticalKerning[c] + 1, glyphHeight[c], 0);
-                    method394(j1, i + horizontalKerning[c], glyphPixels[c], glyphWidth[c], i1 + verticalKerning[c], glyphHeight[c], j);
+                        method394(192, i + horizontalKerning[c] + 1, glyphPixels[c], glyphWidth[c], ypos + verticalKerning[c] + 1, glyphHeight[c], 0);
+                    method394(j1, i + horizontalKerning[c], glyphPixels[c], glyphWidth[c], ypos + verticalKerning[c], glyphHeight[c], j);
                 }
                 i += rsb[c];
                 if((aRandom1498.nextInt() & 3) == 0)
@@ -276,9 +276,9 @@ public final class TextDrawingArea extends DrawingArea {
         if(s.equals("gr3"))
             return 0x40ff00;
         if(s.equals("str"))
-            aBoolean1499 = true;
+            isStrikethrough = true;
         if(s.equals("end"))
-            aBoolean1499 = false;
+            isStrikethrough = false;
         return -1;
     }
 
@@ -428,7 +428,7 @@ public final class TextDrawingArea extends DrawingArea {
     private final int[] horizontalKerning;
     private final int[] verticalKerning;
     private final int[] rsb;
-    public int anInt1497;
+    public int charHeight;
     private final Random aRandom1498;
-    private boolean aBoolean1499;
+    private boolean isStrikethrough;
 }
