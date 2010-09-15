@@ -60,10 +60,19 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OnDemandFetcher.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="OnDemandFetcher.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OnDemandFetcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="42" selection-start="4800" selection-end="4800" vertical-scroll-proportion="0.31233597">
+            <state line="126" column="42" selection-start="4800" selection-end="4800" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingUsagePointers.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SettingUsagePointers.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="43" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.5125628">
               <folding />
             </state>
           </provider>
@@ -92,6 +101,7 @@
         <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
         <option value="$PROJECT_DIR$/JagexArchive.java" />
         <option value="$PROJECT_DIR$/OnDemandFetcher.java" />
+        <option value="$PROJECT_DIR$/SettingUsagePointers.java" />
       </list>
     </option>
   </component>
@@ -317,13 +327,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Animation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="59" selection-start="3642" selection-end="3642" vertical-scroll-proportion="0.35929647">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Animable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="13" selection-start="164" selection-end="164" vertical-scroll-proportion="0.085427135">
@@ -424,7 +427,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OnDemandFetcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="42" selection-start="4800" selection-end="4800" vertical-scroll-proportion="0.31233597">
+        <state line="126" column="42" selection-start="4800" selection-end="4800" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SettingUsagePointers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="43" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.5125628">
           <folding />
         </state>
       </provider>
