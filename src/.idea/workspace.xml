@@ -69,10 +69,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingUsagePointers.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SettingUsagePointers.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SettingUsagePointers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="43" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.5125628">
+            <state line="74" column="43" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VarBit.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/VarBit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="19" selection-start="1201" selection-end="1201" vertical-scroll-proportion="-0.42211056">
               <folding />
             </state>
           </provider>
@@ -102,6 +111,7 @@
         <option value="$PROJECT_DIR$/JagexArchive.java" />
         <option value="$PROJECT_DIR$/OnDemandFetcher.java" />
         <option value="$PROJECT_DIR$/SettingUsagePointers.java" />
+        <option value="$PROJECT_DIR$/VarBit.java" />
       </list>
     </option>
   </component>
@@ -327,13 +337,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Animable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="164" selection-end="164" vertical-scroll-proportion="0.085427135">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TextDrawingArea.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="283" column="0" selection-start="8835" selection-end="8835" vertical-scroll-proportion="0.31233597">
@@ -434,7 +437,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SettingUsagePointers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="43" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.5125628">
+        <state line="74" column="43" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VarBit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="19" selection-start="1201" selection-end="1201" vertical-scroll-proportion="-0.42211056">
           <folding />
         </state>
       </provider>
