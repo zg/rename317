@@ -888,7 +888,7 @@ public final class Model extends Animable {
             return;
         if(i == -1)
             return;
-        AnimationFrame animationFrame = AnimationFrame.method531(i);
+        AnimationFrame animationFrame = AnimationFrame.forID(i);
         if(animationFrame == null)
             return;
         Class18 class18 = animationFrame.aClass18_637;
@@ -912,10 +912,10 @@ public final class Model extends Animable {
             method470(k);
             return;
         }
-        AnimationFrame animationFrame = AnimationFrame.method531(k);
+        AnimationFrame animationFrame = AnimationFrame.forID(k);
         if(animationFrame == null)
             return;
-        AnimationFrame animationFrame_1 = AnimationFrame.method531(j);
+        AnimationFrame animationFrame_1 = AnimationFrame.forID(j);
         if(animationFrame_1 == null)
         {
             method470(k);
