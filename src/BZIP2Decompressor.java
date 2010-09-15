@@ -167,33 +167,33 @@ label0:
         boolean flag19 = true;
         while(flag19) 
         {
-            byte byte0 = method228(BZ2Entry);
+            byte byte0 = getByte(BZ2Entry);
             if(byte0 == 23)
                 return;
-            byte0 = method228(BZ2Entry);
-            byte0 = method228(BZ2Entry);
-            byte0 = method228(BZ2Entry);
-            byte0 = method228(BZ2Entry);
-            byte0 = method228(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
             BZ2Entry.anInt579++;
-            byte0 = method228(BZ2Entry);
-            byte0 = method228(BZ2Entry);
-            byte0 = method228(BZ2Entry);
-            byte0 = method228(BZ2Entry);
-            byte0 = method229(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
+            byte0 = getBit(BZ2Entry);
             BZ2Entry.aBoolean575 = byte0 != 0;
             if(BZ2Entry.aBoolean575)
                 System.out.println("PANIC! RANDOMISED BLOCK!");
             BZ2Entry.anInt580 = 0;
-            byte0 = method228(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
             BZ2Entry.anInt580 = BZ2Entry.anInt580 << 8 | byte0 & 0xff;
-            byte0 = method228(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
             BZ2Entry.anInt580 = BZ2Entry.anInt580 << 8 | byte0 & 0xff;
-            byte0 = method228(BZ2Entry);
+            byte0 = getByte(BZ2Entry);
             BZ2Entry.anInt580 = BZ2Entry.anInt580 << 8 | byte0 & 0xff;
             for(int j = 0; j < 16; j++)
             {
-                byte byte1 = method229(BZ2Entry);
+                byte byte1 = getBit(BZ2Entry);
                 BZ2Entry.aBooleanArray590[j] = byte1 == 1;
             }
 
@@ -205,7 +205,7 @@ label0:
                 {
                     for(int i3 = 0; i3 < 16; i3++)
                     {
-                        byte byte2 = method229(BZ2Entry);
+                        byte byte2 = getBit(BZ2Entry);
                         if(byte2 == 1)
                             BZ2Entry.aBooleanArray589[l * 16 + i3] = true;
                     }
@@ -214,14 +214,14 @@ label0:
 
             method231(BZ2Entry);
             int i4 = BZ2Entry.anInt588 + 2;
-            int j4 = method230(3, BZ2Entry);
-            int k4 = method230(15, BZ2Entry);
+            int j4 = getBits(3, BZ2Entry);
+            int k4 = getBits(15, BZ2Entry);
             for(int i1 = 0; i1 < k4; i1++)
             {
                 int j3 = 0;
                 do
                 {
-                    byte byte3 = method229(BZ2Entry);
+                    byte byte3 = getBit(BZ2Entry);
                     if(byte3 == 0)
                         break;
                     j3++;
@@ -246,15 +246,15 @@ label0:
 
             for(int k3 = 0; k3 < j4; k3++)
             {
-                int l6 = method230(5, BZ2Entry);
+                int l6 = getBits(5, BZ2Entry);
                 for(int k1 = 0; k1 < i4; k1++)
                 {
                     do
                     {
-                        byte byte4 = method229(BZ2Entry);
+                        byte byte4 = getBit(BZ2Entry);
                         if(byte4 == 0)
                             break;
-                        byte4 = method229(BZ2Entry);
+                        byte4 = getBit(BZ2Entry);
                         if(byte4 == 0)
                             l6++;
                         else
@@ -315,10 +315,10 @@ label0:
             int i7 = k8;
             int l7;
             byte byte9;
-            for(l7 = method230(i7, BZ2Entry); l7 > ai[i7]; l7 = l7 << 1 | byte9)
+            for(l7 = getBits(i7, BZ2Entry); l7 > ai[i7]; l7 = l7 << 1 | byte9)
             {
                 i7++;
-                byte9 = method229(BZ2Entry);
+                byte9 = getBit(BZ2Entry);
             }
 
             for(int k5 = ai2[l7 - ai1[i7]]; k5 != l4;)
@@ -348,10 +348,10 @@ label0:
                         int j7 = k8;
                         int i8;
                         byte byte10;
-                        for(i8 = method230(j7, BZ2Entry); i8 > ai[j7]; i8 = i8 << 1 | byte10)
+                        for(i8 = getBits(j7, BZ2Entry); i8 > ai[j7]; i8 = i8 << 1 | byte10)
                         {
                             j7++;
-                            byte10 = method229(BZ2Entry);
+                            byte10 = getBit(BZ2Entry);
                         }
 
                         k5 = ai2[i8 - ai1[j7]];
@@ -437,10 +437,10 @@ label0:
                     int k7 = k8;
                     int j8;
                     byte byte11;
-                    for(j8 = method230(k7, BZ2Entry); j8 > ai[k7]; j8 = j8 << 1 | byte11)
+                    for(j8 = getBits(k7, BZ2Entry); j8 > ai[k7]; j8 = j8 << 1 | byte11)
                     {
                         k7++;
-                        byte11 = method229(BZ2Entry);
+                        byte11 = getBit(BZ2Entry);
                     }
 
                     k5 = ai2[j8 - ai1[k7]];
@@ -474,17 +474,17 @@ label0:
         }
     }
 
-    private static byte method228(BZ2Entry BZ2Entry)
+    private static byte getByte(BZ2Entry BZ2Entry)
     {
-        return (byte)method230(8, BZ2Entry);
+        return (byte) getBits(8, BZ2Entry);
     }
 
-    private static byte method229(BZ2Entry BZ2Entry)
+    private static byte getBit(BZ2Entry BZ2Entry)
     {
-        return (byte)method230(1, BZ2Entry);
+        return (byte) getBits(1, BZ2Entry);
     }
 
-    private static int method230(int i, BZ2Entry BZ2Entry)
+    private static int getBits(int i, BZ2Entry BZ2Entry)
     {
         int j;
         do
