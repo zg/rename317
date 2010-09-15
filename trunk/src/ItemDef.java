@@ -156,7 +156,7 @@ public final class ItemDef
         modifiedModelColors = null;
         originalModelColors = null;
         modelZoom = 2000;
-        modelRotation1 = 0;
+        sprite_rotation_scale = 0;
         modelRotation2 = 0;
         anInt204 = 0;
         modelOffset1 = 0;
@@ -220,7 +220,7 @@ public final class ItemDef
         ItemDef itemDef = forID(certTemplateID);
         modelID = itemDef.modelID;
         modelZoom = itemDef.modelZoom;
-        modelRotation1 = itemDef.modelRotation1;
+        sprite_rotation_scale = itemDef.sprite_rotation_scale;
         modelRotation2 = itemDef.modelRotation2;
 
         anInt204 = itemDef.anInt204;
@@ -253,26 +253,26 @@ public final class ItemDef
             if(sprite != null)
                 return sprite;
         }
-        ItemDef itemDef = forID(i);
-        if(itemDef.stackIDs == null)
+        ItemDef definition = forID(i);
+        if(definition.stackIDs == null)
             j = -1;
         if(j > 1)
         {
             int i1 = -1;
             for(int j1 = 0; j1 < 10; j1++)
-                if(j >= itemDef.stackAmounts[j1] && itemDef.stackAmounts[j1] != 0)
-                    i1 = itemDef.stackIDs[j1];
+                if(j >= definition.stackAmounts[j1] && definition.stackAmounts[j1] != 0)
+                    i1 = definition.stackIDs[j1];
 
             if(i1 != -1)
-                itemDef = forID(i1);
+                definition = forID(i1);
         }
-        Model model = itemDef.method201(1);
+        Model model = definition.method201(1);
         if(model == null)
             return null;
         Sprite sprite = null;
-        if(itemDef.certTemplateID != -1)
+        if(definition.certTemplateID != -1)
         {
-            sprite = getSprite(itemDef.certID, 10, -1);
+            sprite = getSprite(definition.certID, 10, -1);
             if(sprite == null)
                 return null;
         }
@@ -290,15 +290,15 @@ public final class ItemDef
         Texture.aBoolean1464 = false;
         DrawingArea.initDrawingArea(32, 32, sprite2.myPixels);
         DrawingArea.method336(32, 0, 0, 0, 32);
-        Texture.method364();
-        int k3 = itemDef.modelZoom;
+        Texture.initialize();
+        int k3 = definition.modelZoom;
         if(k == -1)
             k3 = (int)((double)k3 * 1.5D);
         if(k > 0)
             k3 = (int)((double)k3 * 1.04D);
-        int l3 = Texture.anIntArray1470[itemDef.modelRotation1] * k3 >> 16;
-        int i4 = Texture.anIntArray1471[itemDef.modelRotation1] * k3 >> 16;
-        model.method482(itemDef.modelRotation2, itemDef.anInt204, itemDef.modelRotation1, itemDef.modelOffset1, l3 + model.modelHeight / 2 + itemDef.modelOffset2, i4 + itemDef.modelOffset2);
+        int l3 = Texture.SINE[definition.sprite_rotation_scale] * k3 >> 16;
+        int i4 = Texture.COSINE[definition.sprite_rotation_scale] * k3 >> 16;
+        model.method482(definition.modelRotation2, definition.anInt204, definition.sprite_rotation_scale, definition.modelOffset1, l3 + model.modelHeight / 2 + definition.modelOffset2, i4 + definition.modelOffset2);
         for(int i5 = 31; i5 >= 0; i5--)
         {
             for(int j4 = 31; j4 >= 0; j4--)
@@ -349,7 +349,7 @@ public final class ItemDef
             }
 
         }
-        if(itemDef.certTemplateID != -1)
+        if(definition.certTemplateID != -1)
         {
             int l5 = sprite.anInt1444;
             int j6 = sprite.anInt1445;
@@ -367,7 +367,7 @@ public final class ItemDef
         Texture.textureInt2 = l1;
         Texture.anIntArray1472 = ai;
         Texture.aBoolean1464 = true;
-        if(itemDef.stackable)
+        if(definition.stackable)
             sprite2.anInt1444 = 33;
         else
             sprite2.anInt1444 = 32;
@@ -451,7 +451,7 @@ public final class ItemDef
                 modelZoom = stream.readUnsignedWord();
             else
             if(i == 5)
-                modelRotation1 = stream.readUnsignedWord();
+                sprite_rotation_scale = stream.readUnsignedWord();
             else
             if(i == 6)
                 modelRotation2 = stream.readUnsignedWord();
@@ -616,7 +616,7 @@ public final class ItemDef
     private int anInt185;
     private int anInt188;
     public String actions[];
-    public int modelRotation1;
+    public int sprite_rotation_scale;
     private int anInt191;
     private int anInt192;
     private int[] stackIDs;

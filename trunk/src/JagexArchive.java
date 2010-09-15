@@ -2,9 +2,9 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-final class StreamLoader {
+final class JagexArchive {
 
-    public StreamLoader(byte abyte0[])
+    public JagexArchive(byte abyte0[])
     {
                Stream stream = new Stream(abyte0);
         int i = stream.read3Bytes();
