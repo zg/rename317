@@ -4,9 +4,9 @@
 
 public final class SpotAnim {
 
-    public static void unpackConfig(StreamLoader streamLoader)
+    public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(streamLoader.getDataForName("spotanim.dat"));
+        Stream stream = new Stream(jagexArchive.getDataForName("spotanim.dat"));
         int length = stream.readUnsignedWord();
         if(cache == null)
             cache = new SpotAnim[length];

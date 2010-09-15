@@ -4,9 +4,9 @@
 
 public final class Flo {
 
-    public static void unpackConfig(StreamLoader streamLoader)
+    public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(streamLoader.getDataForName("flo.dat"));
+        Stream stream = new Stream(jagexArchive.getDataForName("flo.dat"));
         int cacheSize = stream.readUnsignedWord();
         if(cache == null)
             cache = new Flo[cacheSize];

@@ -15,10 +15,10 @@ public final class RSInterface
         invStackSizes[j] = k;
     }
 
-    public static void unpack(StreamLoader streamLoader, TextDrawingArea textDrawingAreas[], StreamLoader streamLoader_1)
+    public static void unpack(JagexArchive jagexArchive, TextDrawingArea textDrawingAreas[], JagexArchive jagexArchive_1)
     {
         aMRUNodes_238 = new MRUNodes(50000);
-        Stream stream = new Stream(streamLoader.getDataForName("data"));
+        Stream stream = new Stream(jagexArchive.getDataForName("data"));
         int i = -1;
         int j = stream.readUnsignedWord();
         interfaceCache = new RSInterface[j];
@@ -112,10 +112,10 @@ public final class RSInterface
                         rsInterface.spritesX[j2] = stream.readSignedWord();
                         rsInterface.spritesY[j2] = stream.readSignedWord();
                         String s1 = stream.readString();
-                        if(streamLoader_1 != null && s1.length() > 0)
+                        if(jagexArchive_1 != null && s1.length() > 0)
                         {
                             int i5 = s1.lastIndexOf(",");
-                            rsInterface.sprites[j2] = method207(Integer.parseInt(s1.substring(i5 + 1)), streamLoader_1, s1.substring(0, i5));
+                            rsInterface.sprites[j2] = method207(Integer.parseInt(s1.substring(i5 + 1)), jagexArchive_1, s1.substring(0, i5));
                         }
                     }
                 }
@@ -155,16 +155,16 @@ public final class RSInterface
             if(rsInterface.type == 5)
             {
                 String s = stream.readString();
-                if(streamLoader_1 != null && s.length() > 0)
+                if(jagexArchive_1 != null && s.length() > 0)
                 {
                     int i4 = s.lastIndexOf(",");
-                    rsInterface.sprite1 = method207(Integer.parseInt(s.substring(i4 + 1)), streamLoader_1, s.substring(0, i4));
+                    rsInterface.sprite1 = method207(Integer.parseInt(s.substring(i4 + 1)), jagexArchive_1, s.substring(0, i4));
                 }
                 s = stream.readString();
-                if(streamLoader_1 != null && s.length() > 0)
+                if(jagexArchive_1 != null && s.length() > 0)
                 {
                     int j4 = s.lastIndexOf(",");
-                    rsInterface.sprite2 = method207(Integer.parseInt(s.substring(j4 + 1)), streamLoader_1, s.substring(0, j4));
+                    rsInterface.sprite2 = method207(Integer.parseInt(s.substring(j4 + 1)), jagexArchive_1, s.substring(0, j4));
                 }
             }
             if(rsInterface.type == 6)
@@ -268,7 +268,7 @@ public final class RSInterface
         return model;
     }
 
-    private static Sprite method207(int i, StreamLoader streamLoader, String s)
+    private static Sprite method207(int i, JagexArchive jagexArchive, String s)
     {
         long l = (TextClass.method585(s) << 8) + (long)i;
         Sprite sprite = (Sprite) aMRUNodes_238.insertFromCache(l);
@@ -276,7 +276,7 @@ public final class RSInterface
             return sprite;
         try
         {
-            sprite = new Sprite(streamLoader, s, i);
+            sprite = new Sprite(jagexArchive, s, i);
             aMRUNodes_238.removeFromCache(sprite, l);
         }
         catch(Exception _ex)
@@ -308,7 +308,7 @@ public final class RSInterface
             return null;
         if(k == -1 && j == -1 && model.anIntArray1640 == null)
             return model;
-        Model model_1 = new Model(true, Class36.method532(k) & Class36.method532(j), false, model);
+        Model model_1 = new Model(true, AnimationFrame.method532(k) & AnimationFrame.method532(j), false, model);
         if(k != -1 || j != -1)
             model_1.method469();
         if(k != -1)

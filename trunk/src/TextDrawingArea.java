@@ -6,7 +6,7 @@ import java.util.Random;
 
 public final class TextDrawingArea extends DrawingArea {
 
-    public TextDrawingArea(boolean flag, String s, StreamLoader streamLoader)
+    public TextDrawingArea(boolean flag, String s, JagexArchive jagexArchive)
     {
         glyphPixels = new byte[256][];
         glyphWidth = new int[256];
@@ -16,8 +16,8 @@ public final class TextDrawingArea extends DrawingArea {
         rsb = new int[256];
         aRandom1498 = new Random();
         aBoolean1499 = false;
-        Stream data = new Stream(streamLoader.getDataForName(s + ".dat"));
-        Stream index = new Stream(streamLoader.getDataForName("index.dat"));
+        Stream data = new Stream(jagexArchive.getDataForName(s + ".dat"));
+        Stream index = new Stream(jagexArchive.getDataForName("index.dat"));
         index.currentOffset = data.readUnsignedWord() + 4;
         int k = index.readUnsignedByte();
         if(k > 0)

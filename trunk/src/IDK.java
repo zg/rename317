@@ -4,9 +4,9 @@
 
 public final class IDK {
 
-    public static void unpackConfig(StreamLoader streamLoader)
+    public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(streamLoader.getDataForName("idk.dat"));
+        Stream stream = new Stream(jagexArchive.getDataForName("idk.dat"));
         length = stream.readUnsignedWord();
         if(cache == null)
             cache = new IDK[length];

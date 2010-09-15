@@ -64,13 +64,13 @@ final class Texture extends DrawingArea {
         }
     }
 
-    public static void method368(StreamLoader streamLoader)
+    public static void method368(JagexArchive jagexArchive)
     {
         anInt1473 = 0;
         for(int j = 0; j < 50; j++)
             try
             {
-                aBackgroundArray1474s[j] = new Background(streamLoader, String.valueOf(j), 0);
+                aBackgroundArray1474s[j] = new Background(jagexArchive, String.valueOf(j), 0);
                 if(lowMem && aBackgroundArray1474s[j].anInt1456 == 128)
                     aBackgroundArray1474s[j].method356();
                 else

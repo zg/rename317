@@ -5,9 +5,7 @@
 import java.applet.AppletContext;
 import java.awt.*;
 import java.io.*;
-import java.math.BigInteger;
 import java.net.*;
-import java.util.zip.CRC32;
 
 import sign.signlink;
 
@@ -2299,8 +2297,8 @@ public final class client extends RSApplet {
 
     private void loadTitleScreen()
     {
-        aBackground_966 = new Background(titleStreamLoader, "titlebox", 0);
-        aBackground_967 = new Background(titleStreamLoader, "titlebutton", 0);
+        aBackground_966 = new Background(titleJagexArchive, "titlebox", 0);
+        aBackground_967 = new Background(titleJagexArchive, "titlebutton", 0);
         aBackgroundArray1152s = new Background[12];
         int j = 0;
         try
@@ -2311,12 +2309,12 @@ public final class client extends RSApplet {
         if(j == 0)
         {
             for(int k = 0; k < 12; k++)
-                aBackgroundArray1152s[k] = new Background(titleStreamLoader, "runes", k);
+                aBackgroundArray1152s[k] = new Background(titleJagexArchive, "runes", k);
 
         } else
         {
             for(int l = 0; l < 12; l++)
-                aBackgroundArray1152s[l] = new Background(titleStreamLoader, "runes", 12 + (l & 3));
+                aBackgroundArray1152s[l] = new Background(titleJagexArchive, "runes", 12 + (l & 3));
 
         }
         aClass30_Sub2_Sub1_Sub1_1201 = new Sprite(128, 265);
@@ -2542,7 +2540,7 @@ public final class client extends RSApplet {
 
     private void drawLogo()
     {
-        byte abyte0[] = titleStreamLoader.getDataForName("title.dat");
+        byte abyte0[] = titleJagexArchive.getDataForName("title.dat");
         Sprite sprite = new Sprite(abyte0, this);
         aRSImageProducer_1110.initDrawingArea();
         sprite.method346(0, 0);
@@ -2590,7 +2588,7 @@ public final class client extends RSApplet {
         sprite.method346(254, -171);
         aRSImageProducer_1115.initDrawingArea();
             sprite.method346(-180, -171);
-            sprite = new Sprite(titleStreamLoader, "logo", 0);
+            sprite = new Sprite(titleJagexArchive, "logo", 0);
             aRSImageProducer_1107.initDrawingArea();
             sprite.drawSprite(382 - sprite.myWidth / 2 - 128, 18);
             sprite = null;
@@ -2621,7 +2619,7 @@ public final class client extends RSApplet {
                     }
                 }
                 if(onDemandData.dataType == 1 && onDemandData.buffer != null)
-                    Class36.method529(onDemandData.buffer);
+                    AnimationFrame.method529(onDemandData.buffer);
                 if(onDemandData.dataType == 2 && onDemandData.ID == nextSong && onDemandData.buffer != null)
                     saveMidi(songChanging, onDemandData.buffer);
                 if(onDemandData.dataType == 3 && loadingStage == 1)
@@ -3133,7 +3131,7 @@ public final class client extends RSApplet {
         DrawingArea.setAllPixelsToZero();
         aRSImageProducer_1115 = new RSImageProducer(75, 94, getGameComponent());
         DrawingArea.setAllPixelsToZero();
-        if(titleStreamLoader != null)
+        if(titleJagexArchive != null)
         {
             drawLogo();
             loadTitleScreen();
@@ -3146,7 +3144,7 @@ public final class client extends RSApplet {
         anInt1079 = i;
         aString1049 = s;
         resetImageProducers();
-        if(titleStreamLoader == null)
+        if(titleJagexArchive == null)
         {
             super.drawLoadingText(i, s);
             return;
@@ -3256,7 +3254,7 @@ public final class client extends RSApplet {
         return true;
     }
 
-    private StreamLoader streamLoaderForName(int i, String s, String s1, int j, int k)
+    private JagexArchive streamLoaderForName(int i, String s, String s1, int j, int k)
     {
         byte abyte0[] = null;
         int l = 5;
@@ -3275,8 +3273,8 @@ public final class client extends RSApplet {
         }
         if(abyte0 != null)
         {
-            StreamLoader streamLoader = new StreamLoader(abyte0);
-            return streamLoader;
+            JagexArchive jagexArchive = new JagexArchive(abyte0);
+            return jagexArchive;
         }
         int j1 = 0;
         while(abyte0 == null)
@@ -3392,8 +3390,8 @@ public final class client extends RSApplet {
 
         }
 
-        StreamLoader streamLoader_1 = new StreamLoader(abyte0);
-            return streamLoader_1;
+        JagexArchive jagexArchive_1 = new JagexArchive(abyte0);
+            return jagexArchive_1;
     }
 
     private void dropClient()
@@ -4645,7 +4643,7 @@ public final class client extends RSApplet {
         Texture.nullLoader();
         WorldController.nullLoader();
         Model.nullLoader();
-        Class36.nullLoader();
+        AnimationFrame.nullLoader();
         System.gc();
     }
 
@@ -6658,19 +6656,19 @@ public final class client extends RSApplet {
         try
         {
             connectServer();
-            titleStreamLoader = streamLoaderForName(1, "title screen", "title", expectedCRCs[1], 25);
-            aTextDrawingArea_1270 = new TextDrawingArea(false, "p11_full", titleStreamLoader);
-            aTextDrawingArea_1271 = new TextDrawingArea(false, "p12_full", titleStreamLoader);
-            chatTextDrawingArea = new TextDrawingArea(false, "b12_full", titleStreamLoader);
-            TextDrawingArea aTextDrawingArea_1273 = new TextDrawingArea(true, "q8_full", titleStreamLoader);
+            titleJagexArchive = streamLoaderForName(1, "title screen", "title", expectedCRCs[1], 25);
+            aTextDrawingArea_1270 = new TextDrawingArea(false, "p11_full", titleJagexArchive);
+            aTextDrawingArea_1271 = new TextDrawingArea(false, "p12_full", titleJagexArchive);
+            chatTextDrawingArea = new TextDrawingArea(false, "b12_full", titleJagexArchive);
+            TextDrawingArea aTextDrawingArea_1273 = new TextDrawingArea(true, "q8_full", titleJagexArchive);
             drawLogo();
             loadTitleScreen();
-            StreamLoader streamLoader = streamLoaderForName(2, "config", "config", expectedCRCs[2], 30);
-            StreamLoader streamLoader_1 = streamLoaderForName(3, "interface", "interface", expectedCRCs[3], 35);
-            StreamLoader streamLoader_2 = streamLoaderForName(4, "2d graphics", "media", expectedCRCs[4], 40);
-            StreamLoader streamLoader_3 = streamLoaderForName(6, "textures", "textures", expectedCRCs[6], 45);
-            StreamLoader streamLoader_4 = streamLoaderForName(7, "chat system", "wordenc", expectedCRCs[7], 50);
-            StreamLoader streamLoader_5 = streamLoaderForName(8, "sound effects", "sounds", expectedCRCs[8], 55);
+            JagexArchive jagexArchive = streamLoaderForName(2, "config", "config", expectedCRCs[2], 30);
+            JagexArchive jagexArchive_1 = streamLoaderForName(3, "interface", "interface", expectedCRCs[3], 35);
+            JagexArchive jagexArchive_2 = streamLoaderForName(4, "2d graphics", "media", expectedCRCs[4], 40);
+            JagexArchive jagexArchive_3 = streamLoaderForName(6, "textures", "textures", expectedCRCs[6], 45);
+            JagexArchive jagexArchive_4 = streamLoaderForName(7, "chat system", "wordenc", expectedCRCs[7], 50);
+            JagexArchive jagexArchive_5 = streamLoaderForName(8, "sound effects", "sounds", expectedCRCs[8], 55);
             byteGroundArray = new byte[4][104][104];
             intGroundArray = new int[4][105][105];
             worldController = new WorldController(intGroundArray);
@@ -6678,11 +6676,11 @@ public final class client extends RSApplet {
                 aClass11Array1230[j] = new Class11();
 
             aClass30_Sub2_Sub1_Sub1_1263 = new Sprite(512, 512);
-            StreamLoader streamLoader_6 = streamLoaderForName(5, "update list", "versionlist", expectedCRCs[5], 60);
+            JagexArchive jagexArchive_6 = streamLoaderForName(5, "update list", "versionlist", expectedCRCs[5], 60);
             drawLoadingText(60, "Connecting to update server");
             onDemandFetcher = new OnDemandFetcher();
-            onDemandFetcher.start(streamLoader_6, this);
-            Class36.method528(onDemandFetcher.getAnimCount());
+            onDemandFetcher.start(jagexArchive_6, this);
+            AnimationFrame.method528(onDemandFetcher.getAnimCount());
             Model.method459(onDemandFetcher.getVersionCount(0), onDemandFetcher);
             if(!lowMem)
             {
@@ -6823,105 +6821,105 @@ public final class client extends RSApplet {
 
             }
             drawLoadingText(80, "Unpacking media");
-            invBack = new Background(streamLoader_2, "invback", 0);
-            chatBack = new Background(streamLoader_2, "chatback", 0);
-            mapBack = new Background(streamLoader_2, "mapback", 0);
-            backBase1 = new Background(streamLoader_2, "backbase1", 0);
-            backBase2 = new Background(streamLoader_2, "backbase2", 0);
-            backHmid1 = new Background(streamLoader_2, "backhmid1", 0);
+            invBack = new Background(jagexArchive_2, "invback", 0);
+            chatBack = new Background(jagexArchive_2, "chatback", 0);
+            mapBack = new Background(jagexArchive_2, "mapback", 0);
+            backBase1 = new Background(jagexArchive_2, "backbase1", 0);
+            backBase2 = new Background(jagexArchive_2, "backbase2", 0);
+            backHmid1 = new Background(jagexArchive_2, "backhmid1", 0);
             for(int j3 = 0; j3 < 13; j3++)
-                sideIcons[j3] = new Background(streamLoader_2, "sideicons", j3);
+                sideIcons[j3] = new Background(jagexArchive_2, "sideicons", j3);
 
-            compass = new Sprite(streamLoader_2, "compass", 0);
-            mapEdge = new Sprite(streamLoader_2, "mapedge", 0);
+            compass = new Sprite(jagexArchive_2, "compass", 0);
+            mapEdge = new Sprite(jagexArchive_2, "mapedge", 0);
             mapEdge.method345();
             try
             {
                 for(int k3 = 0; k3 < 100; k3++)
-                    mapScenes[k3] = new Background(streamLoader_2, "mapscene", k3);
+                    mapScenes[k3] = new Background(jagexArchive_2, "mapscene", k3);
 
             }
             catch(Exception _ex) { }
             try
             {
                 for(int l3 = 0; l3 < 100; l3++)
-                    mapFunctions[l3] = new Sprite(streamLoader_2, "mapfunction", l3);
+                    mapFunctions[l3] = new Sprite(jagexArchive_2, "mapfunction", l3);
 
             }
             catch(Exception _ex) { }
             try
             {
                 for(int i4 = 0; i4 < 20; i4++)
-                    hitMarks[i4] = new Sprite(streamLoader_2, "hitmarks", i4);
+                    hitMarks[i4] = new Sprite(jagexArchive_2, "hitmarks", i4);
 
             }
             catch(Exception _ex) { }
             try
             {
                 for(int j4 = 0; j4 < 20; j4++)
-                    headIcons[j4] = new Sprite(streamLoader_2, "headicons", j4);
+                    headIcons[j4] = new Sprite(jagexArchive_2, "headicons", j4);
 
             }
             catch(Exception _ex) { }
-            mapFlag = new Sprite(streamLoader_2, "mapmarker", 0);
-            mapMarker = new Sprite(streamLoader_2, "mapmarker", 1);
+            mapFlag = new Sprite(jagexArchive_2, "mapmarker", 0);
+            mapMarker = new Sprite(jagexArchive_2, "mapmarker", 1);
             for(int k4 = 0; k4 < 8; k4++)
-                crosses[k4] = new Sprite(streamLoader_2, "cross", k4);
+                crosses[k4] = new Sprite(jagexArchive_2, "cross", k4);
 
-            mapDotItem = new Sprite(streamLoader_2, "mapdots", 0);
-            mapDotNPC = new Sprite(streamLoader_2, "mapdots", 1);
-            mapDotPlayer = new Sprite(streamLoader_2, "mapdots", 2);
-            mapDotFriend = new Sprite(streamLoader_2, "mapdots", 3);
-            mapDotTeam = new Sprite(streamLoader_2, "mapdots", 4);
-            scrollBar1 = new Background(streamLoader_2, "scrollbar", 0);
-            scrollBar2 = new Background(streamLoader_2, "scrollbar", 1);
-            redStone1 = new Background(streamLoader_2, "redstone1", 0);
-            redStone2 = new Background(streamLoader_2, "redstone2", 0);
-            redStone3 = new Background(streamLoader_2, "redstone3", 0);
-            redStone1_2 = new Background(streamLoader_2, "redstone1", 0);
+            mapDotItem = new Sprite(jagexArchive_2, "mapdots", 0);
+            mapDotNPC = new Sprite(jagexArchive_2, "mapdots", 1);
+            mapDotPlayer = new Sprite(jagexArchive_2, "mapdots", 2);
+            mapDotFriend = new Sprite(jagexArchive_2, "mapdots", 3);
+            mapDotTeam = new Sprite(jagexArchive_2, "mapdots", 4);
+            scrollBar1 = new Background(jagexArchive_2, "scrollbar", 0);
+            scrollBar2 = new Background(jagexArchive_2, "scrollbar", 1);
+            redStone1 = new Background(jagexArchive_2, "redstone1", 0);
+            redStone2 = new Background(jagexArchive_2, "redstone2", 0);
+            redStone3 = new Background(jagexArchive_2, "redstone3", 0);
+            redStone1_2 = new Background(jagexArchive_2, "redstone1", 0);
             redStone1_2.method358();
-            redStone2_2 = new Background(streamLoader_2, "redstone2", 0);
+            redStone2_2 = new Background(jagexArchive_2, "redstone2", 0);
             redStone2_2.method358();
-            redStone1_3 = new Background(streamLoader_2, "redstone1", 0);
+            redStone1_3 = new Background(jagexArchive_2, "redstone1", 0);
             redStone1_3.method359();
-            redStone2_3 = new Background(streamLoader_2, "redstone2", 0);
+            redStone2_3 = new Background(jagexArchive_2, "redstone2", 0);
             redStone2_3.method359();
-            redStone3_2 = new Background(streamLoader_2, "redstone3", 0);
+            redStone3_2 = new Background(jagexArchive_2, "redstone3", 0);
             redStone3_2.method359();
-            redStone1_4 = new Background(streamLoader_2, "redstone1", 0);
+            redStone1_4 = new Background(jagexArchive_2, "redstone1", 0);
             redStone1_4.method358();
             redStone1_4.method359();
-            redStone2_4 = new Background(streamLoader_2, "redstone2", 0);
+            redStone2_4 = new Background(jagexArchive_2, "redstone2", 0);
             redStone2_4.method358();
             redStone2_4.method359();
             for(int l4 = 0; l4 < 2; l4++)
-                modIcons[l4] = new Background(streamLoader_2, "mod_icons", l4);
+                modIcons[l4] = new Background(jagexArchive_2, "mod_icons", l4);
 
-            Sprite sprite = new Sprite(streamLoader_2, "backleft1", 0);
+            Sprite sprite = new Sprite(jagexArchive_2, "backleft1", 0);
             backLeftIP1 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
-            sprite = new Sprite(streamLoader_2, "backleft2", 0);
+            sprite = new Sprite(jagexArchive_2, "backleft2", 0);
             backLeftIP2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
-            sprite = new Sprite(streamLoader_2, "backright1", 0);
+            sprite = new Sprite(jagexArchive_2, "backright1", 0);
             backRightIP1 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
-            sprite = new Sprite(streamLoader_2, "backright2", 0);
+            sprite = new Sprite(jagexArchive_2, "backright2", 0);
             backRightIP2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
-            sprite = new Sprite(streamLoader_2, "backtop1", 0);
+            sprite = new Sprite(jagexArchive_2, "backtop1", 0);
             backTopIP1 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
-            sprite = new Sprite(streamLoader_2, "backvmid1", 0);
+            sprite = new Sprite(jagexArchive_2, "backvmid1", 0);
             backVmidIP1 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
-            sprite = new Sprite(streamLoader_2, "backvmid2", 0);
+            sprite = new Sprite(jagexArchive_2, "backvmid2", 0);
             backVmidIP2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
-            sprite = new Sprite(streamLoader_2, "backvmid3", 0);
+            sprite = new Sprite(jagexArchive_2, "backvmid3", 0);
             backVmidIP3 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
-            sprite = new Sprite(streamLoader_2, "backhmid2", 0);
+            sprite = new Sprite(jagexArchive_2, "backhmid2", 0);
             backVmidIP2_2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
             sprite.method346(0, 0);
             int i5 = (int)(Math.random() * 21D) - 10;
@@ -6937,24 +6935,24 @@ public final class client extends RSApplet {
             }
 
             drawLoadingText(83, "Unpacking textures");
-            Texture.method368(streamLoader_3);
+            Texture.method368(jagexArchive_3);
             Texture.method372(0.80000000000000004D);
             Texture.method367();
             drawLoadingText(86, "Unpacking config");
-            Animation.unpackConfig(streamLoader);
-            ObjectDef.unpackConfig(streamLoader);
-            Flo.unpackConfig(streamLoader);
-            ItemDef.unpackConfig(streamLoader);
-            EntityDef.unpackConfig(streamLoader);
-            IDK.unpackConfig(streamLoader);
-            SpotAnim.unpackConfig(streamLoader);
-            Varp.unpackConfig(streamLoader);
-            VarBit.unpackConfig(streamLoader);
+            Animation.unpackConfig(jagexArchive);
+            ObjectDef.unpackConfig(jagexArchive);
+            Flo.unpackConfig(jagexArchive);
+            ItemDef.unpackConfig(jagexArchive);
+            EntityDef.unpackConfig(jagexArchive);
+            IDK.unpackConfig(jagexArchive);
+            SpotAnim.unpackConfig(jagexArchive);
+            Varp.unpackConfig(jagexArchive);
+            VarBit.unpackConfig(jagexArchive);
             ItemDef.isMembers = isMembers;
             if(!lowMem)
             {
                 drawLoadingText(90, "Unpacking sounds");
-                byte abyte0[] = streamLoader_5.getDataForName("sounds.dat");
+                byte abyte0[] = jagexArchive_5.getDataForName("sounds.dat");
                 Stream stream = new Stream(abyte0);
                 Sounds.unpack(stream);
             }
@@ -6962,7 +6960,7 @@ public final class client extends RSApplet {
             TextDrawingArea aclass30_sub2_sub1_sub4s[] = {
                     aTextDrawingArea_1270, aTextDrawingArea_1271, chatTextDrawingArea, aTextDrawingArea_1273
             };
-            RSInterface.unpack(streamLoader_1, aclass30_sub2_sub1_sub4s, streamLoader_2);
+            RSInterface.unpack(jagexArchive_1, aclass30_sub2_sub1_sub4s, jagexArchive_2);
             drawLoadingText(100, "Preparing game engine");
             for(int j6 = 0; j6 < 33; j6++)
             {
@@ -7024,7 +7022,7 @@ public final class client extends RSApplet {
             }
 
             WorldController.method310(500, 800, 512, 334, ai);
-            Censor.loadConfig(streamLoader_4);
+            Censor.loadConfig(jagexArchive_4);
             mouseDetection = new MouseDetection(this);
             startRunnable(mouseDetection, 10);
             Animable_Sub5.clientInstance = this;
@@ -11995,7 +11993,7 @@ public final class client extends RSApplet {
     private String aString1049;
     private static int anInt1051;
     private final int[] anIntArray1052;
-    private StreamLoader titleStreamLoader;
+    private JagexArchive titleJagexArchive;
     private int anInt1054;
     private int anInt1055;
     private NodeList aClass19_1056;

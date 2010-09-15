@@ -40,10 +40,10 @@ public final class Sprite extends DrawingArea {
         }
     }
 
-    public Sprite(StreamLoader streamLoader, String s, int i)
+    public Sprite(JagexArchive jagexArchive, String s, int i)
     {
-        Stream stream = new Stream(streamLoader.getDataForName(s + ".dat"));
-        Stream stream_1 = new Stream(streamLoader.getDataForName("index.dat"));
+        Stream stream = new Stream(jagexArchive.getDataForName(s + ".dat"));
+        Stream stream_1 = new Stream(jagexArchive.getDataForName("index.dat"));
         stream_1.currentOffset = stream.readUnsignedWord();
         anInt1444 = stream_1.readUnsignedWord();
         anInt1445 = stream_1.readUnsignedWord();
