@@ -2,7 +2,7 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-public final class  Varp {
+public final class SettingUsagePointers {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
@@ -10,13 +10,13 @@ public final class  Varp {
         anInt702 = 0;
         int cacheSize = stream.readUnsignedWord();
         if(cache == null)
-            cache = new Varp[cacheSize];
+            cache = new SettingUsagePointers[cacheSize];
         if(anIntArray703 == null)
             anIntArray703 = new int[cacheSize];
         for(int j = 0; j < cacheSize; j++)
         {
             if(cache[j] == null)
-                cache[j] = new Varp();
+                cache[j] = new SettingUsagePointers();
             cache[j].readValues(stream, j);
         }
         if(stream.currentOffset != stream.buffer.length)
@@ -44,7 +44,7 @@ public final class  Varp {
                 dummy = 2;
             else
             if(j == 5)
-                anInt709 = stream.readUnsignedWord();
+                usage = stream.readUnsignedWord();
             else
             if(j == 6)
                 dummy = 2;
@@ -71,15 +71,15 @@ public final class  Varp {
         } while(true);
     }
 
-    private Varp()
+    private SettingUsagePointers()
     {
         aBoolean713 = false;
     }
 
-    public static Varp cache[];
+    public static SettingUsagePointers cache[];
     private static int anInt702;
     private static int[] anIntArray703;
-    public int anInt709;
+    public int usage;
     public boolean aBoolean713;
 
 }

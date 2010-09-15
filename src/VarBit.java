@@ -16,7 +16,7 @@ public final class VarBit {
                 cache[j] = new VarBit();
             cache[j].readValues(stream);
             if(cache[j].aBoolean651)
-                Varp.cache[cache[j].anInt648].aBoolean713 = true;
+                SettingUsagePointers.cache[cache[j].anInt648].aBoolean713 = true;
         }
 
         if(stream.currentOffset != stream.buffer.length)

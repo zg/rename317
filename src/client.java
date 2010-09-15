@@ -1177,7 +1177,7 @@ public final class client extends RSApplet {
 
     private void method33(int i)
     {
-        int j = Varp.cache[i].anInt709;
+        int j = SettingUsagePointers.cache[i].usage;
         if(j == 0)
             return;
         int k = variousSettings[i];
@@ -4637,7 +4637,7 @@ public final class client extends RSApplet {
         Animation.anims = null;
         SpotAnim.cache = null;
         SpotAnim.aMRUNodes_415 = null;
-        Varp.cache = null;
+        SettingUsagePointers.cache = null;
         super.fullGameScreen = null;
         Player.mruNodes = null;
         Texture.nullLoader();
@@ -6946,7 +6946,7 @@ public final class client extends RSApplet {
             EntityDef.unpackConfig(jagexArchive);
             IDK.unpackConfig(jagexArchive);
             SpotAnim.unpackConfig(jagexArchive);
-            Varp.unpackConfig(jagexArchive);
+            SettingUsagePointers.unpackConfig(jagexArchive);
             VarBit.unpackConfig(jagexArchive);
             ItemDef.isMembers = isMembers;
             if(!lowMem)
