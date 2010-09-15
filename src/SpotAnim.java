@@ -66,12 +66,12 @@ public final class SpotAnim {
         Model model = (Model) aMRUNodes_415.insertFromCache(anInt404);
         if(model != null)
             return model;
-        model = Model.method462(anInt405);
+        model = Model.getModel(anInt405);
         if(model == null)
             return null;
         for(int i = 0; i < 6; i++)
             if(anIntArray408[0] != 0)
-                model.method476(anIntArray408[i], anIntArray409[i]);
+                model.recolour(anIntArray408[i], anIntArray409[i]);
 
         aMRUNodes_415.removeFromCache(model, anInt404);
         return model;

@@ -40,7 +40,7 @@ public final class EntityDef
             return null;
         Model aclass30_sub2_sub4_sub6s[] = new Model[anIntArray73.length];
         for(int j = 0; j < anIntArray73.length; j++)
-            aclass30_sub2_sub4_sub6s[j] = Model.method462(anIntArray73[j]);
+            aclass30_sub2_sub4_sub6s[j] = Model.getModel(anIntArray73[j]);
 
         Model model;
         if(aclass30_sub2_sub4_sub6s.length == 1)
@@ -50,7 +50,7 @@ public final class EntityDef
         if(anIntArray76 != null)
         {
             for(int k = 0; k < anIntArray76.length; k++)
-                model.method476(anIntArray76[k], anIntArray70[k]);
+                model.recolour(anIntArray76[k], anIntArray70[k]);
 
         }
         return model;
@@ -65,7 +65,7 @@ public final class EntityDef
             int k = varBit.configId;
             int l = varBit.rightShiftCount;
             int i1 = varBit.bit;
-            int j1 = client.anIntArray1232[i1 - l];
+            int j1 = client.powersOfTwo[i1 - l];
             j = clientInstance.variousSettings[k] >> l & j1;
         } else
         if(anInt59 != -1)
@@ -103,7 +103,7 @@ public final class EntityDef
         stream = null;
     }
 
-    public Model method164(int j, int k, int ai[])
+    public Model method164(int j, int frameId, int ai[])
     {
         if(childrenIDs != null)
         {
@@ -111,7 +111,7 @@ public final class EntityDef
             if(entityDef == null)
                 return null;
             else
-                return entityDef.method164(j, k, ai);
+                return entityDef.method164(j, frameId, ai);
         }
         Model model = (Model) mruNodes.insertFromCache(type);
         if(model == null)
@@ -125,7 +125,7 @@ public final class EntityDef
                 return null;
             Model aclass30_sub2_sub4_sub6s[] = new Model[anIntArray94.length];
             for(int j1 = 0; j1 < anIntArray94.length; j1++)
-                aclass30_sub2_sub4_sub6s[j1] = Model.method462(anIntArray94[j1]);
+                aclass30_sub2_sub4_sub6s[j1] = Model.getModel(anIntArray94[j1]);
 
             if(aclass30_sub2_sub4_sub6s.length == 1)
                 model = aclass30_sub2_sub4_sub6s[0];
@@ -134,25 +134,25 @@ public final class EntityDef
             if(anIntArray76 != null)
             {
                 for(int k1 = 0; k1 < anIntArray76.length; k1++)
-                    model.method476(anIntArray76[k1], anIntArray70[k1]);
+                    model.recolour(anIntArray76[k1], anIntArray70[k1]);
 
             }
-            model.method469();
-            model.method479(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
+            model.calcSkinning();
+            model.preprocess(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
             mruNodes.removeFromCache(model, type);
         }
         Model model_1 = Model.aModel_1621;
-        model_1.method464(model, AnimationFrame.method532(k) & AnimationFrame.method532(j));
-        if(k != -1 && j != -1)
-            model_1.method471(ai, j, k);
+        model_1.method464(model, AnimationFrame.method532(frameId) & AnimationFrame.method532(j));
+        if(frameId != -1 && j != -1)
+            model_1.method471(ai, j, frameId);
         else
-        if(k != -1)
-            model_1.method470(k);
+        if(frameId != -1)
+            model_1.applyTransform(frameId);
         if(anInt91 != 128 || anInt86 != 128)
-            model_1.method478(anInt91, anInt91, anInt86);
+            model_1.scaleT(anInt91, anInt91, anInt86);
         model_1.method466();
-        model_1.anIntArrayArray1658 = null;
-        model_1.anIntArrayArray1657 = null;
+        model_1.triangleSkin = null;
+        model_1.vertexSkin = null;
         if(aByte68 == 1)
             model_1.aBoolean1659 = true;
         return model_1;
@@ -183,7 +183,7 @@ public final class EntityDef
                 aByte68 = stream.readSignedByte();
             else
             if(i == 13)
-                anInt77 = stream.readUnsignedWord();
+                idleAnimation = stream.readUnsignedWord();
             else
             if(i == 14)
                 anInt67 = stream.readUnsignedWord();
@@ -293,7 +293,7 @@ public final class EntityDef
         anInt67 = -1;
         aByte68 = 1;
         anInt75 = -1;
-        anInt77 = -1;
+        idleAnimation = -1;
         type = -1L;
         anInt79 = 32;
         anInt83 = -1;
@@ -321,7 +321,7 @@ public final class EntityDef
     private int[] anIntArray73;
     public int anInt75;
     private int[] anIntArray76;
-    public int anInt77;
+    public int idleAnimation;
     public long type;
     public int anInt79;
     private static EntityDef[] cache;

@@ -109,7 +109,7 @@ public final class Model extends Animable {
         aClass21Array1661[j] = null;
     }
 
-    public static Model method462(int j)
+    public static Model getModel(int j)
     {
         if(aClass21Array1661 == null)
             return null;
@@ -709,8 +709,8 @@ public final class Model extends Animable {
         anIntArray1640 = model.anIntArray1640;
         anIntArray1638 = model.anIntArray1638;
         anInt1641 = model.anInt1641;
-        anIntArrayArray1658 = model.anIntArrayArray1658;
-        anIntArrayArray1657 = model.anIntArrayArray1657;
+        triangleSkin = model.triangleSkin;
+        vertexSkin = model.vertexSkin;
         anIntArray1631 = model.anIntArray1631;
         anIntArray1632 = model.anIntArray1632;
         anIntArray1633 = model.anIntArray1633;
@@ -824,7 +824,7 @@ public final class Model extends Animable {
             anInt1652 = anInt1653 + (int)Math.sqrt(anInt1650 * anInt1650 + anInt1651 * anInt1651);
     }
 
-    public void method469()
+    public void calcSkinning()
     {
         if(anIntArray1655 != null)
         {
@@ -838,17 +838,17 @@ public final class Model extends Animable {
                     j = j1;
             }
 
-            anIntArrayArray1657 = new int[j + 1][];
+            vertexSkin = new int[j + 1][];
             for(int k1 = 0; k1 <= j; k1++)
             {
-                anIntArrayArray1657[k1] = new int[ai[k1]];
+                vertexSkin[k1] = new int[ai[k1]];
                 ai[k1] = 0;
             }
 
             for(int j2 = 0; j2 < anInt1626; j2++)
             {
                 int l2 = anIntArray1655[j2];
-                anIntArrayArray1657[l2][ai[l2]++] = j2;
+                vertexSkin[l2][ai[l2]++] = j2;
             }
 
             anIntArray1655 = null;
@@ -865,26 +865,26 @@ public final class Model extends Animable {
                     k = l1;
             }
 
-            anIntArrayArray1658 = new int[k + 1][];
+            triangleSkin = new int[k + 1][];
             for(int i2 = 0; i2 <= k; i2++)
             {
-                anIntArrayArray1658[i2] = new int[ai1[i2]];
+                triangleSkin[i2] = new int[ai1[i2]];
                 ai1[i2] = 0;
             }
 
             for(int k2 = 0; k2 < anInt1630; k2++)
             {
                 int i3 = anIntArray1656[k2];
-                anIntArrayArray1658[i3][ai1[i3]++] = k2;
+                triangleSkin[i3][ai1[i3]++] = k2;
             }
 
             anIntArray1656 = null;
         }
     }
 
-    public void method470(int i)
+    public void applyTransform(int i)
     {
-        if(anIntArrayArray1657 == null)
+        if(vertexSkin == null)
             return;
         if(i == -1)
             return;
@@ -909,7 +909,7 @@ public final class Model extends Animable {
             return;
         if(ai == null || j == -1)
         {
-            method470(k);
+            applyTransform(k);
             return;
         }
         AnimationFrame animationFrame = AnimationFrame.forID(k);
@@ -918,7 +918,7 @@ public final class Model extends Animable {
         AnimationFrame animationFrame_1 = AnimationFrame.forID(j);
         if(animationFrame_1 == null)
         {
-            method470(k);
+            applyTransform(k);
             return;
         }
         Class18 class18 = animationFrame.aClass18_637;
@@ -962,9 +962,9 @@ public final class Model extends Animable {
             for(int k2 = 0; k2 < i1; k2++)
             {
                 int l3 = ai[k2];
-                if(l3 < anIntArrayArray1657.length)
+                if(l3 < vertexSkin.length)
                 {
-                    int ai5[] = anIntArrayArray1657[l3];
+                    int ai5[] = vertexSkin[l3];
                     for(int i5 = 0; i5 < ai5.length; i5++)
                     {
                         int j6 = ai5[i5];
@@ -996,9 +996,9 @@ public final class Model extends Animable {
             for(int k1 = 0; k1 < i1; k1++)
             {
                 int l2 = ai[k1];
-                if(l2 < anIntArrayArray1657.length)
+                if(l2 < vertexSkin.length)
                 {
-                    int ai1[] = anIntArrayArray1657[l2];
+                    int ai1[] = vertexSkin[l2];
                     for(int i4 = 0; i4 < ai1.length; i4++)
                     {
                         int j5 = ai1[i4];
@@ -1017,9 +1017,9 @@ public final class Model extends Animable {
             for(int l1 = 0; l1 < i1; l1++)
             {
                 int i3 = ai[l1];
-                if(i3 < anIntArrayArray1657.length)
+                if(i3 < vertexSkin.length)
                 {
-                    int ai2[] = anIntArrayArray1657[i3];
+                    int ai2[] = vertexSkin[i3];
                     for(int j4 = 0; j4 < ai2.length; j4++)
                     {
                         int k5 = ai2[j4];
@@ -1068,9 +1068,9 @@ public final class Model extends Animable {
             for(int i2 = 0; i2 < i1; i2++)
             {
                 int j3 = ai[i2];
-                if(j3 < anIntArrayArray1657.length)
+                if(j3 < vertexSkin.length)
                 {
-                    int ai3[] = anIntArrayArray1657[j3];
+                    int ai3[] = vertexSkin[j3];
                     for(int k4 = 0; k4 < ai3.length; k4++)
                     {
                         int l5 = ai3[k4];
@@ -1090,14 +1090,14 @@ public final class Model extends Animable {
 
             return;
         }
-        if(i == 5 && anIntArrayArray1658 != null && anIntArray1639 != null)
+        if(i == 5 && triangleSkin != null && anIntArray1639 != null)
         {
             for(int j2 = 0; j2 < i1; j2++)
             {
                 int k3 = ai[j2];
-                if(k3 < anIntArrayArray1658.length)
+                if(k3 < triangleSkin.length)
                 {
-                    int ai4[] = anIntArrayArray1658[k3];
+                    int ai4[] = triangleSkin[k3];
                     for(int l4 = 0; l4 < ai4.length; l4++)
                     {
                         int i6 = ai4[l4];
@@ -1148,7 +1148,7 @@ public final class Model extends Animable {
 
     }
 
-    public void method476(int i, int j)
+    public void recolour(int i, int j)
     {
         for(int k = 0; k < anInt1630; k++)
             if(anIntArray1640[k] == i)
@@ -1169,7 +1169,7 @@ public final class Model extends Animable {
         }
     }
 
-    public void method478(int i, int j, int l)
+    public void scaleT(int i, int j, int l)
     {
         for(int i1 = 0; i1 < anInt1626; i1++)
         {
@@ -1180,7 +1180,7 @@ public final class Model extends Animable {
 
     }
 
-    public void method479(int i, int j, int k, int l, int i1, boolean flag)
+    public void preprocess(int i, int j, int k, int l, int i1, boolean flag)
     {
         int j1 = (int)Math.sqrt(k * k + l * l + i1 * i1);
         int k1 = j * j1 >> 8;
@@ -1969,8 +1969,8 @@ public final class Model extends Animable {
     public int anInt1654;
     private int[] anIntArray1655;
     private int[] anIntArray1656;
-    public int anIntArrayArray1657[][];
-    public int anIntArrayArray1658[][];
+    public int vertexSkin[][];
+    public int triangleSkin[][];
     public boolean aBoolean1659;
     Class33 aClass33Array1660[];
     private static Class21[] aClass21Array1661;

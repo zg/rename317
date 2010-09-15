@@ -254,7 +254,7 @@ public final class RSInterface
         if(model != null)
             return model;
         if(i == 1)
-            model = Model.method462(j);
+            model = Model.getModel(j);
         if(i == 2)
             model = EntityDef.forID(j).method160();
         if(i == 3)
@@ -310,12 +310,12 @@ public final class RSInterface
             return model;
         Model model_1 = new Model(true, AnimationFrame.method532(k) & AnimationFrame.method532(j), false, model);
         if(k != -1 || j != -1)
-            model_1.method469();
+            model_1.calcSkinning();
         if(k != -1)
-            model_1.method470(k);
+            model_1.applyTransform(k);
         if(j != -1)
-            model_1.method470(j);
-        model_1.method479(64, 768, -50, -10, -50, true);
+            model_1.applyTransform(j);
+        model_1.preprocess(64, 768, -50, -10, -50, true);
             return model_1;
     }
 

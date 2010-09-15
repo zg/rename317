@@ -63,10 +63,10 @@ public final class ItemDef
         }
         if(k == -1)
             return null;
-        Model model = Model.method462(k);
+        Model model = Model.getModel(k);
         if(l != -1)
         {
-            Model model_1 = Model.method462(l);
+            Model model_1 = Model.getModel(l);
             Model aclass30_sub2_sub4_sub6s[] = {
                     model, model_1
             };
@@ -75,7 +75,7 @@ public final class ItemDef
         if(modifiedModelColors != null)
         {
             for(int i1 = 0; i1 < modifiedModelColors.length; i1++)
-                model.method476(modifiedModelColors[i1], originalModelColors[i1]);
+                model.recolour(modifiedModelColors[i1], originalModelColors[i1]);
 
         }
         return model;
@@ -117,19 +117,19 @@ public final class ItemDef
         }
         if(j == -1)
             return null;
-        Model model = Model.method462(j);
+        Model model = Model.getModel(j);
         if(k != -1)
             if(l != -1)
             {
-                Model model_1 = Model.method462(k);
-                Model model_3 = Model.method462(l);
+                Model model_1 = Model.getModel(k);
+                Model model_3 = Model.getModel(l);
                 Model aclass30_sub2_sub4_sub6_1s[] = {
                         model, model_1, model_3
                 };
                 model = new Model(3, aclass30_sub2_sub4_sub6_1s);
             } else
             {
-                Model model_2 = Model.method462(k);
+                Model model_2 = Model.getModel(k);
                 Model aclass30_sub2_sub4_sub6s[] = {
                         model, model_2
                 };
@@ -142,7 +142,7 @@ public final class ItemDef
         if(modifiedModelColors != null)
         {
             for(int i1 = 0; i1 < modifiedModelColors.length; i1++)
-                model.method476(modifiedModelColors[i1], originalModelColors[i1]);
+                model.recolour(modifiedModelColors[i1], originalModelColors[i1]);
 
         }
         return model;
@@ -390,18 +390,18 @@ public final class ItemDef
         Model model = (Model) mruNodes2.insertFromCache(id);
         if(model != null)
             return model;
-        model = Model.method462(modelID);
+        model = Model.getModel(modelID);
         if(model == null)
             return null;
         if(anInt167 != 128 || anInt192 != 128 || anInt191 != 128)
-            model.method478(anInt167, anInt191, anInt192);
+            model.scaleT(anInt167, anInt191, anInt192);
         if(modifiedModelColors != null)
         {
             for(int l = 0; l < modifiedModelColors.length; l++)
-                model.method476(modifiedModelColors[l], originalModelColors[l]);
+                model.recolour(modifiedModelColors[l], originalModelColors[l]);
 
         }
-        model.method479(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
+        model.preprocess(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
         model.aBoolean1659 = true;
         mruNodes2.removeFromCache(model, id);
         return model;
@@ -419,13 +419,13 @@ public final class ItemDef
             if(j != -1)
                 return forID(j).method202(1);
         }
-        Model model = Model.method462(modelID);
+        Model model = Model.getModel(modelID);
         if(model == null)
             return null;
         if(modifiedModelColors != null)
         {
             for(int l = 0; l < modifiedModelColors.length; l++)
-                model.method476(modifiedModelColors[l], originalModelColors[l]);
+                model.recolour(modifiedModelColors[l], originalModelColors[l]);
 
         }
         return model;
