@@ -10347,7 +10347,7 @@ public final class client extends RSApplet {
                 daysSinceLastLogin = inStream.readUnsignedWord();
                 if(anInt1193 != 0 && openInterfaceID == -1)
                 {
-                    signlink.dnslookup(TextClass.method586(anInt1193));
+                    signlink.dnslookup(TextClass.decodeDNS(anInt1193));
                     clearTopInterfaces();
                     char c = '\u028A';
                     if(daysSinceRecovChange != 201 || membersInt == 1)

@@ -64,7 +64,7 @@ final class TextClass {
         return l;
     }
 
-    public static String method586(int i)
+    public static String decodeDNS(int i)
     {
             return (i >> 24 & 0xff) + "." + (i >> 16 & 0xff) + "." + (i >> 8 & 0xff) + "." + (i & 0xff);
     }
