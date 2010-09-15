@@ -60,19 +60,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JagexArchive.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="JagexArchive.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/JagexArchive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="35" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BZIP2Decompressor.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BZIP2Decompressor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="510" column="53" selection-start="18085" selection-end="18085" vertical-scroll-proportion="0.42257217">
+            <state line="53" column="57" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.44094488">
               <folding />
             </state>
           </provider>
@@ -98,8 +89,8 @@
         <option value="$PROJECT_DIR$/GameObjectSpawnRequest.java" />
         <option value="$PROJECT_DIR$/RSApplet.java" />
         <option value="$PROJECT_DIR$/TextClass.java" />
-        <option value="$PROJECT_DIR$/JagexArchive.java" />
         <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
+        <option value="$PROJECT_DIR$/JagexArchive.java" />
       </list>
     </option>
   </component>
@@ -409,16 +400,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JagexArchive.java">
+    <entry file="file://$PROJECT_DIR$/BZIP2Decompressor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="35" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0">
+        <state line="510" column="53" selection-start="18085" selection-end="18085" vertical-scroll-proportion="0.42257217">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BZIP2Decompressor.java">
+    <entry file="file://$PROJECT_DIR$/JagexArchive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="510" column="53" selection-start="18085" selection-end="18085" vertical-scroll-proportion="0.42257217">
+        <state line="53" column="57" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.44094488">
           <folding />
         </state>
       </provider>
