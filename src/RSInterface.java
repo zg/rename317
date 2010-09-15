@@ -103,7 +103,7 @@ public final class RSInterface
                 rsInterface.invSpritePadY = stream.readUnsignedByte();
                 rsInterface.spritesX = new int[20];
                 rsInterface.spritesY = new int[20];
-                rsInterface.sprites = new Sprite[20];
+                rsInterface.rgbImages = new RgbImage[20];
                 for(int j2 = 0; j2 < 20; j2++)
                 {
                     int k3 = stream.readUnsignedByte();
@@ -115,7 +115,7 @@ public final class RSInterface
                         if(jagexArchive_1 != null && s1.length() > 0)
                         {
                             int i5 = s1.lastIndexOf(",");
-                            rsInterface.sprites[j2] = method207(Integer.parseInt(s1.substring(i5 + 1)), jagexArchive_1, s1.substring(0, i5));
+                            rsInterface.rgbImages[j2] = method207(Integer.parseInt(s1.substring(i5 + 1)), jagexArchive_1, s1.substring(0, i5));
                         }
                     }
                 }
@@ -268,22 +268,22 @@ public final class RSInterface
         return model;
     }
 
-    private static Sprite method207(int i, JagexArchive jagexArchive, String s)
+    private static RgbImage method207(int i, JagexArchive jagexArchive, String s)
     {
         long l = (TextClass.method585(s) << 8) + (long)i;
-        Sprite sprite = (Sprite) aMRUNodes_238.insertFromCache(l);
-        if(sprite != null)
-            return sprite;
+        RgbImage rgbImage = (RgbImage) aMRUNodes_238.insertFromCache(l);
+        if(rgbImage != null)
+            return rgbImage;
         try
         {
-            sprite = new Sprite(jagexArchive, s, i);
-            aMRUNodes_238.removeFromCache(sprite, l);
+            rgbImage = new RgbImage(jagexArchive, s, i);
+            aMRUNodes_238.removeFromCache(rgbImage, l);
         }
         catch(Exception _ex)
         {
             return null;
         }
-        return sprite;
+        return rgbImage;
     }
 
     public static void method208(boolean flag, Model model)
@@ -323,9 +323,9 @@ public final class RSInterface
     {
     }
 
-    public Sprite sprite1;
+    public RgbImage sprite1;
     public int anInt208;
-    public Sprite sprites[];
+    public RgbImage rgbImages[];
     public static RSInterface interfaceCache[];
     public int anIntArray212[];
     public int anInt214;
@@ -372,7 +372,7 @@ public final class RSInterface
     public int anInt257;
     public int anInt258;
     public boolean aBoolean259;
-    public Sprite sprite2;
+    public RgbImage sprite2;
     public int scrollMax;
     public int type;
     public int anInt263;
