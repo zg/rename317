@@ -59,17 +59,7 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="GameObjectSpawnRequest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/GameObjectSpawnRequest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="15" selection-start="218" selection-end="218" vertical-scroll-proportion="0.21356784">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -88,6 +78,7 @@
         <option value="$PROJECT_DIR$/Animation.java" />
         <option value="$PROJECT_DIR$/ItemDef.java" />
         <option value="$PROJECT_DIR$/GameObjectSpawnRequest.java" />
+        <option value="$PROJECT_DIR$/RSApplet.java" />
       </list>
     </option>
   </component>
@@ -357,7 +348,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GameObjectSpawnRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="15" selection-start="218" selection-end="218" vertical-scroll-proportion="0.21356784">
+        <state line="7" column="15" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sign/signlink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="67" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.9081365">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Censor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="43" selection-start="636" selection-end="636" vertical-scroll-proportion="0.53543305">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RSFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="20" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MouseDetection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="31" selection-start="353" selection-end="353" vertical-scroll-proportion="-0.580402">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RSApplet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="53" selection-start="2257" selection-end="2257" vertical-scroll-proportion="-4.4435697">
           <folding />
         </state>
       </provider>

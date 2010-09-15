@@ -39,13 +39,13 @@ public class RSApplet extends Applet
             gameFrame.addWindowListener(this);
         drawLoadingText(0, "Loading...");
         startUp();
-        int i = 0;
-        int j = 256;
-        int k = 1;
-        int i1 = 0;
-        int j1 = 0;
+        int opos = 0;
+        int ratio = 256;
+        int del = 1;
+        int count = 0;
+        int intex = 0;
         for(int k1 = 0; k1 < 10; k1++)
-            aLongArray7[k1] = System.currentTimeMillis();
+            otim[k1] = System.currentTimeMillis();
 
         long l = System.currentTimeMillis();
         while(anInt4 >= 0) 
@@ -59,47 +59,47 @@ public class RSApplet extends Applet
                     return;
                 }
             }
-            int i2 = j;
-            int j2 = k;
-            j = 300;
-            k = 1;
+            int i2 = ratio;
+            int j2 = del;
+            ratio = 300;
+            del = 1;
             long l1 = System.currentTimeMillis();
-            if(aLongArray7[i] == 0L)
+            if(otim[opos] == 0L)
             {
-                j = i2;
-                k = j2;
+                ratio = i2;
+                del = j2;
             } else
-            if(l1 > aLongArray7[i])
-                j = (int)((long)(2560 * delayTime) / (l1 - aLongArray7[i]));
-            if(j < 25)
-                j = 25;
-            if(j > 256)
+            if(l1 > otim[opos])
+                ratio = (int)((long)(2560 * delayTime) / (l1 - otim[opos]));
+            if(ratio < 25)
+                ratio = 25;
+            if(ratio > 256)
             {
-                j = 256;
-                k = (int)((long) delayTime - (l1 - aLongArray7[i]) / 10L);
+                ratio = 256;
+                del = (int)((long) delayTime - (l1 - otim[opos]) / 10L);
             }
-            if(k > delayTime)
-                k = delayTime;
-            aLongArray7[i] = l1;
-            i = (i + 1) % 10;
-            if(k > 1)
+            if(del > delayTime)
+                del = delayTime;
+            otim[opos] = l1;
+            opos = (opos + 1) % 10;
+            if(del > 1)
             {
                 for(int k2 = 0; k2 < 10; k2++)
-                    if(aLongArray7[k2] != 0L)
-                        aLongArray7[k2] += k;
+                    if(otim[k2] != 0L)
+                        otim[k2] += del;
 
             }
-            if(k < minDelay)
-                k = minDelay;
+            if(del < minDelay)
+                del = minDelay;
             try
             {
-                Thread.sleep(k);
+                Thread.sleep(del);
             }
             catch(InterruptedException _ex)
             {
-                j1++;
+                intex++;
             }
-            for(; i1 < 256; i1 += j)
+            for(; count < 256; count += ratio)
             {
                 clickMode3 = clickMode1;
                 saveClickX = clickX;
@@ -110,24 +110,24 @@ public class RSApplet extends Applet
                 readIndex = writeIndex;
             }
 
-            i1 &= 0xff;
+            count &= 0xff;
             if(delayTime > 0)
-                fps = (1000 * j) / (delayTime * 256);
+                fps = (1000 * ratio) / (delayTime * 256);
             processDrawing();
             if(shouldDebug)
             {
                 System.out.println("ntime:" + l1);
                 for(int l2 = 0; l2 < 10; l2++)
                 {
-                    int i3 = ((i - l2 - 1) + 20) % 10;
-                    System.out.println("otim" + i3 + ":" + aLongArray7[i3]);
+                    int i3 = ((opos - l2 - 1) + 20) % 10;
+                    System.out.println("otim" + i3 + ":" + otim[i3]);
                 }
 
-                System.out.println("fps:" + fps + " ratio:" + j + " count:" + i1);
-                System.out.println("del:" + k + " deltime:" + delayTime + " mindel:" + minDelay);
-                System.out.println("intex:" + j1 + " opos:" + i);
+                System.out.println("fps:" + fps + " ratio:" + ratio + " count:" + count);
+                System.out.println("del:" + del + " deltime:" + delayTime + " mindel:" + minDelay);
+                System.out.println("intex:" + intex + " opos:" + opos);
                 shouldDebug = false;
-                j1 = 0;
+                intex = 0;
             }
         }
         if(anInt4 == -1)
@@ -484,7 +484,7 @@ public class RSApplet extends Applet
     {
         delayTime = 20;
         minDelay = 1;
-        aLongArray7 = new long[10];
+        otim = new long[10];
         shouldDebug = false;
         shouldClearScreen = true;
         awtFocus = true;
@@ -495,7 +495,7 @@ public class RSApplet extends Applet
     private int anInt4;
     private int delayTime;
     int minDelay;
-    private final long[] aLongArray7;
+    private final long[] otim;
     int fps;
     boolean shouldDebug;
     int myWidth;
