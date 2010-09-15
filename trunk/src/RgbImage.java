@@ -5,17 +5,17 @@
 import java.awt.*;
 import java.awt.image.PixelGrabber;
 
-public final class Sprite extends DrawingArea {
+public final class RgbImage extends DrawingArea {
 
-    public Sprite(int i, int j)
+    public RgbImage(int i, int j)
     {
         myPixels = new int[i * j];
-        myWidth = anInt1444 = i;
-        myHeight = anInt1445 = j;
-        anInt1442 = anInt1443 = 0;
+        myWidth = w2 = i;
+        myHeight = h2 = j;
+        xDrawOffset = yDrawOffset = 0;
     }
 
-    public Sprite(byte abyte0[], Component component)
+    public RgbImage(byte abyte0[], Component component)
     {
         try
         {
@@ -26,10 +26,10 @@ public final class Sprite extends DrawingArea {
             mediatracker.waitForAll();
             myWidth = image.getWidth(component);
             myHeight = image.getHeight(component);
-            anInt1444 = myWidth;
-            anInt1445 = myHeight;
-            anInt1442 = 0;
-            anInt1443 = 0;
+            w2 = myWidth;
+            h2 = myHeight;
+            xDrawOffset = 0;
+            yDrawOffset = 0;
             myPixels = new int[myWidth * myHeight];
             PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, myWidth, myHeight, myPixels, 0, myWidth);
             pixelgrabber.grabPixels();
@@ -40,13 +40,13 @@ public final class Sprite extends DrawingArea {
         }
     }
 
-    public Sprite(JagexArchive jagexArchive, String s, int i)
+    public RgbImage(JagexArchive jagexArchive, String s, int i)
     {
         Stream stream = new Stream(jagexArchive.getDataForName(s + ".dat"));
         Stream stream_1 = new Stream(jagexArchive.getDataForName("index.dat"));
         stream_1.currentOffset = stream.readUnsignedWord();
-        anInt1444 = stream_1.readUnsignedWord();
-        anInt1445 = stream_1.readUnsignedWord();
+        w2 = stream_1.readUnsignedWord();
+        h2 = stream_1.readUnsignedWord();
         int j = stream_1.readUnsignedByte();
         int ai[] = new int[j];
         for(int k = 0; k < j - 1; k++)
@@ -63,8 +63,8 @@ public final class Sprite extends DrawingArea {
             stream_1.currentOffset++;
         }
 
-        anInt1442 = stream_1.readUnsignedByte();
-        anInt1443 = stream_1.readUnsignedByte();
+        xDrawOffset = stream_1.readUnsignedByte();
+        yDrawOffset = stream_1.readUnsignedByte();
         myWidth = stream_1.readUnsignedWord();
         myHeight = stream_1.readUnsignedWord();
         int i1 = stream_1.readUnsignedByte();
@@ -89,7 +89,7 @@ public final class Sprite extends DrawingArea {
         }
     }
 
-    public void method343()
+    public void initDrawingArea()
     {
         DrawingArea.initDrawingArea(myHeight, myWidth, myPixels);
     }
@@ -130,23 +130,23 @@ public final class Sprite extends DrawingArea {
 
     public void method345()
     {
-        int ai[] = new int[anInt1444 * anInt1445];
+        int ai[] = new int[w2 * h2];
         for(int j = 0; j < myHeight; j++)
         {
-            System.arraycopy(myPixels, j * myWidth, ai, j + anInt1443 * anInt1444 + anInt1442, myWidth);
+            System.arraycopy(myPixels, j * myWidth, ai, j + yDrawOffset * w2 + xDrawOffset, myWidth);
         }
 
         myPixels = ai;
-        myWidth = anInt1444;
-        myHeight = anInt1445;
-        anInt1442 = 0;
-        anInt1443 = 0;
+        myWidth = w2;
+        myHeight = h2;
+        xDrawOffset = 0;
+        yDrawOffset = 0;
     }
 
     public void method346(int i, int j)
     {
-        i += anInt1442;
-        j += anInt1443;
+        i += xDrawOffset;
+        j += yDrawOffset;
         int l = i + j * DrawingArea.width;
         int i1 = 0;
         int j1 = myHeight;
@@ -214,8 +214,8 @@ public final class Sprite extends DrawingArea {
     public void drawSprite1(int i, int j)
     {
         int k = 128;//was parameter
-        i += anInt1442;
-        j += anInt1443;
+        i += xDrawOffset;
+        j += yDrawOffset;
         int i1 = i + j * DrawingArea.width;
         int j1 = 0;
         int k1 = myHeight;
@@ -257,8 +257,8 @@ public final class Sprite extends DrawingArea {
 
     public void drawSprite(int i, int k)
     {
-        i += anInt1442;
-        k += anInt1443;
+        i += xDrawOffset;
+        k += yDrawOffset;
         int l = i + k * DrawingArea.width;
         int i1 = 0;
         int j1 = myHeight;
@@ -370,35 +370,35 @@ public final class Sprite extends DrawingArea {
         }
     }
 
-    public void method352(int i, int j, int ai[], int k, int ai1[], int i1,
-                          int j1, int k1, int l1, int i2)
+    public void rotate(int height, int angle, int widthmap[], int hingesize, int ai1[], int center_y,
+                          int j1, int k1, int width, int center_x)
     {
         try
         {
-            int j2 = -l1 / 2;
-            int k2 = -i / 2;
-            int l2 = (int)(Math.sin((double)j / 326.11000000000001D) * 65536D);
-            int i3 = (int)(Math.cos((double)j / 326.11000000000001D) * 65536D);
-            l2 = l2 * k >> 8;
-            i3 = i3 * k >> 8;
-            int j3 = (i2 << 16) + (k2 * l2 + j2 * i3);
-            int k3 = (i1 << 16) + (k2 * i3 - j2 * l2);
+            int j2 = -width / 2;
+            int k2 = -height / 2;
+            int __pyoffset = (int)(Math.sin((double)angle / 326.11000000000001D) * 65536D);
+            int __pxoffset = (int)(Math.cos((double)angle / 326.11000000000001D) * 65536D);
+            __pyoffset = __pyoffset * hingesize >> 8;
+            __pxoffset = __pxoffset * hingesize >> 8;
+            int j3 = (center_x << 16) + (k2 * __pyoffset + j2 * __pxoffset);
+            int k3 = (center_y << 16) + (k2 * __pxoffset - j2 * __pyoffset);
             int l3 = k1 + j1 * DrawingArea.width;
-            for(j1 = 0; j1 < i; j1++)
+            for(j1 = 0; j1 < height; j1++)
             {
                 int i4 = ai1[j1];
                 int j4 = l3 + i4;
-                int k4 = j3 + i3 * i4;
-                int l4 = k3 - l2 * i4;
-                for(k1 = -ai[j1]; k1 < 0; k1++)
+                int __x = j3 + __pxoffset * i4;
+                int __y = k3 - __pyoffset * i4;
+                for(k1 = -widthmap[j1]; k1 < 0; k1++)
                 {
-                    DrawingArea.pixels[j4++] = myPixels[(k4 >> 16) + (l4 >> 16) * myWidth];
-                    k4 += i3;
-                    l4 -= l2;
+                    DrawingArea.pixels[j4++] = myPixels[(__x >> 16) + (__y >> 16) * myWidth];
+                    __x += __pxoffset;
+                    __y -= __pyoffset;
                 }
 
-                j3 += l2;
-                k3 += i3;
+                j3 += __pyoffset;
+                k3 += __pxoffset;
                 l3 += DrawingArea.width;
             }
 
@@ -458,8 +458,8 @@ public final class Sprite extends DrawingArea {
 
     public void method354(Background background, int i, int j)
     {
-        j += anInt1442;
-        i += anInt1443;
+        j += xDrawOffset;
+        i += yDrawOffset;
         int k = j + i * DrawingArea.width;
         int l = 0;
         int i1 = myHeight;
@@ -548,8 +548,8 @@ public final class Sprite extends DrawingArea {
     public int myPixels[];
     public int myWidth;
     public int myHeight;
-    private int anInt1442;
-    private int anInt1443;
-    public int anInt1444;
-    public int anInt1445;
+    private int xDrawOffset;
+    private int yDrawOffset;
+    public int w2;
+    public int h2;
 }

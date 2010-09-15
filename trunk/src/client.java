@@ -675,7 +675,7 @@ public final class client extends RSApplet {
 
         int j1 = ((238 + (int)(Math.random() * 20D)) - 10 << 16) + ((238 + (int)(Math.random() * 20D)) - 10 << 8) + ((238 + (int)(Math.random() * 20D)) - 10);
         int l1 = (238 + (int)(Math.random() * 20D)) - 10 << 16;
-        aClass30_Sub2_Sub1_Sub1_1263.method343();
+        aClass30_Sub2_Sub1_Sub1_1263.initDrawingArea();
         for(int i2 = 1; i2 < 103; i2++)
         {
             for(int j2 = 1; j2 < 103; j2++)
@@ -2317,8 +2317,8 @@ public final class client extends RSApplet {
                 aBackgroundArray1152s[l] = new Background(titleJagexArchive, "runes", 12 + (l & 3));
 
         }
-        aClass30_Sub2_Sub1_Sub1_1201 = new Sprite(128, 265);
-        aClass30_Sub2_Sub1_Sub1_1202 = new Sprite(128, 265);
+        aClass30_Sub2_Sub1_Sub1_1201 = new RgbImage(128, 265);
+        aClass30_Sub2_Sub1_Sub1_1202 = new RgbImage(128, 265);
         System.arraycopy(aRSImageProducer_1110.anIntArray315, 0, aClass30_Sub2_Sub1_Sub1_1201.myPixels, 0, 33920);
 
         System.arraycopy(aRSImageProducer_1111.anIntArray315, 0, aClass30_Sub2_Sub1_Sub1_1202.myPixels, 0, 33920);
@@ -2541,57 +2541,57 @@ public final class client extends RSApplet {
     private void drawLogo()
     {
         byte abyte0[] = titleJagexArchive.getDataForName("title.dat");
-        Sprite sprite = new Sprite(abyte0, this);
+        RgbImage rgbImage = new RgbImage(abyte0, this);
         aRSImageProducer_1110.initDrawingArea();
-        sprite.method346(0, 0);
+        rgbImage.method346(0, 0);
         aRSImageProducer_1111.initDrawingArea();
-        sprite.method346(-637, 0);
+        rgbImage.method346(-637, 0);
         aRSImageProducer_1107.initDrawingArea();
-        sprite.method346(-128, 0);
+        rgbImage.method346(-128, 0);
         aRSImageProducer_1108.initDrawingArea();
-        sprite.method346(-202, -371);
+        rgbImage.method346(-202, -371);
         aRSImageProducer_1109.initDrawingArea();
-        sprite.method346(-202, -171);
+        rgbImage.method346(-202, -171);
         aRSImageProducer_1112.initDrawingArea();
-        sprite.method346(0, -265);
+        rgbImage.method346(0, -265);
         aRSImageProducer_1113.initDrawingArea();
-        sprite.method346(-562, -265);
+        rgbImage.method346(-562, -265);
         aRSImageProducer_1114.initDrawingArea();
-        sprite.method346(-128, -171);
+        rgbImage.method346(-128, -171);
         aRSImageProducer_1115.initDrawingArea();
-        sprite.method346(-562, -171);
-        int ai[] = new int[sprite.myWidth];
-        for(int j = 0; j < sprite.myHeight; j++)
+        rgbImage.method346(-562, -171);
+        int ai[] = new int[rgbImage.myWidth];
+        for(int j = 0; j < rgbImage.myHeight; j++)
         {
-            for(int k = 0; k < sprite.myWidth; k++)
-                ai[k] = sprite.myPixels[(sprite.myWidth - k - 1) + sprite.myWidth * j];
+            for(int k = 0; k < rgbImage.myWidth; k++)
+                ai[k] = rgbImage.myPixels[(rgbImage.myWidth - k - 1) + rgbImage.myWidth * j];
 
-            System.arraycopy(ai, 0, sprite.myPixels, sprite.myWidth * j, sprite.myWidth);
+            System.arraycopy(ai, 0, rgbImage.myPixels, rgbImage.myWidth * j, rgbImage.myWidth);
 
         }
 
         aRSImageProducer_1110.initDrawingArea();
-        sprite.method346(382, 0);
+        rgbImage.method346(382, 0);
         aRSImageProducer_1111.initDrawingArea();
-        sprite.method346(-255, 0);
+        rgbImage.method346(-255, 0);
         aRSImageProducer_1107.initDrawingArea();
-        sprite.method346(254, 0);
+        rgbImage.method346(254, 0);
         aRSImageProducer_1108.initDrawingArea();
-        sprite.method346(180, -371);
+        rgbImage.method346(180, -371);
         aRSImageProducer_1109.initDrawingArea();
-        sprite.method346(180, -171);
+        rgbImage.method346(180, -171);
         aRSImageProducer_1112.initDrawingArea();
-        sprite.method346(382, -265);
+        rgbImage.method346(382, -265);
         aRSImageProducer_1113.initDrawingArea();
-        sprite.method346(-180, -265);
+        rgbImage.method346(-180, -265);
         aRSImageProducer_1114.initDrawingArea();
-        sprite.method346(254, -171);
+        rgbImage.method346(254, -171);
         aRSImageProducer_1115.initDrawingArea();
-            sprite.method346(-180, -171);
-            sprite = new Sprite(titleJagexArchive, "logo", 0);
+            rgbImage.method346(-180, -171);
+            rgbImage = new RgbImage(titleJagexArchive, "logo", 0);
             aRSImageProducer_1107.initDrawingArea();
-            sprite.drawSprite(382 - sprite.myWidth / 2 - 128, 18);
-            sprite = null;
+            rgbImage.drawSprite(382 - rgbImage.myWidth / 2 - 128, 18);
+            rgbImage = null;
             Object obj = null;
             Object obj1 = null;
             System.gc();
@@ -5589,7 +5589,7 @@ public final class client extends RSApplet {
             return super.getDocumentBase().getHost().toLowerCase();
     }
 
-    private void method81(Sprite sprite, int j, int k)
+    private void method81(RgbImage rgbImage, int j, int k)
     {
         int l = k * k + j * j;
         if(l > 4225 && l < 0x15f90)
@@ -5607,7 +5607,7 @@ public final class client extends RSApplet {
             mapEdge.method353(83 - k2 - 20, d, (94 + j2 + 4) - 10);
         } else
         {
-            markMinimap(sprite, k, j);
+            markMinimap(rgbImage, k, j);
         }
     }
 
@@ -6675,7 +6675,7 @@ public final class client extends RSApplet {
             for(int j = 0; j < 4; j++)
                 aTileSettingArray1230[j] = new TileSetting();
 
-            aClass30_Sub2_Sub1_Sub1_1263 = new Sprite(512, 512);
+            aClass30_Sub2_Sub1_Sub1_1263 = new RgbImage(512, 512);
             JagexArchive jagexArchive_6 = streamLoaderForName(5, "update list", "versionlist", expectedCRCs[5], 60);
             drawLoadingText(60, "Connecting to update server");
             onDemandFetcher = new OnDemandFetcher();
@@ -6830,8 +6830,8 @@ public final class client extends RSApplet {
             for(int j3 = 0; j3 < 13; j3++)
                 sideIcons[j3] = new Background(jagexArchive_2, "sideicons", j3);
 
-            compass = new Sprite(jagexArchive_2, "compass", 0);
-            mapEdge = new Sprite(jagexArchive_2, "mapedge", 0);
+            compass = new RgbImage(jagexArchive_2, "compass", 0);
+            mapEdge = new RgbImage(jagexArchive_2, "mapedge", 0);
             mapEdge.method345();
             try
             {
@@ -6843,34 +6843,34 @@ public final class client extends RSApplet {
             try
             {
                 for(int l3 = 0; l3 < 100; l3++)
-                    mapFunctions[l3] = new Sprite(jagexArchive_2, "mapfunction", l3);
+                    mapFunctions[l3] = new RgbImage(jagexArchive_2, "mapfunction", l3);
 
             }
             catch(Exception _ex) { }
             try
             {
                 for(int i4 = 0; i4 < 20; i4++)
-                    hitMarks[i4] = new Sprite(jagexArchive_2, "hitmarks", i4);
+                    hitMarks[i4] = new RgbImage(jagexArchive_2, "hitmarks", i4);
 
             }
             catch(Exception _ex) { }
             try
             {
                 for(int j4 = 0; j4 < 20; j4++)
-                    headIcons[j4] = new Sprite(jagexArchive_2, "headicons", j4);
+                    headIcons[j4] = new RgbImage(jagexArchive_2, "headicons", j4);
 
             }
             catch(Exception _ex) { }
-            mapFlag = new Sprite(jagexArchive_2, "mapmarker", 0);
-            mapMarker = new Sprite(jagexArchive_2, "mapmarker", 1);
+            mapFlag = new RgbImage(jagexArchive_2, "mapmarker", 0);
+            mapMarker = new RgbImage(jagexArchive_2, "mapmarker", 1);
             for(int k4 = 0; k4 < 8; k4++)
-                crosses[k4] = new Sprite(jagexArchive_2, "cross", k4);
+                crosses[k4] = new RgbImage(jagexArchive_2, "cross", k4);
 
-            mapDotItem = new Sprite(jagexArchive_2, "mapdots", 0);
-            mapDotNPC = new Sprite(jagexArchive_2, "mapdots", 1);
-            mapDotPlayer = new Sprite(jagexArchive_2, "mapdots", 2);
-            mapDotFriend = new Sprite(jagexArchive_2, "mapdots", 3);
-            mapDotTeam = new Sprite(jagexArchive_2, "mapdots", 4);
+            mapDotItem = new RgbImage(jagexArchive_2, "mapdots", 0);
+            mapDotNPC = new RgbImage(jagexArchive_2, "mapdots", 1);
+            mapDotPlayer = new RgbImage(jagexArchive_2, "mapdots", 2);
+            mapDotFriend = new RgbImage(jagexArchive_2, "mapdots", 3);
+            mapDotTeam = new RgbImage(jagexArchive_2, "mapdots", 4);
             scrollBar1 = new Background(jagexArchive_2, "scrollbar", 0);
             scrollBar2 = new Background(jagexArchive_2, "scrollbar", 1);
             redStone1 = new Background(jagexArchive_2, "redstone1", 0);
@@ -6895,33 +6895,33 @@ public final class client extends RSApplet {
             for(int l4 = 0; l4 < 2; l4++)
                 modIcons[l4] = new Background(jagexArchive_2, "mod_icons", l4);
 
-            Sprite sprite = new Sprite(jagexArchive_2, "backleft1", 0);
-            backLeftIP1 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
-            sprite = new Sprite(jagexArchive_2, "backleft2", 0);
-            backLeftIP2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
-            sprite = new Sprite(jagexArchive_2, "backright1", 0);
-            backRightIP1 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
-            sprite = new Sprite(jagexArchive_2, "backright2", 0);
-            backRightIP2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
-            sprite = new Sprite(jagexArchive_2, "backtop1", 0);
-            backTopIP1 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
-            sprite = new Sprite(jagexArchive_2, "backvmid1", 0);
-            backVmidIP1 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
-            sprite = new Sprite(jagexArchive_2, "backvmid2", 0);
-            backVmidIP2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
-            sprite = new Sprite(jagexArchive_2, "backvmid3", 0);
-            backVmidIP3 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
-            sprite = new Sprite(jagexArchive_2, "backhmid2", 0);
-            backVmidIP2_2 = new RSImageProducer(sprite.myWidth, sprite.myHeight, getGameComponent());
-            sprite.method346(0, 0);
+            RgbImage rgbImage = new RgbImage(jagexArchive_2, "backleft1", 0);
+            backLeftIP1 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
+            rgbImage = new RgbImage(jagexArchive_2, "backleft2", 0);
+            backLeftIP2 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
+            rgbImage = new RgbImage(jagexArchive_2, "backright1", 0);
+            backRightIP1 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
+            rgbImage = new RgbImage(jagexArchive_2, "backright2", 0);
+            backRightIP2 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
+            rgbImage = new RgbImage(jagexArchive_2, "backtop1", 0);
+            backTopIP1 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
+            rgbImage = new RgbImage(jagexArchive_2, "backvmid1", 0);
+            backVmidIP1 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
+            rgbImage = new RgbImage(jagexArchive_2, "backvmid2", 0);
+            backVmidIP2 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
+            rgbImage = new RgbImage(jagexArchive_2, "backvmid3", 0);
+            backVmidIP3 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
+            rgbImage = new RgbImage(jagexArchive_2, "backhmid2", 0);
+            backVmidIP2_2 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
+            rgbImage.method346(0, 0);
             int i5 = (int)(Math.random() * 21D) - 10;
             int j5 = (int)(Math.random() * 21D) - 10;
             int k5 = (int)(Math.random() * 21D) - 10;
@@ -7846,7 +7846,7 @@ public final class client extends RSApplet {
                                     int l9 = 0;
                                     if(itemSelected == 1 && anInt1283 == i3 && anInt1284 == class9_1.id)
                                         l9 = 0xffffff;
-                                    Sprite class30_sub2_sub1_sub1_2 = ItemDef.getSprite(j9, class9_1.invStackSizes[i3], l9);
+                                    RgbImage class30_sub2_sub1_sub1_2 = ItemDef.getSprite(j9, class9_1.invStackSizes[i3], l9);
                                     if(class30_sub2_sub1_sub1_2 != null)
                                     {
                                         if(activeInterfaceType != 0 && anInt1085 == i3 && anInt1084 == class9_1.id)
@@ -7888,7 +7888,7 @@ public final class client extends RSApplet {
                                             class30_sub2_sub1_sub1_2.drawSprite1(k5, j6);
                                         else
                                             class30_sub2_sub1_sub1_2.drawSprite(k5, j6);
-                                        if(class30_sub2_sub1_sub1_2.anInt1444 == 33 || class9_1.invStackSizes[i3] != 1)
+                                        if(class30_sub2_sub1_sub1_2.w2 == 33 || class9_1.invStackSizes[i3] != 1)
                                         {
                                             int k10 = class9_1.invStackSizes[i3];
                                             aTextDrawingArea_1270.method385(0, intToKOrMil(k10), j6 + 10 + j7, k5 + 1 + k6);
@@ -7897,9 +7897,9 @@ public final class client extends RSApplet {
                                     }
                                 }
                             } else
-                            if(class9_1.sprites != null && i3 < 20)
+                            if(class9_1.rgbImages != null && i3 < 20)
                             {
-                                Sprite class30_sub2_sub1_sub1_1 = class9_1.sprites[i3];
+                                RgbImage class30_sub2_sub1_sub1_1 = class9_1.rgbImages[i3];
                                 if(class30_sub2_sub1_sub1_1 != null)
                                     class30_sub2_sub1_sub1_1.drawSprite(k5, j6);
                             }
@@ -8031,13 +8031,13 @@ public final class client extends RSApplet {
                 } else
                 if(class9_1.type == 5)
                 {
-                    Sprite sprite;
+                    RgbImage rgbImage;
                     if(interfaceIsSelected(class9_1))
-                        sprite = class9_1.sprite2;
+                        rgbImage = class9_1.sprite2;
                     else
-                        sprite = class9_1.sprite1;
-                    if(sprite != null)
-                        sprite.drawSprite(k2, l2);
+                        rgbImage = class9_1.sprite1;
+                    if(rgbImage != null)
+                        rgbImage.drawSprite(k2, l2);
                 } else
                 if(class9_1.type == 6)
                 {
@@ -9088,15 +9088,15 @@ public final class client extends RSApplet {
                 if(abyte0[i5] == 0)
                     ai[i5] = 0;
 
-            compass.method352(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
+            compass.rotate(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
             aRSImageProducer_1165.initDrawingArea();
             return;
         }
         int i = minimapInt1 + minimapInt2 & 0x7ff;
         int j = 48 + myPlayer.x / 32;
         int l2 = 464 - myPlayer.y / 32;
-        aClass30_Sub2_Sub1_Sub1_1263.method352(151, i, anIntArray1229, 256 + minimapInt3, anIntArray1052, l2, 5, 25, 146, j);
-        compass.method352(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
+        aClass30_Sub2_Sub1_Sub1_1263.rotate(151, i, anIntArray1229, 256 + minimapInt3, anIntArray1052, l2, 5, 25, 146, j);
+        compass.rotate(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
         for(int j5 = 0; j5 < anInt1071; j5++)
         {
             int k = (anIntArray1072[j5] * 4 + 2) - myPlayer.x / 32;
@@ -10134,7 +10134,7 @@ public final class client extends RSApplet {
         }
     }
 
-    private void markMinimap(Sprite sprite, int i, int j)
+    private void markMinimap(RgbImage rgbImage, int i, int j)
     {
         int k = minimapInt1 + minimapInt2 & 0x7ff;
         int l = i * i + j * j;
@@ -10148,10 +10148,10 @@ public final class client extends RSApplet {
         int l1 = j * j1 - i * i1 >> 16;
         if(l > 2500)
         {
-            sprite.method354(mapBack, 83 - l1 - sprite.anInt1445 / 2 - 4, ((94 + k1) - sprite.anInt1444 / 2) + 4);
+            rgbImage.method354(mapBack, 83 - l1 - rgbImage.h2 / 2 - 4, ((94 + k1) - rgbImage.w2 / 2) + 4);
         } else
         {
-            sprite.drawSprite(((94 + k1) - sprite.anInt1444 / 2) + 4, 83 - l1 - sprite.anInt1445 / 2 - 4);
+            rgbImage.drawSprite(((94 + k1) - rgbImage.w2 / 2) + 4, 83 - l1 - rgbImage.h2 / 2 - 4);
         }
     }
 
@@ -11684,7 +11684,7 @@ public final class client extends RSApplet {
         anIntArray982 = new int[anInt975];
         aStringArray983 = new String[anInt975];
         anInt985 = -1;
-        hitMarks = new Sprite[20];
+        hitMarks = new RgbImage[20];
         anIntArray990 = new int[5];
         aBoolean994 = false;
         anInt1002 = 0x23201b;
@@ -11694,7 +11694,7 @@ public final class client extends RSApplet {
         anInt1018 = -1;
         anIntArray1030 = new int[5];
         aBoolean1031 = false;
-        mapFunctions = new Sprite[100];
+        mapFunctions = new RgbImage[100];
         dialogID = -1;
         maxStats = new int[Skills.skillsCount];
         anIntArray1045 = new int[2000];
@@ -11717,17 +11717,17 @@ public final class client extends RSApplet {
         menuActionCmd3 = new int[500];
         menuActionID = new int[500];
         menuActionCmd1 = new int[500];
-        headIcons = new Sprite[20];
+        headIcons = new RgbImage[20];
         tabAreaAltered = false;
         aString1121 = "";
         atPlayerActions = new String[5];
         atPlayerArray = new boolean[5];
         anIntArrayArrayArray1129 = new int[4][13][13];
         anInt1132 = 2;
-        aClass30_Sub2_Sub1_Sub1Array1140 = new Sprite[1000];
+        aClass30_Sub2_Sub1_Sub1Array1140 = new RgbImage[1000];
         aBoolean1141 = false;
         aBoolean1149 = false;
-        crosses = new Sprite[8];
+        crosses = new RgbImage[8];
         musicEnabled = true;
         needDrawTabArea = false;
         loggedIn = false;
@@ -11815,8 +11815,8 @@ public final class client extends RSApplet {
     private Background redStone3_2;
     private Background redStone1_4;
     private Background redStone2_4;
-    private Sprite mapFlag;
-    private Sprite mapMarker;
+    private RgbImage mapFlag;
+    private RgbImage mapMarker;
     private boolean aBoolean872;
     private final int[] anIntArray873;
     private int anInt874;
@@ -11866,8 +11866,8 @@ public final class client extends RSApplet {
     private final int anInt927;
     private final int[] anIntArray928;
     private int[][] anIntArrayArray929;
-    private Sprite aClass30_Sub2_Sub1_Sub1_931;
-    private Sprite aClass30_Sub2_Sub1_Sub1_932;
+    private RgbImage aClass30_Sub2_Sub1_Sub1_931;
+    private RgbImage aClass30_Sub2_Sub1_Sub1_932;
     private int anInt933;
     private int anInt934;
     private int anInt935;
@@ -11919,7 +11919,7 @@ public final class client extends RSApplet {
     private int anInt984;
     private int anInt985;
     private static int anInt986;
-    private Sprite[] hitMarks;
+    private RgbImage[] hitMarks;
     private int anInt988;
     private int anInt989;
     private final int[] anIntArray990;
@@ -11931,7 +11931,7 @@ public final class client extends RSApplet {
     private int anInt998;
     private int anInt999;
     private ISAACRandomGen encryption;
-    private Sprite mapEdge;
+    private RgbImage mapEdge;
     private final int anInt1002;
     static final int[][] anIntArrayArray1003 = {
         {
@@ -11975,7 +11975,7 @@ public final class client extends RSApplet {
     private Background backHmid1;
     private final int[] anIntArray1030;
     private boolean aBoolean1031;
-    private Sprite[] mapFunctions;
+    private RgbImage[] mapFunctions;
     private int baseX;
     private int baseY;
     private int anInt1036;
@@ -12013,11 +12013,11 @@ public final class client extends RSApplet {
     private int anInt1071;
     private int[] anIntArray1072;
     private int[] anIntArray1073;
-    private Sprite mapDotItem;
-    private Sprite mapDotNPC;
-    private Sprite mapDotPlayer;
-    private Sprite mapDotFriend;
-    private Sprite mapDotTeam;
+    private RgbImage mapDotItem;
+    private RgbImage mapDotNPC;
+    private RgbImage mapDotPlayer;
+    private RgbImage mapDotFriend;
+    private RgbImage mapDotTeam;
     private int anInt1079;
     private boolean aBoolean1080;
     private String[] friendsList;
@@ -12033,7 +12033,7 @@ public final class client extends RSApplet {
     private int[] menuActionCmd3;
     private int[] menuActionID;
     private int[] menuActionCmd1;
-    private Sprite[] headIcons;
+    private RgbImage[] headIcons;
     private static int anInt1097;
     private int anInt1098;
     private int anInt1099;
@@ -12054,7 +12054,7 @@ public final class client extends RSApplet {
     private static int anInt1117;
     private int membersInt;
     private String aString1121;
-    private Sprite compass;
+    private RgbImage compass;
     private RSImageProducer aRSImageProducer_1123;
     private RSImageProducer aRSImageProducer_1124;
     private RSImageProducer aRSImageProducer_1125;
@@ -12074,7 +12074,7 @@ public final class client extends RSApplet {
     private int anInt1137;
     private int spellUsableOn;
     private String spellTooltip;
-    private Sprite[] aClass30_Sub2_Sub1_Sub1Array1140;
+    private RgbImage[] aClass30_Sub2_Sub1_Sub1Array1140;
     private boolean aBoolean1141;
     private static int anInt1142;
     private Background redStone1;
@@ -12084,7 +12084,7 @@ public final class client extends RSApplet {
     private Background redStone2_2;
     private int energy;
     private boolean aBoolean1149;
-    private Sprite[] crosses;
+    private RgbImage[] crosses;
     private boolean musicEnabled;
     private Background[] aBackgroundArray1152s;
     private boolean needDrawTabArea;
@@ -12137,8 +12137,8 @@ public final class client extends RSApplet {
     private Background mapBack;
     private Background chatBack;
     private String[] menuActionName;
-    private Sprite aClass30_Sub2_Sub1_Sub1_1201;
-    private Sprite aClass30_Sub2_Sub1_Sub1_1202;
+    private RgbImage aClass30_Sub2_Sub1_Sub1_1201;
+    private RgbImage aClass30_Sub2_Sub1_Sub1_1202;
     private final int[] anIntArray1203;
     static final int[] anIntArray1204 = {
         9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 
@@ -12196,7 +12196,7 @@ public final class client extends RSApplet {
     private int prevSong;
     private int destX;
     private int destY;
-    private Sprite aClass30_Sub2_Sub1_Sub1_1263;
+    private RgbImage aClass30_Sub2_Sub1_Sub1_1263;
     private int anInt1264;
     private int anInt1265;
     private String loginMessage1;

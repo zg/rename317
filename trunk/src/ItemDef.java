@@ -240,18 +240,18 @@ public final class ItemDef
         stackable = true;
     }
 
-    public static Sprite getSprite(int i, int j, int k)
+    public static RgbImage getSprite(int i, int j, int k)
     {
         if(k == 0)
         {
-            Sprite sprite = (Sprite) mruNodes1.insertFromCache(i);
-            if(sprite != null && sprite.anInt1445 != j && sprite.anInt1445 != -1)
+            RgbImage rgbImage = (RgbImage) mruNodes1.insertFromCache(i);
+            if(rgbImage != null && rgbImage.h2 != j && rgbImage.h2 != -1)
             {
-                sprite.unlink();
-                sprite = null;
+                rgbImage.unlink();
+                rgbImage = null;
             }
-            if(sprite != null)
-                return sprite;
+            if(rgbImage != null)
+                return rgbImage;
         }
         ItemDef definition = forID(i);
         if(definition.stackIDs == null)
@@ -269,14 +269,14 @@ public final class ItemDef
         Model model = definition.method201(1);
         if(model == null)
             return null;
-        Sprite sprite = null;
+        RgbImage rgbImage = null;
         if(definition.certTemplateID != -1)
         {
-            sprite = getSprite(definition.certID, 10, -1);
-            if(sprite == null)
+            rgbImage = getSprite(definition.certID, 10, -1);
+            if(rgbImage == null)
                 return null;
         }
-        Sprite sprite2 = new Sprite(32, 32);
+        RgbImage sprite2 = new RgbImage(32, 32);
         int k1 = ThreeDimensionalDrawingArea.textureInt1;
         int l1 = ThreeDimensionalDrawingArea.textureInt2;
         int ai[] = ThreeDimensionalDrawingArea.anIntArray1472;
@@ -351,13 +351,13 @@ public final class ItemDef
         }
         if(definition.certTemplateID != -1)
         {
-            int l5 = sprite.anInt1444;
-            int j6 = sprite.anInt1445;
-            sprite.anInt1444 = 32;
-            sprite.anInt1445 = 32;
-            sprite.drawSprite(0, 0);
-            sprite.anInt1444 = l5;
-            sprite.anInt1445 = j6;
+            int l5 = rgbImage.w2;
+            int j6 = rgbImage.h2;
+            rgbImage.w2 = 32;
+            rgbImage.h2 = 32;
+            rgbImage.drawSprite(0, 0);
+            rgbImage.w2 = l5;
+            rgbImage.h2 = j6;
         }
         if(k == 0)
             mruNodes1.removeFromCache(sprite2, i);
@@ -368,10 +368,10 @@ public final class ItemDef
         ThreeDimensionalDrawingArea.anIntArray1472 = ai;
         ThreeDimensionalDrawingArea.aBoolean1464 = true;
         if(definition.stackable)
-            sprite2.anInt1444 = 33;
+            sprite2.w2 = 33;
         else
-            sprite2.anInt1444 = 32;
-        sprite2.anInt1445 = j;
+            sprite2.w2 = 32;
+        sprite2.h2 = j;
         return sprite2;
     }
 
