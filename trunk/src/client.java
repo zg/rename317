@@ -9018,9 +9018,9 @@ public final class client extends RSApplet {
                 {
                     int j2 = ai[l++];
                     VarBit varBit = VarBit.cache[j2];
-                    int l3 = varBit.anInt648;
-                    int i4 = varBit.anInt649;
-                    int j4 = varBit.anInt650;
+                    int l3 = varBit.configId;
+                    int i4 = varBit.rightShiftCount;
+                    int j4 = varBit.bit;
                     int k4 = anIntArray1232[j4 - i4];
                     k1 = variousSettings[l3] >> i4 & k4;
                 }
