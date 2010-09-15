@@ -2,45 +2,46 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
+//mobile -super_
 public class Entity extends Animable {
 
-    public final void setPos(int i, int j, boolean flag)
+    public final void setPos(int x, int y, boolean flag)//push
     {
-        if(anim != -1 && Animation.anims[anim].anInt364 == 1)
-            anim = -1;
+        if(animation != -1 && Animation.anims[animation].priority == 1)
+            animation = -1;
         if(!flag)
         {
-            int k = i - smallX[0];
-            int l = j - smallY[0];
-            if(k >= -8 && k <= 8 && l >= -8 && l <= 8)
+            int dx = x - path_x[0];
+            int dy = y - path_y[0];
+            if(dx >= -8 && dx <= 8 && dy >= -8 && dy <= 8)
             {
-                if(smallXYIndex < 9)
-                    smallXYIndex++;
-                for(int i1 = smallXYIndex; i1 > 0; i1--)
+                if(path_length < 9)
+                    path_length++;
+                for(int i1 = path_length; i1 > 0; i1--)
                 {
-                    smallX[i1] = smallX[i1 - 1];
-                    smallY[i1] = smallY[i1 - 1];
-                    aBooleanArray1553[i1] = aBooleanArray1553[i1 - 1];
+                    path_x[i1] = path_x[i1 - 1];
+                    path_y[i1] = path_y[i1 - 1];
+                    path_run[i1] = path_run[i1 - 1];
                 }
 
-                smallX[0] = i;
-                smallY[0] = j;
-                aBooleanArray1553[0] = false;
+                path_x[0] = x;
+                path_y[0] = y;
+                path_run[0] = false;
                 return;
             }
         }
-        smallXYIndex = 0;
+        path_length = 0;
         anInt1542 = 0;
         anInt1503 = 0;
-        smallX[0] = i;
-        smallY[0] = j;
-        x = smallX[0] * 128 + anInt1540 * 64;
-        y = smallY[0] * 128 + anInt1540 * 64;
+        path_x[0] = x;
+        path_y[0] = y;
+        this.bound_extent_x = path_x[0] * 128 + bound_dim * 64;
+        this.bound_extent_y = path_y[0] * 128 + bound_dim * 64;
     }
 
     public final void method446()
     {
-        smallXYIndex = 0;
+        path_length = 0;
         anInt1542 = 0;
     }
 
@@ -56,51 +57,51 @@ public class Entity extends Animable {
             }
     }
 
-    public final void moveInDir(boolean flag, int i)
+    public final void move(boolean run, int dir)
     {
-        int j = smallX[0];
-        int k = smallY[0];
-        if(i == 0)
+        int x = path_x[0];
+        int y = path_y[0];
+        if(dir == 0)
         {
-            j--;
-            k++;
+            x--;
+            y++;
         }
-        if(i == 1)
-            k++;
-        if(i == 2)
+        if(dir == 1)
+            y++;
+        if(dir == 2)
         {
-            j++;
-            k++;
+            x++;
+            y++;
         }
-        if(i == 3)
-            j--;
-        if(i == 4)
-            j++;
-        if(i == 5)
+        if(dir == 3)
+            x--;
+        if(dir == 4)
+            x++;
+        if(dir == 5)
         {
-            j--;
-            k--;
+            x--;
+            y--;
         }
-        if(i == 6)
-            k--;
-        if(i == 7)
+        if(dir == 6)
+            y--;
+        if(dir == 7)
         {
-            j++;
-            k--;
+            x++;
+            y--;
         }
-        if(anim != -1 && Animation.anims[anim].anInt364 == 1)
-            anim = -1;
-        if(smallXYIndex < 9)
-            smallXYIndex++;
-        for(int l = smallXYIndex; l > 0; l--)
+        if(animation != -1 && Animation.anims[animation].priority == 1)
+            animation = -1;
+        if(path_length < 9)
+            path_length++;
+        for(int l = path_length; l > 0; l--)
         {
-            smallX[l] = smallX[l - 1];
-            smallY[l] = smallY[l - 1];
-            aBooleanArray1553[l] = aBooleanArray1553[l - 1];
+            path_x[l] = path_x[l - 1];
+            path_y[l] = path_y[l - 1];
+            path_run[l] = path_run[l - 1];
         }
-            smallX[0] = j;
-            smallY[0] = k;
-            aBooleanArray1553[0] = flag;
+            path_x[0] = x;
+            path_y[0] = y;
+            path_run[0] = run;
     }
 
     public int entScreenX;
@@ -113,8 +114,8 @@ public class Entity extends Animable {
 
     Entity()
     {
-        smallX = new int[10];
-        smallY = new int[10];
+        path_x = new int[10];
+        path_y = new int[10];
         interactingEntity = -1;
         anInt1504 = 32;
         anInt1505 = -1;
@@ -126,20 +127,20 @@ public class Entity extends Animable {
         hitsLoopCycle = new int[4];
         anInt1517 = -1;
         anInt1520 = -1;
-        anim = -1;
+        animation = -1;
         loopCycleStatus = -1000;
         textCycle = 100;
-        anInt1540 = 1;
+        bound_dim = 1;
         aBoolean1541 = false;
-        aBooleanArray1553 = new boolean[10];
+        path_run = new boolean[10];
         anInt1554 = -1;
         anInt1555 = -1;
         anInt1556 = -1;
         anInt1557 = -1;
     }
 
-    public final int[] smallX;
-    public final int[] smallY;
+    public final int[] path_x;
+    public final int[] path_y;
     public int interactingEntity;
     int anInt1503;
     int anInt1504;
@@ -161,8 +162,8 @@ public class Entity extends Animable {
     int anInt1522;
     int anInt1523;
     int anInt1524;
-    int smallXYIndex;
-    public int anim;
+    int path_length;
+    public int animation;
     int anInt1527;
     int anInt1528;
     int anInt1529;
@@ -175,7 +176,7 @@ public class Entity extends Animable {
     int anInt1537;
     int anInt1538;
     int anInt1539;
-    int anInt1540;
+    int bound_dim;
     boolean aBoolean1541;
     int anInt1542;
     int anInt1543;
@@ -185,10 +186,10 @@ public class Entity extends Animable {
     int anInt1547;
     int anInt1548;
     int anInt1549;
-    public int x;
-    public int y;
+    public int bound_extent_x;
+    public int bound_extent_y;
     int anInt1552;
-    final boolean[] aBooleanArray1553;
+    final boolean[] path_run;
     int anInt1554;
     int anInt1555;
     int anInt1556;

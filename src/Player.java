@@ -44,7 +44,7 @@ public final class Player extends Entity
             if(client.loopCycle >= anInt1707 && client.loopCycle < anInt1708)
             {
                 Model model_1 = aModel_1714;
-                model_1.method475(anInt1711 - super.x, anInt1712 - anInt1709, anInt1713 - super.y);
+                model_1.method475(anInt1711 - super.bound_extent_x, anInt1712 - anInt1709, anInt1713 - super.bound_extent_y);
                 if(super.turnDirection == 512)
                 {
                     model_1.method473();
@@ -76,7 +76,7 @@ public final class Player extends Entity
                     model_1.method473();
                     model_1.method473();
                 }
-                model_1.method475(super.x - anInt1711, anInt1709 - anInt1712, super.y - anInt1713);
+                model_1.method475(super.bound_extent_x - anInt1711, anInt1709 - anInt1712, super.bound_extent_y - anInt1713);
             }
         }
         model.aBoolean1659 = true;
@@ -173,8 +173,8 @@ public final class Player extends Entity
         if(desc != null)
         {
             int j = -1;
-            if(super.anim >= 0 && super.anInt1529 == 0)
-                j = Animation.anims[super.anim].frame2IDS[super.anInt1527];
+            if(super.animation >= 0 && super.anInt1529 == 0)
+                j = Animation.anims[super.animation].frame2IDS[super.anInt1527];
             else
             if(super.anInt1517 >= 0)
                 j = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
@@ -186,9 +186,9 @@ public final class Player extends Entity
         int i1 = -1;
         int j1 = -1;
         int k1 = -1;
-        if(super.anim >= 0 && super.anInt1529 == 0)
+        if(super.animation >= 0 && super.anInt1529 == 0)
         {
-            Animation animation = Animation.anims[super.anim];
+            Animation animation = Animation.anims[super.animation];
             k = animation.frame2IDS[super.anInt1527];
             if(super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511)
                 i1 = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
@@ -274,7 +274,7 @@ public final class Player extends Entity
         Model model_2 = Model.aModel_1621;
         model_2.method464(model_1, AnimationFrame.method532(k) & AnimationFrame.method532(i1));
         if(k != -1 && i1 != -1)
-            model_2.method471(Animation.anims[super.anim].animationFlowControl, i1, k);
+            model_2.method471(Animation.anims[super.animation].animationFlowControl, i1, k);
         else
         if(k != -1)
             model_2.applyTransform(k);
