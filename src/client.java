@@ -5212,7 +5212,7 @@ public final class client extends RSApplet {
                     }
 
                 model.method469();
-                model.method470(Animation.anims[myPlayer.anInt1511].anIntArray353[0]);
+                model.method470(Animation.anims[myPlayer.anInt1511].frame2IDS[0]);
                 model.method479(64, 850, -30, -50, -30, true);
                 class9.anInt233 = 5;
                 class9.mediaID = 0;
@@ -7272,7 +7272,7 @@ public final class client extends RSApplet {
 
     private void method98(Entity entity)
     {
-        if(entity.anInt1548 == loopCycle || entity.anim == -1 || entity.anInt1529 != 0 || entity.anInt1528 + 1 > Animation.anims[entity.anim].method258(entity.anInt1527))
+        if(entity.anInt1548 == loopCycle || entity.anim == -1 || entity.anInt1529 != 0 || entity.anInt1528 + 1 > Animation.anims[entity.anim].getFrameLength(entity.anInt1527))
         {
             int i = entity.anInt1548 - entity.anInt1547;
             int j = loopCycle - entity.anInt1547;
@@ -7482,12 +7482,12 @@ public final class client extends RSApplet {
         {
             Animation animation = Animation.anims[entity.anInt1517];
             entity.anInt1519++;
-            if(entity.anInt1518 < animation.anInt352 && entity.anInt1519 > animation.method258(entity.anInt1518))
+            if(entity.anInt1518 < animation.frameCount && entity.anInt1519 > animation.getFrameLength(entity.anInt1518))
             {
                 entity.anInt1519 = 0;
                 entity.anInt1518++;
             }
-            if(entity.anInt1518 >= animation.anInt352)
+            if(entity.anInt1518 >= animation.frameCount)
             {
                 entity.anInt1519 = 0;
                 entity.anInt1518 = 0;
@@ -7498,10 +7498,10 @@ public final class client extends RSApplet {
             if(entity.anInt1521 < 0)
                 entity.anInt1521 = 0;
             Animation animation_1 = SpotAnim.cache[entity.anInt1520].aAnimation_407;
-            for(entity.anInt1522++; entity.anInt1521 < animation_1.anInt352 && entity.anInt1522 > animation_1.method258(entity.anInt1521); entity.anInt1521++)
-                entity.anInt1522 -= animation_1.method258(entity.anInt1521);
+            for(entity.anInt1522++; entity.anInt1521 < animation_1.frameCount && entity.anInt1522 > animation_1.getFrameLength(entity.anInt1521); entity.anInt1521++)
+                entity.anInt1522 -= animation_1.getFrameLength(entity.anInt1521);
 
-            if(entity.anInt1521 >= animation_1.anInt352 && (entity.anInt1521 < 0 || entity.anInt1521 >= animation_1.anInt352))
+            if(entity.anInt1521 >= animation_1.frameCount && (entity.anInt1521 < 0 || entity.anInt1521 >= animation_1.frameCount))
                 entity.anInt1520 = -1;
         }
         if(entity.anim != -1 && entity.anInt1529 <= 1)
@@ -7516,16 +7516,16 @@ public final class client extends RSApplet {
         if(entity.anim != -1 && entity.anInt1529 == 0)
         {
             Animation animation_3 = Animation.anims[entity.anim];
-            for(entity.anInt1528++; entity.anInt1527 < animation_3.anInt352 && entity.anInt1528 > animation_3.method258(entity.anInt1527); entity.anInt1527++)
-                entity.anInt1528 -= animation_3.method258(entity.anInt1527);
+            for(entity.anInt1528++; entity.anInt1527 < animation_3.frameCount && entity.anInt1528 > animation_3.getFrameLength(entity.anInt1527); entity.anInt1527++)
+                entity.anInt1528 -= animation_3.getFrameLength(entity.anInt1527);
 
-            if(entity.anInt1527 >= animation_3.anInt352)
+            if(entity.anInt1527 >= animation_3.frameCount)
             {
-                entity.anInt1527 -= animation_3.anInt356;
+                entity.anInt1527 -= animation_3.frameStep;
                 entity.anInt1530++;
                 if(entity.anInt1530 >= animation_3.anInt362)
                     entity.anim = -1;
-                if(entity.anInt1527 < 0 || entity.anInt1527 >= animation_3.anInt352)
+                if(entity.anInt1527 < 0 || entity.anInt1527 >= animation_3.frameCount)
                     entity.anim = -1;
             }
             entity.aBoolean1541 = animation_3.aBoolean358;
@@ -8060,7 +8060,7 @@ public final class client extends RSApplet {
                     } else
                     {
                         Animation animation = Animation.anims[i7];
-                        model = class9_1.method209(animation.anIntArray354[class9_1.anInt246], animation.anIntArray353[class9_1.anInt246], flag2);
+                        model = class9_1.method209(animation.frame1IDS[class9_1.anInt246], animation.frame2IDS[class9_1.anInt246], flag2);
                     }
                     if(model != null)
                         model.method482(class9_1.anInt271, 0, class9_1.anInt270, 0, i5, l5);
@@ -8787,14 +8787,14 @@ public final class client extends RSApplet {
                 if(l != -1)
                 {
                     Animation animation = Animation.anims[l];
-                    for(class9_1.anInt208 += i; class9_1.anInt208 > animation.method258(class9_1.anInt246);)
+                    for(class9_1.anInt208 += i; class9_1.anInt208 > animation.getFrameLength(class9_1.anInt246);)
                     {
-                        class9_1.anInt208 -= animation.method258(class9_1.anInt246) + 1;
+                        class9_1.anInt208 -= animation.getFrameLength(class9_1.anInt246) + 1;
                         class9_1.anInt246++;
-                        if(class9_1.anInt246 >= animation.anInt352)
+                        if(class9_1.anInt246 >= animation.frameCount)
                         {
-                            class9_1.anInt246 -= animation.anInt356;
-                            if(class9_1.anInt246 < 0 || class9_1.anInt246 >= animation.anInt352)
+                            class9_1.anInt246 -= animation.frameStep;
+                            if(class9_1.anInt246 < 0 || class9_1.anInt246 >= animation.frameCount)
                                 class9_1.anInt246 = 0;
                         }
                         flag1 = true;

@@ -22,7 +22,7 @@ final class Animable_Sub3 extends Animable {
         Model model = aSpotAnim_1568.getModel();
         if(model == null)
             return null;
-        int j = aSpotAnim_1568.aAnimation_407.anIntArray353[anInt1569];
+        int j = aSpotAnim_1568.aAnimation_407.frame2IDS[anInt1569];
         Model model_1 = new Model(true, AnimationFrame.method532(j), false, model);
         if(!aBoolean1567)
         {
@@ -55,11 +55,11 @@ final class Animable_Sub3 extends Animable {
 
     public void method454(int i)
     {
-        for(anInt1570 += i; anInt1570 > aSpotAnim_1568.aAnimation_407.method258(anInt1569);)
+        for(anInt1570 += i; anInt1570 > aSpotAnim_1568.aAnimation_407.getFrameLength(anInt1569);)
         {
-            anInt1570 -= aSpotAnim_1568.aAnimation_407.method258(anInt1569) + 1;
+            anInt1570 -= aSpotAnim_1568.aAnimation_407.getFrameLength(anInt1569) + 1;
             anInt1569++;
-            if(anInt1569 >= aSpotAnim_1568.aAnimation_407.anInt352 && (anInt1569 < 0 || anInt1569 >= aSpotAnim_1568.aAnimation_407.anInt352))
+            if(anInt1569 >= aSpotAnim_1568.aAnimation_407.frameCount && (anInt1569 < 0 || anInt1569 >= aSpotAnim_1568.aAnimation_407.frameCount))
             {
                 anInt1569 = 0;
                 aBoolean1567 = true;

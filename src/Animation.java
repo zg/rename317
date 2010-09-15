@@ -18,14 +18,14 @@ public final class Animation {
         }
     }
 
-    public int method258(int i)
+    public int getFrameLength(int i)
     {
-        int j = anIntArray355[i];
+        int j = frameLengths[i];
         if(j == 0)
         {
-            AnimationFrame animationFrame = AnimationFrame.method531(anIntArray353[i]);
+            AnimationFrame animationFrame = AnimationFrame.forID(frame2IDS[i]);
             if(animationFrame != null)
-                j = anIntArray355[i] = animationFrame.anInt636;
+                j = frameLengths[i] = animationFrame.displayLength;
         }
         if(j == 0)
             j = 1;
@@ -41,31 +41,31 @@ public final class Animation {
                 break;
             if(i == 1)
             {
-                anInt352 = stream.readUnsignedByte();
-                anIntArray353 = new int[anInt352];
-                anIntArray354 = new int[anInt352];
-                anIntArray355 = new int[anInt352];
-                for(int j = 0; j < anInt352; j++)
+                frameCount = stream.readUnsignedByte();
+                frame2IDS = new int[frameCount];
+                frame1IDS = new int[frameCount];
+                frameLengths = new int[frameCount];
+                for(int j = 0; j < frameCount; j++)
                 {
-                    anIntArray353[j] = stream.readUnsignedWord();
-                    anIntArray354[j] = stream.readUnsignedWord();
-                    if(anIntArray354[j] == 65535)
-                        anIntArray354[j] = -1;
-                    anIntArray355[j] = stream.readUnsignedWord();
+                    frame2IDS[j] = stream.readUnsignedWord();
+                    frame1IDS[j] = stream.readUnsignedWord();
+                    if(frame1IDS[j] == 65535)
+                        frame1IDS[j] = -1;
+                    frameLengths[j] = stream.readUnsignedWord();
                 }
 
             } else
             if(i == 2)
-                anInt356 = stream.readUnsignedWord();
+                frameStep = stream.readUnsignedWord();
             else
             if(i == 3)
             {
                 int k = stream.readUnsignedByte();
-                anIntArray357 = new int[k + 1];
+                animationFlowControl = new int[k + 1];
                 for(int l = 0; l < k; l++)
-                    anIntArray357[l] = stream.readUnsignedByte();
+                    animationFlowControl[l] = stream.readUnsignedByte();
 
-                anIntArray357[k] = 0x98967f;
+                animationFlowControl[k] = 0x98967f;
             } else
             if(i == 4)
                 aBoolean358 = true;
@@ -96,24 +96,24 @@ public final class Animation {
             else
                 System.out.println("Error unrecognised seq config code: " + i);
         } while(true);
-        if(anInt352 == 0)
+        if(frameCount == 0)
         {
-            anInt352 = 1;
-            anIntArray353 = new int[1];
-            anIntArray353[0] = -1;
-            anIntArray354 = new int[1];
-            anIntArray354[0] = -1;
-            anIntArray355 = new int[1];
-            anIntArray355[0] = -1;
+            frameCount = 1;
+            frame2IDS = new int[1];
+            frame2IDS[0] = -1;
+            frame1IDS = new int[1];
+            frame1IDS[0] = -1;
+            frameLengths = new int[1];
+            frameLengths[0] = -1;
         }
         if(anInt363 == -1)
-            if(anIntArray357 != null)
+            if(animationFlowControl != null)
                 anInt363 = 2;
             else
                 anInt363 = 0;
         if(anInt364 == -1)
         {
-            if(anIntArray357 != null)
+            if(animationFlowControl != null)
             {
                 anInt364 = 2;
                 return;
@@ -124,7 +124,7 @@ public final class Animation {
 
     private Animation()
     {
-        anInt356 = -1;
+        frameStep = -1;
         aBoolean358 = false;
         anInt359 = 5;
         anInt360 = -1;
@@ -136,12 +136,12 @@ public final class Animation {
     }
 
     public static Animation anims[];
-    public int anInt352;
-    public int anIntArray353[];
-    public int anIntArray354[];
-    private int[] anIntArray355;
-    public int anInt356;
-    public int anIntArray357[];
+    public int frameCount;
+    public int frame2IDS[];
+    public int frame1IDS[];
+    private int[] frameLengths;
+    public int frameStep;
+    public int animationFlowControl[];
     public boolean aBoolean358;
     public int anInt359;
     public int anInt360;
