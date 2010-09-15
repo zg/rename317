@@ -3,10 +3,10 @@
 // Decompiler options: packimports(3) 
 
 
-final class Class32
+final class BZ2Entry
 {
 
-    Class32()
+    BZ2Entry()
     {
         anIntArray583 = new int[256];
         anIntArray585 = new int[257];
