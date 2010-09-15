@@ -3088,15 +3088,15 @@ public final class client extends RSApplet {
 
     private void method63()
     {
-        Class30_Sub1 class30_sub1 = (Class30_Sub1)aClass19_1179.reverseGetFirst();
-        for(; class30_sub1 != null; class30_sub1 = (Class30_Sub1)aClass19_1179.reverseGetNext())
-            if(class30_sub1.anInt1294 == -1)
+        GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst();
+        for(; gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
+            if(gameObjectSpawnRequest.anInt1294 == -1)
             {
-                class30_sub1.anInt1302 = 0;
-                method89(class30_sub1);
+                gameObjectSpawnRequest.anInt1302 = 0;
+                method89(gameObjectSpawnRequest);
             } else
             {
-                class30_sub1.unlink();
+                gameObjectSpawnRequest.unlink();
             }
 
     }
@@ -6522,30 +6522,30 @@ public final class client extends RSApplet {
 
     }
 
-    private void method89(Class30_Sub1 class30_sub1)
+    private void method89(GameObjectSpawnRequest gameObjectSpawnRequest)
     {
         int i = 0;
         int j = -1;
         int k = 0;
         int l = 0;
-        if(class30_sub1.anInt1296 == 0)
-            i = worldController.method300(class30_sub1.anInt1295, class30_sub1.anInt1297, class30_sub1.anInt1298);
-        if(class30_sub1.anInt1296 == 1)
-            i = worldController.method301(class30_sub1.anInt1295, class30_sub1.anInt1297, class30_sub1.anInt1298);
-        if(class30_sub1.anInt1296 == 2)
-            i = worldController.method302(class30_sub1.anInt1295, class30_sub1.anInt1297, class30_sub1.anInt1298);
-        if(class30_sub1.anInt1296 == 3)
-            i = worldController.method303(class30_sub1.anInt1295, class30_sub1.anInt1297, class30_sub1.anInt1298);
+        if(gameObjectSpawnRequest.anInt1296 == 0)
+            i = worldController.method300(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298);
+        if(gameObjectSpawnRequest.anInt1296 == 1)
+            i = worldController.method301(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298);
+        if(gameObjectSpawnRequest.anInt1296 == 2)
+            i = worldController.method302(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298);
+        if(gameObjectSpawnRequest.anInt1296 == 3)
+            i = worldController.method303(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298);
         if(i != 0)
         {
-            int i1 = worldController.method304(class30_sub1.anInt1295, class30_sub1.anInt1297, class30_sub1.anInt1298, i);
+            int i1 = worldController.method304(gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1298, i);
             j = i >> 14 & 0x7fff;
             k = i1 & 0x1f;
             l = i1 >> 6;
         }
-        class30_sub1.anInt1299 = j;
-        class30_sub1.anInt1301 = k;
-        class30_sub1.anInt1300 = l;
+        gameObjectSpawnRequest.anInt1299 = j;
+        gameObjectSpawnRequest.anInt1301 = k;
+        gameObjectSpawnRequest.anInt1300 = l;
     }
 
     private void method90()
@@ -8587,30 +8587,30 @@ public final class client extends RSApplet {
     {
         if(loadingStage == 2)
         {
-            for(Class30_Sub1 class30_sub1 = (Class30_Sub1)aClass19_1179.reverseGetFirst(); class30_sub1 != null; class30_sub1 = (Class30_Sub1)aClass19_1179.reverseGetNext())
+            for(GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
             {
-                if(class30_sub1.anInt1294 > 0)
-                    class30_sub1.anInt1294--;
-                if(class30_sub1.anInt1294 == 0)
+                if(gameObjectSpawnRequest.anInt1294 > 0)
+                    gameObjectSpawnRequest.anInt1294--;
+                if(gameObjectSpawnRequest.anInt1294 == 0)
                 {
-                    if(class30_sub1.anInt1299 < 0 || ObjectManager.method178(class30_sub1.anInt1299, class30_sub1.anInt1301))
+                    if(gameObjectSpawnRequest.anInt1299 < 0 || ObjectManager.method178(gameObjectSpawnRequest.anInt1299, gameObjectSpawnRequest.anInt1301))
                     {
-                        method142(class30_sub1.anInt1298, class30_sub1.anInt1295, class30_sub1.anInt1300, class30_sub1.anInt1301, class30_sub1.anInt1297, class30_sub1.anInt1296, class30_sub1.anInt1299);
-                        class30_sub1.unlink();
+                        method142(gameObjectSpawnRequest.anInt1298, gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1300, gameObjectSpawnRequest.anInt1301, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1296, gameObjectSpawnRequest.anInt1299);
+                        gameObjectSpawnRequest.unlink();
                     }
                 } else
                 {
-                    if(class30_sub1.anInt1302 > 0)
-                        class30_sub1.anInt1302--;
-                    if(class30_sub1.anInt1302 == 0 && class30_sub1.anInt1297 >= 1 && class30_sub1.anInt1298 >= 1 && class30_sub1.anInt1297 <= 102 && class30_sub1.anInt1298 <= 102 && (class30_sub1.anInt1291 < 0 || ObjectManager.method178(class30_sub1.anInt1291, class30_sub1.anInt1293)))
+                    if(gameObjectSpawnRequest.anInt1302 > 0)
+                        gameObjectSpawnRequest.anInt1302--;
+                    if(gameObjectSpawnRequest.anInt1302 == 0 && gameObjectSpawnRequest.anInt1297 >= 1 && gameObjectSpawnRequest.anInt1298 >= 1 && gameObjectSpawnRequest.anInt1297 <= 102 && gameObjectSpawnRequest.anInt1298 <= 102 && (gameObjectSpawnRequest.anInt1291 < 0 || ObjectManager.method178(gameObjectSpawnRequest.anInt1291, gameObjectSpawnRequest.anInt1293)))
                     {
-                        method142(class30_sub1.anInt1298, class30_sub1.anInt1295, class30_sub1.anInt1292, class30_sub1.anInt1293, class30_sub1.anInt1297, class30_sub1.anInt1296, class30_sub1.anInt1291);
-                        class30_sub1.anInt1302 = -1;
-                        if(class30_sub1.anInt1291 == class30_sub1.anInt1299 && class30_sub1.anInt1299 == -1)
-                            class30_sub1.unlink();
+                        method142(gameObjectSpawnRequest.anInt1298, gameObjectSpawnRequest.anInt1295, gameObjectSpawnRequest.anInt1292, gameObjectSpawnRequest.anInt1293, gameObjectSpawnRequest.anInt1297, gameObjectSpawnRequest.anInt1296, gameObjectSpawnRequest.anInt1291);
+                        gameObjectSpawnRequest.anInt1302 = -1;
+                        if(gameObjectSpawnRequest.anInt1291 == gameObjectSpawnRequest.anInt1299 && gameObjectSpawnRequest.anInt1299 == -1)
+                            gameObjectSpawnRequest.unlink();
                         else
-                        if(class30_sub1.anInt1291 == class30_sub1.anInt1299 && class30_sub1.anInt1292 == class30_sub1.anInt1300 && class30_sub1.anInt1293 == class30_sub1.anInt1301)
-                            class30_sub1.unlink();
+                        if(gameObjectSpawnRequest.anInt1291 == gameObjectSpawnRequest.anInt1299 && gameObjectSpawnRequest.anInt1292 == gameObjectSpawnRequest.anInt1300 && gameObjectSpawnRequest.anInt1293 == gameObjectSpawnRequest.anInt1301)
+                            gameObjectSpawnRequest.unlink();
                     }
                 }
             }
@@ -9304,30 +9304,30 @@ public final class client extends RSApplet {
     private void method130(int j, int k, int l, int i1, int j1, int k1,
                            int l1, int i2, int j2)
     {
-        Class30_Sub1 class30_sub1 = null;
-        for(Class30_Sub1 class30_sub1_1 = (Class30_Sub1)aClass19_1179.reverseGetFirst(); class30_sub1_1 != null; class30_sub1_1 = (Class30_Sub1)aClass19_1179.reverseGetNext())
+        GameObjectSpawnRequest gameObjectSpawnRequest = null;
+        for(GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
         {
-            if(class30_sub1_1.anInt1295 != l1 || class30_sub1_1.anInt1297 != i2 || class30_sub1_1.anInt1298 != j1 || class30_sub1_1.anInt1296 != i1)
+            if(gameObjectSpawnRequest_1.anInt1295 != l1 || gameObjectSpawnRequest_1.anInt1297 != i2 || gameObjectSpawnRequest_1.anInt1298 != j1 || gameObjectSpawnRequest_1.anInt1296 != i1)
                 continue;
-            class30_sub1 = class30_sub1_1;
+            gameObjectSpawnRequest = gameObjectSpawnRequest_1;
             break;
         }
 
-        if(class30_sub1 == null)
+        if(gameObjectSpawnRequest == null)
         {
-            class30_sub1 = new Class30_Sub1();
-            class30_sub1.anInt1295 = l1;
-            class30_sub1.anInt1296 = i1;
-            class30_sub1.anInt1297 = i2;
-            class30_sub1.anInt1298 = j1;
-            method89(class30_sub1);
-            aClass19_1179.insertHead(class30_sub1);
+            gameObjectSpawnRequest = new GameObjectSpawnRequest();
+            gameObjectSpawnRequest.anInt1295 = l1;
+            gameObjectSpawnRequest.anInt1296 = i1;
+            gameObjectSpawnRequest.anInt1297 = i2;
+            gameObjectSpawnRequest.anInt1298 = j1;
+            method89(gameObjectSpawnRequest);
+            aClass19_1179.insertHead(gameObjectSpawnRequest);
         }
-        class30_sub1.anInt1291 = k;
-        class30_sub1.anInt1293 = k1;
-        class30_sub1.anInt1292 = l;
-        class30_sub1.anInt1302 = j2;
-        class30_sub1.anInt1294 = j;
+        gameObjectSpawnRequest.anInt1291 = k;
+        gameObjectSpawnRequest.anInt1293 = k1;
+        gameObjectSpawnRequest.anInt1292 = l;
+        gameObjectSpawnRequest.anInt1302 = j2;
+        gameObjectSpawnRequest.anInt1294 = j;
     }
 
     private boolean interfaceIsSelected(RSInterface class9)
@@ -10381,9 +10381,9 @@ public final class client extends RSApplet {
 
                 }
 
-                for(Class30_Sub1 class30_sub1 = (Class30_Sub1)aClass19_1179.reverseGetFirst(); class30_sub1 != null; class30_sub1 = (Class30_Sub1)aClass19_1179.reverseGetNext())
-                    if(class30_sub1.anInt1297 >= anInt1268 && class30_sub1.anInt1297 < anInt1268 + 8 && class30_sub1.anInt1298 >= anInt1269 && class30_sub1.anInt1298 < anInt1269 + 8 && class30_sub1.anInt1295 == plane)
-                        class30_sub1.anInt1294 = 0;
+                for(GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
+                    if(gameObjectSpawnRequest.anInt1297 >= anInt1268 && gameObjectSpawnRequest.anInt1297 < anInt1268 + 8 && gameObjectSpawnRequest.anInt1298 >= anInt1269 && gameObjectSpawnRequest.anInt1298 < anInt1269 + 8 && gameObjectSpawnRequest.anInt1295 == plane)
+                        gameObjectSpawnRequest.anInt1294 = 0;
 
                 pktType = -1;
                 return true;
@@ -10740,12 +10740,12 @@ public final class client extends RSApplet {
 
                 }
 
-                for(Class30_Sub1 class30_sub1_1 = (Class30_Sub1)aClass19_1179.reverseGetFirst(); class30_sub1_1 != null; class30_sub1_1 = (Class30_Sub1)aClass19_1179.reverseGetNext())
+                for(GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
                 {
-                    class30_sub1_1.anInt1297 -= i17;
-                    class30_sub1_1.anInt1298 -= j21;
-                    if(class30_sub1_1.anInt1297 < 0 || class30_sub1_1.anInt1298 < 0 || class30_sub1_1.anInt1297 >= 104 || class30_sub1_1.anInt1298 >= 104)
-                        class30_sub1_1.unlink();
+                    gameObjectSpawnRequest_1.anInt1297 -= i17;
+                    gameObjectSpawnRequest_1.anInt1298 -= j21;
+                    if(gameObjectSpawnRequest_1.anInt1297 < 0 || gameObjectSpawnRequest_1.anInt1298 < 0 || gameObjectSpawnRequest_1.anInt1297 >= 104 || gameObjectSpawnRequest_1.anInt1298 >= 104)
+                        gameObjectSpawnRequest_1.unlink();
                 }
 
                 if(destX != 0)
