@@ -2,18 +2,18 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-public final class IDK {
+public final class IdentityKit {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
         Stream stream = new Stream(jagexArchive.getDataForName("idk.dat"));
         length = stream.readUnsignedWord();
         if(cache == null)
-            cache = new IDK[length];
+            cache = new IdentityKit[length];
         for(int j = 0; j < length; j++)
         {
             if(cache[j] == null)
-                cache[j] = new IDK();
+                cache[j] = new IdentityKit();
             cache[j].readValues(stream);
         }
     }
@@ -52,7 +52,7 @@ public final class IDK {
         } while(true);
     }
 
-    public boolean method537()
+    public boolean hasModel()
     {
         if(anIntArray658 == null)
             return true;
@@ -64,7 +64,7 @@ public final class IDK {
         return flag;
     }
 
-    public Model method538()
+    public Model getModel()
     {
         if(anIntArray658 == null)
             return null;
@@ -116,7 +116,7 @@ public final class IDK {
         return model;
     }
 
-    private IDK()
+    private IdentityKit()
     {
         anInt657 = -1;
         anIntArray659 = new int[6];
@@ -125,7 +125,7 @@ public final class IDK {
     }
 
     public static int length;
-    public static IDK cache[];
+    public static IdentityKit cache[];
     public int anInt657;
     private int[] anIntArray658;
     private final int[] anIntArray659;

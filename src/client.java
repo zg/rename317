@@ -1905,9 +1905,9 @@ public final class client extends RSApplet {
         for(int j = 0; j < 7; j++)
         {
             anIntArray1065[j] = -1;
-            for(int k = 0; k < IDK.length; k++)
+            for(int k = 0; k < IdentityKit.length; k++)
             {
-                if(IDK.cache[k].aBoolean662 || IDK.cache[k].anInt657 != j + (aBoolean1047 ? 0 : 7))
+                if(IdentityKit.cache[k].aBoolean662 || IdentityKit.cache[k].anInt657 != j + (aBoolean1047 ? 0 : 7))
                     continue;
                 anIntArray1065[j] = k;
                 break;
@@ -2067,10 +2067,10 @@ public final class client extends RSApplet {
                 do
                 {
                     if(j1 == 0 && --i2 < 0)
-                        i2 = IDK.length - 1;
-                    if(j1 == 1 && ++i2 >= IDK.length)
+                        i2 = IdentityKit.length - 1;
+                    if(j1 == 1 && ++i2 >= IdentityKit.length)
                         i2 = 0;
-                } while(IDK.cache[i2].aBoolean662 || IDK.cache[i2].anInt657 != k + (aBoolean1047 ? 0 : 7));
+                } while(IdentityKit.cache[i2].aBoolean662 || IdentityKit.cache[i2].anInt657 != k + (aBoolean1047 ? 0 : 7));
                 anIntArray1065[k] = i2;
                 aBoolean1031 = true;
             }
@@ -4631,7 +4631,7 @@ public final class client extends RSApplet {
         EntityDef.nullLoader();
         ItemDef.nullLoader();
         Flo.cache = null;
-        IDK.cache = null;
+        IdentityKit.cache = null;
         RSInterface.interfaceCache = null;
         DummyClass.cache = null;
         Animation.anims = null;
@@ -5188,7 +5188,7 @@ public final class client extends RSApplet {
                 for(int k1 = 0; k1 < 7; k1++)
                 {
                     int l1 = anIntArray1065[k1];
-                    if(l1 >= 0 && !IDK.cache[l1].method537())
+                    if(l1 >= 0 && !IdentityKit.cache[l1].hasModel())
                         return;
                 }
 
@@ -5199,7 +5199,7 @@ public final class client extends RSApplet {
                 {
                     int k2 = anIntArray1065[j2];
                     if(k2 >= 0)
-                        aclass30_sub2_sub4_sub6s[i2++] = IDK.cache[k2].method538();
+                        aclass30_sub2_sub4_sub6s[i2++] = IdentityKit.cache[k2].getModel();
                 }
 
                 Model model = new Model(i2, aclass30_sub2_sub4_sub6s);
@@ -6944,7 +6944,7 @@ public final class client extends RSApplet {
             Flo.unpackConfig(jagexArchive);
             ItemDef.unpackConfig(jagexArchive);
             EntityDef.unpackConfig(jagexArchive);
-            IDK.unpackConfig(jagexArchive);
+            IdentityKit.unpackConfig(jagexArchive);
             SpotAnim.unpackConfig(jagexArchive);
             SettingUsagePointers.unpackConfig(jagexArchive);
             VarBit.unpackConfig(jagexArchive);

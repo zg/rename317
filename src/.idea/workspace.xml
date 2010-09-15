@@ -86,6 +86,8 @@
         <option value="$PROJECT_DIR$/VarBit.java" />
         <option value="$PROJECT_DIR$/EntityDef.java" />
         <option value="$PROJECT_DIR$/Flo.java" />
+        <option value="$PROJECT_DIR$/identityKit.java" />
+        <option value="$PROJECT_DIR$/IdentityKit.java" />
       </list>
     </option>
   </component>
@@ -311,13 +313,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sign/signlink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="67" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.9081365">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Censor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="43" selection-start="636" selection-end="636" vertical-scroll-proportion="0.53543305">
@@ -419,6 +414,13 @@
     <entry file="file://$PROJECT_DIR$/Flo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="73" selection-start="175" selection-end="175" vertical-scroll-proportion="0.085427135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IdentityKit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="60" selection-start="2258" selection-end="2258" vertical-scroll-proportion="0.45477387">
           <folding />
         </state>
       </provider>
