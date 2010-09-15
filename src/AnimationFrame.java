@@ -37,7 +37,7 @@ public final class AnimationFrame
         i1 += l;
         Stream stream_5 = new Stream(abyte0);
         stream_5.currentOffset = i1;
-        Class18 class18 = new Class18(stream_5);
+        ModelTransform modelTransform = new ModelTransform(stream_5);
         int k1 = stream_1.readUnsignedWord();
         int ai[] = new int[500];
         int ai1[] = new int[500];
@@ -48,7 +48,7 @@ public final class AnimationFrame
             int i2 = stream_1.readUnsignedWord();
             AnimationFrame animationFrame = aAnimationFrameArray635[i2] = new AnimationFrame();
             animationFrame.displayLength = stream_4.readUnsignedByte();
-            animationFrame.aClass18_637 = class18;
+            animationFrame.aModelTransform_637 = modelTransform;
             int j2 = stream_1.readUnsignedByte();
             int k2 = -1;
             int l2 = 0;
@@ -57,11 +57,11 @@ public final class AnimationFrame
                 int j3 = stream_2.readUnsignedByte();
                 if(j3 > 0)
                 {
-                    if(class18.anIntArray342[i3] != 0)
+                    if(modelTransform.opcodes[i3] != 0)
                     {
                         for(int l3 = i3 - 1; l3 > k2; l3--)
                         {
-                            if(class18.anIntArray342[l3] != 0)
+                            if(modelTransform.opcodes[l3] != 0)
                                 continue;
                             ai[l2] = l3;
                             ai1[l2] = 0;
@@ -74,7 +74,7 @@ public final class AnimationFrame
                     }
                     ai[l2] = i3;
                     char c = '\0';
-                    if(class18.anIntArray342[i3] == 3)
+                    if(modelTransform.opcodes[i3] == 3)
                         c = '\200';
                     if((j3 & 1) != 0)
                         ai1[l2] = stream_3.method421();
@@ -90,7 +90,7 @@ public final class AnimationFrame
                         ai3[l2] = c;
                     k2 = i3;
                     l2++;
-                    if(class18.anIntArray342[i3] == 5)
+                    if(modelTransform.opcodes[i3] == 5)
                         aBooleanArray643[i2] = false;
                 }
             }
@@ -136,7 +136,7 @@ public final class AnimationFrame
 
     private static AnimationFrame[] aAnimationFrameArray635;
     public int displayLength;
-    public Class18 aClass18_637;
+    public ModelTransform aModelTransform_637;
     public int anInt638;
     public int anIntArray639[];
     public int anIntArray640[];

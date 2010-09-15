@@ -60,37 +60,46 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MapRegion.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MapRegion.java">
+      <file leaf-file-name="Class21.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Class21.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.0">
+            <state line="28" column="67" selection-start="641" selection-end="641" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sounds.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Sounds.java">
+      <file leaf-file-name="Class29.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Class29.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="5" selection-start="3120" selection-end="3120" vertical-scroll-proportion="0.0">
+            <state line="51" column="62" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SoundTrack.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SoundTrack.java">
+      <file leaf-file-name="Class33.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Class33.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="220" column="22" selection-start="8418" selection-end="8418" vertical-scroll-proportion="0.0">
+            <state line="17" column="0" selection-start="283" selection-end="283" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RgbImage.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RgbImage.java">
+      <file leaf-file-name="AnimationFrame.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AnimationFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="381" column="47" selection-start="10748" selection-end="10748" vertical-scroll-proportion="0.51206434">
+            <state line="139" column="24" selection-start="4628" selection-end="4628" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModelTransform.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ModelTransform.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="30" selection-start="218" selection-end="218" vertical-scroll-proportion="0.21794872">
               <folding />
             </state>
           </provider>
@@ -110,8 +119,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
-        <option value="$PROJECT_DIR$/JagexArchive.java" />
         <option value="$PROJECT_DIR$/OnDemandFetcher.java" />
         <option value="$PROJECT_DIR$/SettingUsagePointers.java" />
         <option value="$PROJECT_DIR$/VarBit.java" />
@@ -126,6 +133,8 @@
         <option value="$PROJECT_DIR$/Sounds.java" />
         <option value="$PROJECT_DIR$/SoundTrack.java" />
         <option value="$PROJECT_DIR$/RgbImage.java" />
+        <option value="$PROJECT_DIR$/AnimationFrame.java" />
+        <option value="$PROJECT_DIR$/ModelTransform.java" />
       </list>
     </option>
   </component>
@@ -351,41 +360,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/OnDemandData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.1281407">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OnDemandFetcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="42" selection-start="4800" selection-end="4800" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SettingUsagePointers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="43" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VarBit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="29" selection-start="1783" selection-end="1783" vertical-scroll-proportion="0.60301507">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EntityDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="73" selection-start="5577" selection-end="5577" vertical-scroll-proportion="0.34383202">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="73" selection-start="175" selection-end="175" vertical-scroll-proportion="0.085427135">
@@ -435,30 +409,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MapRegion.java">
+    <entry file="file://$PROJECT_DIR$/RgbImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Sounds.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="5" selection-start="3120" selection-end="3120" vertical-scroll-proportion="0.0">
+        <state line="381" column="47" selection-start="10748" selection-end="10748" vertical-scroll-proportion="0.51206434">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SoundTrack.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="22" selection-start="8418" selection-end="8418" vertical-scroll-proportion="0.0">
+        <state line="220" column="22" selection-start="8418" selection-end="8418" vertical-scroll-proportion="-1.5790884">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RgbImage.java">
+    <entry file="file://$PROJECT_DIR$/Sounds.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="381" column="47" selection-start="10748" selection-end="10748" vertical-scroll-proportion="0.51206434">
+        <state line="96" column="72" selection-start="3114" selection-end="3114" vertical-scroll-proportion="0.2386059">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MapRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.8847185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class21.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="67" selection-start="641" selection-end="641" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class29.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="62" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class33.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="283" selection-end="283" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AnimationFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="24" selection-start="4628" selection-end="4628" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ModelTransform.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="30" selection-start="218" selection-end="218" vertical-scroll-proportion="0.21794872">
           <folding />
         </state>
       </provider>
