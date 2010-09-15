@@ -122,23 +122,23 @@ public final class client extends RSApplet {
         chatBack.method361(0, 0);
         if(messagePromptRaised)
         {
-            chatTextDrawingArea.drawText(0, aString1121, 40, 239);
-            chatTextDrawingArea.drawText(128, promptInput + "*", 60, 239);
+            chatRSFont.drawText(0, aString1121, 40, 239);
+            chatRSFont.drawText(128, promptInput + "*", 60, 239);
         } else
         if(inputDialogState == 1)
         {
-            chatTextDrawingArea.drawText(0, "Enter amount:", 40, 239);
-            chatTextDrawingArea.drawText(128, amountOrNameInput + "*", 60, 239);
+            chatRSFont.drawText(0, "Enter amount:", 40, 239);
+            chatRSFont.drawText(128, amountOrNameInput + "*", 60, 239);
         } else
         if(inputDialogState == 2)
         {
-            chatTextDrawingArea.drawText(0, "Enter name:", 40, 239);
-            chatTextDrawingArea.drawText(128, amountOrNameInput + "*", 60, 239);
+            chatRSFont.drawText(0, "Enter name:", 40, 239);
+            chatRSFont.drawText(128, amountOrNameInput + "*", 60, 239);
         } else
         if(aString844 != null)
         {
-            chatTextDrawingArea.drawText(0, aString844, 40, 239);
-            chatTextDrawingArea.drawText(128, "Click to continue", 60, 239);
+            chatRSFont.drawText(0, aString844, 40, 239);
+            chatRSFont.drawText(128, "Click to continue", 60, 239);
         } else
         if(backDialogID != -1)
             drawInterface(0, 0, RSInterface.interfaceCache[backDialogID], 0);
@@ -148,7 +148,7 @@ public final class client extends RSApplet {
             drawInterface(0, 0, RSInterface.interfaceCache[dialogID], 0);
         } else
         {
-            TextDrawingArea textDrawingArea = aTextDrawingArea_1271;
+            RSFont RSFont = aRSFont_1271;
             int j = 0;
             DrawingArea.setDrawingArea(77, 0, 463, 0);
             for(int k = 0; k < 100; k++)
@@ -171,7 +171,7 @@ public final class client extends RSApplet {
                     if(l == 0)
                     {
                         if(i1 > 0 && i1 < 110)
-                            textDrawingArea.method385(0, chatMessages[k], i1, 4);
+                            RSFont.drawTextHLeftVMid(0, chatMessages[k], i1, 4);
                         j++;
                     }
                     if((l == 1 || l == 2) && (l == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s1)))
@@ -189,9 +189,9 @@ public final class client extends RSApplet {
                                 modIcons[1].method361(j1, i1 - 12);
                                 j1 += 14;
                             }
-                            textDrawingArea.method385(0, s1 + ":", i1, j1);
-                            j1 += textDrawingArea.getTextWidth(s1) + 8;
-                            textDrawingArea.method385(255, chatMessages[k], i1, j1);
+                            RSFont.drawTextHLeftVMid(0, s1 + ":", i1, j1);
+                            j1 += RSFont.getTextWidth(s1) + 8;
+                            RSFont.drawTextHLeftVMid(255, chatMessages[k], i1, j1);
                         }
                         j++;
                     }
@@ -200,8 +200,8 @@ public final class client extends RSApplet {
                         if(i1 > 0 && i1 < 110)
                         {
                             int k1 = 4;
-                            textDrawingArea.method385(0, "From", i1, k1);
-                            k1 += textDrawingArea.getTextWidth("From ");
+                            RSFont.drawTextHLeftVMid(0, "From", i1, k1);
+                            k1 += RSFont.getTextWidth("From ");
                             if(byte0 == 1)
                             {
                                 modIcons[0].method361(k1, i1 - 12);
@@ -212,37 +212,37 @@ public final class client extends RSApplet {
                                 modIcons[1].method361(k1, i1 - 12);
                                 k1 += 14;
                             }
-                            textDrawingArea.method385(0, s1 + ":", i1, k1);
-                            k1 += textDrawingArea.getTextWidth(s1) + 8;
-                            textDrawingArea.method385(0x800000, chatMessages[k], i1, k1);
+                            RSFont.drawTextHLeftVMid(0, s1 + ":", i1, k1);
+                            k1 += RSFont.getTextWidth(s1) + 8;
+                            RSFont.drawTextHLeftVMid(0x800000, chatMessages[k], i1, k1);
                         }
                         j++;
                     }
                     if(l == 4 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s1)))
                     {
                         if(i1 > 0 && i1 < 110)
-                            textDrawingArea.method385(0x800080, s1 + " " + chatMessages[k], i1, 4);
+                            RSFont.drawTextHLeftVMid(0x800080, s1 + " " + chatMessages[k], i1, 4);
                         j++;
                     }
                     if(l == 5 && splitPrivateChat == 0 && privateChatMode < 2)
                     {
                         if(i1 > 0 && i1 < 110)
-                            textDrawingArea.method385(0x800000, chatMessages[k], i1, 4);
+                            RSFont.drawTextHLeftVMid(0x800000, chatMessages[k], i1, 4);
                         j++;
                     }
                     if(l == 6 && splitPrivateChat == 0 && privateChatMode < 2)
                     {
                         if(i1 > 0 && i1 < 110)
                         {
-                            textDrawingArea.method385(0, "To " + s1 + ":", i1, 4);
-                            textDrawingArea.method385(0x800000, chatMessages[k], i1, 12 + textDrawingArea.getTextWidth("To " + s1));
+                            RSFont.drawTextHLeftVMid(0, "To " + s1 + ":", i1, 4);
+                            RSFont.drawTextHLeftVMid(0x800000, chatMessages[k], i1, 12 + RSFont.getTextWidth("To " + s1));
                         }
                         j++;
                     }
                     if(l == 8 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s1)))
                     {
                         if(i1 > 0 && i1 < 110)
-                            textDrawingArea.method385(0x7e3200, s1 + " " + chatMessages[k], i1, 4);
+                            RSFont.drawTextHLeftVMid(0x7e3200, s1 + " " + chatMessages[k], i1, 4);
                         j++;
                     }
                 }
@@ -257,9 +257,9 @@ public final class client extends RSApplet {
                 s = myPlayer.name;
             else
                 s = TextClass.fixName(myUsername);
-            textDrawingArea.method385(0, s + ":", 90, 4);
-            textDrawingArea.method385(255, inputString + "*", 90, 6 + textDrawingArea.getTextWidth(s + ": "));
-            DrawingArea.method339(77, 0, 479, 0);
+            RSFont.drawTextHLeftVMid(0, s + ":", 90, 4);
+            RSFont.drawTextHLeftVMid(255, inputString + "*", 90, 6 + RSFont.getTextWidth(s + ": "));
+            DrawingArea.drawHLine(77, 0, 479, 0);
         }
         if(menuOpen && menuScreenArea == 2)
             drawMenu();
@@ -1060,12 +1060,12 @@ public final class client extends RSApplet {
         DrawingArea.method336(k1, l + 16 + l1, i1, anInt1063, 16);
         DrawingArea.method341(l + 16 + l1, anInt902, k1, i1);
         DrawingArea.method341(l + 16 + l1, anInt902, k1, i1 + 1);
-        DrawingArea.method339(l + 16 + l1, anInt902, 16, i1);
-        DrawingArea.method339(l + 17 + l1, anInt902, 16, i1);
+        DrawingArea.drawHLine(l + 16 + l1, anInt902, 16, i1);
+        DrawingArea.drawHLine(l + 17 + l1, anInt902, 16, i1);
         DrawingArea.method341(l + 16 + l1, anInt927, k1, i1 + 15);
         DrawingArea.method341(l + 17 + l1, anInt927, k1 - 1, i1 + 14);
-        DrawingArea.method339(l + 15 + l1 + k1, anInt927, 16, i1);
-        DrawingArea.method339(l + 14 + l1 + k1, anInt927, 15, i1 + 1);
+        DrawingArea.drawHLine(l + 15 + l1 + k1, anInt927, 16, i1);
+        DrawingArea.drawHLine(l + 14 + l1 + k1, anInt927, 15, i1 + 1);
     }
 
     private void updateNPCs(Stream stream, int i)
@@ -1340,8 +1340,8 @@ public final class client extends RSApplet {
                 npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height);
                 if(spriteDrawX > -1 && anInt974 < anInt975)
                 {
-                    anIntArray979[anInt974] = chatTextDrawingArea.method384(((Entity) (obj)).textSpoken) / 2;
-                    anIntArray978[anInt974] = chatTextDrawingArea.anInt1497;
+                    anIntArray979[anInt974] = chatRSFont.method384(((Entity) (obj)).textSpoken) / 2;
+                    anIntArray978[anInt974] = chatRSFont.charHeight;
                     anIntArray976[anInt974] = spriteDrawX;
                     anIntArray977[anInt974] = spriteDrawY;
                     anIntArray980[anInt974] = ((Entity) (obj)).anInt1513;
@@ -1391,8 +1391,8 @@ public final class client extends RSApplet {
                             spriteDrawY -= 10;
                         }
                         hitMarks[((Entity) (obj)).hitMarkTypes[j1]].drawSprite(spriteDrawX - 12, spriteDrawY - 12);
-                        aTextDrawingArea_1270.drawText(0, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 4, spriteDrawX);
-                        aTextDrawingArea_1270.drawText(0xffffff, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 3, spriteDrawX - 1);
+                        aRSFont_1270.drawText(0, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 4, spriteDrawX);
+                        aRSFont_1270.drawText(0xffffff, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 3, spriteDrawX - 1);
                     }
                 }
 
@@ -1467,31 +1467,31 @@ public final class client extends RSApplet {
                 }
                 if(anIntArray981[k] == 0)
                 {
-                    chatTextDrawingArea.drawText(0, s, spriteDrawY + 1, spriteDrawX);
-                    chatTextDrawingArea.drawText(i3, s, spriteDrawY, spriteDrawX);
+                    chatRSFont.drawText(0, s, spriteDrawY + 1, spriteDrawX);
+                    chatRSFont.drawText(i3, s, spriteDrawY, spriteDrawX);
                 }
                 if(anIntArray981[k] == 1)
                 {
-                    chatTextDrawingArea.method386(0, s, spriteDrawX, anInt1265, spriteDrawY + 1);
-                    chatTextDrawingArea.method386(i3, s, spriteDrawX, anInt1265, spriteDrawY);
+                    chatRSFont.method386(0, s, spriteDrawX, anInt1265, spriteDrawY + 1);
+                    chatRSFont.method386(i3, s, spriteDrawX, anInt1265, spriteDrawY);
                 }
                 if(anIntArray981[k] == 2)
                 {
-                    chatTextDrawingArea.method387(spriteDrawX, s, anInt1265, spriteDrawY + 1, 0);
-                    chatTextDrawingArea.method387(spriteDrawX, s, anInt1265, spriteDrawY, i3);
+                    chatRSFont.method387(spriteDrawX, s, anInt1265, spriteDrawY + 1, 0);
+                    chatRSFont.method387(spriteDrawX, s, anInt1265, spriteDrawY, i3);
                 }
                 if(anIntArray981[k] == 3)
                 {
-                    chatTextDrawingArea.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY + 1, spriteDrawX, 0);
-                    chatTextDrawingArea.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY, spriteDrawX, i3);
+                    chatRSFont.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY + 1, spriteDrawX, 0);
+                    chatRSFont.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY, spriteDrawX, i3);
                 }
                 if(anIntArray981[k] == 4)
                 {
-                    int i4 = chatTextDrawingArea.method384(s);
+                    int i4 = chatRSFont.method384(s);
                     int k4 = ((150 - anIntArray982[k]) * (i4 + 100)) / 150;
                     DrawingArea.setDrawingArea(334, spriteDrawX - 50, spriteDrawX + 50, 0);
-                    chatTextDrawingArea.method385(0, s, spriteDrawY + 1, (spriteDrawX + 50) - k4);
-                    chatTextDrawingArea.method385(i3, s, spriteDrawY, (spriteDrawX + 50) - k4);
+                    chatRSFont.drawTextHLeftVMid(0, s, spriteDrawY + 1, (spriteDrawX + 50) - k4);
+                    chatRSFont.drawTextHLeftVMid(i3, s, spriteDrawY, (spriteDrawX + 50) - k4);
                     DrawingArea.defaultDrawingAreaSize();
                 }
                 if(anIntArray981[k] == 5)
@@ -1503,15 +1503,15 @@ public final class client extends RSApplet {
                     else
                     if(j4 > 125)
                         l4 = j4 - 125;
-                    DrawingArea.setDrawingArea(spriteDrawY + 5, 0, 512, spriteDrawY - chatTextDrawingArea.anInt1497 - 1);
-                    chatTextDrawingArea.drawText(0, s, spriteDrawY + 1 + l4, spriteDrawX);
-                    chatTextDrawingArea.drawText(i3, s, spriteDrawY + l4, spriteDrawX);
+                    DrawingArea.setDrawingArea(spriteDrawY + 5, 0, 512, spriteDrawY - chatRSFont.charHeight - 1);
+                    chatRSFont.drawText(0, s, spriteDrawY + 1 + l4, spriteDrawX);
+                    chatRSFont.drawText(i3, s, spriteDrawY + l4, spriteDrawX);
                     DrawingArea.defaultDrawingAreaSize();
                 }
             } else
             {
-                chatTextDrawingArea.drawText(0, s, spriteDrawY + 1, spriteDrawX);
-                chatTextDrawingArea.drawText(0xffff00, s, spriteDrawY, spriteDrawX);
+                chatRSFont.drawText(0, s, spriteDrawY + 1, spriteDrawX);
+                chatRSFont.drawText(0xffff00, s, spriteDrawY, spriteDrawX);
             }
         }
     }catch(Exception e){ }
@@ -1767,7 +1767,7 @@ public final class client extends RSApplet {
         DrawingArea.method336(l, j, i, i1, k);
         DrawingArea.method336(16, j + 1, i + 1, 0, k - 2);
         DrawingArea.fillPixels(i + 1, k - 2, l - 19, 0, j + 18);
-        chatTextDrawingArea.method385(i1, "Choose Option", j + 14, i + 3);
+        chatRSFont.drawTextHLeftVMid(i1, "Choose Option", j + 14, i + 3);
         int j1 = super.mouseX;
         int k1 = super.mouseY;
         if(menuScreenArea == 0)
@@ -1791,7 +1791,7 @@ public final class client extends RSApplet {
             int j2 = 0xffffff;
             if(j1 > i && j1 < i + k && k1 > i2 - 13 && k1 < i2 + 3)
                 j2 = 0xffff00;
-            chatTextDrawingArea.method389(true, i + 3, j2, menuActionName[l1], i2);
+            chatRSFont.method389(true, i + 3, j2, menuActionName[l1], i2);
         }
 
     }
@@ -2435,8 +2435,8 @@ public final class client extends RSApplet {
         if(lowMem && loadingStage == 2 && MapRegion.anInt131 != plane)
         {
             aRSImageProducer_1165.initDrawingArea();
-            aTextDrawingArea_1271.drawText(0, "Loading - please wait.", 151, 257);
-            aTextDrawingArea_1271.drawText(0xffffff, "Loading - please wait.", 150, 256);
+            aRSFont_1271.drawText(0, "Loading - please wait.", 151, 257);
+            aRSFont_1271.drawText(0xffffff, "Loading - please wait.", 150, 256);
             aRSImageProducer_1165.drawGraphics(4, super.graphics, 4);
             loadingStage = 1;
             aLong824 = System.currentTimeMillis();
@@ -3153,13 +3153,13 @@ public final class client extends RSApplet {
         char c = '\u0168';
         char c1 = '\310';
         byte byte1 = 20;
-        chatTextDrawingArea.drawText(0xffffff, "RuneScape is loading - please wait...", c1 / 2 - 26 - byte1, c / 2);
+        chatRSFont.drawText(0xffffff, "RuneScape is loading - please wait...", c1 / 2 - 26 - byte1, c / 2);
         int j = c1 / 2 - 18 - byte1;
         DrawingArea.fillPixels(c / 2 - 152, 304, 34, 0x8c1111, j);
         DrawingArea.fillPixels(c / 2 - 151, 302, 32, 0, j + 1);
         DrawingArea.method336(30, j + 2, c / 2 - 150, 0x8c1111, i * 3);
         DrawingArea.method336(30, j + 2, (c / 2 - 150) + i * 3, 0, 300 - i * 3);
-        chatTextDrawingArea.drawText(0xffffff, s, (c1 / 2 + 5) - byte1, c / 2);
+        chatRSFont.drawText(0xffffff, s, (c1 / 2 + 5) - byte1, c / 2);
         aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if(welcomeScreenRaised)
         {
@@ -3402,10 +3402,10 @@ public final class client extends RSApplet {
             return;
         }
         aRSImageProducer_1165.initDrawingArea();
-        aTextDrawingArea_1271.drawText(0, "Connection lost", 144, 257);
-        aTextDrawingArea_1271.drawText(0xffffff, "Connection lost", 143, 256);
-        aTextDrawingArea_1271.drawText(0, "Please wait - attempting to reestablish", 159, 257);
-        aTextDrawingArea_1271.drawText(0xffffff, "Please wait - attempting to reestablish", 158, 256);
+        aRSFont_1271.drawText(0, "Connection lost", 144, 257);
+        aRSFont_1271.drawText(0xffffff, "Connection lost", 143, 256);
+        aRSFont_1271.drawText(0, "Please wait - attempting to reestablish", 159, 257);
+        aRSFont_1271.drawText(0xffffff, "Please wait - attempting to reestablish", 158, 256);
         aRSImageProducer_1165.drawGraphics(4, super.graphics, 4);
         anInt1021 = 0;
         destX = 0;
@@ -5377,7 +5377,7 @@ public final class client extends RSApplet {
     {
         if(splitPrivateChat == 0)
             return;
-        TextDrawingArea textDrawingArea = aTextDrawingArea_1271;
+        RSFont RSFont = aRSFont_1271;
         int i = 0;
         if(anInt1104 != 0)
             i = 1;
@@ -5401,9 +5401,9 @@ public final class client extends RSApplet {
                 {
                     int l = 329 - i * 13;
                     int k1 = 4;
-                    textDrawingArea.method385(0, "From", l, k1);
-                    textDrawingArea.method385(65535, "From", l - 1, k1);
-                    k1 += textDrawingArea.getTextWidth("From ");
+                    RSFont.drawTextHLeftVMid(0, "From", l, k1);
+                    RSFont.drawTextHLeftVMid(65535, "From", l - 1, k1);
+                    k1 += RSFont.getTextWidth("From ");
                     if(byte1 == 1)
                     {
                         modIcons[0].method361(k1, l - 12);
@@ -5414,24 +5414,24 @@ public final class client extends RSApplet {
                         modIcons[1].method361(k1, l - 12);
                         k1 += 14;
                     }
-                    textDrawingArea.method385(0, s + ": " + chatMessages[j], l, k1);
-                    textDrawingArea.method385(65535, s + ": " + chatMessages[j], l - 1, k1);
+                    RSFont.drawTextHLeftVMid(0, s + ": " + chatMessages[j], l, k1);
+                    RSFont.drawTextHLeftVMid(65535, s + ": " + chatMessages[j], l - 1, k1);
                     if(++i >= 5)
                         return;
                 }
                 if(k == 5 && privateChatMode < 2)
                 {
                     int i1 = 329 - i * 13;
-                    textDrawingArea.method385(0, chatMessages[j], i1, 4);
-                    textDrawingArea.method385(65535, chatMessages[j], i1 - 1, 4);
+                    RSFont.drawTextHLeftVMid(0, chatMessages[j], i1, 4);
+                    RSFont.drawTextHLeftVMid(65535, chatMessages[j], i1 - 1, 4);
                     if(++i >= 5)
                         return;
                 }
                 if(k == 6 && privateChatMode < 2)
                 {
                     int j1 = 329 - i * 13;
-                    textDrawingArea.method385(0, "To " + s + ": " + chatMessages[j], j1, 4);
-                    textDrawingArea.method385(65535, "To " + s + ": " + chatMessages[j], j1 - 1, 4);
+                    RSFont.drawTextHLeftVMid(0, "To " + s + ": " + chatMessages[j], j1, 4);
+                    RSFont.drawTextHLeftVMid(65535, "To " + s + ": " + chatMessages[j], j1 - 1, 4);
                     if(++i >= 5)
                         return;
                 }
@@ -6657,10 +6657,10 @@ public final class client extends RSApplet {
         {
             connectServer();
             titleJagexArchive = streamLoaderForName(1, "title screen", "title", expectedCRCs[1], 25);
-            aTextDrawingArea_1270 = new TextDrawingArea(false, "p11_full", titleJagexArchive);
-            aTextDrawingArea_1271 = new TextDrawingArea(false, "p12_full", titleJagexArchive);
-            chatTextDrawingArea = new TextDrawingArea(false, "b12_full", titleJagexArchive);
-            TextDrawingArea aTextDrawingArea_1273 = new TextDrawingArea(true, "q8_full", titleJagexArchive);
+            aRSFont_1270 = new RSFont(false, "p11_full", titleJagexArchive);
+            aRSFont_1271 = new RSFont(false, "p12_full", titleJagexArchive);
+            chatRSFont = new RSFont(false, "b12_full", titleJagexArchive);
+            RSFont aRSFont_1273 = new RSFont(true, "q8_full", titleJagexArchive);
             drawLogo();
             loadTitleScreen();
             JagexArchive jagexArchive = streamLoaderForName(2, "config", "config", expectedCRCs[2], 30);
@@ -6957,8 +6957,8 @@ public final class client extends RSApplet {
                 Sounds.unpack(stream);
             }
             drawLoadingText(95, "Unpacking interfaces");
-            TextDrawingArea aclass30_sub2_sub1_sub4s[] = {
-                    aTextDrawingArea_1270, aTextDrawingArea_1271, chatTextDrawingArea, aTextDrawingArea_1273
+            RSFont aclass30_sub2_sub1_sub4s[] = {
+                    aRSFont_1270, aRSFont_1271, chatRSFont, aRSFont_1273
             };
             RSInterface.unpack(jagexArchive_1, aclass30_sub2_sub1_sub4s, jagexArchive_2);
             drawLoadingText(100, "Preparing game engine");
@@ -7707,30 +7707,30 @@ public final class client extends RSApplet {
             aBoolean1233 = false;
             aRSImageProducer_1123.initDrawingArea();
             backBase1.method361(0, 0);
-            aTextDrawingArea_1271.method382(0xffffff, 55, "Public chat", 28, true);
+            aRSFont_1271.method382(0xffffff, 55, "Public chat", 28, true);
             if(publicChatMode == 0)
-                aTextDrawingArea_1271.method382(65280, 55, "On", 41, true);
+                aRSFont_1271.method382(65280, 55, "On", 41, true);
             if(publicChatMode == 1)
-                aTextDrawingArea_1271.method382(0xffff00, 55, "Friends", 41, true);
+                aRSFont_1271.method382(0xffff00, 55, "Friends", 41, true);
             if(publicChatMode == 2)
-                aTextDrawingArea_1271.method382(0xff0000, 55, "Off", 41, true);
+                aRSFont_1271.method382(0xff0000, 55, "Off", 41, true);
             if(publicChatMode == 3)
-                aTextDrawingArea_1271.method382(65535, 55, "Hide", 41, true);
-            aTextDrawingArea_1271.method382(0xffffff, 184, "Private chat", 28, true);
+                aRSFont_1271.method382(65535, 55, "Hide", 41, true);
+            aRSFont_1271.method382(0xffffff, 184, "Private chat", 28, true);
             if(privateChatMode == 0)
-                aTextDrawingArea_1271.method382(65280, 184, "On", 41, true);
+                aRSFont_1271.method382(65280, 184, "On", 41, true);
             if(privateChatMode == 1)
-                aTextDrawingArea_1271.method382(0xffff00, 184, "Friends", 41, true);
+                aRSFont_1271.method382(0xffff00, 184, "Friends", 41, true);
             if(privateChatMode == 2)
-                aTextDrawingArea_1271.method382(0xff0000, 184, "Off", 41, true);
-            aTextDrawingArea_1271.method382(0xffffff, 324, "Trade/compete", 28, true);
+                aRSFont_1271.method382(0xff0000, 184, "Off", 41, true);
+            aRSFont_1271.method382(0xffffff, 324, "Trade/compete", 28, true);
             if(tradeMode == 0)
-                aTextDrawingArea_1271.method382(65280, 324, "On", 41, true);
+                aRSFont_1271.method382(65280, 324, "On", 41, true);
             if(tradeMode == 1)
-                aTextDrawingArea_1271.method382(0xffff00, 324, "Friends", 41, true);
+                aRSFont_1271.method382(0xffff00, 324, "Friends", 41, true);
             if(tradeMode == 2)
-                aTextDrawingArea_1271.method382(0xff0000, 324, "Off", 41, true);
-            aTextDrawingArea_1271.method382(0xffffff, 458, "Report abuse", 33, true);
+                aRSFont_1271.method382(0xff0000, 324, "Off", 41, true);
+            aRSFont_1271.method382(0xffffff, 458, "Report abuse", 33, true);
             aRSImageProducer_1123.drawGraphics(453, super.graphics, 0);
             aRSImageProducer_1165.initDrawingArea();
         }
@@ -7891,8 +7891,8 @@ public final class client extends RSApplet {
                                         if(class30_sub2_sub1_sub1_2.w2 == 33 || class9_1.invStackSizes[i3] != 1)
                                         {
                                             int k10 = class9_1.invStackSizes[i3];
-                                            aTextDrawingArea_1270.method385(0, intToKOrMil(k10), j6 + 10 + j7, k5 + 1 + k6);
-                                            aTextDrawingArea_1270.method385(0xffff00, intToKOrMil(k10), j6 + 9 + j7, k5 + k6);
+                                            aRSFont_1270.drawTextHLeftVMid(0, intToKOrMil(k10), j6 + 10 + j7, k5 + 1 + k6);
+                                            aRSFont_1270.drawTextHLeftVMid(0xffff00, intToKOrMil(k10), j6 + 9 + j7, k5 + k6);
                                         }
                                     }
                                 }
@@ -7940,7 +7940,7 @@ public final class client extends RSApplet {
                 } else
                 if(class9_1.type == 4)
                 {
-                    TextDrawingArea textDrawingArea = class9_1.textDrawingAreas;
+                    RSFont RSFont = class9_1.textDrawingAreas;
                     String s = class9_1.message;
                     boolean flag1 = false;
                     if(anInt1039 == class9_1.id || anInt1048 == class9_1.id || anInt1026 == class9_1.id)
@@ -7971,7 +7971,7 @@ public final class client extends RSApplet {
                         if(i4 == 49152)
                             i4 = 0xffffff;
                     }
-                    for(int l6 = l2 + textDrawingArea.anInt1497; s.length() > 0; l6 += textDrawingArea.anInt1497)
+                    for(int l6 = l2 + RSFont.charHeight; s.length() > 0; l6 += RSFont.charHeight)
                     {
                         if(s.indexOf("%") != -1)
                         {
@@ -8023,9 +8023,9 @@ public final class client extends RSApplet {
                             s = "";
                         }
                         if(class9_1.aBoolean223)
-                            textDrawingArea.method382(i4, k2 + class9_1.width / 2, s1, l6, class9_1.aBoolean268);
+                            RSFont.method382(i4, k2 + class9_1.width / 2, s1, l6, class9_1.aBoolean268);
                         else
-                            textDrawingArea.method389(class9_1.aBoolean268, k2, i4, s1, l6);
+                            RSFont.method389(class9_1.aBoolean268, k2, i4, s1, l6);
                     }
 
                 } else
@@ -8069,7 +8069,7 @@ public final class client extends RSApplet {
                 } else
                 if(class9_1.type == 7)
                 {
-                    TextDrawingArea textDrawingArea_1 = class9_1.textDrawingAreas;
+                    RSFont RSFont_1 = class9_1.textDrawingAreas;
                     int k4 = 0;
                     for(int j5 = 0; j5 < class9_1.height; j5++)
                     {
@@ -8084,9 +8084,9 @@ public final class client extends RSApplet {
                                 int i9 = k2 + i6 * (115 + class9_1.invSpritePadX);
                                 int k9 = l2 + j5 * (12 + class9_1.invSpritePadY);
                                 if(class9_1.aBoolean223)
-                                    textDrawingArea_1.method382(class9_1.textColor, i9 + class9_1.width / 2, s2, k9, class9_1.aBoolean268);
+                                    RSFont_1.method382(class9_1.textColor, i9 + class9_1.width / 2, s2, k9, class9_1.aBoolean268);
                                 else
-                                    textDrawingArea_1.method389(class9_1.aBoolean268, i9, class9_1.textColor, s2, k9);
+                                    RSFont_1.method389(class9_1.aBoolean268, i9, class9_1.textColor, s2, k9);
                             }
                             k4++;
                         }
@@ -8501,14 +8501,14 @@ public final class client extends RSApplet {
             int i1 = 0xffff00;
             if(super.fps < 15)
                 i1 = 0xff0000;
-            aTextDrawingArea_1271.method380("Fps:" + super.fps, c, i1, k);
+            aRSFont_1271.method380("Fps:" + super.fps, c, i1, k);
             k += 15;
             Runtime runtime = Runtime.getRuntime();
             int j1 = (int)((runtime.totalMemory() - runtime.freeMemory()) / 1024L);
             i1 = 0xffff00;
             if(j1 > 0x2000000 && lowMem)
                 i1 = 0xff0000;
-            aTextDrawingArea_1271.method380("Mem:" + j1 + "k", c, 0xffff00, k);
+            aRSFont_1271.method380("Mem:" + j1 + "k", c, 0xffff00, k);
             k += 15;
         }
         if(anInt1104 != 0)
@@ -8517,9 +8517,9 @@ public final class client extends RSApplet {
             int l = j / 60;
             j %= 60;
             if(j < 10)
-                aTextDrawingArea_1271.method385(0xffff00, "System update in: " + l + ":0" + j, 329, 4);
+                aRSFont_1271.drawTextHLeftVMid(0xffff00, "System update in: " + l + ":0" + j, 329, 4);
             else
-                aTextDrawingArea_1271.method385(0xffff00, "System update in: " + l + ":" + j, 329, 4);
+                aRSFont_1271.drawTextHLeftVMid(0xffff00, "System update in: " + l + ":" + j, 329, 4);
             anInt849++;
             if(anInt849 > 75)
             {
@@ -8620,10 +8620,10 @@ public final class client extends RSApplet {
 
     private void determineMenuSize()
     {
-        int i = chatTextDrawingArea.getTextWidth("Choose Option");
+        int i = chatRSFont.getTextWidth("Choose Option");
         for(int j = 0; j < menuActionRow; j++)
         {
-            int k = chatTextDrawingArea.getTextWidth(menuActionName[j]);
+            int k = chatRSFont.getTextWidth(menuActionName[j]);
             if(k > i)
                 i = k;
         }
@@ -9073,7 +9073,7 @@ public final class client extends RSApplet {
             s = menuActionName[menuActionRow - 1];
         if(menuActionRow > 2)
             s = s + "@whi@ / " + (menuActionRow - 2) + " more options";
-        chatTextDrawingArea.method390(4, 0xffffff, s, loopCycle / 1000, 15);
+        chatRSFont.method390(4, 0xffffff, s, loopCycle / 1000, 15);
     }
 
     private void drawMinimap()
@@ -9273,7 +9273,7 @@ public final class client extends RSApplet {
                     int l = 329 - i * 13;
                     if(super.mouseX > 4 && super.mouseY - 4 > l - 10 && super.mouseY - 4 <= l + 3)
                     {
-                        int i1 = aTextDrawingArea_1271.getTextWidth("From:  " + s + chatMessages[j]) + 25;
+                        int i1 = aRSFont_1271.getTextWidth("From:  " + s + chatMessages[j]) + 25;
                         if(i1 > 450)
                             i1 = 450;
                         if(super.mouseX < 4 + i1)
@@ -9550,62 +9550,62 @@ public final class client extends RSApplet {
         if(loginScreenState == 0)
         {
             int i = c1 / 2 + 80;
-            aTextDrawingArea_1270.method382(0x75a9a9, c / 2, onDemandFetcher.statusString, i, true);
+            aRSFont_1270.method382(0x75a9a9, c / 2, onDemandFetcher.statusString, i, true);
             i = c1 / 2 - 20;
-            chatTextDrawingArea.method382(0xffff00, c / 2, "Welcome to RuneScape", i, true);
+            chatRSFont.method382(0xffff00, c / 2, "Welcome to RuneScape", i, true);
             i += 30;
             int l = c / 2 - 80;
             int k1 = c1 / 2 + 20;
             aBackground_967.method361(l - 73, k1 - 20);
-            chatTextDrawingArea.method382(0xffffff, l, "New User", k1 + 5, true);
+            chatRSFont.method382(0xffffff, l, "New User", k1 + 5, true);
             l = c / 2 + 80;
             aBackground_967.method361(l - 73, k1 - 20);
-            chatTextDrawingArea.method382(0xffffff, l, "Existing User", k1 + 5, true);
+            chatRSFont.method382(0xffffff, l, "Existing User", k1 + 5, true);
         }
         if(loginScreenState == 2)
         {
             int j = c1 / 2 - 40;
             if(loginMessage1.length() > 0)
             {
-                chatTextDrawingArea.method382(0xffff00, c / 2, loginMessage1, j - 15, true);
-                chatTextDrawingArea.method382(0xffff00, c / 2, loginMessage2, j, true);
+                chatRSFont.method382(0xffff00, c / 2, loginMessage1, j - 15, true);
+                chatRSFont.method382(0xffff00, c / 2, loginMessage2, j, true);
                 j += 30;
             } else
             {
-                chatTextDrawingArea.method382(0xffff00, c / 2, loginMessage2, j - 7, true);
+                chatRSFont.method382(0xffff00, c / 2, loginMessage2, j - 7, true);
                 j += 30;
             }
-            chatTextDrawingArea.method389(true, c / 2 - 90, 0xffffff, "Username: " + myUsername + ((loginScreenCursorPos == 0) & (loopCycle % 40 < 20) ? "@yel@|" : ""), j);
+            chatRSFont.method389(true, c / 2 - 90, 0xffffff, "Username: " + myUsername + ((loginScreenCursorPos == 0) & (loopCycle % 40 < 20) ? "@yel@|" : ""), j);
             j += 15;
-            chatTextDrawingArea.method389(true, c / 2 - 88, 0xffffff, "Password: " + TextClass.passwordAsterisks(myPassword) + ((loginScreenCursorPos == 1) & (loopCycle % 40 < 20) ? "@yel@|" : ""), j);
+            chatRSFont.method389(true, c / 2 - 88, 0xffffff, "Password: " + TextClass.passwordAsterisks(myPassword) + ((loginScreenCursorPos == 1) & (loopCycle % 40 < 20) ? "@yel@|" : ""), j);
             j += 15;
             if(!flag)
             {
                 int i1 = c / 2 - 80;
                 int l1 = c1 / 2 + 50;
                 aBackground_967.method361(i1 - 73, l1 - 20);
-                chatTextDrawingArea.method382(0xffffff, i1, "Login", l1 + 5, true);
+                chatRSFont.method382(0xffffff, i1, "Login", l1 + 5, true);
                 i1 = c / 2 + 80;
                 aBackground_967.method361(i1 - 73, l1 - 20);
-                chatTextDrawingArea.method382(0xffffff, i1, "Cancel", l1 + 5, true);
+                chatRSFont.method382(0xffffff, i1, "Cancel", l1 + 5, true);
             }
         }
         if(loginScreenState == 3)
         {
-                        chatTextDrawingArea.method382(0xffff00, c / 2, "Create a free account", c1 / 2 - 60, true);
+                        chatRSFont.method382(0xffff00, c / 2, "Create a free account", c1 / 2 - 60, true);
             int k = c1 / 2 - 35;
-            chatTextDrawingArea.method382(0xffffff, c / 2, "To create a new account you need to", k, true);
+            chatRSFont.method382(0xffffff, c / 2, "To create a new account you need to", k, true);
             k += 15;
-            chatTextDrawingArea.method382(0xffffff, c / 2, "go back to the main RuneScape webpage", k, true);
+            chatRSFont.method382(0xffffff, c / 2, "go back to the main RuneScape webpage", k, true);
             k += 15;
-            chatTextDrawingArea.method382(0xffffff, c / 2, "and choose the red 'create account'", k, true);
+            chatRSFont.method382(0xffffff, c / 2, "and choose the red 'create account'", k, true);
             k += 15;
-            chatTextDrawingArea.method382(0xffffff, c / 2, "button at the top right of that page.", k, true);
+            chatRSFont.method382(0xffffff, c / 2, "button at the top right of that page.", k, true);
             k += 15;
             int j1 = c / 2;
             int i2 = c1 / 2 + 50;
             aBackground_967.method361(j1 - 73, i2 - 20);
-            chatTextDrawingArea.method382(0xffffff, j1, "Cancel", i2 + 5, true);
+            chatRSFont.method382(0xffffff, j1, "Cancel", i2 + 5, true);
         }
         aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if(welcomeScreenRaised)
@@ -10573,8 +10573,8 @@ public final class client extends RSApplet {
                 loadingStage = 1;
                 aLong824 = System.currentTimeMillis();
                 aRSImageProducer_1165.initDrawingArea();
-                aTextDrawingArea_1271.drawText(0, "Loading - please wait.", 151, 257);
-                aTextDrawingArea_1271.drawText(0xffffff, "Loading - please wait.", 150, 256);
+                aRSFont_1271.drawText(0, "Loading - please wait.", 151, 257);
+                aRSFont_1271.drawText(0xffffff, "Loading - please wait.", 150, 256);
                 aRSImageProducer_1165.drawGraphics(4, super.graphics, 4);
                 if(pktType == 73)
                 {
@@ -12203,9 +12203,9 @@ public final class client extends RSApplet {
     private String loginMessage2;
     private int anInt1268;
     private int anInt1269;
-    private TextDrawingArea aTextDrawingArea_1270;
-    private TextDrawingArea aTextDrawingArea_1271;
-    private TextDrawingArea chatTextDrawingArea;
+    private RSFont aRSFont_1270;
+    private RSFont aRSFont_1271;
+    private RSFont chatRSFont;
     private int anInt1275;
     private int backDialogID;
     private int anInt1278;
