@@ -14,7 +14,7 @@ public final class SpotAnim {
         {
             if(cache[j] == null)
                 cache[j] = new SpotAnim();
-            cache[j].anInt404 = j;
+            cache[j].id = j;
             cache[j].readValues(stream);
         }
 
@@ -28,34 +28,34 @@ public final class SpotAnim {
             if(i == 0)
                 return;
             if(i == 1)
-                anInt405 = stream.readUnsignedWord();
+                modelID = stream.readUnsignedWord();
             else
             if(i == 2)
             {
-                anInt406 = stream.readUnsignedWord();
+                animationID = stream.readUnsignedWord();
                 if(Animation.anims != null)
-                    aAnimation_407 = Animation.anims[anInt406];
+                    aAnimation_407 = Animation.anims[animationID];
             } else
             if(i == 4)
-                anInt410 = stream.readUnsignedWord();
+                resizeXY = stream.readUnsignedWord();
             else
             if(i == 5)
-                anInt411 = stream.readUnsignedWord();
+                resizeZ = stream.readUnsignedWord();
             else
             if(i == 6)
-                anInt412 = stream.readUnsignedWord();
+                rotation = stream.readUnsignedWord();
             else
             if(i == 7)
-                anInt413 = stream.readUnsignedByte();
+                modelBrightness = stream.readUnsignedByte();
             else
             if(i == 8)
-                anInt414 = stream.readUnsignedByte();
+                modelShadow = stream.readUnsignedByte();
             else
             if(i >= 40 && i < 50)
-                anIntArray408[i - 40] = stream.readUnsignedWord();
+                originalModelColours[i - 40] = stream.readUnsignedWord();
             else
             if(i >= 50 && i < 60)
-                anIntArray409[i - 50] = stream.readUnsignedWord();
+                modifiedModelColours[i - 50] = stream.readUnsignedWord();
             else
                 System.out.println("Error unrecognised spotanim config code: " + i);
         } while(true);
@@ -63,43 +63,41 @@ public final class SpotAnim {
 
     public Model getModel()
     {
-        Model model = (Model) aMRUNodes_415.insertFromCache(anInt404);
+        Model model = (Model) aMRUNodes_415.insertFromCache(id);
         if(model != null)
             return model;
-        model = Model.getModel(anInt405);
+        model = Model.getModel(modelID);
         if(model == null)
             return null;
         for(int i = 0; i < 6; i++)
-            if(anIntArray408[0] != 0)
-                model.recolour(anIntArray408[i], anIntArray409[i]);
+            if(originalModelColours[0] != 0)
+                model.recolour(originalModelColours[i], modifiedModelColours[i]);
 
-        aMRUNodes_415.removeFromCache(model, anInt404);
+        aMRUNodes_415.removeFromCache(model, id);
         return model;
     }
 
     private SpotAnim()
     {
-        anInt400 = 9;
-        anInt406 = -1;
-        anIntArray408 = new int[6];
-        anIntArray409 = new int[6];
-        anInt410 = 128;
-        anInt411 = 128;
+        animationID = -1;
+        originalModelColours = new int[6];
+        modifiedModelColours = new int[6];
+        resizeXY = 128;
+        resizeZ = 128;
     }
 
-    private final int anInt400;
     public static SpotAnim cache[];
-    private int anInt404;
-    private int anInt405;
-    private int anInt406;
+    private int id;
+    private int modelID;
+    private int animationID;
     public Animation aAnimation_407;
-    private final int[] anIntArray408;
-    private final int[] anIntArray409;
-    public int anInt410;
-    public int anInt411;
-    public int anInt412;
-    public int anInt413;
-    public int anInt414;
+    private final int[] originalModelColours;
+    private final int[] modifiedModelColours;
+    public int resizeXY;
+    public int resizeZ;
+    public int rotation;
+    public int modelBrightness;
+    public int modelShadow;
     public static MRUNodes aMRUNodes_415 = new MRUNodes(30);
 
 }
