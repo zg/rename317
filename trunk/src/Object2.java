@@ -10,12 +10,12 @@ public final class Object2
     {
     }
 
-    int anInt499;
-    int anInt500;
-    int anInt501;
-    int anInt502;
-    int anInt503;
-    public Animable aClass30_Sub2_Sub4_504;
+    int Z3D;
+    int X3D;
+    int Y3D;
+    int configBits;
+    int face;
+    public Animable myMob;
     public int uid;
-    byte aByte506;
+    byte objConf;
 }

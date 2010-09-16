@@ -60,82 +60,19 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Class47.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class47.java">
+      <file leaf-file-name="SceneGraph.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SceneGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="8" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0">
+            <state line="2246" column="75" selection-start="94067" selection-end="94067" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlainTile.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PlainTile.java">
+      <file leaf-file-name="ShapedTile.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ShapedTile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="20" selection-start="385" selection-end="385" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Object1.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Object1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Object3.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Object3.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Object2.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Object2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Object4.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Object4.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Object5.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Object5.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectOnTile.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ObjectOnTile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="58" selection-start="2238" selection-end="2238" vertical-scroll-proportion="0.26997244">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Entity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Entity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="13" selection-start="2248" selection-end="2248" vertical-scroll-proportion="0.0">
+            <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="-12.409548">
               <folding />
             </state>
           </provider>
@@ -155,8 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/IdentityKit.java" />
-        <option value="$PROJECT_DIR$/StillGraphics.java" />
         <option value="$PROJECT_DIR$/Projectile.java" />
         <option value="$PROJECT_DIR$/TileSetting.java" />
         <option value="$PROJECT_DIR$/MapRegion.java" />
@@ -171,6 +106,8 @@
         <option value="$PROJECT_DIR$/PlainTile.java" />
         <option value="$PROJECT_DIR$/Entity.java" />
         <option value="$PROJECT_DIR$/ObjectOnTile.java" />
+        <option value="$PROJECT_DIR$/Model.java" />
+        <option value="$PROJECT_DIR$/SceneGraph.java" />
       </list>
     </option>
   </component>
@@ -209,9 +146,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -232,6 +166,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Favorites" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -349,7 +286,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4752941" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -359,9 +295,10 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.258956" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24974412" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4752941" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -396,114 +333,106 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MapRegion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1403" column="37" selection-start="54215" selection-end="54215" vertical-scroll-proportion="0.8847185">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ModelTransform.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="30" selection-start="218" selection-end="218" vertical-scroll-proportion="0.21794872">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AnimationFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="24" selection-start="4628" selection-end="4628" vertical-scroll-proportion="0.541555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class33.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="283" selection-end="283" vertical-scroll-proportion="0.65384614">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class29.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="62" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.42091152">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class21.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="67" selection-start="641" selection-end="641" vertical-scroll-proportion="1.1333333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RSFont.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="425" column="26" selection-start="12837" selection-end="12837" vertical-scroll-proportion="0.36745408">
+        <state line="425" column="26" selection-start="12837" selection-end="12837" vertical-scroll-proportion="0.36745408" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PlainTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="20" selection-start="385" selection-end="385" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Object1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Object3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class39.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="41" selection-start="883" selection-end="883" vertical-scroll-proportion="0.74931127">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="12" selection-start="186" selection-end="186" vertical-scroll-proportion="0.044736844">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class47.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="8" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PlainTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="20" selection-start="385" selection-end="385" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Object1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Object3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
+        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.044736844">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Object2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.06030151">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Object4.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0">
+        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.10301507">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Object5.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="13" selection-start="2248" selection-end="2248" vertical-scroll-proportion="0.0">
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.042713568">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ObjectOnTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="58" selection-start="2238" selection-end="2238" vertical-scroll-proportion="0.26997244">
+        <state line="91" column="43" selection-start="3039" selection-end="3039" vertical-scroll-proportion="0.062992126">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1725" column="49" selection-start="58485" selection-end="58485" vertical-scroll-proportion="0.044619422">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="13" selection-start="2248" selection-end="2248" vertical-scroll-proportion="0.042713568">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.1281407">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2246" column="75" selection-start="94067" selection-end="94067" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ShapedTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="-12.409548">
           <folding />
         </state>
       </provider>

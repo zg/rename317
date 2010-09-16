@@ -10,10 +10,10 @@ public final class Object3
     {
     }
 
-    int anInt811;
-    int anInt812;
-    int anInt813;
+    int Z3D;
+    int X3D;
+    int Y3D;
     public Animable aClass30_Sub2_Sub4_814;
     public int uid;
-    byte aByte816;
+    byte objConf;
 }
