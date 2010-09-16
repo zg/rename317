@@ -13,7 +13,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         lineOffsets = null;
         textureImages = null;
         texture_is_transparent = null;
-        anIntArray1476 = null;
+        texture_replacement_colour = null;
         texture_pixel_array_pool = null;
         texture_pixel_cache = null;
         texture_last_used = null;
@@ -49,11 +49,11 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     }
 
-    public static void cleanup()
+    public static void initialize_texture_array_pools(int tex_pool_size)
     {
         if(texture_pixel_array_pool == null)
         {
-            texture_pixel_array_pool_ptr = 20;//was parameter
+            texture_pixel_array_pool_ptr = tex_pool_size;//was parameter
             if(lowMem)
                 texture_pixel_array_pool = new int[texture_pixel_array_pool_ptr][16384];
             else
@@ -81,27 +81,27 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     }
 
-    public static int method369(int i)
+    public static int calculate_texture_colour(int tex_id)
     {
-        if(anIntArray1476[i] != 0)
-            return anIntArray1476[i];
-        int k = 0;
-        int l = 0;
-        int i1 = 0;
-        int j1 = texturePalettes[i].length;
-        for(int k1 = 0; k1 < j1; k1++)
+        if(texture_replacement_colour[tex_id] != 0)
+            return texture_replacement_colour[tex_id];
+        int red = 0;
+        int green = 0;
+        int blue = 0;
+        int colour_count = texturePalettes[tex_id].length;
+        for(int colour_ptr = 0; colour_ptr < colour_count; colour_ptr++)
         {
-            k += texturePalettes[i][k1] >> 16 & 0xff;
-            l += texturePalettes[i][k1] >> 8 & 0xff;
-            i1 += texturePalettes[i][k1] & 0xff;
+            red += texturePalettes[tex_id][colour_ptr] >> 16 & 0xff;
+            green += texturePalettes[tex_id][colour_ptr] >> 8 & 0xff;
+            blue += texturePalettes[tex_id][colour_ptr] & 0xff;
         }
 
-        int l1 = (k / j1 << 16) + (l / j1 << 8) + i1 / j1;
-        l1 = applyBrightnessToRGB(l1, 1.3999999999999999D);
-        if(l1 == 0)
-            l1 = 1;
-        anIntArray1476[i] = l1;
-        return l1;
+        int rgb = (red / colour_count << 16) + (green / colour_count << 8) + blue / colour_count;
+        rgb = applyBrightnessToRGB(rgb, 1.3999999999999999D);
+        if(rgb == 0)
+            rgb = 1;
+        texture_replacement_colour[tex_id] = rgb;
+        return rgb;
     }
 
     public static void free_texture(int texID)
@@ -292,439 +292,439 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         return (r_byte << 16) + (g_byte << 8) + b_byte;
     }
 
-    public static void drawColouredTriangle(int i, int j, int k, int l, int i1, int j1, int k1, int l1,
-            int i2)
+    public static void drawColouredTriangle(int y_a, int y_b, int y_c, int x_a, int x_b, int x_c, int c_a, int c_b,
+            int c_c)
     {
         int j2 = 0;
         int k2 = 0;
-        if(j != i)
+        if(y_b != y_a)
         {
-            j2 = (i1 - l << 16) / (j - i);
-            k2 = (l1 - k1 << 15) / (j - i);
+            j2 = (x_b - x_a << 16) / (y_b - y_a);
+            k2 = (c_b - c_a << 15) / (y_b - y_a);
         }
         int l2 = 0;
         int i3 = 0;
-        if(k != j)
+        if(y_c != y_b)
         {
-            l2 = (j1 - i1 << 16) / (k - j);
-            i3 = (i2 - l1 << 15) / (k - j);
+            l2 = (x_c - x_b << 16) / (y_c - y_b);
+            i3 = (c_c - c_b << 15) / (y_c - y_b);
         }
         int j3 = 0;
         int k3 = 0;
-        if(k != i)
+        if(y_c != y_a)
         {
-            j3 = (l - j1 << 16) / (i - k);
-            k3 = (k1 - i2 << 15) / (i - k);
+            j3 = (x_a - x_c << 16) / (y_a - y_c);
+            k3 = (c_a - c_c << 15) / (y_a - y_c);
         }
-        if(i <= j && i <= k)
+        if(y_a <= y_b && y_a <= y_c)
         {
-            if(i >= DrawingArea.viewport_h)
+            if(y_a >= DrawingArea.viewport_h)
                 return;
-            if(j > DrawingArea.viewport_h)
-                j = DrawingArea.viewport_h;
-            if(k > DrawingArea.viewport_h)
-                k = DrawingArea.viewport_h;
-            if(j < k)
+            if(y_b > DrawingArea.viewport_h)
+                y_b = DrawingArea.viewport_h;
+            if(y_c > DrawingArea.viewport_h)
+                y_c = DrawingArea.viewport_h;
+            if(y_b < y_c)
             {
-                j1 = l <<= 16;
-                i2 = k1 <<= 15;
-                if(i < 0)
+                x_c = x_a <<= 16;
+                c_c = c_a <<= 15;
+                if(y_a < 0)
                 {
-                    j1 -= j3 * i;
-                    l -= j2 * i;
-                    i2 -= k3 * i;
-                    k1 -= k2 * i;
-                    i = 0;
+                    x_c -= j3 * y_a;
+                    x_a -= j2 * y_a;
+                    c_c -= k3 * y_a;
+                    c_a -= k2 * y_a;
+                    y_a = 0;
                 }
-                i1 <<= 16;
-                l1 <<= 15;
-                if(j < 0)
+                x_b <<= 16;
+                c_b <<= 15;
+                if(y_b < 0)
                 {
-                    i1 -= l2 * j;
-                    l1 -= i3 * j;
-                    j = 0;
+                    x_b -= l2 * y_b;
+                    c_b -= i3 * y_b;
+                    y_b = 0;
                 }
-                if(i != j && j3 < j2 || i == j && j3 > l2)
+                if(y_a != y_b && j3 < j2 || y_a == y_b && j3 > l2)
                 {
-                    k -= j;
-                    j -= i;
-                    for(i = lineOffsets[i]; --j >= 0; i += DrawingArea.width)
+                    y_c -= y_b;
+                    y_b -= y_a;
+                    for(y_a = lineOffsets[y_a]; --y_b >= 0; y_a += DrawingArea.width)
                     {
-                        draw2DJagColouredShape(DrawingArea.pixels, i, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
-                        j1 += j3;
-                        l += j2;
-                        i2 += k3;
-                        k1 += k2;
+                        draw2DJagColouredShape(DrawingArea.pixels, y_a, x_c >> 16, x_a >> 16, c_c >> 7, c_a >> 7);
+                        x_c += j3;
+                        x_a += j2;
+                        c_c += k3;
+                        c_a += k2;
                     }
 
-                    while(--k >= 0)
+                    while(--y_c >= 0)
                     {
-                        draw2DJagColouredShape(DrawingArea.pixels, i, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
-                        j1 += j3;
-                        i1 += l2;
-                        i2 += k3;
-                        l1 += i3;
-                        i += DrawingArea.width;
+                        draw2DJagColouredShape(DrawingArea.pixels, y_a, x_c >> 16, x_b >> 16, c_c >> 7, c_b >> 7);
+                        x_c += j3;
+                        x_b += l2;
+                        c_c += k3;
+                        c_b += i3;
+                        y_a += DrawingArea.width;
                     }
                     return;
                 }
-                k -= j;
-                j -= i;
-                for(i = lineOffsets[i]; --j >= 0; i += DrawingArea.width)
+                y_c -= y_b;
+                y_b -= y_a;
+                for(y_a = lineOffsets[y_a]; --y_b >= 0; y_a += DrawingArea.width)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, i, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
-                    j1 += j3;
-                    l += j2;
-                    i2 += k3;
-                    k1 += k2;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_a, x_a >> 16, x_c >> 16, c_a >> 7, c_c >> 7);
+                    x_c += j3;
+                    x_a += j2;
+                    c_c += k3;
+                    c_a += k2;
                 }
 
-                while(--k >= 0)
+                while(--y_c >= 0)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, i, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
-                    j1 += j3;
-                    i1 += l2;
-                    i2 += k3;
-                    l1 += i3;
-                    i += DrawingArea.width;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_a, x_b >> 16, x_c >> 16, c_b >> 7, c_c >> 7);
+                    x_c += j3;
+                    x_b += l2;
+                    c_c += k3;
+                    c_b += i3;
+                    y_a += DrawingArea.width;
                 }
                 return;
             }
-            i1 = l <<= 16;
-            l1 = k1 <<= 15;
-            if(i < 0)
+            x_b = x_a <<= 16;
+            c_b = c_a <<= 15;
+            if(y_a < 0)
             {
-                i1 -= j3 * i;
-                l -= j2 * i;
-                l1 -= k3 * i;
-                k1 -= k2 * i;
-                i = 0;
+                x_b -= j3 * y_a;
+                x_a -= j2 * y_a;
+                c_b -= k3 * y_a;
+                c_a -= k2 * y_a;
+                y_a = 0;
             }
-            j1 <<= 16;
-            i2 <<= 15;
-            if(k < 0)
+            x_c <<= 16;
+            c_c <<= 15;
+            if(y_c < 0)
             {
-                j1 -= l2 * k;
-                i2 -= i3 * k;
-                k = 0;
+                x_c -= l2 * y_c;
+                c_c -= i3 * y_c;
+                y_c = 0;
             }
-            if(i != k && j3 < j2 || i == k && l2 > j2)
+            if(y_a != y_c && j3 < j2 || y_a == y_c && l2 > j2)
             {
-                j -= k;
-                k -= i;
-                for(i = lineOffsets[i]; --k >= 0; i += DrawingArea.width)
+                y_b -= y_c;
+                y_c -= y_a;
+                for(y_a = lineOffsets[y_a]; --y_c >= 0; y_a += DrawingArea.width)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, i, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
-                    i1 += j3;
-                    l += j2;
-                    l1 += k3;
-                    k1 += k2;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_a, x_b >> 16, x_a >> 16, c_b >> 7, c_a >> 7);
+                    x_b += j3;
+                    x_a += j2;
+                    c_b += k3;
+                    c_a += k2;
                 }
 
-                while(--j >= 0)
+                while(--y_b >= 0)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, i, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
-                    j1 += l2;
-                    l += j2;
-                    i2 += i3;
-                    k1 += k2;
-                    i += DrawingArea.width;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_a, x_c >> 16, x_a >> 16, c_c >> 7, c_a >> 7);
+                    x_c += l2;
+                    x_a += j2;
+                    c_c += i3;
+                    c_a += k2;
+                    y_a += DrawingArea.width;
                 }
                 return;
             }
-            j -= k;
-            k -= i;
-            for(i = lineOffsets[i]; --k >= 0; i += DrawingArea.width)
+            y_b -= y_c;
+            y_c -= y_a;
+            for(y_a = lineOffsets[y_a]; --y_c >= 0; y_a += DrawingArea.width)
             {
-                draw2DJagColouredShape(DrawingArea.pixels, i, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
-                i1 += j3;
-                l += j2;
-                l1 += k3;
-                k1 += k2;
+                draw2DJagColouredShape(DrawingArea.pixels, y_a, x_a >> 16, x_b >> 16, c_a >> 7, c_b >> 7);
+                x_b += j3;
+                x_a += j2;
+                c_b += k3;
+                c_a += k2;
             }
 
-            while(--j >= 0)
+            while(--y_b >= 0)
             {
-                draw2DJagColouredShape(DrawingArea.pixels, i, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
-                j1 += l2;
-                l += j2;
-                i2 += i3;
-                k1 += k2;
-                i += DrawingArea.width;
+                draw2DJagColouredShape(DrawingArea.pixels, y_a, x_a >> 16, x_c >> 16, c_a >> 7, c_c >> 7);
+                x_c += l2;
+                x_a += j2;
+                c_c += i3;
+                c_a += k2;
+                y_a += DrawingArea.width;
             }
             return;
         }
-        if(j <= k)
+        if(y_b <= y_c)
         {
-            if(j >= DrawingArea.viewport_h)
+            if(y_b >= DrawingArea.viewport_h)
                 return;
-            if(k > DrawingArea.viewport_h)
-                k = DrawingArea.viewport_h;
-            if(i > DrawingArea.viewport_h)
-                i = DrawingArea.viewport_h;
-            if(k < i)
+            if(y_c > DrawingArea.viewport_h)
+                y_c = DrawingArea.viewport_h;
+            if(y_a > DrawingArea.viewport_h)
+                y_a = DrawingArea.viewport_h;
+            if(y_c < y_a)
             {
-                l = i1 <<= 16;
-                k1 = l1 <<= 15;
-                if(j < 0)
+                x_a = x_b <<= 16;
+                c_a = c_b <<= 15;
+                if(y_b < 0)
                 {
-                    l -= j2 * j;
-                    i1 -= l2 * j;
-                    k1 -= k2 * j;
-                    l1 -= i3 * j;
-                    j = 0;
+                    x_a -= j2 * y_b;
+                    x_b -= l2 * y_b;
+                    c_a -= k2 * y_b;
+                    c_b -= i3 * y_b;
+                    y_b = 0;
                 }
-                j1 <<= 16;
-                i2 <<= 15;
-                if(k < 0)
+                x_c <<= 16;
+                c_c <<= 15;
+                if(y_c < 0)
                 {
-                    j1 -= j3 * k;
-                    i2 -= k3 * k;
-                    k = 0;
+                    x_c -= j3 * y_c;
+                    c_c -= k3 * y_c;
+                    y_c = 0;
                 }
-                if(j != k && j2 < l2 || j == k && j2 > j3)
+                if(y_b != y_c && j2 < l2 || y_b == y_c && j2 > j3)
                 {
-                    i -= k;
-                    k -= j;
-                    for(j = lineOffsets[j]; --k >= 0; j += DrawingArea.width)
+                    y_a -= y_c;
+                    y_c -= y_b;
+                    for(y_b = lineOffsets[y_b]; --y_c >= 0; y_b += DrawingArea.width)
                     {
-                        draw2DJagColouredShape(DrawingArea.pixels, j, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
-                        l += j2;
-                        i1 += l2;
-                        k1 += k2;
-                        l1 += i3;
+                        draw2DJagColouredShape(DrawingArea.pixels, y_b, x_a >> 16, x_b >> 16, c_a >> 7, c_b >> 7);
+                        x_a += j2;
+                        x_b += l2;
+                        c_a += k2;
+                        c_b += i3;
                     }
 
-                    while(--i >= 0)
+                    while(--y_a >= 0)
                     {
-                        draw2DJagColouredShape(DrawingArea.pixels, j, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
-                        l += j2;
-                        j1 += j3;
-                        k1 += k2;
-                        i2 += k3;
-                        j += DrawingArea.width;
+                        draw2DJagColouredShape(DrawingArea.pixels, y_b, x_a >> 16, x_c >> 16, c_a >> 7, c_c >> 7);
+                        x_a += j2;
+                        x_c += j3;
+                        c_a += k2;
+                        c_c += k3;
+                        y_b += DrawingArea.width;
                     }
                     return;
                 }
-                i -= k;
-                k -= j;
-                for(j = lineOffsets[j]; --k >= 0; j += DrawingArea.width)
+                y_a -= y_c;
+                y_c -= y_b;
+                for(y_b = lineOffsets[y_b]; --y_c >= 0; y_b += DrawingArea.width)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, j, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
-                    l += j2;
-                    i1 += l2;
-                    k1 += k2;
-                    l1 += i3;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_b, x_b >> 16, x_a >> 16, c_b >> 7, c_a >> 7);
+                    x_a += j2;
+                    x_b += l2;
+                    c_a += k2;
+                    c_b += i3;
                 }
 
-                while(--i >= 0)
+                while(--y_a >= 0)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, j, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
-                    l += j2;
-                    j1 += j3;
-                    k1 += k2;
-                    i2 += k3;
-                    j += DrawingArea.width;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_b, x_c >> 16, x_a >> 16, c_c >> 7, c_a >> 7);
+                    x_a += j2;
+                    x_c += j3;
+                    c_a += k2;
+                    c_c += k3;
+                    y_b += DrawingArea.width;
                 }
                 return;
             }
-            j1 = i1 <<= 16;
-            i2 = l1 <<= 15;
-            if(j < 0)
+            x_c = x_b <<= 16;
+            c_c = c_b <<= 15;
+            if(y_b < 0)
             {
-                j1 -= j2 * j;
-                i1 -= l2 * j;
-                i2 -= k2 * j;
-                l1 -= i3 * j;
-                j = 0;
+                x_c -= j2 * y_b;
+                x_b -= l2 * y_b;
+                c_c -= k2 * y_b;
+                c_b -= i3 * y_b;
+                y_b = 0;
             }
-            l <<= 16;
-            k1 <<= 15;
-            if(i < 0)
+            x_a <<= 16;
+            c_a <<= 15;
+            if(y_a < 0)
             {
-                l -= j3 * i;
-                k1 -= k3 * i;
-                i = 0;
+                x_a -= j3 * y_a;
+                c_a -= k3 * y_a;
+                y_a = 0;
             }
             if(j2 < l2)
             {
-                k -= i;
-                i -= j;
-                for(j = lineOffsets[j]; --i >= 0; j += DrawingArea.width)
+                y_c -= y_a;
+                y_a -= y_b;
+                for(y_b = lineOffsets[y_b]; --y_a >= 0; y_b += DrawingArea.width)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, j, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
-                    j1 += j2;
-                    i1 += l2;
-                    i2 += k2;
-                    l1 += i3;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_b, x_c >> 16, x_b >> 16, c_c >> 7, c_b >> 7);
+                    x_c += j2;
+                    x_b += l2;
+                    c_c += k2;
+                    c_b += i3;
                 }
 
-                while(--k >= 0)
+                while(--y_c >= 0)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, j, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
-                    l += j3;
-                    i1 += l2;
-                    k1 += k3;
-                    l1 += i3;
-                    j += DrawingArea.width;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_b, x_a >> 16, x_b >> 16, c_a >> 7, c_b >> 7);
+                    x_a += j3;
+                    x_b += l2;
+                    c_a += k3;
+                    c_b += i3;
+                    y_b += DrawingArea.width;
                 }
                 return;
             }
-            k -= i;
-            i -= j;
-            for(j = lineOffsets[j]; --i >= 0; j += DrawingArea.width)
+            y_c -= y_a;
+            y_a -= y_b;
+            for(y_b = lineOffsets[y_b]; --y_a >= 0; y_b += DrawingArea.width)
             {
-                draw2DJagColouredShape(DrawingArea.pixels, j, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
-                j1 += j2;
-                i1 += l2;
-                i2 += k2;
-                l1 += i3;
+                draw2DJagColouredShape(DrawingArea.pixels, y_b, x_b >> 16, x_c >> 16, c_b >> 7, c_c >> 7);
+                x_c += j2;
+                x_b += l2;
+                c_c += k2;
+                c_b += i3;
             }
 
-            while(--k >= 0)
+            while(--y_c >= 0)
             {
-                draw2DJagColouredShape(DrawingArea.pixels, j, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
-                l += j3;
-                i1 += l2;
-                k1 += k3;
-                l1 += i3;
-                j += DrawingArea.width;
+                draw2DJagColouredShape(DrawingArea.pixels, y_b, x_b >> 16, x_a >> 16, c_b >> 7, c_a >> 7);
+                x_a += j3;
+                x_b += l2;
+                c_a += k3;
+                c_b += i3;
+                y_b += DrawingArea.width;
             }
             return;
         }
-        if(k >= DrawingArea.viewport_h)
+        if(y_c >= DrawingArea.viewport_h)
             return;
-        if(i > DrawingArea.viewport_h)
-            i = DrawingArea.viewport_h;
-        if(j > DrawingArea.viewport_h)
-            j = DrawingArea.viewport_h;
-        if(i < j)
+        if(y_a > DrawingArea.viewport_h)
+            y_a = DrawingArea.viewport_h;
+        if(y_b > DrawingArea.viewport_h)
+            y_b = DrawingArea.viewport_h;
+        if(y_a < y_b)
         {
-            i1 = j1 <<= 16;
-            l1 = i2 <<= 15;
-            if(k < 0)
+            x_b = x_c <<= 16;
+            c_b = c_c <<= 15;
+            if(y_c < 0)
             {
-                i1 -= l2 * k;
-                j1 -= j3 * k;
-                l1 -= i3 * k;
-                i2 -= k3 * k;
-                k = 0;
+                x_b -= l2 * y_c;
+                x_c -= j3 * y_c;
+                c_b -= i3 * y_c;
+                c_c -= k3 * y_c;
+                y_c = 0;
             }
-            l <<= 16;
-            k1 <<= 15;
-            if(i < 0)
+            x_a <<= 16;
+            c_a <<= 15;
+            if(y_a < 0)
             {
-                l -= j2 * i;
-                k1 -= k2 * i;
-                i = 0;
+                x_a -= j2 * y_a;
+                c_a -= k2 * y_a;
+                y_a = 0;
             }
             if(l2 < j3)
             {
-                j -= i;
-                i -= k;
-                for(k = lineOffsets[k]; --i >= 0; k += DrawingArea.width)
+                y_b -= y_a;
+                y_a -= y_c;
+                for(y_c = lineOffsets[y_c]; --y_a >= 0; y_c += DrawingArea.width)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, k, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
-                    i1 += l2;
-                    j1 += j3;
-                    l1 += i3;
-                    i2 += k3;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_c, x_b >> 16, x_c >> 16, c_b >> 7, c_c >> 7);
+                    x_b += l2;
+                    x_c += j3;
+                    c_b += i3;
+                    c_c += k3;
                 }
 
-                while(--j >= 0)
+                while(--y_b >= 0)
                 {
-                    draw2DJagColouredShape(DrawingArea.pixels, k, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
-                    i1 += l2;
-                    l += j2;
-                    l1 += i3;
-                    k1 += k2;
-                    k += DrawingArea.width;
+                    draw2DJagColouredShape(DrawingArea.pixels, y_c, x_b >> 16, x_a >> 16, c_b >> 7, c_a >> 7);
+                    x_b += l2;
+                    x_a += j2;
+                    c_b += i3;
+                    c_a += k2;
+                    y_c += DrawingArea.width;
                 }
                 return;
             }
-            j -= i;
-            i -= k;
-            for(k = lineOffsets[k]; --i >= 0; k += DrawingArea.width)
+            y_b -= y_a;
+            y_a -= y_c;
+            for(y_c = lineOffsets[y_c]; --y_a >= 0; y_c += DrawingArea.width)
             {
-                draw2DJagColouredShape(DrawingArea.pixels, k, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
-                i1 += l2;
-                j1 += j3;
-                l1 += i3;
-                i2 += k3;
+                draw2DJagColouredShape(DrawingArea.pixels, y_c, x_c >> 16, x_b >> 16, c_c >> 7, c_b >> 7);
+                x_b += l2;
+                x_c += j3;
+                c_b += i3;
+                c_c += k3;
             }
 
-            while(--j >= 0)
+            while(--y_b >= 0)
             {
-                draw2DJagColouredShape(DrawingArea.pixels, k, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
-                i1 += l2;
-                l += j2;
-                l1 += i3;
-                k1 += k2;
-                k += DrawingArea.width;
+                draw2DJagColouredShape(DrawingArea.pixels, y_c, x_a >> 16, x_b >> 16, c_a >> 7, c_b >> 7);
+                x_b += l2;
+                x_a += j2;
+                c_b += i3;
+                c_a += k2;
+                y_c += DrawingArea.width;
             }
             return;
         }
-        l = j1 <<= 16;
-        k1 = i2 <<= 15;
-        if(k < 0)
+        x_a = x_c <<= 16;
+        c_a = c_c <<= 15;
+        if(y_c < 0)
         {
-            l -= l2 * k;
-            j1 -= j3 * k;
-            k1 -= i3 * k;
-            i2 -= k3 * k;
-            k = 0;
+            x_a -= l2 * y_c;
+            x_c -= j3 * y_c;
+            c_a -= i3 * y_c;
+            c_c -= k3 * y_c;
+            y_c = 0;
         }
-        i1 <<= 16;
-        l1 <<= 15;
-        if(j < 0)
+        x_b <<= 16;
+        c_b <<= 15;
+        if(y_b < 0)
         {
-            i1 -= j2 * j;
-            l1 -= k2 * j;
-            j = 0;
+            x_b -= j2 * y_b;
+            c_b -= k2 * y_b;
+            y_b = 0;
         }
         if(l2 < j3)
         {
-            i -= j;
-            j -= k;
-            for(k = lineOffsets[k]; --j >= 0; k += DrawingArea.width)
+            y_a -= y_b;
+            y_b -= y_c;
+            for(y_c = lineOffsets[y_c]; --y_b >= 0; y_c += DrawingArea.width)
             {
-                draw2DJagColouredShape(DrawingArea.pixels, k, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
-                l += l2;
-                j1 += j3;
-                k1 += i3;
-                i2 += k3;
+                draw2DJagColouredShape(DrawingArea.pixels, y_c, x_a >> 16, x_c >> 16, c_a >> 7, c_c >> 7);
+                x_a += l2;
+                x_c += j3;
+                c_a += i3;
+                c_c += k3;
             }
 
-            while(--i >= 0)
+            while(--y_a >= 0)
             {
-                draw2DJagColouredShape(DrawingArea.pixels, k, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
-                i1 += j2;
-                j1 += j3;
-                l1 += k2;
-                i2 += k3;
-                k += DrawingArea.width;
+                draw2DJagColouredShape(DrawingArea.pixels, y_c, x_b >> 16, x_c >> 16, c_b >> 7, c_c >> 7);
+                x_b += j2;
+                x_c += j3;
+                c_b += k2;
+                c_c += k3;
+                y_c += DrawingArea.width;
             }
             return;
         }
-        i -= j;
-        j -= k;
-        for(k = lineOffsets[k]; --j >= 0; k += DrawingArea.width)
+        y_a -= y_b;
+        y_b -= y_c;
+        for(y_c = lineOffsets[y_c]; --y_b >= 0; y_c += DrawingArea.width)
         {
-            draw2DJagColouredShape(DrawingArea.pixels, k, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
-            l += l2;
-            j1 += j3;
-            k1 += i3;
-            i2 += k3;
+            draw2DJagColouredShape(DrawingArea.pixels, y_c, x_c >> 16, x_a >> 16, c_c >> 7, c_a >> 7);
+            x_a += l2;
+            x_c += j3;
+            c_a += i3;
+            c_c += k3;
         }
 
-        while(--i >= 0)
+        while(--y_a >= 0)
         {
-            draw2DJagColouredShape(DrawingArea.pixels, k, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
-            i1 += j2;
-            j1 += j3;
-            l1 += k2;
-            i2 += k3;
-            k += DrawingArea.width;
+            draw2DJagColouredShape(DrawingArea.pixels, y_c, x_c >> 16, x_b >> 16, c_c >> 7, c_b >> 7);
+            x_b += j2;
+            x_c += j3;
+            c_b += k2;
+            c_c += k3;
+            y_c += DrawingArea.width;
         }
     }
 
@@ -2187,7 +2187,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
     private static int loadedTextureCount;
     public static IndexedImage textureImages[] = new IndexedImage[50];
     private static boolean[] texture_is_transparent = new boolean[50];
-    private static int[] anIntArray1476 = new int[50];
+    private static int[] texture_replacement_colour = new int[50];
     private static int texture_pixel_array_pool_ptr;
     private static int[][] texture_pixel_array_pool;
     private static int[][] texture_pixel_cache = new int[50][];

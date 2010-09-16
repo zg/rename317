@@ -63,9 +63,9 @@ public final class EntityDef
         {
             VarBit varBit = VarBit.cache[anInt57];
             int k = varBit.configId;
-            int l = varBit.rightShiftCount;
-            int i1 = varBit.bit;
-            int j1 = client.powersOfTwo[i1 - l];
+            int l = varBit.least_significant_bit;
+            int i1 = varBit.most_significant_bit;
+            int j1 = client.BITFIELD_MAX_VALUE[i1 - l];
             j = clientInstance.variousSettings[k] >> l & j1;
         } else
         if(anInt59 != -1)

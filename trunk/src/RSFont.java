@@ -207,7 +207,7 @@ public final class RSFont extends DrawingArea {
                 i += rsb[c];
             }
         if(isStrikethrough)
-            DrawingArea.drawHLine(k + (int)((double) charHeight * 0.69999999999999996D), 0x800000, i - l, l);
+            DrawingArea.drawHLine(l, k + (int)((double) charHeight * 0.69999999999999996D), i - l, 0x800000);
     }
 
     public void method390(int i, int j, String s, int k, int ypos)

@@ -33,8 +33,8 @@ public final class VarBit {
             if(j == 1)
             {
                 configId = stream.readUnsignedWord();
-                rightShiftCount = stream.readUnsignedByte();
-                bit = stream.readUnsignedByte();
+                least_significant_bit = stream.readUnsignedByte();
+                most_significant_bit = stream.readUnsignedByte();
             } else
             if(j == 10)
                 stream.readString();
@@ -59,7 +59,7 @@ public final class VarBit {
 
     public static VarBit cache[];
     public int configId;
-    public int rightShiftCount;
-    public int bit;
+    public int least_significant_bit;
+    public int most_significant_bit;
     private boolean aBoolean651;
 }

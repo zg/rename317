@@ -160,9 +160,9 @@ stream = null;
         {
             VarBit varBit = VarBit.cache[configId_1];
             int j = varBit.configId;
-            int k = varBit.rightShiftCount;
-            int l = varBit.bit;
-            int i1 = client.powersOfTwo[l - k];
+            int k = varBit.least_significant_bit;
+            int l = varBit.most_significant_bit;
+            int i1 = client.BITFIELD_MAX_VALUE[l - k];
             i = clientInstance.variousSettings[j] >> k & i1;
         } else
         if(configID != -1)

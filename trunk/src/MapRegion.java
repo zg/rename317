@@ -218,7 +218,7 @@ final class MapRegion {
                                     int rgbTexOverlay;
                                     if(texoverlay >= 0)
                                     {
-                                        rgbTexOverlay = ThreeDimensionalDrawingArea.method369(texoverlay);
+                                        rgbTexOverlay = ThreeDimensionalDrawingArea.calculate_texture_colour(texoverlay);
                                         j23 = -1;
                                     } else
                                     if(overlay.colour2 == 0xff00ff)
