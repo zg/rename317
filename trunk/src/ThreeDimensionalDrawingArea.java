@@ -10,38 +10,38 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         anIntArray1468 = null;
         SINE = null;
         COSINE = null;
-        anIntArray1472 = null;
-        aBackgroundArray1474s = null;
+        lineOffsets = null;
+        textureImages = null;
         aBooleanArray1475 = null;
         anIntArray1476 = null;
         anIntArrayArray1478 = null;
         anIntArrayArray1479 = null;
         anIntArray1480 = null;
         colourMap = null;
-        anIntArrayArray1483 = null;
+        texturePalettes = null;
     }
 
-    public static void initialize()
+    public static void initToActiveDrawingArea()
     {
-        anIntArray1472 = new int[DrawingArea.height];
+        lineOffsets = new int[DrawingArea.height];
         for(int j = 0; j < DrawingArea.height; j++)
-            anIntArray1472[j] = DrawingArea.width * j;
+            lineOffsets[j] = DrawingArea.width * j;
 
         xMidPos = DrawingArea.width / 2;
         yMidPos = DrawingArea.height / 2;
     }
 
-    public static void method365(int j, int k)
+    public static void initToDimensions(int width, int height)
     {
-       anIntArray1472 = new int[k];
-        for(int l = 0; l < k; l++)
-            anIntArray1472[l] = j * l;
+       lineOffsets = new int[height];
+        for(int l = 0; l < height; l++)
+            lineOffsets[l] = width * l;
 
-        xMidPos = j / 2;
-        yMidPos = k / 2;
+        xMidPos = width / 2;
+        yMidPos = height / 2;
     }
 
-    public static void method366()
+    public static void nullInit()
     {
         anIntArrayArray1478 = null;
         for(int j = 0; j < 50; j++)
@@ -49,7 +49,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     }
 
-    public static void method367()
+    public static void cleanup()
     {
         if(anIntArrayArray1478 == null)
         {
@@ -64,18 +64,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
     }
 
-    public static void method368(JagexArchive jagexArchive)
+    public static void loadTextures(JagexArchive jagexArchive)
     {
-        anInt1473 = 0;
+        loadedTextureCount = 0;
         for(int j = 0; j < 50; j++)
             try
             {
-                aBackgroundArray1474s[j] = new Background(jagexArchive, String.valueOf(j), 0);
-                if(lowMem && aBackgroundArray1474s[j].anInt1456 == 128)
-                    aBackgroundArray1474s[j].method356();
+                textureImages[j] = new IndexedImage(jagexArchive, String.valueOf(j), 0);
+                if(lowMem && textureImages[j].libWidth == 128)
+                    textureImages[j].resizeToHalfLibSize();
                 else
-                    aBackgroundArray1474s[j].method357();
-                anInt1473++;
+                    textureImages[j].resizeToLibSize();
+                loadedTextureCount++;
             }
             catch(Exception _ex) { }
 
@@ -88,31 +88,31 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         int k = 0;
         int l = 0;
         int i1 = 0;
-        int j1 = anIntArrayArray1483[i].length;
+        int j1 = texturePalettes[i].length;
         for(int k1 = 0; k1 < j1; k1++)
         {
-            k += anIntArrayArray1483[i][k1] >> 16 & 0xff;
-            l += anIntArrayArray1483[i][k1] >> 8 & 0xff;
-            i1 += anIntArrayArray1483[i][k1] & 0xff;
+            k += texturePalettes[i][k1] >> 16 & 0xff;
+            l += texturePalettes[i][k1] >> 8 & 0xff;
+            i1 += texturePalettes[i][k1] & 0xff;
         }
 
         int l1 = (k / j1 << 16) + (l / j1 << 8) + i1 / j1;
-        l1 = method373(l1, 1.3999999999999999D);
+        l1 = applyBrightnessToRGB(l1, 1.3999999999999999D);
         if(l1 == 0)
             l1 = 1;
         anIntArray1476[i] = l1;
         return l1;
     }
 
-    public static void method370(int i)
+    public static void method370(int texID)
     {
-        if(anIntArrayArray1479[i] == null)
+        if(anIntArrayArray1479[texID] == null)
             return;
-        anIntArrayArray1478[anInt1477++] = anIntArrayArray1479[i];
-        anIntArrayArray1479[i] = null;
+        anIntArrayArray1478[anInt1477++] = anIntArrayArray1479[texID];
+        anIntArrayArray1479[texID] = null;
     }
 
-    private static int[] method371(int i)
+    private static int[] getTexturePixels(int i)
     {
         anIntArray1480[i] = anInt1481++;
         if(anIntArrayArray1479[i] != null)
@@ -126,7 +126,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         {
             int j = 0;
             int k = -1;
-            for(int l = 0; l < anInt1473; l++)
+            for(int l = 0; l < loadedTextureCount; l++)
                 if(anIntArrayArray1479[l] != null && (anIntArray1480[l] < j || k == -1))
                 {
                     j = anIntArray1480[l];
@@ -137,14 +137,14 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             anIntArrayArray1479[k] = null;
         }
         anIntArrayArray1479[i] = ai;
-        Background background = aBackgroundArray1474s[i];
-        int ai1[] = anIntArrayArray1483[i];
+        IndexedImage indexedImage = textureImages[i];
+        int ai1[] = texturePalettes[i];
         if(lowMem)
         {
             aBooleanArray1475[i] = false;
             for(int i1 = 0; i1 < 4096; i1++)
             {
-                int i2 = ai[i1] = ai1[background.aByteArray1450[i1]] & 0xf8f8ff;
+                int i2 = ai[i1] = ai1[indexedImage.aByteArray1450[i1]] & 0xf8f8ff;
                 if(i2 == 0)
                     aBooleanArray1475[i] = true;
                 ai[4096 + i1] = i2 - (i2 >>> 3) & 0xf8f8ff;
@@ -154,19 +154,19 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
         } else
         {
-            if(background.anInt1452 == 64)
+            if(indexedImage.anInt1452 == 64)
             {
                 for(int j1 = 0; j1 < 128; j1++)
                 {
                     for(int j2 = 0; j2 < 128; j2++)
-                        ai[j2 + (j1 << 7)] = ai1[background.aByteArray1450[(j2 >> 1) + ((j1 >> 1) << 6)]];
+                        ai[j2 + (j1 << 7)] = ai1[indexedImage.aByteArray1450[(j2 >> 1) + ((j1 >> 1) << 6)]];
 
                 }
 
             } else
             {
                 for(int k1 = 0; k1 < 16384; k1++)
-                    ai[k1] = ai1[background.aByteArray1450[k1]];
+                    ai[k1] = ai1[indexedImage.aByteArray1450[k1]];
 
             }
             aBooleanArray1475[i] = false;
@@ -185,9 +185,9 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         return ai;
     }
 
-    public static void method372(double d)
+    public static void setBrightness(double brightness)
     {
-        d += Math.random() * 0.029999999999999999D - 0.014999999999999999D;
+        brightness += Math.random() * 0.029999999999999999D - 0.014999999999999999D;
         int j = 0;
         for(int k = 0; k < 512; k++)
         {
@@ -248,25 +248,25 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 int l1 = (int)(d4 * 256D);
                 int i2 = (int)(d5 * 256D);
                 int j2 = (int)(d6 * 256D);
-                int k2 = (l1 << 16) + (i2 << 8) + j2;
-                k2 = method373(k2, d);
-                if(k2 == 0)
-                    k2 = 1;
-                colourMap[j++] = k2;
+                int rgb = (l1 << 16) + (i2 << 8) + j2;
+                rgb = applyBrightnessToRGB(rgb, brightness);
+                if(rgb == 0)
+                    rgb = 1;
+                colourMap[j++] = rgb;
             }
 
         }
 
         for(int l = 0; l < 50; l++)
-            if(aBackgroundArray1474s[l] != null)
+            if(textureImages[l] != null)
             {
-                int ai[] = aBackgroundArray1474s[l].anIntArray1451;
-                anIntArrayArray1483[l] = new int[ai.length];
+                int ai[] = textureImages[l].anIntArray1451;
+                texturePalettes[l] = new int[ai.length];
                 for(int j1 = 0; j1 < ai.length; j1++)
                 {
-                    anIntArrayArray1483[l][j1] = method373(ai[j1], d);
-                    if((anIntArrayArray1483[l][j1] & 0xf8f8ff) == 0 && j1 != 0)
-                        anIntArrayArray1483[l][j1] = 1;
+                    texturePalettes[l][j1] = applyBrightnessToRGB(ai[j1], brightness);
+                    if((texturePalettes[l][j1] & 0xf8f8ff) == 0 && j1 != 0)
+                        texturePalettes[l][j1] = 1;
                 }
 
             }
@@ -276,18 +276,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     }
 
-    private static int method373(int i, double d)
+    private static int applyBrightnessToRGB(int i, double d)
     {
-        double d1 = (double)(i >> 16) / 256D;
-        double d2 = (double)(i >> 8 & 0xff) / 256D;
-        double d3 = (double)(i & 0xff) / 256D;
-        d1 = Math.pow(d1, d);
-        d2 = Math.pow(d2, d);
-        d3 = Math.pow(d3, d);
-        int j = (int)(d1 * 256D);
-        int k = (int)(d2 * 256D);
-        int l = (int)(d3 * 256D);
-        return (j << 16) + (k << 8) + l;
+        double r = (double)(i >> 16) / 256D;
+        double g = (double)(i >> 8 & 0xff) / 256D;
+        double b = (double)(i & 0xff) / 256D;
+        r = Math.pow(r, d);
+        g = Math.pow(g, d);
+        b = Math.pow(b, d);
+        int r_byte = (int)(r * 256D);
+        int g_byte = (int)(g * 256D);
+        int b_byte = (int)(b * 256D);
+        return (r_byte << 16) + (g_byte << 8) + b_byte;
     }
 
     public static void drawColouredTriangle(int i, int j, int k, int l, int i1, int j1, int k1, int l1,
@@ -346,18 +346,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 {
                     k -= j;
                     j -= i;
-                    for(i = anIntArray1472[i]; --j >= 0; i += DrawingArea.width)
+                    for(i = lineOffsets[i]; --j >= 0; i += DrawingArea.width)
                     {
-                        method375(DrawingArea.pixels, i, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
+                        draw2DJagColouredShape(DrawingArea.pixels, i, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
                         j1 += j3;
                         l += j2;
                         i2 += k3;
                         k1 += k2;
                     }
 
-                    while(--k >= 0) 
+                    while(--k >= 0)
                     {
-                        method375(DrawingArea.pixels, i, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
+                        draw2DJagColouredShape(DrawingArea.pixels, i, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
                         j1 += j3;
                         i1 += l2;
                         i2 += k3;
@@ -368,18 +368,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 }
                 k -= j;
                 j -= i;
-                for(i = anIntArray1472[i]; --j >= 0; i += DrawingArea.width)
+                for(i = lineOffsets[i]; --j >= 0; i += DrawingArea.width)
                 {
-                    method375(DrawingArea.pixels, i, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, i, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
                     j1 += j3;
                     l += j2;
                     i2 += k3;
                     k1 += k2;
                 }
 
-                while(--k >= 0) 
+                while(--k >= 0)
                 {
-                    method375(DrawingArea.pixels, i, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, i, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
                     j1 += j3;
                     i1 += l2;
                     i2 += k3;
@@ -410,18 +410,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 j -= k;
                 k -= i;
-                for(i = anIntArray1472[i]; --k >= 0; i += DrawingArea.width)
+                for(i = lineOffsets[i]; --k >= 0; i += DrawingArea.width)
                 {
-                    method375(DrawingArea.pixels, i, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, i, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
                     i1 += j3;
                     l += j2;
                     l1 += k3;
                     k1 += k2;
                 }
 
-                while(--j >= 0) 
+                while(--j >= 0)
                 {
-                    method375(DrawingArea.pixels, i, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, i, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
                     j1 += l2;
                     l += j2;
                     i2 += i3;
@@ -432,18 +432,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             j -= k;
             k -= i;
-            for(i = anIntArray1472[i]; --k >= 0; i += DrawingArea.width)
+            for(i = lineOffsets[i]; --k >= 0; i += DrawingArea.width)
             {
-                method375(DrawingArea.pixels, i, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
+                draw2DJagColouredShape(DrawingArea.pixels, i, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
                 i1 += j3;
                 l += j2;
                 l1 += k3;
                 k1 += k2;
             }
 
-            while(--j >= 0) 
+            while(--j >= 0)
             {
-                method375(DrawingArea.pixels, i, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
+                draw2DJagColouredShape(DrawingArea.pixels, i, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
                 j1 += l2;
                 l += j2;
                 i2 += i3;
@@ -484,18 +484,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 {
                     i -= k;
                     k -= j;
-                    for(j = anIntArray1472[j]; --k >= 0; j += DrawingArea.width)
+                    for(j = lineOffsets[j]; --k >= 0; j += DrawingArea.width)
                     {
-                        method375(DrawingArea.pixels, j, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
+                        draw2DJagColouredShape(DrawingArea.pixels, j, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
                         l += j2;
                         i1 += l2;
                         k1 += k2;
                         l1 += i3;
                     }
 
-                    while(--i >= 0) 
+                    while(--i >= 0)
                     {
-                        method375(DrawingArea.pixels, j, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
+                        draw2DJagColouredShape(DrawingArea.pixels, j, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
                         l += j2;
                         j1 += j3;
                         k1 += k2;
@@ -506,18 +506,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 }
                 i -= k;
                 k -= j;
-                for(j = anIntArray1472[j]; --k >= 0; j += DrawingArea.width)
+                for(j = lineOffsets[j]; --k >= 0; j += DrawingArea.width)
                 {
-                    method375(DrawingArea.pixels, j, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, j, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
                     l += j2;
                     i1 += l2;
                     k1 += k2;
                     l1 += i3;
                 }
 
-                while(--i >= 0) 
+                while(--i >= 0)
                 {
-                    method375(DrawingArea.pixels, j, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, j, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
                     l += j2;
                     j1 += j3;
                     k1 += k2;
@@ -548,18 +548,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 k -= i;
                 i -= j;
-                for(j = anIntArray1472[j]; --i >= 0; j += DrawingArea.width)
+                for(j = lineOffsets[j]; --i >= 0; j += DrawingArea.width)
                 {
-                    method375(DrawingArea.pixels, j, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, j, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
                     j1 += j2;
                     i1 += l2;
                     i2 += k2;
                     l1 += i3;
                 }
 
-                while(--k >= 0) 
+                while(--k >= 0)
                 {
-                    method375(DrawingArea.pixels, j, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, j, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
                     l += j3;
                     i1 += l2;
                     k1 += k3;
@@ -570,18 +570,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             k -= i;
             i -= j;
-            for(j = anIntArray1472[j]; --i >= 0; j += DrawingArea.width)
+            for(j = lineOffsets[j]; --i >= 0; j += DrawingArea.width)
             {
-                method375(DrawingArea.pixels, j, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
+                draw2DJagColouredShape(DrawingArea.pixels, j, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
                 j1 += j2;
                 i1 += l2;
                 i2 += k2;
                 l1 += i3;
             }
 
-            while(--k >= 0) 
+            while(--k >= 0)
             {
-                method375(DrawingArea.pixels, j, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
+                draw2DJagColouredShape(DrawingArea.pixels, j, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
                 l += j3;
                 i1 += l2;
                 k1 += k3;
@@ -620,18 +620,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 j -= i;
                 i -= k;
-                for(k = anIntArray1472[k]; --i >= 0; k += DrawingArea.width)
+                for(k = lineOffsets[k]; --i >= 0; k += DrawingArea.width)
                 {
-                    method375(DrawingArea.pixels, k, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, k, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
                     i1 += l2;
                     j1 += j3;
                     l1 += i3;
                     i2 += k3;
                 }
 
-                while(--j >= 0) 
+                while(--j >= 0)
                 {
-                    method375(DrawingArea.pixels, k, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
+                    draw2DJagColouredShape(DrawingArea.pixels, k, i1 >> 16, l >> 16, l1 >> 7, k1 >> 7);
                     i1 += l2;
                     l += j2;
                     l1 += i3;
@@ -642,18 +642,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             j -= i;
             i -= k;
-            for(k = anIntArray1472[k]; --i >= 0; k += DrawingArea.width)
+            for(k = lineOffsets[k]; --i >= 0; k += DrawingArea.width)
             {
-                method375(DrawingArea.pixels, k, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
+                draw2DJagColouredShape(DrawingArea.pixels, k, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
                 i1 += l2;
                 j1 += j3;
                 l1 += i3;
                 i2 += k3;
             }
 
-            while(--j >= 0) 
+            while(--j >= 0)
             {
-                method375(DrawingArea.pixels, k, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
+                draw2DJagColouredShape(DrawingArea.pixels, k, l >> 16, i1 >> 16, k1 >> 7, l1 >> 7);
                 i1 += l2;
                 l += j2;
                 l1 += i3;
@@ -684,18 +684,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         {
             i -= j;
             j -= k;
-            for(k = anIntArray1472[k]; --j >= 0; k += DrawingArea.width)
+            for(k = lineOffsets[k]; --j >= 0; k += DrawingArea.width)
             {
-                method375(DrawingArea.pixels, k, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
+                draw2DJagColouredShape(DrawingArea.pixels, k, l >> 16, j1 >> 16, k1 >> 7, i2 >> 7);
                 l += l2;
                 j1 += j3;
                 k1 += i3;
                 i2 += k3;
             }
 
-            while(--i >= 0) 
+            while(--i >= 0)
             {
-                method375(DrawingArea.pixels, k, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
+                draw2DJagColouredShape(DrawingArea.pixels, k, i1 >> 16, j1 >> 16, l1 >> 7, i2 >> 7);
                 i1 += j2;
                 j1 += j3;
                 l1 += k2;
@@ -706,18 +706,18 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         i -= j;
         j -= k;
-        for(k = anIntArray1472[k]; --j >= 0; k += DrawingArea.width)
+        for(k = lineOffsets[k]; --j >= 0; k += DrawingArea.width)
         {
-            method375(DrawingArea.pixels, k, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
+            draw2DJagColouredShape(DrawingArea.pixels, k, j1 >> 16, l >> 16, i2 >> 7, k1 >> 7);
             l += l2;
             j1 += j3;
             k1 += i3;
             i2 += k3;
         }
 
-        while(--i >= 0) 
+        while(--i >= 0)
         {
-            method375(DrawingArea.pixels, k, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
+            draw2DJagColouredShape(DrawingArea.pixels, k, j1 >> 16, i1 >> 16, i2 >> 7, l1 >> 7);
             i1 += j2;
             j1 += j3;
             l1 += k2;
@@ -726,9 +726,9 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
     }
 
-    private static void method375(int ai[], int i, int l, int i1, int j1, int k1)
+    private static void draw2DJagColouredShape(int ai[], int i, int l, int i1, int jgx, int k1)
     {
-        int j;//was parameter
+        int rgb;//was parameter
         int k;//was parameter
         if(aBoolean1464)
         {
@@ -736,14 +736,14 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             if(aBoolean1462)
             {
                 if(i1 - l > 3)
-                    l1 = (k1 - j1) / (i1 - l);
+                    l1 = (k1 - jgx) / (i1 - l);
                 else
                     l1 = 0;
-                if(i1 > DrawingArea.centerX)
-                    i1 = DrawingArea.centerX;
+                if(i1 > DrawingArea.viewport_r_x)
+                    i1 = DrawingArea.viewport_r_x;
                 if(l < 0)
                 {
-                    j1 -= l * l1;
+                    jgx -= l * l1;
                     l = 0;
                 }
                 if(l >= i1)
@@ -758,7 +758,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 i += l;
                 k = i1 - l >> 2;
                 if(k > 0)
-                    l1 = (k1 - j1) * anIntArray1468[k] >> 15;
+                    l1 = (k1 - jgx) * anIntArray1468[k] >> 15;
                 else
                     l1 = 0;
             }
@@ -766,19 +766,19 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 while(--k >= 0) 
                 {
-                    j = colourMap[j1 >> 8];
-                    j1 += l1;
-                    ai[i++] = j;
-                    ai[i++] = j;
-                    ai[i++] = j;
-                    ai[i++] = j;
+                    rgb = colourMap[jgx >> 8];
+                    jgx += l1;
+                    ai[i++] = rgb;
+                    ai[i++] = rgb;
+                    ai[i++] = rgb;
+                    ai[i++] = rgb;
                 }
                 k = i1 - l & 3;
                 if(k > 0)
                 {
-                    j = colourMap[j1 >> 8];
+                    rgb = colourMap[jgx >> 8];
                     do
-                        ai[i++] = j;
+                        ai[i++] = rgb;
                     while(--k > 0);
                     return;
                 }
@@ -788,21 +788,21 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 int l2 = 256 - alpha;
                 while(--k >= 0) 
                 {
-                    j = colourMap[j1 >> 8];
-                    j1 += l1;
-                    j = ((j & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((j & 0xff00) * l2 >> 8 & 0xff00);
-                    ai[i++] = j + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
-                    ai[i++] = j + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
-                    ai[i++] = j + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
-                    ai[i++] = j + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
+                    rgb = colourMap[jgx >> 8];
+                    jgx += l1;
+                    rgb = ((rgb & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((rgb & 0xff00) * l2 >> 8 & 0xff00);
+                    ai[i++] = rgb + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
+                    ai[i++] = rgb + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
+                    ai[i++] = rgb + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
+                    ai[i++] = rgb + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
                 }
                 k = i1 - l & 3;
                 if(k > 0)
                 {
-                    j = colourMap[j1 >> 8];
-                    j = ((j & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((j & 0xff00) * l2 >> 8 & 0xff00);
+                    rgb = colourMap[jgx >> 8];
+                    rgb = ((rgb & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((rgb & 0xff00) * l2 >> 8 & 0xff00);
                     do
-                        ai[i++] = j + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
+                        ai[i++] = rgb + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
                     while(--k > 0);
                 }
             }
@@ -810,14 +810,14 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         if(l >= i1)
             return;
-        int i2 = (k1 - j1) / (i1 - l);
+        int i2 = (k1 - jgx) / (i1 - l);
         if(aBoolean1462)
         {
-            if(i1 > DrawingArea.centerX)
-                i1 = DrawingArea.centerX;
+            if(i1 > DrawingArea.viewport_r_x)
+                i1 = DrawingArea.viewport_r_x;
             if(l < 0)
             {
-                j1 -= l * i2;
+                jgx -= l * i2;
                 l = 0;
             }
             if(l >= i1)
@@ -829,8 +829,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         {
             do
             {
-                ai[i++] = colourMap[j1 >> 8];
-                j1 += i2;
+                ai[i++] = colourMap[jgx >> 8];
+                jgx += i2;
             } while(--k > 0);
             return;
         }
@@ -838,10 +838,10 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         int i3 = 256 - alpha;
         do
         {
-            j = colourMap[j1 >> 8];
-            j1 += i2;
-            j = ((j & 0xff00ff) * i3 >> 8 & 0xff00ff) + ((j & 0xff00) * i3 >> 8 & 0xff00);
-            ai[i++] = j + ((ai[i] & 0xff00ff) * k2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * k2 >> 8 & 0xff00);
+            rgb = colourMap[jgx >> 8];
+            jgx += i2;
+            rgb = ((rgb & 0xff00ff) * i3 >> 8 & 0xff00ff) + ((rgb & 0xff00) * i3 >> 8 & 0xff00);
+            ai[i++] = rgb + ((ai[i] & 0xff00ff) * k2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * k2 >> 8 & 0xff00);
         } while(--k > 0);
     }
 
@@ -883,7 +883,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 {
                     k -= j;
                     j -= i;
-                    for(i = anIntArray1472[i]; --j >= 0; i += DrawingArea.width)
+                    for(i = lineOffsets[i]; --j >= 0; i += DrawingArea.width)
                     {
                         method377(DrawingArea.pixels, i, k1, j1 >> 16, l >> 16);
                         j1 += j2;
@@ -901,7 +901,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 }
                 k -= j;
                 j -= i;
-                for(i = anIntArray1472[i]; --j >= 0; i += DrawingArea.width)
+                for(i = lineOffsets[i]; --j >= 0; i += DrawingArea.width)
                 {
                     method377(DrawingArea.pixels, i, k1, l >> 16, j1 >> 16);
                     j1 += j2;
@@ -934,7 +934,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 j -= k;
                 k -= i;
-                for(i = anIntArray1472[i]; --k >= 0; i += DrawingArea.width)
+                for(i = lineOffsets[i]; --k >= 0; i += DrawingArea.width)
                 {
                     method377(DrawingArea.pixels, i, k1, i1 >> 16, l >> 16);
                     i1 += j2;
@@ -952,7 +952,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             j -= k;
             k -= i;
-            for(i = anIntArray1472[i]; --k >= 0; i += DrawingArea.width)
+            for(i = lineOffsets[i]; --k >= 0; i += DrawingArea.width)
             {
                 method377(DrawingArea.pixels, i, k1, l >> 16, i1 >> 16);
                 i1 += j2;
@@ -995,7 +995,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 {
                     i -= k;
                     k -= j;
-                    for(j = anIntArray1472[j]; --k >= 0; j += DrawingArea.width)
+                    for(j = lineOffsets[j]; --k >= 0; j += DrawingArea.width)
                     {
                         method377(DrawingArea.pixels, j, k1, l >> 16, i1 >> 16);
                         l += l1;
@@ -1013,7 +1013,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 }
                 i -= k;
                 k -= j;
-                for(j = anIntArray1472[j]; --k >= 0; j += DrawingArea.width)
+                for(j = lineOffsets[j]; --k >= 0; j += DrawingArea.width)
                 {
                     method377(DrawingArea.pixels, j, k1, i1 >> 16, l >> 16);
                     l += l1;
@@ -1046,7 +1046,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 k -= i;
                 i -= j;
-                for(j = anIntArray1472[j]; --i >= 0; j += DrawingArea.width)
+                for(j = lineOffsets[j]; --i >= 0; j += DrawingArea.width)
                 {
                     method377(DrawingArea.pixels, j, k1, j1 >> 16, i1 >> 16);
                     j1 += l1;
@@ -1064,7 +1064,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             k -= i;
             i -= j;
-            for(j = anIntArray1472[j]; --i >= 0; j += DrawingArea.width)
+            for(j = lineOffsets[j]; --i >= 0; j += DrawingArea.width)
             {
                 method377(DrawingArea.pixels, j, k1, i1 >> 16, j1 >> 16);
                 j1 += l1;
@@ -1105,7 +1105,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 j -= i;
                 i -= k;
-                for(k = anIntArray1472[k]; --i >= 0; k += DrawingArea.width)
+                for(k = lineOffsets[k]; --i >= 0; k += DrawingArea.width)
                 {
                     method377(DrawingArea.pixels, k, k1, i1 >> 16, j1 >> 16);
                     i1 += i2;
@@ -1123,7 +1123,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             j -= i;
             i -= k;
-            for(k = anIntArray1472[k]; --i >= 0; k += DrawingArea.width)
+            for(k = lineOffsets[k]; --i >= 0; k += DrawingArea.width)
             {
                 method377(DrawingArea.pixels, k, k1, j1 >> 16, i1 >> 16);
                 i1 += i2;
@@ -1156,7 +1156,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         {
             i -= j;
             j -= k;
-            for(k = anIntArray1472[k]; --j >= 0; k += DrawingArea.width)
+            for(k = lineOffsets[k]; --j >= 0; k += DrawingArea.width)
             {
                 method377(DrawingArea.pixels, k, k1, l >> 16, j1 >> 16);
                 l += i2;
@@ -1174,7 +1174,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         i -= j;
         j -= k;
-        for(k = anIntArray1472[k]; --j >= 0; k += DrawingArea.width)
+        for(k = lineOffsets[k]; --j >= 0; k += DrawingArea.width)
         {
             method377(DrawingArea.pixels, k, k1, j1 >> 16, l >> 16);
             l += i2;
@@ -1195,8 +1195,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         int k;//was parameter
         if(aBoolean1462)
         {
-            if(i1 > DrawingArea.centerX)
-                i1 = DrawingArea.centerX;
+            if(i1 > DrawingArea.viewport_r_x)
+                i1 = DrawingArea.viewport_r_x;
             if(l < 0)
                 l = 0;
         }
@@ -1237,7 +1237,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             int i2, int j2, int k2, int l2, int i3, int j3, int k3, 
             int l3, int i4, int j4, int k4)
     {
-        int ai[] = method371(k4);
+        int ai[] = getTexturePixels(k4);
         aBoolean1463 = !aBooleanArray1475[k4];
         k2 = j2 - k2;
         j3 = i3 - j3;
@@ -1311,7 +1311,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 {
                     k -= j;
                     j -= i;
-                    i = anIntArray1472[i];
+                    i = lineOffsets[i];
                     while(--j >= 0) 
                     {
                         method379(DrawingArea.pixels, ai, i, j1 >> 16, l >> 16, i2 >> 8, k1 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1340,7 +1340,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 }
                 k -= j;
                 j -= i;
-                i = anIntArray1472[i];
+                i = lineOffsets[i];
                 while(--j >= 0) 
                 {
                     method379(DrawingArea.pixels, ai, i, l >> 16, j1 >> 16, k1 >> 8, i2 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1393,7 +1393,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 j -= k;
                 k -= i;
-                i = anIntArray1472[i];
+                i = lineOffsets[i];
                 while(--k >= 0) 
                 {
                     method379(DrawingArea.pixels, ai, i, i1 >> 16, l >> 16, l1 >> 8, k1 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1422,7 +1422,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             j -= k;
             k -= i;
-            i = anIntArray1472[i];
+            i = lineOffsets[i];
             while(--k >= 0) 
             {
                 method379(DrawingArea.pixels, ai, i, l >> 16, i1 >> 16, k1 >> 8, l1 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1485,7 +1485,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 {
                     i -= k;
                     k -= j;
-                    j = anIntArray1472[j];
+                    j = lineOffsets[j];
                     while(--k >= 0) 
                     {
                         method379(DrawingArea.pixels, ai, j, l >> 16, i1 >> 16, k1 >> 8, l1 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1514,7 +1514,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 }
                 i -= k;
                 k -= j;
-                j = anIntArray1472[j];
+                j = lineOffsets[j];
                 while(--k >= 0) 
                 {
                     method379(DrawingArea.pixels, ai, j, i1 >> 16, l >> 16, l1 >> 8, k1 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1567,7 +1567,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 k -= i;
                 i -= j;
-                j = anIntArray1472[j];
+                j = lineOffsets[j];
                 while(--i >= 0) 
                 {
                     method379(DrawingArea.pixels, ai, j, j1 >> 16, i1 >> 16, i2 >> 8, l1 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1596,7 +1596,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             k -= i;
             i -= j;
-            j = anIntArray1472[j];
+            j = lineOffsets[j];
             while(--i >= 0) 
             {
                 method379(DrawingArea.pixels, ai, j, i1 >> 16, j1 >> 16, l1 >> 8, i2 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1657,7 +1657,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 j -= i;
                 i -= k;
-                k = anIntArray1472[k];
+                k = lineOffsets[k];
                 while(--i >= 0) 
                 {
                     method379(DrawingArea.pixels, ai, k, i1 >> 16, j1 >> 16, l1 >> 8, i2 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1686,7 +1686,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             j -= i;
             i -= k;
-            k = anIntArray1472[k];
+            k = lineOffsets[k];
             while(--i >= 0) 
             {
                 method379(DrawingArea.pixels, ai, k, j1 >> 16, i1 >> 16, i2 >> 8, l1 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1739,7 +1739,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         {
             i -= j;
             j -= k;
-            k = anIntArray1472[k];
+            k = lineOffsets[k];
             while(--j >= 0) 
             {
                 method379(DrawingArea.pixels, ai, k, l >> 16, j1 >> 16, k1 >> 8, i2 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1768,7 +1768,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         i -= j;
         j -= k;
-        k = anIntArray1472[k];
+        k = lineOffsets[k];
         while(--j >= 0) 
         {
             method379(DrawingArea.pixels, ai, k, j1 >> 16, l >> 16, i2 >> 8, k1 >> 8, l4, k5, j6, i5, l5, k6);
@@ -1807,8 +1807,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         if(aBoolean1462)
         {
             j3 = (k1 - j1) / (i1 - l);
-            if(i1 > DrawingArea.centerX)
-                i1 = DrawingArea.centerX;
+            if(i1 > DrawingArea.viewport_r_x)
+                i1 = DrawingArea.viewport_r_x;
             if(l < 0)
             {
                 j1 -= l * j3;
@@ -2181,9 +2181,9 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
     public static final int[] anIntArray1469;
     public static int SINE[];
     public static int COSINE[];
-    public static int anIntArray1472[];
-    private static int anInt1473;
-    public static Background aBackgroundArray1474s[] = new Background[50];
+    public static int lineOffsets[];
+    private static int loadedTextureCount;
+    public static IndexedImage textureImages[] = new IndexedImage[50];
     private static boolean[] aBooleanArray1475 = new boolean[50];
     private static int[] anIntArray1476 = new int[50];
     private static int anInt1477;
@@ -2192,7 +2192,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
     public static int anIntArray1480[] = new int[50];
     public static int anInt1481;
     public static int colourMap[] = new int[0x10000];
-    private static int[][] anIntArrayArray1483 = new int[50][];
+    private static int[][] texturePalettes = new int[50][];
 
     static 
     {

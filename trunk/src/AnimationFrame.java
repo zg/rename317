@@ -48,7 +48,7 @@ public final class AnimationFrame
             int i2 = stream_1.readUnsignedWord();
             AnimationFrame animationFrame = aAnimationFrameArray635[i2] = new AnimationFrame();
             animationFrame.displayLength = stream_4.readUnsignedByte();
-            animationFrame.aModelTransform_637 = modelTransform;
+            animationFrame.myModelTransform = modelTransform;
             int j2 = stream_1.readUnsignedByte();
             int k2 = -1;
             int l2 = 0;
@@ -77,15 +77,15 @@ public final class AnimationFrame
                     if(modelTransform.opcodes[i3] == 3)
                         c = '\200';
                     if((j3 & 1) != 0)
-                        ai1[l2] = stream_3.method421();
+                        ai1[l2] = stream_3.readSpaceSaver2();
                     else
                         ai1[l2] = c;
                     if((j3 & 2) != 0)
-                        ai2[l2] = stream_3.method421();
+                        ai2[l2] = stream_3.readSpaceSaver2();
                     else
                         ai2[l2] = c;
                     if((j3 & 4) != 0)
-                        ai3[l2] = stream_3.method421();
+                        ai3[l2] = stream_3.readSpaceSaver2();
                     else
                         ai3[l2] = c;
                     k2 = i3;
@@ -96,16 +96,16 @@ public final class AnimationFrame
             }
 
             animationFrame.anInt638 = l2;
-            animationFrame.anIntArray639 = new int[l2];
-            animationFrame.anIntArray640 = new int[l2];
-            animationFrame.anIntArray641 = new int[l2];
-            animationFrame.anIntArray642 = new int[l2];
+            animationFrame.opcodeLinkTable = new int[l2];
+            animationFrame.modifier1 = new int[l2];
+            animationFrame.modifier2 = new int[l2];
+            animationFrame.modifier3 = new int[l2];
             for(int k3 = 0; k3 < l2; k3++)
             {
-                animationFrame.anIntArray639[k3] = ai[k3];
-                animationFrame.anIntArray640[k3] = ai1[k3];
-                animationFrame.anIntArray641[k3] = ai2[k3];
-                animationFrame.anIntArray642[k3] = ai3[k3];
+                animationFrame.opcodeLinkTable[k3] = ai[k3];
+                animationFrame.modifier1[k3] = ai1[k3];
+                animationFrame.modifier2[k3] = ai2[k3];
+                animationFrame.modifier3[k3] = ai3[k3];
             }
 
         }
@@ -136,12 +136,12 @@ public final class AnimationFrame
 
     private static AnimationFrame[] aAnimationFrameArray635;
     public int displayLength;
-    public ModelTransform aModelTransform_637;
+    public ModelTransform myModelTransform;
     public int anInt638;
-    public int anIntArray639[];
-    public int anIntArray640[];
-    public int anIntArray641[];
-    public int anIntArray642[];
+    public int opcodeLinkTable[];
+    public int modifier1[];
+    public int modifier2[];
+    public int modifier3[];
     private static boolean[] aBooleanArray643;
 
 }

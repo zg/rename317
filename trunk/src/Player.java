@@ -23,7 +23,7 @@ public final class Player extends Entity
             if(model_2 != null)
             {
                 Model model_3 = new Model(true, AnimationFrame.method532(super.anInt1521), false, model_2);
-                model_3.method475(0, -super.anInt1524, 0);
+                model_3.translate(0, -super.anInt1524, 0);
                 model_3.calcSkinning();
                 model_3.applyTransform(spotAnim.aAnimation_407.frame2IDS[super.anInt1521]);
                 model_3.triangleSkin = null;
@@ -44,7 +44,7 @@ public final class Player extends Entity
             if(client.loopCycle >= anInt1707 && client.loopCycle < anInt1708)
             {
                 Model model_1 = aModel_1714;
-                model_1.method475(anInt1711 - super.bound_extent_x, anInt1712 - anInt1709, anInt1713 - super.bound_extent_y);
+                model_1.translate(anInt1711 - super.bound_extent_x, anInt1712 - anInt1709, anInt1713 - super.bound_extent_y);
                 if(super.turnDirection == 512)
                 {
                     model_1.method473();
@@ -76,7 +76,7 @@ public final class Player extends Entity
                     model_1.method473();
                     model_1.method473();
                 }
-                model_1.method475(super.bound_extent_x - anInt1711, anInt1709 - anInt1712, super.bound_extent_y - anInt1713);
+                model_1.translate(super.bound_extent_x - anInt1711, anInt1709 - anInt1712, super.bound_extent_y - anInt1713);
             }
         }
         model.aBoolean1659 = true;

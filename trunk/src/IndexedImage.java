@@ -2,14 +2,14 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-public final class Background extends DrawingArea {
+public final class IndexedImage extends DrawingArea {
 
-    public Background(JagexArchive jagexArchive, String s, int i)
+    public IndexedImage(JagexArchive jagexArchive, String s, int i)
     {
         Stream stream = new Stream(jagexArchive.getDataForName(s + ".dat"));
         Stream stream_1 = new Stream(jagexArchive.getDataForName("index.dat"));
         stream_1.currentOffset = stream.readUnsignedWord();
-        anInt1456 = stream_1.readUnsignedWord();
+        libWidth = stream_1.readUnsignedWord();
         anInt1457 = stream_1.readUnsignedWord();
         int j = stream_1.readUnsignedByte();
         anIntArray1451 = new int[j];
@@ -49,41 +49,41 @@ public final class Background extends DrawingArea {
         }
     }
 
-    public void method356()
+    public void resizeToHalfLibSize()
     {
-        anInt1456 /= 2;
+        libWidth /= 2;
         anInt1457 /= 2;
-        byte abyte0[] = new byte[anInt1456 * anInt1457];
+        byte abyte0[] = new byte[libWidth * anInt1457];
         int i = 0;
         for(int j = 0; j < anInt1453; j++)
         {
             for(int k = 0; k < anInt1452; k++)
-                abyte0[(k + anInt1454 >> 1) + (j + anInt1455 >> 1) * anInt1456] = aByteArray1450[i++];
+                abyte0[(k + anInt1454 >> 1) + (j + anInt1455 >> 1) * libWidth] = aByteArray1450[i++];
 
         }
 
         aByteArray1450 = abyte0;
-        anInt1452 = anInt1456;
+        anInt1452 = libWidth;
         anInt1453 = anInt1457;
         anInt1454 = 0;
             anInt1455 = 0;
     }
 
-    public void method357()
+    public void resizeToLibSize()
     {
-        if(anInt1452 == anInt1456 && anInt1453 == anInt1457)
+        if(anInt1452 == libWidth && anInt1453 == anInt1457)
             return;
-        byte abyte0[] = new byte[anInt1456 * anInt1457];
+        byte abyte0[] = new byte[libWidth * anInt1457];
         int i = 0;
         for(int j = 0; j < anInt1453; j++)
         {
             for(int k = 0; k < anInt1452; k++)
-                abyte0[k + anInt1454 + (j + anInt1455) * anInt1456] = aByteArray1450[i++];
+                abyte0[k + anInt1454 + (j + anInt1455) * libWidth] = aByteArray1450[i++];
 
         }
 
         aByteArray1450 = abyte0;
-        anInt1452 = anInt1456;
+        anInt1452 = libWidth;
         anInt1453 = anInt1457;
         anInt1454 = 0;
         anInt1455 = 0;
@@ -101,7 +101,7 @@ public final class Background extends DrawingArea {
         }
 
         aByteArray1450 = abyte0;
-        anInt1454 = anInt1456 - anInt1452 - anInt1454;
+        anInt1454 = libWidth - anInt1452 - anInt1454;
     }
 
     public void method359()
@@ -243,6 +243,6 @@ public final class Background extends DrawingArea {
     public int anInt1453;
     public int anInt1454;
     public int anInt1455;
-    public int anInt1456;
+    public int libWidth;
     private int anInt1457;
 }

@@ -118,7 +118,7 @@ public final class client extends RSApplet {
     private void drawChatArea()
     {
         aRSImageProducer_1166.initDrawingArea();
-        ThreeDimensionalDrawingArea.anIntArray1472 = anIntArray1180;
+        ThreeDimensionalDrawingArea.lineOffsets = anIntArray1180;
         chatBack.method361(0, 0);
         if(messagePromptRaised)
         {
@@ -265,7 +265,7 @@ public final class client extends RSApplet {
             drawMenu();
         aRSImageProducer_1166.drawGraphics(357, super.graphics, 17);
         aRSImageProducer_1165.initDrawingArea();
-        ThreeDimensionalDrawingArea.anIntArray1472 = anIntArray1182;
+        ThreeDimensionalDrawingArea.lineOffsets = anIntArray1182;
     }
 
     public void init()
@@ -430,7 +430,7 @@ public final class client extends RSApplet {
             anInt985 = -1;
             aClass19_1056.removeAll();
             aClass19_1013.removeAll();
-            ThreeDimensionalDrawingArea.method366();
+            ThreeDimensionalDrawingArea.nullInit();
             unlinkMRUNodes();
             sceneGraph.initToNull();
             System.gc();
@@ -611,7 +611,7 @@ public final class client extends RSApplet {
 
         }
         System.gc();
-        ThreeDimensionalDrawingArea.method367();
+        ThreeDimensionalDrawingArea.cleanup();
         onDemandFetcher.method566();
         int k = (anInt1069 - 6) / 8 - 1;
         int j1 = (anInt1069 + 6) / 8 + 1;
@@ -1184,13 +1184,13 @@ public final class client extends RSApplet {
         if(j == 1)
         {
             if(k == 1)
-                ThreeDimensionalDrawingArea.method372(0.90000000000000002D);
+                ThreeDimensionalDrawingArea.setBrightness(0.90000000000000002D);
             if(k == 2)
-                ThreeDimensionalDrawingArea.method372(0.80000000000000004D);
+                ThreeDimensionalDrawingArea.setBrightness(0.80000000000000004D);
             if(k == 3)
-                ThreeDimensionalDrawingArea.method372(0.69999999999999996D);
+                ThreeDimensionalDrawingArea.setBrightness(0.69999999999999996D);
             if(k == 4)
-                ThreeDimensionalDrawingArea.method372(0.59999999999999998D);
+                ThreeDimensionalDrawingArea.setBrightness(0.59999999999999998D);
             ItemDef.mruNodes1.unlinkAll();
             welcomeScreenRaised = true;
         }
@@ -1552,7 +1552,7 @@ public final class client extends RSApplet {
     private void drawTabArea()
     {
         aRSImageProducer_1163.initDrawingArea();
-        ThreeDimensionalDrawingArea.anIntArray1472 = anIntArray1181;
+        ThreeDimensionalDrawingArea.lineOffsets = anIntArray1181;
         invBack.method361(0, 0);
         if(invOverlayInterfaceID != -1)
             drawInterface(0, 0, RSInterface.interfaceCache[invOverlayInterfaceID], 0);
@@ -1563,7 +1563,7 @@ public final class client extends RSApplet {
             drawMenu();
         aRSImageProducer_1163.drawGraphics(205, super.graphics, 553);
         aRSImageProducer_1165.initDrawingArea();
-        ThreeDimensionalDrawingArea.anIntArray1472 = anIntArray1182;
+        ThreeDimensionalDrawingArea.lineOffsets = anIntArray1182;
     }
 
     private void method37(int j)
@@ -1572,15 +1572,15 @@ public final class client extends RSApplet {
         {
             if(ThreeDimensionalDrawingArea.anIntArray1480[17] >= j)
             {
-                Background background = ThreeDimensionalDrawingArea.aBackgroundArray1474s[17];
-                int k = background.anInt1452 * background.anInt1453 - 1;
-                int j1 = background.anInt1452 * anInt945 * 2;
-                byte abyte0[] = background.aByteArray1450;
+                IndexedImage indexedImage = ThreeDimensionalDrawingArea.textureImages[17];
+                int k = indexedImage.anInt1452 * indexedImage.anInt1453 - 1;
+                int j1 = indexedImage.anInt1452 * anInt945 * 2;
+                byte abyte0[] = indexedImage.aByteArray1450;
                 byte abyte3[] = aByteArray912;
                 for(int i2 = 0; i2 <= k; i2++)
                     abyte3[i2] = abyte0[i2 - j1 & k];
 
-                background.aByteArray1450 = abyte3;
+                indexedImage.aByteArray1450 = abyte3;
                 aByteArray912 = abyte0;
                 ThreeDimensionalDrawingArea.method370(17);
                 anInt854++;
@@ -1606,29 +1606,29 @@ public final class client extends RSApplet {
             }
             if(ThreeDimensionalDrawingArea.anIntArray1480[24] >= j)
             {
-                Background background_1 = ThreeDimensionalDrawingArea.aBackgroundArray1474s[24];
-                int l = background_1.anInt1452 * background_1.anInt1453 - 1;
-                int k1 = background_1.anInt1452 * anInt945 * 2;
-                byte abyte1[] = background_1.aByteArray1450;
+                IndexedImage indexedImage_1 = ThreeDimensionalDrawingArea.textureImages[24];
+                int l = indexedImage_1.anInt1452 * indexedImage_1.anInt1453 - 1;
+                int k1 = indexedImage_1.anInt1452 * anInt945 * 2;
+                byte abyte1[] = indexedImage_1.aByteArray1450;
                 byte abyte4[] = aByteArray912;
                 for(int j2 = 0; j2 <= l; j2++)
                     abyte4[j2] = abyte1[j2 - k1 & l];
 
-                background_1.aByteArray1450 = abyte4;
+                indexedImage_1.aByteArray1450 = abyte4;
                 aByteArray912 = abyte1;
                 ThreeDimensionalDrawingArea.method370(24);
             }
             if(ThreeDimensionalDrawingArea.anIntArray1480[34] >= j)
             {
-                Background background_2 = ThreeDimensionalDrawingArea.aBackgroundArray1474s[34];
-                int i1 = background_2.anInt1452 * background_2.anInt1453 - 1;
-                int l1 = background_2.anInt1452 * anInt945 * 2;
-                byte abyte2[] = background_2.aByteArray1450;
+                IndexedImage indexedImage_2 = ThreeDimensionalDrawingArea.textureImages[34];
+                int i1 = indexedImage_2.anInt1452 * indexedImage_2.anInt1453 - 1;
+                int l1 = indexedImage_2.anInt1452 * anInt945 * 2;
+                byte abyte2[] = indexedImage_2.aByteArray1450;
                 byte abyte5[] = aByteArray912;
                 for(int k2 = 0; k2 <= i1; k2++)
                     abyte5[k2] = abyte2[k2 - l1 & i1];
 
-                background_2.aByteArray1450 = abyte5;
+                indexedImage_2.aByteArray1450 = abyte5;
                 aByteArray912 = abyte2;
                 ThreeDimensionalDrawingArea.method370(34);
             }
@@ -2156,12 +2156,12 @@ public final class client extends RSApplet {
             ObjectDef class46_2 = ObjectDef.forID(i5);
             if(class46_2.anInt758 != -1)
             {
-                Background background_2 = mapScenes[class46_2.anInt758];
-                if(background_2 != null)
+                IndexedImage indexedImage_2 = mapScenes[class46_2.anInt758];
+                if(indexedImage_2 != null)
                 {
-                    int i6 = (class46_2.anInt744 * 4 - background_2.anInt1452) / 2;
-                    int j6 = (class46_2.anInt761 * 4 - background_2.anInt1453) / 2;
-                    background_2.method361(48 + l * 4 + i6, 48 + (104 - i - class46_2.anInt761) * 4 + j6);
+                    int i6 = (class46_2.anInt744 * 4 - indexedImage_2.anInt1452) / 2;
+                    int j6 = (class46_2.anInt761 * 4 - indexedImage_2.anInt1453) / 2;
+                    indexedImage_2.method361(48 + l * 4 + i6, 48 + (104 - i - class46_2.anInt761) * 4 + j6);
                 }
             } else
             {
@@ -2247,12 +2247,12 @@ public final class client extends RSApplet {
             ObjectDef class46_1 = ObjectDef.forID(l3);
             if(class46_1.anInt758 != -1)
             {
-                Background background_1 = mapScenes[class46_1.anInt758];
-                if(background_1 != null)
+                IndexedImage indexedImage_1 = mapScenes[class46_1.anInt758];
+                if(indexedImage_1 != null)
                 {
-                    int j5 = (class46_1.anInt744 * 4 - background_1.anInt1452) / 2;
-                    int k5 = (class46_1.anInt761 * 4 - background_1.anInt1453) / 2;
-                    background_1.method361(48 + l * 4 + j5, 48 + (104 - i - class46_1.anInt761) * 4 + k5);
+                    int j5 = (class46_1.anInt744 * 4 - indexedImage_1.anInt1452) / 2;
+                    int k5 = (class46_1.anInt761 * 4 - indexedImage_1.anInt1453) / 2;
+                    indexedImage_1.method361(48 + l * 4 + j5, 48 + (104 - i - class46_1.anInt761) * 4 + k5);
                 }
             } else
             if(j3 == 9)
@@ -2284,12 +2284,12 @@ public final class client extends RSApplet {
             ObjectDef class46 = ObjectDef.forID(j2);
             if(class46.anInt758 != -1)
             {
-                Background background = mapScenes[class46.anInt758];
-                if(background != null)
+                IndexedImage indexedImage = mapScenes[class46.anInt758];
+                if(indexedImage != null)
                 {
-                    int i4 = (class46.anInt744 * 4 - background.anInt1452) / 2;
-                    int j4 = (class46.anInt761 * 4 - background.anInt1453) / 2;
-                    background.method361(48 + l * 4 + i4, 48 + (104 - i - class46.anInt761) * 4 + j4);
+                    int i4 = (class46.anInt744 * 4 - indexedImage.anInt1452) / 2;
+                    int j4 = (class46.anInt761 * 4 - indexedImage.anInt1453) / 2;
+                    indexedImage.method361(48 + l * 4 + i4, 48 + (104 - i - class46.anInt761) * 4 + j4);
                 }
             }
         }
@@ -2297,9 +2297,9 @@ public final class client extends RSApplet {
 
     private void loadTitleScreen()
     {
-        aBackground_966 = new Background(titleJagexArchive, "titlebox", 0);
-        aBackground_967 = new Background(titleJagexArchive, "titlebutton", 0);
-        aBackgroundArray1152s = new Background[12];
+        aIndexedImage_966 = new IndexedImage(titleJagexArchive, "titlebox", 0);
+        aIndexedImage_967 = new IndexedImage(titleJagexArchive, "titlebutton", 0);
+        aIndexedImageArray1152s = new IndexedImage[12];
         int j = 0;
         try
         {
@@ -2309,12 +2309,12 @@ public final class client extends RSApplet {
         if(j == 0)
         {
             for(int k = 0; k < 12; k++)
-                aBackgroundArray1152s[k] = new Background(titleJagexArchive, "runes", k);
+                aIndexedImageArray1152s[k] = new IndexedImage(titleJagexArchive, "runes", k);
 
         } else
         {
             for(int l = 0; l < 12; l++)
-                aBackgroundArray1152s[l] = new Background(titleJagexArchive, "runes", 12 + (l & 3));
+                aIndexedImageArray1152s[l] = new IndexedImage(titleJagexArchive, "runes", 12 + (l & 3));
 
         }
         aClass30_Sub2_Sub1_Sub1_1201 = new RgbImage(128, 265);
@@ -2679,7 +2679,7 @@ public final class client extends RSApplet {
         {
             anInt1275 -= anIntArray1190.length;
             int i2 = (int)(Math.random() * 12D);
-            randomizeBackground(aBackgroundArray1152s[i2]);
+            randomizeBackground(aIndexedImageArray1152s[i2]);
         }
         for(int j2 = 1; j2 < c - 1; j2++)
         {
@@ -4327,9 +4327,9 @@ public final class client extends RSApplet {
             menuActionRow++;
         }
         int j = -1;
-        for(int k = 0; k < Model.anInt1687; k++)
+        for(int k = 0; k < Model.resourceCount; k++)
         {
-            int l = Model.anIntArray1688[k];
+            int l = Model.resourceIDTAG[k];
             int i1 = l & 0x7f;
             int j1 = l >> 7 & 0x7f;
             int k1 = l >> 29 & 3;
@@ -6821,14 +6821,14 @@ public final class client extends RSApplet {
 
             }
             drawLoadingText(80, "Unpacking media");
-            invBack = new Background(jagexArchive_2, "invback", 0);
-            chatBack = new Background(jagexArchive_2, "chatback", 0);
-            mapBack = new Background(jagexArchive_2, "mapback", 0);
-            backBase1 = new Background(jagexArchive_2, "backbase1", 0);
-            backBase2 = new Background(jagexArchive_2, "backbase2", 0);
-            backHmid1 = new Background(jagexArchive_2, "backhmid1", 0);
+            invBack = new IndexedImage(jagexArchive_2, "invback", 0);
+            chatBack = new IndexedImage(jagexArchive_2, "chatback", 0);
+            mapBack = new IndexedImage(jagexArchive_2, "mapback", 0);
+            backBase1 = new IndexedImage(jagexArchive_2, "backbase1", 0);
+            backBase2 = new IndexedImage(jagexArchive_2, "backbase2", 0);
+            backHmid1 = new IndexedImage(jagexArchive_2, "backhmid1", 0);
             for(int j3 = 0; j3 < 13; j3++)
-                sideIcons[j3] = new Background(jagexArchive_2, "sideicons", j3);
+                sideIcons[j3] = new IndexedImage(jagexArchive_2, "sideicons", j3);
 
             compass = new RgbImage(jagexArchive_2, "compass", 0);
             mapEdge = new RgbImage(jagexArchive_2, "mapedge", 0);
@@ -6836,7 +6836,7 @@ public final class client extends RSApplet {
             try
             {
                 for(int k3 = 0; k3 < 100; k3++)
-                    mapScenes[k3] = new Background(jagexArchive_2, "mapscene", k3);
+                    mapScenes[k3] = new IndexedImage(jagexArchive_2, "mapscene", k3);
 
             }
             catch(Exception _ex) { }
@@ -6871,29 +6871,29 @@ public final class client extends RSApplet {
             mapDotPlayer = new RgbImage(jagexArchive_2, "mapdots", 2);
             mapDotFriend = new RgbImage(jagexArchive_2, "mapdots", 3);
             mapDotTeam = new RgbImage(jagexArchive_2, "mapdots", 4);
-            scrollBar1 = new Background(jagexArchive_2, "scrollbar", 0);
-            scrollBar2 = new Background(jagexArchive_2, "scrollbar", 1);
-            redStone1 = new Background(jagexArchive_2, "redstone1", 0);
-            redStone2 = new Background(jagexArchive_2, "redstone2", 0);
-            redStone3 = new Background(jagexArchive_2, "redstone3", 0);
-            redStone1_2 = new Background(jagexArchive_2, "redstone1", 0);
+            scrollBar1 = new IndexedImage(jagexArchive_2, "scrollbar", 0);
+            scrollBar2 = new IndexedImage(jagexArchive_2, "scrollbar", 1);
+            redStone1 = new IndexedImage(jagexArchive_2, "redstone1", 0);
+            redStone2 = new IndexedImage(jagexArchive_2, "redstone2", 0);
+            redStone3 = new IndexedImage(jagexArchive_2, "redstone3", 0);
+            redStone1_2 = new IndexedImage(jagexArchive_2, "redstone1", 0);
             redStone1_2.method358();
-            redStone2_2 = new Background(jagexArchive_2, "redstone2", 0);
+            redStone2_2 = new IndexedImage(jagexArchive_2, "redstone2", 0);
             redStone2_2.method358();
-            redStone1_3 = new Background(jagexArchive_2, "redstone1", 0);
+            redStone1_3 = new IndexedImage(jagexArchive_2, "redstone1", 0);
             redStone1_3.method359();
-            redStone2_3 = new Background(jagexArchive_2, "redstone2", 0);
+            redStone2_3 = new IndexedImage(jagexArchive_2, "redstone2", 0);
             redStone2_3.method359();
-            redStone3_2 = new Background(jagexArchive_2, "redstone3", 0);
+            redStone3_2 = new IndexedImage(jagexArchive_2, "redstone3", 0);
             redStone3_2.method359();
-            redStone1_4 = new Background(jagexArchive_2, "redstone1", 0);
+            redStone1_4 = new IndexedImage(jagexArchive_2, "redstone1", 0);
             redStone1_4.method358();
             redStone1_4.method359();
-            redStone2_4 = new Background(jagexArchive_2, "redstone2", 0);
+            redStone2_4 = new IndexedImage(jagexArchive_2, "redstone2", 0);
             redStone2_4.method358();
             redStone2_4.method359();
             for(int l4 = 0; l4 < 2; l4++)
-                modIcons[l4] = new Background(jagexArchive_2, "mod_icons", l4);
+                modIcons[l4] = new IndexedImage(jagexArchive_2, "mod_icons", l4);
 
             RgbImage rgbImage = new RgbImage(jagexArchive_2, "backleft1", 0);
             backLeftIP1 = new RSImageProducer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
@@ -6935,9 +6935,9 @@ public final class client extends RSApplet {
             }
 
             drawLoadingText(83, "Unpacking textures");
-            ThreeDimensionalDrawingArea.method368(jagexArchive_3);
-            ThreeDimensionalDrawingArea.method372(0.80000000000000004D);
-            ThreeDimensionalDrawingArea.method367();
+            ThreeDimensionalDrawingArea.loadTextures(jagexArchive_3);
+            ThreeDimensionalDrawingArea.setBrightness(0.80000000000000004D);
+            ThreeDimensionalDrawingArea.cleanup();
             drawLoadingText(86, "Unpacking config");
             Animation.unpackConfig(jagexArchive);
             ObjectDef.unpackConfig(jagexArchive);
@@ -7006,12 +7006,12 @@ public final class client extends RSApplet {
                 anIntArray1229[l6 - 5] = l7 - j7;
             }
 
-            ThreeDimensionalDrawingArea.method365(479, 96);
-            anIntArray1180 = ThreeDimensionalDrawingArea.anIntArray1472;
-            ThreeDimensionalDrawingArea.method365(190, 261);
-            anIntArray1181 = ThreeDimensionalDrawingArea.anIntArray1472;
-            ThreeDimensionalDrawingArea.method365(512, 334);
-            anIntArray1182 = ThreeDimensionalDrawingArea.anIntArray1472;
+            ThreeDimensionalDrawingArea.initToDimensions(479, 96);
+            anIntArray1180 = ThreeDimensionalDrawingArea.lineOffsets;
+            ThreeDimensionalDrawingArea.initToDimensions(190, 261);
+            anIntArray1181 = ThreeDimensionalDrawingArea.lineOffsets;
+            ThreeDimensionalDrawingArea.initToDimensions(512, 334);
+            anIntArray1182 = ThreeDimensionalDrawingArea.lineOffsets;
             int ai[] = new int[9];
             for(int i8 = 0; i8 < 9; i8++)
             {
@@ -8063,7 +8063,7 @@ public final class client extends RSApplet {
                         model = class9_1.method209(animation.frame1IDS[class9_1.anInt246], animation.frame2IDS[class9_1.anInt246], flag2);
                     }
                     if(model != null)
-                        model.method482(class9_1.anInt271, 0, class9_1.anInt270, 0, i5, l5);
+                        model.rendersingle(class9_1.anInt271, 0, class9_1.anInt270, 0, i5, l5);
                     ThreeDimensionalDrawingArea.xMidPos = k3;
                     ThreeDimensionalDrawingArea.yMidPos = j4;
                 } else
@@ -8099,7 +8099,7 @@ public final class client extends RSApplet {
         DrawingArea.setDrawingArea(l1, i1, k1, j1);
     }
 
-    private void randomizeBackground(Background background)
+    private void randomizeBackground(IndexedImage indexedImage)
     {
         int j = 256;
         for(int k = 0; k < anIntArray1190.length; k++)
@@ -8128,16 +8128,16 @@ public final class client extends RSApplet {
             anIntArray1191 = ai;
         }
 
-        if(background != null)
+        if(indexedImage != null)
         {
             int l1 = 0;
-            for(int j2 = 0; j2 < background.anInt1453; j2++)
+            for(int j2 = 0; j2 < indexedImage.anInt1453; j2++)
             {
-                for(int l2 = 0; l2 < background.anInt1452; l2++)
-                    if(background.aByteArray1450[l1++] != 0)
+                for(int l2 = 0; l2 < indexedImage.anInt1452; l2++)
+                    if(indexedImage.aByteArray1450[l1++] != 0)
                     {
-                        int i3 = l2 + 16 + background.anInt1454;
-                        int j3 = j2 + 16 + background.anInt1455;
+                        int i3 = l2 + 16 + indexedImage.anInt1454;
+                        int j3 = j2 + 16 + indexedImage.anInt1455;
                         int k3 = i3 + (j3 << 7);
                         anIntArray1190[k3] = 0;
                     }
@@ -8750,9 +8750,9 @@ public final class client extends RSApplet {
             }
             catch(Exception _ex) { }
         }
-        aBackground_966 = null;
-        aBackground_967 = null;
-        aBackgroundArray1152s = null;
+        aIndexedImage_966 = null;
+        aIndexedImage_967 = null;
+        aIndexedImageArray1152s = null;
         anIntArray850 = null;
         anIntArray851 = null;
         anIntArray852 = null;
@@ -9544,7 +9544,7 @@ public final class client extends RSApplet {
     {
         resetImageProducers();
         aRSImageProducer_1109.initDrawingArea();
-        aBackground_966.method361(0, 0);
+        aIndexedImage_966.method361(0, 0);
         char c = '\u0168';
         char c1 = '\310';
         if(loginScreenState == 0)
@@ -9556,10 +9556,10 @@ public final class client extends RSApplet {
             i += 30;
             int l = c / 2 - 80;
             int k1 = c1 / 2 + 20;
-            aBackground_967.method361(l - 73, k1 - 20);
+            aIndexedImage_967.method361(l - 73, k1 - 20);
             chatRSFont.method382(0xffffff, l, "New User", k1 + 5, true);
             l = c / 2 + 80;
-            aBackground_967.method361(l - 73, k1 - 20);
+            aIndexedImage_967.method361(l - 73, k1 - 20);
             chatRSFont.method382(0xffffff, l, "Existing User", k1 + 5, true);
         }
         if(loginScreenState == 2)
@@ -9583,10 +9583,10 @@ public final class client extends RSApplet {
             {
                 int i1 = c / 2 - 80;
                 int l1 = c1 / 2 + 50;
-                aBackground_967.method361(i1 - 73, l1 - 20);
+                aIndexedImage_967.method361(i1 - 73, l1 - 20);
                 chatRSFont.method382(0xffffff, i1, "Login", l1 + 5, true);
                 i1 = c / 2 + 80;
-                aBackground_967.method361(i1 - 73, l1 - 20);
+                aIndexedImage_967.method361(i1 - 73, l1 - 20);
                 chatRSFont.method382(0xffffff, i1, "Cancel", l1 + 5, true);
             }
         }
@@ -9604,7 +9604,7 @@ public final class client extends RSApplet {
             k += 15;
             int j1 = c / 2;
             int i2 = c1 / 2 + 50;
-            aBackground_967.method361(j1 - 73, i2 - 20);
+            aIndexedImage_967.method361(j1 - 73, i2 - 20);
             chatRSFont.method382(0xffffff, j1, "Cancel", i2 + 5, true);
         }
         aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
@@ -11581,7 +11581,7 @@ public final class client extends RSApplet {
 
         int k2 = ThreeDimensionalDrawingArea.anInt1481;
         Model.aBoolean1684 = true;
-            Model.anInt1687 = 0;
+            Model.resourceCount = 0;
             Model.anInt1685 = super.mouseX - 4;
             Model.anInt1686 = super.mouseY - 4;
             DrawingArea.setAllPixelsToZero();
@@ -11662,7 +11662,7 @@ public final class client extends RSApplet {
         chatTypes = new int[100];
         chatNames = new String[100];
         chatMessages = new String[100];
-        sideIcons = new Background[13];
+        sideIcons = new IndexedImage[13];
         aBoolean954 = true;
         friendsListAsLongs = new long[200];
         currentSong = -1;
@@ -11704,7 +11704,7 @@ public final class client extends RSApplet {
         aClass19_1056 = new NodeList();
         anIntArray1057 = new int[33];
         aClass9_1059 = new RSInterface();
-        mapScenes = new Background[100];
+        mapScenes = new IndexedImage[100];
         anInt1063 = 0x4d4233;
         anIntArray1065 = new int[7];
         anIntArray1072 = new int[1000];
@@ -11749,7 +11749,7 @@ public final class client extends RSApplet {
         anInt1210 = 2;
         anInt1211 = 78;
         promptInput = "";
-        modIcons = new Background[2];
+        modIcons = new IndexedImage[2];
         tabID = 3;
         inputTaken = false;
         songChanging = true;
@@ -11810,11 +11810,11 @@ public final class client extends RSApplet {
     private int xCameraCurve;
     private int myPrivilege;
     private final int[] currentExp;
-    private Background redStone1_3;
-    private Background redStone2_3;
-    private Background redStone3_2;
-    private Background redStone1_4;
-    private Background redStone2_4;
+    private IndexedImage redStone1_3;
+    private IndexedImage redStone2_3;
+    private IndexedImage redStone3_2;
+    private IndexedImage redStone1_4;
+    private IndexedImage redStone2_4;
     private RgbImage mapFlag;
     private RgbImage mapMarker;
     private boolean aBoolean872;
@@ -11880,7 +11880,7 @@ public final class client extends RSApplet {
     private final String[] chatMessages;
     private int anInt945;
     private SceneGraph sceneGraph;
-    private Background[] sideIcons;
+    private IndexedImage[] sideIcons;
     private int menuScreenArea;
     private int menuOffsetX;
     private int menuOffsetY;
@@ -11900,8 +11900,8 @@ public final class client extends RSApplet {
     private final int[] anIntArray965 = {
         0xffff00, 0xff0000, 65280, 65535, 0xff00ff, 0xffffff
     };
-    private Background aBackground_966;
-    private Background aBackground_967;
+    private IndexedImage aIndexedImage_966;
+    private IndexedImage aIndexedImage_967;
     private final int[] anIntArray968;
     private final int[] anIntArray969;
     final Decompressor[] decompressors;
@@ -11967,12 +11967,12 @@ public final class client extends RSApplet {
     private int anInt1021;
     private int anInt1022;
     private int loadingStage;
-    private Background scrollBar1;
-    private Background scrollBar2;
+    private IndexedImage scrollBar1;
+    private IndexedImage scrollBar2;
     private int anInt1026;
-    private Background backBase1;
-    private Background backBase2;
-    private Background backHmid1;
+    private IndexedImage backBase1;
+    private IndexedImage backBase2;
+    private IndexedImage backHmid1;
     private final int[] anIntArray1030;
     private boolean aBoolean1031;
     private RgbImage[] mapFunctions;
@@ -11999,7 +11999,7 @@ public final class client extends RSApplet {
     private NodeList aClass19_1056;
     private final int[] anIntArray1057;
     private final RSInterface aClass9_1059;
-    private Background[] mapScenes;
+    private IndexedImage[] mapScenes;
     private static int anInt1061;
     private int anInt1062;
     private final int anInt1063;
@@ -12077,16 +12077,16 @@ public final class client extends RSApplet {
     private RgbImage[] aClass30_Sub2_Sub1_Sub1Array1140;
     private boolean aBoolean1141;
     private static int anInt1142;
-    private Background redStone1;
-    private Background redStone2;
-    private Background redStone3;
-    private Background redStone1_2;
-    private Background redStone2_2;
+    private IndexedImage redStone1;
+    private IndexedImage redStone2;
+    private IndexedImage redStone3;
+    private IndexedImage redStone1_2;
+    private IndexedImage redStone2_2;
     private int energy;
     private boolean aBoolean1149;
     private RgbImage[] crosses;
     private boolean musicEnabled;
-    private Background[] aBackgroundArray1152s;
+    private IndexedImage[] aIndexedImageArray1152s;
     private boolean needDrawTabArea;
     private int unreadMessages;
     private static int anInt1155;
@@ -12133,9 +12133,9 @@ public final class client extends RSApplet {
     private Stream stream;
     private int anInt1193;
     private int splitPrivateChat;
-    private Background invBack;
-    private Background mapBack;
-    private Background chatBack;
+    private IndexedImage invBack;
+    private IndexedImage mapBack;
+    private IndexedImage chatBack;
     private String[] menuActionName;
     private RgbImage aClass30_Sub2_Sub1_Sub1_1201;
     private RgbImage aClass30_Sub2_Sub1_Sub1_1202;
@@ -12155,7 +12155,7 @@ public final class client extends RSApplet {
     private int[][][] intGroundArray;
     private long aLong1215;
     private int loginScreenCursorPos;
-    private final Background[] modIcons;
+    private final IndexedImage[] modIcons;
     private long aLong1220;
     private int tabID;
     private int anInt1222;
