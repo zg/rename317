@@ -84,9 +84,9 @@ final class ObjectOnTile extends Animable {
             }
         }
         ObjectDef class46 = ObjectDef.forID(anInt1610);
-        anInt1601 = class46.anInt774;
-        anInt1602 = class46.anInt749;
-        anIntArray1600 = class46.childrenIDs;
+        anInt1601 = class46.configId_1;
+        anInt1602 = class46.configID;
+        anIntArray1600 = class46.configObjectIDs;
     }
 
     private int frame;

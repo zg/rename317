@@ -60,28 +60,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="IndexedImage.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IndexedImage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="243" column="80" selection-start="6878" selection-end="6878" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Class47.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Class47.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Class4.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class4.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="26" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -105,10 +87,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Class29.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Class29.java">
+      <file leaf-file-name="ObjectDef.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ObjectDef.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="44" selection-start="482" selection-end="482" vertical-scroll-proportion="0.6692913">
+            <state line="6" column="36" selection-start="218" selection-end="218" vertical-scroll-proportion="0.17847769">
               <folding />
             </state>
           </provider>
@@ -128,8 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/RgbImage.java" />
-        <option value="$PROJECT_DIR$/AnimationFrame.java" />
         <option value="$PROJECT_DIR$/ModelTransform.java" />
         <option value="$PROJECT_DIR$/RSFont.java" />
         <option value="$PROJECT_DIR$/Class47.java" />
@@ -144,6 +124,8 @@
         <option value="$PROJECT_DIR$/Model.java" />
         <option value="$PROJECT_DIR$/Class33.java" />
         <option value="$PROJECT_DIR$/IndexedImage.java" />
+        <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
+        <option value="$PROJECT_DIR$/ObjectDef.java" />
       </list>
     </option>
   </component>
@@ -182,7 +164,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -203,8 +184,9 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -369,21 +351,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Object4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.10301507" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Object5.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.042713568" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ObjectOnTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="43" selection-start="3039" selection-end="3039" vertical-scroll-proportion="0.062992126" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Entity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="91" column="13" selection-start="2248" selection-end="2248" vertical-scroll-proportion="0.042713568" />
@@ -401,58 +368,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="-0.5728643">
-          <folding />
-        </state>
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="-0.5728643" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ShapedTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="262" column="41" selection-start="7469" selection-end="7469" vertical-scroll-proportion="0.31658292">
-          <folding />
-        </state>
+        <state line="262" column="41" selection-start="7469" selection-end="7469" vertical-scroll-proportion="0.31658292" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ModelHeader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="31" selection-start="535" selection-end="535" vertical-scroll-proportion="0.5829146">
-          <folding />
-        </state>
+        <state line="21" column="31" selection-start="535" selection-end="535" vertical-scroll-proportion="0.5829146" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1466" column="35" selection-start="51382" selection-end="51382" vertical-scroll-proportion="0.53543305">
-          <folding />
-        </state>
+        <state line="1466" column="35" selection-start="51382" selection-end="51382" vertical-scroll-proportion="0.53543305" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IndexedImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="80" selection-start="6878" selection-end="6878" vertical-scroll-proportion="0.0">
+        <state line="243" column="80" selection-start="6878" selection-end="6878" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="26" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class29.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="44" selection-start="482" selection-end="482" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BZ2Entry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="46" selection-start="592" selection-end="592" vertical-scroll-proportion="0.72613066" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BZIP2Decompressor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="52" selection-start="235" selection-end="235" vertical-scroll-proportion="0.044619422">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class47.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="26" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class39.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class33.java">
@@ -462,9 +430,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Class29.java">
+    <entry file="file://$PROJECT_DIR$/ObjectDef.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="44" selection-start="482" selection-end="482" vertical-scroll-proportion="0.6692913">
+        <state line="6" column="36" selection-start="218" selection-end="218" vertical-scroll-proportion="0.17847769">
           <folding />
         </state>
       </provider>
