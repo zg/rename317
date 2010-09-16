@@ -284,9 +284,9 @@ public final class ItemDef
         int i2 = DrawingArea.width;
         int j2 = DrawingArea.height;
         int k2 = DrawingArea.topX;
-        int l2 = DrawingArea.bottomX;
+        int l2 = DrawingArea.viewport_w;
         int i3 = DrawingArea.topY;
-        int j3 = DrawingArea.bottomY;
+        int j3 = DrawingArea.viewport_h;
         ThreeDimensionalDrawingArea.aBoolean1464 = false;
         DrawingArea.initDrawingArea(32, 32, sprite2.myPixels);
         DrawingArea.method336(32, 0, 0, 0, 32);

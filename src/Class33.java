@@ -3,6 +3,7 @@
 // Decompiler options: packimports(3) 
 
 
+//something todo with vertices..
 final class Class33
 {
 

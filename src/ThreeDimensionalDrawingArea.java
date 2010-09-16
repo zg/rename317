@@ -144,7 +144,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             aBooleanArray1475[i] = false;
             for(int i1 = 0; i1 < 4096; i1++)
             {
-                int i2 = ai[i1] = ai1[indexedImage.aByteArray1450[i1]] & 0xf8f8ff;
+                int i2 = ai[i1] = ai1[indexedImage.imgPixels[i1]] & 0xf8f8ff;
                 if(i2 == 0)
                     aBooleanArray1475[i] = true;
                 ai[4096 + i1] = i2 - (i2 >>> 3) & 0xf8f8ff;
@@ -154,19 +154,19 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
         } else
         {
-            if(indexedImage.anInt1452 == 64)
+            if(indexedImage.imgWidth == 64)
             {
                 for(int j1 = 0; j1 < 128; j1++)
                 {
                     for(int j2 = 0; j2 < 128; j2++)
-                        ai[j2 + (j1 << 7)] = ai1[indexedImage.aByteArray1450[(j2 >> 1) + ((j1 >> 1) << 6)]];
+                        ai[j2 + (j1 << 7)] = ai1[indexedImage.imgPixels[(j2 >> 1) + ((j1 >> 1) << 6)]];
 
                 }
 
             } else
             {
                 for(int k1 = 0; k1 < 16384; k1++)
-                    ai[k1] = ai1[indexedImage.aByteArray1450[k1]];
+                    ai[k1] = ai1[indexedImage.imgPixels[k1]];
 
             }
             aBooleanArray1475[i] = false;
@@ -260,7 +260,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         for(int l = 0; l < 50; l++)
             if(textureImages[l] != null)
             {
-                int ai[] = textureImages[l].anIntArray1451;
+                int ai[] = textureImages[l].palette;
                 texturePalettes[l] = new int[ai.length];
                 for(int j1 = 0; j1 < ai.length; j1++)
                 {
@@ -316,12 +316,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         if(i <= j && i <= k)
         {
-            if(i >= DrawingArea.bottomY)
+            if(i >= DrawingArea.viewport_h)
                 return;
-            if(j > DrawingArea.bottomY)
-                j = DrawingArea.bottomY;
-            if(k > DrawingArea.bottomY)
-                k = DrawingArea.bottomY;
+            if(j > DrawingArea.viewport_h)
+                j = DrawingArea.viewport_h;
+            if(k > DrawingArea.viewport_h)
+                k = DrawingArea.viewport_h;
             if(j < k)
             {
                 j1 = l <<= 16;
@@ -454,12 +454,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         if(j <= k)
         {
-            if(j >= DrawingArea.bottomY)
+            if(j >= DrawingArea.viewport_h)
                 return;
-            if(k > DrawingArea.bottomY)
-                k = DrawingArea.bottomY;
-            if(i > DrawingArea.bottomY)
-                i = DrawingArea.bottomY;
+            if(k > DrawingArea.viewport_h)
+                k = DrawingArea.viewport_h;
+            if(i > DrawingArea.viewport_h)
+                i = DrawingArea.viewport_h;
             if(k < i)
             {
                 l = i1 <<= 16;
@@ -590,12 +590,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             return;
         }
-        if(k >= DrawingArea.bottomY)
+        if(k >= DrawingArea.viewport_h)
             return;
-        if(i > DrawingArea.bottomY)
-            i = DrawingArea.bottomY;
-        if(j > DrawingArea.bottomY)
-            j = DrawingArea.bottomY;
+        if(i > DrawingArea.viewport_h)
+            i = DrawingArea.viewport_h;
+        if(j > DrawingArea.viewport_h)
+            j = DrawingArea.viewport_h;
         if(i < j)
         {
             i1 = j1 <<= 16;
@@ -858,12 +858,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             j2 = (l - j1 << 16) / (i - k);
         if(i <= j && i <= k)
         {
-            if(i >= DrawingArea.bottomY)
+            if(i >= DrawingArea.viewport_h)
                 return;
-            if(j > DrawingArea.bottomY)
-                j = DrawingArea.bottomY;
-            if(k > DrawingArea.bottomY)
-                k = DrawingArea.bottomY;
+            if(j > DrawingArea.viewport_h)
+                j = DrawingArea.viewport_h;
+            if(k > DrawingArea.viewport_h)
+                k = DrawingArea.viewport_h;
             if(j < k)
             {
                 j1 = l <<= 16;
@@ -970,12 +970,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         if(j <= k)
         {
-            if(j >= DrawingArea.bottomY)
+            if(j >= DrawingArea.viewport_h)
                 return;
-            if(k > DrawingArea.bottomY)
-                k = DrawingArea.bottomY;
-            if(i > DrawingArea.bottomY)
-                i = DrawingArea.bottomY;
+            if(k > DrawingArea.viewport_h)
+                k = DrawingArea.viewport_h;
+            if(i > DrawingArea.viewport_h)
+                i = DrawingArea.viewport_h;
             if(k < i)
             {
                 l = i1 <<= 16;
@@ -1080,12 +1080,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             return;
         }
-        if(k >= DrawingArea.bottomY)
+        if(k >= DrawingArea.viewport_h)
             return;
-        if(i > DrawingArea.bottomY)
-            i = DrawingArea.bottomY;
-        if(j > DrawingArea.bottomY)
-            j = DrawingArea.bottomY;
+        if(i > DrawingArea.viewport_h)
+            i = DrawingArea.viewport_h;
+        if(j > DrawingArea.viewport_h)
+            j = DrawingArea.viewport_h;
         if(i < j)
         {
             i1 = j1 <<= 16;
@@ -1277,12 +1277,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         if(i <= j && i <= k)
         {
-            if(i >= DrawingArea.bottomY)
+            if(i >= DrawingArea.viewport_h)
                 return;
-            if(j > DrawingArea.bottomY)
-                j = DrawingArea.bottomY;
-            if(k > DrawingArea.bottomY)
-                k = DrawingArea.bottomY;
+            if(j > DrawingArea.viewport_h)
+                j = DrawingArea.viewport_h;
+            if(k > DrawingArea.viewport_h)
+                k = DrawingArea.viewport_h;
             if(j < k)
             {
                 j1 = l <<= 16;
@@ -1451,12 +1451,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         if(j <= k)
         {
-            if(j >= DrawingArea.bottomY)
+            if(j >= DrawingArea.viewport_h)
                 return;
-            if(k > DrawingArea.bottomY)
-                k = DrawingArea.bottomY;
-            if(i > DrawingArea.bottomY)
-                i = DrawingArea.bottomY;
+            if(k > DrawingArea.viewport_h)
+                k = DrawingArea.viewport_h;
+            if(i > DrawingArea.viewport_h)
+                i = DrawingArea.viewport_h;
             if(k < i)
             {
                 l = i1 <<= 16;
@@ -1623,12 +1623,12 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
             return;
         }
-        if(k >= DrawingArea.bottomY)
+        if(k >= DrawingArea.viewport_h)
             return;
-        if(i > DrawingArea.bottomY)
-            i = DrawingArea.bottomY;
-        if(j > DrawingArea.bottomY)
-            j = DrawingArea.bottomY;
+        if(i > DrawingArea.viewport_h)
+            i = DrawingArea.viewport_h;
+        if(j > DrawingArea.viewport_h)
+            j = DrawingArea.viewport_h;
         if(i < j)
         {
             i1 = j1 <<= 16;
