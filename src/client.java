@@ -259,7 +259,7 @@ public final class client extends RSApplet {
                 s = TextClass.fixName(myUsername);
             RSFont.drawTextHLeftVMid(0, s + ":", 90, 4);
             RSFont.drawTextHLeftVMid(255, inputString + "*", 90, 6 + RSFont.getTextWidth(s + ": "));
-            DrawingArea.drawHLine(77, 0, 479, 0);
+            DrawingArea.drawHLine(0, 77, 479, 0);
         }
         if(menuOpen && menuScreenArea == 2)
             drawMenu();
@@ -611,7 +611,7 @@ public final class client extends RSApplet {
 
         }
         System.gc();
-        ThreeDimensionalDrawingArea.cleanup();
+        ThreeDimensionalDrawingArea.initialize_texture_array_pools(20);
         onDemandFetcher.method566();
         int k = (anInt1069 - 6) / 8 - 1;
         int j1 = (anInt1069 + 6) / 8 + 1;
@@ -1052,20 +1052,20 @@ public final class client extends RSApplet {
     {
         scrollBar1.drawImage(i1, l);
         scrollBar2.drawImage(i1, (l + j) - 16);
-        DrawingArea.method336(j - 32, l + 16, i1, anInt1002, 16);
+        DrawingArea.fillRect(i1, l + 16, 16, j - 32, anInt1002);
         int k1 = ((j - 32) * j) / j1;
         if(k1 < 8)
             k1 = 8;
         int l1 = ((j - 32 - k1) * k) / (j1 - j);
-        DrawingArea.method336(k1, l + 16 + l1, i1, anInt1063, 16);
-        DrawingArea.method341(l + 16 + l1, anInt902, k1, i1);
-        DrawingArea.method341(l + 16 + l1, anInt902, k1, i1 + 1);
-        DrawingArea.drawHLine(l + 16 + l1, anInt902, 16, i1);
-        DrawingArea.drawHLine(l + 17 + l1, anInt902, 16, i1);
-        DrawingArea.method341(l + 16 + l1, anInt927, k1, i1 + 15);
-        DrawingArea.method341(l + 17 + l1, anInt927, k1 - 1, i1 + 14);
-        DrawingArea.drawHLine(l + 15 + l1 + k1, anInt927, 16, i1);
-        DrawingArea.drawHLine(l + 14 + l1 + k1, anInt927, 15, i1 + 1);
+        DrawingArea.fillRect(i1, l + 16 + l1, 16, k1, anInt1063);
+        DrawingArea.drawVLine(i1, l + 16 + l1, k1, anInt902);
+        DrawingArea.drawVLine(i1 + 1, l + 16 + l1, k1, anInt902);
+        DrawingArea.drawHLine(i1, l + 16 + l1, 16, anInt902);
+        DrawingArea.drawHLine(i1, l + 17 + l1, 16, anInt902);
+        DrawingArea.drawVLine(i1 + 15, l + 16 + l1, k1, anInt927);
+        DrawingArea.drawVLine(i1 + 14, l + 17 + l1, k1 - 1, anInt927);
+        DrawingArea.drawHLine(i1, l + 15 + l1 + k1, 16, anInt927);
+        DrawingArea.drawHLine(i1 + 1, l + 14 + l1 + k1, 15, anInt927);
     }
 
     private void updateNPCs(Stream stream, int i)
@@ -1367,8 +1367,8 @@ public final class client extends RSApplet {
                     int i1 = (((Entity) (obj)).currentHealth * 30) / ((Entity) (obj)).maxHealth;
                     if(i1 > 30)
                         i1 = 30;
-                    DrawingArea.method336(5, spriteDrawY - 3, spriteDrawX - 15, 65280, i1);
-                    DrawingArea.method336(5, spriteDrawY - 3, (spriteDrawX - 15) + i1, 0xff0000, 30 - i1);
+                    DrawingArea.fillRect(spriteDrawX - 15, spriteDrawY - 3, i1, 5, 65280);
+                    DrawingArea.fillRect((spriteDrawX - 15) + i1, spriteDrawY - 3, 30 - i1, 5, 0xff0000);
                 }
             }catch(Exception e){ }
             }
@@ -1764,9 +1764,9 @@ public final class client extends RSApplet {
         int k = menuWidth;
         int l = anInt952;
         int i1 = 0x5d5447;
-        DrawingArea.method336(l, j, i, i1, k);
-        DrawingArea.method336(16, j + 1, i + 1, 0, k - 2);
-        DrawingArea.fillPixels(i + 1, k - 2, l - 19, 0, j + 18);
+        DrawingArea.fillRect(i, j, k, l, i1);
+        DrawingArea.fillRect(i + 1, j + 1, k - 2, 16, 0);
+        DrawingArea.drawRect(i + 1, j + 18, k - 2, l - 19, 0);
         chatRSFont.drawTextHLeftVMid(i1, "Choose Option", j + 14, i + 3);
         int j1 = super.mouseX;
         int k1 = super.mouseY;
@@ -3114,23 +3114,23 @@ public final class client extends RSApplet {
         aRSImageProducer_1124 = null;
         aRSImageProducer_1125 = null;
         aRSImageProducer_1110 = new RSImageProducer(128, 265, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1111 = new RSImageProducer(128, 265, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1107 = new RSImageProducer(509, 171, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1108 = new RSImageProducer(360, 132, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1109 = new RSImageProducer(360, 200, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1112 = new RSImageProducer(202, 238, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1113 = new RSImageProducer(203, 238, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1114 = new RSImageProducer(74, 94, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1115 = new RSImageProducer(75, 94, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         if(titleJagexArchive != null)
         {
             drawLogo();
@@ -3155,10 +3155,10 @@ public final class client extends RSApplet {
         byte byte1 = 20;
         chatRSFont.drawText(0xffffff, "RuneScape is loading - please wait...", c1 / 2 - 26 - byte1, c / 2);
         int j = c1 / 2 - 18 - byte1;
-        DrawingArea.fillPixels(c / 2 - 152, 304, 34, 0x8c1111, j);
-        DrawingArea.fillPixels(c / 2 - 151, 302, 32, 0, j + 1);
-        DrawingArea.method336(30, j + 2, c / 2 - 150, 0x8c1111, i * 3);
-        DrawingArea.method336(30, j + 2, (c / 2 - 150) + i * 3, 0, 300 - i * 3);
+        DrawingArea.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
+        DrawingArea.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
+        DrawingArea.fillRect(c / 2 - 150, j + 2, i * 3, 30, 0x8c1111);
+        DrawingArea.fillRect((c / 2 - 150) + i * 3, j + 2, 300 - i * 3, 30, 0);
         chatRSFont.drawText(0xffffff, s, (c1 / 2 + 5) - byte1, c / 2);
         aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if(welcomeScreenRaised)
@@ -5568,11 +5568,11 @@ public final class client extends RSApplet {
         aRSImageProducer_1115 = null;
         aRSImageProducer_1166 = new RSImageProducer(479, 96, getGameComponent());
         aRSImageProducer_1164 = new RSImageProducer(172, 156, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         mapBack.drawImage(0, 0);
         aRSImageProducer_1163 = new RSImageProducer(190, 261, getGameComponent());
         aRSImageProducer_1165 = new RSImageProducer(512, 334, getGameComponent());
-        DrawingArea.setAllPixelsToZero();
+        DrawingArea.reset_image();
         aRSImageProducer_1123 = new RSImageProducer(496, 50, getGameComponent());
         aRSImageProducer_1124 = new RSImageProducer(269, 37, getGameComponent());
         aRSImageProducer_1125 = new RSImageProducer(249, 45, getGameComponent());
@@ -6937,7 +6937,7 @@ public final class client extends RSApplet {
             drawLoadingText(83, "Unpacking textures");
             ThreeDimensionalDrawingArea.loadTextures(jagexArchive_3);
             ThreeDimensionalDrawingArea.setBrightness(0.80000000000000004D);
-            ThreeDimensionalDrawingArea.cleanup();
+            ThreeDimensionalDrawingArea.initialize_texture_array_pools(20);
             drawLoadingText(86, "Unpacking config");
             Animation.unpackConfig(jagexArchive);
             ObjectDef.unpackConfig(jagexArchive);
@@ -7929,14 +7929,14 @@ public final class client extends RSApplet {
                     if(class9_1.aByte254 == 0)
                     {
                         if(class9_1.aBoolean227)
-                            DrawingArea.method336(class9_1.height, l2, k2, j3, class9_1.width);
+                            DrawingArea.fillRect(k2, l2, class9_1.width, class9_1.height, j3);
                         else
-                            DrawingArea.fillPixels(k2, class9_1.width, class9_1.height, j3, l2);
+                            DrawingArea.drawRect(k2, l2, class9_1.width, class9_1.height, j3);
                     } else
                     if(class9_1.aBoolean227)
-                        DrawingArea.method335(j3, l2, class9_1.width, class9_1.height, 256 - (class9_1.aByte254 & 0xff), k2);
+                        DrawingArea.fillRect(k2, l2, class9_1.width, class9_1.height, j3, 256 - (class9_1.aByte254 & 0xff));
                     else
-                        DrawingArea.method338(l2, class9_1.height, 256 - (class9_1.aByte254 & 0xff), j3, class9_1.width, k2);
+                        DrawingArea.drawRect(k2, l2, class9_1.width, class9_1.height, j3, 256 - (class9_1.aByte254 & 0xff));
                 } else
                 if(class9_1.type == 4)
                 {
@@ -9019,9 +9019,9 @@ public final class client extends RSApplet {
                     int j2 = ai[l++];
                     VarBit varBit = VarBit.cache[j2];
                     int l3 = varBit.configId;
-                    int i4 = varBit.rightShiftCount;
-                    int j4 = varBit.bit;
-                    int k4 = powersOfTwo[j4 - i4];
+                    int i4 = varBit.least_significant_bit;
+                    int j4 = varBit.most_significant_bit;
+                    int k4 = BITFIELD_MAX_VALUE[j4 - i4];
                     k1 = variousSettings[l3] >> i4 & k4;
                 }
                 if(j1 == 15)
@@ -9201,7 +9201,7 @@ public final class client extends RSApplet {
             int l4 = (destY * 4 + 2) - myPlayer.bound_extent_y / 32;
             markMinimap(mapFlag, j2, l4);
         }
-        DrawingArea.method336(3, 78, 97, 0xffffff, 3);
+        DrawingArea.fillRect(97, 78, 3, 3, 0xffffff);
         aRSImageProducer_1165.initDrawingArea();
     }
 
@@ -11584,7 +11584,7 @@ public final class client extends RSApplet {
             Model.resourceCount = 0;
             Model.anInt1685 = super.mouseX - 4;
             Model.anInt1686 = super.mouseY - 4;
-            DrawingArea.setAllPixelsToZero();
+            DrawingArea.reset_image();
 //xxx disables graphics            if(graphicsEnabled){
             sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
             sceneGraph.clearObj5Cache();
@@ -12166,7 +12166,7 @@ public final class client extends RSApplet {
     private boolean songChanging;
     private final int[] anIntArray1229;
     private TileSetting[] aTileSettingArray1230;
-    public static int powersOfTwo[];
+    public static int BITFIELD_MAX_VALUE[];
     private boolean aBoolean1233;
     private int[] anIntArray1234;
     private int[] anIntArray1235;
@@ -12234,11 +12234,11 @@ public final class client extends RSApplet {
             anIntArray1019[j] = i / 4;
         }
 
-        powersOfTwo = new int[32];
+        BITFIELD_MAX_VALUE = new int[32];
         i = 2;
         for(int k = 0; k < 32; k++)
         {
-            powersOfTwo[k] = i - 1;
+            BITFIELD_MAX_VALUE[k] = i - 1;
             i += i;
         }
 

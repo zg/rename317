@@ -41,7 +41,7 @@ public class DrawingArea extends NodeSub {
         viewport_c_y = viewport_h / 2;
     }
 
-    public static void setAllPixelsToZero()
+    public static void reset_image()
     {
         int i = width * height;
         for(int j = 0; j < i; j++)
@@ -49,175 +49,175 @@ public class DrawingArea extends NodeSub {
 
     }
 
-    public static void method335(int i, int j, int k, int l, int i1, int k1)
+    public static void fillRect(int x, int y, int w, int h, int colour, int alpha)
     {
-        if(k1 < topX)
+        if(x < topX)
         {
-            k -= topX - k1;
-            k1 = topX;
+            w -= topX - x;
+            x = topX;
         }
-        if(j < topY)
+        if(y < topY)
         {
-            l -= topY - j;
-            j = topY;
+            h -= topY - y;
+            y = topY;
         }
-        if(k1 + k > viewport_w)
-            k = viewport_w - k1;
-        if(j + l > viewport_h)
-            l = viewport_h - j;
-        int l1 = 256 - i1;
-        int i2 = (i >> 16 & 0xff) * i1;
-        int j2 = (i >> 8 & 0xff) * i1;
-        int k2 = (i & 0xff) * i1;
-        int k3 = width - k;
-        int l3 = k1 + j * width;
-        for(int i4 = 0; i4 < l; i4++)
+        if(x + w > viewport_w)
+            w = viewport_w - x;
+        if(y + h > viewport_h)
+            h = viewport_h - y;
+        int dest_intensity = 256 - alpha;
+        int src_red = (colour >> 16 & 0xff) * alpha;
+        int src_green = (colour >> 8 & 0xff) * alpha;
+        int src_blue = (colour & 0xff) * alpha;
+        int line_offset = width - w;
+        int ptr = x + y * width;
+        for(int _y = 0; _y < h; _y++)
         {
-            for(int j4 = -k; j4 < 0; j4++)
+            for(int _x = -w; _x < 0; _x++)
             {
-                int l2 = (pixels[l3] >> 16 & 0xff) * l1;
-                int i3 = (pixels[l3] >> 8 & 0xff) * l1;
-                int j3 = (pixels[l3] & 0xff) * l1;
-                int k4 = ((i2 + l2 >> 8) << 16) + ((j2 + i3 >> 8) << 8) + (k2 + j3 >> 8);
-                pixels[l3++] = k4;
+                int dest_red = (pixels[ptr] >> 16 & 0xff) * dest_intensity;
+                int dest_green = (pixels[ptr] >> 8 & 0xff) * dest_intensity;
+                int dest_blue = (pixels[ptr] & 0xff) * dest_intensity;
+                int result_rgb = ((src_red + dest_red >> 8) << 16) + ((src_green + dest_green >> 8) << 8) + (src_blue + dest_blue >> 8);
+                pixels[ptr++] = result_rgb;
             }
 
-            l3 += k3;
+            ptr += line_offset;
         }
     }
 
-    public static void method336(int i, int j, int k, int l, int i1)
+    public static void fillRect(int x, int y, int w, int h, int colour)
     {
-        if(k < topX)
+        if(x < topX)
         {
-            i1 -= topX - k;
-            k = topX;
+            w -= topX - x;
+            x = topX;
         }
-        if(j < topY)
+        if(y < topY)
         {
-            i -= topY - j;
-            j = topY;
+            h -= topY - y;
+            y = topY;
         }
-        if(k + i1 > viewport_w)
-            i1 = viewport_w - k;
-        if(j + i > viewport_h)
-            i = viewport_h - j;
-        int k1 = width - i1;
-        int l1 = k + j * width;
-        for(int i2 = -i; i2 < 0; i2++)
+        if(x + w > viewport_w)
+            w = viewport_w - x;
+        if(y + h > viewport_h)
+            h = viewport_h - y;
+        int line_offset = width - w;
+        int ptr = x + y * width;
+        for(int _y = -h; _y < 0; _y++)
         {
-            for(int j2 = -i1; j2 < 0; j2++)
-                pixels[l1++] = l;
+            for(int _x = -w; _x < 0; _x++)
+                pixels[ptr++] = colour;
 
-            l1 += k1;
+            ptr += line_offset;
         }
 
     }
 
-    public static void fillPixels(int i, int j, int k, int l, int i1)
+    public static void drawRect(int x, int y, int w, int h, int colour)
     {
-        drawHLine(i1, l, j, i);
-        drawHLine((i1 + k) - 1, l, j, i);
-        method341(i1, l, k, i);
-        method341(i1, l, k, (i + j) - 1);
+        drawHLine(x, y, w, colour);
+        drawHLine(x, (y + h) - 1, w, colour);
+        drawVLine(x, y, h, colour);
+        drawVLine((x + w) - 1, y, h, colour);
     }
 
-    public static void method338(int i, int j, int k, int l, int i1, int j1)
+    public static void drawRect(int x, int y, int w, int h, int colour, int alpha)
     {
-        method340(l, i1, i, k, j1);
-        method340(l, i1, (i + j) - 1, k, j1);
-        if(j >= 3)
+        drawHLine(x, y, w, colour, alpha);
+        drawHLine(x, (y + h) - 1, w, colour, alpha);
+        if(h >= 3)
         {
-            method342(l, j1, k, i + 1, j - 2);
-            method342(l, (j1 + i1) - 1, k, i + 1, j - 2);
+            drawVLine(x, y + 1, h - 2, colour, alpha);
+            drawVLine((x + w) - 1, y + 1, h - 2, colour, alpha);
         }
     }
 
-    public static void drawHLine(int i, int j, int k, int l)
+    public static void drawHLine(int x, int y, int w, int colour)
     {
-        if(i < topY || i >= viewport_h)
+        if(y < topY || y >= viewport_h)
             return;
-        if(l < topX)
+        if(x < topX)
         {
-            k -= topX - l;
-            l = topX;
+            w -= topX - x;
+            x = topX;
         }
-        if(l + k > viewport_w)
-            k = viewport_w - l;
-        int i1 = l + i * width;
-        for(int j1 = 0; j1 < k; j1++)
-            pixels[i1 + j1] = j;
+        if(x + w > viewport_w)
+            w = viewport_w - x;
+        int ptr = x + y * width;
+        for(int _x = 0; _x < w; _x++)
+            pixels[ptr + _x] = colour;
 
     }
 
-    private static void method340(int i, int j, int k, int l, int i1)
+    public static void drawHLine(int x, int y, int w, int colour, int alpha)
     {
-        if(k < topY || k >= viewport_h)
+        if(y < topY || y >= viewport_h)
             return;
-        if(i1 < topX)
+        if(x < topX)
         {
-            j -= topX - i1;
-            i1 = topX;
+            w -= topX - x;
+            x = topX;
         }
-        if(i1 + j > viewport_w)
-            j = viewport_w - i1;
-        int j1 = 256 - l;
-        int k1 = (i >> 16 & 0xff) * l;
-        int l1 = (i >> 8 & 0xff) * l;
-        int i2 = (i & 0xff) * l;
-        int i3 = i1 + k * width;
-        for(int j3 = 0; j3 < j; j3++)
+        if(x + w > viewport_w)
+            w = viewport_w - x;
+        int dest_intensity = 256 - alpha;
+        int src_red = (colour >> 16 & 0xff) * alpha;
+        int src_green = (colour >> 8 & 0xff) * alpha;
+        int src_blue = (colour & 0xff) * alpha;
+        int ptr = x + y * width;
+        for(int _x = 0; _x < w; _x++)
         {
-            int j2 = (pixels[i3] >> 16 & 0xff) * j1;
-            int k2 = (pixels[i3] >> 8 & 0xff) * j1;
-            int l2 = (pixels[i3] & 0xff) * j1;
-            int k3 = ((k1 + j2 >> 8) << 16) + ((l1 + k2 >> 8) << 8) + (i2 + l2 >> 8);
-            pixels[i3++] = k3;
+            int dest_red = (pixels[ptr] >> 16 & 0xff) * dest_intensity;
+            int dest_green = (pixels[ptr] >> 8 & 0xff) * dest_intensity;
+            int dest_blue = (pixels[ptr] & 0xff) * dest_intensity;
+            int result_rgb = ((src_red + dest_red >> 8) << 16) + ((src_green + dest_green >> 8) << 8) + (src_blue + dest_blue >> 8);
+            pixels[ptr++] = result_rgb;
         }
 
     }
 
-    public static void method341(int i, int j, int k, int l)
+    public static void drawVLine(int x, int y, int h, int colour)
     {
-        if(l < topX || l >= viewport_w)
+        if(x < topX || x >= viewport_w)
             return;
-        if(i < topY)
+        if(y < topY)
         {
-            k -= topY - i;
-            i = topY;
+            h -= topY - y;
+            y = topY;
         }
-        if(i + k > viewport_h)
-            k = viewport_h - i;
-        int j1 = l + i * width;
-        for(int k1 = 0; k1 < k; k1++)
-            pixels[j1 + k1 * width] = j;
+        if(y + h > viewport_h)
+            h = viewport_h - y;
+        int ptr = x + y * width;
+        for(int _y = 0; _y < h; _y++)
+            pixels[ptr + _y * width] = colour;
 
     }
 
-    private static void method342(int i, int j, int k, int l, int i1)
+    public static void drawVLine(int x, int y, int h, int colour, int alpha)
     {
-        if(j < topX || j >= viewport_w)
+        if(x < topX || x >= viewport_w)
             return;
-        if(l < topY)
+        if(y < topY)
         {
-            i1 -= topY - l;
-            l = topY;
+            h -= topY - y;
+            y = topY;
         }
-        if(l + i1 > viewport_h)
-            i1 = viewport_h - l;
-        int j1 = 256 - k;
-        int k1 = (i >> 16 & 0xff) * k;
-        int l1 = (i >> 8 & 0xff) * k;
-        int i2 = (i & 0xff) * k;
-        int i3 = j + l * width;
-        for(int j3 = 0; j3 < i1; j3++)
+        if(y + h > viewport_h)
+            h = viewport_h - y;
+        int dest_intensity = 256 - alpha;
+        int src_red = (colour >> 16 & 0xff) * alpha;
+        int src_green = (colour >> 8 & 0xff) * alpha;
+        int src_blue = (colour & 0xff) * alpha;
+        int ptr = x + y * width;
+        for(int _y = 0; _y < h; _y++)
         {
-            int j2 = (pixels[i3] >> 16 & 0xff) * j1;
-            int k2 = (pixels[i3] >> 8 & 0xff) * j1;
-            int l2 = (pixels[i3] & 0xff) * j1;
-            int k3 = ((k1 + j2 >> 8) << 16) + ((l1 + k2 >> 8) << 8) + (i2 + l2 >> 8);
-            pixels[i3] = k3;
-            i3 += width;
+            int dest_red = (pixels[ptr] >> 16 & 0xff) * dest_intensity;
+            int dest_green = (pixels[ptr] >> 8 & 0xff) * dest_intensity;
+            int dest_blue = (pixels[ptr] & 0xff) * dest_intensity;
+            int result_rgb = ((src_red + dest_red >> 8) << 16) + ((src_green + dest_green >> 8) << 8) + (src_blue + dest_blue >> 8);
+            pixels[ptr] = result_rgb;
+            ptr += width;
         }
 
     }
