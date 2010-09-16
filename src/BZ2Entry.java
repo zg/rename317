@@ -10,9 +10,9 @@ final class BZ2Entry
     {
         anIntArray583 = new int[256];
         anIntArray585 = new int[257];
-        aBooleanArray589 = new boolean[256];
+        inUse = new boolean[256];
         aBooleanArray590 = new boolean[16];
-        aByteArray591 = new byte[256];
+        seqToUnseq = new byte[256];
         aByteArray592 = new byte[4096];
         anIntArray593 = new int[16];
         aByteArray594 = new byte[18002];
@@ -48,10 +48,10 @@ final class BZ2Entry
     int anInt584;
     final int[] anIntArray585;
     public static int anIntArray587[];
-    int anInt588;
-    final boolean[] aBooleanArray589;
+    int nInUse;
+    final boolean[] inUse;
     final boolean[] aBooleanArray590;
-    final byte[] aByteArray591;
+    final byte[] seqToUnseq;
     final byte[] aByteArray592;
     final int[] anIntArray593;
     final byte[] aByteArray594;

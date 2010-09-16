@@ -698,7 +698,7 @@ public final class client extends RSApplet {
                 if(i3 != 0)
                 {
                     i3 = i3 >> 14 & 0x7fff;
-                    int j3 = ObjectDef.forID(i3).anInt746;
+                    int j3 = ObjectDef.forID(i3).mapFunctionID;
                     if(j3 >= 0)
                     {
                         int k3 = k2;
@@ -2154,14 +2154,14 @@ public final class client extends RSApplet {
             int k4 = 24624 + l * 4 + (103 - i) * 512 * 4;
             int i5 = k1 >> 14 & 0x7fff;
             ObjectDef class46_2 = ObjectDef.forID(i5);
-            if(class46_2.anInt758 != -1)
+            if(class46_2.mapSceneID != -1)
             {
-                IndexedImage indexedImage_2 = mapScenes[class46_2.anInt758];
+                IndexedImage indexedImage_2 = mapScenes[class46_2.mapSceneID];
                 if(indexedImage_2 != null)
                 {
-                    int i6 = (class46_2.anInt744 * 4 - indexedImage_2.imgWidth) / 2;
-                    int j6 = (class46_2.anInt761 * 4 - indexedImage_2.imgHeight) / 2;
-                    indexedImage_2.drawImage(48 + l * 4 + i6, 48 + (104 - i - class46_2.anInt761) * 4 + j6);
+                    int i6 = (class46_2.sizeX * 4 - indexedImage_2.imgWidth) / 2;
+                    int j6 = (class46_2.sizeY * 4 - indexedImage_2.imgHeight) / 2;
+                    indexedImage_2.drawImage(48 + l * 4 + i6, 48 + (104 - i - class46_2.sizeY) * 4 + j6);
                 }
             } else
             {
@@ -2245,14 +2245,14 @@ public final class client extends RSApplet {
             int j3 = i2 & 0x1f;
             int l3 = k1 >> 14 & 0x7fff;
             ObjectDef class46_1 = ObjectDef.forID(l3);
-            if(class46_1.anInt758 != -1)
+            if(class46_1.mapSceneID != -1)
             {
-                IndexedImage indexedImage_1 = mapScenes[class46_1.anInt758];
+                IndexedImage indexedImage_1 = mapScenes[class46_1.mapSceneID];
                 if(indexedImage_1 != null)
                 {
-                    int j5 = (class46_1.anInt744 * 4 - indexedImage_1.imgWidth) / 2;
-                    int k5 = (class46_1.anInt761 * 4 - indexedImage_1.imgHeight) / 2;
-                    indexedImage_1.drawImage(48 + l * 4 + j5, 48 + (104 - i - class46_1.anInt761) * 4 + k5);
+                    int j5 = (class46_1.sizeX * 4 - indexedImage_1.imgWidth) / 2;
+                    int k5 = (class46_1.sizeY * 4 - indexedImage_1.imgHeight) / 2;
+                    indexedImage_1.drawImage(48 + l * 4 + j5, 48 + (104 - i - class46_1.sizeY) * 4 + k5);
                 }
             } else
             if(j3 == 9)
@@ -2282,14 +2282,14 @@ public final class client extends RSApplet {
         {
             int j2 = k1 >> 14 & 0x7fff;
             ObjectDef class46 = ObjectDef.forID(j2);
-            if(class46.anInt758 != -1)
+            if(class46.mapSceneID != -1)
             {
-                IndexedImage indexedImage = mapScenes[class46.anInt758];
+                IndexedImage indexedImage = mapScenes[class46.mapSceneID];
                 if(indexedImage != null)
                 {
-                    int i4 = (class46.anInt744 * 4 - indexedImage.imgWidth) / 2;
-                    int j4 = (class46.anInt761 * 4 - indexedImage.imgHeight) / 2;
-                    indexedImage.drawImage(48 + l * 4 + i4, 48 + (104 - i - class46.anInt761) * 4 + j4);
+                    int i4 = (class46.sizeX * 4 - indexedImage.imgWidth) / 2;
+                    int j4 = (class46.sizeY * 4 - indexedImage.imgHeight) / 2;
+                    indexedImage.drawImage(48 + l * 4 + i4, 48 + (104 - i - class46.sizeY) * 4 + j4);
                 }
             }
         }
@@ -3232,12 +3232,12 @@ public final class client extends RSApplet {
             int j2;
             if(l1 == 0 || l1 == 2)
             {
-                i2 = class46.anInt744;
-                j2 = class46.anInt761;
+                i2 = class46.sizeX;
+                j2 = class46.sizeY;
             } else
             {
-                i2 = class46.anInt761;
-                j2 = class46.anInt744;
+                i2 = class46.sizeY;
+                j2 = class46.sizeX;
             }
             int k2 = class46.anInt768;
             if(l1 != 0)
@@ -4340,7 +4340,7 @@ public final class client extends RSApplet {
             if(k1 == 2 && sceneGraph.getIDTAGForXYZ(plane, i1, j1, l) >= 0)
             {
                 ObjectDef class46 = ObjectDef.forID(l1);
-                if(class46.childrenIDs != null)
+                if(class46.configObjectIDs != null)
                     class46 = class46.method580();
                 if(class46 == null)
                     continue;
@@ -9842,12 +9842,12 @@ public final class client extends RSApplet {
                     player.anInt1707 = l14 + loopCycle;
                     player.anInt1708 = k17 + loopCycle;
                     player.aModel_1714 = model;
-                    int i23 = class46.anInt744;
-                    int j23 = class46.anInt761;
+                    int i23 = class46.sizeX;
+                    int j23 = class46.sizeY;
                     if(i20 == 1 || i20 == 3)
                     {
-                        i23 = class46.anInt761;
-                        j23 = class46.anInt744;
+                        i23 = class46.sizeY;
+                        j23 = class46.sizeX;
                     }
                     player.anInt1711 = k4 * 128 + i23 * 64;
                     player.anInt1713 = j7 * 128 + j23 * 64;
@@ -10181,7 +10181,7 @@ public final class client extends RSApplet {
                 {
                     sceneGraph.method291(i1, j, i, (byte)-119);
                     ObjectDef class46 = ObjectDef.forID(j2);
-                    if(class46.aBoolean767)
+                    if(class46.isUnwalkable)
                         aTileSettingArray1230[j].method215(l2, k2, class46.aBoolean757, i1, i);
                 }
                 if(j1 == 1)
@@ -10190,16 +10190,16 @@ public final class client extends RSApplet {
                 {
                     sceneGraph.method293(j, i1, i);
                     ObjectDef class46_1 = ObjectDef.forID(j2);
-                    if(i1 + class46_1.anInt744 > 103 || i + class46_1.anInt744 > 103 || i1 + class46_1.anInt761 > 103 || i + class46_1.anInt761 > 103)
+                    if(i1 + class46_1.sizeX > 103 || i + class46_1.sizeX > 103 || i1 + class46_1.sizeY > 103 || i + class46_1.sizeY > 103)
                         return;
-                    if(class46_1.aBoolean767)
-                        aTileSettingArray1230[j].method216(l2, class46_1.anInt744, i1, i, class46_1.anInt761, class46_1.aBoolean757);
+                    if(class46_1.isUnwalkable)
+                        aTileSettingArray1230[j].method216(l2, class46_1.sizeX, i1, i, class46_1.sizeY, class46_1.aBoolean757);
                 }
                 if(j1 == 3)
                 {
                     sceneGraph.method294(j, i, i1);
                     ObjectDef class46_2 = ObjectDef.forID(j2);
-                    if(class46_2.aBoolean767 && class46_2.hasActions)
+                    if(class46_2.isUnwalkable && class46_2.hasActions)
                         aTileSettingArray1230[j].method218(i, i1);
                 }
             }

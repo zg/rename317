@@ -4,17 +4,18 @@
 
 final class BZIP2Decompressor
 {
+    //todo compile apaches version then decompile it
 
-    public static int decompress(byte abyte0[], int i, byte abyte1[], int j, int k)
+    public static int decompress(byte abyte0[], int size, byte abyte1[], int sizeondisk, int offset)
     {
         synchronized(A_BZ_2_ENTRY___305)
         {
             A_BZ_2_ENTRY___305.aByteArray563 = abyte1;
-            A_BZ_2_ENTRY___305.anInt564 = k;
+            A_BZ_2_ENTRY___305.anInt564 = offset;
             A_BZ_2_ENTRY___305.aByteArray568 = abyte0;
             A_BZ_2_ENTRY___305.anInt569 = 0;
-            A_BZ_2_ENTRY___305.anInt565 = j;
-            A_BZ_2_ENTRY___305.anInt570 = i;
+            A_BZ_2_ENTRY___305.anInt565 = sizeondisk;
+            A_BZ_2_ENTRY___305.anInt570 = size;
             A_BZ_2_ENTRY___305.anInt577 = 0;
             A_BZ_2_ENTRY___305.anInt576 = 0;
             A_BZ_2_ENTRY___305.anInt566 = 0;
@@ -23,8 +24,8 @@ final class BZIP2Decompressor
             A_BZ_2_ENTRY___305.anInt572 = 0;
             A_BZ_2_ENTRY___305.anInt579 = 0;
             method227(A_BZ_2_ENTRY___305);
-            i -= A_BZ_2_ENTRY___305.anInt570;
-            return i;
+            size -= A_BZ_2_ENTRY___305.anInt570;
+            return size;
         }
     }
 
@@ -198,7 +199,7 @@ label0:
             }
 
             for(int k = 0; k < 256; k++)
-                BZ2Entry.aBooleanArray589[k] = false;
+                BZ2Entry.inUse[k] = false;
 
             for(int l = 0; l < 16; l++)
                 if(BZ2Entry.aBooleanArray590[l])
@@ -207,13 +208,13 @@ label0:
                     {
                         byte byte2 = getBit(BZ2Entry);
                         if(byte2 == 1)
-                            BZ2Entry.aBooleanArray589[l * 16 + i3] = true;
+                            BZ2Entry.inUse[l * 16 + i3] = true;
                     }
 
                 }
 
-            method231(BZ2Entry);
-            int i4 = BZ2Entry.anInt588 + 2;
+            makeMaps(BZ2Entry);
+            int i4 = BZ2Entry.nInUse + 2;
             int j4 = getBits(3, BZ2Entry);
             int k4 = getBits(15, BZ2Entry);
             for(int i1 = 0; i1 < k4; i1++)
@@ -281,7 +282,7 @@ label0:
                 BZ2Entry.anIntArray600[l3] = byte8;
             }
 
-            int l4 = BZ2Entry.anInt588 + 1;
+            int l4 = BZ2Entry.nInUse + 1;
             int l5 = 0x186a0 * BZ2Entry.anInt578;
             int i5 = -1;
             int j5 = 0;
@@ -357,7 +358,7 @@ label0:
                         k5 = ai2[i8 - ai1[j7]];
                     } while(k5 == 0 || k5 == 1);
                     j6++;
-                    byte byte5 = BZ2Entry.aByteArray591[BZ2Entry.aByteArray592[BZ2Entry.anIntArray593[0]] & 0xff];
+                    byte byte5 = BZ2Entry.seqToUnseq[BZ2Entry.aByteArray592[BZ2Entry.anIntArray593[0]] & 0xff];
                     BZ2Entry.anIntArray583[byte5 & 0xff] += j6;
                     for(; j6 > 0; j6--)
                     {
@@ -420,8 +421,8 @@ label0:
 
                         }
                     }
-                    BZ2Entry.anIntArray583[BZ2Entry.aByteArray591[byte6 & 0xff] & 0xff]++;
-                    BZ2Entry.anIntArray587[i6] = BZ2Entry.aByteArray591[byte6 & 0xff] & 0xff;
+                    BZ2Entry.anIntArray583[BZ2Entry.seqToUnseq[byte6 & 0xff] & 0xff]++;
+                    BZ2Entry.anIntArray587[i6] = BZ2Entry.seqToUnseq[byte6 & 0xff] & 0xff;
                     i6++;
                     if(j5 == 0)
                     {
@@ -507,14 +508,14 @@ label0:
         return j;
     }
 
-    private static void method231(BZ2Entry BZ2Entry)
+    private static void makeMaps(BZ2Entry BZ2Entry)
     {
-        BZ2Entry.anInt588 = 0;
+        BZ2Entry.nInUse = 0;
         for(int i = 0; i < 256; i++)
-            if(BZ2Entry.aBooleanArray589[i])
+            if(BZ2Entry.inUse[i])
             {
-                BZ2Entry.aByteArray591[BZ2Entry.anInt588] = (byte)i;
-                BZ2Entry.anInt588++;
+                BZ2Entry.seqToUnseq[BZ2Entry.nInUse] = (byte)i;
+                BZ2Entry.nInUse++;
             }
 
     }
