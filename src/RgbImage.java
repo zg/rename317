@@ -456,7 +456,7 @@ public final class RgbImage extends DrawingArea {
         }
     }
 
-    public void method354(Background background, int i, int j)
+    public void method354(IndexedImage indexedImage, int i, int j)
     {
         j += xDrawOffset;
         i += yDrawOffset;
@@ -495,7 +495,7 @@ public final class RgbImage extends DrawingArea {
         }
         if(!(j1 <= 0 || i1 <= 0))
         {
-            method355(myPixels, j1, background.aByteArray1450, i1, DrawingArea.pixels, 0, k1, k, l1, l);
+            method355(myPixels, j1, indexedImage.aByteArray1450, i1, DrawingArea.pixels, 0, k1, k, l1, l);
         }
     }
 

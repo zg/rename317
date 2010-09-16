@@ -306,7 +306,7 @@ public final class RSInterface
             model = method206(anInt233, mediaID);
         if(model == null)
             return null;
-        if(k == -1 && j == -1 && model.anIntArray1640 == null)
+        if(k == -1 && j == -1 && model.triangleColours == null)
             return model;
         Model model_1 = new Model(true, AnimationFrame.method532(k) & AnimationFrame.method532(j), false, model);
         if(k != -1 || j != -1)

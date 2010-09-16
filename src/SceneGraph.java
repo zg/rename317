@@ -702,28 +702,28 @@ final class SceneGraph {
     {
         anInt488++;
         int l = 0;
-        int ai[] = model_1.anIntArray1627;
-        int i1 = model_1.anInt1626;
-        for(int j1 = 0; j1 < model.anInt1626; j1++)
+        int ai[] = model_1.vertexX;
+        int i1 = model_1.verticeCount;
+        for(int j1 = 0; j1 < model.verticeCount; j1++)
         {
             Class33 class33 = model.aClass33Array1425[j1];
             Class33 class33_1 = model.aClass33Array1660[j1];
             if(class33_1.anInt605 != 0)
             {
-                int i2 = model.anIntArray1628[j1] - j;
+                int i2 = model.vertexY[j1] - j;
                 if(i2 <= model_1.anInt1651)
                 {
-                    int j2 = model.anIntArray1627[j1] - i;
+                    int j2 = model.vertexX[j1] - i;
                     if(j2 >= model_1.anInt1646 && j2 <= model_1.anInt1647)
                     {
-                        int k2 = model.anIntArray1629[j1] - k;
+                        int k2 = model.vertexZ[j1] - k;
                         if(k2 >= model_1.anInt1649 && k2 <= model_1.anInt1648)
                         {
                             for(int l2 = 0; l2 < i1; l2++)
                             {
                                 Class33 class33_2 = model_1.aClass33Array1425[l2];
                                 Class33 class33_3 = model_1.aClass33Array1660[l2];
-                                if(j2 == ai[l2] && k2 == model_1.anIntArray1629[l2] && i2 == model_1.anIntArray1628[l2] && class33_3.anInt605 != 0)
+                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && class33_3.anInt605 != 0)
                                 {
                                     class33.anInt602 += class33_3.anInt602;
                                     class33.anInt603 += class33_3.anInt603;
@@ -747,13 +747,13 @@ final class SceneGraph {
 
         if(l < 3 || !flag)
             return;
-        for(int k1 = 0; k1 < model.anInt1630; k1++)
-            if(anIntArray486[model.anIntArray1631[k1]] == anInt488 && anIntArray486[model.anIntArray1632[k1]] == anInt488 && anIntArray486[model.anIntArray1633[k1]] == anInt488)
-                model.anIntArray1637[k1] = -1;
+        for(int k1 = 0; k1 < model.triangleCount; k1++)
+            if(anIntArray486[model.triangleA[k1]] == anInt488 && anIntArray486[model.triangleB[k1]] == anInt488 && anIntArray486[model.triangleC[k1]] == anInt488)
+                model.triangle_draw_type[k1] = -1;
 
-        for(int l1 = 0; l1 < model_1.anInt1630; l1++)
-            if(anIntArray487[model_1.anIntArray1631[l1]] == anInt488 && anIntArray487[model_1.anIntArray1632[l1]] == anInt488 && anIntArray487[model_1.anIntArray1633[l1]] == anInt488)
-                model_1.anIntArray1637[l1] = -1;
+        for(int l1 = 0; l1 < model_1.triangleCount; l1++)
+            if(anIntArray487[model_1.triangleA[l1]] == anInt488 && anIntArray487[model_1.triangleB[l1]] == anInt488 && anIntArray487[model_1.triangleC[l1]] == anInt488)
+                model_1.triangle_draw_type[l1] = -1;
 
     }
 
@@ -1645,7 +1645,7 @@ label0:
         ThreeDimensionalDrawingArea.alpha = 0;
         if((screenXD - screenXC) * (screenYB - screenYC) - (screenYD - screenYC) * (screenXB - screenXC) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > DrawingArea.centerX || screenXC > DrawingArea.centerX || screenXB > DrawingArea.centerX;
+            ThreeDimensionalDrawingArea.aBoolean1462 = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > DrawingArea.viewport_r_x || screenXC > DrawingArea.viewport_r_x || screenXB > DrawingArea.viewport_r_x;
             if(isClicked && isTriangleClicked(clickX, clickY, screenYD, screenYC, screenYB, screenXD, screenXC, screenXB))
             {
                 clickedTileX = tX;
@@ -1670,7 +1670,7 @@ label0:
         }
         if((screenXA - screenXB) * (screenYC - screenYB) - (screenYA - screenYB) * (screenXC - screenXB) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > DrawingArea.centerX || screenXB > DrawingArea.centerX || screenXC > DrawingArea.centerX;
+            ThreeDimensionalDrawingArea.aBoolean1462 = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > DrawingArea.viewport_r_x || screenXB > DrawingArea.viewport_r_x || screenXC > DrawingArea.viewport_r_x;
             if(isClicked && isTriangleClicked(clickX, clickY, screenYA, screenYB, screenYC, screenXA, screenXB, screenXC))
             {
                 clickedTileX = tX;
@@ -1737,7 +1737,7 @@ label0:
             int sYC = ShapedTile.screenY[indexC];
             if((sXA - sXB) * (sYC - sYB) - (sYA - sYB) * (sXC - sXB) > 0)
             {
-                ThreeDimensionalDrawingArea.aBoolean1462 = sXA < 0 || sXB < 0 || sXC < 0 || sXA > DrawingArea.centerX || sXB > DrawingArea.centerX || sXC > DrawingArea.centerX;
+                ThreeDimensionalDrawingArea.aBoolean1462 = sXA < 0 || sXB < 0 || sXC < 0 || sXA > DrawingArea.viewport_r_x || sXB > DrawingArea.viewport_r_x || sXC > DrawingArea.viewport_r_x;
                 if(isClicked && isTriangleClicked(clickX, clickY, sYA, sYB, sYC, sXA, sXB, sXC))
                 {
                     clickedTileX = i;
@@ -1745,19 +1745,19 @@ label0:
                 }
                 if(shapedTile.triTex == null || shapedTile.triTex[j2] == -1)
                 {
-                    if(shapedTile.anIntArray676[j2] != 0xbc614e)
-                        ThreeDimensionalDrawingArea.drawColouredTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.anIntArray676[j2], shapedTile.anIntArray677[j2], shapedTile.anIntArray678[j2]);
+                    if(shapedTile.verticeColourA[j2] != 0xbc614e)
+                        ThreeDimensionalDrawingArea.drawColouredTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2]);
                 } else
                 if(!lowMem)
                 {
-                    if(shapedTile.aBoolean683)
-                        ThreeDimensionalDrawingArea.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.anIntArray676[j2], shapedTile.anIntArray677[j2], shapedTile.anIntArray678[j2], ShapedTile.veritceX[0], ShapedTile.veritceX[1], ShapedTile.veritceX[3], ShapedTile.veritceZ[0], ShapedTile.veritceZ[1], ShapedTile.veritceZ[3], ShapedTile.veritceY[0], ShapedTile.veritceY[1], ShapedTile.veritceY[3], shapedTile.triTex[j2]);
+                    if(shapedTile.flat)
+                        ThreeDimensionalDrawingArea.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2], ShapedTile.veritceX[0], ShapedTile.veritceX[1], ShapedTile.veritceX[3], ShapedTile.veritceZ[0], ShapedTile.veritceZ[1], ShapedTile.veritceZ[3], ShapedTile.veritceY[0], ShapedTile.veritceY[1], ShapedTile.veritceY[3], shapedTile.triTex[j2]);
                     else
-                        ThreeDimensionalDrawingArea.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.anIntArray676[j2], shapedTile.anIntArray677[j2], shapedTile.anIntArray678[j2], ShapedTile.veritceX[indexA], ShapedTile.veritceX[indexB], ShapedTile.veritceX[indexC], ShapedTile.veritceZ[indexA], ShapedTile.veritceZ[indexB], ShapedTile.veritceZ[indexC], ShapedTile.veritceY[indexA], ShapedTile.veritceY[indexB], ShapedTile.veritceY[indexC], shapedTile.triTex[j2]);
+                        ThreeDimensionalDrawingArea.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2], ShapedTile.veritceX[indexA], ShapedTile.veritceX[indexB], ShapedTile.veritceX[indexC], ShapedTile.veritceZ[indexA], ShapedTile.veritceZ[indexB], ShapedTile.veritceZ[indexC], ShapedTile.veritceY[indexA], ShapedTile.veritceY[indexB], ShapedTile.veritceY[indexC], shapedTile.triTex[j2]);
                 } else
                 {
                     int k5 = textureRGBColour[shapedTile.triTex[j2]];
-                    ThreeDimensionalDrawingArea.drawColouredTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.anIntArray676[j2]), mixColour(k5, shapedTile.anIntArray677[j2]), mixColour(k5, shapedTile.anIntArray678[j2]));
+                    ThreeDimensionalDrawingArea.drawColouredTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.verticeColourA[j2]), mixColour(k5, shapedTile.verticeColourB[j2]), mixColour(k5, shapedTile.verticeColourC[j2]));
                 }
             }
         }

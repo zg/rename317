@@ -18,8 +18,8 @@ public class DrawingArea extends NodeSub {
             topY = 0;
             bottomX = width;
             bottomY = height;
-            centerX = bottomX - 1;
-            centerY = bottomX / 2;
+            viewport_r_x = bottomX - 1;
+            viewport_c_x = bottomX / 2;
     }
 
     public static void setDrawingArea(int i, int j, int k, int l)
@@ -36,9 +36,9 @@ public class DrawingArea extends NodeSub {
         topY = l;
         bottomX = k;
         bottomY = i;
-        centerX = bottomX - 1;
-        centerY = bottomX / 2;
-        anInt1387 = bottomY / 2;
+        viewport_r_x = bottomX - 1;
+        viewport_c_x = bottomX / 2;
+        viewport_c_y = bottomY / 2;
     }
 
     public static void setAllPixelsToZero()
@@ -233,8 +233,8 @@ public class DrawingArea extends NodeSub {
     public static int bottomY;
     public static int topX;
     public static int bottomX;
-    public static int centerX;
-    public static int centerY;
-    public static int anInt1387;
+    public static int viewport_r_x;
+    public static int viewport_c_x;
+    public static int viewport_c_y;
 
 }

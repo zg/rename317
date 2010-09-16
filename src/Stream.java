@@ -218,7 +218,7 @@ public final class Stream extends NodeSub {
         currentOffset = (bitPosition + 7) / 8;
     }
 
-    public int method421()
+    public int readSpaceSaver2()
     {
         int i = buffer[currentOffset] & 0xff;
         if(i < 128)

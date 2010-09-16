@@ -257,7 +257,7 @@ final class SoundTrack
             if(k == 0)
                 break;
             anIntArray106[j] = k;
-            anIntArray107[j] = stream.method421();
+            anIntArray107[j] = stream.readSpaceSaver2();
             anIntArray108[j] = stream.readSpaceSaver();
         }
 
