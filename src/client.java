@@ -574,9 +574,9 @@ public final class client extends RSApplet {
             if(k3 < plane - 1)
                 k3 = plane - 1;
             if(lowMem)
-                sceneGraph.method275(MapRegion.setZ);
+                sceneGraph.resetTilesHL(MapRegion.setZ);
             else
-                sceneGraph.method275(0);
+                sceneGraph.resetTilesHL(0);
             for(int i5 = 0; i5 < 104; i5++)
             {
                 for(int i7 = 0; i7 < 104; i7++)
@@ -665,9 +665,9 @@ public final class client extends RSApplet {
             for(int k1 = 1; k1 < 103; k1++)
             {
                 if((byteGroundArray[i][k1][l] & 0x18) == 0)
-                    sceneGraph.method309(ai, i1, i, k1, l);
+                    sceneGraph.drawMinimapTile(ai, i1, i, k1, l);
                 if(i < 3 && (byteGroundArray[i + 1][k1][l] & 8) != 0)
-                    sceneGraph.method309(ai, i1, i + 1, k1, l);
+                    sceneGraph.drawMinimapTile(ai, i1, i + 1, k1, l);
                 i1 += 4;
             }
 
@@ -794,7 +794,7 @@ public final class client extends RSApplet {
             }
             if(!npc.desc.aBoolean84)
                 k += 0x80000000;
-            sceneGraph.method285(plane, npc.anInt1552, method42(plane, npc.bound_extent_y, npc.bound_extent_x), k, npc.bound_extent_y, (npc.bound_dim - 1) * 64 + 60, npc.bound_extent_x, npc, npc.aBoolean1541);
+            sceneGraph.addEntityA(plane, npc.anInt1552, method42(plane, npc.bound_extent_y, npc.bound_extent_x), k, npc.bound_extent_y, (npc.bound_dim - 1) * 64 + 60, npc.bound_extent_x, npc, npc.aBoolean1541);
         }
     }
 
@@ -1995,7 +1995,7 @@ public final class client extends RSApplet {
             {
                 player.aBoolean1699 = false;
                 player.anInt1709 = method42(plane, player.bound_extent_y, player.bound_extent_x);
-                sceneGraph.method286(plane, player.bound_extent_y, player, player.anInt1552, player.anInt1722, player.bound_extent_x, player.anInt1709, player.anInt1719, player.anInt1721, i1, player.anInt1720);
+                sceneGraph.addEntity(plane, player.bound_extent_y, player, player.anInt1552, player.anInt1722, player.bound_extent_x, player.anInt1709, player.anInt1719, player.anInt1721, i1, player.anInt1720);
                 continue;
             }
             if((player.bound_extent_x & 0x7f) == 64 && (player.bound_extent_y & 0x7f) == 64)
@@ -2005,7 +2005,7 @@ public final class client extends RSApplet {
                 anIntArrayArray929[j1][k1] = anInt1265;
             }
             player.anInt1709 = method42(plane, player.bound_extent_y, player.bound_extent_x);
-            sceneGraph.method285(plane, player.anInt1552, player.anInt1709, i1, player.bound_extent_y, 60, player.bound_extent_x, player, player.aBoolean1541);
+            sceneGraph.addEntityA(plane, player.anInt1552, player.anInt1709, i1, player.bound_extent_y, 60, player.bound_extent_x, player, player.aBoolean1541);
         }
 
     }
@@ -2144,7 +2144,7 @@ public final class client extends RSApplet {
         int k1 = sceneGraph.method300(j1, l, i);
         if(k1 != 0)
         {
-            int l1 = sceneGraph.method304(j1, l, i, k1);
+            int l1 = sceneGraph.getIDTAGForXYZ(j1, l, i, k1);
             int k2 = l1 >> 6 & 3;
             int i3 = l1 & 0x1f;
             int k3 = k;
@@ -2240,7 +2240,7 @@ public final class client extends RSApplet {
         k1 = sceneGraph.method302(j1, l, i);
         if(k1 != 0)
         {
-            int i2 = sceneGraph.method304(j1, l, i, k1);
+            int i2 = sceneGraph.getIDTAGForXYZ(j1, l, i, k1);
             int l2 = i2 >> 6 & 3;
             int j3 = i2 & 0x1f;
             int l3 = k1 >> 14 & 0x7fff;
@@ -2525,7 +2525,7 @@ public final class client extends RSApplet {
                         class30_sub2_sub4_sub4.method455(loopCycle, player.bound_extent_y, method42(class30_sub2_sub4_sub4.anInt1597, player.bound_extent_y, player.bound_extent_x) - class30_sub2_sub4_sub4.anInt1583, player.bound_extent_x);
                 }
                 class30_sub2_sub4_sub4.method456(anInt945);
-                sceneGraph.method285(plane, class30_sub2_sub4_sub4.anInt1595, (int)class30_sub2_sub4_sub4.aDouble1587, -1, (int)class30_sub2_sub4_sub4.aDouble1586, 60, (int)class30_sub2_sub4_sub4.aDouble1585, class30_sub2_sub4_sub4, false);
+                sceneGraph.addEntityA(plane, class30_sub2_sub4_sub4.anInt1595, (int)class30_sub2_sub4_sub4.aDouble1587, -1, (int)class30_sub2_sub4_sub4.aDouble1586, 60, (int)class30_sub2_sub4_sub4.aDouble1585, class30_sub2_sub4_sub4, false);
             }
 
     }
@@ -2981,12 +2981,12 @@ public final class client extends RSApplet {
                 super.clickMode3 = 0;
             }
         }
-        if(SceneGraph.anInt470 != -1)
+        if(SceneGraph.clickedTileX != -1)
         {
-            int k = SceneGraph.anInt470;
-            int k1 = SceneGraph.anInt471;
+            int k = SceneGraph.clickedTileX;
+            int k1 = SceneGraph.clickedTileY;
             boolean flag = doWalkTo(0, 0, 0, 0, myPlayer.path_y[0], 0, 0, k1, myPlayer.path_x[0], true, k);
-            SceneGraph.anInt470 = -1;
+            SceneGraph.clickedTileX = -1;
             if(flag)
             {
                 crossX = super.saveClickX;
@@ -3220,7 +3220,7 @@ public final class client extends RSApplet {
     private boolean method66(int i, int j, int k)
     {
         int i1 = i >> 14 & 0x7fff;
-        int j1 = sceneGraph.method304(plane, k, j, i);
+        int j1 = sceneGraph.getIDTAGForXYZ(plane, k, j, i);
         if(j1 == -1)
             return false;
         int k1 = j1 & 0x1f;
@@ -3574,9 +3574,9 @@ public final class client extends RSApplet {
         }
         if(l == 516)
             if(!menuOpen)
-                sceneGraph.method312(super.saveClickY - 4, super.saveClickX - 4);
+                sceneGraph.setClick(super.saveClickY - 4, super.saveClickX - 4);
             else
-                sceneGraph.method312(k - 4, j - 4);
+                sceneGraph.setClick(k - 4, j - 4);
         if(l == 1062)
         {
             anInt924 += baseX;
@@ -4337,7 +4337,7 @@ public final class client extends RSApplet {
             if(l == j)
                 continue;
             j = l;
-            if(k1 == 2 && sceneGraph.method304(plane, i1, j1, l) >= 0)
+            if(k1 == 2 && sceneGraph.getIDTAGForXYZ(plane, i1, j1, l) >= 0)
             {
                 ObjectDef class46 = ObjectDef.forID(l1);
                 if(class46.childrenIDs != null)
@@ -5595,8 +5595,8 @@ public final class client extends RSApplet {
         if(l > 4225 && l < 0x15f90)
         {
             int i1 = minimapInt1 + minimapInt2 & 0x7ff;
-            int j1 = Model.modelIntArray1[i1];
-            int k1 = Model.modelIntArray2[i1];
+            int j1 = Model.Sine[i1];
+            int k1 = Model.Cosine[i1];
             j1 = (j1 * 256) / (minimapInt3 + 256);
             k1 = (k1 * 256) / (minimapInt3 + 256);
             int l1 = j * j1 + k * k1 >> 16;
@@ -6538,7 +6538,7 @@ public final class client extends RSApplet {
             i = sceneGraph.method303(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
         if(i != 0)
         {
-            int i1 = sceneGraph.method304(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z, i);
+            int i1 = sceneGraph.getIDTAGForXYZ(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z, i);
             j = i >> 14 & 0x7fff;
             k = i1 & 0x1f;
             l = i1 >> 6;
@@ -7021,7 +7021,7 @@ public final class client extends RSApplet {
                 ai[i8] = l8 * i9 >> 16;
             }
 
-            SceneGraph.method310(500, 800, 512, 334, ai);
+            SceneGraph.initialize(500, 800, 512, 334, ai);
             Censor.loadConfig(jagexArchive_4);
             mouseDetection = new MouseDetection(this);
             startRunnable(mouseDetection, 10);
@@ -7785,7 +7785,7 @@ public final class client extends RSApplet {
                 if(class30_sub2_sub4_sub3.aBoolean1567)
                     class30_sub2_sub4_sub3.unlink();
                 else
-                    sceneGraph.method285(class30_sub2_sub4_sub3.anInt1560, 0, class30_sub2_sub4_sub3.anInt1563, -1, class30_sub2_sub4_sub3.anInt1562, 60, class30_sub2_sub4_sub3.anInt1561, class30_sub2_sub4_sub3, false);
+                    sceneGraph.addEntityA(class30_sub2_sub4_sub3.anInt1560, 0, class30_sub2_sub4_sub3.anInt1563, -1, class30_sub2_sub4_sub3.anInt1562, 60, class30_sub2_sub4_sub3.anInt1561, class30_sub2_sub4_sub3, false);
             }
 
     }
@@ -8041,10 +8041,10 @@ public final class client extends RSApplet {
                 } else
                 if(class9_1.type == 6)
                 {
-                    int k3 = ThreeDimensionalDrawingArea.textureInt1;
-                    int j4 = ThreeDimensionalDrawingArea.textureInt2;
-                    ThreeDimensionalDrawingArea.textureInt1 = k2 + class9_1.width / 2;
-                    ThreeDimensionalDrawingArea.textureInt2 = l2 + class9_1.height / 2;
+                    int k3 = ThreeDimensionalDrawingArea.xMidPos;
+                    int j4 = ThreeDimensionalDrawingArea.yMidPos;
+                    ThreeDimensionalDrawingArea.xMidPos = k2 + class9_1.width / 2;
+                    ThreeDimensionalDrawingArea.yMidPos = l2 + class9_1.height / 2;
                     int i5 = ThreeDimensionalDrawingArea.SINE[class9_1.anInt270] * class9_1.anInt269 >> 16;
                     int l5 = ThreeDimensionalDrawingArea.COSINE[class9_1.anInt270] * class9_1.anInt269 >> 16;
                     boolean flag2 = interfaceIsSelected(class9_1);
@@ -8064,8 +8064,8 @@ public final class client extends RSApplet {
                     }
                     if(model != null)
                         model.method482(class9_1.anInt271, 0, class9_1.anInt270, 0, i5, l5);
-                    ThreeDimensionalDrawingArea.textureInt1 = k3;
-                    ThreeDimensionalDrawingArea.textureInt2 = j4;
+                    ThreeDimensionalDrawingArea.xMidPos = k3;
+                    ThreeDimensionalDrawingArea.yMidPos = j4;
                 } else
                 if(class9_1.type == 7)
                 {
@@ -9224,10 +9224,10 @@ public final class client extends RSApplet {
         i -= xCameraPos;
         i1 -= zCameraPos;
         l -= yCameraPos;
-        int j1 = Model.modelIntArray1[yCameraCurve];
-        int k1 = Model.modelIntArray2[yCameraCurve];
-        int l1 = Model.modelIntArray1[xCameraCurve];
-        int i2 = Model.modelIntArray2[xCameraCurve];
+        int j1 = Model.Sine[yCameraCurve];
+        int k1 = Model.Cosine[yCameraCurve];
+        int l1 = Model.Sine[xCameraCurve];
+        int i2 = Model.Cosine[xCameraCurve];
         int j2 = l * l1 + i * i2 >> 16;
         l = l * i2 - i * l1 >> 16;
         i = j2;
@@ -9236,8 +9236,8 @@ public final class client extends RSApplet {
         i1 = j2;
         if(l >= 50)
         {
-            spriteDrawX = ThreeDimensionalDrawingArea.textureInt1 + (i << 9) / l;
-            spriteDrawY = ThreeDimensionalDrawingArea.textureInt2 + (i1 << 9) / l;
+            spriteDrawX = ThreeDimensionalDrawingArea.xMidPos + (i << 9) / l;
+            spriteDrawY = ThreeDimensionalDrawingArea.yMidPos + (i1 << 9) / l;
         } else
         {
             spriteDrawX = -1;
@@ -9787,7 +9787,7 @@ public final class client extends RSApplet {
                 {
                     Object2 class26 = sceneGraph.method297(j4, i7, plane);
                     if(class26 != null)
-                        class26.aClass30_Sub2_Sub4_504 = new ObjectOnTile(class26.uid >> 14 & 0x7fff, 0, 4, i19, l19, j18, k20, j17, false);
+                        class26.myMob = new ObjectOnTile(class26.uid >> 14 & 0x7fff, 0, 4, i19, l19, j18, k20, j17, false);
                 }
                 if(j16 == 2)
                 {
@@ -10140,8 +10140,8 @@ public final class client extends RSApplet {
         int l = i * i + j * j;
         if(l > 6400)
             return;
-        int i1 = Model.modelIntArray1[k];
-        int j1 = Model.modelIntArray2[k];
+        int i1 = Model.Sine[k];
+        int j1 = Model.Cosine[k];
         i1 = (i1 * 256) / (minimapInt3 + 256);
         j1 = (j1 * 256) / (minimapInt3 + 256);
         int k1 = j * i1 + i * j1 >> 16;
@@ -10173,7 +10173,7 @@ public final class client extends RSApplet {
                 i2 = sceneGraph.method303(j, i1, i);
             if(i2 != 0)
             {
-                int i3 = sceneGraph.method304(j, i1, i, i2);
+                int i3 = sceneGraph.getIDTAGForXYZ(j, i1, i, i2);
                 int j2 = i2 >> 14 & 0x7fff;
                 int k2 = i3 & 0x1f;
                 int l2 = i3 >> 6;
@@ -10251,8 +10251,8 @@ public final class client extends RSApplet {
         int l2 = j;
         if(l1 != 0)
         {
-            int i3 = Model.modelIntArray1[l1];
-            int k3 = Model.modelIntArray2[l1];
+            int i3 = Model.Sine[l1];
+            int k3 = Model.Cosine[l1];
             int i4 = k2 * k3 - l2 * i3 >> 16;
             l2 = k2 * i3 + l2 * k3 >> 16;
             k2 = i4;
@@ -10271,8 +10271,8 @@ public final class client extends RSApplet {
               l2 = fwdbwd;
             }
 */
-            int j3 = Model.modelIntArray1[i2];
-            int l3 = Model.modelIntArray2[i2];
+            int j3 = Model.Sine[i2];
+            int l3 = Model.Cosine[i2];
             int j4 = l2 * j3 + j2 * l3 >> 16;
             l2 = l2 * l3 - j2 * j3 >> 16;
             j2 = j4;
@@ -11586,7 +11586,7 @@ public final class client extends RSApplet {
             Model.anInt1686 = super.mouseY - 4;
             DrawingArea.setAllPixelsToZero();
 //xxx disables graphics            if(graphicsEnabled){
-            sceneGraph.method313(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
+            sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
             sceneGraph.clearObj5Cache();
             updateEntities();
             drawHeadIcon();

@@ -2,29 +2,27 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-import sign.signlink;
-
-final class Class40
+final class ShapedTile
 {
 
-    public Class40(int i, int j, int k, int l, int i1, int j1, int k1,
+    public ShapedTile(int i, int j, int k, int l, int i1, int j1, int k1,
                    int l1, int i2, int j2, int k2, int l2, int i3, int j3,
                    int k3, int l3, int i4, int k4, int l4)
     {
         aBoolean683 = !(i3 != l2 || i3 != l || i3 != k2);
-        anInt684 = j3;
-        anInt685 = k1;
-        anInt686 = i2;
-        anInt687 = l4;
+        shapeA = j3;
+        shapeB = k1;
+        colourRGB = i2;
+        colourRGBA = l4;
         char c = '\200';
         int i5 = c / 2;
         int j5 = c / 4;
         int k5 = (c * 3) / 4;
         int ai[] = anIntArrayArray696[j3];
         int l5 = ai.length;
-        anIntArray673 = new int[l5];
-        anIntArray674 = new int[l5];
-        anIntArray675 = new int[l5];
+        origVertexX = new int[l5];
+        origVertexY = new int[l5];
+        origVertexZ = new int[l5];
         int ai1[] = new int[l5];
         int ai2[] = new int[l5];
         int i6 = k4 * c;
@@ -170,23 +168,23 @@ final class Class40
                 k8 = k;
                 j9 = k3;
             }
-            anIntArray673[k6] = i7;
-            anIntArray674[k6] = i8;
-            anIntArray675[k6] = k7;
+            origVertexX[k6] = i7;
+            origVertexY[k6] = i8;
+            origVertexZ[k6] = k7;
             ai1[k6] = k8;
             ai2[k6] = j9;
         }
 
         int ai3[] = anIntArrayArray697[j3];
         int j7 = ai3.length / 4;
-        anIntArray679 = new int[j7];
-        anIntArray680 = new int[j7];
-        anIntArray681 = new int[j7];
+        indexA = new int[j7];
+        indexB = new int[j7];
+        indexC = new int[j7];
         anIntArray676 = new int[j7];
         anIntArray677 = new int[j7];
         anIntArray678 = new int[j7];
         if(i1 != -1)
-            anIntArray682 = new int[j7];
+            triTex = new int[j7];
         int l7 = 0;
         for(int j8 = 0; j8 < j7; j8++)
         {
@@ -201,23 +199,23 @@ final class Class40
                 i10 = i10 - k1 & 3;
             if(k10 < 4)
                 k10 = k10 - k1 & 3;
-            anIntArray679[j8] = k9;
-            anIntArray680[j8] = i10;
-            anIntArray681[j8] = k10;
+            indexA[j8] = k9;
+            indexB[j8] = i10;
+            indexC[j8] = k10;
             if(l8 == 0)
             {
                 anIntArray676[j8] = ai1[k9];
                 anIntArray677[j8] = ai1[i10];
                 anIntArray678[j8] = ai1[k10];
-                if(anIntArray682 != null)
-                    anIntArray682[j8] = -1;
+                if(triTex != null)
+                    triTex[j8] = -1;
             } else
             {
                 anIntArray676[j8] = ai2[k9];
                 anIntArray677[j8] = ai2[i10];
                 anIntArray678[j8] = ai2[k10];
-                if(anIntArray682 != null)
-                    anIntArray682[j8] = i1;
+                if(triTex != null)
+                    triTex[j8] = i1;
             }
         }
 
@@ -239,26 +237,26 @@ final class Class40
         l9 /= 14;
     }
 
-    final int[] anIntArray673;
-    final int[] anIntArray674;
-    final int[] anIntArray675;
+    final int[] origVertexX;
+    final int[] origVertexY;
+    final int[] origVertexZ;
     final int[] anIntArray676;
     final int[] anIntArray677;
     final int[] anIntArray678;
-    final int[] anIntArray679;
-    final int[] anIntArray680;
-    final int[] anIntArray681;
-    int anIntArray682[];
+    final int[] indexA;
+    final int[] indexB;
+    final int[] indexC;
+    int triTex[];
     final boolean aBoolean683;
-    final int anInt684;
-    final int anInt685;
-    final int anInt686;
-    final int anInt687;
-    static final int[] anIntArray688 = new int[6];
-    static final int[] anIntArray689 = new int[6];
-    static final int[] anIntArray690 = new int[6];
-    static final int[] anIntArray691 = new int[6];
-    static final int[] anIntArray692 = new int[6];
+    final int shapeA;
+    final int shapeB;
+    final int colourRGB;
+    final int colourRGBA;
+    static final int[] screenX = new int[6];
+    static final int[] screenY = new int[6];
+    static final int[] veritceX = new int[6];
+    static final int[] veritceZ = new int[6];
+    static final int[] veritceY = new int[6];
     static final int[] anIntArray693 = {
         1, 0
     };

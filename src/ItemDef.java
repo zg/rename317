@@ -277,8 +277,8 @@ public final class ItemDef
                 return null;
         }
         RgbImage sprite2 = new RgbImage(32, 32);
-        int k1 = ThreeDimensionalDrawingArea.textureInt1;
-        int l1 = ThreeDimensionalDrawingArea.textureInt2;
+        int k1 = ThreeDimensionalDrawingArea.xMidPos;
+        int l1 = ThreeDimensionalDrawingArea.yMidPos;
         int ai[] = ThreeDimensionalDrawingArea.anIntArray1472;
         int ai1[] = DrawingArea.pixels;
         int i2 = DrawingArea.width;
@@ -363,8 +363,8 @@ public final class ItemDef
             mruNodes1.removeFromCache(sprite2, i);
         DrawingArea.initDrawingArea(j2, i2, ai1);
         DrawingArea.setDrawingArea(j3, k2, l2, i3);
-        ThreeDimensionalDrawingArea.textureInt1 = k1;
-        ThreeDimensionalDrawingArea.textureInt2 = l1;
+        ThreeDimensionalDrawingArea.xMidPos = k1;
+        ThreeDimensionalDrawingArea.yMidPos = l1;
         ThreeDimensionalDrawingArea.anIntArray1472 = ai;
         ThreeDimensionalDrawingArea.aBoolean1464 = true;
         if(definition.stackable)

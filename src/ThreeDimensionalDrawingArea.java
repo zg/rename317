@@ -27,8 +27,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         for(int j = 0; j < DrawingArea.height; j++)
             anIntArray1472[j] = DrawingArea.width * j;
 
-        textureInt1 = DrawingArea.width / 2;
-        textureInt2 = DrawingArea.height / 2;
+        xMidPos = DrawingArea.width / 2;
+        yMidPos = DrawingArea.height / 2;
     }
 
     public static void method365(int j, int k)
@@ -37,8 +37,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         for(int l = 0; l < k; l++)
             anIntArray1472[l] = j * l;
 
-        textureInt1 = j / 2;
-        textureInt2 = k / 2;
+        xMidPos = j / 2;
+        yMidPos = k / 2;
     }
 
     public static void method366()
@@ -290,7 +290,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         return (j << 16) + (k << 8) + l;
     }
 
-    public static void method374(int i, int j, int k, int l, int i1, int j1, int k1, int l1, 
+    public static void drawColouredTriangle(int i, int j, int k, int l, int i1, int j1, int k1, int l1,
             int i2)
     {
         int j2 = 0;
@@ -762,7 +762,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 else
                     l1 = 0;
             }
-            if(anInt1465 == 0)
+            if(alpha == 0)
             {
                 while(--k >= 0) 
                 {
@@ -784,8 +784,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 }
             } else
             {
-                int j2 = anInt1465;
-                int l2 = 256 - anInt1465;
+                int j2 = alpha;
+                int l2 = 256 - alpha;
                 while(--k >= 0) 
                 {
                     j = colourMap[j1 >> 8];
@@ -825,7 +825,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         i += l;
         k = i1 - l;
-        if(anInt1465 == 0)
+        if(alpha == 0)
         {
             do
             {
@@ -834,8 +834,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             } while(--k > 0);
             return;
         }
-        int k2 = anInt1465;
-        int i3 = 256 - anInt1465;
+        int k2 = alpha;
+        int i3 = 256 - alpha;
         do
         {
             j = colourMap[j1 >> 8];
@@ -1204,7 +1204,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             return;
         i += l;
         k = i1 - l >> 2;
-        if(anInt1465 == 0)
+        if(alpha == 0)
         {
             while(--k >= 0) 
             {
@@ -1218,8 +1218,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
             return;
         }
-        int j1 = anInt1465;
-        int k1 = 256 - anInt1465;
+        int j1 = alpha;
+        int k1 = 256 - alpha;
         j = ((j & 0xff00ff) * k1 >> 8 & 0xff00ff) + ((j & 0xff00) * k1 >> 8 & 0xff00);
         while(--k >= 0) 
         {
@@ -1233,7 +1233,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     }
 
-    public static void method378(int i, int j, int k, int l, int i1, int j1, int k1, int l1, 
+    public static void drawTexturedTriangle(int i, int j, int k, int l, int i1, int j1, int k1, int l1,
             int i2, int j2, int k2, int l2, int i3, int j3, int k3, 
             int l3, int i4, int j4, int k4)
     {
@@ -1303,7 +1303,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                     l1 -= l7 * j;
                     j = 0;
                 }
-                int k8 = i - textureInt2;
+                int k8 = i - yMidPos;
                 l4 += j5 * k8;
                 k5 += i6 * k8;
                 j6 += l6 * k8;
@@ -1385,7 +1385,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 i2 -= l7 * k;
                 k = 0;
             }
-            int l8 = i - textureInt2;
+            int l8 = i - yMidPos;
             l4 += j5 * l8;
             k5 += i6 * l8;
             j6 += l6 * l8;
@@ -1477,7 +1477,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                     i2 -= j8 * k;
                     k = 0;
                 }
-                int i9 = j - textureInt2;
+                int i9 = j - yMidPos;
                 l4 += j5 * i9;
                 k5 += i6 * i9;
                 j6 += l6 * i9;
@@ -1559,7 +1559,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 k1 -= j8 * i;
                 i = 0;
             }
-            int j9 = j - textureInt2;
+            int j9 = j - yMidPos;
             l4 += j5 * j9;
             k5 += i6 * j9;
             j6 += l6 * j9;
@@ -1649,7 +1649,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 k1 -= j7 * i;
                 i = 0;
             }
-            int k9 = k - textureInt2;
+            int k9 = k - yMidPos;
             l4 += j5 * k9;
             k5 += i6 * k9;
             j6 += l6 * k9;
@@ -1731,7 +1731,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             l1 -= j7 * j;
             j = 0;
         }
-        int l9 = k - textureInt2;
+        int l9 = k - yMidPos;
         l4 += j5 * l9;
         k5 += i6 * l9;
         j6 += l6 * l9;
@@ -1837,7 +1837,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         {
             int i4 = 0;
             int k4 = 0;
-            int k6 = l - textureInt1;
+            int k6 = l - xMidPos;
             l1 += (k2 >> 3) * k6;
             i2 += (l2 >> 3) * k6;
             j2 += (i3 >> 3) * k6;
@@ -2004,7 +2004,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         }
         int j4 = 0;
         int l4 = 0;
-        int l6 = l - textureInt1;
+        int l6 = l - xMidPos;
         l1 += (k2 >> 3) * l6;
         i2 += (l2 >> 3) * l6;
         j2 += (i3 >> 3) * l6;
@@ -2174,9 +2174,9 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
     static boolean aBoolean1462;
     private static boolean aBoolean1463;
     public static boolean aBoolean1464 = true;
-    public static int anInt1465;
-    public static int textureInt1;
-    public static int textureInt2;
+    public static int alpha;
+    public static int xMidPos;
+    public static int yMidPos;
     private static int[] anIntArray1468;
     public static final int[] anIntArray1469;
     public static int SINE[];

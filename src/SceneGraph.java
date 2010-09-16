@@ -4,21 +4,21 @@
 
 final class SceneGraph {
 
-    public SceneGraph(int ai[][][])
+    public SceneGraph(int heightmap[][][])
     {
-        int i = 104;//was parameter
-        int j = 104;//was parameter
-        int k = 4;//was parameter
+        int length = 104;//was parameter
+        int width = 104;//was parameter
+        int height = 4;//was parameter
         aBoolean434 = true;
         obj5Cache = new Object5[5000];
         anIntArray486 = new int[10000];
         anIntArray487 = new int[10000];
-        anInt437 = k;
-        anInt438 = j;
-        anInt439 = i;
-            groundArray = new Ground[k][j][i];
-            anIntArrayArrayArray445 = new int[k][j + 1][i + 1];
-            anIntArrayArrayArray440 = ai;
+        zMapSize = height;
+        xMapSize = width;
+        yMapSize = length;
+            tileArray = new Tile[height][width][length];
+            anIntArrayArrayArray445 = new int[height][width + 1][length + 1];
+            this.heightmap = heightmap;
             initToNull();
     }
 
@@ -34,12 +34,12 @@ final class SceneGraph {
 
     public void initToNull()
     {
-        for(int j = 0; j < anInt437; j++)
+        for(int j = 0; j < zMapSize; j++)
         {
-            for(int k = 0; k < anInt438; k++)
+            for(int k = 0; k < xMapSize; k++)
             {
-                for(int i1 = 0; i1 < anInt439; i1++)
-                    groundArray[j][k][i1] = null;
+                for(int i1 = 0; i1 < yMapSize; i1++)
+                    tileArray[j][k][i1] = null;
 
             }
 
@@ -61,14 +61,14 @@ final class SceneGraph {
 
     }
 
-    public void method275(int i)
+    public void resetTilesHL(int i)
     {
         anInt442 = i;
-        for(int k = 0; k < anInt438; k++)
+        for(int k = 0; k < xMapSize; k++)
         {
-            for(int l = 0; l < anInt439; l++)
-                if(groundArray[i][k][l] == null)
-                    groundArray[i][k][l] = new Ground(i, k, l);
+            for(int l = 0; l < yMapSize; l++)
+                if(tileArray[i][k][l] == null)
+                    tileArray[i][k][l] = new Tile(i, k, l);
 
         }
 
@@ -76,10 +76,10 @@ final class SceneGraph {
 
     public void method276(int i, int j)
     {
-        Ground class30_sub3 = groundArray[0][j][i];
+        Tile class30_sub3 = tileArray[0][j][i];
         for(int l = 0; l < 3; l++)
         {
-            Ground class30_sub3_1 = groundArray[l][j][i] = groundArray[l + 1][j][i];
+            Tile class30_sub3_1 = tileArray[l][j][i] = tileArray[l + 1][j][i];
             if(class30_sub3_1 != null)
             {
                 class30_sub3_1.anInt1307--;
@@ -92,10 +92,10 @@ final class SceneGraph {
 
             }
         }
-        if(groundArray[0][j][i] == null)
-            groundArray[0][j][i] = new Ground(0, j, i);
-        groundArray[0][j][i].aClass30_Sub3_1329 = class30_sub3;
-        groundArray[3][j][i] = null;
+        if(tileArray[0][j][i] == null)
+            tileArray[0][j][i] = new Tile(0, j, i);
+        tileArray[0][j][i].aClass30_Sub3_1329 = class30_sub3;
+        tileArray[3][j][i] = null;
     }
 
     public static void method277(int i, int j, int k, int l, int i1, int j1, int l1,
@@ -118,60 +118,60 @@ final class SceneGraph {
 
     public void method278(int i, int j, int k, int l)
     {
-        Ground class30_sub3 = groundArray[i][j][k];
+        Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 != null)
         {
-            groundArray[i][j][k].anInt1321 = l;
+            tileArray[i][j][k].anInt1321 = l;
         }
     }
 
-    public void addTile(int i, int j, int k, int l, int i1, int j1, int k1,
+    public void addTile(int zz, int x, int y, int l, int i1, int j1, int k1,
             int l1, int i2, int j2, int k2, int l2, int i3, int j3, 
             int k3, int l3, int i4, int j4, int k4, int l4)
     {
         if(l == 0)
         {
             PlainTile plainTile = new PlainTile(k2, l2, i3, j3, -1, k4, false);
-            for(int i5 = i; i5 >= 0; i5--)
-                if(groundArray[i5][j][k] == null)
-                    groundArray[i5][j][k] = new Ground(i5, j, k);
+            for(int heightLevel = zz; heightLevel >= 0; heightLevel--)
+                if(tileArray[heightLevel][x][y] == null)
+                    tileArray[heightLevel][x][y] = new Tile(heightLevel, x, y);
 
-            groundArray[i][j][k].aPlainTile_1311 = plainTile;
+            tileArray[zz][x][y].myPlainTile = plainTile;
             return;
         }
         if(l == 1)
         {
             PlainTile plainTile_1 = new PlainTile(k3, l3, i4, j4, j1, l4, k1 == l1 && k1 == i2 && k1 == j2);
-            for(int j5 = i; j5 >= 0; j5--)
-                if(groundArray[j5][j][k] == null)
-                    groundArray[j5][j][k] = new Ground(j5, j, k);
+            for(int j5 = zz; j5 >= 0; j5--)
+                if(tileArray[j5][x][y] == null)
+                    tileArray[j5][x][y] = new Tile(j5, x, y);
 
-            groundArray[i][j][k].aPlainTile_1311 = plainTile_1;
+            tileArray[zz][x][y].myPlainTile = plainTile_1;
             return;
         }
-        Class40 class40 = new Class40(k, k3, j3, i2, j1, i4, i1, k2, k4, i3, j2, l1, k1, l, j4, l3, l2, j, l4);
-        for(int k5 = i; k5 >= 0; k5--)
-            if(groundArray[k5][j][k] == null)
-                groundArray[k5][j][k] = new Ground(k5, j, k);
+        ShapedTile shapedTile = new ShapedTile(y, k3, j3, i2, j1, i4, i1, k2, k4, i3, j2, l1, k1, l, j4, l3, l2, x, l4);
+        for(int k5 = zz; k5 >= 0; k5--)
+            if(tileArray[k5][x][y] == null)
+                tileArray[k5][x][y] = new Tile(k5, x, y);
 
-        groundArray[i][j][k].aClass40_1312 = class40;
+        tileArray[zz][x][y].aShapedTile_1312 = shapedTile;
     }
 
-    public void method280(int i, int j, int k, Animable class30_sub2_sub4, byte byte0, int i1,
-                          int j1)
+    public void addObj3(int Z, int z3d, int Y, Animable class30_sub2_sub4, byte byte0, int uid,
+                          int X)
     {
         if(class30_sub2_sub4 == null)
             return;
         Object3 class49 = new Object3();
         class49.aClass30_Sub2_Sub4_814 = class30_sub2_sub4;
-        class49.anInt812 = j1 * 128 + 64;
-        class49.anInt813 = k * 128 + 64;
-        class49.anInt811 = j;
-        class49.uid = i1;
-        class49.aByte816 = byte0;
-        if(groundArray[i][j1][k] == null)
-            groundArray[i][j1][k] = new Ground(i, j1, k);
-        groundArray[i][j1][k].obj3 = class49;
+        class49.X3D = X * 128 + 64;
+        class49.Y3D = Y * 128 + 64;
+        class49.Z3D = z3d;
+        class49.uid = uid;
+        class49.objConf = byte0;
+        if(tileArray[Z][X][Y] == null)
+            tileArray[Z][X][Y] = new Tile(Z, X, Y);
+        tileArray[Z][X][Y].obj3 = class49;
     }
 
     public void method281(int i, int j, Animable class30_sub2_sub4, int k, Animable class30_sub2_sub4_1, Animable class30_sub2_sub4_2,
@@ -186,7 +186,7 @@ final class SceneGraph {
         object4.aClass30_Sub2_Sub4_49 = class30_sub2_sub4;
         object4.aClass30_Sub2_Sub4_50 = class30_sub2_sub4_1;
         int j1 = 0;
-        Ground class30_sub3 = groundArray[l][i][i1];
+        Tile class30_sub3 = tileArray[l][i][i1];
         if(class30_sub3 != null)
         {
             for(int k1 = 0; k1 < class30_sub3.anInt1317; k1++)
@@ -199,12 +199,12 @@ final class SceneGraph {
 
         }
         object4.anInt52 = j1;
-        if(groundArray[l][i][i1] == null)
-            groundArray[l][i][i1] = new Ground(l, i, i1);
-        groundArray[l][i][i1].obj4 = object4;
+        if(tileArray[l][i][i1] == null)
+            tileArray[l][i][i1] = new Tile(l, i, i1);
+        tileArray[l][i][i1].obj4 = object4;
     }
 
-    public void method282(int i, Animable class30_sub2_sub4, int j, int k, byte byte0, int l,
+    public void addObject1(int i, Animable class30_sub2_sub4, int j, int k, byte byte0, int l,
                           Animable class30_sub2_sub4_1, int i1, int j1, int k1)
     {
         if(class30_sub2_sub4 == null && class30_sub2_sub4_1 == null)
@@ -220,34 +220,34 @@ final class SceneGraph {
         object1.orientation = i;
         object1.orientation1 = j1;
         for(int l1 = k1; l1 >= 0; l1--)
-            if(groundArray[l1][l][k] == null)
-                groundArray[l1][l][k] = new Ground(l1, l, k);
+            if(tileArray[l1][l][k] == null)
+                tileArray[l1][l][k] = new Tile(l1, l, k);
 
-        groundArray[k1][l][k].obj1 = object1;
+        tileArray[k1][l][k].obj1 = object1;
     }
 
-    public void method283(int i, int j, int k, int i1, int j1, int k1,
-                          Animable class30_sub2_sub4, int l1, byte byte0, int i2, int j2)
+    public void addObject(int i, int tileY, int face, int tileZ, int x3dOff, int z3d,
+                          Animable animable, int tileX, byte obConfig, int y3dOff, int facebits)
     {
-        if(class30_sub2_sub4 == null)
+        if(animable == null)
             return;
-        Object2 class26 = new Object2();
-        class26.uid = i;
-        class26.aByte506 = byte0;
-        class26.anInt500 = l1 * 128 + 64 + j1;
-        class26.anInt501 = j * 128 + 64 + i2;
-        class26.anInt499 = k1;
-        class26.aClass30_Sub2_Sub4_504 = class30_sub2_sub4;
-        class26.anInt502 = j2;
-        class26.anInt503 = k;
-        for(int k2 = i1; k2 >= 0; k2--)
-            if(groundArray[k2][l1][j] == null)
-                groundArray[k2][l1][j] = new Ground(k2, l1, j);
+        Object2 object2 = new Object2();
+        object2.uid = i;
+        object2.objConf = obConfig;
+        object2.X3D = tileX * 128 + 64 + x3dOff;
+        object2.Y3D = tileY * 128 + 64 + y3dOff;
+        object2.Z3D = z3d;
+        object2.myMob = animable;
+        object2.configBits = facebits;
+        object2.face = face;
+        for(int k2 = tileZ; k2 >= 0; k2--)
+            if(tileArray[k2][tileX][tileY] == null)
+                tileArray[k2][tileX][tileY] = new Tile(k2, tileX, tileY);
 
-        groundArray[i1][l1][j].obj2 = class26;
+        tileArray[tileZ][tileX][tileY].obj2 = object2;
     }
 
-    public boolean method284(int i, byte byte0, int j, int k, Animable class30_sub2_sub4, int l, int i1,
+    public boolean addEntityB(int i, byte byte0, int j, int k, Animable class30_sub2_sub4, int l, int i1,
                              int j1, int k1, int l1)
     {
         if(class30_sub2_sub4 == null)
@@ -257,11 +257,11 @@ final class SceneGraph {
         {
             int i2 = l1 * 128 + 64 * l;
             int j2 = k1 * 128 + 64 * k;
-            return method287(i1, l1, k1, l, k, i2, j2, j, class30_sub2_sub4, j1, false, i, byte0);
+            return addEntityC(i1, l1, k1, l, k, i2, j2, j, class30_sub2_sub4, j1, false, i, byte0);
         }
     }
 
-    public boolean method285(int i, int j, int k, int l, int i1, int j1,
+    public boolean addEntityA(int i, int j, int k, int l, int i1, int j1,
                              int k1, Animable class30_sub2_sub4, boolean flag)
     {
         if(class30_sub2_sub4 == null)
@@ -285,25 +285,25 @@ final class SceneGraph {
         i2 /= 128;
         j2 /= 128;
         k2 /= 128;
-        return method287(i, l1, i2, (j2 - l1) + 1, (k2 - i2) + 1, k1, i1, k, class30_sub2_sub4, j, true, l, (byte)0);
+        return addEntityC(i, l1, i2, (j2 - l1) + 1, (k2 - i2) + 1, k1, i1, k, class30_sub2_sub4, j, true, l, (byte)0);
     }
 
-    public boolean method286(int j, int k, Animable class30_sub2_sub4, int l, int i1, int j1,
+    public boolean addEntity(int j, int k, Animable class30_sub2_sub4, int l, int i1, int j1,
                              int k1, int l1, int i2, int j2, int k2)
     {
-        return class30_sub2_sub4 == null || method287(j, l1, k2, (i2 - l1) + 1, (i1 - k2) + 1, j1, k, k1, class30_sub2_sub4, l, true, j2, (byte) 0);
+        return class30_sub2_sub4 == null || addEntityC(j, l1, k2, (i2 - l1) + 1, (i1 - k2) + 1, j1, k, k1, class30_sub2_sub4, l, true, j2, (byte) 0);
     }
 
-    private boolean method287(int i, int j, int k, int l, int i1, int j1, int k1,
+    private boolean addEntityC(int i, int j, int k, int l, int i1, int j1, int k1,
             int l1, Animable class30_sub2_sub4, int i2, boolean flag, int j2, byte byte0)
     {
         for(int k2 = j; k2 < j + l; k2++)
         {
             for(int l2 = k; l2 < k + i1; l2++)
             {
-                if(k2 < 0 || l2 < 0 || k2 >= anInt438 || l2 >= anInt439)
+                if(k2 < 0 || l2 < 0 || k2 >= xMapSize || l2 >= yMapSize)
                     return false;
-                Ground class30_sub3 = groundArray[i][k2][l2];
+                Tile class30_sub3 = tileArray[i][k2][l2];
                 if(class30_sub3 != null && class30_sub3.anInt1317 >= 5)
                     return false;
             }
@@ -337,10 +337,10 @@ final class SceneGraph {
                 if(j3 < (k + i1) - 1)
                     k3 += 2;
                 for(int l3 = i; l3 >= 0; l3--)
-                    if(groundArray[l3][i3][j3] == null)
-                        groundArray[l3][i3][j3] = new Ground(l3, i3, j3);
+                    if(tileArray[l3][i3][j3] == null)
+                        tileArray[l3][i3][j3] = new Tile(l3, i3, j3);
 
-                Ground class30_sub3_1 = groundArray[i][i3][j3];
+                Tile class30_sub3_1 = tileArray[i][i3][j3];
                 class30_sub3_1.obj5Array[class30_sub3_1.anInt1317] = class28;
                 class30_sub3_1.anIntArray1319[class30_sub3_1.anInt1317] = k3;
                 class30_sub3_1.anInt1320 |= k3;
@@ -372,7 +372,7 @@ final class SceneGraph {
         {
             for(int k = class28.anInt525; k <= class28.anInt526; k++)
             {
-                Ground class30_sub3 = groundArray[class28.anInt517][j][k];
+                Tile class30_sub3 = tileArray[class28.anInt517][j][k];
                 if(class30_sub3 != null)
                 {
                     for(int l = 0; l < class30_sub3.anInt1317; l++)
@@ -403,7 +403,7 @@ final class SceneGraph {
 
     public void method290(int i, int k, int l, int i1)
     {
-        Ground class30_sub3 = groundArray[i1][l][i];
+        Tile class30_sub3 = tileArray[i1][l][i];
         if(class30_sub3 == null)
             return;
         Object2 class26 = class30_sub3.obj2;
@@ -411,14 +411,14 @@ final class SceneGraph {
         {
             int j1 = l * 128 + 64;
             int k1 = i * 128 + 64;
-            class26.anInt500 = j1 + ((class26.anInt500 - j1) * k) / 16;
-            class26.anInt501 = k1 + ((class26.anInt501 - k1) * k) / 16;
+            class26.X3D = j1 + ((class26.X3D - j1) * k) / 16;
+            class26.Y3D = k1 + ((class26.Y3D - k1) * k) / 16;
         }
     }
 
     public void method291(int i, int j, int k, byte byte0)
     {
-        Ground class30_sub3 = groundArray[j][i][k];
+        Tile class30_sub3 = tileArray[j][i][k];
         if(byte0 != -119)
             aBoolean434 = !aBoolean434;
         if(class30_sub3 != null)
@@ -429,7 +429,7 @@ final class SceneGraph {
 
     public void method292(int j, int k, int l)
     {
-        Ground class30_sub3 = groundArray[k][l][j];
+        Tile class30_sub3 = tileArray[k][l][j];
         if(class30_sub3 != null)
         {
             class30_sub3.obj2 = null;
@@ -438,7 +438,7 @@ final class SceneGraph {
 
     public void method293(int i, int k, int l)
     {
-        Ground class30_sub3 = groundArray[i][k][l];
+        Tile class30_sub3 = tileArray[i][k][l];
         if(class30_sub3 == null)
             return;
         for(int j1 = 0; j1 < class30_sub3.anInt1317; j1++)
@@ -455,7 +455,7 @@ final class SceneGraph {
 
     public void method294(int i, int j, int k)
     {
-        Ground class30_sub3 = groundArray[i][k][j];
+        Tile class30_sub3 = tileArray[i][k][j];
         if(class30_sub3 == null)
             return;
         class30_sub3.obj3 = null;
@@ -463,7 +463,7 @@ final class SceneGraph {
 
     public void method295(int i, int j, int k)
     {
-        Ground class30_sub3 = groundArray[i][j][k];
+        Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 != null)
         {
             class30_sub3.obj4 = null;
@@ -472,7 +472,7 @@ final class SceneGraph {
 
     public Object1 method296(int i, int j, int k)
     {
-        Ground class30_sub3 = groundArray[i][j][k];
+        Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 == null)
             return null;
         else
@@ -481,7 +481,7 @@ final class SceneGraph {
 
     public Object2 method297(int i, int k, int l)
     {
-        Ground class30_sub3 = groundArray[l][i][k];
+        Tile class30_sub3 = tileArray[l][i][k];
         if(class30_sub3 == null)
             return null;
         else
@@ -490,7 +490,7 @@ final class SceneGraph {
 
     public Object5 method298(int i, int j, int k)
     {
-        Ground class30_sub3 = groundArray[k][i][j];
+        Tile class30_sub3 = tileArray[k][i][j];
         if(class30_sub3 == null)
             return null;
         for(int l = 0; l < class30_sub3.anInt1317; l++)
@@ -504,7 +504,7 @@ final class SceneGraph {
 
     public Object3 method299(int i, int j, int k)
     {
-        Ground class30_sub3 = groundArray[k][j][i];
+        Tile class30_sub3 = tileArray[k][j][i];
         if(class30_sub3 == null || class30_sub3.obj3 == null)
             return null;
         else
@@ -513,7 +513,7 @@ final class SceneGraph {
 
     public int method300(int i, int j, int k)
     {
-        Ground class30_sub3 = groundArray[i][j][k];
+        Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 == null || class30_sub3.obj1 == null)
             return 0;
         else
@@ -522,7 +522,7 @@ final class SceneGraph {
 
     public int method301(int i, int j, int l)
     {
-        Ground class30_sub3 = groundArray[i][j][l];
+        Tile class30_sub3 = tileArray[i][j][l];
         if(class30_sub3 == null || class30_sub3.obj2 == null)
             return 0;
         else
@@ -531,7 +531,7 @@ final class SceneGraph {
 
     public int method302(int i, int j, int k)
     {
-        Ground class30_sub3 = groundArray[i][j][k];
+        Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 == null)
             return 0;
         for(int l = 0; l < class30_sub3.anInt1317; l++)
@@ -546,24 +546,24 @@ final class SceneGraph {
 
     public int method303(int i, int j, int k)
     {
-        Ground class30_sub3 = groundArray[i][j][k];
+        Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 == null || class30_sub3.obj3 == null)
             return 0;
         else
             return class30_sub3.obj3.uid;
     }
 
-    public int method304(int i, int j, int k, int l)
+    public int getIDTAGForXYZ(int i, int j, int k, int l)
     {
-        Ground class30_sub3 = groundArray[i][j][k];
+        Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 == null)
             return -1;
         if(class30_sub3.obj1 != null && class30_sub3.obj1.uid == l)
             return class30_sub3.obj1.aByte281 & 0xff;
         if(class30_sub3.obj2 != null && class30_sub3.obj2.uid == l)
-            return class30_sub3.obj2.aByte506 & 0xff;
+            return class30_sub3.obj2.objConf & 0xff;
         if(class30_sub3.obj3 != null && class30_sub3.obj3.uid == l)
-            return class30_sub3.obj3.aByte816 & 0xff;
+            return class30_sub3.obj3.objConf & 0xff;
         for(int i1 = 0; i1 < class30_sub3.anInt1317; i1++)
             if(class30_sub3.obj5Array[i1].uid == l)
                 return class30_sub3.obj5Array[i1].aByte530 & 0xff;
@@ -577,13 +577,13 @@ final class SceneGraph {
         int l = 768;//was parameter
         int j1 = (int)Math.sqrt(k * k + i * i + i1 * i1);
         int k1 = l * j1 >> 8;
-        for(int l1 = 0; l1 < anInt437; l1++)
+        for(int l1 = 0; l1 < zMapSize; l1++)
         {
-            for(int i2 = 0; i2 < anInt438; i2++)
+            for(int i2 = 0; i2 < xMapSize; i2++)
             {
-                for(int j2 = 0; j2 < anInt439; j2++)
+                for(int j2 = 0; j2 < yMapSize; j2++)
                 {
-                    Ground class30_sub3 = groundArray[l1][i2][j2];
+                    Tile class30_sub3 = tileArray[l1][i2][j2];
                     if(class30_sub3 != null)
                     {
                         Object1 class10 = class30_sub3.obj1;
@@ -625,27 +625,27 @@ final class SceneGraph {
 
     private void method306(int i, int j, Model model, int k)
     {
-        if(i < anInt438)
+        if(i < xMapSize)
         {
-            Ground class30_sub3 = groundArray[j][i + 1][k];
+            Tile class30_sub3 = tileArray[j][i + 1][k];
             if(class30_sub3 != null && class30_sub3.obj3 != null && class30_sub3.obj3.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
                 method308(model, (Model)class30_sub3.obj3.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
         }
-        if(k < anInt438)
+        if(k < xMapSize)
         {
-            Ground class30_sub3_1 = groundArray[j][i][k + 1];
+            Tile class30_sub3_1 = tileArray[j][i][k + 1];
             if(class30_sub3_1 != null && class30_sub3_1.obj3 != null && class30_sub3_1.obj3.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
                 method308(model, (Model)class30_sub3_1.obj3.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
         }
-        if(i < anInt438 && k < anInt439)
+        if(i < xMapSize && k < yMapSize)
         {
-            Ground class30_sub3_2 = groundArray[j][i + 1][k + 1];
+            Tile class30_sub3_2 = tileArray[j][i + 1][k + 1];
             if(class30_sub3_2 != null && class30_sub3_2.obj3 != null && class30_sub3_2.obj3.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
                 method308(model, (Model)class30_sub3_2.obj3.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
         }
-        if(i < anInt438 && k > 0)
+        if(i < xMapSize && k > 0)
         {
-            Ground class30_sub3_3 = groundArray[j][i + 1][k - 1];
+            Tile class30_sub3_3 = tileArray[j][i + 1][k - 1];
             if(class30_sub3_3 != null && class30_sub3_3.obj3 != null && class30_sub3_3.obj3.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
                 method308(model, (Model)class30_sub3_3.obj3.aClass30_Sub2_Sub4_814, 128, 0, -128, true);
         }
@@ -659,18 +659,18 @@ final class SceneGraph {
         int l1 = i1 - 1;
         int i2 = i1 + k;
         for(int j2 = i; j2 <= i + 1; j2++)
-            if(j2 != anInt437)
+            if(j2 != zMapSize)
             {
                 for(int k2 = j1; k2 <= k1; k2++)
-                    if(k2 >= 0 && k2 < anInt438)
+                    if(k2 >= 0 && k2 < xMapSize)
                     {
                         for(int l2 = l1; l2 <= i2; l2++)
-                            if(l2 >= 0 && l2 < anInt439 && (!flag || k2 >= k1 || l2 >= i2 || l2 < i1 && k2 != l))
+                            if(l2 >= 0 && l2 < yMapSize && (!flag || k2 >= k1 || l2 >= i2 || l2 < i1 && k2 != l))
                             {
-                                Ground class30_sub3 = groundArray[j2][k2][l2];
+                                Tile class30_sub3 = tileArray[j2][k2][l2];
                                 if(class30_sub3 != null)
                                 {
-                                    int i3 = (anIntArrayArrayArray440[j2][k2][l2] + anIntArrayArrayArray440[j2][k2 + 1][l2] + anIntArrayArrayArray440[j2][k2][l2 + 1] + anIntArrayArrayArray440[j2][k2 + 1][l2 + 1]) / 4 - (anIntArrayArrayArray440[i][l][i1] + anIntArrayArrayArray440[i][l + 1][i1] + anIntArrayArrayArray440[i][l][i1 + 1] + anIntArrayArrayArray440[i][l + 1][i1 + 1]) / 4;
+                                    int i3 = (heightmap[j2][k2][l2] + heightmap[j2][k2 + 1][l2] + heightmap[j2][k2][l2 + 1] + heightmap[j2][k2 + 1][l2 + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
                                     Object1 class10 = class30_sub3.obj1;
                                     if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.aClass33Array1425 != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
@@ -757,13 +757,13 @@ final class SceneGraph {
 
     }
 
-    public void method309(int ai[], int i, int k, int l, int i1)
+    public void drawMinimapTile(int pixels[], int drawOffset, int heightLevel, int x, int y)
     {
         int j = 512;//was parameter
-        Ground class30_sub3 = groundArray[k][l][i1];
+        Tile class30_sub3 = tileArray[heightLevel][x][y];
         if(class30_sub3 == null)
             return;
-        PlainTile plainTile = class30_sub3.aPlainTile_1311;
+        PlainTile plainTile = class30_sub3.myPlainTile;
         if(plainTile != null)
         {
             int j1 = plainTile.colourRGB;
@@ -771,22 +771,22 @@ final class SceneGraph {
                 return;
             for(int k1 = 0; k1 < 4; k1++)
             {
-                ai[i] = j1;
-                ai[i + 1] = j1;
-                ai[i + 2] = j1;
-                ai[i + 3] = j1;
-                i += j;
+                pixels[drawOffset] = j1;
+                pixels[drawOffset + 1] = j1;
+                pixels[drawOffset + 2] = j1;
+                pixels[drawOffset + 3] = j1;
+                drawOffset += j;
             }
 
             return;
         }
-        Class40 class40 = class30_sub3.aClass40_1312;
-        if(class40 == null)
+        ShapedTile shapedTile = class30_sub3.aShapedTile_1312;
+        if(shapedTile == null)
             return;
-        int l1 = class40.anInt684;
-        int i2 = class40.anInt685;
-        int j2 = class40.anInt686;
-        int k2 = class40.anInt687;
+        int l1 = shapedTile.shapeA;
+        int i2 = shapedTile.shapeB;
+        int j2 = shapedTile.colourRGB;
+        int k2 = shapedTile.colourRGBA;
         int ai1[] = anIntArrayArray489[l1];
         int ai2[] = anIntArrayArray490[i2];
         int l2 = 0;
@@ -794,11 +794,11 @@ final class SceneGraph {
         {
             for(int i3 = 0; i3 < 4; i3++)
             {
-                ai[i] = ai1[ai2[l2++]] != 0 ? k2 : j2;
-                ai[i + 1] = ai1[ai2[l2++]] != 0 ? k2 : j2;
-                ai[i + 2] = ai1[ai2[l2++]] != 0 ? k2 : j2;
-                ai[i + 3] = ai1[ai2[l2++]] != 0 ? k2 : j2;
-                i += j;
+                pixels[drawOffset] = ai1[ai2[l2++]] != 0 ? k2 : j2;
+                pixels[drawOffset + 1] = ai1[ai2[l2++]] != 0 ? k2 : j2;
+                pixels[drawOffset + 2] = ai1[ai2[l2++]] != 0 ? k2 : j2;
+                pixels[drawOffset + 3] = ai1[ai2[l2++]] != 0 ? k2 : j2;
+                drawOffset += j;
             }
 
             return;
@@ -806,35 +806,35 @@ final class SceneGraph {
         for(int j3 = 0; j3 < 4; j3++)
         {
             if(ai1[ai2[l2++]] != 0)
-                ai[i] = k2;
+                pixels[drawOffset] = k2;
             if(ai1[ai2[l2++]] != 0)
-                ai[i + 1] = k2;
+                pixels[drawOffset + 1] = k2;
             if(ai1[ai2[l2++]] != 0)
-                ai[i + 2] = k2;
+                pixels[drawOffset + 2] = k2;
             if(ai1[ai2[l2++]] != 0)
-                ai[i + 3] = k2;
-            i += j;
+                pixels[drawOffset + 3] = k2;
+            drawOffset += j;
         }
 
     }
 
-    public static void method310(int i, int j, int k, int l, int ai[])
+    public static void initialize(int i, int j, int daW, int daH, int ai[])
     {
-        anInt495 = 0;
-        anInt496 = 0;
-        anInt497 = k;
-        anInt498 = l;
-        anInt493 = k / 2;
-        anInt494 = l / 2;
+        left = 0;
+        top = 0;
+        right = daW;
+        bottom = daH;
+        midX = daW / 2;
+        midY = daH / 2;
         boolean aflag[][][][] = new boolean[9][32][53][53];
         for(int i1 = 128; i1 <= 384; i1 += 32)
         {
             for(int j1 = 0; j1 < 2048; j1 += 64)
             {
-                anInt458 = Model.modelIntArray1[i1];
-                anInt459 = Model.modelIntArray2[i1];
-                anInt460 = Model.modelIntArray1[j1];
-                anInt461 = Model.modelIntArray2[j1];
+                yCurveSine = Model.Sine[i1];
+                yCurveCosine = Model.Cosine[i1];
+                xCurveSine = Model.Sine[j1];
+                xCurveCosine = Model.Cosine[j1];
                 int l1 = (i1 - 128) / 32;
                 int j2 = j1 / 64;
                 for(int l2 = -26; l2 <= 26; l2++)
@@ -908,74 +908,74 @@ label0:
 
     private static boolean method311(int i, int j, int k)
     {
-        int l = j * anInt460 + k * anInt461 >> 16;
-        int i1 = j * anInt461 - k * anInt460 >> 16;
-        int j1 = i * anInt458 + i1 * anInt459 >> 16;
-        int k1 = i * anInt459 - i1 * anInt458 >> 16;
+        int l = j * xCurveSine + k * xCurveCosine >> 16;
+        int i1 = j * xCurveCosine - k * xCurveSine >> 16;
+        int j1 = i * yCurveSine + i1 * yCurveCosine >> 16;
+        int k1 = i * yCurveCosine - i1 * yCurveSine >> 16;
         if(j1 < 50 || j1 > 3500)
             return false;
-        int l1 = anInt493 + (l << 9) / j1;
-        int i2 = anInt494 + (k1 << 9) / j1;
-        return l1 >= anInt495 && l1 <= anInt497 && i2 >= anInt496 && i2 <= anInt498;
+        int l1 = midX + (l << 9) / j1;
+        int i2 = midY + (k1 << 9) / j1;
+        return l1 >= left && l1 <= right && i2 >= top && i2 <= bottom;
     }
 
-    public void method312(int i, int j)
+    public void setClick(int i, int j)
     {
-        aBoolean467 = true;
-        anInt468 = j;
-        anInt469 = i;
-        anInt470 = -1;
-        anInt471 = -1;
+        isClicked = true;
+        clickX = j;
+        clickY = i;
+        clickedTileX = -1;
+        clickedTileY = -1;
     }
 
-    public void method313(int i, int j, int k, int l, int i1, int j1)
+    public void render(int xCampos, int yCampos, int xCurve, int zCampos, int plane, int yCurve)
     {
-        if(i < 0)
-            i = 0;
+        if(xCampos < 0)
+            xCampos = 0;
         else
-        if(i >= anInt438 * 128)
-            i = anInt438 * 128 - 1;
-        if(j < 0)
-            j = 0;
+        if(xCampos >= xMapSize * 128)
+            xCampos = xMapSize * 128 - 1;
+        if(yCampos < 0)
+            yCampos = 0;
         else
-        if(j >= anInt439 * 128)
-            j = anInt439 * 128 - 1;
+        if(yCampos >= yMapSize * 128)
+            yCampos = yMapSize * 128 - 1;
         anInt448++;
-        anInt458 = Model.modelIntArray1[j1];
-        anInt459 = Model.modelIntArray2[j1];
-        anInt460 = Model.modelIntArray1[k];
-        anInt461 = Model.modelIntArray2[k];
-        aBooleanArrayArray492 = aBooleanArrayArrayArrayArray491[(j1 - 128) / 32][k / 64];
-        anInt455 = i;
-        anInt456 = l;
-        anInt457 = j;
-        anInt453 = i / 128;
-        anInt454 = j / 128;
-        anInt447 = i1;
-        anInt449 = anInt453 - 25;
+        yCurveSine = Model.Sine[yCurve];
+        yCurveCosine = Model.Cosine[yCurve];
+        xCurveSine = Model.Sine[xCurve];
+        xCurveCosine = Model.Cosine[xCurve];
+        aBooleanArrayArray492 = aBooleanArrayArrayArrayArray491[(yCurve - 128) / 32][xCurve / 64];
+        xCameraPosition = xCampos;
+        zCameraPosition = zCampos;
+        yCameraPosition = yCampos;
+        xCameraPositionTile = xCampos / 128;
+        yCameraPositionTile = yCampos / 128;
+        this.plane = plane;
+        anInt449 = xCameraPositionTile - 25;
         if(anInt449 < 0)
             anInt449 = 0;
-        anInt451 = anInt454 - 25;
+        anInt451 = yCameraPositionTile - 25;
         if(anInt451 < 0)
             anInt451 = 0;
-        anInt450 = anInt453 + 25;
-        if(anInt450 > anInt438)
-            anInt450 = anInt438;
-        anInt452 = anInt454 + 25;
-        if(anInt452 > anInt439)
-            anInt452 = anInt439;
+        anInt450 = xCameraPositionTile + 25;
+        if(anInt450 > xMapSize)
+            anInt450 = xMapSize;
+        anInt452 = yCameraPositionTile + 25;
+        if(anInt452 > yMapSize)
+            anInt452 = yMapSize;
         method319();
         anInt446 = 0;
-        for(int k1 = anInt442; k1 < anInt437; k1++)
+        for(int k1 = anInt442; k1 < zMapSize; k1++)
         {
-            Ground aclass30_sub3[][] = groundArray[k1];
+            Tile aclass30_sub3[][] = tileArray[k1];
             for(int i2 = anInt449; i2 < anInt450; i2++)
             {
                 for(int k2 = anInt451; k2 < anInt452; k2++)
                 {
-                    Ground class30_sub3 = aclass30_sub3[i2][k2];
+                    Tile class30_sub3 = aclass30_sub3[i2][k2];
                     if(class30_sub3 != null)
-                        if(class30_sub3.anInt1321 > i1 || !aBooleanArrayArray492[(i2 - anInt453) + 25][(k2 - anInt454) + 25] && anIntArrayArrayArray440[k1][i2][k2] - l < 2000)
+                        if(class30_sub3.anInt1321 > plane || !aBooleanArrayArray492[(i2 - xCameraPositionTile) + 25][(k2 - yCameraPositionTile) + 25] && heightmap[k1][i2][k2] - zCampos < 2000)
                         {
                             class30_sub3.aBoolean1322 = false;
                             class30_sub3.aBoolean1323 = false;
@@ -993,52 +993,52 @@ label0:
 
         }
 
-        for(int l1 = anInt442; l1 < anInt437; l1++)
+        for(int l1 = anInt442; l1 < zMapSize; l1++)
         {
-            Ground aclass30_sub3_1[][] = groundArray[l1];
+            Tile aclass30_sub3_1[][] = tileArray[l1];
             for(int l2 = -25; l2 <= 0; l2++)
             {
-                int i3 = anInt453 + l2;
-                int k3 = anInt453 - l2;
+                int i3 = xCameraPositionTile + l2;
+                int k3 = xCameraPositionTile - l2;
                 if(i3 >= anInt449 || k3 < anInt450)
                 {
                     for(int i4 = -25; i4 <= 0; i4++)
                     {
-                        int k4 = anInt454 + i4;
-                        int i5 = anInt454 - i4;
+                        int k4 = yCameraPositionTile + i4;
+                        int i5 = yCameraPositionTile - i4;
                         if(i3 >= anInt449)
                         {
                             if(k4 >= anInt451)
                             {
-                                Ground class30_sub3_1 = aclass30_sub3_1[i3][k4];
+                                Tile class30_sub3_1 = aclass30_sub3_1[i3][k4];
                                 if(class30_sub3_1 != null && class30_sub3_1.aBoolean1322)
-                                    method314(class30_sub3_1, true);
+                                    renderTileF(class30_sub3_1, true);
                             }
                             if(i5 < anInt452)
                             {
-                                Ground class30_sub3_2 = aclass30_sub3_1[i3][i5];
+                                Tile class30_sub3_2 = aclass30_sub3_1[i3][i5];
                                 if(class30_sub3_2 != null && class30_sub3_2.aBoolean1322)
-                                    method314(class30_sub3_2, true);
+                                    renderTileF(class30_sub3_2, true);
                             }
                         }
                         if(k3 < anInt450)
                         {
                             if(k4 >= anInt451)
                             {
-                                Ground class30_sub3_3 = aclass30_sub3_1[k3][k4];
+                                Tile class30_sub3_3 = aclass30_sub3_1[k3][k4];
                                 if(class30_sub3_3 != null && class30_sub3_3.aBoolean1322)
-                                    method314(class30_sub3_3, true);
+                                    renderTileF(class30_sub3_3, true);
                             }
                             if(i5 < anInt452)
                             {
-                                Ground class30_sub3_4 = aclass30_sub3_1[k3][i5];
+                                Tile class30_sub3_4 = aclass30_sub3_1[k3][i5];
                                 if(class30_sub3_4 != null && class30_sub3_4.aBoolean1322)
-                                    method314(class30_sub3_4, true);
+                                    renderTileF(class30_sub3_4, true);
                             }
                         }
                         if(anInt446 == 0)
                         {
-                            aBoolean467 = false;
+                            isClicked = false;
                             return;
                         }
                     }
@@ -1048,52 +1048,52 @@ label0:
 
         }
 
-        for(int j2 = anInt442; j2 < anInt437; j2++)
+        for(int j2 = anInt442; j2 < zMapSize; j2++)
         {
-            Ground aclass30_sub3_2[][] = groundArray[j2];
+            Tile aclass30_sub3_2[][] = tileArray[j2];
             for(int j3 = -25; j3 <= 0; j3++)
             {
-                int l3 = anInt453 + j3;
-                int j4 = anInt453 - j3;
+                int l3 = xCameraPositionTile + j3;
+                int j4 = xCameraPositionTile - j3;
                 if(l3 >= anInt449 || j4 < anInt450)
                 {
                     for(int l4 = -25; l4 <= 0; l4++)
                     {
-                        int j5 = anInt454 + l4;
-                        int k5 = anInt454 - l4;
+                        int j5 = yCameraPositionTile + l4;
+                        int k5 = yCameraPositionTile - l4;
                         if(l3 >= anInt449)
                         {
                             if(j5 >= anInt451)
                             {
-                                Ground class30_sub3_5 = aclass30_sub3_2[l3][j5];
+                                Tile class30_sub3_5 = aclass30_sub3_2[l3][j5];
                                 if(class30_sub3_5 != null && class30_sub3_5.aBoolean1322)
-                                    method314(class30_sub3_5, false);
+                                    renderTileF(class30_sub3_5, false);
                             }
                             if(k5 < anInt452)
                             {
-                                Ground class30_sub3_6 = aclass30_sub3_2[l3][k5];
+                                Tile class30_sub3_6 = aclass30_sub3_2[l3][k5];
                                 if(class30_sub3_6 != null && class30_sub3_6.aBoolean1322)
-                                    method314(class30_sub3_6, false);
+                                    renderTileF(class30_sub3_6, false);
                             }
                         }
                         if(j4 < anInt450)
                         {
                             if(j5 >= anInt451)
                             {
-                                Ground class30_sub3_7 = aclass30_sub3_2[j4][j5];
+                                Tile class30_sub3_7 = aclass30_sub3_2[j4][j5];
                                 if(class30_sub3_7 != null && class30_sub3_7.aBoolean1322)
-                                    method314(class30_sub3_7, false);
+                                    renderTileF(class30_sub3_7, false);
                             }
                             if(k5 < anInt452)
                             {
-                                Ground class30_sub3_8 = aclass30_sub3_2[j4][k5];
+                                Tile class30_sub3_8 = aclass30_sub3_2[j4][k5];
                                 if(class30_sub3_8 != null && class30_sub3_8.aBoolean1322)
-                                    method314(class30_sub3_8, false);
+                                    renderTileF(class30_sub3_8, false);
                             }
                         }
                         if(anInt446 == 0)
                         {
-                            aBoolean467 = false;
+                            isClicked = false;
                             return;
                         }
                     }
@@ -1103,118 +1103,118 @@ label0:
 
         }
 
-        aBoolean467 = false;
+        isClicked = false;
     }
 
-    private void method314(Ground class30_sub3, boolean flag)
+    private void renderTileF(Tile class30_sub3, boolean flag)
     {
         aClass19_477.insertHead(class30_sub3);
         do
         {
-            Ground class30_sub3_1;
+            Tile TILE;
             do
             {
-                class30_sub3_1 = (Ground)aClass19_477.popHead();
-                if(class30_sub3_1 == null)
+                TILE = (Tile)aClass19_477.popHead();
+                if(TILE == null)
                     return;
-            } while(!class30_sub3_1.aBoolean1323);
-            int i = class30_sub3_1.anInt1308;
-            int j = class30_sub3_1.anInt1309;
-            int k = class30_sub3_1.anInt1307;
-            int l = class30_sub3_1.anInt1310;
-            Ground aclass30_sub3[][] = groundArray[k];
-            if(class30_sub3_1.aBoolean1322)
+            } while(!TILE.aBoolean1323);
+            int X = TILE.anInt1308;
+            int Y = TILE.anInt1309;
+            int k = TILE.anInt1307;
+            int l = TILE.anInt1310;
+            Tile aclass30_sub3[][] = tileArray[k];
+            if(TILE.aBoolean1322)
             {
                 if(flag)
                 {
                     if(k > 0)
                     {
-                        Ground class30_sub3_2 = groundArray[k - 1][i][j];
+                        Tile class30_sub3_2 = tileArray[k - 1][X][Y];
                         if(class30_sub3_2 != null && class30_sub3_2.aBoolean1323)
                             continue;
                     }
-                    if(i <= anInt453 && i > anInt449)
+                    if(X <= xCameraPositionTile && X > anInt449)
                     {
-                        Ground class30_sub3_3 = aclass30_sub3[i - 1][j];
-                        if(class30_sub3_3 != null && class30_sub3_3.aBoolean1323 && (class30_sub3_3.aBoolean1322 || (class30_sub3_1.anInt1320 & 1) == 0))
+                        Tile class30_sub3_3 = aclass30_sub3[X - 1][Y];
+                        if(class30_sub3_3 != null && class30_sub3_3.aBoolean1323 && (class30_sub3_3.aBoolean1322 || (TILE.anInt1320 & 1) == 0))
                             continue;
                     }
-                    if(i >= anInt453 && i < anInt450 - 1)
+                    if(X >= xCameraPositionTile && X < anInt450 - 1)
                     {
-                        Ground class30_sub3_4 = aclass30_sub3[i + 1][j];
-                        if(class30_sub3_4 != null && class30_sub3_4.aBoolean1323 && (class30_sub3_4.aBoolean1322 || (class30_sub3_1.anInt1320 & 4) == 0))
+                        Tile class30_sub3_4 = aclass30_sub3[X + 1][Y];
+                        if(class30_sub3_4 != null && class30_sub3_4.aBoolean1323 && (class30_sub3_4.aBoolean1322 || (TILE.anInt1320 & 4) == 0))
                             continue;
                     }
-                    if(j <= anInt454 && j > anInt451)
+                    if(Y <= yCameraPositionTile && Y > anInt451)
                     {
-                        Ground class30_sub3_5 = aclass30_sub3[i][j - 1];
-                        if(class30_sub3_5 != null && class30_sub3_5.aBoolean1323 && (class30_sub3_5.aBoolean1322 || (class30_sub3_1.anInt1320 & 8) == 0))
+                        Tile class30_sub3_5 = aclass30_sub3[X][Y - 1];
+                        if(class30_sub3_5 != null && class30_sub3_5.aBoolean1323 && (class30_sub3_5.aBoolean1322 || (TILE.anInt1320 & 8) == 0))
                             continue;
                     }
-                    if(j >= anInt454 && j < anInt452 - 1)
+                    if(Y >= yCameraPositionTile && Y < anInt452 - 1)
                     {
-                        Ground class30_sub3_6 = aclass30_sub3[i][j + 1];
-                        if(class30_sub3_6 != null && class30_sub3_6.aBoolean1323 && (class30_sub3_6.aBoolean1322 || (class30_sub3_1.anInt1320 & 2) == 0))
+                        Tile class30_sub3_6 = aclass30_sub3[X][Y + 1];
+                        if(class30_sub3_6 != null && class30_sub3_6.aBoolean1323 && (class30_sub3_6.aBoolean1322 || (TILE.anInt1320 & 2) == 0))
                             continue;
                     }
                 } else
                 {
                     flag = true;
                 }
-                class30_sub3_1.aBoolean1322 = false;
-                if(class30_sub3_1.aClass30_Sub3_1329 != null)
+                TILE.aBoolean1322 = false;
+                if(TILE.aClass30_Sub3_1329 != null)
                 {
-                    Ground class30_sub3_7 = class30_sub3_1.aClass30_Sub3_1329;
-                    if(class30_sub3_7.aPlainTile_1311 != null)
+                    Tile class30_sub3_7 = TILE.aClass30_Sub3_1329;
+                    if(class30_sub3_7.myPlainTile != null)
                     {
-                        if(!method320(0, i, j))
-                            method315(class30_sub3_7.aPlainTile_1311, 0, anInt458, anInt459, anInt460, anInt461, i, j);
+                        if(!method320(0, X, Y))
+                            renderTile(class30_sub3_7.myPlainTile, 0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
                     } else
-                    if(class30_sub3_7.aClass40_1312 != null && !method320(0, i, j))
-                        method316(i, anInt458, anInt460, class30_sub3_7.aClass40_1312, anInt459, j, anInt461);
+                    if(class30_sub3_7.aShapedTile_1312 != null && !method320(0, X, Y))
+                        drawShapedTile(X, yCurveSine, xCurveSine, class30_sub3_7.aShapedTile_1312, yCurveCosine, Y, xCurveCosine);
                     Object1 class10 = class30_sub3_7.obj1;
                     if(class10 != null)
-                        class10.aClass30_Sub2_Sub4_278.method443(0, anInt458, anInt459, anInt460, anInt461, class10.anInt274 - anInt455, class10.anInt273 - anInt456, class10.anInt275 - anInt457, class10.uid);
+                        class10.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10.anInt274 - xCameraPosition, class10.anInt273 - zCameraPosition, class10.anInt275 - yCameraPosition, class10.uid);
                     for(int i2 = 0; i2 < class30_sub3_7.anInt1317; i2++)
                     {
                         Object5 class28 = class30_sub3_7.obj5Array[i2];
                         if(class28 != null)
-                            class28.aClass30_Sub2_Sub4_521.method443(class28.anInt522, anInt458, anInt459, anInt460, anInt461, class28.anInt519 - anInt455, class28.anInt518 - anInt456, class28.anInt520 - anInt457, class28.uid);
+                            class28.aClass30_Sub2_Sub4_521.renderAtPoint(class28.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28.anInt519 - xCameraPosition, class28.anInt518 - zCameraPosition, class28.anInt520 - yCameraPosition, class28.uid);
                     }
 
                 }
                 boolean flag1 = false;
-                if(class30_sub3_1.aPlainTile_1311 != null)
+                if(TILE.myPlainTile != null)
                 {
-                    if(!method320(l, i, j))
+                    if(!method320(l, X, Y))
                     {
                         flag1 = true;
-                        method315(class30_sub3_1.aPlainTile_1311, l, anInt458, anInt459, anInt460, anInt461, i, j);
+                        renderTile(TILE.myPlainTile, l, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
                     }
                 } else
-                if(class30_sub3_1.aClass40_1312 != null && !method320(l, i, j))
+                if(TILE.aShapedTile_1312 != null && !method320(l, X, Y))
                 {
                     flag1 = true;
-                    method316(i, anInt458, anInt460, class30_sub3_1.aClass40_1312, anInt459, j, anInt461);
+                    drawShapedTile(X, yCurveSine, xCurveSine, TILE.aShapedTile_1312, yCurveCosine, Y, xCurveCosine);
                 }
                 int j1 = 0;
                 int j2 = 0;
-                Object1 class10_3 = class30_sub3_1.obj1;
-                Object2 class26_1 = class30_sub3_1.obj2;
+                Object1 class10_3 = TILE.obj1;
+                Object2 class26_1 = TILE.obj2;
                 if(class10_3 != null || class26_1 != null)
                 {
-                    if(anInt453 == i)
+                    if(xCameraPositionTile == X)
                         j1++;
                     else
-                    if(anInt453 < i)
+                    if(xCameraPositionTile < X)
                         j1 += 2;
-                    if(anInt454 == j)
+                    if(yCameraPositionTile == Y)
                         j1 += 3;
                     else
-                    if(anInt454 > j)
+                    if(yCameraPositionTile > Y)
                         j1 += 6;
                     j2 = anIntArray478[j1];
-                    class30_sub3_1.anInt1328 = anIntArray480[j1];
+                    TILE.anInt1328 = anIntArray480[j1];
                 }
                 if(class10_3 != null)
                 {
@@ -1222,46 +1222,46 @@ label0:
                     {
                         if(class10_3.orientation == 16)
                         {
-                            class30_sub3_1.anInt1325 = 3;
-                            class30_sub3_1.anInt1326 = anIntArray481[j1];
-                            class30_sub3_1.anInt1327 = 3 - class30_sub3_1.anInt1326;
+                            TILE.anInt1325 = 3;
+                            TILE.anInt1326 = anIntArray481[j1];
+                            TILE.anInt1327 = 3 - TILE.anInt1326;
                         } else
                         if(class10_3.orientation == 32)
                         {
-                            class30_sub3_1.anInt1325 = 6;
-                            class30_sub3_1.anInt1326 = anIntArray482[j1];
-                            class30_sub3_1.anInt1327 = 6 - class30_sub3_1.anInt1326;
+                            TILE.anInt1325 = 6;
+                            TILE.anInt1326 = anIntArray482[j1];
+                            TILE.anInt1327 = 6 - TILE.anInt1326;
                         } else
                         if(class10_3.orientation == 64)
                         {
-                            class30_sub3_1.anInt1325 = 12;
-                            class30_sub3_1.anInt1326 = anIntArray483[j1];
-                            class30_sub3_1.anInt1327 = 12 - class30_sub3_1.anInt1326;
+                            TILE.anInt1325 = 12;
+                            TILE.anInt1326 = anIntArray483[j1];
+                            TILE.anInt1327 = 12 - TILE.anInt1326;
                         } else
                         {
-                            class30_sub3_1.anInt1325 = 9;
-                            class30_sub3_1.anInt1326 = anIntArray484[j1];
-                            class30_sub3_1.anInt1327 = 9 - class30_sub3_1.anInt1326;
+                            TILE.anInt1325 = 9;
+                            TILE.anInt1326 = anIntArray484[j1];
+                            TILE.anInt1327 = 9 - TILE.anInt1326;
                         }
                     } else
                     {
-                        class30_sub3_1.anInt1325 = 0;
+                        TILE.anInt1325 = 0;
                     }
-                    if((class10_3.orientation & j2) != 0 && !method321(l, i, j, class10_3.orientation))
-                        class10_3.aClass30_Sub2_Sub4_278.method443(0, anInt458, anInt459, anInt460, anInt461, class10_3.anInt274 - anInt455, class10_3.anInt273 - anInt456, class10_3.anInt275 - anInt457, class10_3.uid);
-                    if((class10_3.orientation1 & j2) != 0 && !method321(l, i, j, class10_3.orientation1))
-                        class10_3.aClass30_Sub2_Sub4_279.method443(0, anInt458, anInt459, anInt460, anInt461, class10_3.anInt274 - anInt455, class10_3.anInt273 - anInt456, class10_3.anInt275 - anInt457, class10_3.uid);
+                    if((class10_3.orientation & j2) != 0 && !method321(l, X, Y, class10_3.orientation))
+                        class10_3.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_3.anInt274 - xCameraPosition, class10_3.anInt273 - zCameraPosition, class10_3.anInt275 - yCameraPosition, class10_3.uid);
+                    if((class10_3.orientation1 & j2) != 0 && !method321(l, X, Y, class10_3.orientation1))
+                        class10_3.aClass30_Sub2_Sub4_279.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_3.anInt274 - xCameraPosition, class10_3.anInt273 - zCameraPosition, class10_3.anInt275 - yCameraPosition, class10_3.uid);
                 }
-                if(class26_1 != null && !method322(l, i, j, class26_1.aClass30_Sub2_Sub4_504.modelHeight))
-                    if((class26_1.anInt502 & j2) != 0)
-                        class26_1.aClass30_Sub2_Sub4_504.method443(class26_1.anInt503, anInt458, anInt459, anInt460, anInt461, class26_1.anInt500 - anInt455, class26_1.anInt499 - anInt456, class26_1.anInt501 - anInt457, class26_1.uid);
+                if(class26_1 != null && !method322(l, X, Y, class26_1.myMob.modelHeight))
+                    if((class26_1.configBits & j2) != 0)
+                        class26_1.myMob.renderAtPoint(class26_1.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class26_1.X3D - xCameraPosition, class26_1.Z3D - zCameraPosition, class26_1.Y3D - yCameraPosition, class26_1.uid);
                     else
-                    if((class26_1.anInt502 & 0x300) != 0)
+                    if((class26_1.configBits & 0x300) != 0)
                     {
-                        int j4 = class26_1.anInt500 - anInt455;
-                        int l5 = class26_1.anInt499 - anInt456;
-                        int k6 = class26_1.anInt501 - anInt457;
-                        int i8 = class26_1.anInt503;
+                        int j4 = class26_1.X3D - xCameraPosition;
+                        int l5 = class26_1.Z3D - zCameraPosition;
+                        int k6 = class26_1.Y3D - yCameraPosition;
+                        int i8 = class26_1.face;
                         int k9;
                         if(i8 == 1 || i8 == 2)
                             k9 = -j4;
@@ -1272,70 +1272,70 @@ label0:
                             k10 = -k6;
                         else
                             k10 = k6;
-                        if((class26_1.anInt502 & 0x100) != 0 && k10 < k9)
+                        if((class26_1.configBits & 0x100) != 0 && k10 < k9)
                         {
-                            int i11 = j4 + anIntArray463[i8];
-                            int k11 = k6 + anIntArray464[i8];
-                            class26_1.aClass30_Sub2_Sub4_504.method443(i8 * 512 + 256, anInt458, anInt459, anInt460, anInt461, i11, l5, k11, class26_1.uid);
+                            int i11 = j4 + faceXOffset2[i8];
+                            int k11 = k6 + faceYOffset2[i8];
+                            class26_1.myMob.renderAtPoint(i8 * 512 + 256, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, i11, l5, k11, class26_1.uid);
                         }
-                        if((class26_1.anInt502 & 0x200) != 0 && k10 > k9)
+                        if((class26_1.configBits & 0x200) != 0 && k10 > k9)
                         {
-                            int j11 = j4 + anIntArray465[i8];
-                            int l11 = k6 + anIntArray466[i8];
-                            class26_1.aClass30_Sub2_Sub4_504.method443(i8 * 512 + 1280 & 0x7ff, anInt458, anInt459, anInt460, anInt461, j11, l5, l11, class26_1.uid);
+                            int j11 = j4 + faceXOffset3[i8];
+                            int l11 = k6 + faceYOffset3[i8];
+                            class26_1.myMob.renderAtPoint(i8 * 512 + 1280 & 0x7ff, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, j11, l5, l11, class26_1.uid);
                         }
                     }
                 if(flag1)
                 {
-                    Object3 class49 = class30_sub3_1.obj3;
+                    Object3 class49 = TILE.obj3;
                     if(class49 != null)
-                        class49.aClass30_Sub2_Sub4_814.method443(0, anInt458, anInt459, anInt460, anInt461, class49.anInt812 - anInt455, class49.anInt811 - anInt456, class49.anInt813 - anInt457, class49.uid);
-                    Object4 object4_1 = class30_sub3_1.obj4;
+                        class49.aClass30_Sub2_Sub4_814.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class49.X3D - xCameraPosition, class49.Z3D - zCameraPosition, class49.Y3D - yCameraPosition, class49.uid);
+                    Object4 object4_1 = TILE.obj4;
                     if(object4_1 != null && object4_1.anInt52 == 0)
                     {
                         if(object4_1.aClass30_Sub2_Sub4_49 != null)
-                            object4_1.aClass30_Sub2_Sub4_49.method443(0, anInt458, anInt459, anInt460, anInt461, object4_1.anInt46 - anInt455, object4_1.anInt45 - anInt456, object4_1.anInt47 - anInt457, object4_1.uid);
+                            object4_1.aClass30_Sub2_Sub4_49.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.anInt46 - xCameraPosition, object4_1.anInt45 - zCameraPosition, object4_1.anInt47 - yCameraPosition, object4_1.uid);
                         if(object4_1.aClass30_Sub2_Sub4_50 != null)
-                            object4_1.aClass30_Sub2_Sub4_50.method443(0, anInt458, anInt459, anInt460, anInt461, object4_1.anInt46 - anInt455, object4_1.anInt45 - anInt456, object4_1.anInt47 - anInt457, object4_1.uid);
+                            object4_1.aClass30_Sub2_Sub4_50.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.anInt46 - xCameraPosition, object4_1.anInt45 - zCameraPosition, object4_1.anInt47 - yCameraPosition, object4_1.uid);
                         if(object4_1.aClass30_Sub2_Sub4_48 != null)
-                            object4_1.aClass30_Sub2_Sub4_48.method443(0, anInt458, anInt459, anInt460, anInt461, object4_1.anInt46 - anInt455, object4_1.anInt45 - anInt456, object4_1.anInt47 - anInt457, object4_1.uid);
+                            object4_1.aClass30_Sub2_Sub4_48.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.anInt46 - xCameraPosition, object4_1.anInt45 - zCameraPosition, object4_1.anInt47 - yCameraPosition, object4_1.uid);
                     }
                 }
-                int k4 = class30_sub3_1.anInt1320;
+                int k4 = TILE.anInt1320;
                 if(k4 != 0)
                 {
-                    if(i < anInt453 && (k4 & 4) != 0)
+                    if(X < xCameraPositionTile && (k4 & 4) != 0)
                     {
-                        Ground class30_sub3_17 = aclass30_sub3[i + 1][j];
+                        Tile class30_sub3_17 = aclass30_sub3[X + 1][Y];
                         if(class30_sub3_17 != null && class30_sub3_17.aBoolean1323)
                             aClass19_477.insertHead(class30_sub3_17);
                     }
-                    if(j < anInt454 && (k4 & 2) != 0)
+                    if(Y < yCameraPositionTile && (k4 & 2) != 0)
                     {
-                        Ground class30_sub3_18 = aclass30_sub3[i][j + 1];
+                        Tile class30_sub3_18 = aclass30_sub3[X][Y + 1];
                         if(class30_sub3_18 != null && class30_sub3_18.aBoolean1323)
                             aClass19_477.insertHead(class30_sub3_18);
                     }
-                    if(i > anInt453 && (k4 & 1) != 0)
+                    if(X > xCameraPositionTile && (k4 & 1) != 0)
                     {
-                        Ground class30_sub3_19 = aclass30_sub3[i - 1][j];
+                        Tile class30_sub3_19 = aclass30_sub3[X - 1][Y];
                         if(class30_sub3_19 != null && class30_sub3_19.aBoolean1323)
                             aClass19_477.insertHead(class30_sub3_19);
                     }
-                    if(j > anInt454 && (k4 & 8) != 0)
+                    if(Y > yCameraPositionTile && (k4 & 8) != 0)
                     {
-                        Ground class30_sub3_20 = aclass30_sub3[i][j - 1];
+                        Tile class30_sub3_20 = aclass30_sub3[X][Y - 1];
                         if(class30_sub3_20 != null && class30_sub3_20.aBoolean1323)
                             aClass19_477.insertHead(class30_sub3_20);
                     }
                 }
             }
-            if(class30_sub3_1.anInt1325 != 0)
+            if(TILE.anInt1325 != 0)
             {
                 boolean flag2 = true;
-                for(int k1 = 0; k1 < class30_sub3_1.anInt1317; k1++)
+                for(int k1 = 0; k1 < TILE.anInt1317; k1++)
                 {
-                    if(class30_sub3_1.obj5Array[k1].anInt528 == anInt448 || (class30_sub3_1.anIntArray1319[k1] & class30_sub3_1.anInt1325) != class30_sub3_1.anInt1326)
+                    if(TILE.obj5Array[k1].anInt528 == anInt448 || (TILE.anIntArray1319[k1] & TILE.anInt1325) != TILE.anInt1326)
                         continue;
                     flag2 = false;
                     break;
@@ -1343,32 +1343,32 @@ label0:
 
                 if(flag2)
                 {
-                    Object1 class10_1 = class30_sub3_1.obj1;
-                    if(!method321(l, i, j, class10_1.orientation))
-                        class10_1.aClass30_Sub2_Sub4_278.method443(0, anInt458, anInt459, anInt460, anInt461, class10_1.anInt274 - anInt455, class10_1.anInt273 - anInt456, class10_1.anInt275 - anInt457, class10_1.uid);
-                    class30_sub3_1.anInt1325 = 0;
+                    Object1 class10_1 = TILE.obj1;
+                    if(!method321(l, X, Y, class10_1.orientation))
+                        class10_1.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_1.anInt274 - xCameraPosition, class10_1.anInt273 - zCameraPosition, class10_1.anInt275 - yCameraPosition, class10_1.uid);
+                    TILE.anInt1325 = 0;
                 }
             }
-            if(class30_sub3_1.aBoolean1324)
+            if(TILE.aBoolean1324)
                 try
                 {
-                    int i1 = class30_sub3_1.anInt1317;
-                    class30_sub3_1.aBoolean1324 = false;
+                    int i1 = TILE.anInt1317;
+                    TILE.aBoolean1324 = false;
                     int l1 = 0;
 label0:
                     for(int k2 = 0; k2 < i1; k2++)
                     {
-                        Object5 class28_1 = class30_sub3_1.obj5Array[k2];
+                        Object5 class28_1 = TILE.obj5Array[k2];
                         if(class28_1.anInt528 == anInt448)
                             continue;
                         for(int k3 = class28_1.anInt523; k3 <= class28_1.anInt524; k3++)
                         {
                             for(int l4 = class28_1.anInt525; l4 <= class28_1.anInt526; l4++)
                             {
-                                Ground class30_sub3_21 = aclass30_sub3[k3][l4];
+                                Tile class30_sub3_21 = aclass30_sub3[k3][l4];
                                 if(class30_sub3_21.aBoolean1322)
                                 {
-                                    class30_sub3_1.aBoolean1324 = true;
+                                    TILE.aBoolean1324 = true;
                                 } else
                                 {
                                     if(class30_sub3_21.anInt1325 == 0)
@@ -1382,9 +1382,9 @@ label0:
                                         l6 += 8;
                                     if(l4 < class28_1.anInt526)
                                         l6 += 2;
-                                    if((l6 & class30_sub3_21.anInt1325) != class30_sub3_1.anInt1327)
+                                    if((l6 & class30_sub3_21.anInt1325) != TILE.anInt1327)
                                         continue;
-                                    class30_sub3_1.aBoolean1324 = true;
+                                    TILE.aBoolean1324 = true;
                                 }
                                 continue label0;
                             }
@@ -1392,12 +1392,12 @@ label0:
                         }
 
                         aClass28Array462[l1++] = class28_1;
-                        int i5 = anInt453 - class28_1.anInt523;
-                        int i6 = class28_1.anInt524 - anInt453;
+                        int i5 = xCameraPositionTile - class28_1.anInt523;
+                        int i6 = class28_1.anInt524 - xCameraPositionTile;
                         if(i6 > i5)
                             i5 = i6;
-                        int i7 = anInt454 - class28_1.anInt525;
-                        int j8 = class28_1.anInt526 - anInt454;
+                        int i7 = yCameraPositionTile - class28_1.anInt525;
+                        int j8 = class28_1.anInt526 - yCameraPositionTile;
                         if(j8 > i7)
                             class28_1.anInt527 = i5 + j8;
                         else
@@ -1419,10 +1419,10 @@ label0:
                                 } else
                                 if(class28_2.anInt527 == i3)
                                 {
-                                    int j7 = class28_2.anInt519 - anInt455;
-                                    int k8 = class28_2.anInt520 - anInt457;
-                                    int l9 = aClass28Array462[l3].anInt519 - anInt455;
-                                    int l10 = aClass28Array462[l3].anInt520 - anInt457;
+                                    int j7 = class28_2.anInt519 - xCameraPosition;
+                                    int k8 = class28_2.anInt520 - yCameraPosition;
+                                    int l9 = aClass28Array462[l3].anInt519 - xCameraPosition;
+                                    int l10 = aClass28Array462[l3].anInt520 - yCameraPosition;
                                     if(j7 * j7 + k8 * k8 > l9 * l9 + l10 * l10)
                                         l3 = j5;
                                 }
@@ -1433,80 +1433,80 @@ label0:
                         Object5 class28_3 = aClass28Array462[l3];
                         class28_3.anInt528 = anInt448;
                         if(!method323(l, class28_3.anInt523, class28_3.anInt524, class28_3.anInt525, class28_3.anInt526, class28_3.aClass30_Sub2_Sub4_521.modelHeight))
-                            class28_3.aClass30_Sub2_Sub4_521.method443(class28_3.anInt522, anInt458, anInt459, anInt460, anInt461, class28_3.anInt519 - anInt455, class28_3.anInt518 - anInt456, class28_3.anInt520 - anInt457, class28_3.uid);
+                            class28_3.aClass30_Sub2_Sub4_521.renderAtPoint(class28_3.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28_3.anInt519 - xCameraPosition, class28_3.anInt518 - zCameraPosition, class28_3.anInt520 - yCameraPosition, class28_3.uid);
                         for(int k7 = class28_3.anInt523; k7 <= class28_3.anInt524; k7++)
                         {
                             for(int l8 = class28_3.anInt525; l8 <= class28_3.anInt526; l8++)
                             {
-                                Ground class30_sub3_22 = aclass30_sub3[k7][l8];
+                                Tile class30_sub3_22 = aclass30_sub3[k7][l8];
                                 if(class30_sub3_22.anInt1325 != 0)
                                     aClass19_477.insertHead(class30_sub3_22);
                                 else
-                                if((k7 != i || l8 != j) && class30_sub3_22.aBoolean1323)
+                                if((k7 != X || l8 != Y) && class30_sub3_22.aBoolean1323)
                                     aClass19_477.insertHead(class30_sub3_22);
                             }
 
                         }
 
                     }
-                    if(class30_sub3_1.aBoolean1324)
+                    if(TILE.aBoolean1324)
                         continue;
                 }
                 catch(Exception _ex)
                 {
-                    class30_sub3_1.aBoolean1324 = false;
+                    TILE.aBoolean1324 = false;
                 }
-            if(!class30_sub3_1.aBoolean1323 || class30_sub3_1.anInt1325 != 0)
+            if(!TILE.aBoolean1323 || TILE.anInt1325 != 0)
                 continue;
-            if(i <= anInt453 && i > anInt449)
+            if(X <= xCameraPositionTile && X > anInt449)
             {
-                Ground class30_sub3_8 = aclass30_sub3[i - 1][j];
+                Tile class30_sub3_8 = aclass30_sub3[X - 1][Y];
                 if(class30_sub3_8 != null && class30_sub3_8.aBoolean1323)
                     continue;
             }
-            if(i >= anInt453 && i < anInt450 - 1)
+            if(X >= xCameraPositionTile && X < anInt450 - 1)
             {
-                Ground class30_sub3_9 = aclass30_sub3[i + 1][j];
+                Tile class30_sub3_9 = aclass30_sub3[X + 1][Y];
                 if(class30_sub3_9 != null && class30_sub3_9.aBoolean1323)
                     continue;
             }
-            if(j <= anInt454 && j > anInt451)
+            if(Y <= yCameraPositionTile && Y > anInt451)
             {
-                Ground class30_sub3_10 = aclass30_sub3[i][j - 1];
+                Tile class30_sub3_10 = aclass30_sub3[X][Y - 1];
                 if(class30_sub3_10 != null && class30_sub3_10.aBoolean1323)
                     continue;
             }
-            if(j >= anInt454 && j < anInt452 - 1)
+            if(Y >= yCameraPositionTile && Y < anInt452 - 1)
             {
-                Ground class30_sub3_11 = aclass30_sub3[i][j + 1];
+                Tile class30_sub3_11 = aclass30_sub3[X][Y + 1];
                 if(class30_sub3_11 != null && class30_sub3_11.aBoolean1323)
                     continue;
             }
-            class30_sub3_1.aBoolean1323 = false;
+            TILE.aBoolean1323 = false;
             anInt446--;
-            Object4 object4 = class30_sub3_1.obj4;
+            Object4 object4 = TILE.obj4;
             if(object4 != null && object4.anInt52 != 0)
             {
                 if(object4.aClass30_Sub2_Sub4_49 != null)
-                    object4.aClass30_Sub2_Sub4_49.method443(0, anInt458, anInt459, anInt460, anInt461, object4.anInt46 - anInt455, object4.anInt45 - anInt456 - object4.anInt52, object4.anInt47 - anInt457, object4.uid);
+                    object4.aClass30_Sub2_Sub4_49.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.anInt46 - xCameraPosition, object4.anInt45 - zCameraPosition - object4.anInt52, object4.anInt47 - yCameraPosition, object4.uid);
                 if(object4.aClass30_Sub2_Sub4_50 != null)
-                    object4.aClass30_Sub2_Sub4_50.method443(0, anInt458, anInt459, anInt460, anInt461, object4.anInt46 - anInt455, object4.anInt45 - anInt456 - object4.anInt52, object4.anInt47 - anInt457, object4.uid);
+                    object4.aClass30_Sub2_Sub4_50.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.anInt46 - xCameraPosition, object4.anInt45 - zCameraPosition - object4.anInt52, object4.anInt47 - yCameraPosition, object4.uid);
                 if(object4.aClass30_Sub2_Sub4_48 != null)
-                    object4.aClass30_Sub2_Sub4_48.method443(0, anInt458, anInt459, anInt460, anInt461, object4.anInt46 - anInt455, object4.anInt45 - anInt456 - object4.anInt52, object4.anInt47 - anInt457, object4.uid);
+                    object4.aClass30_Sub2_Sub4_48.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.anInt46 - xCameraPosition, object4.anInt45 - zCameraPosition - object4.anInt52, object4.anInt47 - yCameraPosition, object4.uid);
             }
-            if(class30_sub3_1.anInt1328 != 0)
+            if(TILE.anInt1328 != 0)
             {
-                Object2 class26 = class30_sub3_1.obj2;
-                if(class26 != null && !method322(l, i, j, class26.aClass30_Sub2_Sub4_504.modelHeight))
-                    if((class26.anInt502 & class30_sub3_1.anInt1328) != 0)
-                        class26.aClass30_Sub2_Sub4_504.method443(class26.anInt503, anInt458, anInt459, anInt460, anInt461, class26.anInt500 - anInt455, class26.anInt499 - anInt456, class26.anInt501 - anInt457, class26.uid);
+                Object2 class26 = TILE.obj2;
+                if(class26 != null && !method322(l, X, Y, class26.myMob.modelHeight))
+                    if((class26.configBits & TILE.anInt1328) != 0)
+                        class26.myMob.renderAtPoint(class26.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class26.X3D - xCameraPosition, class26.Z3D - zCameraPosition, class26.Y3D - yCameraPosition, class26.uid);
                     else
-                    if((class26.anInt502 & 0x300) != 0)
+                    if((class26.configBits & 0x300) != 0)
                     {
-                        int l2 = class26.anInt500 - anInt455;
-                        int j3 = class26.anInt499 - anInt456;
-                        int i4 = class26.anInt501 - anInt457;
-                        int k5 = class26.anInt503;
+                        int l2 = class26.X3D - xCameraPosition;
+                        int j3 = class26.Z3D - zCameraPosition;
+                        int i4 = class26.Y3D - yCameraPosition;
+                        int k5 = class26.face;
                         int j6;
                         if(k5 == 1 || k5 == 2)
                             j6 = -l2;
@@ -1517,178 +1517,193 @@ label0:
                             l7 = -i4;
                         else
                             l7 = i4;
-                        if((class26.anInt502 & 0x100) != 0 && l7 >= j6)
+                        if((class26.configBits & 0x100) != 0 && l7 >= j6)
                         {
-                            int i9 = l2 + anIntArray463[k5];
-                            int i10 = i4 + anIntArray464[k5];
-                            class26.aClass30_Sub2_Sub4_504.method443(k5 * 512 + 256, anInt458, anInt459, anInt460, anInt461, i9, j3, i10, class26.uid);
+                            int i9 = l2 + faceXOffset2[k5];
+                            int i10 = i4 + faceYOffset2[k5];
+                            class26.myMob.renderAtPoint(k5 * 512 + 256, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, i9, j3, i10, class26.uid);
                         }
-                        if((class26.anInt502 & 0x200) != 0 && l7 <= j6)
+                        if((class26.configBits & 0x200) != 0 && l7 <= j6)
                         {
-                            int j9 = l2 + anIntArray465[k5];
-                            int j10 = i4 + anIntArray466[k5];
-                            class26.aClass30_Sub2_Sub4_504.method443(k5 * 512 + 1280 & 0x7ff, anInt458, anInt459, anInt460, anInt461, j9, j3, j10, class26.uid);
+                            int j9 = l2 + faceXOffset3[k5];
+                            int j10 = i4 + faceYOffset3[k5];
+                            class26.myMob.renderAtPoint(k5 * 512 + 1280 & 0x7ff, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, j9, j3, j10, class26.uid);
                         }
                     }
-                Object1 class10_2 = class30_sub3_1.obj1;
+                Object1 class10_2 = TILE.obj1;
                 if(class10_2 != null)
                 {
-                    if((class10_2.orientation1 & class30_sub3_1.anInt1328) != 0 && !method321(l, i, j, class10_2.orientation1))
-                        class10_2.aClass30_Sub2_Sub4_279.method443(0, anInt458, anInt459, anInt460, anInt461, class10_2.anInt274 - anInt455, class10_2.anInt273 - anInt456, class10_2.anInt275 - anInt457, class10_2.uid);
-                    if((class10_2.orientation & class30_sub3_1.anInt1328) != 0 && !method321(l, i, j, class10_2.orientation))
-                        class10_2.aClass30_Sub2_Sub4_278.method443(0, anInt458, anInt459, anInt460, anInt461, class10_2.anInt274 - anInt455, class10_2.anInt273 - anInt456, class10_2.anInt275 - anInt457, class10_2.uid);
+                    if((class10_2.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, class10_2.orientation1))
+                        class10_2.aClass30_Sub2_Sub4_279.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_2.anInt274 - xCameraPosition, class10_2.anInt273 - zCameraPosition, class10_2.anInt275 - yCameraPosition, class10_2.uid);
+                    if((class10_2.orientation & TILE.anInt1328) != 0 && !method321(l, X, Y, class10_2.orientation))
+                        class10_2.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_2.anInt274 - xCameraPosition, class10_2.anInt273 - zCameraPosition, class10_2.anInt275 - yCameraPosition, class10_2.uid);
                 }
             }
-            if(k < anInt437 - 1)
+            if(k < zMapSize - 1)
             {
-                Ground class30_sub3_12 = groundArray[k + 1][i][j];
+                Tile class30_sub3_12 = tileArray[k + 1][X][Y];
                 if(class30_sub3_12 != null && class30_sub3_12.aBoolean1323)
                     aClass19_477.insertHead(class30_sub3_12);
             }
-            if(i < anInt453)
+            if(X < xCameraPositionTile)
             {
-                Ground class30_sub3_13 = aclass30_sub3[i + 1][j];
+                Tile class30_sub3_13 = aclass30_sub3[X + 1][Y];
                 if(class30_sub3_13 != null && class30_sub3_13.aBoolean1323)
                     aClass19_477.insertHead(class30_sub3_13);
             }
-            if(j < anInt454)
+            if(Y < yCameraPositionTile)
             {
-                Ground class30_sub3_14 = aclass30_sub3[i][j + 1];
+                Tile class30_sub3_14 = aclass30_sub3[X][Y + 1];
                 if(class30_sub3_14 != null && class30_sub3_14.aBoolean1323)
                     aClass19_477.insertHead(class30_sub3_14);
             }
-            if(i > anInt453)
+            if(X > xCameraPositionTile)
             {
-                Ground class30_sub3_15 = aclass30_sub3[i - 1][j];
+                Tile class30_sub3_15 = aclass30_sub3[X - 1][Y];
                 if(class30_sub3_15 != null && class30_sub3_15.aBoolean1323)
                     aClass19_477.insertHead(class30_sub3_15);
             }
-            if(j > anInt454)
+            if(Y > yCameraPositionTile)
             {
-                Ground class30_sub3_16 = aclass30_sub3[i][j - 1];
+                Tile class30_sub3_16 = aclass30_sub3[X][Y - 1];
                 if(class30_sub3_16 != null && class30_sub3_16.aBoolean1323)
                     aClass19_477.insertHead(class30_sub3_16);
             }
         } while(true);
     }
 
-    private void method315(PlainTile plainTile, int i, int j, int k, int l, int i1, int j1,
-            int k1)
+    private void renderTile(PlainTile plainTile, int tZ, int j, int k, int l, int i1, int tX,
+            int tY)
     {
-        int l1;
-        int i2 = l1 = (j1 << 7) - anInt455;
-        int j2;
-        int k2 = j2 = (k1 << 7) - anInt457;
-        int l2;
-        int i3 = l2 = i2 + 128;
-        int j3;
-        int k3 = j3 = k2 + 128;
-        int l3 = anIntArrayArrayArray440[i][j1][k1] - anInt456;
-        int i4 = anIntArrayArrayArray440[i][j1 + 1][k1] - anInt456;
-        int j4 = anIntArrayArrayArray440[i][j1 + 1][k1 + 1] - anInt456;
-        int k4 = anIntArrayArrayArray440[i][j1][k1 + 1] - anInt456;
-        int l4 = k2 * l + i2 * i1 >> 16;
-        k2 = k2 * i1 - i2 * l >> 16;
-        i2 = l4;
-        l4 = l3 * k - k2 * j >> 16;
-        k2 = l3 * j + k2 * k >> 16;
-        l3 = l4;
-        if(k2 < 50)
+        int xC;
+        int xA = xC = (tX << 7) - xCameraPosition;
+        int yB;
+        int yA = yB = (tY << 7) - yCameraPosition;
+        int xD;
+        int xB = xD = xA + 128;
+        int yC;
+        int yD = yC = yA + 128;
+        int zA = heightmap[tZ][tX][tY] - zCameraPosition;
+        int zB = heightmap[tZ][tX + 1][tY] - zCameraPosition;
+        int zD = heightmap[tZ][tX + 1][tY + 1] - zCameraPosition;
+        int zC = heightmap[tZ][tX][tY + 1] - zCameraPosition;
+        int l4 = yA * l + xA * i1 >> 16;
+        yA = yA * i1 - xA * l >> 16;
+        xA = l4;
+                /**
+         * The Square
+         * A--------B
+         * |        |
+         * |        |
+         * |        |
+         * C--------D
+         *
+         * JagSquare
+         * A--------B
+         * |        |
+         * |        |
+         * |        |
+         * D--------C
+         */
+        l4 = zA * k - yA * j >> 16;
+        yA = zA * j + yA * k >> 16;
+        zA = l4;
+        if(yA < 50)
             return;
-        l4 = j2 * l + i3 * i1 >> 16;
-        j2 = j2 * i1 - i3 * l >> 16;
-        i3 = l4;
-        l4 = i4 * k - j2 * j >> 16;
-        j2 = i4 * j + j2 * k >> 16;
-        i4 = l4;
-        if(j2 < 50)
+        l4 = yB * l + xB * i1 >> 16;
+        yB = yB * i1 - xB * l >> 16;
+        xB = l4;
+        l4 = zB * k - yB * j >> 16;
+        yB = zB * j + yB * k >> 16;
+        zB = l4;
+        if(yB < 50)
             return;
-        l4 = k3 * l + l2 * i1 >> 16;
-        k3 = k3 * i1 - l2 * l >> 16;
-        l2 = l4;
-        l4 = j4 * k - k3 * j >> 16;
-        k3 = j4 * j + k3 * k >> 16;
-        j4 = l4;
-        if(k3 < 50)
+        l4 = yD * l + xD * i1 >> 16;
+        yD = yD * i1 - xD * l >> 16;
+        xD = l4;
+        l4 = zD * k - yD * j >> 16;
+        yD = zD * j + yD * k >> 16;
+        zD = l4;
+        if(yD < 50)
             return;
-        l4 = j3 * l + l1 * i1 >> 16;
-        j3 = j3 * i1 - l1 * l >> 16;
-        l1 = l4;
-        l4 = k4 * k - j3 * j >> 16;
-        j3 = k4 * j + j3 * k >> 16;
-        k4 = l4;
-        if(j3 < 50)
+        l4 = yC * l + xC * i1 >> 16;
+        yC = yC * i1 - xC * l >> 16;
+        xC = l4;
+        l4 = zC * k - yC * j >> 16;
+        yC = zC * j + yC * k >> 16;
+        zC = l4;
+        if(yC < 50)
             return;
-        int i5 = ThreeDimensionalDrawingArea.textureInt1 + (i2 << 9) / k2;
-        int j5 = ThreeDimensionalDrawingArea.textureInt2 + (l3 << 9) / k2;
-        int k5 = ThreeDimensionalDrawingArea.textureInt1 + (i3 << 9) / j2;
-        int l5 = ThreeDimensionalDrawingArea.textureInt2 + (i4 << 9) / j2;
-        int i6 = ThreeDimensionalDrawingArea.textureInt1 + (l2 << 9) / k3;
-        int j6 = ThreeDimensionalDrawingArea.textureInt2 + (j4 << 9) / k3;
-        int k6 = ThreeDimensionalDrawingArea.textureInt1 + (l1 << 9) / j3;
-        int l6 = ThreeDimensionalDrawingArea.textureInt2 + (k4 << 9) / j3;
-        ThreeDimensionalDrawingArea.anInt1465 = 0;
-        if((i6 - k6) * (l5 - l6) - (j6 - l6) * (k5 - k6) > 0)
+        int screenXA = ThreeDimensionalDrawingArea.xMidPos + (xA << 9) / yA;
+        int screenYA = ThreeDimensionalDrawingArea.yMidPos + (zA << 9) / yA;
+        int screenXB = ThreeDimensionalDrawingArea.xMidPos + (xB << 9) / yB;
+        int screenYB = ThreeDimensionalDrawingArea.yMidPos + (zB << 9) / yB;
+        int screenXD = ThreeDimensionalDrawingArea.xMidPos + (xD << 9) / yD;
+        int screenYD = ThreeDimensionalDrawingArea.yMidPos + (zD << 9) / yD;
+        int screenXC = ThreeDimensionalDrawingArea.xMidPos + (xC << 9) / yC;
+        int screenYC = ThreeDimensionalDrawingArea.yMidPos + (zC << 9) / yC;
+        ThreeDimensionalDrawingArea.alpha = 0;
+        if((screenXD - screenXC) * (screenYB - screenYC) - (screenYD - screenYC) * (screenXB - screenXC) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = i6 < 0 || k6 < 0 || k5 < 0 || i6 > DrawingArea.centerX || k6 > DrawingArea.centerX || k5 > DrawingArea.centerX;
-            if(aBoolean467 && method318(anInt468, anInt469, j6, l6, l5, i6, k6, k5))
+            ThreeDimensionalDrawingArea.aBoolean1462 = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > DrawingArea.centerX || screenXC > DrawingArea.centerX || screenXB > DrawingArea.centerX;
+            if(isClicked && isTriangleClicked(clickX, clickY, screenYD, screenYC, screenYB, screenXD, screenXC, screenXB))
             {
-                anInt470 = j1;
-                anInt471 = k1;
+                clickedTileX = tX;
+                clickedTileY = tY;
             }
             if(plainTile.texture == -1)
             {
                 if(plainTile.colourD != 0xbc614e)
-                    ThreeDimensionalDrawingArea.method374(j6, l6, l5, i6, k6, k5, plainTile.colourD, plainTile.colourC, plainTile.colourB);
+                    ThreeDimensionalDrawingArea.drawColouredTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB);
             } else
             if(!lowMem)
             {
                 if(plainTile.flat)
-                    ThreeDimensionalDrawingArea.method378(j6, l6, l5, i6, k6, k5, plainTile.colourD, plainTile.colourC, plainTile.colourB, i2, i3, l1, l3, i4, k4, k2, j2, j3, plainTile.texture);
+                    ThreeDimensionalDrawingArea.drawTexturedTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB, xA, xB, xC, zA, zB, zC, yA, yB, yC, plainTile.texture);
                 else
-                    ThreeDimensionalDrawingArea.method378(j6, l6, l5, i6, k6, k5, plainTile.colourD, plainTile.colourC, plainTile.colourB, l2, l1, i3, j4, k4, i4, k3, j3, j2, plainTile.texture);
+                    ThreeDimensionalDrawingArea.drawTexturedTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB, xD, xC, xB, zD, zC, zB, yD, yC, yB, plainTile.texture);
             } else
             {
-                int i7 = anIntArray485[plainTile.texture];
-                ThreeDimensionalDrawingArea.method374(j6, l6, l5, i6, k6, k5, method317(i7, plainTile.colourD), method317(i7, plainTile.colourC), method317(i7, plainTile.colourB));
+                int i7 = textureRGBColour[plainTile.texture];
+                ThreeDimensionalDrawingArea.drawColouredTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, mixColour(i7, plainTile.colourD), mixColour(i7, plainTile.colourC), mixColour(i7, plainTile.colourB));
             }
         }
-        if((i5 - k5) * (l6 - l5) - (j5 - l5) * (k6 - k5) > 0)
+        if((screenXA - screenXB) * (screenYC - screenYB) - (screenYA - screenYB) * (screenXC - screenXB) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = i5 < 0 || k5 < 0 || k6 < 0 || i5 > DrawingArea.centerX || k5 > DrawingArea.centerX || k6 > DrawingArea.centerX;
-            if(aBoolean467 && method318(anInt468, anInt469, j5, l5, l6, i5, k5, k6))
+            ThreeDimensionalDrawingArea.aBoolean1462 = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > DrawingArea.centerX || screenXB > DrawingArea.centerX || screenXC > DrawingArea.centerX;
+            if(isClicked && isTriangleClicked(clickX, clickY, screenYA, screenYB, screenYC, screenXA, screenXB, screenXC))
             {
-                anInt470 = j1;
-                anInt471 = k1;
+                clickedTileX = tX;
+                clickedTileY = tY;
             }
             if(plainTile.texture == -1)
             {
                 if(plainTile.colourA != 0xbc614e)
                 {
-                    ThreeDimensionalDrawingArea.method374(j5, l5, l6, i5, k5, k6, plainTile.colourA, plainTile.colourB, plainTile.colourC);
+                    ThreeDimensionalDrawingArea.drawColouredTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC);
                 }
             } else
             {
                 if(!lowMem)
                 {
-                    ThreeDimensionalDrawingArea.method378(j5, l5, l6, i5, k5, k6, plainTile.colourA, plainTile.colourB, plainTile.colourC, i2, i3, l1, l3, i4, k4, k2, j2, j3, plainTile.texture);
+                    ThreeDimensionalDrawingArea.drawTexturedTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC, xA, xB, xC, zA, zB, zC, yA, yB, yC, plainTile.texture);
                     return;
                 }
-                int j7 = anIntArray485[plainTile.texture];
-                ThreeDimensionalDrawingArea.method374(j5, l5, l6, i5, k5, k6, method317(j7, plainTile.colourA), method317(j7, plainTile.colourB), method317(j7, plainTile.colourC));
+                int j7 = textureRGBColour[plainTile.texture];
+                ThreeDimensionalDrawingArea.drawColouredTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, mixColour(j7, plainTile.colourA), mixColour(j7, plainTile.colourB), mixColour(j7, plainTile.colourC));
             }
         }
     }
 
-    private void method316(int i, int j, int k, Class40 class40, int l, int i1,
+    private void drawShapedTile(int i, int j, int k, ShapedTile shapedTile, int l, int i1,
                            int j1)
     {
-        int k1 = class40.anIntArray673.length;
-        for(int l1 = 0; l1 < k1; l1++)
+        int k1 = shapedTile.origVertexX.length;
+        for(int vID = 0; vID < k1; vID++)
         {
-            int i2 = class40.anIntArray673[l1] - anInt455;
-            int k2 = class40.anIntArray674[l1] - anInt456;
-            int i3 = class40.anIntArray675[l1] - anInt457;
+            int i2 = shapedTile.origVertexX[vID] - xCameraPosition;
+            int k2 = shapedTile.origVertexY[vID] - zCameraPosition;
+            int i3 = shapedTile.origVertexZ[vID] - yCameraPosition;
             int k3 = i3 * k + i2 * j1 >> 16;
             i3 = i3 * j1 - i2 * k >> 16;
             i2 = k3;
@@ -1697,59 +1712,59 @@ label0:
             k2 = k3;
             if(i3 < 50)
                 return;
-            if(class40.anIntArray682 != null)
+            if(shapedTile.triTex != null)
             {
-                Class40.anIntArray690[l1] = i2;
-                Class40.anIntArray691[l1] = k2;
-                Class40.anIntArray692[l1] = i3;
+                ShapedTile.veritceX[vID] = i2;
+                ShapedTile.veritceZ[vID] = k2;
+                ShapedTile.veritceY[vID] = i3;
             }
-            Class40.anIntArray688[l1] = ThreeDimensionalDrawingArea.textureInt1 + (i2 << 9) / i3;
-            Class40.anIntArray689[l1] = ThreeDimensionalDrawingArea.textureInt2 + (k2 << 9) / i3;
+            ShapedTile.screenX[vID] = ThreeDimensionalDrawingArea.xMidPos + (i2 << 9) / i3;
+            ShapedTile.screenY[vID] = ThreeDimensionalDrawingArea.yMidPos + (k2 << 9) / i3;
         }
 
-        ThreeDimensionalDrawingArea.anInt1465 = 0;
-        k1 = class40.anIntArray679.length;
+        ThreeDimensionalDrawingArea.alpha = 0;
+        k1 = shapedTile.indexA.length;
         for(int j2 = 0; j2 < k1; j2++)
         {
-            int l2 = class40.anIntArray679[j2];
-            int j3 = class40.anIntArray680[j2];
-            int l3 = class40.anIntArray681[j2];
-            int i4 = Class40.anIntArray688[l2];
-            int j4 = Class40.anIntArray688[j3];
-            int k4 = Class40.anIntArray688[l3];
-            int l4 = Class40.anIntArray689[l2];
-            int i5 = Class40.anIntArray689[j3];
-            int j5 = Class40.anIntArray689[l3];
-            if((i4 - j4) * (j5 - i5) - (l4 - i5) * (k4 - j4) > 0)
+            int indexA = shapedTile.indexA[j2];
+            int indexB = shapedTile.indexB[j2];
+            int indexC = shapedTile.indexC[j2];
+            int sXA = ShapedTile.screenX[indexA];
+            int sXB = ShapedTile.screenX[indexB];
+            int sXC = ShapedTile.screenX[indexC];
+            int sYA = ShapedTile.screenY[indexA];
+            int sYB = ShapedTile.screenY[indexB];
+            int sYC = ShapedTile.screenY[indexC];
+            if((sXA - sXB) * (sYC - sYB) - (sYA - sYB) * (sXC - sXB) > 0)
             {
-                ThreeDimensionalDrawingArea.aBoolean1462 = i4 < 0 || j4 < 0 || k4 < 0 || i4 > DrawingArea.centerX || j4 > DrawingArea.centerX || k4 > DrawingArea.centerX;
-                if(aBoolean467 && method318(anInt468, anInt469, l4, i5, j5, i4, j4, k4))
+                ThreeDimensionalDrawingArea.aBoolean1462 = sXA < 0 || sXB < 0 || sXC < 0 || sXA > DrawingArea.centerX || sXB > DrawingArea.centerX || sXC > DrawingArea.centerX;
+                if(isClicked && isTriangleClicked(clickX, clickY, sYA, sYB, sYC, sXA, sXB, sXC))
                 {
-                    anInt470 = i;
-                    anInt471 = i1;
+                    clickedTileX = i;
+                    clickedTileY = i1;
                 }
-                if(class40.anIntArray682 == null || class40.anIntArray682[j2] == -1)
+                if(shapedTile.triTex == null || shapedTile.triTex[j2] == -1)
                 {
-                    if(class40.anIntArray676[j2] != 0xbc614e)
-                        ThreeDimensionalDrawingArea.method374(l4, i5, j5, i4, j4, k4, class40.anIntArray676[j2], class40.anIntArray677[j2], class40.anIntArray678[j2]);
+                    if(shapedTile.anIntArray676[j2] != 0xbc614e)
+                        ThreeDimensionalDrawingArea.drawColouredTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.anIntArray676[j2], shapedTile.anIntArray677[j2], shapedTile.anIntArray678[j2]);
                 } else
                 if(!lowMem)
                 {
-                    if(class40.aBoolean683)
-                        ThreeDimensionalDrawingArea.method378(l4, i5, j5, i4, j4, k4, class40.anIntArray676[j2], class40.anIntArray677[j2], class40.anIntArray678[j2], Class40.anIntArray690[0], Class40.anIntArray690[1], Class40.anIntArray690[3], Class40.anIntArray691[0], Class40.anIntArray691[1], Class40.anIntArray691[3], Class40.anIntArray692[0], Class40.anIntArray692[1], Class40.anIntArray692[3], class40.anIntArray682[j2]);
+                    if(shapedTile.aBoolean683)
+                        ThreeDimensionalDrawingArea.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.anIntArray676[j2], shapedTile.anIntArray677[j2], shapedTile.anIntArray678[j2], ShapedTile.veritceX[0], ShapedTile.veritceX[1], ShapedTile.veritceX[3], ShapedTile.veritceZ[0], ShapedTile.veritceZ[1], ShapedTile.veritceZ[3], ShapedTile.veritceY[0], ShapedTile.veritceY[1], ShapedTile.veritceY[3], shapedTile.triTex[j2]);
                     else
-                        ThreeDimensionalDrawingArea.method378(l4, i5, j5, i4, j4, k4, class40.anIntArray676[j2], class40.anIntArray677[j2], class40.anIntArray678[j2], Class40.anIntArray690[l2], Class40.anIntArray690[j3], Class40.anIntArray690[l3], Class40.anIntArray691[l2], Class40.anIntArray691[j3], Class40.anIntArray691[l3], Class40.anIntArray692[l2], Class40.anIntArray692[j3], Class40.anIntArray692[l3], class40.anIntArray682[j2]);
+                        ThreeDimensionalDrawingArea.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.anIntArray676[j2], shapedTile.anIntArray677[j2], shapedTile.anIntArray678[j2], ShapedTile.veritceX[indexA], ShapedTile.veritceX[indexB], ShapedTile.veritceX[indexC], ShapedTile.veritceZ[indexA], ShapedTile.veritceZ[indexB], ShapedTile.veritceZ[indexC], ShapedTile.veritceY[indexA], ShapedTile.veritceY[indexB], ShapedTile.veritceY[indexC], shapedTile.triTex[j2]);
                 } else
                 {
-                    int k5 = anIntArray485[class40.anIntArray682[j2]];
-                    ThreeDimensionalDrawingArea.method374(l4, i5, j5, i4, j4, k4, method317(k5, class40.anIntArray676[j2]), method317(k5, class40.anIntArray677[j2]), method317(k5, class40.anIntArray678[j2]));
+                    int k5 = textureRGBColour[shapedTile.triTex[j2]];
+                    ThreeDimensionalDrawingArea.drawColouredTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.anIntArray676[j2]), mixColour(k5, shapedTile.anIntArray677[j2]), mixColour(k5, shapedTile.anIntArray678[j2]));
                 }
             }
         }
 
     }
 
-    private int method317(int j, int k)
+    private int mixColour(int j, int k)
     {
         k = 127 - k;
         k = (k * (j & 0x7f)) / 160;
@@ -1761,7 +1776,7 @@ label0:
         return (j & 0xff80) + k;
     }
 
-    private boolean method318(int i, int j, int k, int l, int i1, int j1, int k1,
+    private boolean isTriangleClicked(int i, int j, int k, int l, int i1, int j1, int k1,
             int l1)
     {
         if(j < k && j < l && j < i1)
@@ -1780,21 +1795,21 @@ label0:
 
     private void method319()
     {
-        int j = anIntArray473[anInt447];
-        Class47 aclass47[] = aClass47ArrayArray474[anInt447];
+        int j = anIntArray473[plane];
+        Class47 aclass47[] = aClass47ArrayArray474[plane];
         anInt475 = 0;
         for(int k = 0; k < j; k++)
         {
             Class47 class47 = aclass47[k];
             if(class47.anInt791 == 1)
             {
-                int l = (class47.anInt787 - anInt453) + 25;
+                int l = (class47.anInt787 - xCameraPositionTile) + 25;
                 if(l < 0 || l > 50)
                     continue;
-                int k1 = (class47.anInt789 - anInt454) + 25;
+                int k1 = (class47.anInt789 - yCameraPositionTile) + 25;
                 if(k1 < 0)
                     k1 = 0;
-                int j2 = (class47.anInt790 - anInt454) + 25;
+                int j2 = (class47.anInt790 - yCameraPositionTile) + 25;
                 if(j2 > 50)
                     j2 = 50;
                 boolean flag = false;
@@ -1806,7 +1821,7 @@ label0:
                     }
                 if(!flag)
                     continue;
-                int j3 = anInt455 - class47.anInt792;
+                int j3 = xCameraPosition - class47.anInt792;
                 if(j3 > 32)
                 {
                     class47.anInt798 = 1;
@@ -1817,22 +1832,22 @@ label0:
                     class47.anInt798 = 2;
                     j3 = -j3;
                 }
-                class47.anInt801 = (class47.anInt794 - anInt457 << 8) / j3;
-                class47.anInt802 = (class47.anInt795 - anInt457 << 8) / j3;
-                class47.anInt803 = (class47.anInt796 - anInt456 << 8) / j3;
-                class47.anInt804 = (class47.anInt797 - anInt456 << 8) / j3;
+                class47.anInt801 = (class47.anInt794 - yCameraPosition << 8) / j3;
+                class47.anInt802 = (class47.anInt795 - yCameraPosition << 8) / j3;
+                class47.anInt803 = (class47.anInt796 - zCameraPosition << 8) / j3;
+                class47.anInt804 = (class47.anInt797 - zCameraPosition << 8) / j3;
                 aClass47Array476[anInt475++] = class47;
                 continue;
             }
             if(class47.anInt791 == 2)
             {
-                int i1 = (class47.anInt789 - anInt454) + 25;
+                int i1 = (class47.anInt789 - yCameraPositionTile) + 25;
                 if(i1 < 0 || i1 > 50)
                     continue;
-                int l1 = (class47.anInt787 - anInt453) + 25;
+                int l1 = (class47.anInt787 - xCameraPositionTile) + 25;
                 if(l1 < 0)
                     l1 = 0;
-                int k2 = (class47.anInt788 - anInt453) + 25;
+                int k2 = (class47.anInt788 - xCameraPositionTile) + 25;
                 if(k2 > 50)
                     k2 = 50;
                 boolean flag1 = false;
@@ -1844,7 +1859,7 @@ label0:
                     }
                 if(!flag1)
                     continue;
-                int k3 = anInt457 - class47.anInt794;
+                int k3 = yCameraPosition - class47.anInt794;
                 if(k3 > 32)
                 {
                     class47.anInt798 = 3;
@@ -1855,29 +1870,29 @@ label0:
                     class47.anInt798 = 4;
                     k3 = -k3;
                 }
-                class47.anInt799 = (class47.anInt792 - anInt455 << 8) / k3;
-                class47.anInt800 = (class47.anInt793 - anInt455 << 8) / k3;
-                class47.anInt803 = (class47.anInt796 - anInt456 << 8) / k3;
-                class47.anInt804 = (class47.anInt797 - anInt456 << 8) / k3;
+                class47.anInt799 = (class47.anInt792 - xCameraPosition << 8) / k3;
+                class47.anInt800 = (class47.anInt793 - xCameraPosition << 8) / k3;
+                class47.anInt803 = (class47.anInt796 - zCameraPosition << 8) / k3;
+                class47.anInt804 = (class47.anInt797 - zCameraPosition << 8) / k3;
                 aClass47Array476[anInt475++] = class47;
             } else
             if(class47.anInt791 == 4)
             {
-                int j1 = class47.anInt796 - anInt456;
+                int j1 = class47.anInt796 - zCameraPosition;
                 if(j1 > 128)
                 {
-                    int i2 = (class47.anInt789 - anInt454) + 25;
+                    int i2 = (class47.anInt789 - yCameraPositionTile) + 25;
                     if(i2 < 0)
                         i2 = 0;
-                    int l2 = (class47.anInt790 - anInt454) + 25;
+                    int l2 = (class47.anInt790 - yCameraPositionTile) + 25;
                     if(l2 > 50)
                         l2 = 50;
                     if(i2 <= l2)
                     {
-                        int i3 = (class47.anInt787 - anInt453) + 25;
+                        int i3 = (class47.anInt787 - xCameraPositionTile) + 25;
                         if(i3 < 0)
                             i3 = 0;
-                        int l3 = (class47.anInt788 - anInt453) + 25;
+                        int l3 = (class47.anInt788 - xCameraPositionTile) + 25;
                         if(l3 > 50)
                             l3 = 50;
                         boolean flag2 = false;
@@ -1897,10 +1912,10 @@ label0:
                         if(flag2)
                         {
                             class47.anInt798 = 5;
-                            class47.anInt799 = (class47.anInt792 - anInt455 << 8) / j1;
-                            class47.anInt800 = (class47.anInt793 - anInt455 << 8) / j1;
-                            class47.anInt801 = (class47.anInt794 - anInt457 << 8) / j1;
-                            class47.anInt802 = (class47.anInt795 - anInt457 << 8) / j1;
+                            class47.anInt799 = (class47.anInt792 - xCameraPosition << 8) / j1;
+                            class47.anInt800 = (class47.anInt793 - xCameraPosition << 8) / j1;
+                            class47.anInt801 = (class47.anInt794 - yCameraPosition << 8) / j1;
+                            class47.anInt802 = (class47.anInt795 - yCameraPosition << 8) / j1;
                             aClass47Array476[anInt475++] = class47;
                         }
                     }
@@ -1919,7 +1934,7 @@ label0:
             return true;
         int i1 = j << 7;
         int j1 = k << 7;
-        if(method324(i1 + 1, anIntArrayArrayArray440[i][j][k], j1 + 1) && method324((i1 + 128) - 1, anIntArrayArrayArray440[i][j + 1][k], j1 + 1) && method324((i1 + 128) - 1, anIntArrayArrayArray440[i][j + 1][k + 1], (j1 + 128) - 1) && method324(i1 + 1, anIntArrayArrayArray440[i][j][k + 1], (j1 + 128) - 1))
+        if(method324(i1 + 1, heightmap[i][j][k], j1 + 1) && method324((i1 + 128) - 1, heightmap[i][j + 1][k], j1 + 1) && method324((i1 + 128) - 1, heightmap[i][j + 1][k + 1], (j1 + 128) - 1) && method324(i1 + 1, heightmap[i][j][k + 1], (j1 + 128) - 1))
         {
             anIntArrayArrayArray445[i][j][k] = anInt448;
             return true;
@@ -1936,7 +1951,7 @@ label0:
             return false;
         int i1 = j << 7;
         int j1 = k << 7;
-        int k1 = anIntArrayArrayArray440[i][j][k] - 1;
+        int k1 = heightmap[i][j][k] - 1;
         int l1 = k1 - 120;
         int i2 = k1 - 230;
         int j2 = k1 - 238;
@@ -1944,7 +1959,7 @@ label0:
         {
             if(l == 1)
             {
-                if(i1 > anInt455)
+                if(i1 > xCameraPosition)
                 {
                     if(!method324(i1, k1, j1))
                         return false;
@@ -1962,7 +1977,7 @@ label0:
             }
             if(l == 2)
             {
-                if(j1 < anInt457)
+                if(j1 < yCameraPosition)
                 {
                     if(!method324(i1, k1, j1 + 128))
                         return false;
@@ -1980,7 +1995,7 @@ label0:
             }
             if(l == 4)
             {
-                if(i1 < anInt455)
+                if(i1 < xCameraPosition)
                 {
                     if(!method324(i1 + 128, k1, j1))
                         return false;
@@ -1998,7 +2013,7 @@ label0:
             }
             if(l == 8)
             {
-                if(j1 > anInt457)
+                if(j1 > yCameraPosition)
                 {
                     if(!method324(i1, k1, j1))
                         return false;
@@ -2039,7 +2054,7 @@ label0:
             return false;
         int i1 = j << 7;
         int j1 = k << 7;
-        return method324(i1 + 1, anIntArrayArrayArray440[i][j][k] - l, j1 + 1) && method324((i1 + 128) - 1, anIntArrayArrayArray440[i][j + 1][k] - l, j1 + 1) && method324((i1 + 128) - 1, anIntArrayArrayArray440[i][j + 1][k + 1] - l, (j1 + 128) - 1) && method324(i1 + 1, anIntArrayArrayArray440[i][j][k + 1] - l, (j1 + 128) - 1);
+        return method324(i1 + 1, heightmap[i][j][k] - l, j1 + 1) && method324((i1 + 128) - 1, heightmap[i][j + 1][k] - l, j1 + 1) && method324((i1 + 128) - 1, heightmap[i][j + 1][k + 1] - l, (j1 + 128) - 1) && method324(i1 + 1, heightmap[i][j][k + 1] - l, (j1 + 128) - 1);
     }
 
     private boolean method323(int i, int j, int k, int l, int i1, int j1)
@@ -2050,7 +2065,7 @@ label0:
                 return false;
             int k1 = j << 7;
             int i2 = l << 7;
-            return method324(k1 + 1, anIntArrayArrayArray440[i][j][l] - j1, i2 + 1) && method324((k1 + 128) - 1, anIntArrayArrayArray440[i][j + 1][l] - j1, i2 + 1) && method324((k1 + 128) - 1, anIntArrayArrayArray440[i][j + 1][l + 1] - j1, (i2 + 128) - 1) && method324(k1 + 1, anIntArrayArrayArray440[i][j][l + 1] - j1, (i2 + 128) - 1);
+            return method324(k1 + 1, heightmap[i][j][l] - j1, i2 + 1) && method324((k1 + 128) - 1, heightmap[i][j + 1][l] - j1, i2 + 1) && method324((k1 + 128) - 1, heightmap[i][j + 1][l + 1] - j1, (i2 + 128) - 1) && method324(k1 + 1, heightmap[i][j][l + 1] - j1, (i2 + 128) - 1);
         }
         for(int l1 = j; l1 <= k; l1++)
         {
@@ -2062,7 +2077,7 @@ label0:
 
         int k2 = (j << 7) + 1;
         int l2 = (l << 7) + 2;
-        int i3 = anIntArrayArrayArray440[i][j][l] - j1;
+        int i3 = heightmap[i][j][l] - j1;
         if(!method324(k2, i3, l2))
             return false;
         int j3 = (k << 7) - 1;
@@ -2149,49 +2164,49 @@ label0:
 
     private boolean aBoolean434;
     public static boolean lowMem = true;
-    private final int anInt437;
-    private final int anInt438;
-    private final int anInt439;
-    private final int[][][] anIntArrayArrayArray440;
-    private final Ground[][][] groundArray;
+    private final int zMapSize;
+    private final int xMapSize;
+    private final int yMapSize;
+    private final int[][][] heightmap;
+    private final Tile[][][] tileArray;
     private int anInt442;
     private int obj5CacheCurrPos;
     private final Object5[] obj5Cache;
     private final int[][][] anIntArrayArrayArray445;
     private static int anInt446;
-    private static int anInt447;
+    private static int plane;
     private static int anInt448;
     private static int anInt449;
     private static int anInt450;
     private static int anInt451;
     private static int anInt452;
-    private static int anInt453;
-    private static int anInt454;
-    private static int anInt455;
-    private static int anInt456;
-    private static int anInt457;
-    private static int anInt458;
-    private static int anInt459;
-    private static int anInt460;
-    private static int anInt461;
+    private static int xCameraPositionTile;
+    private static int yCameraPositionTile;
+    private static int xCameraPosition;
+    private static int zCameraPosition;
+    private static int yCameraPosition;
+    private static int yCurveSine;
+    private static int yCurveCosine;
+    private static int xCurveSine;
+    private static int xCurveCosine;
     private static Object5[] aClass28Array462 = new Object5[100];
-    private static final int[] anIntArray463 = {
+    private static final int[] faceXOffset2 = {
         53, -53, -53, 53
     };
-    private static final int[] anIntArray464 = {
+    private static final int[] faceYOffset2 = {
         -53, -53, 53, 53
     };
-    private static final int[] anIntArray465 = {
+    private static final int[] faceXOffset3 = {
         -45, 45, 45, -45
     };
-    private static final int[] anIntArray466 = {
+    private static final int[] faceYOffset3 = {
         45, 45, -45, -45
     };
-    private static boolean aBoolean467;
-    private static int anInt468;
-    private static int anInt469;
-    public static int anInt470 = -1;
-    public static int anInt471 = -1;
+    private static boolean isClicked;
+    private static int clickX;
+    private static int clickY;
+    public static int clickedTileX = -1;
+    public static int clickedTileY = -1;
     private static final int anInt472;
     private static int[] anIntArray473;
     private static Class47[][] aClass47ArrayArray474;
@@ -2219,7 +2234,7 @@ label0:
     private static final int[] anIntArray484 = {
         1, 1, 0, 0, 0, 8, 0, 0, 8
     };
-    private static final int[] anIntArray485 = {
+    private static final int[] textureRGBColour = {
         41, 39248, 41, 4643, 41, 41, 41, 41, 41, 41, 
         41, 41, 41, 41, 41, 43086, 41, 41, 41, 41, 
         41, 41, 41, 8602, 41, 28992, 41, 41, 41, 41, 
@@ -2286,12 +2301,12 @@ label0:
     };
     private static boolean[][][][] aBooleanArrayArrayArrayArray491 = new boolean[8][32][51][51];
     private static boolean[][] aBooleanArrayArray492;
-    private static int anInt493;
-    private static int anInt494;
-    private static int anInt495;
-    private static int anInt496;
-    private static int anInt497;
-    private static int anInt498;
+    private static int midX;
+    private static int midY;
+    private static int left;
+    private static int top;
+    private static int right;
+    private static int bottom;
 
     static 
     {
