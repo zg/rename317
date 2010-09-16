@@ -28,9 +28,9 @@ public final class Player extends Entity
                 model_3.applyTransform(spotAnim.aAnimation_407.frame2IDS[super.anInt1521]);
                 model_3.triangleSkin = null;
                 model_3.vertexSkin = null;
-                if(spotAnim.anInt410 != 128 || spotAnim.anInt411 != 128)
-                    model_3.scaleT(spotAnim.anInt410, spotAnim.anInt410, spotAnim.anInt411);
-                model_3.preprocess(64 + spotAnim.anInt413, 850 + spotAnim.anInt414, -30, -50, -30, true);
+                if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
+                    model_3.scaleT(spotAnim.resizeXY, spotAnim.resizeXY, spotAnim.resizeZ);
+                model_3.preprocess(64 + spotAnim.modelBrightness, 850 + spotAnim.modelShadow, -30, -50, -30, true);
                 Model aclass30_sub2_sub4_sub6_1s[] = {
                         model, model_3
                 };

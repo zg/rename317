@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="b89b271f-bcab-4808-b81f-ee8fd61b54e9" name="Default" comment="" />
-    <ignored path="src.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="src.iws" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,37 +60,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Class47.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class47.java">
+      <file leaf-file-name="SpotAnim.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SpotAnim.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Class39.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class39.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Class33.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class33.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="12" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectDef.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ObjectDef.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="36" selection-start="218" selection-end="218" vertical-scroll-proportion="0.17847769">
+            <state line="87" column="0" selection-start="2666" selection-end="2666" vertical-scroll-proportion="0.17989418">
               <folding />
             </state>
           </provider>
@@ -110,7 +83,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ModelTransform.java" />
         <option value="$PROJECT_DIR$/RSFont.java" />
         <option value="$PROJECT_DIR$/Class47.java" />
         <option value="$PROJECT_DIR$/Class43.java" />
@@ -126,6 +98,7 @@
         <option value="$PROJECT_DIR$/IndexedImage.java" />
         <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
         <option value="$PROJECT_DIR$/ObjectDef.java" />
+        <option value="$PROJECT_DIR$/SpotAnim.java" />
       </list>
     </option>
   </component>
@@ -303,19 +276,19 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.258956" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4752941" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.258956" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4752941" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24974412" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -351,11 +324,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="13" selection-start="2248" selection-end="2248" vertical-scroll-proportion="0.042713568" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SceneGraph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2246" column="75" selection-start="94067" selection-end="94067" vertical-scroll-proportion="0.0" />
@@ -366,24 +334,9 @@
         <state line="1267" column="46" selection-start="38914" selection-end="38914" vertical-scroll-proportion="0.44619423" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="-0.5728643" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ShapedTile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="262" column="41" selection-start="7469" selection-end="7469" vertical-scroll-proportion="0.31658292" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ModelHeader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="31" selection-start="535" selection-end="535" vertical-scroll-proportion="0.5829146" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1466" column="35" selection-start="51382" selection-end="51382" vertical-scroll-proportion="0.53543305" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IndexedImage.java">
@@ -408,31 +361,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BZIP2Decompressor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="52" selection-start="235" selection-end="235" vertical-scroll-proportion="0.044619422">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class47.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class39.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class33.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="12" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="6" column="52" selection-start="235" selection-end="235" vertical-scroll-proportion="0.044619422" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ObjectDef.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="36" selection-start="218" selection-end="218" vertical-scroll-proportion="0.17847769">
+        <state line="394" column="20" selection-start="12629" selection-end="12629" vertical-scroll-proportion="0.1496063" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class33.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="12" selection-start="197" selection-end="197" vertical-scroll-proportion="0.25376883" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class39.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.089238845" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class47.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.042713568" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.042713568">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ModelHeader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="15" selection-start="494" selection-end="502" vertical-scroll-proportion="0.31658292">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1976" column="41" selection-start="72639" selection-end="72639" vertical-scroll-proportion="0.044619422" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpotAnim.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="0" selection-start="2666" selection-end="2666" vertical-scroll-proportion="0.17989418">
           <folding />
         </state>
       </provider>

@@ -31,25 +31,25 @@ final class StillGraphics extends Animable {
             model_1.triangleSkin = null;
             model_1.vertexSkin = null;
         }
-        if(aSpotAnim_1568.anInt410 != 128 || aSpotAnim_1568.anInt411 != 128)
-            model_1.scaleT(aSpotAnim_1568.anInt410, aSpotAnim_1568.anInt410, aSpotAnim_1568.anInt411);
-        if(aSpotAnim_1568.anInt412 != 0)
+        if(aSpotAnim_1568.resizeXY != 128 || aSpotAnim_1568.resizeZ != 128)
+            model_1.scaleT(aSpotAnim_1568.resizeXY, aSpotAnim_1568.resizeXY, aSpotAnim_1568.resizeZ);
+        if(aSpotAnim_1568.rotation != 0)
         {
-            if(aSpotAnim_1568.anInt412 == 90)
+            if(aSpotAnim_1568.rotation == 90)
                 model_1.method473();
-            if(aSpotAnim_1568.anInt412 == 180)
+            if(aSpotAnim_1568.rotation == 180)
             {
                 model_1.method473();
                 model_1.method473();
             }
-            if(aSpotAnim_1568.anInt412 == 270)
+            if(aSpotAnim_1568.rotation == 270)
             {
                 model_1.method473();
                 model_1.method473();
                 model_1.method473();
             }
         }
-        model_1.preprocess(64 + aSpotAnim_1568.anInt413, 850 + aSpotAnim_1568.anInt414, -30, -50, -30, true);
+        model_1.preprocess(64 + aSpotAnim_1568.modelBrightness, 850 + aSpotAnim_1568.modelShadow, -30, -50, -30, true);
         return model_1;
     }
 
