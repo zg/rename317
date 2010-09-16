@@ -1570,7 +1570,7 @@ public final class client extends RSApplet {
     {
         if(!lowMem)
         {
-            if(ThreeDimensionalDrawingArea.anIntArray1480[17] >= j)
+            if(ThreeDimensionalDrawingArea.texture_last_used[17] >= j)
             {
                 IndexedImage indexedImage = ThreeDimensionalDrawingArea.textureImages[17];
                 int k = indexedImage.imgWidth * indexedImage.imgHeight - 1;
@@ -1582,7 +1582,7 @@ public final class client extends RSApplet {
 
                 indexedImage.imgPixels = abyte3;
                 aByteArray912 = abyte0;
-                ThreeDimensionalDrawingArea.method370(17);
+                ThreeDimensionalDrawingArea.free_texture(17);
                 anInt854++;
                 if(anInt854 > 1235)
                 {
@@ -1604,7 +1604,7 @@ public final class client extends RSApplet {
                     stream.writeBytes(stream.currentOffset - l2);
                 }
             }
-            if(ThreeDimensionalDrawingArea.anIntArray1480[24] >= j)
+            if(ThreeDimensionalDrawingArea.texture_last_used[24] >= j)
             {
                 IndexedImage indexedImage_1 = ThreeDimensionalDrawingArea.textureImages[24];
                 int l = indexedImage_1.imgWidth * indexedImage_1.imgHeight - 1;
@@ -1616,9 +1616,9 @@ public final class client extends RSApplet {
 
                 indexedImage_1.imgPixels = abyte4;
                 aByteArray912 = abyte1;
-                ThreeDimensionalDrawingArea.method370(24);
+                ThreeDimensionalDrawingArea.free_texture(24);
             }
-            if(ThreeDimensionalDrawingArea.anIntArray1480[34] >= j)
+            if(ThreeDimensionalDrawingArea.texture_last_used[34] >= j)
             {
                 IndexedImage indexedImage_2 = ThreeDimensionalDrawingArea.textureImages[34];
                 int i1 = indexedImage_2.imgWidth * indexedImage_2.imgHeight - 1;
@@ -1630,7 +1630,7 @@ public final class client extends RSApplet {
 
                 indexedImage_2.imgPixels = abyte5;
                 aByteArray912 = abyte2;
-                ThreeDimensionalDrawingArea.method370(34);
+                ThreeDimensionalDrawingArea.free_texture(34);
             }
         }
     }
@@ -11579,7 +11579,7 @@ public final class client extends RSApplet {
                 }
             }
 
-        int k2 = ThreeDimensionalDrawingArea.anInt1481;
+        int k2 = ThreeDimensionalDrawingArea.texture_get_count;
         Model.aBoolean1684 = true;
             Model.resourceCount = 0;
             Model.anInt1685 = super.mouseX - 4;

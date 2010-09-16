@@ -12,11 +12,11 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         COSINE = null;
         lineOffsets = null;
         textureImages = null;
-        aBooleanArray1475 = null;
+        texture_is_transparent = null;
         anIntArray1476 = null;
-        anIntArrayArray1478 = null;
-        anIntArrayArray1479 = null;
-        anIntArray1480 = null;
+        texture_pixel_array_pool = null;
+        texture_pixel_cache = null;
+        texture_last_used = null;
         colourMap = null;
         texturePalettes = null;
     }
@@ -43,23 +43,23 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     public static void nullInit()
     {
-        anIntArrayArray1478 = null;
+        texture_pixel_array_pool = null;
         for(int j = 0; j < 50; j++)
-            anIntArrayArray1479[j] = null;
+            texture_pixel_cache[j] = null;
 
     }
 
     public static void cleanup()
     {
-        if(anIntArrayArray1478 == null)
+        if(texture_pixel_array_pool == null)
         {
-            anInt1477 = 20;//was parameter
+            texture_pixel_array_pool_ptr = 20;//was parameter
             if(lowMem)
-                anIntArrayArray1478 = new int[anInt1477][16384];
+                texture_pixel_array_pool = new int[texture_pixel_array_pool_ptr][16384];
             else
-                anIntArrayArray1478 = new int[anInt1477][0x10000];
+                texture_pixel_array_pool = new int[texture_pixel_array_pool_ptr][0x10000];
             for(int k = 0; k < 50; k++)
-                anIntArrayArray1479[k] = null;
+                texture_pixel_cache[k] = null;
 
         }
     }
@@ -104,52 +104,54 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         return l1;
     }
 
-    public static void method370(int texID)
+    public static void free_texture(int texID)
     {
-        if(anIntArrayArray1479[texID] == null)
+        if(texture_pixel_cache[texID] == null)
             return;
-        anIntArrayArray1478[anInt1477++] = anIntArrayArray1479[texID];
-        anIntArrayArray1479[texID] = null;
+        texture_pixel_array_pool[texture_pixel_array_pool_ptr++] = texture_pixel_cache[texID];
+        texture_pixel_cache[texID] = null;
     }
 
-    private static int[] getTexturePixels(int i)
+    private static int[] getTexturePixels(int tex_id)
     {
-        anIntArray1480[i] = anInt1481++;
-        if(anIntArrayArray1479[i] != null)
-            return anIntArrayArray1479[i];
-        int ai[];
-        if(anInt1477 > 0)
-        {
-            ai = anIntArrayArray1478[--anInt1477];
-            anIntArrayArray1478[anInt1477] = null;
+        texture_last_used[tex_id] = texture_get_count++;
+        if(texture_pixel_cache[tex_id] != null)
+            return texture_pixel_cache[tex_id];
+        int texture_pixel_data[];
+        //Start of mem management code
+        if(texture_pixel_array_pool_ptr > 0)
+        {	//Freed texture data arrays available
+            texture_pixel_data = texture_pixel_array_pool[--texture_pixel_array_pool_ptr];
+            texture_pixel_array_pool[texture_pixel_array_pool_ptr] = null;
         } else
-        {
-            int j = 0;
-            int k = -1;
+        {   //No freed texture data arrays available, recycle least used texture's array
+            int lowest_usage_count = 0;
+            int cached_texture_to_use = -1;
             for(int l = 0; l < loadedTextureCount; l++)
-                if(anIntArrayArray1479[l] != null && (anIntArray1480[l] < j || k == -1))
+                if(texture_pixel_cache[l] != null && (texture_last_used[l] < lowest_usage_count || cached_texture_to_use == -1))
                 {
-                    j = anIntArray1480[l];
-                    k = l;
+                    lowest_usage_count = texture_last_used[l];
+                    cached_texture_to_use = l;
                 }
 
-            ai = anIntArrayArray1479[k];
-            anIntArrayArray1479[k] = null;
+            texture_pixel_data = texture_pixel_cache[cached_texture_to_use];
+            texture_pixel_cache[cached_texture_to_use] = null;
         }
-        anIntArrayArray1479[i] = ai;
-        IndexedImage indexedImage = textureImages[i];
-        int ai1[] = texturePalettes[i];
+        texture_pixel_cache[tex_id] = texture_pixel_data;
+        //End of mem management code
+        IndexedImage indexedImage = textureImages[tex_id];
+        int ai1[] = texturePalettes[tex_id];
         if(lowMem)
         {
-            aBooleanArray1475[i] = false;
+            texture_is_transparent[tex_id] = false;
             for(int i1 = 0; i1 < 4096; i1++)
             {
-                int i2 = ai[i1] = ai1[indexedImage.imgPixels[i1]] & 0xf8f8ff;
+                int i2 = texture_pixel_data[i1] = ai1[indexedImage.imgPixels[i1]] & 0xf8f8ff;
                 if(i2 == 0)
-                    aBooleanArray1475[i] = true;
-                ai[4096 + i1] = i2 - (i2 >>> 3) & 0xf8f8ff;
-                ai[8192 + i1] = i2 - (i2 >>> 2) & 0xf8f8ff;
-                ai[12288 + i1] = i2 - (i2 >>> 2) - (i2 >>> 3) & 0xf8f8ff;
+                    texture_is_transparent[tex_id] = true;
+                texture_pixel_data[4096 + i1] = i2 - (i2 >>> 3) & 0xf8f8ff;
+                texture_pixel_data[8192 + i1] = i2 - (i2 >>> 2) & 0xf8f8ff;
+                texture_pixel_data[12288 + i1] = i2 - (i2 >>> 2) - (i2 >>> 3) & 0xf8f8ff;
             }
 
         } else
@@ -159,30 +161,30 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 for(int j1 = 0; j1 < 128; j1++)
                 {
                     for(int j2 = 0; j2 < 128; j2++)
-                        ai[j2 + (j1 << 7)] = ai1[indexedImage.imgPixels[(j2 >> 1) + ((j1 >> 1) << 6)]];
+                        texture_pixel_data[j2 + (j1 << 7)] = ai1[indexedImage.imgPixels[(j2 >> 1) + ((j1 >> 1) << 6)]];
 
                 }
 
             } else
             {
                 for(int k1 = 0; k1 < 16384; k1++)
-                    ai[k1] = ai1[indexedImage.imgPixels[k1]];
+                    texture_pixel_data[k1] = ai1[indexedImage.imgPixels[k1]];
 
             }
-            aBooleanArray1475[i] = false;
+            texture_is_transparent[tex_id] = false;
             for(int l1 = 0; l1 < 16384; l1++)
             {
-                ai[l1] &= 0xf8f8ff;
-                int k2 = ai[l1];
+                texture_pixel_data[l1] &= 0xf8f8ff;
+                int k2 = texture_pixel_data[l1];
                 if(k2 == 0)
-                    aBooleanArray1475[i] = true;
-                ai[16384 + l1] = k2 - (k2 >>> 3) & 0xf8f8ff;
-                ai[32768 + l1] = k2 - (k2 >>> 2) & 0xf8f8ff;
-                ai[49152 + l1] = k2 - (k2 >>> 2) - (k2 >>> 3) & 0xf8f8ff;
+                    texture_is_transparent[tex_id] = true;
+                texture_pixel_data[16384 + l1] = k2 - (k2 >>> 3) & 0xf8f8ff;
+                texture_pixel_data[32768 + l1] = k2 - (k2 >>> 2) & 0xf8f8ff;
+                texture_pixel_data[49152 + l1] = k2 - (k2 >>> 2) - (k2 >>> 3) & 0xf8f8ff;
             }
 
         }
-        return ai;
+        return texture_pixel_data;
     }
 
     public static void setBrightness(double brightness)
@@ -272,7 +274,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
 
         for(int i1 = 0; i1 < 50; i1++)
-            method370(i1);
+            free_texture(i1);
 
     }
 
@@ -1238,7 +1240,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             int l3, int i4, int j4, int k4)
     {
         int ai[] = getTexturePixels(k4);
-        aBoolean1463 = !aBooleanArray1475[k4];
+        aBoolean1463 = !texture_is_transparent[k4];
         k2 = j2 - k2;
         j3 = i3 - j3;
         i4 = l3 - i4;
@@ -2184,13 +2186,13 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
     public static int lineOffsets[];
     private static int loadedTextureCount;
     public static IndexedImage textureImages[] = new IndexedImage[50];
-    private static boolean[] aBooleanArray1475 = new boolean[50];
+    private static boolean[] texture_is_transparent = new boolean[50];
     private static int[] anIntArray1476 = new int[50];
-    private static int anInt1477;
-    private static int[][] anIntArrayArray1478;
-    private static int[][] anIntArrayArray1479 = new int[50][];
-    public static int anIntArray1480[] = new int[50];
-    public static int anInt1481;
+    private static int texture_pixel_array_pool_ptr;
+    private static int[][] texture_pixel_array_pool;
+    private static int[][] texture_pixel_cache = new int[50][];
+    public static int texture_last_used[] = new int[50];
+    public static int texture_get_count;
     public static int colourMap[] = new int[0x10000];
     private static int[][] texturePalettes = new int[50][];
 
