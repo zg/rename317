@@ -296,8 +296,8 @@ public final class RSFont extends DrawingArea {
             i2 += j2 * k;
             j1 += j2 * DrawingArea.width;
         }
-        if(j + l >= DrawingArea.bottomY)
-            l -= ((j + l) - DrawingArea.bottomY) + 1;
+        if(j + l >= DrawingArea.viewport_h)
+            l -= ((j + l) - DrawingArea.viewport_h) + 1;
         if(i < DrawingArea.topX)
         {
             int k2 = DrawingArea.topX - i;
@@ -308,9 +308,9 @@ public final class RSFont extends DrawingArea {
             l1 += k2;
             k1 += k2;
         }
-        if(i + k >= DrawingArea.bottomX)
+        if(i + k >= DrawingArea.viewport_w)
         {
-            int l2 = ((i + k) - DrawingArea.bottomX) + 1;
+            int l2 = ((i + k) - DrawingArea.viewport_w) + 1;
             k -= l2;
             l1 += l2;
             k1 += l2;
@@ -375,8 +375,8 @@ public final class RSFont extends DrawingArea {
             j2 += k2 * k;
             k1 += k2 * DrawingArea.width;
         }
-        if(l + i1 >= DrawingArea.bottomY)
-            i1 -= ((l + i1) - DrawingArea.bottomY) + 1;
+        if(l + i1 >= DrawingArea.viewport_h)
+            i1 -= ((l + i1) - DrawingArea.viewport_h) + 1;
         if(j < DrawingArea.topX)
         {
             int l2 = DrawingArea.topX - j;
@@ -387,9 +387,9 @@ public final class RSFont extends DrawingArea {
             i2 += l2;
             l1 += l2;
         }
-        if(j + k >= DrawingArea.bottomX)
+        if(j + k >= DrawingArea.viewport_w)
         {
-            int i3 = ((j + k) - DrawingArea.bottomX) + 1;
+            int i3 = ((j + k) - DrawingArea.viewport_w) + 1;
             k -= i3;
             i2 += i3;
             l1 += i3;

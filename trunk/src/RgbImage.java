@@ -161,8 +161,8 @@ public final class RgbImage extends DrawingArea {
             i1 += j2 * k1;
             l += j2 * DrawingArea.width;
         }
-        if(j + j1 > DrawingArea.bottomY)
-            j1 -= (j + j1) - DrawingArea.bottomY;
+        if(j + j1 > DrawingArea.viewport_h)
+            j1 -= (j + j1) - DrawingArea.viewport_h;
         if(i < DrawingArea.topX)
         {
             int k2 = DrawingArea.topX - i;
@@ -173,9 +173,9 @@ public final class RgbImage extends DrawingArea {
             i2 += k2;
             l1 += k2;
         }
-        if(i + k1 > DrawingArea.bottomX)
+        if(i + k1 > DrawingArea.viewport_w)
         {
-            int l2 = (i + k1) - DrawingArea.bottomX;
+            int l2 = (i + k1) - DrawingArea.viewport_w;
             k1 -= l2;
             i2 += l2;
             l1 += l2;
@@ -230,8 +230,8 @@ public final class RgbImage extends DrawingArea {
             j1 += k2 * l1;
             i1 += k2 * DrawingArea.width;
         }
-        if(j + k1 > DrawingArea.bottomY)
-            k1 -= (j + k1) - DrawingArea.bottomY;
+        if(j + k1 > DrawingArea.viewport_h)
+            k1 -= (j + k1) - DrawingArea.viewport_h;
         if(i < DrawingArea.topX)
         {
             int l2 = DrawingArea.topX - i;
@@ -242,9 +242,9 @@ public final class RgbImage extends DrawingArea {
             j2 += l2;
             i2 += l2;
         }
-        if(i + l1 > DrawingArea.bottomX)
+        if(i + l1 > DrawingArea.viewport_w)
         {
-            int i3 = (i + l1) - DrawingArea.bottomX;
+            int i3 = (i + l1) - DrawingArea.viewport_w;
             l1 -= i3;
             j2 += i3;
             i2 += i3;
@@ -273,8 +273,8 @@ public final class RgbImage extends DrawingArea {
             i1 += j2 * k1;
             l += j2 * DrawingArea.width;
         }
-        if(k + j1 > DrawingArea.bottomY)
-            j1 -= (k + j1) - DrawingArea.bottomY;
+        if(k + j1 > DrawingArea.viewport_h)
+            j1 -= (k + j1) - DrawingArea.viewport_h;
         if(i < DrawingArea.topX)
         {
             int k2 = DrawingArea.topX - i;
@@ -285,9 +285,9 @@ public final class RgbImage extends DrawingArea {
             i2 += k2;
             l1 += k2;
         }
-        if(i + k1 > DrawingArea.bottomX)
+        if(i + k1 > DrawingArea.viewport_w)
         {
-            int l2 = (i + k1) - DrawingArea.bottomX;
+            int l2 = (i + k1) - DrawingArea.viewport_w;
             k1 -= l2;
             i2 += l2;
             l1 += l2;
@@ -474,8 +474,8 @@ public final class RgbImage extends DrawingArea {
             l += i2 * j1;
             k += i2 * DrawingArea.width;
         }
-        if(i + i1 > DrawingArea.bottomY)
-            i1 -= (i + i1) - DrawingArea.bottomY;
+        if(i + i1 > DrawingArea.viewport_h)
+            i1 -= (i + i1) - DrawingArea.viewport_h;
         if(j < DrawingArea.topX)
         {
             int j2 = DrawingArea.topX - j;
@@ -486,16 +486,16 @@ public final class RgbImage extends DrawingArea {
             l1 += j2;
             k1 += j2;
         }
-        if(j + j1 > DrawingArea.bottomX)
+        if(j + j1 > DrawingArea.viewport_w)
         {
-            int k2 = (j + j1) - DrawingArea.bottomX;
+            int k2 = (j + j1) - DrawingArea.viewport_w;
             j1 -= k2;
             l1 += k2;
             k1 += k2;
         }
         if(!(j1 <= 0 || i1 <= 0))
         {
-            method355(myPixels, j1, indexedImage.aByteArray1450, i1, DrawingArea.pixels, 0, k1, k, l1, l);
+            method355(myPixels, j1, indexedImage.imgPixels, i1, DrawingArea.pixels, 0, k1, k, l1, l);
         }
     }
 

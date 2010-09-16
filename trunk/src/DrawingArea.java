@@ -16,10 +16,10 @@ public class DrawingArea extends NodeSub {
     {
             topX = 0;
             topY = 0;
-            bottomX = width;
-            bottomY = height;
-            viewport_r_x = bottomX - 1;
-            viewport_c_x = bottomX / 2;
+            viewport_w = width;
+            viewport_h = height;
+            viewport_r_x = viewport_w - 1;
+            viewport_c_x = viewport_w / 2;
     }
 
     public static void setDrawingArea(int i, int j, int k, int l)
@@ -34,11 +34,11 @@ public class DrawingArea extends NodeSub {
             i = height;
         topX = j;
         topY = l;
-        bottomX = k;
-        bottomY = i;
-        viewport_r_x = bottomX - 1;
-        viewport_c_x = bottomX / 2;
-        viewport_c_y = bottomY / 2;
+        viewport_w = k;
+        viewport_h = i;
+        viewport_r_x = viewport_w - 1;
+        viewport_c_x = viewport_w / 2;
+        viewport_c_y = viewport_h / 2;
     }
 
     public static void setAllPixelsToZero()
@@ -61,10 +61,10 @@ public class DrawingArea extends NodeSub {
             l -= topY - j;
             j = topY;
         }
-        if(k1 + k > bottomX)
-            k = bottomX - k1;
-        if(j + l > bottomY)
-            l = bottomY - j;
+        if(k1 + k > viewport_w)
+            k = viewport_w - k1;
+        if(j + l > viewport_h)
+            l = viewport_h - j;
         int l1 = 256 - i1;
         int i2 = (i >> 16 & 0xff) * i1;
         int j2 = (i >> 8 & 0xff) * i1;
@@ -98,10 +98,10 @@ public class DrawingArea extends NodeSub {
             i -= topY - j;
             j = topY;
         }
-        if(k + i1 > bottomX)
-            i1 = bottomX - k;
-        if(j + i > bottomY)
-            i = bottomY - j;
+        if(k + i1 > viewport_w)
+            i1 = viewport_w - k;
+        if(j + i > viewport_h)
+            i = viewport_h - j;
         int k1 = width - i1;
         int l1 = k + j * width;
         for(int i2 = -i; i2 < 0; i2++)
@@ -135,15 +135,15 @@ public class DrawingArea extends NodeSub {
 
     public static void drawHLine(int i, int j, int k, int l)
     {
-        if(i < topY || i >= bottomY)
+        if(i < topY || i >= viewport_h)
             return;
         if(l < topX)
         {
             k -= topX - l;
             l = topX;
         }
-        if(l + k > bottomX)
-            k = bottomX - l;
+        if(l + k > viewport_w)
+            k = viewport_w - l;
         int i1 = l + i * width;
         for(int j1 = 0; j1 < k; j1++)
             pixels[i1 + j1] = j;
@@ -152,15 +152,15 @@ public class DrawingArea extends NodeSub {
 
     private static void method340(int i, int j, int k, int l, int i1)
     {
-        if(k < topY || k >= bottomY)
+        if(k < topY || k >= viewport_h)
             return;
         if(i1 < topX)
         {
             j -= topX - i1;
             i1 = topX;
         }
-        if(i1 + j > bottomX)
-            j = bottomX - i1;
+        if(i1 + j > viewport_w)
+            j = viewport_w - i1;
         int j1 = 256 - l;
         int k1 = (i >> 16 & 0xff) * l;
         int l1 = (i >> 8 & 0xff) * l;
@@ -179,15 +179,15 @@ public class DrawingArea extends NodeSub {
 
     public static void method341(int i, int j, int k, int l)
     {
-        if(l < topX || l >= bottomX)
+        if(l < topX || l >= viewport_w)
             return;
         if(i < topY)
         {
             k -= topY - i;
             i = topY;
         }
-        if(i + k > bottomY)
-            k = bottomY - i;
+        if(i + k > viewport_h)
+            k = viewport_h - i;
         int j1 = l + i * width;
         for(int k1 = 0; k1 < k; k1++)
             pixels[j1 + k1 * width] = j;
@@ -196,15 +196,15 @@ public class DrawingArea extends NodeSub {
 
     private static void method342(int i, int j, int k, int l, int i1)
     {
-        if(j < topX || j >= bottomX)
+        if(j < topX || j >= viewport_w)
             return;
         if(l < topY)
         {
             i1 -= topY - l;
             l = topY;
         }
-        if(l + i1 > bottomY)
-            i1 = bottomY - l;
+        if(l + i1 > viewport_h)
+            i1 = viewport_h - l;
         int j1 = 256 - k;
         int k1 = (i >> 16 & 0xff) * k;
         int l1 = (i >> 8 & 0xff) * k;
@@ -230,9 +230,9 @@ public class DrawingArea extends NodeSub {
     public static int width;
     public static int height;
     public static int topY;
-    public static int bottomY;
+    public static int viewport_h;
     public static int topX;
-    public static int bottomX;
+    public static int viewport_w;
     public static int viewport_r_x;
     public static int viewport_c_x;
     public static int viewport_c_y;
