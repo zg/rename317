@@ -137,10 +137,10 @@ public final class Flo {
         else
         if(lightrand > 255)
             lightrand = 255;
-        hslcolour = compaseHSL(huerand, satrand, lightrand);
+        hslcolour = pack_hsl(huerand, satrand, lightrand);
     }
 
-    private int compaseHSL(int hue, int saturation, int lightness)
+    private int pack_hsl(int hue, int saturation, int lightness)
     {
         if(lightness > 179)
             saturation /= 2;
