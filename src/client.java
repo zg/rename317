@@ -251,7 +251,7 @@ public final class client extends RSApplet {
             anInt1211 = j * 14 + 7;
             if(anInt1211 < 78)
                 anInt1211 = 78;
-            method30(77, anInt1211 - anInt1089 - 77, 0, 463, anInt1211);
+            renderChatInterface(77, anInt1211 - anInt1089 - 77, 0, 463, anInt1211);
             String s;
             if(myPlayer != null && myPlayer.name != null)
                 s = myPlayer.name;
@@ -423,7 +423,7 @@ public final class client extends RSApplet {
         signlink.midisave(abyte0, abyte0.length);
     }
 
-    private void method22()
+    private void updateWorldObjects()
     {
         try
         {
@@ -435,7 +435,7 @@ public final class client extends RSApplet {
             sceneGraph.initToNull();
             System.gc();
             for(int i = 0; i < 4; i++)
-                aTileSettingArray1230[i].init();
+                tileSettings[i].init();
 
             for(int l = 0; l < 4; l++)
             {
@@ -459,7 +459,7 @@ public final class client extends RSApplet {
                     int k5 = (anIntArray1234[i3] & 0xff) * 64 - baseY;
                     byte abyte0[] = aByteArrayArray1183[i3];
                     if(abyte0 != null)
-                        mapRegion.readMapzor(abyte0, k5, i4, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, aTileSettingArray1230);
+                        mapRegion.readMapzor(abyte0, k5, i4, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, tileSettings);
                 }
 
                 for(int j4 = 0; j4 < k2; j4++)
@@ -486,7 +486,7 @@ public final class client extends RSApplet {
                     {
                         int l8 = (anIntArray1234[i6] >> 8) * 64 - baseX;
                         int k9 = (anIntArray1234[i6] & 0xff) * 64 - baseY;
-                        mapRegion.method190(l8, aTileSettingArray1230, k9, sceneGraph, abyte1);
+                        mapRegion.method190(l8, tileSettings, k9, sceneGraph, abyte1);
                     }
                 }
 
@@ -511,7 +511,7 @@ public final class client extends RSApplet {
                                 {
                                     if(anIntArray1234[l11] != j11 || aByteArrayArray1183[l11] == null)
                                         continue;
-                                    mapRegion.method179(i9, l9, aTileSettingArray1230, k4 * 8, (j10 & 7) * 8, aByteArrayArray1183[l11], (l10 & 7) * 8, j3, j6 * 8);
+                                    mapRegion.method179(i9, l9, tileSettings, k4 * 8, (j10 & 7) * 8, aByteArrayArray1183[l11], (l10 & 7) * 8, j3, j6 * 8);
                                     break;
                                 }
 
@@ -552,7 +552,7 @@ public final class client extends RSApplet {
                                 {
                                     if(anIntArray1234[k12] != j12 || aByteArrayArray1247[k12] == null)
                                         continue;
-                                    mapRegion.method183(aTileSettingArray1230, sceneGraph, k10, j8 * 8, (i12 & 7) * 8, l6, aByteArrayArray1247[k12], (k11 & 7) * 8, i11, j9 * 8);
+                                    mapRegion.method183(tileSettings, sceneGraph, k10, j8 * 8, (i12 & 7) * 8, l6, aByteArrayArray1247[k12], (k11 & 7) * 8, i11, j9 * 8);
                                     break;
                                 }
 
@@ -565,7 +565,7 @@ public final class client extends RSApplet {
 
             }
             stream.createFrame(0);
-            mapRegion.addTiles(aTileSettingArray1230, sceneGraph);
+            mapRegion.addTiles(tileSettings, sceneGraph);
             aRSImageProducer_1165.initDrawingArea();
             stream.createFrame(0);
             int k3 = MapRegion.setZ;
@@ -652,7 +652,7 @@ public final class client extends RSApplet {
         SpotAnim.aMRUNodes_415.unlinkAll();
     }
 
-    private void method24(int i)
+    private void rendedMapScene(int i)
     {
         int ai[] = aClass30_Sub2_Sub1_Sub1_1263.myPixels;
         int j = ai.length;
@@ -681,9 +681,9 @@ public final class client extends RSApplet {
             for(int j2 = 1; j2 < 103; j2++)
             {
                 if((byteGroundArray[i][j2][i2] & 0x18) == 0)
-                    method50(i2, j1, j2, l1, i);
+                    drawMapScenes(i2, j1, j2, l1, i);
                 if(i < 3 && (byteGroundArray[i + 1][j2][i2] & 8) != 0)
-                    method50(i2, j1, j2, l1, i + 1);
+                    drawMapScenes(i2, j1, j2, l1, i + 1);
             }
 
         }
@@ -707,7 +707,7 @@ public final class client extends RSApplet {
                         {
                             byte byte0 = 104;
                             byte byte1 = 104;
-                            int ai1[][] = aTileSettingArray1230[plane].clipData;
+                            int ai1[][] = tileSettings[plane].clipData;
                             for(int i4 = 0; i4 < 10; i4++)
                             {
                                 int j4 = (int)(Math.random() * 4D);
@@ -774,7 +774,7 @@ public final class client extends RSApplet {
         sceneGraph.method281(i, i1, ((Animable) (obj1)), method42(plane, j * 128 + 64, i * 128 + 64), ((Animable) (obj2)), ((Animable) (obj)), plane, j);
     }
 
-    private void method26(boolean flag)
+    private void renderNPCs(boolean flag)//todo- check this
     {
         for(int j = 0; j < npcCount; j++)
         {
@@ -1048,7 +1048,7 @@ public final class client extends RSApplet {
 
     }
 
-    private void method30(int j, int k, int l, int i1, int j1)
+    private void renderChatInterface(int j, int k, int l, int i1, int j1)
     {
         scrollBar1.drawImage(i1, l);
         scrollBar2.drawImage(i1, (l + j) - 16);
@@ -1072,9 +1072,9 @@ public final class client extends RSApplet {
     {
         anInt839 = 0;
         anInt893 = 0;
-        method139(stream);
-        method46(i, stream);
-        method86(stream);
+        updateNPCs(stream);
+        updateNpcMovement(i, stream);
+        readNpcUpdateMask(stream);
         for(int k = 0; k < anInt839; k++)
         {
             int l = anIntArray840[k];
@@ -1635,7 +1635,7 @@ public final class client extends RSApplet {
         }
     }
 
-    private void method38()
+    private void resetSpokenText()
     {
         for(int i = -1; i < playerCount; i++)
         {
@@ -1890,7 +1890,7 @@ public final class client extends RSApplet {
         unlinkMRUNodes();
         sceneGraph.initToNull();
         for(int i = 0; i < 4; i++)
-            aTileSettingArray1230[i].init();
+            tileSettings[i].init();
 
         System.gc();
         stopMidi();
@@ -1917,7 +1917,7 @@ public final class client extends RSApplet {
 
     }
 
-    private void method46(int i, Stream stream)
+    private void updateNpcMovement(int i, Stream stream)
     {
         while(stream.bitPosition + 21 < i * 8)
         {
@@ -1964,7 +1964,7 @@ public final class client extends RSApplet {
         processOnDemandQueue();
     }
 
-    private void method47(boolean flag)
+    private void renderOtherPlayers(boolean flag)
     {
         if(myPlayer.bound_extent_x >> 7 == destX && myPlayer.bound_extent_y >> 7 == destY)
             destX = 0;
@@ -2125,7 +2125,7 @@ public final class client extends RSApplet {
         return false;
     }
 
-    private void method49(Stream stream)
+    private void refreshUpdateMasks(Stream stream)
     {
         for(int j = 0; j < anInt893; j++)
         {
@@ -2134,12 +2134,12 @@ public final class client extends RSApplet {
             int l = stream.readUnsignedByte();
             if((l & 0x40) != 0)
                 l += stream.readUnsignedByte() << 8;
-            method107(l, k, stream, player);
+            appendPlayerUpdateMask(l, k, stream, player);
         }
 
     }
 
-    private void method50(int i, int k, int l, int i1, int j1)
+    private void drawMapScenes(int i, int k, int l, int i1, int j1)
     {
         int k1 = sceneGraph.method300(j1, l, i);
         if(k1 != 0)
@@ -2453,7 +2453,7 @@ public final class client extends RSApplet {
         if(loadingStage == 2 && plane != anInt985)
         {
             anInt985 = plane;
-            method24(plane);
+            rendedMapScene(plane);
         }
     }
 
@@ -2493,13 +2493,13 @@ public final class client extends RSApplet {
         {
             loadingStage = 2;
             MapRegion.anInt131 = plane;
-            method22();
+            updateWorldObjects();
             stream.createFrame(121);
             return 0;
         }
     }
 
-    private void method55()
+    private void renderProjectiles()//todo- confirm
     {
         for(Projectile class30_sub2_sub4_sub4 = (Projectile)aClass19_1013.reverseGetFirst(); class30_sub2_sub4_sub4 != null; class30_sub2_sub4_sub4 = (Projectile)aClass19_1013.reverseGetNext())
             if(class30_sub2_sub4_sub4.anInt1597 != plane || loopCycle > class30_sub2_sub4_sub4.anInt1572)
@@ -2891,9 +2891,9 @@ public final class client extends RSApplet {
         anInt1009++;
         if(anInt1009 > 750)
             dropClient();
-        method114();
-        method95();
-        method38();
+        updatePlayerInstances();
+        forceNpcUpdateBlock();
+        resetSpokenText();
         anInt945++;
         if(crossType != 0)
         {
@@ -3014,7 +3014,7 @@ public final class client extends RSApplet {
         for(int i1 = 0; i1 < 5; i1++)
             anIntArray1030[i1]++;
 
-        method73();
+        manageTextInputs();
         super.idleTime++;
         if(super.idleTime > 4500)
         {
@@ -3217,7 +3217,7 @@ public final class client extends RSApplet {
         }
     }
 
-    private boolean method66(int i, int j, int k)
+    private boolean clickObject(int i, int j, int k)//todo- confirm
     {
         int i1 = i >> 14 & 0x7fff;
         int j1 = sceneGraph.getIDTAGForXYZ(plane, k, j, i);
@@ -3470,7 +3470,7 @@ public final class client extends RSApplet {
             stream.writeWord(i1);
             stream.method431(j + baseX);
         }
-        if(l == 62 && method66(i1, k, j))
+        if(l == 62 && clickObject(i1, k, j))
         {
             stream.createFrame(192);
             stream.writeWord(anInt1284);
@@ -3586,7 +3586,7 @@ public final class client extends RSApplet {
                 stream.writeDWordBigEndian(0xe63271);
                 anInt924 = 0;
             }
-            method66(i1, k, j);
+            clickObject(i1, k, j);
             stream.createFrame(228);
             stream.method432(i1 >> 14 & 0x7fff);
             stream.method432(k + baseY);
@@ -3960,7 +3960,7 @@ public final class client extends RSApplet {
         }
         if(l == 900)
         {
-            method66(i1, k, j);
+            clickObject(i1, k, j);
             stream.createFrame(252);
             stream.method433(i1 >> 14 & 0x7fff);
             stream.method431(k + baseY);
@@ -4023,7 +4023,7 @@ public final class client extends RSApplet {
                 stream.method431(i1);
             }
         }
-        if(l == 956 && method66(i1, k, j))
+        if(l == 956 && clickObject(i1, k, j))
         {
             stream.createFrame(35);
             stream.method431(j + baseX);
@@ -4191,7 +4191,7 @@ public final class client extends RSApplet {
         }
         if(l == 113)
         {
-            method66(i1, k, j);
+            clickObject(i1, k, j);
             stream.createFrame(70);
             stream.method431(j + baseX);
             stream.writeWord(k + baseY);
@@ -4199,7 +4199,7 @@ public final class client extends RSApplet {
         }
         if(l == 872)
         {
-            method66(i1, k, j);
+            clickObject(i1, k, j);
             stream.createFrame(234);
             stream.method433(j + baseX);
             stream.method432(i1 >> 14 & 0x7fff);
@@ -4207,7 +4207,7 @@ public final class client extends RSApplet {
         }
         if(l == 502)
         {
-            method66(i1, k, j);
+            clickObject(i1, k, j);
             stream.createFrame(132);
             stream.method433(j + baseX);
             stream.writeWord(i1 >> 14 & 0x7fff);
@@ -4292,16 +4292,16 @@ public final class client extends RSApplet {
 
     }
 
-    private void method70()
+    private void checkTutorialIsland()//tutorial island areas
     {
         anInt1251 = 0;
-        int j = (myPlayer.bound_extent_x >> 7) + baseX;
-        int k = (myPlayer.bound_extent_y >> 7) + baseY;
-        if(j >= 3053 && j <= 3156 && k >= 3056 && k <= 3136)
+        int bigX = (myPlayer.bound_extent_x >> 7) + baseX;
+        int bigY = (myPlayer.bound_extent_y >> 7) + baseY;
+        if(bigX >= 3053 && bigX <= 3156 && bigY >= 3056 && bigY <= 3136)
             anInt1251 = 1;
-        if(j >= 3072 && j <= 3118 && k >= 9492 && k <= 9535)
+        if(bigX >= 3072 && bigX <= 3118 && bigY >= 9492 && bigY <= 9535)
             anInt1251 = 1;
-        if(anInt1251 == 1 && j >= 3139 && j <= 3199 && k >= 3008 && k <= 3062)
+        if(anInt1251 == 1 && bigX >= 3139 && bigX <= 3199 && bigY >= 3008 && bigY <= 3062)
             anInt1251 = 0;
     }
 
@@ -4542,7 +4542,7 @@ public final class client extends RSApplet {
         intGroundArray = null;
         byteGroundArray = null;
         sceneGraph = null;
-        aTileSettingArray1230 = null;
+        tileSettings = null;
         anIntArrayArray901 = null;
         anIntArrayArray825 = null;
         bigX = null;
@@ -4672,7 +4672,7 @@ public final class client extends RSApplet {
             return this;
     }
 
-    private void method73()
+    private void manageTextInputs()
     {
         do
         {
@@ -4834,7 +4834,7 @@ public final class client extends RSApplet {
                                 for(int i2 = 1; i2 < 103; i2++)
                                 {
                                     for(int k2 = 1; k2 < 103; k2++)
-                                        aTileSettingArray1230[k1].clipData[i2][k2] = 0;
+                                        tileSettings[k1].clipData[i2][k2] = 0;
 
                                 }
 
@@ -5589,7 +5589,7 @@ public final class client extends RSApplet {
             return super.getDocumentBase().getHost().toLowerCase();
     }
 
-    private void method81(RgbImage rgbImage, int j, int k)
+    private void method81(RgbImage rgbImage, int j, int k)//todo - is this that white line thing?
     {
         int l = k * k + j * j;
         if(l > 4225 && l < 0x15f90)
@@ -5679,10 +5679,10 @@ public final class client extends RSApplet {
         }
     }
 
-    private int method83(int i, int j, int k)
+    private int rotateFlameColour(int r, int g, int b)
     {
-        int l = 256 - k;
-        return ((i & 0xff00ff) * l + (j & 0xff00ff) * k & 0xff00ff00) + ((i & 0xff00) * l + (j & 0xff00) * k & 0xff0000) >> 8;
+        int l = 256 - b;
+        return ((r & 0xff00ff) * l + (g & 0xff00ff) * b & 0xff00ff00) + ((r & 0xff00) * l + (g & 0xff00) * b & 0xff0000) >> 8;
     }
 
     private void login(String s, String s1, boolean flag)
@@ -6055,7 +6055,7 @@ public final class client extends RSApplet {
         bigY[l3++] = j1;
         boolean flag1 = false;
         int j4 = bigX.length;
-        int ai[][] = aTileSettingArray1230[plane].clipData;
+        int ai[][] = tileSettings[plane].clipData;
         while(i4 != l3) 
         {
             j3 = bigX[i4];
@@ -6068,18 +6068,18 @@ public final class client extends RSApplet {
             }
             if(i1 != 0)
             {
-                if((i1 < 5 || i1 == 10) && aTileSettingArray1230[plane].isWalkableA(k2, j3, k3, j, i1 - 1, i2))
+                if((i1 < 5 || i1 == 10) && tileSettings[plane].isWalkableA(k2, j3, k3, j, i1 - 1, i2))
                 {
                     flag1 = true;
                     break;
                 }
-                if(i1 < 10 && aTileSettingArray1230[plane].isWalkableB(k2, i2, k3, i1 - 1, j, j3))
+                if(i1 < 10 && tileSettings[plane].isWalkableB(k2, i2, k3, i1 - 1, j, j3))
                 {
                     flag1 = true;
                     break;
                 }
             }
-            if(k1 != 0 && k != 0 && aTileSettingArray1230[plane].isWalkableC(i2, k2, j3, k, l1, k1, k3))
+            if(k1 != 0 && k != 0 && tileSettings[plane].isWalkableC(i2, k2, j3, k, l1, k1, k3))
             {
                 flag1 = true;
                 break;
@@ -6253,7 +6253,7 @@ public final class client extends RSApplet {
         return i != 1;
     }
 
-    private void method86(Stream stream)
+    private void readNpcUpdateMask(Stream stream)
     {
         for(int j = 0; j < anInt893; j++)
         {
@@ -6548,7 +6548,7 @@ public final class client extends RSApplet {
         gameObjectSpawnRequest.face = l;
     }
 
-    private void method90()
+    private void method90()//todo - handlemusicevents
     {
         for(int i = 0; i < anInt1062; i++)
             if(anIntArray1250[i] <= 0)
@@ -6673,7 +6673,7 @@ public final class client extends RSApplet {
             intGroundArray = new int[4][105][105];
             sceneGraph = new SceneGraph(intGroundArray);
             for(int j = 0; j < 4; j++)
-                aTileSettingArray1230[j] = new TileSetting();
+                tileSettings[j] = new TileSetting();
 
             aClass30_Sub2_Sub1_Sub1_1263 = new RgbImage(512, 512);
             JagexArchive jagexArchive_6 = streamLoaderForName(5, "update list", "versionlist", expectedCRCs[5], 60);
@@ -7037,7 +7037,7 @@ public final class client extends RSApplet {
         loadingError = true;
     }
 
-    private void method91(Stream stream, int i)
+    private void updateOtherPlayerMovements(Stream stream, int i)
     {
         while(stream.bitPosition + 10 < i * 8)
         {
@@ -7068,7 +7068,7 @@ public final class client extends RSApplet {
         stream.finishBitAccess();
     }
 
-    private void processMainScreenClick()
+    private void processMainScreenClick()//minimap walking
     {
         if(anInt1021 != 0)
             return;
@@ -7208,18 +7208,18 @@ public final class client extends RSApplet {
         return super.getCodeBase();
     }
 
-    private void method95()
+    private void forceNpcUpdateBlock()
     {
         for(int j = 0; j < npcCount; j++)
         {
             int k = npcIndices[j];
             NPC npc = npcArray[k];
             if(npc != null)
-                method96(npc);
+                entityUpdateBlock(npc);
         }
     }
 
-    private void method96(Entity entity)
+    private void entityUpdateBlock(Entity entity)//realy?
     {
         if(entity.bound_extent_x < 128 || entity.bound_extent_y < 128 || entity.bound_extent_x >= 13184 || entity.bound_extent_y >= 13184)
         {
@@ -7242,17 +7242,17 @@ public final class client extends RSApplet {
             entity.method446();
         }
         if(entity.anInt1547 > loopCycle)
-            method97(entity);
+            refreshEntityPosition(entity);
         else
         if(entity.anInt1548 >= loopCycle)
-            method98(entity);
+            refreshEntityFaceDirection(entity);
         else
             method99(entity);
-        method100(entity);
-        method101(entity);
+        appendFocusDestination(entity);
+        appendAnimation(entity);
     }
 
-    private void method97(Entity entity)
+    private void refreshEntityPosition(Entity entity)
     {
         int i = entity.anInt1547 - loopCycle;
         int j = entity.anInt1543 * 128 + entity.bound_dim * 64;
@@ -7270,7 +7270,7 @@ public final class client extends RSApplet {
             entity.turnDirection = 512;
     }
 
-    private void method98(Entity entity)
+    private void refreshEntityFaceDirection(Entity entity)
     {
         if(entity.anInt1548 == loopCycle || entity.animation == -1 || entity.anInt1529 != 0 || entity.anInt1528 + 1 > Animation.anims[entity.animation].getFrameLength(entity.anInt1527))
         {
@@ -7414,7 +7414,7 @@ public final class client extends RSApplet {
         }
     }
 
-    private void method100(Entity entity)
+    private void appendFocusDestination(Entity entity)
     {
         if(entity.anInt1504 == 0)
             return;
@@ -7475,7 +7475,7 @@ public final class client extends RSApplet {
         }
     }
 
-    private void method101(Entity entity)
+    private void appendAnimation(Entity entity)
     {
         entity.aBoolean1541 = false;
         if(entity.anInt1517 != -1)
@@ -7564,7 +7564,7 @@ public final class client extends RSApplet {
             needDrawTabArea = true;
         if(invOverlayInterfaceID != -1)
         {
-            boolean flag1 = method119(anInt945, invOverlayInterfaceID);
+            boolean flag1 = animateRSInterface(anInt945, invOverlayInterfaceID);
             if(flag1)
                 needDrawTabArea = true;
         }
@@ -7595,7 +7595,7 @@ public final class client extends RSApplet {
         }
         if(backDialogID != -1)
         {
-            boolean flag2 = method119(anInt945, backDialogID);
+            boolean flag2 = animateRSInterface(anInt945, backDialogID);
             if(flag2)
                 inputTaken = true;
         }
@@ -7772,7 +7772,7 @@ public final class client extends RSApplet {
         }
     }
 
-    private void method104()
+    private void renderStationaryGraphics()
     {
         StillGraphics class30_sub2_sub4_sub3 = (StillGraphics)aClass19_1056.reverseGetFirst();
         for(; class30_sub2_sub4_sub3 != null; class30_sub2_sub4_sub3 = (StillGraphics)aClass19_1056.reverseGetNext())
@@ -7819,7 +7819,7 @@ public final class client extends RSApplet {
                     class9_1.scrollPosition = 0;
                 drawInterface(class9_1.scrollPosition, k2, class9_1, l2);
                 if(class9_1.scrollMax > class9_1.height)
-                    method30(class9_1.height, class9_1.scrollPosition, l2, k2 + class9_1.width, class9_1.scrollMax);
+                    renderChatInterface(class9_1.height, class9_1.scrollPosition, l2, k2 + class9_1.width, class9_1.scrollMax);
             } else
             if(class9_1.type != 1)
                 if(class9_1.type == 2)
@@ -8147,7 +8147,7 @@ public final class client extends RSApplet {
         }
     }
 
-    private void method107(int i, int j, Stream stream, Player player)
+    private void appendPlayerUpdateMask(int i, int j, Stream stream, Player player)
     {
         if((i & 0x400) != 0)
         {
@@ -8476,15 +8476,15 @@ public final class client extends RSApplet {
             crosses[4 + crossIndex / 100].drawSprite(crossX - 8 - 4, crossY - 8 - 4);
         if(anInt1018 != -1)
         {
-            method119(anInt945, anInt1018);
+            animateRSInterface(anInt945, anInt1018);
             drawInterface(0, 0, RSInterface.interfaceCache[anInt1018], 0);
         }
         if(openInterfaceID != -1)
         {
-            method119(anInt945, openInterfaceID);
+            animateRSInterface(anInt945, openInterfaceID);
             drawInterface(0, 0, RSInterface.interfaceCache[openInterfaceID], 0);
         }
-        method70();
+        checkTutorialIsland();
         if(!menuOpen)
         {
             processRightClick();
@@ -8567,7 +8567,7 @@ public final class client extends RSApplet {
         throw new RuntimeException();
     }
 
-    private void method114()
+    private void updatePlayerInstances()
     {
         for(int i = -1; i < playerCount; i++)
         {
@@ -8578,7 +8578,7 @@ public final class client extends RSApplet {
                 j = playerIndices[i];
             Player player = playerArray[j];
             if(player != null)
-                method96(player);
+                entityUpdateBlock(player);
         }
 
     }
@@ -8693,7 +8693,7 @@ public final class client extends RSApplet {
         }
     }
 
-    private void method117(Stream stream)
+    private void updatePlayerMovement(Stream stream)
     {
         stream.initBitAccess();
         int j = stream.readBits(1);
@@ -8765,7 +8765,7 @@ public final class client extends RSApplet {
         aClass30_Sub2_Sub1_Sub1_1202 = null;
     }
 
-    private boolean method119(int i, int j)
+    private boolean animateRSInterface(int i, int j)
     {
         boolean flag1 = false;
         RSInterface class9 = RSInterface.interfaceCache[j];
@@ -8775,7 +8775,7 @@ public final class client extends RSApplet {
                 break;
             RSInterface class9_1 = RSInterface.interfaceCache[class9.children[k]];
             if(class9_1.type == 1)
-                flag1 |= method119(i, class9_1.id);
+                flag1 |= animateRSInterface(i, class9_1.id);
             if(class9_1.type == 6 && (class9_1.anInt257 != -1 || class9_1.anInt258 != -1))
             {
                 boolean flag2 = interfaceIsSelected(class9_1);
@@ -8887,7 +8887,7 @@ public final class client extends RSApplet {
         return j;
     }
 
-    private int method121()
+    private int resetCameraHeight()
     {
         int j = method42(plane, yCameraPos, xCameraPos);
         if(j - zCameraPos < 800 && (byteGroundArray[plane][xCameraPos >> 7][yCameraPos >> 7] & 4) != 0)
@@ -9301,7 +9301,7 @@ public final class client extends RSApplet {
 
     }
 
-    private void method130(int j, int k, int l, int i1, int j1, int k1,
+    private void createObjectSpawnRequest(int j, int k, int l, int i1, int j1, int k1,
                            int l1, int i2, int j2)
     {
         GameObjectSpawnRequest gameObjectSpawnRequest = null;
@@ -9392,24 +9392,24 @@ public final class client extends RSApplet {
         {
             for(int i = 0; i < 256; i++)
                 if(anInt1040 > 768)
-                    anIntArray850[i] = method83(anIntArray851[i], anIntArray852[i], 1024 - anInt1040);
+                    anIntArray850[i] = rotateFlameColour(anIntArray851[i], anIntArray852[i], 1024 - anInt1040);
                 else
                 if(anInt1040 > 256)
                     anIntArray850[i] = anIntArray852[i];
                 else
-                    anIntArray850[i] = method83(anIntArray852[i], anIntArray851[i], 256 - anInt1040);
+                    anIntArray850[i] = rotateFlameColour(anIntArray852[i], anIntArray851[i], 256 - anInt1040);
 
         } else
         if(anInt1041 > 0)
         {
             for(int j = 0; j < 256; j++)
                 if(anInt1041 > 768)
-                    anIntArray850[j] = method83(anIntArray851[j], anIntArray853[j], 1024 - anInt1041);
+                    anIntArray850[j] = rotateFlameColour(anIntArray851[j], anIntArray853[j], 1024 - anInt1041);
                 else
                 if(anInt1041 > 256)
                     anIntArray850[j] = anIntArray853[j];
                 else
-                    anIntArray850[j] = method83(anIntArray853[j], anIntArray851[j], 256 - anInt1041);
+                    anIntArray850[j] = rotateFlameColour(anIntArray853[j], anIntArray851[j], 256 - anInt1041);
 
         } else
         {
@@ -9479,7 +9479,7 @@ public final class client extends RSApplet {
         aRSImageProducer_1111.drawGraphics(0, super.graphics, 637);
     }
 
-    private void method134(Stream stream)
+    private void updatePlayer(Stream stream)
     {
         int j = stream.readBits(8);
         if(j < playerCount)
@@ -9838,7 +9838,7 @@ public final class client extends RSApplet {
                 Model model = class46.method578(j19, i20, i22, j22, k22, l22, -1);
                 if(model != null)
                 {
-                    method130(k17 + 1, -1, 0, l20, j7, 0, plane, k4, l14 + 1);
+                    createObjectSpawnRequest(k17 + 1, -1, 0, l20, j7, 0, plane, k4, l14 + 1);
                     player.anInt1707 = l14 + loopCycle;
                     player.anInt1708 = k17 + loopCycle;
                     player.aModel_1714 = model;
@@ -9882,7 +9882,7 @@ public final class client extends RSApplet {
             int k16 = k12 & 3;
             int l17 = anIntArray1177[i15];
             if(l4 >= 0 && k7 >= 0 && l4 < 104 && k7 < 104)
-                method130(-1, j10, k16, l17, k7, i15, plane, l4, 0);
+                createObjectSpawnRequest(-1, j10, k16, l17, k7, i15, plane, l4, 0);
             return;
         }
         if(j == 4)
@@ -9931,7 +9931,7 @@ public final class client extends RSApplet {
             int k15 = anInt1268 + (j13 >> 4 & 7);
             int l16 = anInt1269 + (j13 & 7);
             if(k15 >= 0 && l16 >= 0 && k15 < 104 && l16 < 104)
-                method130(-1, -1, j8, i11, l16, k5, plane, k15, 0);
+                createObjectSpawnRequest(-1, -1, j8, i11, l16, k5, plane, k15, 0);
             return;
         }
         if(j == 117)
@@ -9971,7 +9971,7 @@ public final class client extends RSApplet {
         ObjectDef.lowMem = true;
     }
 
-    private void method139(Stream stream)
+    private void updateNPCs(Stream stream)
     {
         stream.initBitAccess();
         int k = stream.readBits(8);
@@ -10182,7 +10182,7 @@ public final class client extends RSApplet {
                     sceneGraph.method291(i1, j, i, (byte)-119);
                     ObjectDef class46 = ObjectDef.forID(j2);
                     if(class46.isUnwalkable)
-                        aTileSettingArray1230[j].method215(l2, k2, class46.aBoolean757, i1, i);
+                        tileSettings[j].method215(l2, k2, class46.aBoolean757, i1, i);
                 }
                 if(j1 == 1)
                     sceneGraph.method292(i, j, i1);
@@ -10193,14 +10193,14 @@ public final class client extends RSApplet {
                     if(i1 + class46_1.sizeX > 103 || i + class46_1.sizeX > 103 || i1 + class46_1.sizeY > 103 || i + class46_1.sizeY > 103)
                         return;
                     if(class46_1.isUnwalkable)
-                        aTileSettingArray1230[j].method216(l2, class46_1.sizeX, i1, i, class46_1.sizeY, class46_1.aBoolean757);
+                        tileSettings[j].method216(l2, class46_1.sizeX, i1, i, class46_1.sizeY, class46_1.aBoolean757);
                 }
                 if(j1 == 3)
                 {
                     sceneGraph.method294(j, i, i1);
                     ObjectDef class46_2 = ObjectDef.forID(j2);
                     if(class46_2.isUnwalkable && class46_2.hasActions)
-                        aTileSettingArray1230[j].method218(i, i1);
+                        tileSettings[j].method218(i, i1);
                 }
             }
             if(k1 >= 0)
@@ -10208,7 +10208,7 @@ public final class client extends RSApplet {
                 int j3 = j;
                 if(j3 < 3 && (byteGroundArray[1][i1][i] & 2) == 2)
                     j3++;
-                MapRegion.method188(sceneGraph, k, i, l, j3, aTileSettingArray1230[j], intGroundArray, i1, k1, j);
+                MapRegion.method188(sceneGraph, k, i, l, j3, tileSettings[j], intGroundArray, i1, k1, j);
             }
         }
     }
@@ -10217,10 +10217,10 @@ public final class client extends RSApplet {
     {
         anInt839 = 0;
         anInt893 = 0;
-        method117(stream);
-        method134(stream);
-        method91(stream, i);
-        method49(stream);
+        updatePlayerMovement(stream);
+        updatePlayer(stream);
+        updateOtherPlayerMovements(stream, i);
+        refreshUpdateMasks(stream);
         for(int k = 0; k < anInt839; k++)
         {
             int l = anIntArray840[k];
@@ -11531,12 +11531,12 @@ public final class client extends RSApplet {
     private void method146()
     {
         anInt1265++;
-        method47(true);
-        method26(true);
-        method47(false);
-        method26(false);
-        method55();
-        method104();
+        renderOtherPlayers(true);
+        renderNPCs(true);
+        renderOtherPlayers(false);
+        renderNPCs(false);
+        renderProjectiles();
+        renderStationaryGraphics();
         if(!aBoolean1160)
         {
             int i = anInt1184;
@@ -11551,7 +11551,7 @@ public final class client extends RSApplet {
         if(!aBoolean1160)
             j = method120();
         else
-            j = method121();
+            j = resetCameraHeight();
         int l = xCameraPos;
         int i1 = zCameraPos;
         int j1 = yCameraPos;
@@ -11754,7 +11754,7 @@ public final class client extends RSApplet {
         inputTaken = false;
         songChanging = true;
         anIntArray1229 = new int[151];
-        aTileSettingArray1230 = new TileSetting[4];
+        tileSettings = new TileSetting[4];
         aBoolean1233 = false;
         anIntArray1240 = new int[100];
         anIntArray1241 = new int[50];
@@ -12165,7 +12165,7 @@ public final class client extends RSApplet {
     private int nextSong;
     private boolean songChanging;
     private final int[] anIntArray1229;
-    private TileSetting[] aTileSettingArray1230;
+    private TileSetting[] tileSettings;
     public static int BITFIELD_MAX_VALUE[];
     private boolean aBoolean1233;
     private int[] anIntArray1234;
