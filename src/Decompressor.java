@@ -5,7 +5,7 @@
 import java.io.*;
 
 final class Decompressor {
-
+ //todo - think of new name - not all data is compressed (light232)
     public Decompressor(RandomAccessFile randomaccessfile, RandomAccessFile randomaccessfile1, int j)
     {
         indexID = j;
