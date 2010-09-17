@@ -21,11 +21,11 @@ final class CullingCluster
     int world_end_y;
     int world_start_z;
     int world_end_z;
-    int x_distance_from_camera_enum;
-    int anInt799;
-    int anInt800;
+    int tile_distance_enum;
+    int world_distance_from_camera_start_x;
+    int world_distance_from_camera_end_x;
     int world_distance_from_camera_start_y;
     int world_distance_from_camera_end_y;
-    int anInt803;
-    int anInt804;
+    int world_distance_from_camera_start_z;
+    int world_distance_from_camera_end_z;
 }
