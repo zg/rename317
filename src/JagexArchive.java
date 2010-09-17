@@ -13,12 +13,12 @@ final class JagexArchive {
         {
             byte out[] = new byte[resultLength];
             BZIP2Decompressor.decompress(out, resultLength, in, rawLength, 6);
-            aByteArray726 = out;
-            stream = new Stream(aByteArray726);
+            outputData = out;
+            stream = new Stream(outputData);
             isCompressed = true;
         } else
         {
-            aByteArray726 = in;
+            outputData = in;
             isCompressed = false;
         }
         dataSize = stream.readUnsignedWord();
@@ -52,10 +52,10 @@ final class JagexArchive {
                     abyte0 = new byte[myFileSizes[k]];
                 if(!isCompressed)
                 {
-                    BZIP2Decompressor.decompress(abyte0, myFileSizes[k], aByteArray726, myOnDiskFileSizes[k], myFileOffsets[k]);
+                    BZIP2Decompressor.decompress(abyte0, myFileSizes[k], outputData, myOnDiskFileSizes[k], myFileOffsets[k]);
                 } else
                 {
-                    System.arraycopy(aByteArray726, myFileOffsets[k], abyte0, 0, myFileSizes[k]);
+                    System.arraycopy(outputData, myFileOffsets[k], abyte0, 0, myFileSizes[k]);
 
                 }
                 return abyte0;
@@ -64,7 +64,7 @@ final class JagexArchive {
         return null;
     }
 
-    private final byte[] aByteArray726;
+    private final byte[] outputData;
     private final int dataSize;
     private final int[] myNameIndexes;
     private final int[] myFileSizes;

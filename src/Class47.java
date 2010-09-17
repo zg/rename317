@@ -9,7 +9,7 @@ final class Class47
     Class47()
     {
     }
-
+    //map culling
     int anInt787;
     int anInt788;
     int anInt789;
