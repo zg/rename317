@@ -3316,7 +3316,7 @@ public final class client extends RSApplet {
                 try
                 {
                     if(decompressors[0] != null)
-                        decompressors[0].method234(abyte0.length, abyte0, i);
+                        decompressors[0].put(abyte0.length, abyte0, i);
                 }
                 catch(Exception _ex)
                 {

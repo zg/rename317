@@ -623,11 +623,11 @@ public final class Model extends Animable {
                 System.arraycopy(model.triangle_draw_type, 0, triangle_draw_type, 0, triangleCount);
 
             }
-            super.aVertexNormalArray1425 = new VertexNormal[verticeCount];
+            super.vertexNormalArray = new VertexNormal[verticeCount];
             for(int j1 = 0; j1 < verticeCount; j1++)
             {
-                VertexNormal vertexNormal = super.aVertexNormalArray1425[j1] = new VertexNormal();
-                VertexNormal vertexNormal_1 = model.aVertexNormalArray1425[j1];
+                VertexNormal vertexNormal = super.vertexNormalArray[j1] = new VertexNormal();
+                VertexNormal vertexNormal_1 = model.vertexNormalArray[j1];
                 vertexNormal.x = vertexNormal_1.x;
                 vertexNormal.y = vertexNormal_1.y;
                 vertexNormal.z = vertexNormal_1.z;
@@ -1190,11 +1190,11 @@ public final class Model extends Animable {
             anIntArray1635 = new int[triangleCount];
             anIntArray1636 = new int[triangleCount];
         }
-        if(super.aVertexNormalArray1425 == null)
+        if(super.vertexNormalArray == null)
         {
-            super.aVertexNormalArray1425 = new VertexNormal[verticeCount];
+            super.vertexNormalArray = new VertexNormal[verticeCount];
             for(int l1 = 0; l1 < verticeCount; l1++)
-                super.aVertexNormalArray1425[l1] = new VertexNormal();
+                super.vertexNormalArray[l1] = new VertexNormal();
 
         }
         for(int i2 = 0; i2 < triangleCount; i2++)
@@ -1225,17 +1225,17 @@ public final class Model extends Animable {
             j5 = (j5 * 256) / k5;
             if(triangle_draw_type == null || (triangle_draw_type[i2] & 1) == 0)
             {
-                VertexNormal vertexNormal_2 = super.aVertexNormalArray1425[j2];
+                VertexNormal vertexNormal_2 = super.vertexNormalArray[j2];
                 vertexNormal_2.x += l4;
                 vertexNormal_2.y += i5;
                 vertexNormal_2.z += j5;
                 vertexNormal_2.magnitude++;
-                vertexNormal_2 = super.aVertexNormalArray1425[l2];
+                vertexNormal_2 = super.vertexNormalArray[l2];
                 vertexNormal_2.x += l4;
                 vertexNormal_2.y += i5;
                 vertexNormal_2.z += j5;
                 vertexNormal_2.magnitude++;
-                vertexNormal_2 = super.aVertexNormalArray1425[i3];
+                vertexNormal_2 = super.vertexNormalArray[i3];
                 vertexNormal_2.x += l4;
                 vertexNormal_2.y += i5;
                 vertexNormal_2.z += j5;
@@ -1255,7 +1255,7 @@ public final class Model extends Animable {
             aVertexNormalArray1660 = new VertexNormal[verticeCount];
             for(int k2 = 0; k2 < verticeCount; k2++)
             {
-                VertexNormal vertexNormal = super.aVertexNormalArray1425[k2];
+                VertexNormal vertexNormal = super.vertexNormalArray[k2];
                 VertexNormal vertexNormal_1 = aVertexNormalArray1660[k2] = new VertexNormal();
                 vertexNormal_1.x = vertexNormal.x;
                 vertexNormal_1.y = vertexNormal.y;
@@ -1283,13 +1283,13 @@ public final class Model extends Animable {
             if(triangle_draw_type == null)
             {
                 int i3 = triangleColours[j1];
-                VertexNormal vertexNormal = super.aVertexNormalArray1425[k1];
+                VertexNormal vertexNormal = super.vertexNormalArray[k1];
                 int k2 = i + (k * vertexNormal.x + l * vertexNormal.y + i1 * vertexNormal.z) / (j * vertexNormal.magnitude);
                 anIntArray1634[j1] = method481(i3, k2, 0);
-                vertexNormal = super.aVertexNormalArray1425[i2];
+                vertexNormal = super.vertexNormalArray[i2];
                 k2 = i + (k * vertexNormal.x + l * vertexNormal.y + i1 * vertexNormal.z) / (j * vertexNormal.magnitude);
                 anIntArray1635[j1] = method481(i3, k2, 0);
-                vertexNormal = super.aVertexNormalArray1425[j2];
+                vertexNormal = super.vertexNormalArray[j2];
                 k2 = i + (k * vertexNormal.x + l * vertexNormal.y + i1 * vertexNormal.z) / (j * vertexNormal.magnitude);
                 anIntArray1636[j1] = method481(i3, k2, 0);
             } else
@@ -1297,19 +1297,19 @@ public final class Model extends Animable {
             {
                 int j3 = triangleColours[j1];
                 int k3 = triangle_draw_type[j1];
-                VertexNormal vertexNormal_1 = super.aVertexNormalArray1425[k1];
+                VertexNormal vertexNormal_1 = super.vertexNormalArray[k1];
                 int l2 = i + (k * vertexNormal_1.x + l * vertexNormal_1.y + i1 * vertexNormal_1.z) / (j * vertexNormal_1.magnitude);
                 anIntArray1634[j1] = method481(j3, l2, k3);
-                vertexNormal_1 = super.aVertexNormalArray1425[i2];
+                vertexNormal_1 = super.vertexNormalArray[i2];
                 l2 = i + (k * vertexNormal_1.x + l * vertexNormal_1.y + i1 * vertexNormal_1.z) / (j * vertexNormal_1.magnitude);
                 anIntArray1635[j1] = method481(j3, l2, k3);
-                vertexNormal_1 = super.aVertexNormalArray1425[j2];
+                vertexNormal_1 = super.vertexNormalArray[j2];
                 l2 = i + (k * vertexNormal_1.x + l * vertexNormal_1.y + i1 * vertexNormal_1.z) / (j * vertexNormal_1.magnitude);
                 anIntArray1636[j1] = method481(j3, l2, k3);
             }
         }
 
-        super.aVertexNormalArray1425 = null;
+        super.vertexNormalArray = null;
         aVertexNormalArray1660 = null;
         vertex_vskin = null;
         triangle_tskin = null;

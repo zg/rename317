@@ -69,28 +69,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameObjectSpawnRequest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GameObjectSpawnRequest.java">
+      <file leaf-file-name="Decompressor.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Decompressor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="14" selection-start="246" selection-end="255" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8593" column="42" selection-start="331013" selection-end="331013" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JagexArchive.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/JagexArchive.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="31" selection-start="565" selection-end="565" vertical-scroll-proportion="0.5800525">
+            <state line="12" column="30" selection-start="398" selection-end="398" vertical-scroll-proportion="0.44619423">
               <folding />
             </state>
           </provider>
@@ -110,8 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/PlainTile.java" />
-        <option value="$PROJECT_DIR$/Entity.java" />
         <option value="$PROJECT_DIR$/ObjectOnTile.java" />
         <option value="$PROJECT_DIR$/SceneGraph.java" />
         <option value="$PROJECT_DIR$/ThreeDimensionalDrawingArea.java" />
@@ -126,6 +106,8 @@
         <option value="$PROJECT_DIR$/VertexNormal.java" />
         <option value="$PROJECT_DIR$/Class47.java" />
         <option value="$PROJECT_DIR$/JagexArchive.java" />
+        <option value="$PROJECT_DIR$/Animable.java" />
+        <option value="$PROJECT_DIR$/Decompressor.java" />
       </list>
     </option>
   </component>
@@ -351,21 +333,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BZ2Entry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="46" selection-start="592" selection-end="592" vertical-scroll-proportion="0.72613066" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BZIP2Decompressor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="52" selection-start="235" selection-end="235" vertical-scroll-proportion="0.044619422" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ObjectDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="394" column="20" selection-start="12629" selection-end="12629" vertical-scroll-proportion="0.1496063" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.042713568" />
@@ -421,9 +388,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/JagexArchive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="31" selection-start="565" selection-end="565" vertical-scroll-proportion="0.5800525">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8593" column="42" selection-start="331013" selection-end="331013" vertical-scroll-proportion="0.1496063">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GameObjectSpawnRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="14" selection-start="246" selection-end="255" vertical-scroll-proportion="0.0">
+        <state line="9" column="14" selection-start="246" selection-end="255" vertical-scroll-proportion="0.298995">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MapRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="162" selection-end="162" vertical-scroll-proportion="0.089238845">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Animable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="30" selection-start="572" selection-end="572" vertical-scroll-proportion="0.31658292">
           <folding />
         </state>
       </provider>
@@ -435,16 +430,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client.java">
+    <entry file="file://$PROJECT_DIR$/Decompressor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8593" column="42" selection-start="331013" selection-end="331013" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JagexArchive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="31" selection-start="565" selection-end="565" vertical-scroll-proportion="0.5800525">
+        <state line="12" column="30" selection-start="398" selection-end="398" vertical-scroll-proportion="0.44619423">
           <folding />
         </state>
       </provider>
