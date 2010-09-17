@@ -60,55 +60,37 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SpotAnim.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SpotAnim.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="0" selection-start="2666" selection-end="2666" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Class47.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Class47.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
+            <state line="11" column="17" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Class4.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class4.java">
+      <file leaf-file-name="GameObjectSpawnRequest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GameObjectSpawnRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="12" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0">
+            <state line="9" column="14" selection-start="246" selection-end="255" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Class39.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class39.java">
+      <file leaf-file-name="client.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
+            <state line="8593" column="42" selection-start="331013" selection-end="331013" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VertexNormal.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/VertexNormal.java">
+      <file leaf-file-name="JagexArchive.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/JagexArchive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="12" selection-start="297" selection-end="297" vertical-scroll-proportion="0.5013405">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Class29.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class29.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="28" selection-start="419" selection-end="419" vertical-scroll-proportion="0.0">
+            <state line="15" column="31" selection-start="565" selection-end="565" vertical-scroll-proportion="0.5800525">
               <folding />
             </state>
           </provider>
@@ -128,8 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Class47.java" />
-        <option value="$PROJECT_DIR$/Class43.java" />
         <option value="$PROJECT_DIR$/PlainTile.java" />
         <option value="$PROJECT_DIR$/Entity.java" />
         <option value="$PROJECT_DIR$/ObjectOnTile.java" />
@@ -144,6 +124,8 @@
         <option value="$PROJECT_DIR$/ObjectDef.java" />
         <option value="$PROJECT_DIR$/SpotAnim.java" />
         <option value="$PROJECT_DIR$/VertexNormal.java" />
+        <option value="$PROJECT_DIR$/Class47.java" />
+        <option value="$PROJECT_DIR$/JagexArchive.java" />
       </list>
     </option>
   </component>
@@ -369,26 +351,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SceneGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2246" column="75" selection-start="94067" selection-end="94067" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThreeDimensionalDrawingArea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1267" column="46" selection-start="38914" selection-end="38914" vertical-scroll-proportion="0.44619423" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ShapedTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="262" column="41" selection-start="7469" selection-end="7469" vertical-scroll-proportion="0.31658292" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IndexedImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="80" selection-start="6878" selection-end="6878" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BZ2Entry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="46" selection-start="592" selection-end="592" vertical-scroll-proportion="0.72613066" />
@@ -424,31 +386,65 @@
         <state line="87" column="0" selection-start="2666" selection-end="2666" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Class47.java">
+    <entry file="file://$PROJECT_DIR$/VertexNormal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="12" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class39.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class29.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="28" selection-start="419" selection-end="419" vertical-scroll-proportion="0.0">
+        <state line="16" column="8" selection-start="293" selection-end="302" vertical-scroll-proportion="-7.48">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/VertexNormal.java">
+    <entry file="file://$PROJECT_DIR$/Class29.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="12" selection-start="297" selection-end="297" vertical-scroll-proportion="0.5013405">
+        <state line="21" column="81" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class39.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="331" selection-end="436" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="160" column="18" selection-start="4667" selection-end="4667" vertical-scroll-proportion="0.23115578">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GameObjectSpawnRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="14" selection-start="246" selection-end="255" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Class47.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="17" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8593" column="42" selection-start="331013" selection-end="331013" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JagexArchive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="31" selection-start="565" selection-end="565" vertical-scroll-proportion="0.5800525">
           <folding />
         </state>
       </provider>
