@@ -689,7 +689,7 @@ public final class client extends RSApplet {
         }
 
         aRSImageProducer_1165.initDrawingArea();
-        anInt1071 = 0;
+        numOfMapMarkers = 0;
         for(int k2 = 0; k2 < 104; k2++)
         {
             for(int l2 = 0; l2 < 104; l2++)
@@ -722,10 +722,10 @@ public final class client extends RSApplet {
                             }
 
                         }
-                        aClass30_Sub2_Sub1_Sub1Array1140[anInt1071] = mapFunctions[j3];
-                        anIntArray1072[anInt1071] = k3;
-                        anIntArray1073[anInt1071] = l3;
-                        anInt1071++;
+                        markGraphic[numOfMapMarkers] = mapFunctions[j3];
+                        markPosX[numOfMapMarkers] = k3;
+                        markPosY[numOfMapMarkers] = l3;
+                        numOfMapMarkers++;
                     }
                 }
             }
@@ -4610,9 +4610,9 @@ public final class client extends RSApplet {
         menuActionCmd1 = null;
         menuActionName = null;
         variousSettings = null;
-        anIntArray1072 = null;
-        anIntArray1073 = null;
-        aClass30_Sub2_Sub1_Sub1Array1140 = null;
+        markPosX = null;
+        markPosY = null;
+        markGraphic = null;
         aClass30_Sub2_Sub1_Sub1_1263 = null;
         friendsList = null;
         friendsListAsLongs = null;
@@ -9097,11 +9097,11 @@ public final class client extends RSApplet {
         int l2 = 464 - myPlayer.bound_extent_y / 32;
         aClass30_Sub2_Sub1_Sub1_1263.rotate(151, i, anIntArray1229, 256 + minimapInt3, anIntArray1052, l2, 5, 25, 146, j);
         compass.rotate(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
-        for(int j5 = 0; j5 < anInt1071; j5++)
+        for(int j5 = 0; j5 < numOfMapMarkers; j5++)
         {
-            int k = (anIntArray1072[j5] * 4 + 2) - myPlayer.bound_extent_x / 32;
-            int i3 = (anIntArray1073[j5] * 4 + 2) - myPlayer.bound_extent_y / 32;
-            markMinimap(aClass30_Sub2_Sub1_Sub1Array1140[j5], k, i3);
+            int mapX = (markPosX[j5] * 4 + 2) - myPlayer.bound_extent_x / 32;
+            int mapY = (markPosY[j5] * 4 + 2) - myPlayer.bound_extent_y / 32;
+            markMinimap(markGraphic[j5], mapX, mapY);
         }
 
         for(int k5 = 0; k5 < 104; k5++)
@@ -11707,8 +11707,8 @@ public final class client extends RSApplet {
         mapScenes = new IndexedImage[100];
         anInt1063 = 0x4d4233;
         anIntArray1065 = new int[7];
-        anIntArray1072 = new int[1000];
-        anIntArray1073 = new int[1000];
+        markPosX = new int[1000];
+        markPosY = new int[1000];
         aBoolean1080 = false;
         friendsList = new String[200];
         inStream = Stream.create();
@@ -11724,7 +11724,7 @@ public final class client extends RSApplet {
         atPlayerArray = new boolean[5];
         anIntArrayArrayArray1129 = new int[4][13][13];
         anInt1132 = 2;
-        aClass30_Sub2_Sub1_Sub1Array1140 = new RgbImage[1000];
+        markGraphic = new RgbImage[1000];
         aBoolean1141 = false;
         aBoolean1149 = false;
         crosses = new RgbImage[8];
@@ -12010,9 +12010,9 @@ public final class client extends RSApplet {
     private OnDemandFetcher onDemandFetcher;
     private int anInt1069;
     private int anInt1070;
-    private int anInt1071;
-    private int[] anIntArray1072;
-    private int[] anIntArray1073;
+    private int numOfMapMarkers;
+    private int[] markPosX;
+    private int[] markPosY;
     private RgbImage mapDotItem;
     private RgbImage mapDotNPC;
     private RgbImage mapDotPlayer;
@@ -12074,7 +12074,7 @@ public final class client extends RSApplet {
     private int anInt1137;
     private int spellUsableOn;
     private String spellTooltip;
-    private RgbImage[] aClass30_Sub2_Sub1_Sub1Array1140;
+    private RgbImage[] markGraphic;
     private boolean aBoolean1141;
     private static int anInt1142;
     private IndexedImage redStone1;
