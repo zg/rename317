@@ -25,8 +25,8 @@ final class SceneGraph {
     public static void nullLoader()
     {
         aClass28Array462 = null;
-        anIntArray473 = null;
-        aClass47ArrayArray474 = null;
+        culling_cluster_ptr = null;
+        culling_clusters = null;
         aClass19_477 = null;
         aBooleanArrayArrayArrayArray491 = null;
         aBooleanArrayArray492 = null;
@@ -46,10 +46,10 @@ final class SceneGraph {
         }
         for(int l = 0; l < anInt472; l++)
         {
-            for(int j1 = 0; j1 < anIntArray473[l]; j1++)
-                aClass47ArrayArray474[l][j1] = null;
+            for(int j1 = 0; j1 < culling_cluster_ptr[l]; j1++)
+                culling_clusters[l][j1] = null;
 
-            anIntArray473[l] = 0;
+            culling_cluster_ptr[l] = 0;
         }
 
         for(int k1 = 0; k1 < obj5CacheCurrPos; k1++)
@@ -74,54 +74,54 @@ final class SceneGraph {
 
     }
 
-    public void method276(int i, int j)
+    public void apply_bridge_mode(int x, int y)
     {
-        Tile class30_sub3 = tileArray[0][j][i];
-        for(int l = 0; l < 3; l++)
+        Tile level0_tile = tileArray[0][x][y];
+        for(int _z = 0; _z < 3; _z++)
         {
-            Tile class30_sub3_1 = tileArray[l][j][i] = tileArray[l + 1][j][i];
-            if(class30_sub3_1 != null)
+            Tile tile = tileArray[_z][x][y] = tileArray[_z + 1][x][y];
+            if(tile != null)
             {
-                class30_sub3_1.anInt1307--;
-                for(int j1 = 0; j1 < class30_sub3_1.anInt1317; j1++)
+                tile.tile_z--;
+                for(int ptr = 0; ptr < tile.entity_count; ptr++)
                 {
-                    Object5 class28 = class30_sub3_1.obj5Array[j1];
-                    if((class28.uid >> 29 & 3) == 2 && class28.anInt523 == j && class28.anInt525 == i)
-                        class28.anInt517--;
+                    Object5 world_entity = tile.entities[ptr];
+                    if((world_entity.uid >> 29 & 3) == 2 && world_entity.tile_x == x && world_entity.tile_y == y)
+                        world_entity.tile_z--;
                 }
 
             }
         }
-        if(tileArray[0][j][i] == null)
-            tileArray[0][j][i] = new Tile(0, j, i);
-        tileArray[0][j][i].aClass30_Sub3_1329 = class30_sub3;
-        tileArray[3][j][i] = null;
+        if(tileArray[0][x][y] == null)
+            tileArray[0][x][y] = new Tile(0, x, y);
+        tileArray[0][x][y].tile_below0 = level0_tile;
+        tileArray[3][x][y] = null;
     }
 
-    public static void method277(int i, int j, int k, int l, int i1, int j1, int l1,
-                                 int i2)
+    public static void create_culling_cluster(int z, int lowest_x, int lowest_y, int lowest_z, int highest_x, int highest_y, int highest_z,
+                                 int search_mask)
     {
-        Class47 class47 = new Class47();
-        class47.anInt787 = j / 128;
-        class47.anInt788 = l / 128;
-        class47.anInt789 = l1 / 128;
-        class47.anInt790 = i1 / 128;
-        class47.anInt791 = i2;
-        class47.anInt792 = j;
-        class47.anInt793 = l;
-        class47.anInt794 = l1;
-        class47.anInt795 = i1;
-        class47.anInt796 = j1;
-        class47.anInt797 = k;
-        aClass47ArrayArray474[i][anIntArray473[i]++] = class47;
+        CullingCluster culling_cluster = new CullingCluster();
+        culling_cluster.tile_start_x = lowest_x / 128;
+        culling_cluster.tile_end_x = highest_x / 128;
+        culling_cluster.tile_start_y = lowest_y / 128;
+        culling_cluster.tile_end_y = highest_y / 128;
+        culling_cluster.search_mask = search_mask;
+        culling_cluster.world_start_x = lowest_x;
+        culling_cluster.world_end_x = highest_x;
+        culling_cluster.world_start_y = lowest_y;
+        culling_cluster.world_end_y = highest_y;
+        culling_cluster.world_start_z = highest_z;
+        culling_cluster.world_end_z = lowest_z;
+        culling_clusters[z][culling_cluster_ptr[z]++] = culling_cluster;
     }
 
-    public void method278(int i, int j, int k, int l)
+    public void set_tile_logic_height(int z, int x, int y, int l_z)
     {
-        Tile class30_sub3 = tileArray[i][j][k];
+        Tile class30_sub3 = tileArray[z][x][y];
         if(class30_sub3 != null)
         {
-            tileArray[i][j][k].anInt1321 = l;
+            tileArray[z][x][y].logic_height = l_z;
         }
     }
 
@@ -189,10 +189,10 @@ final class SceneGraph {
         Tile class30_sub3 = tileArray[l][i][i1];
         if(class30_sub3 != null)
         {
-            for(int k1 = 0; k1 < class30_sub3.anInt1317; k1++)
-                if(class30_sub3.obj5Array[k1].aClass30_Sub2_Sub4_521 instanceof Model)
+            for(int k1 = 0; k1 < class30_sub3.entity_count; k1++)
+                if(class30_sub3.entities[k1].aClass30_Sub2_Sub4_521 instanceof Model)
                 {
-                    int l1 = ((Model)class30_sub3.obj5Array[k1].aClass30_Sub2_Sub4_521).anInt1654;
+                    int l1 = ((Model)class30_sub3.entities[k1].aClass30_Sub2_Sub4_521).anInt1654;
                     if(l1 > j1)
                         j1 = l1;
                 }
@@ -304,7 +304,7 @@ final class SceneGraph {
                 if(k2 < 0 || l2 < 0 || k2 >= xMapSize || l2 >= yMapSize)
                     return false;
                 Tile class30_sub3 = tileArray[i][k2][l2];
-                if(class30_sub3 != null && class30_sub3.anInt1317 >= 5)
+                if(class30_sub3 != null && class30_sub3.entity_count >= 5)
                     return false;
             }
 
@@ -313,14 +313,14 @@ final class SceneGraph {
         Object5 class28 = new Object5();
         class28.uid = j2;
         class28.aByte530 = byte0;
-        class28.anInt517 = i;
+        class28.tile_z = i;
         class28.anInt519 = j1;
         class28.anInt520 = k1;
         class28.anInt518 = l1;
         class28.aClass30_Sub2_Sub4_521 = class30_sub2_sub4;
         class28.anInt522 = i2;
-        class28.anInt523 = j;
-        class28.anInt525 = k;
+        class28.tile_x = j;
+        class28.tile_y = k;
         class28.anInt524 = (j + l) - 1;
         class28.anInt526 = (k + i1) - 1;
         for(int i3 = j; i3 < j + l; i3++)
@@ -341,10 +341,10 @@ final class SceneGraph {
                         tileArray[l3][i3][j3] = new Tile(l3, i3, j3);
 
                 Tile class30_sub3_1 = tileArray[i][i3][j3];
-                class30_sub3_1.obj5Array[class30_sub3_1.anInt1317] = class28;
-                class30_sub3_1.anIntArray1319[class30_sub3_1.anInt1317] = k3;
+                class30_sub3_1.entities[class30_sub3_1.entity_count] = class28;
+                class30_sub3_1.anIntArray1319[class30_sub3_1.entity_count] = k3;
                 class30_sub3_1.anInt1320 |= k3;
-                class30_sub3_1.anInt1317++;
+                class30_sub3_1.entity_count++;
             }
 
         }
@@ -368,30 +368,30 @@ final class SceneGraph {
 
     private void method289(Object5 class28)
     {
-        for(int j = class28.anInt523; j <= class28.anInt524; j++)
+        for(int j = class28.tile_x; j <= class28.anInt524; j++)
         {
-            for(int k = class28.anInt525; k <= class28.anInt526; k++)
+            for(int k = class28.tile_y; k <= class28.anInt526; k++)
             {
-                Tile class30_sub3 = tileArray[class28.anInt517][j][k];
+                Tile class30_sub3 = tileArray[class28.tile_z][j][k];
                 if(class30_sub3 != null)
                 {
-                    for(int l = 0; l < class30_sub3.anInt1317; l++)
+                    for(int l = 0; l < class30_sub3.entity_count; l++)
                     {
-                        if(class30_sub3.obj5Array[l] != class28)
+                        if(class30_sub3.entities[l] != class28)
                             continue;
-                        class30_sub3.anInt1317--;
-                        for(int i1 = l; i1 < class30_sub3.anInt1317; i1++)
+                        class30_sub3.entity_count--;
+                        for(int i1 = l; i1 < class30_sub3.entity_count; i1++)
                         {
-                            class30_sub3.obj5Array[i1] = class30_sub3.obj5Array[i1 + 1];
+                            class30_sub3.entities[i1] = class30_sub3.entities[i1 + 1];
                             class30_sub3.anIntArray1319[i1] = class30_sub3.anIntArray1319[i1 + 1];
                         }
 
-                        class30_sub3.obj5Array[class30_sub3.anInt1317] = null;
+                        class30_sub3.entities[class30_sub3.entity_count] = null;
                         break;
                     }
 
                     class30_sub3.anInt1320 = 0;
-                    for(int j1 = 0; j1 < class30_sub3.anInt1317; j1++)
+                    for(int j1 = 0; j1 < class30_sub3.entity_count; j1++)
                         class30_sub3.anInt1320 |= class30_sub3.anIntArray1319[j1];
 
                 }
@@ -441,10 +441,10 @@ final class SceneGraph {
         Tile class30_sub3 = tileArray[i][k][l];
         if(class30_sub3 == null)
             return;
-        for(int j1 = 0; j1 < class30_sub3.anInt1317; j1++)
+        for(int j1 = 0; j1 < class30_sub3.entity_count; j1++)
         {
-            Object5 class28 = class30_sub3.obj5Array[j1];
-            if((class28.uid >> 29 & 3) == 2 && class28.anInt523 == k && class28.anInt525 == l)
+            Object5 class28 = class30_sub3.entities[j1];
+            if((class28.uid >> 29 & 3) == 2 && class28.tile_x == k && class28.tile_y == l)
             {
                 method289(class28);
                 return;
@@ -493,10 +493,10 @@ final class SceneGraph {
         Tile class30_sub3 = tileArray[k][i][j];
         if(class30_sub3 == null)
             return null;
-        for(int l = 0; l < class30_sub3.anInt1317; l++)
+        for(int l = 0; l < class30_sub3.entity_count; l++)
         {
-            Object5 class28 = class30_sub3.obj5Array[l];
-            if((class28.uid >> 29 & 3) == 2 && class28.anInt523 == i && class28.anInt525 == j)
+            Object5 class28 = class30_sub3.entities[l];
+            if((class28.uid >> 29 & 3) == 2 && class28.tile_x == i && class28.tile_y == j)
                 return class28;
         }
         return null;
@@ -534,10 +534,10 @@ final class SceneGraph {
         Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 == null)
             return 0;
-        for(int l = 0; l < class30_sub3.anInt1317; l++)
+        for(int l = 0; l < class30_sub3.entity_count; l++)
         {
-            Object5 class28 = class30_sub3.obj5Array[l];
-            if((class28.uid >> 29 & 3) == 2 && class28.anInt523 == j && class28.anInt525 == k)
+            Object5 class28 = class30_sub3.entities[l];
+            if((class28.uid >> 29 & 3) == 2 && class28.tile_x == j && class28.tile_y == k)
                 return class28.uid;
         }
 
@@ -564,55 +564,53 @@ final class SceneGraph {
             return class30_sub3.obj2.objConf & 0xff;
         if(class30_sub3.obj3 != null && class30_sub3.obj3.uid == l)
             return class30_sub3.obj3.objConf & 0xff;
-        for(int i1 = 0; i1 < class30_sub3.anInt1317; i1++)
-            if(class30_sub3.obj5Array[i1].uid == l)
-                return class30_sub3.obj5Array[i1].aByte530 & 0xff;
+        for(int i1 = 0; i1 < class30_sub3.entity_count; i1++)
+            if(class30_sub3.entities[i1].uid == l)
+                return class30_sub3.entities[i1].aByte530 & 0xff;
 
         return -1;
     }
 
-    public void method305(int i, int k, int i1)
+    public void shade_models(int l_x, int l_y, int l_z, int mag_multiplier, int lightness)
     {
-        int j = 64;//was parameter
-        int l = 768;//was parameter
-        int j1 = (int)Math.sqrt(k * k + i * i + i1 * i1);
-        int k1 = l * j1 >> 8;
-        for(int l1 = 0; l1 < zMapSize; l1++)
+        int dist_from_origin = (int)Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
+        int l_magnitude = mag_multiplier * dist_from_origin >> 8;//Devide by 256 then times 768 wtf
+        for(int _z = 0; _z < zMapSize; _z++)
         {
-            for(int i2 = 0; i2 < xMapSize; i2++)
+            for(int _x = 0; _x < xMapSize; _x++)
             {
-                for(int j2 = 0; j2 < yMapSize; j2++)
+                for(int _y = 0; _y < yMapSize; _y++)
                 {
-                    Tile class30_sub3 = tileArray[l1][i2][j2];
-                    if(class30_sub3 != null)
+                    Tile tile = tileArray[_z][_x][_y];
+                    if(tile != null)
                     {
-                        Object1 class10 = class30_sub3.obj1;
-                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormalArray != null)
+                        Object1 class10 = tile.obj1;
+                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertex_normal != null)
                         {
-                            method307(l1, 1, 1, i2, j2, (Model)class10.aClass30_Sub2_Sub4_278);
-                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormalArray != null)
+                            method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_278);
+                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertex_normal != null)
                             {
-                                method307(l1, 1, 1, i2, j2, (Model)class10.aClass30_Sub2_Sub4_279);
+                                method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_279);
                                 method308((Model)class10.aClass30_Sub2_Sub4_278, (Model)class10.aClass30_Sub2_Sub4_279, 0, 0, 0, false);
-                                ((Model)class10.aClass30_Sub2_Sub4_279).method480(j, k1, k, i, i1);
+                                ((Model)class10.aClass30_Sub2_Sub4_279).do_shading(lightness, l_magnitude, l_x, l_y, l_z);
                             }
-                            ((Model)class10.aClass30_Sub2_Sub4_278).method480(j, k1, k, i, i1);
+                            ((Model)class10.aClass30_Sub2_Sub4_278).do_shading(lightness, l_magnitude, l_x, l_y, l_z);
                         }
-                        for(int k2 = 0; k2 < class30_sub3.anInt1317; k2++)
+                        for(int k2 = 0; k2 < tile.entity_count; k2++)
                         {
-                            Object5 class28 = class30_sub3.obj5Array[k2];
-                            if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertexNormalArray != null)
+                            Object5 class28 = tile.entities[k2];
+                            if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertex_normal != null)
                             {
-                                method307(l1, (class28.anInt524 - class28.anInt523) + 1, (class28.anInt526 - class28.anInt525) + 1, i2, j2, (Model)class28.aClass30_Sub2_Sub4_521);
-                                ((Model)class28.aClass30_Sub2_Sub4_521).method480(j, k1, k, i, i1);
+                                method307(_z, (class28.anInt524 - class28.tile_x) + 1, (class28.anInt526 - class28.tile_y) + 1, _x, _y, (Model)class28.aClass30_Sub2_Sub4_521);
+                                ((Model)class28.aClass30_Sub2_Sub4_521).do_shading(lightness, l_magnitude, l_x, l_y, l_z);
                             }
                         }
 
-                        Object3 class49 = class30_sub3.obj3;
-                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.vertexNormalArray != null)
+                        Object3 class49 = tile.obj3;
+                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.vertex_normal != null)
                         {
-                            method306(i2, l1, (Model)class49.aClass30_Sub2_Sub4_814, j2);
-                            ((Model)class49.aClass30_Sub2_Sub4_814).method480(j, k1, k, i, i1);
+                            method306(_x, _z, (Model)class49.aClass30_Sub2_Sub4_814, _y);
+                            ((Model)class49.aClass30_Sub2_Sub4_814).do_shading(lightness, l_magnitude, l_x, l_y, l_z);
                         }
                     }
                 }
@@ -628,25 +626,25 @@ final class SceneGraph {
         if(i < xMapSize)
         {
             Tile class30_sub3 = tileArray[j][i + 1][k];
-            if(class30_sub3 != null && class30_sub3.obj3 != null && class30_sub3.obj3.aClass30_Sub2_Sub4_814.vertexNormalArray != null)
+            if(class30_sub3 != null && class30_sub3.obj3 != null && class30_sub3.obj3.aClass30_Sub2_Sub4_814.vertex_normal != null)
                 method308(model, (Model)class30_sub3.obj3.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
         }
         if(k < xMapSize)
         {
             Tile class30_sub3_1 = tileArray[j][i][k + 1];
-            if(class30_sub3_1 != null && class30_sub3_1.obj3 != null && class30_sub3_1.obj3.aClass30_Sub2_Sub4_814.vertexNormalArray != null)
+            if(class30_sub3_1 != null && class30_sub3_1.obj3 != null && class30_sub3_1.obj3.aClass30_Sub2_Sub4_814.vertex_normal != null)
                 method308(model, (Model)class30_sub3_1.obj3.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
         }
         if(i < xMapSize && k < yMapSize)
         {
             Tile class30_sub3_2 = tileArray[j][i + 1][k + 1];
-            if(class30_sub3_2 != null && class30_sub3_2.obj3 != null && class30_sub3_2.obj3.aClass30_Sub2_Sub4_814.vertexNormalArray != null)
+            if(class30_sub3_2 != null && class30_sub3_2.obj3 != null && class30_sub3_2.obj3.aClass30_Sub2_Sub4_814.vertex_normal != null)
                 method308(model, (Model)class30_sub3_2.obj3.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
         }
         if(i < xMapSize && k > 0)
         {
             Tile class30_sub3_3 = tileArray[j][i + 1][k - 1];
-            if(class30_sub3_3 != null && class30_sub3_3.obj3 != null && class30_sub3_3.obj3.aClass30_Sub2_Sub4_814.vertexNormalArray != null)
+            if(class30_sub3_3 != null && class30_sub3_3.obj3 != null && class30_sub3_3.obj3.aClass30_Sub2_Sub4_814.vertex_normal != null)
                 method308(model, (Model)class30_sub3_3.obj3.aClass30_Sub2_Sub4_814, 128, 0, -128, true);
         }
     }
@@ -672,18 +670,18 @@ final class SceneGraph {
                                 {
                                     int i3 = (heightmap[j2][k2][l2] + heightmap[j2][k2 + 1][l2] + heightmap[j2][k2][l2 + 1] + heightmap[j2][k2 + 1][l2 + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
                                     Object1 class10 = class30_sub3.obj1;
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormalArray != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertex_normal != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormalArray != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertex_normal != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_279, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
-                                    for(int j3 = 0; j3 < class30_sub3.anInt1317; j3++)
+                                    for(int j3 = 0; j3 < class30_sub3.entity_count; j3++)
                                     {
-                                        Object5 class28 = class30_sub3.obj5Array[j3];
-                                        if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertexNormalArray != null)
+                                        Object5 class28 = class30_sub3.entities[j3];
+                                        if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertex_normal != null)
                                         {
-                                            int k3 = (class28.anInt524 - class28.anInt523) + 1;
-                                            int l3 = (class28.anInt526 - class28.anInt525) + 1;
-                                            method308(model, (Model)class28.aClass30_Sub2_Sub4_521, (class28.anInt523 - l) * 128 + (k3 - j) * 64, i3, (class28.anInt525 - i1) * 128 + (l3 - k) * 64, flag);
+                                            int k3 = (class28.anInt524 - class28.tile_x) + 1;
+                                            int l3 = (class28.anInt526 - class28.tile_y) + 1;
+                                            method308(model, (Model)class28.aClass30_Sub2_Sub4_521, (class28.tile_x - l) * 128 + (k3 - j) * 64, i3, (class28.tile_y - i1) * 128 + (l3 - k) * 64, flag);
                                         }
                                     }
 
@@ -698,7 +696,7 @@ final class SceneGraph {
 
     }
 
-    private void method308(Model model, Model model_1, int i, int j, int k, boolean flag)
+    private void method308(Model model, Model model_1, int t_x, int t_Y, int k, boolean flag)
     {
         anInt488++;
         int l = 0;
@@ -706,14 +704,14 @@ final class SceneGraph {
         int i1 = model_1.verticeCount;
         for(int j1 = 0; j1 < model.verticeCount; j1++)
         {
-            VertexNormal vertexNormal = model.vertexNormalArray[j1];
-            VertexNormal vertexNormal_1 = model.aVertexNormalArray1660[j1];
+            VertexNormal vertexNormal = model.vertex_normal[j1];
+            VertexNormal vertexNormal_1 = model.vertex_normal_offset[j1];
             if(vertexNormal_1.magnitude != 0)
             {
-                int i2 = model.vertexY[j1] - j;
+                int i2 = model.vertexY[j1] - t_Y;
                 if(i2 <= model_1.anInt1651)
                 {
-                    int j2 = model.vertexX[j1] - i;
+                    int j2 = model.vertexX[j1] - t_x;
                     if(j2 >= model_1.anInt1646 && j2 <= model_1.anInt1647)
                     {
                         int k2 = model.vertexZ[j1] - k;
@@ -721,18 +719,18 @@ final class SceneGraph {
                         {
                             for(int l2 = 0; l2 < i1; l2++)
                             {
-                                VertexNormal vertexNormal_2 = model_1.vertexNormalArray[l2];
-                                VertexNormal vertexNormal_3 = model_1.aVertexNormalArray1660[l2];
-                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && vertexNormal_3.magnitude != 0)
+                                VertexNormal normal = model_1.vertex_normal[l2];
+                                VertexNormal normal_offset = model_1.vertex_normal_offset[l2];
+                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && normal_offset.magnitude != 0)
                                 {
-                                    vertexNormal.x += vertexNormal_3.x;
-                                    vertexNormal.y += vertexNormal_3.y;
-                                    vertexNormal.z += vertexNormal_3.z;
-                                    vertexNormal.magnitude += vertexNormal_3.magnitude;
-                                    vertexNormal_2.x += vertexNormal_1.x;
-                                    vertexNormal_2.y += vertexNormal_1.y;
-                                    vertexNormal_2.z += vertexNormal_1.z;
-                                    vertexNormal_2.magnitude += vertexNormal_1.magnitude;
+                                    vertexNormal.x += normal_offset.x;
+                                    vertexNormal.y += normal_offset.y;
+                                    vertexNormal.z += normal_offset.z;
+                                    vertexNormal.magnitude += normal_offset.magnitude;
+                                    normal.x += vertexNormal_1.x;
+                                    normal.y += vertexNormal_1.y;
+                                    normal.z += vertexNormal_1.z;
+                                    normal.magnitude += vertexNormal_1.magnitude;
                                     l++;
                                     anIntArray486[j1] = anInt488;
                                     anIntArray487[l2] = anInt488;
@@ -975,7 +973,7 @@ label0:
                 {
                     Tile class30_sub3 = aclass30_sub3[i2][k2];
                     if(class30_sub3 != null)
-                        if(class30_sub3.anInt1321 > plane || !aBooleanArrayArray492[(i2 - xCameraPositionTile) + 25][(k2 - yCameraPositionTile) + 25] && heightmap[k1][i2][k2] - zCampos < 2000)
+                        if(class30_sub3.logic_height > plane || !aBooleanArrayArray492[(i2 - xCameraPositionTile) + 25][(k2 - yCameraPositionTile) + 25] && heightmap[k1][i2][k2] - zCampos < 2000)
                         {
                             class30_sub3.aBoolean1322 = false;
                             class30_sub3.aBoolean1323 = false;
@@ -984,7 +982,7 @@ label0:
                         {
                             class30_sub3.aBoolean1322 = true;
                             class30_sub3.aBoolean1323 = true;
-                            class30_sub3.aBoolean1324 = class30_sub3.anInt1317 > 0;
+                            class30_sub3.aBoolean1324 = class30_sub3.entity_count > 0;
                             anInt446++;
                         }
                 }
@@ -1120,7 +1118,7 @@ label0:
             } while(!TILE.aBoolean1323);
             int X = TILE.anInt1308;
             int Y = TILE.anInt1309;
-            int k = TILE.anInt1307;
+            int k = TILE.tile_z;
             int l = TILE.anInt1310;
             Tile aclass30_sub3[][] = tileArray[k];
             if(TILE.aBoolean1322)
@@ -1162,9 +1160,9 @@ label0:
                     flag = true;
                 }
                 TILE.aBoolean1322 = false;
-                if(TILE.aClass30_Sub3_1329 != null)
+                if(TILE.tile_below0 != null)
                 {
-                    Tile class30_sub3_7 = TILE.aClass30_Sub3_1329;
+                    Tile class30_sub3_7 = TILE.tile_below0;
                     if(class30_sub3_7.myPlainTile != null)
                     {
                         if(!method320(0, X, Y))
@@ -1175,9 +1173,9 @@ label0:
                     Object1 class10 = class30_sub3_7.obj1;
                     if(class10 != null)
                         class10.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10.anInt274 - xCameraPosition, class10.anInt273 - zCameraPosition, class10.anInt275 - yCameraPosition, class10.uid);
-                    for(int i2 = 0; i2 < class30_sub3_7.anInt1317; i2++)
+                    for(int i2 = 0; i2 < class30_sub3_7.entity_count; i2++)
                     {
-                        Object5 class28 = class30_sub3_7.obj5Array[i2];
+                        Object5 class28 = class30_sub3_7.entities[i2];
                         if(class28 != null)
                             class28.aClass30_Sub2_Sub4_521.renderAtPoint(class28.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28.anInt519 - xCameraPosition, class28.anInt518 - zCameraPosition, class28.anInt520 - yCameraPosition, class28.uid);
                     }
@@ -1333,9 +1331,9 @@ label0:
             if(TILE.anInt1325 != 0)
             {
                 boolean flag2 = true;
-                for(int k1 = 0; k1 < TILE.anInt1317; k1++)
+                for(int k1 = 0; k1 < TILE.entity_count; k1++)
                 {
-                    if(TILE.obj5Array[k1].anInt528 == anInt448 || (TILE.anIntArray1319[k1] & TILE.anInt1325) != TILE.anInt1326)
+                    if(TILE.entities[k1].anInt528 == anInt448 || (TILE.anIntArray1319[k1] & TILE.anInt1325) != TILE.anInt1326)
                         continue;
                     flag2 = false;
                     break;
@@ -1352,18 +1350,18 @@ label0:
             if(TILE.aBoolean1324)
                 try
                 {
-                    int i1 = TILE.anInt1317;
+                    int i1 = TILE.entity_count;
                     TILE.aBoolean1324 = false;
                     int l1 = 0;
 label0:
                     for(int k2 = 0; k2 < i1; k2++)
                     {
-                        Object5 class28_1 = TILE.obj5Array[k2];
+                        Object5 class28_1 = TILE.entities[k2];
                         if(class28_1.anInt528 == anInt448)
                             continue;
-                        for(int k3 = class28_1.anInt523; k3 <= class28_1.anInt524; k3++)
+                        for(int k3 = class28_1.tile_x; k3 <= class28_1.anInt524; k3++)
                         {
-                            for(int l4 = class28_1.anInt525; l4 <= class28_1.anInt526; l4++)
+                            for(int l4 = class28_1.tile_y; l4 <= class28_1.anInt526; l4++)
                             {
                                 Tile class30_sub3_21 = aclass30_sub3[k3][l4];
                                 if(class30_sub3_21.aBoolean1322)
@@ -1374,11 +1372,11 @@ label0:
                                     if(class30_sub3_21.anInt1325 == 0)
                                         continue;
                                     int l6 = 0;
-                                    if(k3 > class28_1.anInt523)
+                                    if(k3 > class28_1.tile_x)
                                         l6++;
                                     if(k3 < class28_1.anInt524)
                                         l6 += 4;
-                                    if(l4 > class28_1.anInt525)
+                                    if(l4 > class28_1.tile_y)
                                         l6 += 8;
                                     if(l4 < class28_1.anInt526)
                                         l6 += 2;
@@ -1392,11 +1390,11 @@ label0:
                         }
 
                         aClass28Array462[l1++] = class28_1;
-                        int i5 = xCameraPositionTile - class28_1.anInt523;
+                        int i5 = xCameraPositionTile - class28_1.tile_x;
                         int i6 = class28_1.anInt524 - xCameraPositionTile;
                         if(i6 > i5)
                             i5 = i6;
-                        int i7 = yCameraPositionTile - class28_1.anInt525;
+                        int i7 = yCameraPositionTile - class28_1.tile_y;
                         int j8 = class28_1.anInt526 - yCameraPositionTile;
                         if(j8 > i7)
                             class28_1.anInt527 = i5 + j8;
@@ -1432,11 +1430,11 @@ label0:
                             break;
                         Object5 class28_3 = aClass28Array462[l3];
                         class28_3.anInt528 = anInt448;
-                        if(!method323(l, class28_3.anInt523, class28_3.anInt524, class28_3.anInt525, class28_3.anInt526, class28_3.aClass30_Sub2_Sub4_521.modelHeight))
+                        if(!method323(l, class28_3.tile_x, class28_3.anInt524, class28_3.tile_y, class28_3.anInt526, class28_3.aClass30_Sub2_Sub4_521.modelHeight))
                             class28_3.aClass30_Sub2_Sub4_521.renderAtPoint(class28_3.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28_3.anInt519 - xCameraPosition, class28_3.anInt518 - zCameraPosition, class28_3.anInt520 - yCameraPosition, class28_3.uid);
-                        for(int k7 = class28_3.anInt523; k7 <= class28_3.anInt524; k7++)
+                        for(int k7 = class28_3.tile_x; k7 <= class28_3.anInt524; k7++)
                         {
-                            for(int l8 = class28_3.anInt525; l8 <= class28_3.anInt526; l8++)
+                            for(int l8 = class28_3.tile_y; l8 <= class28_3.anInt526; l8++)
                             {
                                 Tile class30_sub3_22 = aclass30_sub3[k7][l8];
                                 if(class30_sub3_22.anInt1325 != 0)
@@ -1795,21 +1793,21 @@ label0:
 
     private void method319()
     {
-        int j = anIntArray473[plane];
-        Class47 aclass47[] = aClass47ArrayArray474[plane];
+        int j = culling_cluster_ptr[plane];
+        CullingCluster aclass47[] = culling_clusters[plane];
         anInt475 = 0;
         for(int k = 0; k < j; k++)
         {
-            Class47 class47 = aclass47[k];
-            if(class47.anInt791 == 1)
+            CullingCluster class47 = aclass47[k];
+            if(class47.search_mask == 1)
             {
-                int l = (class47.anInt787 - xCameraPositionTile) + 25;
+                int l = (class47.tile_start_x - xCameraPositionTile) + 25;
                 if(l < 0 || l > 50)
                     continue;
-                int k1 = (class47.anInt789 - yCameraPositionTile) + 25;
+                int k1 = (class47.tile_start_y - yCameraPositionTile) + 25;
                 if(k1 < 0)
                     k1 = 0;
-                int j2 = (class47.anInt790 - yCameraPositionTile) + 25;
+                int j2 = (class47.tile_end_y - yCameraPositionTile) + 25;
                 if(j2 > 50)
                     j2 = 50;
                 boolean flag = false;
@@ -1821,7 +1819,7 @@ label0:
                     }
                 if(!flag)
                     continue;
-                int j3 = xCameraPosition - class47.anInt792;
+                int j3 = xCameraPosition - class47.world_start_x;
                 if(j3 > 32)
                 {
                     class47.anInt798 = 1;
@@ -1832,22 +1830,22 @@ label0:
                     class47.anInt798 = 2;
                     j3 = -j3;
                 }
-                class47.anInt801 = (class47.anInt794 - yCameraPosition << 8) / j3;
-                class47.anInt802 = (class47.anInt795 - yCameraPosition << 8) / j3;
-                class47.anInt803 = (class47.anInt796 - zCameraPosition << 8) / j3;
-                class47.anInt804 = (class47.anInt797 - zCameraPosition << 8) / j3;
+                class47.anInt801 = (class47.world_start_y - yCameraPosition << 8) / j3;
+                class47.anInt802 = (class47.world_end_y - yCameraPosition << 8) / j3;
+                class47.anInt803 = (class47.world_start_z - zCameraPosition << 8) / j3;
+                class47.anInt804 = (class47.world_end_z - zCameraPosition << 8) / j3;
                 aClass47Array476[anInt475++] = class47;
                 continue;
             }
-            if(class47.anInt791 == 2)
+            if(class47.search_mask == 2)
             {
-                int i1 = (class47.anInt789 - yCameraPositionTile) + 25;
+                int i1 = (class47.tile_start_y - yCameraPositionTile) + 25;
                 if(i1 < 0 || i1 > 50)
                     continue;
-                int l1 = (class47.anInt787 - xCameraPositionTile) + 25;
+                int l1 = (class47.tile_start_x - xCameraPositionTile) + 25;
                 if(l1 < 0)
                     l1 = 0;
-                int k2 = (class47.anInt788 - xCameraPositionTile) + 25;
+                int k2 = (class47.tile_end_x - xCameraPositionTile) + 25;
                 if(k2 > 50)
                     k2 = 50;
                 boolean flag1 = false;
@@ -1859,7 +1857,7 @@ label0:
                     }
                 if(!flag1)
                     continue;
-                int k3 = yCameraPosition - class47.anInt794;
+                int k3 = yCameraPosition - class47.world_start_y;
                 if(k3 > 32)
                 {
                     class47.anInt798 = 3;
@@ -1870,29 +1868,29 @@ label0:
                     class47.anInt798 = 4;
                     k3 = -k3;
                 }
-                class47.anInt799 = (class47.anInt792 - xCameraPosition << 8) / k3;
-                class47.anInt800 = (class47.anInt793 - xCameraPosition << 8) / k3;
-                class47.anInt803 = (class47.anInt796 - zCameraPosition << 8) / k3;
-                class47.anInt804 = (class47.anInt797 - zCameraPosition << 8) / k3;
+                class47.anInt799 = (class47.world_start_x - xCameraPosition << 8) / k3;
+                class47.anInt800 = (class47.world_end_x - xCameraPosition << 8) / k3;
+                class47.anInt803 = (class47.world_start_z - zCameraPosition << 8) / k3;
+                class47.anInt804 = (class47.world_end_z - zCameraPosition << 8) / k3;
                 aClass47Array476[anInt475++] = class47;
             } else
-            if(class47.anInt791 == 4)
+            if(class47.search_mask == 4)
             {
-                int j1 = class47.anInt796 - zCameraPosition;
+                int j1 = class47.world_start_z - zCameraPosition;
                 if(j1 > 128)
                 {
-                    int i2 = (class47.anInt789 - yCameraPositionTile) + 25;
+                    int i2 = (class47.tile_start_y - yCameraPositionTile) + 25;
                     if(i2 < 0)
                         i2 = 0;
-                    int l2 = (class47.anInt790 - yCameraPositionTile) + 25;
+                    int l2 = (class47.tile_end_y - yCameraPositionTile) + 25;
                     if(l2 > 50)
                         l2 = 50;
                     if(i2 <= l2)
                     {
-                        int i3 = (class47.anInt787 - xCameraPositionTile) + 25;
+                        int i3 = (class47.tile_start_x - xCameraPositionTile) + 25;
                         if(i3 < 0)
                             i3 = 0;
-                        int l3 = (class47.anInt788 - xCameraPositionTile) + 25;
+                        int l3 = (class47.tile_end_x - xCameraPositionTile) + 25;
                         if(l3 > 50)
                             l3 = 50;
                         boolean flag2 = false;
@@ -1912,10 +1910,10 @@ label0:
                         if(flag2)
                         {
                             class47.anInt798 = 5;
-                            class47.anInt799 = (class47.anInt792 - xCameraPosition << 8) / j1;
-                            class47.anInt800 = (class47.anInt793 - xCameraPosition << 8) / j1;
-                            class47.anInt801 = (class47.anInt794 - yCameraPosition << 8) / j1;
-                            class47.anInt802 = (class47.anInt795 - yCameraPosition << 8) / j1;
+                            class47.anInt799 = (class47.world_start_x - xCameraPosition << 8) / j1;
+                            class47.anInt800 = (class47.world_end_x - xCameraPosition << 8) / j1;
+                            class47.anInt801 = (class47.world_start_y - yCameraPosition << 8) / j1;
+                            class47.anInt802 = (class47.world_end_y - yCameraPosition << 8) / j1;
                             aClass47Array476[anInt475++] = class47;
                         }
                     }
@@ -2091,68 +2089,68 @@ label0:
     {
         for(int l = 0; l < anInt475; l++)
         {
-            Class47 class47 = aClass47Array476[l];
+            CullingCluster class47 = aClass47Array476[l];
             if(class47.anInt798 == 1)
             {
-                int i1 = class47.anInt792 - i;
+                int i1 = class47.world_start_x - i;
                 if(i1 > 0)
                 {
-                    int j2 = class47.anInt794 + (class47.anInt801 * i1 >> 8);
-                    int k3 = class47.anInt795 + (class47.anInt802 * i1 >> 8);
-                    int l4 = class47.anInt796 + (class47.anInt803 * i1 >> 8);
-                    int i6 = class47.anInt797 + (class47.anInt804 * i1 >> 8);
+                    int j2 = class47.world_start_y + (class47.anInt801 * i1 >> 8);
+                    int k3 = class47.world_end_y + (class47.anInt802 * i1 >> 8);
+                    int l4 = class47.world_start_z + (class47.anInt803 * i1 >> 8);
+                    int i6 = class47.world_end_z + (class47.anInt804 * i1 >> 8);
                     if(k >= j2 && k <= k3 && j >= l4 && j <= i6)
                         return true;
                 }
             } else
             if(class47.anInt798 == 2)
             {
-                int j1 = i - class47.anInt792;
+                int j1 = i - class47.world_start_x;
                 if(j1 > 0)
                 {
-                    int k2 = class47.anInt794 + (class47.anInt801 * j1 >> 8);
-                    int l3 = class47.anInt795 + (class47.anInt802 * j1 >> 8);
-                    int i5 = class47.anInt796 + (class47.anInt803 * j1 >> 8);
-                    int j6 = class47.anInt797 + (class47.anInt804 * j1 >> 8);
+                    int k2 = class47.world_start_y + (class47.anInt801 * j1 >> 8);
+                    int l3 = class47.world_end_y + (class47.anInt802 * j1 >> 8);
+                    int i5 = class47.world_start_z + (class47.anInt803 * j1 >> 8);
+                    int j6 = class47.world_end_z + (class47.anInt804 * j1 >> 8);
                     if(k >= k2 && k <= l3 && j >= i5 && j <= j6)
                         return true;
                 }
             } else
             if(class47.anInt798 == 3)
             {
-                int k1 = class47.anInt794 - k;
+                int k1 = class47.world_start_y - k;
                 if(k1 > 0)
                 {
-                    int l2 = class47.anInt792 + (class47.anInt799 * k1 >> 8);
-                    int i4 = class47.anInt793 + (class47.anInt800 * k1 >> 8);
-                    int j5 = class47.anInt796 + (class47.anInt803 * k1 >> 8);
-                    int k6 = class47.anInt797 + (class47.anInt804 * k1 >> 8);
+                    int l2 = class47.world_start_x + (class47.anInt799 * k1 >> 8);
+                    int i4 = class47.world_end_x + (class47.anInt800 * k1 >> 8);
+                    int j5 = class47.world_start_z + (class47.anInt803 * k1 >> 8);
+                    int k6 = class47.world_end_z + (class47.anInt804 * k1 >> 8);
                     if(i >= l2 && i <= i4 && j >= j5 && j <= k6)
                         return true;
                 }
             } else
             if(class47.anInt798 == 4)
             {
-                int l1 = k - class47.anInt794;
+                int l1 = k - class47.world_start_y;
                 if(l1 > 0)
                 {
-                    int i3 = class47.anInt792 + (class47.anInt799 * l1 >> 8);
-                    int j4 = class47.anInt793 + (class47.anInt800 * l1 >> 8);
-                    int k5 = class47.anInt796 + (class47.anInt803 * l1 >> 8);
-                    int l6 = class47.anInt797 + (class47.anInt804 * l1 >> 8);
+                    int i3 = class47.world_start_x + (class47.anInt799 * l1 >> 8);
+                    int j4 = class47.world_end_x + (class47.anInt800 * l1 >> 8);
+                    int k5 = class47.world_start_z + (class47.anInt803 * l1 >> 8);
+                    int l6 = class47.world_end_z + (class47.anInt804 * l1 >> 8);
                     if(i >= i3 && i <= j4 && j >= k5 && j <= l6)
                         return true;
                 }
             } else
             if(class47.anInt798 == 5)
             {
-                int i2 = j - class47.anInt796;
+                int i2 = j - class47.world_start_z;
                 if(i2 > 0)
                 {
-                    int j3 = class47.anInt792 + (class47.anInt799 * i2 >> 8);
-                    int k4 = class47.anInt793 + (class47.anInt800 * i2 >> 8);
-                    int l5 = class47.anInt794 + (class47.anInt801 * i2 >> 8);
-                    int i7 = class47.anInt795 + (class47.anInt802 * i2 >> 8);
+                    int j3 = class47.world_start_x + (class47.anInt799 * i2 >> 8);
+                    int k4 = class47.world_end_x + (class47.anInt800 * i2 >> 8);
+                    int l5 = class47.world_start_y + (class47.anInt801 * i2 >> 8);
+                    int i7 = class47.world_end_y + (class47.anInt802 * i2 >> 8);
                     if(i >= j3 && i <= k4 && k >= l5 && k <= i7)
                         return true;
                 }
@@ -2208,10 +2206,10 @@ label0:
     public static int clickedTileX = -1;
     public static int clickedTileY = -1;
     private static final int anInt472;
-    private static int[] anIntArray473;
-    private static Class47[][] aClass47ArrayArray474;
+    private static int[] culling_cluster_ptr;
+    private static CullingCluster[][] culling_clusters;
     private static int anInt475;
-    private static final Class47[] aClass47Array476 = new Class47[500];
+    private static final CullingCluster[] aClass47Array476 = new CullingCluster[500];
     private static NodeList aClass19_477 = new NodeList();
     private static final int[] anIntArray478 = {
         19, 55, 38, 155, 255, 110, 137, 205, 76
@@ -2311,7 +2309,7 @@ label0:
     static 
     {
         anInt472 = 4;
-        anIntArray473 = new int[anInt472];
-        aClass47ArrayArray474 = new Class47[anInt472][500];
+        culling_cluster_ptr = new int[anInt472];
+        culling_clusters = new CullingCluster[anInt472][500];
     }
 }

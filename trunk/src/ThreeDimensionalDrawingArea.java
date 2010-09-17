@@ -17,7 +17,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         texture_pixel_array_pool = null;
         texture_pixel_cache = null;
         texture_last_used = null;
-        colourMap = null;
+        HSL2RGB = null;
         texturePalettes = null;
     }
 
@@ -254,7 +254,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 rgb = applyBrightnessToRGB(rgb, brightness);
                 if(rgb == 0)
                     rgb = 1;
-                colourMap[j++] = rgb;
+                HSL2RGB[j++] = rgb;
             }
 
         }
@@ -768,7 +768,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             {
                 while(--k >= 0) 
                 {
-                    rgb = colourMap[jgx >> 8];
+                    rgb = HSL2RGB[jgx >> 8];
                     jgx += l1;
                     ai[i++] = rgb;
                     ai[i++] = rgb;
@@ -778,7 +778,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 k = i1 - l & 3;
                 if(k > 0)
                 {
-                    rgb = colourMap[jgx >> 8];
+                    rgb = HSL2RGB[jgx >> 8];
                     do
                         ai[i++] = rgb;
                     while(--k > 0);
@@ -790,7 +790,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 int l2 = 256 - alpha;
                 while(--k >= 0) 
                 {
-                    rgb = colourMap[jgx >> 8];
+                    rgb = HSL2RGB[jgx >> 8];
                     jgx += l1;
                     rgb = ((rgb & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((rgb & 0xff00) * l2 >> 8 & 0xff00);
                     ai[i++] = rgb + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
@@ -801,7 +801,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 k = i1 - l & 3;
                 if(k > 0)
                 {
-                    rgb = colourMap[jgx >> 8];
+                    rgb = HSL2RGB[jgx >> 8];
                     rgb = ((rgb & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((rgb & 0xff00) * l2 >> 8 & 0xff00);
                     do
                         ai[i++] = rgb + ((ai[i] & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * j2 >> 8 & 0xff00);
@@ -831,7 +831,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         {
             do
             {
-                ai[i++] = colourMap[jgx >> 8];
+                ai[i++] = HSL2RGB[jgx >> 8];
                 jgx += i2;
             } while(--k > 0);
             return;
@@ -840,7 +840,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         int i3 = 256 - alpha;
         do
         {
-            rgb = colourMap[jgx >> 8];
+            rgb = HSL2RGB[jgx >> 8];
             jgx += i2;
             rgb = ((rgb & 0xff00ff) * i3 >> 8 & 0xff00ff) + ((rgb & 0xff00) * i3 >> 8 & 0xff00);
             ai[i++] = rgb + ((ai[i] & 0xff00ff) * k2 >> 8 & 0xff00ff) + ((ai[i] & 0xff00) * k2 >> 8 & 0xff00);
@@ -2193,7 +2193,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
     private static int[][] texture_pixel_cache = new int[50][];
     public static int texture_last_used[] = new int[50];
     public static int texture_get_count;
-    public static int colourMap[] = new int[0x10000];
+    public static int HSL2RGB[] = new int[0x10000];
     private static int[][] texturePalettes = new int[50][];
 
     static 

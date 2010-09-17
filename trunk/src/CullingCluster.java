@@ -3,24 +3,24 @@
 // Decompiler options: packimports(3) 
 
 //eah...
-final class Class47
+final class CullingCluster
 {
 
-    Class47()
+    CullingCluster()
     {
     }
     //map culling
-    int anInt787;
-    int anInt788;
-    int anInt789;
-    int anInt790;
-    int anInt791;
-    int anInt792;
-    int anInt793;
-    int anInt794;
-    int anInt795;
-    int anInt796;
-    int anInt797;
+    int tile_start_x;
+    int tile_end_x;
+    int tile_start_y;
+    int tile_end_y;
+    int search_mask;
+    int world_start_x;
+    int world_end_x;
+    int world_start_y;
+    int world_end_y;
+    int world_start_z;
+    int world_end_z;
     int anInt798;
     int anInt799;
     int anInt800;

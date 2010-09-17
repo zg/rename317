@@ -15,9 +15,9 @@ final class MapRegion {
         overLay = new byte[4][xMapSize][yMapSize];
         shapeA = new byte[4][xMapSize][yMapSize];
         shapeB = new byte[4][xMapSize][yMapSize];
-        anIntArrayArrayArray135 = new int[4][xMapSize + 1][yMapSize + 1];
+        tile_culling_bitmap = new int[4][xMapSize + 1][yMapSize + 1];
         aByteArrayArrayArray134 = new byte[4][xMapSize + 1][yMapSize + 1];
-        colourArray = new int[xMapSize + 1][yMapSize + 1];
+        tile_shadow = new int[xMapSize + 1][yMapSize + 1];
         hue = new int[yMapSize];
         saturation = new int[yMapSize];
         lightness = new int[yMapSize];
@@ -52,50 +52,50 @@ final class MapRegion {
             }
 
         }
-        anInt123 += (int)(Math.random() * 5D) - 2;
-        if(anInt123 < -8)
-            anInt123 = -8;
-        if(anInt123 > 8)
-            anInt123 = 8;
-        anInt133 += (int)(Math.random() * 5D) - 2;
-        if(anInt133 < -16)
-            anInt133 = -16;
-        if(anInt133 > 16)
-            anInt133 = 16;
-        for(int Z = 0; Z < 4; Z++)
+        hue_offset += (int)(Math.random() * 5D) - 2;
+        if(hue_offset < -8)
+            hue_offset = -8;
+        if(hue_offset > 8)
+            hue_offset = 8;
+        lightness_offset += (int)(Math.random() * 5D) - 2;
+        if(lightness_offset < -16)
+            lightness_offset = -16;
+        if(lightness_offset > 16)
+            lightness_offset = 16;
+        for(int z = 0; z < 4; z++)
         {
-            byte abyte0[][] = aByteArrayArrayArray134[Z];
-            byte byte0 = 96;
-            char c = '\u0300';
-            byte byte1 = -50;
-            byte byte2 = -10;
-            byte byte3 = -50;
-            int sqrt = (int)Math.sqrt(byte1 * byte1 + byte2 * byte2 + byte3 * byte3);
-            int sqrtA = c * sqrt >> 8;
+            byte something_with_objects[][] = aByteArrayArrayArray134[z];
+            byte light_off = 96;
+            char mag_mult = '\u0300';
+            byte l_x = -50;
+            byte l_y = -10;
+            byte l_z = -50;
+            int sqrt = (int)Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
+            int sqrtA = mag_mult * sqrt >> 8;
             for(int Y = 1; Y < yMapSize - 1; Y++)
             {
                 for(int X = 1; X < xMapSize - 1; X++)
-                {
-                    int hDX = heightMap[Z][X + 1][Y] - heightMap[Z][X - 1][Y];
-                    int hDY = heightMap[Z][X][Y + 1] - heightMap[Z][X][Y - 1];
+                {	//This is object shadows
+                    int hDX = heightMap[z][X + 1][Y] - heightMap[z][X - 1][Y];
+                    int hDY = heightMap[z][X][Y + 1] - heightMap[z][X][Y - 1];
                     int square = (int)Math.sqrt(hDX * hDX + 0x10000 + hDY * hDY);
                     int k12 = (hDX << 8) / square;
                     int l13 = 0x10000 / square;
                     int j15 = (hDY << 8) / square;
-                    int j16 = byte0 + (byte1 * k12 + byte2 * l13 + byte3 * j15) / sqrtA;
-                    int j17 = (abyte0[X - 1][Y] >> 2) + (abyte0[X + 1][Y] >> 3) + (abyte0[X][Y - 1] >> 2) + (abyte0[X][Y + 1] >> 3) + (abyte0[X][Y] >> 1);
-                    colourArray[X][Y] = j16 - j17;
+                    int j16 = light_off + (l_x * k12 + l_y * l13 + l_z * j15) / sqrtA;
+                    int j17 = (something_with_objects[X - 1][Y] >> 2) + (something_with_objects[X + 1][Y] >> 3) + (something_with_objects[X][Y - 1] >> 2) + (something_with_objects[X][Y + 1] >> 3) + (something_with_objects[X][Y] >> 1);
+                    tile_shadow[X][Y] = j16 - j17;
                 }
 
             }
 
-            for(int k5 = 0; k5 < yMapSize; k5++)
+            for(int _y = 0; _y < yMapSize; _y++)
             {
-                hue[k5] = 0;
-                saturation[k5] = 0;
-                lightness[k5] = 0;
-                huedivider[k5] = 0;
-                colourCount[k5] = 0;
+                hue[_y] = 0;
+                saturation[_y] = 0;
+                lightness[_y] = 0;
+                huedivider[_y] = 0;
+                colourCount[_y] = 0;
             }
 
             for(int X = -5; X < xMapSize + 5; X++)
@@ -105,7 +105,7 @@ final class MapRegion {
                     int xPlus5 = X + 5;
                     if(xPlus5 >= 0 && xPlus5 < xMapSize)
                     {
-                        int floID = underLay[Z][xPlus5][Y] & 0xff;
+                        int floID = underLay[z][xPlus5][Y] & 0xff;
                         if(floID > 0)
                         {
                             Flo flo = Flo.cache[floID - 1];
@@ -119,7 +119,7 @@ final class MapRegion {
                     int yMin5 = X - 5;
                     if(yMin5 >= 0 && yMin5 < xMapSize)
                     {
-                        int floID = underLay[Z][yMin5][Y] & 0xff;
+                        int floID = underLay[z][yMin5][Y] & 0xff;
                         if(floID > 0)
                         {
                             Flo flo_1 = Flo.cache[floID - 1];
@@ -134,104 +134,101 @@ final class MapRegion {
 
                 if(X >= 1 && X < xMapSize - 1)
                 {
-                    int pCAA = 0;
-                    int pCBA = 0;
-                    int pCCA = 0;
-                    int pCDividerA = 0;
+                    int tile_hue = 0;
+                    int tile_sat = 0;
+                    int tile_light = 0;
+                    int tile_hue_shift = 0;
                     int colourCount = 0;
                     for(int Y = -5; Y < yMapSize + 5; Y++)
                     {
                         int yPlus5 = Y + 5;
                         if(yPlus5 >= 0 && yPlus5 < yMapSize)
                         {
-                            pCAA += hue[yPlus5];
-                            pCBA += saturation[yPlus5];
-                            pCCA += lightness[yPlus5];
-                            pCDividerA += huedivider[yPlus5];
+                            tile_hue += hue[yPlus5];
+                            tile_sat += saturation[yPlus5];
+                            tile_light += lightness[yPlus5];
+                            tile_hue_shift += huedivider[yPlus5];
                             colourCount += this.colourCount[yPlus5];
                         }
                         int yMin5 = Y - 5;
                         if(yMin5 >= 0 && yMin5 < yMapSize)
                         {
-                            pCAA -= hue[yMin5];
-                            pCBA -= saturation[yMin5];
-                            pCCA -= lightness[yMin5];
-                            pCDividerA -= huedivider[yMin5];
+                            tile_hue -= hue[yMin5];
+                            tile_sat -= saturation[yMin5];
+                            tile_light -= lightness[yMin5];
+                            tile_hue_shift -= huedivider[yMin5];
                             colourCount -= this.colourCount[yMin5];
                         }
-                        if(Y >= 1 && Y < yMapSize - 1 && (!lowMem || (tileSettings[0][X][Y] & 2) != 0 || (tileSettings[Z][X][Y] & 0x10) == 0 && method182(Y, Z, X) == anInt131))
+                        if(Y >= 1 && Y < yMapSize - 1 && (!lowMem || (tileSettings[0][X][Y] & 2) != 0 || (tileSettings[z][X][Y] & 0x10) == 0 && get_logic_height(z, X, Y) == anInt131))
                         {
-                            if(Z < setZ)
-                                setZ = Z;
-                            int underlayID = underLay[Z][X][Y] & 0xff;
-                            int overlayID = overLay[Z][X][Y] & 0xff;
-                            if(underlayID > 0 || overlayID > 0)
+                            if(z < setZ)
+                                setZ = z;
+                            int underlayID = underLay[z][X][Y] & 0xff;
+                            int overlay_id = overLay[z][X][Y] & 0xff;
+                            if(underlayID > 0 || overlay_id > 0)
                             {
-                                int zA = heightMap[Z][X][Y];
-                                int zB = heightMap[Z][X + 1][Y];
-                                int zD = heightMap[Z][X + 1][Y + 1];
-                                int zC = heightMap[Z][X][Y + 1];
-                                int cA = colourArray[X][Y];
-                                int cB = colourArray[X + 1][Y];
-                                int cD = colourArray[X + 1][Y + 1];
-                                int cC = colourArray[X][Y + 1];
-                                int cMix = -1;
-                                int plainColour = -1;
+                                int zA = heightMap[z][X][Y];
+                                int zB = heightMap[z][X + 1][Y];
+                                int zD = heightMap[z][X + 1][Y + 1];
+                                int zC = heightMap[z][X][Y + 1];
+                                int shadow_a = tile_shadow[X][Y];
+                                int shadow_b = tile_shadow[X + 1][Y];
+                                int shadow_d = tile_shadow[X + 1][Y + 1];
+                                int shadow_c = tile_shadow[X][Y + 1];
+                                int underlay_hsl_real = -1;
+                                int underlay_hsl = -1;
                                 if(underlayID > 0)
                                 {
-                                    int h = (pCAA * 256) / pCDividerA;
-                                    int s = pCBA / colourCount;
-                                    int l22 = pCCA / colourCount;
-                                    cMix = composeColour(h, s, l22);
-                                    h = h + anInt123 & 0xff;
-                                    l22 += anInt133;
-                                    if(l22 < 0)
-                                        l22 = 0;
+                                    int h = (tile_hue * 256) / tile_hue_shift;
+                                    int s = tile_sat / colourCount;
+                                    int l = tile_light / colourCount;
+                                    underlay_hsl_real = pack_hsl(h, s, l);
+                                    h = h + hue_offset & 0xff;
+                                    l += lightness_offset;
+                                    if(l < 0)
+                                        l = 0;
                                     else
-                                    if(l22 > 255)
-                                        l22 = 255;
-                                    plainColour = composeColour(h, s, l22);
+                                    if(l > 255)
+                                        l = 255;
+                                    underlay_hsl = pack_hsl(h, s, l);
                                 }
-                                if(Z > 0)
+                                if(z > 0)
                                 {
-                                    boolean flag = true;
-                                    if(underlayID == 0 && shapeA[Z][X][Y] != 0)
-                                        flag = false;
-                                    if(overlayID > 0 && !Flo.cache[overlayID - 1].occlude)
-                                        flag = false;
-                                    if(flag && zA == zB && zA == zD && zA == zC)
-                                        anIntArrayArrayArray135[Z][X][Y] |= 0x924;
+                                    boolean underlay_hidden = true;
+                                    if(underlayID == 0 && shapeA[z][X][Y] != 0)
+                                        underlay_hidden = false;
+                                    if(overlay_id > 0 && !Flo.cache[overlay_id - 1].occlude)
+                                        underlay_hidden = false;
+                                    if(underlay_hidden && zA == zB && zA == zD && zA == zC)
+                                        tile_culling_bitmap[z][X][Y] |= 0x924;
                                 }
-                                int cRGB = 0;
-                                if(cMix != -1)
-                                    cRGB = ThreeDimensionalDrawingArea.colourMap[mix(plainColour, 96)];
-                                if(overlayID == 0)
+                                int underlay_rgb = 0;
+                                if(underlay_hsl_real != -1)
+                                    underlay_rgb = ThreeDimensionalDrawingArea.HSL2RGB[mix_lightness(underlay_hsl, 96)];
+                                if(overlay_id == 0)
                                 {
-                                    sceneGraph.addTile(Z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix(cMix, cA), mix(cMix, cB), mix(cMix, cD), mix(cMix, cC), 0, 0, 0, 0, cRGB, 0);
+                                    sceneGraph.addTile(z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), 0, 0, 0, 0, underlay_rgb, 0);
                                 } else
                                 {
-                                    int shapea = shapeA[Z][X][Y] + 1;
-                                    byte shapeb = shapeB[Z][X][Y];
-                                    Flo overlay = Flo.cache[overlayID - 1];
-                                    int texoverlay = overlay.texture;
-                                    int j23;
-                                    int rgbTexOverlay;
-                                    if(texoverlay >= 0)
+                                    int shapea = shapeA[z][X][Y] + 1;
+                                    byte shapeb = shapeB[z][X][Y];
+                                    Flo overlay = Flo.cache[overlay_id - 1];
+                                    int overlay_texture = overlay.texture;
+                                    int overlay_hsl;
+                                    int overlay_rgb;
+                                    if(overlay_texture >= 0)
                                     {
-                                        rgbTexOverlay = ThreeDimensionalDrawingArea.calculate_texture_colour(texoverlay);
-                                        j23 = -1;
-                                    } else
-                                    if(overlay.colour2 == 0xff00ff)
-                                    {
-                                        rgbTexOverlay = 0;
-                                        j23 = -2;
-                                        texoverlay = -1;
-                                    } else
-                                    {
-                                        j23 = composeColour(overlay.hue, overlay.saturation, overlay.lightness);
-                                        rgbTexOverlay = ThreeDimensionalDrawingArea.colourMap[method185(overlay.hslcolour, 96)];
+                                        overlay_rgb = ThreeDimensionalDrawingArea.calculate_texture_colour(overlay_texture);
+                                        overlay_hsl = -1;//Grayscale
+                                    } else if(overlay.colour2 == 0xff00ff) {
+                                        overlay_rgb = 0;
+                                        overlay_hsl = -2;//Transparent
+                                        overlay_texture = -1;
+                                    } else {
+                                        overlay_hsl = pack_hsl(overlay.hue, overlay.saturation, overlay.lightness);
+                                        overlay_rgb = ThreeDimensionalDrawingArea.HSL2RGB[mix_lightness_gt(overlay.hslcolour, 96)];
                                     }
-                                    sceneGraph.addTile(Z, X, Y, shapea, shapeb, texoverlay, zA, zB, zD, zC, mix(cMix, cA), mix(cMix, cB), mix(cMix, cD), mix(cMix, cC), method185(j23, cA), method185(j23, cB), method185(j23, cD), method185(j23, cC), cRGB, rgbTexOverlay);
+                                    sceneGraph.addTile(z, X, Y, shapea, shapeb, overlay_texture, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), mix_lightness_gt(overlay_hsl, shadow_a), mix_lightness_gt(overlay_hsl, shadow_b), mix_lightness_gt(overlay_hsl, shadow_d), mix_lightness_gt(overlay_hsl, shadow_c), underlay_rgb, overlay_rgb);
                                 }
                             }
                         }
@@ -240,138 +237,138 @@ final class MapRegion {
                 }
             }
 
-            for(int j8 = 1; j8 < yMapSize - 1; j8++)
+            for(int _y = 1; _y < yMapSize - 1; _y++)
             {
-                for(int i10 = 1; i10 < xMapSize - 1; i10++)
-                    sceneGraph.method278(Z, i10, j8, method182(j8, Z, i10));
+                for(int _x = 1; _x < xMapSize - 1; _x++)
+                    sceneGraph.set_tile_logic_height(z, _x, _y, get_logic_height(z, _x, _y));
 
             }
 
         }
 
-        sceneGraph.method305(-10, -50, -50);
-        for(int j1 = 0; j1 < xMapSize; j1++)
+        sceneGraph.shade_models(-50, -10, -50, 768, 64);
+        for(int _x = 0; _x < xMapSize; _x++)
         {
-            for(int l1 = 0; l1 < yMapSize; l1++)
-                if((tileSettings[1][j1][l1] & 2) == 2)
-                    sceneGraph.method276(l1, j1);
+            for(int _y = 0; _y < yMapSize; _y++)
+                if((tileSettings[1][_x][_y] & 2) == 2)
+                    sceneGraph.apply_bridge_mode(_x, _y);
 
         }
 
-        int i2 = 1;
-        int j2 = 2;
-        int k2 = 4;
-        for(int l2 = 0; l2 < 4; l2++)
+        int x_flag = 1;
+        int y_flag = 2;
+        int z_flag = 4;
+        for(int _z = 0; _z < 4; _z++)
         {
-            if(l2 > 0)
+            if(_z > 0)
             {
-                i2 <<= 3;
-                j2 <<= 3;
-                k2 <<= 3;
+                x_flag <<= 3;
+                y_flag <<= 3;
+                z_flag <<= 3;
             }
-            for(int i3 = 0; i3 <= l2; i3++)
+            for(int __z = 0; __z <= _z; __z++)
             {
-                for(int k3 = 0; k3 <= yMapSize; k3++)
+                for(int __y = 0; __y <= yMapSize; __y++)
                 {
-                    for(int i4 = 0; i4 <= xMapSize; i4++)
+                    for(int __x = 0; __x <= xMapSize; __x++)
                     {
-                        if((anIntArrayArrayArray135[i3][i4][k3] & i2) != 0)
+                        if((tile_culling_bitmap[__z][__x][__y] & x_flag) != 0)
                         {
-                            int k4 = k3;
-                            int l5 = k3;
-                            int i7 = i3;
-                            int k8 = i3;
-                            for(; k4 > 0 && (anIntArrayArrayArray135[i3][i4][k4 - 1] & i2) != 0; k4--);
-                            for(; l5 < yMapSize && (anIntArrayArrayArray135[i3][i4][l5 + 1] & i2) != 0; l5++);
-label0:
-                            for(; i7 > 0; i7--)
+                            int lowest_y_flagged = __y;
+                            int highest_y_flagged = __y;
+                            int lowest_z_flagged = __z;
+                            int highest_z_flagged = __z;
+                            for(; lowest_y_flagged > 0 && (tile_culling_bitmap[__z][__x][lowest_y_flagged - 1] & x_flag) != 0; lowest_y_flagged--);
+                            for(; highest_y_flagged < yMapSize && (tile_culling_bitmap[__z][__x][highest_y_flagged + 1] & x_flag) != 0; highest_y_flagged++);
+for_lowest_z_flagged:
+                            for(; lowest_z_flagged > 0; lowest_z_flagged--)
                             {
-                                for(int j10 = k4; j10 <= l5; j10++)
-                                    if((anIntArrayArrayArray135[i7 - 1][i4][j10] & i2) == 0)
-                                        break label0;
+                                for(int ___y = lowest_y_flagged; ___y <= highest_y_flagged; ___y++)
+                                    if((tile_culling_bitmap[lowest_z_flagged - 1][__x][___y] & x_flag) == 0)
+                                        break for_lowest_z_flagged;
 
                             }
 
-label1:
-                            for(; k8 < l2; k8++)
+for_highest_z_flagged:
+                            for(; highest_z_flagged < _z; highest_z_flagged++)
                             {
-                                for(int k10 = k4; k10 <= l5; k10++)
-                                    if((anIntArrayArrayArray135[k8 + 1][i4][k10] & i2) == 0)
-                                        break label1;
+                                for(int ___y = lowest_y_flagged; ___y <= highest_y_flagged; ___y++)
+                                    if((tile_culling_bitmap[highest_z_flagged + 1][__x][___y] & x_flag) == 0)
+                                        break for_highest_z_flagged;
 
                             }
 
-                            int l10 = ((k8 + 1) - i7) * ((l5 - k4) + 1);
-                            if(l10 >= 8)
+                            int flag_count_for___x = ((highest_z_flagged + 1) - lowest_z_flagged) * ((highest_y_flagged - lowest_y_flagged) + 1);
+                            if(flag_count_for___x >= 8)
                             {
                                 char c1 = '\360';
-                                int k14 = heightMap[k8][i4][k4] - c1;
-                                int l15 = heightMap[i7][i4][k4];
-                                SceneGraph.method277(l2, i4 * 128, l15, i4 * 128, l5 * 128 + 128, k14, k4 * 128, 1);
-                                for(int l16 = i7; l16 <= k8; l16++)
+                                int h_a = heightMap[highest_z_flagged][__x][lowest_y_flagged] - c1;
+                                int h_b = heightMap[lowest_z_flagged][__x][lowest_y_flagged];
+                                SceneGraph.create_culling_cluster(_z, __x * 128, lowest_y_flagged * 128, h_b, __x * 128, highest_y_flagged * 128 + 128, h_a, 1);
+                                for(int ___z = lowest_z_flagged; ___z <= highest_z_flagged; ___z++)
                                 {
-                                    for(int l17 = k4; l17 <= l5; l17++)
-                                        anIntArrayArrayArray135[l16][i4][l17] &= ~i2;
+                                    for(int ___y = lowest_y_flagged; ___y <= highest_y_flagged; ___y++)
+                                        tile_culling_bitmap[___z][__x][___y] &= ~x_flag;
 
                                 }
 
                             }
                         }
-                        if((anIntArrayArrayArray135[i3][i4][k3] & j2) != 0)
+                        if((tile_culling_bitmap[__z][__x][__y] & y_flag) != 0)
                         {
-                            int l4 = i4;
-                            int i6 = i4;
-                            int j7 = i3;
-                            int l8 = i3;
-                            for(; l4 > 0 && (anIntArrayArrayArray135[i3][l4 - 1][k3] & j2) != 0; l4--);
-                            for(; i6 < xMapSize && (anIntArrayArrayArray135[i3][i6 + 1][k3] & j2) != 0; i6++);
-label2:
-                            for(; j7 > 0; j7--)
+                            int lowest_x_flagged = __x;
+                            int highest_x_flagged = __x;
+                            int lowest_z_flagged = __z;
+                            int highest_z_flagged = __z;
+                            for(; lowest_x_flagged > 0 && (tile_culling_bitmap[__z][lowest_x_flagged - 1][__y] & y_flag) != 0; lowest_x_flagged--);
+                            for(; highest_x_flagged < xMapSize && (tile_culling_bitmap[__z][highest_x_flagged + 1][__y] & y_flag) != 0; highest_x_flagged++);
+for_lowest_z_flagged:
+                            for(; lowest_z_flagged > 0; lowest_z_flagged--)
                             {
-                                for(int i11 = l4; i11 <= i6; i11++)
-                                    if((anIntArrayArrayArray135[j7 - 1][i11][k3] & j2) == 0)
-                                        break label2;
+                                for(int ___x = lowest_x_flagged; ___x <= highest_x_flagged; ___x++)
+                                    if((tile_culling_bitmap[lowest_z_flagged - 1][___x][__y] & y_flag) == 0)
+                                        break for_lowest_z_flagged;
 
                             }
 
-label3:
-                            for(; l8 < l2; l8++)
+for_highest_z_flagged:
+                            for(; highest_z_flagged < _z; highest_z_flagged++)
                             {
-                                for(int j11 = l4; j11 <= i6; j11++)
-                                    if((anIntArrayArrayArray135[l8 + 1][j11][k3] & j2) == 0)
-                                        break label3;
+                                for(int ___x = lowest_x_flagged; ___x <= highest_x_flagged; ___x++)
+                                    if((tile_culling_bitmap[highest_z_flagged + 1][___x][__y] & y_flag) == 0)
+                                        break for_highest_z_flagged;
 
                             }
 
-                            int k11 = ((l8 + 1) - j7) * ((i6 - l4) + 1);
-                            if(k11 >= 8)
+                            int flag_count = ((highest_z_flagged + 1) - lowest_z_flagged) * ((highest_x_flagged - lowest_x_flagged) + 1);
+                            if(flag_count >= 8)
                             {
                                 char c2 = '\360';
-                                int l14 = heightMap[l8][l4][k3] - c2;
-                                int i16 = heightMap[j7][l4][k3];
-                                SceneGraph.method277(l2, l4 * 128, i16, i6 * 128 + 128, k3 * 128, l14, k3 * 128, 2);
-                                for(int i17 = j7; i17 <= l8; i17++)
+                                int h_a = heightMap[highest_z_flagged][lowest_x_flagged][__y] - c2;
+                                int h_b = heightMap[lowest_z_flagged][lowest_x_flagged][__y];
+                                SceneGraph.create_culling_cluster(_z, lowest_x_flagged * 128, __y * 128, h_b, highest_x_flagged * 128 + 128, __y * 128, h_a, 2);
+                                for(int ___z = lowest_z_flagged; ___z <= highest_z_flagged; ___z++)
                                 {
-                                    for(int i18 = l4; i18 <= i6; i18++)
-                                        anIntArrayArrayArray135[i17][i18][k3] &= ~j2;
+                                    for(int ___x = lowest_x_flagged; ___x <= highest_x_flagged; ___x++)
+                                        tile_culling_bitmap[___z][___x][__y] &= ~y_flag;
 
                                 }
 
                             }
                         }
-                        if((anIntArrayArrayArray135[i3][i4][k3] & k2) != 0)
+                        if((tile_culling_bitmap[__z][__x][__y] & z_flag) != 0)
                         {
-                            int i5 = i4;
-                            int j6 = i4;
-                            int k7 = k3;
-                            int i9 = k3;
-                            for(; k7 > 0 && (anIntArrayArrayArray135[i3][i4][k7 - 1] & k2) != 0; k7--);
-                            for(; i9 < yMapSize && (anIntArrayArrayArray135[i3][i4][i9 + 1] & k2) != 0; i9++);
+                            int i5 = __x;
+                            int j6 = __x;
+                            int k7 = __y;
+                            int i9 = __y;
+                            for(; k7 > 0 && (tile_culling_bitmap[__z][__x][k7 - 1] & z_flag) != 0; k7--);
+                            for(; i9 < yMapSize && (tile_culling_bitmap[__z][__x][i9 + 1] & z_flag) != 0; i9++);
 label4:
                             for(; i5 > 0; i5--)
                             {
                                 for(int l11 = k7; l11 <= i9; l11++)
-                                    if((anIntArrayArrayArray135[i3][i5 - 1][l11] & k2) == 0)
+                                    if((tile_culling_bitmap[__z][i5 - 1][l11] & z_flag) == 0)
                                         break label4;
 
                             }
@@ -380,19 +377,19 @@ label5:
                             for(; j6 < xMapSize; j6++)
                             {
                                 for(int i12 = k7; i12 <= i9; i12++)
-                                    if((anIntArrayArrayArray135[i3][j6 + 1][i12] & k2) == 0)
+                                    if((tile_culling_bitmap[__z][j6 + 1][i12] & z_flag) == 0)
                                         break label5;
 
                             }
 
                             if(((j6 - i5) + 1) * ((i9 - k7) + 1) >= 4)
                             {
-                                int j12 = heightMap[i3][i5][k7];
-                                SceneGraph.method277(l2, i5 * 128, j12, j6 * 128 + 128, i9 * 128 + 128, j12, k7 * 128, 4);
+                                int j12 = heightMap[__z][i5][k7];
+                                SceneGraph.create_culling_cluster(_z, i5 * 128, k7 * 128, j12, j6 * 128 + 128, i9 * 128 + 128, j12, 4);
                                 for(int k13 = i5; k13 <= j6; k13++)
                                 {
                                     for(int i15 = k7; i15 <= i9; i15++)
-                                        anIntArrayArrayArray135[i3][k13][i15] &= ~k2;
+                                        tile_culling_bitmap[__z][k13][i15] &= ~z_flag;
 
                                 }
 
@@ -472,7 +469,7 @@ label0:
         {
             if((tileSettings[k][l][i] & 0x10) != 0)
                 return;
-            if(method182(i, k, l) != anInt131)
+            if(get_logic_height(k, l, i) != anInt131)
                 return;
         }
         if(k < setZ)
@@ -562,7 +559,7 @@ label0:
                 obj2 = new ObjectOnTile(i1, j1, j, zB, zD, zA, zC, class46.animationID, true);
             sceneGraph.addEntityB(idTag, objConf, zMix, 1, ((Animable) (obj2)), 1, k, 0, i, l);
             if(j >= 12 && j <= 17 && j != 13 && k > 0)
-                anIntArrayArrayArray135[k][l][i] |= 0x924;
+                tile_culling_bitmap[k][l][i] |= 0x924;
             if(class46.isUnwalkable && tileSetting != null)
                 tileSetting.method212(class46.aBoolean757, class46.sizeX, class46.sizeY, l, i, j1);
             return;
@@ -583,7 +580,7 @@ label0:
                     aByteArrayArrayArray134[k][l][i + 1] = 50;
                 }
                 if(class46.aBoolean764)
-                    anIntArrayArrayArray135[k][l][i] |= 0x249;
+                    tile_culling_bitmap[k][l][i] |= 0x249;
             } else
             if(j1 == 1)
             {
@@ -593,7 +590,7 @@ label0:
                     aByteArrayArrayArray134[k][l + 1][i + 1] = 50;
                 }
                 if(class46.aBoolean764)
-                    anIntArrayArrayArray135[k][l][i + 1] |= 0x492;
+                    tile_culling_bitmap[k][l][i + 1] |= 0x492;
             } else
             if(j1 == 2)
             {
@@ -603,7 +600,7 @@ label0:
                     aByteArrayArrayArray134[k][l + 1][i + 1] = 50;
                 }
                 if(class46.aBoolean764)
-                    anIntArrayArrayArray135[k][l + 1][i] |= 0x249;
+                    tile_culling_bitmap[k][l + 1][i] |= 0x249;
             } else
             if(j1 == 3)
             {
@@ -613,7 +610,7 @@ label0:
                     aByteArrayArrayArray134[k][l + 1][i] = 50;
                 }
                 if(class46.aBoolean764)
-                    anIntArrayArrayArray135[k][l][i] |= 0x492;
+                    tile_culling_bitmap[k][l][i] |= 0x492;
             }
             if(class46.isUnwalkable && tileSetting != null)
                 tileSetting.method211(i, j1, l, j, class46.aBoolean757);
@@ -663,23 +660,23 @@ label0:
             if(class46.aBoolean764)
                 if(j1 == 0)
                 {
-                    anIntArrayArrayArray135[k][l][i] |= 0x249;
-                    anIntArrayArrayArray135[k][l][i + 1] |= 0x492;
+                    tile_culling_bitmap[k][l][i] |= 0x249;
+                    tile_culling_bitmap[k][l][i + 1] |= 0x492;
                 } else
                 if(j1 == 1)
                 {
-                    anIntArrayArrayArray135[k][l][i + 1] |= 0x492;
-                    anIntArrayArrayArray135[k][l + 1][i] |= 0x249;
+                    tile_culling_bitmap[k][l][i + 1] |= 0x492;
+                    tile_culling_bitmap[k][l + 1][i] |= 0x249;
                 } else
                 if(j1 == 2)
                 {
-                    anIntArrayArrayArray135[k][l + 1][i] |= 0x249;
-                    anIntArrayArrayArray135[k][l][i] |= 0x492;
+                    tile_culling_bitmap[k][l + 1][i] |= 0x249;
+                    tile_culling_bitmap[k][l][i] |= 0x492;
                 } else
                 if(j1 == 3)
                 {
-                    anIntArrayArrayArray135[k][l][i] |= 0x492;
-                    anIntArrayArrayArray135[k][l][i] |= 0x249;
+                    tile_culling_bitmap[k][l][i] |= 0x492;
+                    tile_culling_bitmap[k][l][i] |= 0x249;
                 }
             if(class46.isUnwalkable && tileSetting != null)
                 tileSetting.method211(i, j1, l, j, class46.aBoolean757);
@@ -819,17 +816,17 @@ label0:
         return method184(l2, i3, k1, k);
     }
 
-    private int composeColour(int i, int j, int k)
+    private int pack_hsl(int h, int s, int l)
     {
-        if(k > 179)
-            j /= 2;
-        if(k > 192)
-            j /= 2;
-        if(k > 217)
-            j /= 2;
-        if(k > 243)
-            j /= 2;
-        return (i / 4 << 10) + (j / 32 << 7) + k / 2;
+        if(l > 179)
+            s /= 2;
+        if(l > 192)
+            s /= 2;
+        if(l > 217)
+            s /= 2;
+        if(l > 243)
+            s /= 2;
+        return (h / 4 << 10) + (s / 32 << 7) + l / 2;
     }
 
     public static boolean method178(int i, int j)
@@ -957,14 +954,14 @@ label0:
         } while(true);
     }
 
-    private int method182(int i, int j, int k)
+    private int get_logic_height(int z, int x, int y)
     {
-        if((tileSettings[j][k][i] & 8) != 0)
+        if((tileSettings[z][x][y] & 8) != 0)
             return 0;
-        if(j > 0 && (tileSettings[1][k][i] & 2) != 0)
-            return j - 1;
+        if(z > 0 && (tileSettings[1][x][y] & 2) != 0)
+            return z - 1;
         else
-            return j;
+            return z;
     }
 
     public final void method183(TileSetting aclass11[], SceneGraph sceneGraph, int i, int j, int k, int l,
@@ -1020,27 +1017,26 @@ label0:
         return (i * (0x10000 - i1) >> 16) + (j * i1 >> 16);
     }
 
-    private int method185(int i, int j)
+    private int mix_lightness_gt(int hsl, int l)
     {
-        if(i == -2)
+        if(hsl == -2)
             return 0xbc614e;
-        if(i == -1)
+        if(hsl == -1)
         {
-            if(j < 0)
-                j = 0;
-            else
-            if(j > 127)
-                j = 127;
-            j = 127 - j;
-            return j;
+            if(l < 0)
+                l = 0;
+            else if(l > 127)
+                l = 127;
+            l = 127 - l;
+            return l;
         }
-        j = (j * (i & 0x7f)) / 128;
-        if(j < 2)
-            j = 2;
+        l = (l * (hsl & 0x7f)) / 128;
+        if(l < 2)
+            l = 2;
         else
-        if(j > 126)
-            j = 126;
-        return (i & 0xff80) + j;
+        if(l > 126)
+            l = 126;
+        return (hsl & 0xff80) + l;
     }
 
     private static int method186(int i, int j)
@@ -1051,17 +1047,17 @@ label0:
         return k / 16 + l / 8 + i1 / 4;
     }
 
-    private static int mix(int i, int j)
+    private static int mix_lightness(int hsl, int l)
     {
-        if(i == -1)
+        if(hsl == -1)
             return 0xbc614e;
-        j = (j * (i & 0x7f)) / 128;
-        if(j < 2)
-            j = 2;
+        l = (l * (hsl & 0x7f)) / 128;
+        if(l < 2)
+            l = 2;
         else
-        if(j > 126)
-            j = 126;
-        return (i & 0xff80) + j;
+        if(l > 126)
+            l = 126;
+        return (hsl & 0xff80) + l;
     }
 
     public static void method188(SceneGraph sceneGraph, int i, int j, int k, int l, TileSetting tileSetting, int ai[][][], int i1,
@@ -1370,7 +1366,7 @@ label0:
         }
     }
 
-    private static int anInt123 = (int)(Math.random() * 17D) - 8;
+    private static int hue_offset = (int)(Math.random() * 17D) - 8;
     private final int[] hue;
     private final int[] saturation;
     private final int[] lightness;
@@ -1379,15 +1375,15 @@ label0:
     private final int[][][] heightMap;
     private final byte[][][] overLay;
     static int anInt131;
-    private static int anInt133 = (int)(Math.random() * 33D) - 16;
+    private static int lightness_offset = (int)(Math.random() * 33D) - 16;
     private final byte[][][] aByteArrayArrayArray134;
-    private final int[][][] anIntArrayArrayArray135;
+    private final int[][][] tile_culling_bitmap;
     private final byte[][][] shapeA;
     private static final int faceXOffset[] = {
         1, 0, -1, 0
     };
     private static final int anInt138 = 323;
-    private final int[][] colourArray;
+    private final int[][] tile_shadow;
     private static final int anIntArray140[] = {
         16, 32, 64, 128
     };
