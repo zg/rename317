@@ -96,19 +96,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Class33.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Class33.java">
+      <file leaf-file-name="VertexNormal.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/VertexNormal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="12" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0">
+            <state line="16" column="12" selection-start="297" selection-end="297" vertical-scroll-proportion="0.5013405">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Class29.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Class29.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Class29.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="28" selection-start="419" selection-end="419" vertical-scroll-proportion="0.5800525">
+            <state line="15" column="28" selection-start="419" selection-end="419" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,7 +128,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/RSFont.java" />
         <option value="$PROJECT_DIR$/Class47.java" />
         <option value="$PROJECT_DIR$/Class43.java" />
         <option value="$PROJECT_DIR$/PlainTile.java" />
@@ -144,6 +143,7 @@
         <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
         <option value="$PROJECT_DIR$/ObjectDef.java" />
         <option value="$PROJECT_DIR$/SpotAnim.java" />
+        <option value="$PROJECT_DIR$/VertexNormal.java" />
       </list>
     </option>
   </component>
@@ -202,9 +202,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Favorites" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -406,16 +406,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.042713568">
-          <folding />
-        </state>
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.042713568" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ModelHeader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="15" selection-start="494" selection-end="502" vertical-scroll-proportion="0.31658292">
-          <folding />
-        </state>
+        <state line="20" column="15" selection-start="494" selection-end="502" vertical-scroll-proportion="0.31658292" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Model.java">
@@ -425,42 +421,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SpotAnim.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="0" selection-start="2666" selection-end="2666" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="87" column="0" selection-start="2666" selection-end="2666" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class47.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class4.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="12" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="6" column="12" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class39.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class33.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="12" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class29.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="28" selection-start="419" selection-end="419" vertical-scroll-proportion="0.5800525">
+        <state line="15" column="28" selection-start="419" selection-end="419" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VertexNormal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="12" selection-start="297" selection-end="297" vertical-scroll-proportion="0.5013405">
           <folding />
         </state>
       </provider>

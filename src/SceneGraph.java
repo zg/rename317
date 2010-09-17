@@ -587,10 +587,10 @@ final class SceneGraph {
                     if(class30_sub3 != null)
                     {
                         Object1 class10 = class30_sub3.obj1;
-                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.aClass33Array1425 != null)
+                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.aVertexNormalArray1425 != null)
                         {
                             method307(l1, 1, 1, i2, j2, (Model)class10.aClass30_Sub2_Sub4_278);
-                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.aClass33Array1425 != null)
+                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.aVertexNormalArray1425 != null)
                             {
                                 method307(l1, 1, 1, i2, j2, (Model)class10.aClass30_Sub2_Sub4_279);
                                 method308((Model)class10.aClass30_Sub2_Sub4_278, (Model)class10.aClass30_Sub2_Sub4_279, 0, 0, 0, false);
@@ -601,7 +601,7 @@ final class SceneGraph {
                         for(int k2 = 0; k2 < class30_sub3.anInt1317; k2++)
                         {
                             Object5 class28 = class30_sub3.obj5Array[k2];
-                            if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.aClass33Array1425 != null)
+                            if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.aVertexNormalArray1425 != null)
                             {
                                 method307(l1, (class28.anInt524 - class28.anInt523) + 1, (class28.anInt526 - class28.anInt525) + 1, i2, j2, (Model)class28.aClass30_Sub2_Sub4_521);
                                 ((Model)class28.aClass30_Sub2_Sub4_521).method480(j, k1, k, i, i1);
@@ -609,7 +609,7 @@ final class SceneGraph {
                         }
 
                         Object3 class49 = class30_sub3.obj3;
-                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
+                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.aVertexNormalArray1425 != null)
                         {
                             method306(i2, l1, (Model)class49.aClass30_Sub2_Sub4_814, j2);
                             ((Model)class49.aClass30_Sub2_Sub4_814).method480(j, k1, k, i, i1);
@@ -628,25 +628,25 @@ final class SceneGraph {
         if(i < xMapSize)
         {
             Tile class30_sub3 = tileArray[j][i + 1][k];
-            if(class30_sub3 != null && class30_sub3.obj3 != null && class30_sub3.obj3.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
+            if(class30_sub3 != null && class30_sub3.obj3 != null && class30_sub3.obj3.aClass30_Sub2_Sub4_814.aVertexNormalArray1425 != null)
                 method308(model, (Model)class30_sub3.obj3.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
         }
         if(k < xMapSize)
         {
             Tile class30_sub3_1 = tileArray[j][i][k + 1];
-            if(class30_sub3_1 != null && class30_sub3_1.obj3 != null && class30_sub3_1.obj3.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
+            if(class30_sub3_1 != null && class30_sub3_1.obj3 != null && class30_sub3_1.obj3.aClass30_Sub2_Sub4_814.aVertexNormalArray1425 != null)
                 method308(model, (Model)class30_sub3_1.obj3.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
         }
         if(i < xMapSize && k < yMapSize)
         {
             Tile class30_sub3_2 = tileArray[j][i + 1][k + 1];
-            if(class30_sub3_2 != null && class30_sub3_2.obj3 != null && class30_sub3_2.obj3.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
+            if(class30_sub3_2 != null && class30_sub3_2.obj3 != null && class30_sub3_2.obj3.aClass30_Sub2_Sub4_814.aVertexNormalArray1425 != null)
                 method308(model, (Model)class30_sub3_2.obj3.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
         }
         if(i < xMapSize && k > 0)
         {
             Tile class30_sub3_3 = tileArray[j][i + 1][k - 1];
-            if(class30_sub3_3 != null && class30_sub3_3.obj3 != null && class30_sub3_3.obj3.aClass30_Sub2_Sub4_814.aClass33Array1425 != null)
+            if(class30_sub3_3 != null && class30_sub3_3.obj3 != null && class30_sub3_3.obj3.aClass30_Sub2_Sub4_814.aVertexNormalArray1425 != null)
                 method308(model, (Model)class30_sub3_3.obj3.aClass30_Sub2_Sub4_814, 128, 0, -128, true);
         }
     }
@@ -672,14 +672,14 @@ final class SceneGraph {
                                 {
                                     int i3 = (heightmap[j2][k2][l2] + heightmap[j2][k2 + 1][l2] + heightmap[j2][k2][l2 + 1] + heightmap[j2][k2 + 1][l2 + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
                                     Object1 class10 = class30_sub3.obj1;
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.aClass33Array1425 != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.aVertexNormalArray1425 != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.aClass33Array1425 != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.aVertexNormalArray1425 != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_279, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
                                     for(int j3 = 0; j3 < class30_sub3.anInt1317; j3++)
                                     {
                                         Object5 class28 = class30_sub3.obj5Array[j3];
-                                        if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.aClass33Array1425 != null)
+                                        if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.aVertexNormalArray1425 != null)
                                         {
                                             int k3 = (class28.anInt524 - class28.anInt523) + 1;
                                             int l3 = (class28.anInt526 - class28.anInt525) + 1;
@@ -706,9 +706,9 @@ final class SceneGraph {
         int i1 = model_1.verticeCount;
         for(int j1 = 0; j1 < model.verticeCount; j1++)
         {
-            Class33 class33 = model.aClass33Array1425[j1];
-            Class33 class33_1 = model.aClass33Array1660[j1];
-            if(class33_1.anInt605 != 0)
+            VertexNormal vertexNormal = model.aVertexNormalArray1425[j1];
+            VertexNormal vertexNormal_1 = model.aVertexNormalArray1660[j1];
+            if(vertexNormal_1.magnitude != 0)
             {
                 int i2 = model.vertexY[j1] - j;
                 if(i2 <= model_1.anInt1651)
@@ -721,18 +721,18 @@ final class SceneGraph {
                         {
                             for(int l2 = 0; l2 < i1; l2++)
                             {
-                                Class33 class33_2 = model_1.aClass33Array1425[l2];
-                                Class33 class33_3 = model_1.aClass33Array1660[l2];
-                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && class33_3.anInt605 != 0)
+                                VertexNormal vertexNormal_2 = model_1.aVertexNormalArray1425[l2];
+                                VertexNormal vertexNormal_3 = model_1.aVertexNormalArray1660[l2];
+                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && vertexNormal_3.magnitude != 0)
                                 {
-                                    class33.anInt602 += class33_3.anInt602;
-                                    class33.anInt603 += class33_3.anInt603;
-                                    class33.anInt604 += class33_3.anInt604;
-                                    class33.anInt605 += class33_3.anInt605;
-                                    class33_2.anInt602 += class33_1.anInt602;
-                                    class33_2.anInt603 += class33_1.anInt603;
-                                    class33_2.anInt604 += class33_1.anInt604;
-                                    class33_2.anInt605 += class33_1.anInt605;
+                                    vertexNormal.x += vertexNormal_3.x;
+                                    vertexNormal.y += vertexNormal_3.y;
+                                    vertexNormal.z += vertexNormal_3.z;
+                                    vertexNormal.magnitude += vertexNormal_3.magnitude;
+                                    vertexNormal_2.x += vertexNormal_1.x;
+                                    vertexNormal_2.y += vertexNormal_1.y;
+                                    vertexNormal_2.z += vertexNormal_1.z;
+                                    vertexNormal_2.magnitude += vertexNormal_1.magnitude;
                                     l++;
                                     anIntArray486[j1] = anInt488;
                                     anIntArray487[l2] = anInt488;
