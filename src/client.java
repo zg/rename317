@@ -1885,8 +1885,8 @@ public final class client extends RSApplet {
         socketStream = null;
         loggedIn = false;
         loginScreenState = 0;
- //       myUsername = "";
- //       myPassword = "";
+        myUsername = "";
+        myPassword = "";
         unlinkMRUNodes();
         sceneGraph.initToNull();
         for(int i = 0; i < 4; i++)
@@ -1899,17 +1899,17 @@ public final class client extends RSApplet {
         prevSong = 0;
     }
 
-    private void method45()
+    private void char_edit_change_gender()
     {
-        aBoolean1031 = true;
-        for(int j = 0; j < 7; j++)
+        char_edit_model_changed = true;
+        for(int type = 0; type < 7; type++)
         {
-            char_edit_idkits[j] = -1;
-            for(int k = 0; k < IdentityKit.length; k++)
+            char_edit_idkits[type] = -1;
+            for(int idkit_ptr = 0; idkit_ptr < IdentityKit.length; idkit_ptr++)
             {
-                if(IdentityKit.cache[k].not_selectable || IdentityKit.cache[k].body_part_id != j + (char_edit_gender ? 0 : 7))
+                if(IdentityKit.cache[idkit_ptr].not_selectable || IdentityKit.cache[idkit_ptr].body_part_id != type + (char_edit_gender ? 0 : 7))
                     continue;
-                char_edit_idkits[j] = k;
+                char_edit_idkits[type] = idkit_ptr;
                 break;
             }
 
@@ -2072,30 +2072,30 @@ public final class client extends RSApplet {
                         current_id = 0;
                 } while(IdentityKit.cache[current_id].not_selectable || IdentityKit.cache[current_id].body_part_id != type + (char_edit_gender ? 0 : 7));
                 char_edit_idkits[type] = current_id;
-                aBoolean1031 = true;
+                char_edit_model_changed = true;
             }
         }
         if(j >= 314 && j <= 323)
         {
-            int l = (j - 314) / 2;
-            int k1 = j & 1;
-            int j2 = char_edit_colours[l];
-            if(k1 == 0 && --j2 < 0)
-                j2 = PLAYER_BODY_RECOLOURS[l].length - 1;
-            if(k1 == 1 && ++j2 >= PLAYER_BODY_RECOLOURS[l].length)
-                j2 = 0;
-            char_edit_colours[l] = j2;
-            aBoolean1031 = true;
+            int type = (j - 314) / 2;
+            int direction = j & 1;
+            int current_colour = char_edit_colours[type];
+            if(direction == 0 && --current_colour < 0)
+                current_colour = PLAYER_BODY_RECOLOURS[type].length - 1;
+            if(direction == 1 && ++current_colour >= PLAYER_BODY_RECOLOURS[type].length)
+                current_colour = 0;
+            char_edit_colours[type] = current_colour;
+            char_edit_model_changed = true;
         }
         if(j == 324 && !char_edit_gender)
         {
             char_edit_gender = true;
-            method45();
+            char_edit_change_gender();
         }
         if(j == 325 && char_edit_gender)
         {
             char_edit_gender = false;
-            method45();
+            char_edit_change_gender();
         }
         if(j == 326)
         {
@@ -5183,32 +5183,32 @@ public final class client extends RSApplet {
         {
             class9.anInt270 = 150;
             class9.anInt271 = (int)(Math.sin((double)loopCycle / 40D) * 256D) & 0x7ff;
-            if(aBoolean1031)
+            if(char_edit_model_changed)
             {
-                for(int k1 = 0; k1 < 7; k1++)
+                for(int idkit_ptr = 0; idkit_ptr < 7; idkit_ptr++)
                 {
-                    int l1 = char_edit_idkits[k1];
-                    if(l1 >= 0 && !IdentityKit.cache[l1].is_body_downloaded())
+                    int idkit_id = char_edit_idkits[idkit_ptr];
+                    if(idkit_id >= 0 && !IdentityKit.cache[idkit_id].is_body_downloaded())
                         return;
                 }
 
-                aBoolean1031 = false;
-                Model aclass30_sub2_sub4_sub6s[] = new Model[7];
-                int i2 = 0;
-                for(int j2 = 0; j2 < 7; j2++)
+                char_edit_model_changed = false;
+                Model sub_models[] = new Model[7];
+                int model_ptr = 0;
+                for(int idkit_ptr = 0; idkit_ptr < 7; idkit_ptr++)
                 {
-                    int k2 = char_edit_idkits[j2];
-                    if(k2 >= 0)
-                        aclass30_sub2_sub4_sub6s[i2++] = IdentityKit.cache[k2].get_body_model();
+                    int idkit_id = char_edit_idkits[idkit_ptr];
+                    if(idkit_id >= 0)
+                        sub_models[model_ptr++] = IdentityKit.cache[idkit_id].get_body_model();
                 }
 
-                Model model = new Model(i2, aclass30_sub2_sub4_sub6s);
-                for(int l2 = 0; l2 < 5; l2++)
-                    if(char_edit_colours[l2] != 0)
+                Model model = new Model(model_ptr, sub_models);
+                for(int idkit_ptr = 0; idkit_ptr < 5; idkit_ptr++)
+                    if(char_edit_colours[idkit_ptr] != 0)
                     {
-                        model.recolour(PLAYER_BODY_RECOLOURS[l2][0], PLAYER_BODY_RECOLOURS[l2][char_edit_colours[l2]]);
-                        if(l2 == 1)
-                            model.recolour(SKIN_COLOURS[0], SKIN_COLOURS[char_edit_colours[l2]]);
+                        model.recolour(PLAYER_BODY_RECOLOURS[idkit_ptr][0], PLAYER_BODY_RECOLOURS[idkit_ptr][char_edit_colours[idkit_ptr]]);
+                        if(idkit_ptr == 1)
+                            model.recolour(SKIN_COLOURS[0], SKIN_COLOURS[char_edit_colours[idkit_ptr]]);
                     }
 
                 model.calcSkinning();
@@ -5216,41 +5216,41 @@ public final class client extends RSApplet {
                 model.preprocess(64, 850, -30, -50, -30, true);
                 class9.anInt233 = 5;
                 class9.mediaID = 0;
-                RSInterface.method208(aBoolean994, model);
+                RSInterface.set_custom_model(aBoolean994, model);
             }
             return;
         }
         if(j == 324)
         {
-            if(aClass30_Sub2_Sub1_Sub1_931 == null)
+            if(char_edit_inactive_button == null)
             {
-                aClass30_Sub2_Sub1_Sub1_931 = class9.sprite1;
-                aClass30_Sub2_Sub1_Sub1_932 = class9.sprite2;
+                char_edit_inactive_button = class9.sprite1;
+                char_edit_active_button = class9.sprite2;
             }
             if(char_edit_gender)
             {
-                class9.sprite1 = aClass30_Sub2_Sub1_Sub1_932;
+                class9.sprite1 = char_edit_active_button;
                 return;
             } else
             {
-                class9.sprite1 = aClass30_Sub2_Sub1_Sub1_931;
+                class9.sprite1 = char_edit_inactive_button;
                 return;
             }
         }
         if(j == 325)
         {
-            if(aClass30_Sub2_Sub1_Sub1_931 == null)
+            if(char_edit_inactive_button == null)
             {
-                aClass30_Sub2_Sub1_Sub1_931 = class9.sprite1;
-                aClass30_Sub2_Sub1_Sub1_932 = class9.sprite2;
+                char_edit_inactive_button = class9.sprite1;
+                char_edit_active_button = class9.sprite2;
             }
             if(char_edit_gender)
             {
-                class9.sprite1 = aClass30_Sub2_Sub1_Sub1_931;
+                class9.sprite1 = char_edit_inactive_button;
                 return;
             } else
             {
-                class9.sprite1 = aClass30_Sub2_Sub1_Sub1_932;
+                class9.sprite1 = char_edit_active_button;
                 return;
             }
         }
@@ -5842,7 +5842,7 @@ public final class client extends RSApplet {
                 anInt1055 = 0;
                 anInt1054 = -1;
                 char_edit_gender = true;
-                method45();
+                char_edit_change_gender();
                 for(int j3 = 0; j3 < 5; j3++)
                     char_edit_colours[j3] = 0;
 
@@ -11693,7 +11693,7 @@ public final class client extends RSApplet {
         aBoolean1017 = false;
         anInt1018 = -1;
         anIntArray1030 = new int[5];
-        aBoolean1031 = false;
+        char_edit_model_changed = false;
         mapFunctions = new RgbImage[100];
         dialogID = -1;
         maxStats = new int[Skills.skillsCount];
@@ -11866,8 +11866,8 @@ public final class client extends RSApplet {
     private final int anInt927;
     private final int[] anIntArray928;
     private int[][] anIntArrayArray929;
-    private RgbImage aClass30_Sub2_Sub1_Sub1_931;
-    private RgbImage aClass30_Sub2_Sub1_Sub1_932;
+    private RgbImage char_edit_inactive_button;
+    private RgbImage char_edit_active_button;
     private int anInt933;
     private int anInt934;
     private int anInt935;
@@ -11974,7 +11974,7 @@ public final class client extends RSApplet {
     private IndexedImage backBase2;
     private IndexedImage backHmid1;
     private final int[] anIntArray1030;
-    private boolean aBoolean1031;
+    private boolean char_edit_model_changed;
     private RgbImage[] mapFunctions;
     private int baseX;
     private int baseY;
