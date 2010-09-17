@@ -94,7 +94,7 @@ public final class RgbImage extends DrawingArea {
         DrawingArea.initDrawingArea(myHeight, myWidth, myPixels);
     }
 
-    public void method344(int i, int j, int k)
+    public void shiftColours(int i, int j, int k)
     {
         for(int i1 = 0; i1 < myPixels.length; i1++)
         {
@@ -408,46 +408,46 @@ public final class RgbImage extends DrawingArea {
         }
     }
 
-    public void method353(int i,
-                          double d, int l1)
+    public void rotate(int y,
+                          double d, int x)
     {
         //all of the following were parameters
-        int j = 15;
-        int k = 20;
-        int l = 15;
-        int j1 = 256;
-        int k1 = 20;
+        int center_y = 15;
+        int width = 20;
+        int center_x = 15;
+        int hingesize = 256;
+        int height = 20;
         //all of the previous were parameters
         try
         {
-            int i2 = -k / 2;
-            int j2 = -k1 / 2;
-            int k2 = (int)(Math.sin(d) * 65536D);
-            int l2 = (int)(Math.cos(d) * 65536D);
-            k2 = k2 * j1 >> 8;
-            l2 = l2 * j1 >> 8;
-            int i3 = (l << 16) + (j2 * k2 + i2 * l2);
-            int j3 = (j << 16) + (j2 * l2 - i2 * k2);
-            int k3 = l1 + i * DrawingArea.width;
-            for(i = 0; i < k1; i++)
+            int i2 = -width / 2;
+            int j2 = -height / 2;
+            int __pyoffset = (int)(Math.sin(d) * 65536D);
+            int __pxoffset = (int)(Math.cos(d) * 65536D);
+            __pyoffset = __pyoffset * hingesize >> 8;
+            __pxoffset = __pxoffset * hingesize >> 8;
+            int i3 = (center_x << 16) + (j2 * __pyoffset + i2 * __pxoffset);
+            int j3 = (center_y << 16) + (j2 * __pxoffset - i2 * __pyoffset);
+            int off = x + y * DrawingArea.width;
+            for(y = 0; y < height; y++)
             {
-                int l3 = k3;
-                int i4 = i3;
-                int j4 = j3;
-                for(l1 = -k; l1 < 0; l1++)
+                int l3 = off;
+                int __x = i3;
+                int __y = j3;
+                for(x = -width; x < 0; x++)
                 {
-                    int k4 = myPixels[(i4 >> 16) + (j4 >> 16) * myWidth];
+                    int k4 = myPixels[(__x >> 16) + (__y >> 16) * myWidth];
                     if(k4 != 0)
                         DrawingArea.pixels[l3++] = k4;
                     else
                         l3++;
-                    i4 += l2;
-                    j4 -= k2;
+                    __x += __pxoffset;
+                    __y -= __pyoffset;
                 }
 
-                i3 += k2;
-                j3 += l2;
-                k3 += DrawingArea.width;
+                i3 += __pyoffset;
+                j3 += __pxoffset;
+                off += DrawingArea.width;
             }
 
         }

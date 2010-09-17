@@ -5604,7 +5604,7 @@ public final class client extends RSApplet {
             double d = Math.atan2(l1, i2);
             int j2 = (int)(Math.sin(d) * 63D);
             int k2 = (int)(Math.cos(d) * 57D);
-            mapEdge.method353(83 - k2 - 20, d, (94 + j2 + 4) - 10);
+            mapEdge.rotate(83 - k2 - 20, d, (94 + j2 + 4) - 10);
         } else
         {
             markMinimap(rgbImage, k, j);
@@ -6929,7 +6929,7 @@ public final class client extends RSApplet {
             for(int i6 = 0; i6 < 100; i6++)
             {
                 if(mapFunctions[i6] != null)
-                    mapFunctions[i6].method344(i5 + l5, j5 + l5, k5 + l5);
+                    mapFunctions[i6].shiftColours(i5 + l5, j5 + l5, k5 + l5);
                 if(mapScenes[i6] != null)
                     mapScenes[i6].shiftColours(i5 + l5, j5 + l5, k5 + l5);
             }
