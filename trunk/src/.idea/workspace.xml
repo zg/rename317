@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="b89b271f-bcab-4808-b81f-ee8fd61b54e9" name="Default" comment="" />
-    <ignored path="src.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="src.iws" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +59,44 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="ObjectOnTile.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ObjectOnTile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="46" selection-start="2238" selection-end="2238" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OnDemandData.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OnDemandData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OnDemandFetcher.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OnDemandFetcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="69" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2501" column="38" selection-start="96004" selection-end="96004" vertical-scroll-proportion="0.33333334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -73,7 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/SceneGraph.java" />
         <option value="$PROJECT_DIR$/ThreeDimensionalDrawingArea.java" />
         <option value="$PROJECT_DIR$/ShapedTile.java" />
         <option value="$PROJECT_DIR$/ModelHeader.java" />
@@ -88,6 +124,7 @@
         <option value="$PROJECT_DIR$/JagexArchive.java" />
         <option value="$PROJECT_DIR$/Animable.java" />
         <option value="$PROJECT_DIR$/Decompressor.java" />
+        <option value="$PROJECT_DIR$/ObjectOnTile.java" />
         <option value="$PROJECT_DIR$/client.java" />
       </list>
     </option>
@@ -127,6 +164,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
@@ -148,7 +186,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -314,26 +351,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/VertexNormal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="8" selection-start="293" selection-end="302" vertical-scroll-proportion="-7.48" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class29.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="81" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class39.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Class4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="331" selection-end="436" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="160" column="18" selection-start="4667" selection-end="4667" vertical-scroll-proportion="0.23115578" />
@@ -386,14 +403,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ObjectDef.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="24" selection-start="1612" selection-end="1612" vertical-scroll-proportion="0.044619422">
+        <state line="62" column="24" selection-start="1612" selection-end="1612" vertical-scroll-proportion="0.044619422" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="31" selection-start="274" selection-end="280" vertical-scroll-proportion="0.044619422">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ObjectOnTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="46" selection-start="2238" selection-end="2238" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OnDemandData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OnDemandFetcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="69" selection-start="517" selection-end="517" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9097" column="16" selection-start="348163" selection-end="348163" vertical-scroll-proportion="0.23595506">
+        <state line="2501" column="38" selection-start="96004" selection-end="96004" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>

@@ -7,26 +7,26 @@ final class ObjectOnTile extends Animable {
     public Model getRotatedModel()
     {
         int j = -1;
-        if(aAnimation_1607 != null)
+        if(animation != null)
         {
             int k = client.loopCycle - delay;
-            if(k > 100 && aAnimation_1607.frameStep > 0)
+            if(k > 100 && animation.frameStep > 0)
                 k = 100;
-            while(k > aAnimation_1607.getFrameLength(frame))
+            while(k > animation.getFrameLength(frame))
             {
-                k -= aAnimation_1607.getFrameLength(frame);
+                k -= animation.getFrameLength(frame);
                 frame++;
-                if(frame < aAnimation_1607.frameCount)
+                if(frame < animation.frameCount)
                     continue;
-                frame -= aAnimation_1607.frameStep;
-                if(frame >= 0 && frame < aAnimation_1607.frameCount)
+                frame -= animation.frameStep;
+                if(frame >= 0 && frame < animation.frameCount)
                     continue;
-                aAnimation_1607 = null;
+                animation = null;
                 break;
             }
             delay = client.loopCycle - k;
-            if(aAnimation_1607 != null)
-                j = aAnimation_1607.frame2IDS[frame];
+            if(animation != null)
+                j = animation.frame2IDS[frame];
         }
         ObjectDef class46;
         if(anIntArray1600 != null)
@@ -74,13 +74,13 @@ final class ObjectOnTile extends Animable {
         anInt1606 = k1;
         if(l1 != -1)
         {
-            aAnimation_1607 = Animation.anims[l1];
+            animation = Animation.anims[l1];
             frame = 0;
             delay = client.loopCycle;
-            if(randomize && aAnimation_1607.frameStep != -1)
+            if(randomize && animation.frameStep != -1)
             {
-                frame = (int)(Math.random() * (double) aAnimation_1607.frameCount);
-                delay -= (int)(Math.random() * (double) aAnimation_1607.getFrameLength(frame));
+                frame = (int)(Math.random() * (double) animation.frameCount);
+                delay -= (int)(Math.random() * (double) animation.getFrameLength(frame));
             }
         }
         ObjectDef class46 = ObjectDef.forID(anInt1610);
@@ -97,7 +97,7 @@ final class ObjectOnTile extends Animable {
     private final int anInt1604;
     private final int anInt1605;
     private final int anInt1606;
-    private Animation aAnimation_1607;
+    private Animation animation;
     private int delay;
     public static client clientInstance;
     private final int anInt1610;
