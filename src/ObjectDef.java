@@ -107,13 +107,13 @@ stream = null;
                 return true;
             boolean flag1 = true;
             for(int k = 0; k < objectModelIDs.length; k++)
-                flag1 &= Model.method463(objectModelIDs[k] & 0xffff);
+                flag1 &= Model.is_downloaded(objectModelIDs[k] & 0xffff);
 
             return flag1;
         }
         for(int j = 0; j < types.length; j++)
             if(types[j] == i)
-                return Model.method463(objectModelIDs[j] & 0xffff);
+                return Model.is_downloaded(objectModelIDs[j] & 0xffff);
 
         return true;
     }
@@ -149,7 +149,7 @@ stream = null;
             return true;
         boolean flag1 = true;
         for(int i = 0; i < objectModelIDs.length; i++)
-            flag1 &= Model.method463(objectModelIDs[i] & 0xffff);
+            flag1 &= Model.is_downloaded(objectModelIDs[i] & 0xffff);
             return flag1;
     }
 
@@ -182,7 +182,7 @@ stream = null;
             if(j != 10)
                 return null;
             l1 = (long)((type << 6) + l) + ((long)(k + 1) << 32);
-            Model model_1 = (Model) mruNodes2.insertFromCache(l1);
+            Model model_1 = (Model) mruNodes2.get(l1);
             if(model_1 != null)
                 return model_1;
             if(objectModelIDs == null)
@@ -194,7 +194,7 @@ stream = null;
                 int l2 = objectModelIDs[i2];
                 if(flag1)
                     l2 += 0x10000;
-                model = (Model) mruNodes1.insertFromCache(l2);
+                model = (Model) mruNodes1.get(l2);
                 if(model == null)
                 {
                     model = Model.getModel(l2 & 0xffff);
@@ -202,7 +202,7 @@ stream = null;
                         return null;
                     if(flag1)
                         model.method477();
-                    mruNodes1.removeFromCache(model, l2);
+                    mruNodes1.put(model, l2);
                 }
                 if(k1 > 1)
                     aModelArray741s[i2] = model;
@@ -224,14 +224,14 @@ stream = null;
             if(i1 == -1)
                 return null;
             l1 = (long)((type << 6) + (i1 << 3) + l) + ((long)(k + 1) << 32);
-            Model model_2 = (Model) mruNodes2.insertFromCache(l1);
+            Model model_2 = (Model) mruNodes2.get(l1);
             if(model_2 != null)
                 return model_2;
             int j2 = objectModelIDs[i1];
             boolean flag3 = aBoolean751 ^ (l > 3);
             if(flag3)
                 j2 += 0x10000;
-            model = (Model) mruNodes1.insertFromCache(j2);
+            model = (Model) mruNodes1.get(j2);
             if(model == null)
             {
                 model = Model.getModel(j2 & 0xffff);
@@ -239,7 +239,7 @@ stream = null;
                     return null;
                 if(flag3)
                     model.method477();
-                mruNodes1.removeFromCache(model, j2);
+                mruNodes1.put(model, j2);
             }
         }
         boolean flag;
@@ -269,7 +269,7 @@ stream = null;
         model_3.preprocess(64 + brightness, 768 + contrast * 5, -50, -10, -50, !aBoolean769);
         if(anInt760 == 1)
             model_3.anInt1654 = model_3.modelHeight;
-        mruNodes2.removeFromCache(model_3, l1);
+        mruNodes2.put(model_3, l1);
         return model_3;
     }
 

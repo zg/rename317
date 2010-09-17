@@ -22,8 +22,8 @@ public final class Model extends Animable {
         anIntArray1675 = null;
         anIntArray1676 = null;
         anIntArray1677 = null;
-        Sine = null;
-        Cosine = null;
+        SINE = null;
+        COSINE = null;
         modelIntArray3 = null;
         modelIntArray4 = null;
     }
@@ -124,7 +124,7 @@ public final class Model extends Animable {
         }
     }
 
-    public static boolean method463(int i)
+    public static boolean is_downloaded(int i)
     {
         if(modelHeaderCache == null)
             return false;
@@ -1031,24 +1031,24 @@ public final class Model extends Animable {
                         int i7 = (vZOff & 0xff) * 8;
                         if(i7 != 0)
                         {
-                            int j7 = Sine[i7];
-                            int i8 = Cosine[i7];
+                            int j7 = SINE[i7];
+                            int i8 = COSINE[i7];
                             int l8 = vertexY[k5] * j7 + vertexX[k5] * i8 >> 16;
                             vertexY[k5] = vertexY[k5] * i8 - vertexX[k5] * j7 >> 16;
                             vertexX[k5] = l8;
                         }
                         if(k6 != 0)
                         {
-                            int k7 = Sine[k6];
-                            int j8 = Cosine[k6];
+                            int k7 = SINE[k6];
+                            int j8 = COSINE[k6];
                             int i9 = vertexY[k5] * j8 - vertexZ[k5] * k7 >> 16;
                             vertexZ[k5] = vertexY[k5] * k7 + vertexZ[k5] * j8 >> 16;
                             vertexY[k5] = i9;
                         }
                         if(l6 != 0)
                         {
-                            int l7 = Sine[l6];
-                            int k8 = Cosine[l6];
+                            int l7 = SINE[l6];
+                            int k8 = COSINE[l6];
                             int j9 = vertexZ[k5] * l7 + vertexX[k5] * k8 >> 16;
                             vertexZ[k5] = vertexZ[k5] * k8 - vertexX[k5] * l7 >> 16;
                             vertexX[k5] = j9;
@@ -1127,8 +1127,8 @@ public final class Model extends Animable {
 
     public void method474(int i)
     {
-        int k = Sine[i];
-        int l = Cosine[i];
+        int k = SINE[i];
+        int l = COSINE[i];
         for(int i1 = 0; i1 < verticeCount; i1++)
         {
             int j1 = vertexY[i1] * l - vertexZ[i1] * k >> 16;
@@ -1349,14 +1349,14 @@ public final class Model extends Animable {
         int i = 0; //was a parameter
         int l1 = ThreeDimensionalDrawingArea.xMidPos;
         int i2 = ThreeDimensionalDrawingArea.yMidPos;
-        int j2 = Sine[i];
-        int k2 = Cosine[i];
-        int l2 = Sine[j];
-        int i3 = Cosine[j];
-        int j3 = Sine[k];
-        int k3 = Cosine[k];
-        int l3 = Sine[l];
-        int i4 = Cosine[l];
+        int j2 = SINE[i];
+        int k2 = COSINE[i];
+        int l2 = SINE[j];
+        int i3 = COSINE[j];
+        int j3 = SINE[k];
+        int k3 = COSINE[k];
+        int l3 = SINE[l];
+        int i4 = COSINE[l];
         int j4 = j1 * l3 + k1 * i4 >> 16;
         for(int k4 = 0; k4 < verticeCount; k4++)
         {
@@ -1474,8 +1474,8 @@ public final class Model extends Animable {
         int i7 = 0;
         if(i != 0)
         {
-            l6 = Sine[i];
-            i7 = Cosine[i];
+            l6 = SINE[i];
+            i7 = COSINE[i];
         }
         for(int j7 = 0; j7 < verticeCount; j7++)
         {
@@ -2001,15 +2001,15 @@ public final class Model extends Animable {
     public static int anInt1686;
     public static int resourceCount;
     public static final int[] resourceIDTAG = new int[1000];
-    public static int Sine[];
-    public static int Cosine[];
+    public static int SINE[];
+    public static int COSINE[];
     private static int[] modelIntArray3;
     private static int[] modelIntArray4;
 
     static 
     {
-        Sine = ThreeDimensionalDrawingArea.SINE;
-        Cosine = ThreeDimensionalDrawingArea.COSINE;
+        SINE = ThreeDimensionalDrawingArea.SINE;
+        COSINE = ThreeDimensionalDrawingArea.COSINE;
         modelIntArray3 = ThreeDimensionalDrawingArea.HSL2RGB;
         modelIntArray4 = ThreeDimensionalDrawingArea.anIntArray1469;
     }

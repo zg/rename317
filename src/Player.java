@@ -95,19 +95,19 @@ public final class Player extends Entity
             int k = stream.readUnsignedByte();
             if(k == 0)
             {
-                equipment[j] = 0;
+                appearance_models[j] = 0;
                 continue;
             }
             int i1 = stream.readUnsignedByte();
-            equipment[j] = (k << 8) + i1;
-            if(j == 0 && equipment[0] == 65535)
+            appearance_models[j] = (k << 8) + i1;
+            if(j == 0 && appearance_models[0] == 65535)
             {
                 desc = EntityDef.forID(stream.readUnsignedWord());
                 break;
             }
-            if(equipment[j] >= 512 && equipment[j] - 512 < ItemDef.totalItems)
+            if(appearance_models[j] >= 512 && appearance_models[j] - 512 < ItemDef.totalItems)
             {
-                int l1 = ItemDef.forID(equipment[j] - 512).team;
+                int l1 = ItemDef.forID(appearance_models[j] - 512).team;
                 if(l1 != 0)
                     team = l1;
             }
@@ -116,9 +116,9 @@ public final class Player extends Entity
         for(int l = 0; l < 5; l++)
         {
             int j1 = stream.readUnsignedByte();
-            if(j1 < 0 || j1 >= client.anIntArrayArray1003[l].length)
+            if(j1 < 0 || j1 >= client.PLAYER_BODY_RECOLOURS[l].length)
                 j1 = 0;
-            anIntArray1700[l] = j1;
+            appearance_colours[l] = j1;
         }
 
         super.anInt1511 = stream.readUnsignedWord();
@@ -150,18 +150,18 @@ public final class Player extends Entity
         for(int k1 = 0; k1 < 12; k1++)
         {
             aLong1718 <<= 4;
-            if(equipment[k1] >= 256)
-                aLong1718 += equipment[k1] - 256;
+            if(appearance_models[k1] >= 256)
+                aLong1718 += appearance_models[k1] - 256;
         }
 
-        if(equipment[0] >= 256)
-            aLong1718 += equipment[0] - 256 >> 4;
-        if(equipment[1] >= 256)
-            aLong1718 += equipment[1] - 256 >> 8;
+        if(appearance_models[0] >= 256)
+            aLong1718 += appearance_models[0] - 256 >> 4;
+        if(appearance_models[1] >= 256)
+            aLong1718 += appearance_models[1] - 256 >> 8;
         for(int i2 = 0; i2 < 5; i2++)
         {
             aLong1718 <<= 3;
-            aLong1718 += anIntArray1700[i2];
+            aLong1718 += appearance_colours[i2];
         }
 
         aLong1718 <<= 1;
@@ -195,28 +195,28 @@ public final class Player extends Entity
             if(animation.anInt360 >= 0)
             {
                 j1 = animation.anInt360;
-                l += j1 - equipment[5] << 40;
+                l += j1 - appearance_models[5] << 40;
             }
             if(animation.anInt361 >= 0)
             {
                 k1 = animation.anInt361;
-                l += k1 - equipment[3] << 48;
+                l += k1 - appearance_models[3] << 48;
             }
         } else
         if(super.anInt1517 >= 0)
             k = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
-        Model model_1 = (Model) mruNodes.insertFromCache(l);
+        Model model_1 = (Model) mruNodes.get(l);
         if(model_1 == null)
         {
             boolean flag = false;
             for(int i2 = 0; i2 < 12; i2++)
             {
-                int k2 = equipment[i2];
+                int k2 = appearance_models[i2];
                 if(k1 >= 0 && i2 == 3)
                     k2 = k1;
                 if(j1 >= 0 && i2 == 5)
                     k2 = j1;
-                if(k2 >= 256 && k2 < 512 && !IdentityKit.cache[k2 - 256].hasModel())
+                if(k2 >= 256 && k2 < 512 && !IdentityKit.cache[k2 - 256].is_body_downloaded())
                     flag = true;
                 if(k2 >= 512 && !ItemDef.forID(k2 - 512).method195(anInt1702))
                     flag = true;
@@ -225,7 +225,7 @@ public final class Player extends Entity
             if(flag)
             {
                 if(aLong1697 != -1L)
-                    model_1 = (Model) mruNodes.insertFromCache(aLong1697);
+                    model_1 = (Model) mruNodes.get(aLong1697);
                 if(model_1 == null)
                     return null;
             }
@@ -236,14 +236,14 @@ public final class Player extends Entity
             int j2 = 0;
             for(int l2 = 0; l2 < 12; l2++)
             {
-                int i3 = equipment[l2];
+                int i3 = appearance_models[l2];
                 if(k1 >= 0 && l2 == 3)
                     i3 = k1;
                 if(j1 >= 0 && l2 == 5)
                     i3 = j1;
                 if(i3 >= 256 && i3 < 512)
                 {
-                    Model model_3 = IdentityKit.cache[i3 - 256].getModel();
+                    Model model_3 = IdentityKit.cache[i3 - 256].get_body_model();
                     if(model_3 != null)
                         aclass30_sub2_sub4_sub6s[j2++] = model_3;
                 }
@@ -257,16 +257,16 @@ public final class Player extends Entity
 
             model_1 = new Model(j2, aclass30_sub2_sub4_sub6s);
             for(int j3 = 0; j3 < 5; j3++)
-                if(anIntArray1700[j3] != 0)
+                if(appearance_colours[j3] != 0)
                 {
-                    model_1.recolour(client.anIntArrayArray1003[j3][0], client.anIntArrayArray1003[j3][anIntArray1700[j3]]);
+                    model_1.recolour(client.PLAYER_BODY_RECOLOURS[j3][0], client.PLAYER_BODY_RECOLOURS[j3][appearance_colours[j3]]);
                     if(j3 == 1)
-                        model_1.recolour(client.anIntArray1204[0], client.anIntArray1204[anIntArray1700[j3]]);
+                        model_1.recolour(client.SKIN_COLOURS[0], client.SKIN_COLOURS[appearance_colours[j3]]);
                 }
 
             model_1.calcSkinning();
             model_1.preprocess(64, 850, -30, -50, -30, true);
-            mruNodes.removeFromCache(model_1, l);
+            mruNodes.put(model_1, l);
             aLong1697 = l;
         }
         if(aBoolean1699)
@@ -290,50 +290,50 @@ public final class Player extends Entity
     }
 
     public int privelage;
-	public Model method453()
+	public Model get_head_model()
     {
         if(!visible)
             return null;
         if(desc != null)
-            return desc.method160();
-        boolean flag = false;
+            return desc.get_head_model();
+        boolean is_downloaded = false;
         for(int i = 0; i < 12; i++)
         {
-            int j = equipment[i];
-            if(j >= 256 && j < 512 && !IdentityKit.cache[j - 256].method539())
-                flag = true;
-            if(j >= 512 && !ItemDef.forID(j - 512).method192(anInt1702))
-                flag = true;
+            int j = appearance_models[i];
+            if(j >= 256 && j < 512 && !IdentityKit.cache[j - 256].is_head_downloaded())
+                is_downloaded = true;
+            if(j >= 512 && !ItemDef.forID(j - 512).is_downloaded(anInt1702))
+                is_downloaded = true;
         }
 
-        if(flag)
+        if(is_downloaded)
             return null;
-        Model aclass30_sub2_sub4_sub6s[] = new Model[12];
-        int k = 0;
-        for(int l = 0; l < 12; l++)
+        Model sub_models[] = new Model[12];
+        int model_ptr = 0;
+        for(int ptr = 0; ptr < 12; ptr++)
         {
-            int i1 = equipment[l];
-            if(i1 >= 256 && i1 < 512)
+            int model_id = appearance_models[ptr];
+            if(model_id >= 256 && model_id < 512)
             {
-                Model model_1 = IdentityKit.cache[i1 - 256].method540();
-                if(model_1 != null)
-                    aclass30_sub2_sub4_sub6s[k++] = model_1;
+                Model idkit_model = IdentityKit.cache[model_id - 256].get_head_model();
+                if(idkit_model != null)
+                    sub_models[model_ptr++] = idkit_model;
             }
-            if(i1 >= 512)
+            if(model_id >= 512)
             {
-                Model model_2 = ItemDef.forID(i1 - 512).method194(anInt1702);
-                if(model_2 != null)
-                    aclass30_sub2_sub4_sub6s[k++] = model_2;
+                Model item_model = ItemDef.forID(model_id - 512).get_head_model(anInt1702);
+                if(item_model != null)
+                    sub_models[model_ptr++] = item_model;
             }
         }
 
-        Model model = new Model(k, aclass30_sub2_sub4_sub6s);
-        for(int j1 = 0; j1 < 5; j1++)
-            if(anIntArray1700[j1] != 0)
+        Model model = new Model(model_ptr, sub_models);
+        for(int colour_ptr = 0; colour_ptr < 5; colour_ptr++)
+            if(appearance_colours[colour_ptr] != 0)
             {
-                model.recolour(client.anIntArrayArray1003[j1][0], client.anIntArrayArray1003[j1][anIntArray1700[j1]]);
-                if(j1 == 1)
-                    model.recolour(client.anIntArray1204[0], client.anIntArray1204[anIntArray1700[j1]]);
+                model.recolour(client.PLAYER_BODY_RECOLOURS[colour_ptr][0], client.PLAYER_BODY_RECOLOURS[colour_ptr][appearance_colours[colour_ptr]]);
+                if(colour_ptr == 1)
+                    model.recolour(client.SKIN_COLOURS[0], client.SKIN_COLOURS[appearance_colours[colour_ptr]]);
             }
 
         return model;
@@ -343,16 +343,16 @@ public final class Player extends Entity
     {
         aLong1697 = -1L;
         aBoolean1699 = false;
-        anIntArray1700 = new int[5];
+        appearance_colours = new int[5];
         visible = false;
         anInt1715 = 9;
-        equipment = new int[12];
+        appearance_models = new int[12];
     }
 
     private long aLong1697;
     public EntityDef desc;
     boolean aBoolean1699;
-    final int[] anIntArray1700;
+    final int[] appearance_colours;
     public int team;
     private int anInt1702;
     public String name;
@@ -368,7 +368,7 @@ public final class Player extends Entity
     int anInt1713;
     Model aModel_1714;
     private int anInt1715;
-    public final int[] equipment;
+    public final int[] appearance_models;
     private long aLong1718;
     int anInt1719;
     int anInt1720;

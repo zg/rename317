@@ -1237,26 +1237,26 @@ public final class client extends RSApplet {
         {
             if(k == 0)
             {
-                aBoolean848 = true;
+                wave_on = true;
                 setWaveVolume(0);
             }
             if(k == 1)
             {
-                aBoolean848 = true;
+                wave_on = true;
                 setWaveVolume(-400);
             }
             if(k == 2)
             {
-                aBoolean848 = true;
+                wave_on = true;
                 setWaveVolume(-800);
             }
             if(k == 3)
             {
-                aBoolean848 = true;
+                wave_on = true;
                 setWaveVolume(-1200);
             }
             if(k == 4)
-                aBoolean848 = false;
+                wave_on = false;
         }
         if(j == 5)
             anInt1253 = k;
@@ -1904,12 +1904,12 @@ public final class client extends RSApplet {
         aBoolean1031 = true;
         for(int j = 0; j < 7; j++)
         {
-            anIntArray1065[j] = -1;
+            char_edit_idkits[j] = -1;
             for(int k = 0; k < IdentityKit.length; k++)
             {
-                if(IdentityKit.cache[k].aBoolean662 || IdentityKit.cache[k].anInt657 != j + (aBoolean1047 ? 0 : 7))
+                if(IdentityKit.cache[k].not_selectable || IdentityKit.cache[k].body_part_id != j + (char_edit_gender ? 0 : 7))
                     continue;
-                anIntArray1065[j] = k;
+                char_edit_idkits[j] = k;
                 break;
             }
 
@@ -2059,19 +2059,19 @@ public final class client extends RSApplet {
         }
         if(j >= 300 && j <= 313)
         {
-            int k = (j - 300) / 2;
-            int j1 = j & 1;
-            int i2 = anIntArray1065[k];
-            if(i2 != -1)
+            int type = (j - 300) / 2;
+            int direction = j & 1;
+            int current_id = char_edit_idkits[type];
+            if(current_id != -1)
             {
                 do
                 {
-                    if(j1 == 0 && --i2 < 0)
-                        i2 = IdentityKit.length - 1;
-                    if(j1 == 1 && ++i2 >= IdentityKit.length)
-                        i2 = 0;
-                } while(IdentityKit.cache[i2].aBoolean662 || IdentityKit.cache[i2].anInt657 != k + (aBoolean1047 ? 0 : 7));
-                anIntArray1065[k] = i2;
+                    if(direction == 0 && --current_id < 0)
+                        current_id = IdentityKit.length - 1;
+                    if(direction == 1 && ++current_id >= IdentityKit.length)
+                        current_id = 0;
+                } while(IdentityKit.cache[current_id].not_selectable || IdentityKit.cache[current_id].body_part_id != type + (char_edit_gender ? 0 : 7));
+                char_edit_idkits[type] = current_id;
                 aBoolean1031 = true;
             }
         }
@@ -2079,33 +2079,33 @@ public final class client extends RSApplet {
         {
             int l = (j - 314) / 2;
             int k1 = j & 1;
-            int j2 = anIntArray990[l];
+            int j2 = char_edit_colours[l];
             if(k1 == 0 && --j2 < 0)
-                j2 = anIntArrayArray1003[l].length - 1;
-            if(k1 == 1 && ++j2 >= anIntArrayArray1003[l].length)
+                j2 = PLAYER_BODY_RECOLOURS[l].length - 1;
+            if(k1 == 1 && ++j2 >= PLAYER_BODY_RECOLOURS[l].length)
                 j2 = 0;
-            anIntArray990[l] = j2;
+            char_edit_colours[l] = j2;
             aBoolean1031 = true;
         }
-        if(j == 324 && !aBoolean1047)
+        if(j == 324 && !char_edit_gender)
         {
-            aBoolean1047 = true;
+            char_edit_gender = true;
             method45();
         }
-        if(j == 325 && aBoolean1047)
+        if(j == 325 && char_edit_gender)
         {
-            aBoolean1047 = false;
+            char_edit_gender = false;
             method45();
         }
         if(j == 326)
         {
             stream.createFrame(101);
-            stream.writeWordBigEndian(aBoolean1047 ? 0 : 1);
+            stream.writeWordBigEndian(char_edit_gender ? 0 : 1);
             for(int i1 = 0; i1 < 7; i1++)
-                stream.writeWordBigEndian(anIntArray1065[i1]);
+                stream.writeWordBigEndian(char_edit_idkits[i1]);
 
             for(int l1 = 0; l1 < 5; l1++)
-                stream.writeWordBigEndian(anIntArray990[l1]);
+                stream.writeWordBigEndian(char_edit_colours[l1]);
 
             return true;
         }
@@ -5187,8 +5187,8 @@ public final class client extends RSApplet {
             {
                 for(int k1 = 0; k1 < 7; k1++)
                 {
-                    int l1 = anIntArray1065[k1];
-                    if(l1 >= 0 && !IdentityKit.cache[l1].hasModel())
+                    int l1 = char_edit_idkits[k1];
+                    if(l1 >= 0 && !IdentityKit.cache[l1].is_body_downloaded())
                         return;
                 }
 
@@ -5197,18 +5197,18 @@ public final class client extends RSApplet {
                 int i2 = 0;
                 for(int j2 = 0; j2 < 7; j2++)
                 {
-                    int k2 = anIntArray1065[j2];
+                    int k2 = char_edit_idkits[j2];
                     if(k2 >= 0)
-                        aclass30_sub2_sub4_sub6s[i2++] = IdentityKit.cache[k2].getModel();
+                        aclass30_sub2_sub4_sub6s[i2++] = IdentityKit.cache[k2].get_body_model();
                 }
 
                 Model model = new Model(i2, aclass30_sub2_sub4_sub6s);
                 for(int l2 = 0; l2 < 5; l2++)
-                    if(anIntArray990[l2] != 0)
+                    if(char_edit_colours[l2] != 0)
                     {
-                        model.recolour(anIntArrayArray1003[l2][0], anIntArrayArray1003[l2][anIntArray990[l2]]);
+                        model.recolour(PLAYER_BODY_RECOLOURS[l2][0], PLAYER_BODY_RECOLOURS[l2][char_edit_colours[l2]]);
                         if(l2 == 1)
-                            model.recolour(anIntArray1204[0], anIntArray1204[anIntArray990[l2]]);
+                            model.recolour(SKIN_COLOURS[0], SKIN_COLOURS[char_edit_colours[l2]]);
                     }
 
                 model.calcSkinning();
@@ -5227,7 +5227,7 @@ public final class client extends RSApplet {
                 aClass30_Sub2_Sub1_Sub1_931 = class9.sprite1;
                 aClass30_Sub2_Sub1_Sub1_932 = class9.sprite2;
             }
-            if(aBoolean1047)
+            if(char_edit_gender)
             {
                 class9.sprite1 = aClass30_Sub2_Sub1_Sub1_932;
                 return;
@@ -5244,7 +5244,7 @@ public final class client extends RSApplet {
                 aClass30_Sub2_Sub1_Sub1_931 = class9.sprite1;
                 aClass30_Sub2_Sub1_Sub1_932 = class9.sprite2;
             }
-            if(aBoolean1047)
+            if(char_edit_gender)
             {
                 class9.sprite1 = aClass30_Sub2_Sub1_Sub1_931;
                 return;
@@ -5595,8 +5595,8 @@ public final class client extends RSApplet {
         if(l > 4225 && l < 0x15f90)
         {
             int i1 = minimapInt1 + minimapInt2 & 0x7ff;
-            int j1 = Model.Sine[i1];
-            int k1 = Model.Cosine[i1];
+            int j1 = Model.SINE[i1];
+            int k1 = Model.COSINE[i1];
             j1 = (j1 * 256) / (minimapInt3 + 256);
             k1 = (k1 * 256) / (minimapInt3 + 256);
             int l1 = j * j1 + k * k1 >> 16;
@@ -5841,10 +5841,10 @@ public final class client extends RSApplet {
                 aString844 = null;
                 anInt1055 = 0;
                 anInt1054 = -1;
-                aBoolean1047 = true;
+                char_edit_gender = true;
                 method45();
                 for(int j3 = 0; j3 < 5; j3++)
-                    anIntArray990[j3] = 0;
+                    char_edit_colours[j3] = 0;
 
                 for(int l3 = 0; l3 < 5; l3++)
                 {
@@ -9224,10 +9224,10 @@ public final class client extends RSApplet {
         i -= xCameraPos;
         i1 -= zCameraPos;
         l -= yCameraPos;
-        int j1 = Model.Sine[yCameraCurve];
-        int k1 = Model.Cosine[yCameraCurve];
-        int l1 = Model.Sine[xCameraCurve];
-        int i2 = Model.Cosine[xCameraCurve];
+        int j1 = Model.SINE[yCameraCurve];
+        int k1 = Model.COSINE[yCameraCurve];
+        int l1 = Model.SINE[xCameraCurve];
+        int i2 = Model.COSINE[xCameraCurve];
         int j2 = l * l1 + i * i2 >> 16;
         l = l * i2 - i * l1 >> 16;
         i = j2;
@@ -9697,7 +9697,7 @@ public final class client extends RSApplet {
             int l11 = stream.readUnsignedByte();
             int i14 = l11 >> 4 & 0xf;
             int i16 = l11 & 7;
-            if(myPlayer.path_x[0] >= k3 - i14 && myPlayer.path_x[0] <= k3 + i14 && myPlayer.path_y[0] >= j6 - i14 && myPlayer.path_y[0] <= j6 + i14 && aBoolean848 && !lowMem && anInt1062 < 50)
+            if(myPlayer.path_x[0] >= k3 - i14 && myPlayer.path_x[0] <= k3 + i14 && myPlayer.path_y[0] >= j6 - i14 && myPlayer.path_y[0] <= j6 + i14 && wave_on && !lowMem && anInt1062 < 50)
             {
                 anIntArray1207[anInt1062] = i9;
                 anIntArray1241[anInt1062] = i16;
@@ -10140,8 +10140,8 @@ public final class client extends RSApplet {
         int l = i * i + j * j;
         if(l > 6400)
             return;
-        int i1 = Model.Sine[k];
-        int j1 = Model.Cosine[k];
+        int i1 = Model.SINE[k];
+        int j1 = Model.COSINE[k];
         i1 = (i1 * 256) / (minimapInt3 + 256);
         j1 = (j1 * 256) / (minimapInt3 + 256);
         int k1 = j * i1 + i * j1 >> 16;
@@ -10251,8 +10251,8 @@ public final class client extends RSApplet {
         int l2 = j;
         if(l1 != 0)
         {
-            int i3 = Model.Sine[l1];
-            int k3 = Model.Cosine[l1];
+            int i3 = Model.SINE[l1];
+            int k3 = Model.COSINE[l1];
             int i4 = k2 * k3 - l2 * i3 >> 16;
             l2 = k2 * i3 + l2 * k3 >> 16;
             k2 = i4;
@@ -10271,8 +10271,8 @@ public final class client extends RSApplet {
               l2 = fwdbwd;
             }
 */
-            int j3 = Model.Sine[i2];
-            int l3 = Model.Cosine[i2];
+            int j3 = Model.SINE[i2];
+            int l3 = Model.COSINE[i2];
             int j4 = l2 * j3 + j2 * l3 >> 16;
             l2 = l2 * l3 - j2 * j3 >> 16;
             j2 = j4;
@@ -10393,7 +10393,7 @@ public final class client extends RSApplet {
                 int k = inStream.method436();
                 RSInterface.interfaceCache[k].anInt233 = 3;
                 if(myPlayer.desc == null)
-                    RSInterface.interfaceCache[k].mediaID = (myPlayer.anIntArray1700[0] << 25) + (myPlayer.anIntArray1700[4] << 20) + (myPlayer.equipment[0] << 15) + (myPlayer.equipment[8] << 10) + (myPlayer.equipment[11] << 5) + myPlayer.equipment[1];
+                    RSInterface.interfaceCache[k].mediaID = (myPlayer.appearance_colours[0] << 25) + (myPlayer.appearance_colours[4] << 20) + (myPlayer.appearance_models[0] << 15) + (myPlayer.appearance_models[8] << 10) + (myPlayer.appearance_models[11] << 5) + myPlayer.appearance_models[1];
                 else
                     RSInterface.interfaceCache[k].mediaID = (int)(0x12345678L + myPlayer.desc.type);
                 pktType = -1;
@@ -10818,7 +10818,7 @@ public final class client extends RSApplet {
                 int i4 = inStream.readUnsignedWord();
                 int l11 = inStream.readUnsignedByte();
                 int k17 = inStream.readUnsignedWord();
-                if(aBoolean848 && !lowMem && anInt1062 < 50)
+                if(wave_on && !lowMem && anInt1062 < 50)
                 {
                     anIntArray1207[anInt1062] = i4;
                     anIntArray1241[anInt1062] = l11;
@@ -11631,7 +11631,7 @@ public final class client extends RSApplet {
         npcIndices = new int[16384];
         anIntArray840 = new int[1000];
         aStream_847 = Stream.create();
-        aBoolean848 = true;
+        wave_on = true;
         openInterfaceID = -1;
         currentExp = new int[Skills.skillsCount];
         aBoolean872 = false;
@@ -11685,7 +11685,7 @@ public final class client extends RSApplet {
         aStringArray983 = new String[anInt975];
         anInt985 = -1;
         hitMarks = new RgbImage[20];
-        anIntArray990 = new int[5];
+        char_edit_colours = new int[5];
         aBoolean994 = false;
         anInt1002 = 0x23201b;
         amountOrNameInput = "";
@@ -11698,7 +11698,7 @@ public final class client extends RSApplet {
         dialogID = -1;
         maxStats = new int[Skills.skillsCount];
         anIntArray1045 = new int[2000];
-        aBoolean1047 = true;
+        char_edit_gender = true;
         anIntArray1052 = new int[151];
         anInt1054 = -1;
         aClass19_1056 = new NodeList();
@@ -11706,7 +11706,7 @@ public final class client extends RSApplet {
         aClass9_1059 = new RSInterface();
         mapScenes = new IndexedImage[100];
         anInt1063 = 0x4d4233;
-        anIntArray1065 = new int[7];
+        char_edit_idkits = new int[7];
         markPosX = new int[1000];
         markPosY = new int[1000];
         aBoolean1080 = false;
@@ -11794,7 +11794,7 @@ public final class client extends RSApplet {
     private String aString844;
     private int privateChatMode;
     private Stream aStream_847;
-    private boolean aBoolean848;
+    private boolean wave_on;
     private static int anInt849;
     private int[] anIntArray850;
     private int[] anIntArray851;
@@ -11922,7 +11922,7 @@ public final class client extends RSApplet {
     private RgbImage[] hitMarks;
     private int anInt988;
     private int anInt989;
-    private final int[] anIntArray990;
+    private final int[] char_edit_colours;
     private static boolean aBoolean993;
     private final boolean aBoolean994;
     private int anInt995;
@@ -11933,7 +11933,7 @@ public final class client extends RSApplet {
     private ISAACRandomGen encryption;
     private RgbImage mapEdge;
     private final int anInt1002;
-    static final int[][] anIntArrayArray1003 = {
+    static final int[][] PLAYER_BODY_RECOLOURS = {
         {
             6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 
             2983, 54193
@@ -11988,7 +11988,7 @@ public final class client extends RSApplet {
     private final int[] maxStats;
     private final int[] anIntArray1045;
     private int anInt1046;
-    private boolean aBoolean1047;
+    private boolean char_edit_gender;
     private int anInt1048;
     private String aString1049;
     private static int anInt1051;
@@ -12004,7 +12004,7 @@ public final class client extends RSApplet {
     private int anInt1062;
     private final int anInt1063;
     private int friendsListAction;
-    private final int[] anIntArray1065;
+    private final int[] char_edit_idkits;
     private int mouseInvInterfaceIndex;
     private int lastActiveInvInterface;
     private OnDemandFetcher onDemandFetcher;
@@ -12140,7 +12140,7 @@ public final class client extends RSApplet {
     private RgbImage aClass30_Sub2_Sub1_Sub1_1201;
     private RgbImage aClass30_Sub2_Sub1_Sub1_1202;
     private final int[] anIntArray1203;
-    static final int[] anIntArray1204 = {
+    static final int[] SKIN_COLOURS = {
         9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 
         58654, 5027, 1457, 16565, 34991, 25486
     };
