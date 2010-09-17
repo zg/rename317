@@ -286,7 +286,7 @@ public final class RSInterface
         return rgbImage;
     }
 
-    public static void method208(boolean flag, Model model)
+    public static void set_custom_model(boolean flag, Model model)
     {
         int i = 0;//was parameter
         int j = 5;//was parameter
