@@ -63,7 +63,7 @@ public final class SpotAnim {
 
     public Model getModel()
     {
-        Model model = (Model) aMRUNodes_415.insertFromCache(id);
+        Model model = (Model) aMRUNodes_415.get(id);
         if(model != null)
             return model;
         model = Model.getModel(modelID);
@@ -73,7 +73,7 @@ public final class SpotAnim {
             if(originalModelColours[0] != 0)
                 model.recolour(originalModelColours[i], modifiedModelColours[i]);
 
-        aMRUNodes_415.removeFromCache(model, id);
+        aMRUNodes_415.put(model, id);
         return model;
     }
 

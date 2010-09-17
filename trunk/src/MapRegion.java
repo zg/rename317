@@ -16,7 +16,7 @@ final class MapRegion {
         shapeA = new byte[4][xMapSize][yMapSize];
         shapeB = new byte[4][xMapSize][yMapSize];
         tile_culling_bitmap = new int[4][xMapSize + 1][yMapSize + 1];
-        aByteArrayArrayArray134 = new byte[4][xMapSize + 1][yMapSize + 1];
+        object_shadow_data = new byte[4][xMapSize + 1][yMapSize + 1];
         tile_shadow = new int[xMapSize + 1][yMapSize + 1];
         hue = new int[yMapSize];
         saturation = new int[yMapSize];
@@ -64,7 +64,7 @@ final class MapRegion {
             lightness_offset = 16;
         for(int z = 0; z < 4; z++)
         {
-            byte something_with_objects[][] = aByteArrayArrayArray134[z];
+            byte something_with_objects[][] = object_shadow_data[z];
             byte light_off = 96;
             char mag_mult = '\u0300';
             byte l_x = -50;
@@ -448,7 +448,7 @@ label0:
             for(int k1 = i1; k1 <= i1 + l; k1++)
                 if(k1 >= 0 && k1 < xMapSize && j1 >= 0 && j1 < yMapSize)
                 {
-                    aByteArrayArrayArray134[0][k1][j1] = 127;
+                    object_shadow_data[0][k1][j1] = 127;
                     if(k1 == i1 && k1 > 0)
                         heightMap[0][k1][j1] = heightMap[0][k1 - 1][j1];
                     if(k1 == i1 + l && k1 < xMapSize - 1)
@@ -537,8 +537,8 @@ label0:
                                 int l5 = model.anInt1650 / 4;
                                 if(l5 > 30)
                                     l5 = 30;
-                                if(l5 > aByteArrayArrayArray134[k][l + j5][i + k5])
-                                    aByteArrayArrayArray134[k][l + j5][i + k5] = (byte)l5;
+                                if(l5 > object_shadow_data[k][l + j5][i + k5])
+                                    object_shadow_data[k][l + j5][i + k5] = (byte)l5;
                             }
 
                         }
@@ -576,8 +576,8 @@ label0:
             {
                 if(class46.aBoolean779)
                 {
-                    aByteArrayArrayArray134[k][l][i] = 50;
-                    aByteArrayArrayArray134[k][l][i + 1] = 50;
+                    object_shadow_data[k][l][i] = 50;
+                    object_shadow_data[k][l][i + 1] = 50;
                 }
                 if(class46.aBoolean764)
                     tile_culling_bitmap[k][l][i] |= 0x249;
@@ -586,8 +586,8 @@ label0:
             {
                 if(class46.aBoolean779)
                 {
-                    aByteArrayArrayArray134[k][l][i + 1] = 50;
-                    aByteArrayArrayArray134[k][l + 1][i + 1] = 50;
+                    object_shadow_data[k][l][i + 1] = 50;
+                    object_shadow_data[k][l + 1][i + 1] = 50;
                 }
                 if(class46.aBoolean764)
                     tile_culling_bitmap[k][l][i + 1] |= 0x492;
@@ -596,8 +596,8 @@ label0:
             {
                 if(class46.aBoolean779)
                 {
-                    aByteArrayArrayArray134[k][l + 1][i] = 50;
-                    aByteArrayArrayArray134[k][l + 1][i + 1] = 50;
+                    object_shadow_data[k][l + 1][i] = 50;
+                    object_shadow_data[k][l + 1][i + 1] = 50;
                 }
                 if(class46.aBoolean764)
                     tile_culling_bitmap[k][l + 1][i] |= 0x249;
@@ -606,8 +606,8 @@ label0:
             {
                 if(class46.aBoolean779)
                 {
-                    aByteArrayArrayArray134[k][l][i] = 50;
-                    aByteArrayArrayArray134[k][l + 1][i] = 50;
+                    object_shadow_data[k][l][i] = 50;
+                    object_shadow_data[k][l + 1][i] = 50;
                 }
                 if(class46.aBoolean764)
                     tile_culling_bitmap[k][l][i] |= 0x492;
@@ -628,16 +628,16 @@ label0:
             sceneGraph.addObject1(anIntArray140[j1], ((Animable) (obj4)), idTag, i, objConf, l, null, zMix, 0, k);
             if(class46.aBoolean779)
                 if(j1 == 0)
-                    aByteArrayArrayArray134[k][l][i + 1] = 50;
+                    object_shadow_data[k][l][i + 1] = 50;
                 else
                 if(j1 == 1)
-                    aByteArrayArrayArray134[k][l + 1][i + 1] = 50;
+                    object_shadow_data[k][l + 1][i + 1] = 50;
                 else
                 if(j1 == 2)
-                    aByteArrayArrayArray134[k][l + 1][i] = 50;
+                    object_shadow_data[k][l + 1][i] = 50;
                 else
                 if(j1 == 3)
-                    aByteArrayArrayArray134[k][l][i] = 50;
+                    object_shadow_data[k][l][i] = 50;
             if(class46.isUnwalkable && tileSetting != null)
                 tileSetting.method211(i, j1, l, j, class46.aBoolean757);
             return;
@@ -694,16 +694,16 @@ label0:
             sceneGraph.addObject1(anIntArray140[j1], ((Animable) (obj5)), idTag, i, objConf, l, null, zMix, 0, k);
             if(class46.aBoolean779)
                 if(j1 == 0)
-                    aByteArrayArrayArray134[k][l][i + 1] = 50;
+                    object_shadow_data[k][l][i + 1] = 50;
                 else
                 if(j1 == 1)
-                    aByteArrayArrayArray134[k][l + 1][i + 1] = 50;
+                    object_shadow_data[k][l + 1][i + 1] = 50;
                 else
                 if(j1 == 2)
-                    aByteArrayArrayArray134[k][l + 1][i] = 50;
+                    object_shadow_data[k][l + 1][i] = 50;
                 else
                 if(j1 == 3)
-                    aByteArrayArrayArray134[k][l][i] = 50;
+                    object_shadow_data[k][l][i] = 50;
             if(class46.isUnwalkable && tileSetting != null)
                 tileSetting.method211(i, j1, l, j, class46.aBoolean757);
             return;
@@ -1376,7 +1376,7 @@ label0:
     private final byte[][][] overLay;
     static int anInt131;
     private static int lightness_offset = (int)(Math.random() * 33D) - 16;
-    private final byte[][][] aByteArrayArrayArray134;
+    private final byte[][][] object_shadow_data;
     private final int[][][] tile_culling_bitmap;
     private final byte[][][] shapeA;
     private static final int faceXOffset[] = {

@@ -19,7 +19,7 @@ public final class EntityDef
         return entityDef;
     }
 
-    public Model method160()
+    public Model get_head_model()
     {
         if(childrenIDs != null)
         {
@@ -27,13 +27,13 @@ public final class EntityDef
             if(entityDef == null)
                 return null;
             else
-                return entityDef.method160();
+                return entityDef.get_head_model();
         }
         if(anIntArray73 == null)
             return null;
         boolean flag1 = false;
         for(int i = 0; i < anIntArray73.length; i++)
-            if(!Model.method463(anIntArray73[i]))
+            if(!Model.is_downloaded(anIntArray73[i]))
                 flag1 = true;
 
         if(flag1)
@@ -113,12 +113,12 @@ public final class EntityDef
             else
                 return entityDef.method164(j, frameId, ai);
         }
-        Model model = (Model) mruNodes.insertFromCache(type);
+        Model model = (Model) mruNodes.get(type);
         if(model == null)
         {
             boolean flag = false;
             for(int i1 = 0; i1 < anIntArray94.length; i1++)
-                if(!Model.method463(anIntArray94[i1]))
+                if(!Model.is_downloaded(anIntArray94[i1]))
                     flag = true;
 
             if(flag)
@@ -139,7 +139,7 @@ public final class EntityDef
             }
             model.calcSkinning();
             model.preprocess(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
-            mruNodes.removeFromCache(model, type);
+            mruNodes.put(model, type);
         }
         Model model_1 = Model.aModel_1621;
         model_1.method464(model, AnimationFrame.method532(frameId) & AnimationFrame.method532(j));

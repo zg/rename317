@@ -22,95 +22,95 @@ public final class IdentityKit {
     {
         do
         {
-            int i = stream.readUnsignedByte();
-            if(i == 0)
+            int opcode = stream.readUnsignedByte();
+            if(opcode == 0)
                 return;
-            if(i == 1)
-                anInt657 = stream.readUnsignedByte();
+            if(opcode == 1)
+                body_part_id = stream.readUnsignedByte();
             else
-            if(i == 2)
+            if(opcode == 2)
             {
-                int j = stream.readUnsignedByte();
-                anIntArray658 = new int[j];
-                for(int k = 0; k < j; k++)
-                    anIntArray658[k] = stream.readUnsignedWord();
+                int model_count = stream.readUnsignedByte();
+                body_model_ids = new int[model_count];
+                for(int ptr = 0; ptr < model_count; ptr++)
+                    body_model_ids[ptr] = stream.readUnsignedWord();
 
             } else
-            if(i == 3)
-                aBoolean662 = true;
+            if(opcode == 3)
+                not_selectable = true;
             else
-            if(i >= 40 && i < 50)
-                anIntArray659[i - 40] = stream.readUnsignedWord();
+            if(opcode >= 40 && opcode < 50)
+                recolour_original[opcode - 40] = stream.readUnsignedWord();
             else
-            if(i >= 50 && i < 60)
-                anIntArray660[i - 50] = stream.readUnsignedWord();
+            if(opcode >= 50 && opcode < 60)
+                recolour_target[opcode - 50] = stream.readUnsignedWord();
             else
-            if(i >= 60 && i < 70)
-                anIntArray661[i - 60] = stream.readUnsignedWord();
+            if(opcode >= 60 && opcode < 70)
+                head_model_ids[opcode - 60] = stream.readUnsignedWord();
             else
-                System.out.println("Error unrecognised config code: " + i);
+                System.out.println("Error unrecognised config code: " + opcode);
         } while(true);
     }
 
-    public boolean hasModel()
+    public boolean is_body_downloaded()
     {
-        if(anIntArray658 == null)
+        if(body_model_ids == null)
             return true;
-        boolean flag = true;
-        for(int j = 0; j < anIntArray658.length; j++)
-            if(!Model.method463(anIntArray658[j]))
-                flag = false;
+        boolean is_downloaded = true;
+        for(int ptr = 0; ptr < body_model_ids.length; ptr++)
+            if(!Model.is_downloaded(body_model_ids[ptr]))
+                is_downloaded = false;
 
-        return flag;
+        return is_downloaded;
     }
 
-    public Model getModel()
+    public Model get_body_model()
     {
-        if(anIntArray658 == null)
+        if(body_model_ids == null)
             return null;
-        Model aclass30_sub2_sub4_sub6s[] = new Model[anIntArray658.length];
-        for(int i = 0; i < anIntArray658.length; i++)
-            aclass30_sub2_sub4_sub6s[i] = Model.getModel(anIntArray658[i]);
+        Model sub_models[] = new Model[body_model_ids.length];
+        for(int model_ptr = 0; model_ptr < body_model_ids.length; model_ptr++)
+            sub_models[model_ptr] = Model.getModel(body_model_ids[model_ptr]);
 
         Model model;
-        if(aclass30_sub2_sub4_sub6s.length == 1)
-            model = aclass30_sub2_sub4_sub6s[0];
+        if(sub_models.length == 1)
+            model = sub_models[0];
         else
-            model = new Model(aclass30_sub2_sub4_sub6s.length, aclass30_sub2_sub4_sub6s);
-        for(int j = 0; j < 6; j++)
+            model = new Model(sub_models.length, sub_models);
+        for(int colour_ptr = 0; colour_ptr < 6; colour_ptr++)
         {
-            if(anIntArray659[j] == 0)
+            if(recolour_original[colour_ptr] == 0)
                 break;
-            model.recolour(anIntArray659[j], anIntArray660[j]);
+            model.recolour(recolour_original[colour_ptr], recolour_target[colour_ptr]);
         }
 
         return model;
     }
 
-    public boolean method539()
+    public boolean is_head_downloaded()
     {
-        boolean flag1 = true;
-        for(int i = 0; i < 5; i++)
-            if(anIntArray661[i] != -1 && !Model.method463(anIntArray661[i]))
-                flag1 = false;
+        boolean is_downloaded = true;
+        for(int ptr = 0; ptr < 5; ptr++)
+            if(head_model_ids[ptr] != -1 && !Model.is_downloaded(head_model_ids[ptr]))
+                is_downloaded = false;
 
-        return flag1;
+        return is_downloaded;
     }
 
-    public Model method540()
+    public Model get_head_model()
     {
-        Model aclass30_sub2_sub4_sub6s[] = new Model[5];
-        int j = 0;
-        for(int k = 0; k < 5; k++)
-            if(anIntArray661[k] != -1)
-                aclass30_sub2_sub4_sub6s[j++] = Model.getModel(anIntArray661[k]);
+        Model sub_models[] = new Model[5];
+        int model_ptr = 0;
+        for(int id_ptr = 0; id_ptr < 5; id_ptr++)
+            if(head_model_ids[id_ptr] != -1)
+                sub_models[model_ptr++] = Model.getModel(head_model_ids[id_ptr]);
 
-        Model model = new Model(j, aclass30_sub2_sub4_sub6s);
-        for(int l = 0; l < 6; l++)
+        Model model = new Model(model_ptr, sub_models);
+        for(int colour_ptr = 0; colour_ptr < 6; colour_ptr++)
         {
-            if(anIntArray659[l] == 0)
+            if(recolour_original[colour_ptr] == 0)
                 break;
-            model.recolour(anIntArray659[l], anIntArray660[l]);
+            model.recolour(recolour_original[colour_ptr], recolour_target[colour_ptr]);
         }
 
         return model;
@@ -118,20 +118,20 @@ public final class IdentityKit {
 
     private IdentityKit()
     {
-        anInt657 = -1;
-        anIntArray659 = new int[6];
-        anIntArray660 = new int[6];
-        aBoolean662 = false;
+        body_part_id = -1;
+        recolour_original = new int[6];
+        recolour_target = new int[6];
+        not_selectable = false;
     }
 
     public static int length;
     public static IdentityKit cache[];
-    public int anInt657;
-    private int[] anIntArray658;
-    private final int[] anIntArray659;
-    private final int[] anIntArray660;
-    private final int[] anIntArray661 = {
+    public int body_part_id;
+    private int[] body_model_ids;
+    private final int[] recolour_original;
+    private final int[] recolour_target;
+    private final int[] head_model_ids = {
         -1, -1, -1, -1, -1
     };
-    public boolean aBoolean662;
+    public boolean not_selectable;
 }

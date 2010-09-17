@@ -248,36 +248,36 @@ public final class RSInterface
         aMRUNodes_238 = null;
     }
 
-    private Model method206(int i, int j)
+    private Model get_model(int type, int j)
     {
-        Model model = (Model) aMRUNodes_264.insertFromCache((i << 16) + j);
+        Model model = (Model) model_cache.get((type << 16) + j);
         if(model != null)
             return model;
-        if(i == 1)
+        if(type == 1)
             model = Model.getModel(j);
-        if(i == 2)
-            model = EntityDef.forID(j).method160();
-        if(i == 3)
-            model = client.myPlayer.method453();
-        if(i == 4)
-            model = ItemDef.forID(j).method202(50);
-        if(i == 5)
+        if(type == 2)
+            model = EntityDef.forID(j).get_head_model();
+        if(type == 3)
+            model = client.myPlayer.get_head_model();
+        if(type == 4)
+            model = ItemDef.forID(j).get_inventory_model(50);
+        if(type == 5)
             model = null;
         if(model != null)
-            aMRUNodes_264.removeFromCache(model, (i << 16) + j);
+            model_cache.put(model, (type << 16) + j);
         return model;
     }
 
     private static RgbImage method207(int i, JagexArchive jagexArchive, String s)
     {
         long l = (TextClass.method585(s) << 8) + (long)i;
-        RgbImage rgbImage = (RgbImage) aMRUNodes_238.insertFromCache(l);
+        RgbImage rgbImage = (RgbImage) aMRUNodes_238.get(l);
         if(rgbImage != null)
             return rgbImage;
         try
         {
             rgbImage = new RgbImage(jagexArchive, s, i);
-            aMRUNodes_238.removeFromCache(rgbImage, l);
+            aMRUNodes_238.put(rgbImage, l);
         }
         catch(Exception _ex)
         {
@@ -292,18 +292,18 @@ public final class RSInterface
         int j = 5;//was parameter
         if(flag)
             return;
-        aMRUNodes_264.unlinkAll();
+        model_cache.unlinkAll();
         if(model != null && j != 4)
-            aMRUNodes_264.removeFromCache(model, (j << 16) + i);
+            model_cache.put(model, (j << 16) + i);
     }
 
     public Model method209(int j, int k, boolean flag)
     {
         Model model;
         if(flag)
-            model = method206(anInt255, anInt256);
+            model = get_model(anInt255, anInt256);
         else
-            model = method206(anInt233, mediaID);
+            model = get_model(anInt233, mediaID);
         if(model == null)
             return null;
         if(k == -1 && j == -1 && model.triangleColours == null)
@@ -376,7 +376,7 @@ public final class RSInterface
     public int scrollMax;
     public int type;
     public int anInt263;
-    private static final MRUNodes aMRUNodes_264 = new MRUNodes(30);
+    private static final MRUNodes model_cache = new MRUNodes(30);
     public int anInt265;
     public boolean aBoolean266;
     public int height;

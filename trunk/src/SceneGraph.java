@@ -28,7 +28,7 @@ final class SceneGraph {
         culling_cluster_ptr = null;
         culling_clusters = null;
         aClass19_477 = null;
-        aBooleanArrayArrayArrayArray491 = null;
+        TILE_VISIBILITY_MAPS = null;
         TILE_VISIBILITY_MAP = null;
     }
 
@@ -816,7 +816,7 @@ final class SceneGraph {
 
     }
 
-    public static void initialize(int i, int j, int daW, int daH, int ai[])
+    public static void initialize(int min_z, int max_z, int daW, int daH, int ai[])
     {
         left = 0;
         top = 0;
@@ -825,32 +825,32 @@ final class SceneGraph {
         midX = daW / 2;
         midY = daH / 2;
         boolean aflag[][][][] = new boolean[9][32][53][53];
-        for(int i1 = 128; i1 <= 384; i1 += 32)
+        for(int y_angle = 128; y_angle <= 384; y_angle += 32)
         {
-            for(int j1 = 0; j1 < 2048; j1 += 64)
+            for(int x_angle = 0; x_angle < 2048; x_angle += 64)
             {
-                yCurveSine = Model.Sine[i1];
-                yCurveCosine = Model.Cosine[i1];
-                xCurveSine = Model.Sine[j1];
-                xCurveCosine = Model.Cosine[j1];
-                int l1 = (i1 - 128) / 32;
-                int j2 = j1 / 64;
-                for(int l2 = -26; l2 <= 26; l2++)
+                yCurveSine = Model.SINE[y_angle];
+                yCurveCosine = Model.COSINE[y_angle];
+                xCurveSine = Model.SINE[x_angle];
+                xCurveCosine = Model.COSINE[x_angle];
+                int y_angle_ptr = (y_angle - 128) / 32;
+                int x_angle_ptr = x_angle / 64;
+                for(int x = -26; x <= 26; x++)
                 {
-                    for(int j3 = -26; j3 <= 26; j3++)
+                    for(int y = -26; y <= 26; y++)
                     {
-                        int k3 = l2 * 128;
-                        int i4 = j3 * 128;
-                        boolean flag2 = false;
-                        for(int k4 = -i; k4 <= j; k4 += 128)
+                        int world_x = x * 128;
+                        int world_y = y * 128;
+                        boolean is_visible = false;
+                        for(int world_z = -min_z; world_z <= max_z; world_z += 128)
                         {
-                            if(!method311(ai[l1] + k4, i4, k3))
+                            if(!is_on_screen(ai[y_angle_ptr] + world_z, world_y, world_x))
                                 continue;
-                            flag2 = true;
+                            is_visible = true;
                             break;
                         }
 
-                        aflag[l1][j2][l2 + 25 + 1][j3 + 25 + 1] = flag2;
+                        aflag[y_angle_ptr][x_angle_ptr][x + 25 + 1][y + 25 + 1] = is_visible;
                     }
 
                 }
@@ -893,7 +893,7 @@ label0:
 
                         }
 
-                        aBooleanArrayArrayArrayArray491[k1][i2][k2 + 25][i3 + 25] = flag1;
+                        TILE_VISIBILITY_MAPS[k1][i2][k2 + 25][i3 + 25] = flag1;
                     }
 
                 }
@@ -904,12 +904,12 @@ label0:
 
     }
 
-    private static boolean method311(int i, int j, int k)
+    private static boolean is_on_screen(int z, int y, int x)
     {
-        int l = j * xCurveSine + k * xCurveCosine >> 16;
-        int i1 = j * xCurveCosine - k * xCurveSine >> 16;
-        int j1 = i * yCurveSine + i1 * yCurveCosine >> 16;
-        int k1 = i * yCurveCosine - i1 * yCurveSine >> 16;
+        int l = y * xCurveSine + x * xCurveCosine >> 16;
+        int i1 = y * xCurveCosine - x * xCurveSine >> 16;
+        int j1 = z * yCurveSine + i1 * yCurveCosine >> 16;
+        int k1 = z * yCurveCosine - i1 * yCurveSine >> 16;
         if(j1 < 50 || j1 > 3500)
             return false;
         int l1 = midX + (l << 9) / j1;
@@ -939,11 +939,11 @@ label0:
         if(yCampos >= yMapSize * 128)
             yCampos = yMapSize * 128 - 1;
         anInt448++;
-        yCurveSine = Model.Sine[yCurve];
-        yCurveCosine = Model.Cosine[yCurve];
-        xCurveSine = Model.Sine[xCurve];
-        xCurveCosine = Model.Cosine[xCurve];
-        TILE_VISIBILITY_MAP = aBooleanArrayArrayArrayArray491[(yCurve - 128) / 32][xCurve / 64];
+        yCurveSine = Model.SINE[yCurve];
+        yCurveCosine = Model.COSINE[yCurve];
+        xCurveSine = Model.SINE[xCurve];
+        xCurveCosine = Model.COSINE[xCurve];
+        TILE_VISIBILITY_MAP = TILE_VISIBILITY_MAPS[(yCurve - 128) / 32][xCurve / 64];
         xCameraPosition = xCampos;
         zCameraPosition = zCampos;
         yCameraPosition = yCampos;
@@ -2297,7 +2297,7 @@ for_outer:
             9, 13, 0, 4, 8, 12
         }
     };
-    private static boolean[][][][] aBooleanArrayArrayArrayArray491 = new boolean[8][32][51][51];
+    private static boolean[][][][] TILE_VISIBILITY_MAPS = new boolean[8][32][51][51];
     private static boolean[][] TILE_VISIBILITY_MAP;
     private static int midX;
     private static int midY;

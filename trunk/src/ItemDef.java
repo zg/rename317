@@ -14,7 +14,7 @@ public final class ItemDef
         stream = null;
     }
 
-    public boolean method192(int j)
+    public boolean is_downloaded(int j)
     {
         int k = anInt175;
         int l = anInt166;
@@ -26,9 +26,9 @@ public final class ItemDef
         if(k == -1)
             return true;
         boolean flag = true;
-        if(!Model.method463(k))
+        if(!Model.is_downloaded(k))
             flag = false;
-        if(l != -1 && !Model.method463(l))
+        if(l != -1 && !Model.is_downloaded(l))
             flag = false;
         return flag;
     }
@@ -52,7 +52,7 @@ public final class ItemDef
 
     }
 
-    public Model method194(int j)
+    public Model get_head_model(int j)
     {
         int k = anInt175;
         int l = anInt166;
@@ -95,11 +95,11 @@ public final class ItemDef
         if(k == -1)
             return true;
         boolean flag = true;
-        if(!Model.method463(k))
+        if(!Model.is_downloaded(k))
             flag = false;
-        if(l != -1 && !Model.method463(l))
+        if(l != -1 && !Model.is_downloaded(l))
             flag = false;
-        if(i1 != -1 && !Model.method463(i1))
+        if(i1 != -1 && !Model.is_downloaded(i1))
             flag = false;
         return flag;
     }
@@ -244,7 +244,7 @@ public final class ItemDef
     {
         if(k == 0)
         {
-            RgbImage rgbImage = (RgbImage) mruNodes1.insertFromCache(i);
+            RgbImage rgbImage = (RgbImage) mruNodes1.get(i);
             if(rgbImage != null && rgbImage.h2 != j && rgbImage.h2 != -1)
             {
                 rgbImage.unlink();
@@ -360,7 +360,7 @@ public final class ItemDef
             rgbImage.h2 = j6;
         }
         if(k == 0)
-            mruNodes1.removeFromCache(sprite2, i);
+            mruNodes1.put(sprite2, i);
         DrawingArea.initDrawingArea(j2, i2, ai1);
         DrawingArea.setDrawingArea(j3, k2, l2, i3);
         ThreeDimensionalDrawingArea.xMidPos = k1;
@@ -387,7 +387,7 @@ public final class ItemDef
             if(j != -1)
                 return forID(j).method201(1);
         }
-        Model model = (Model) mruNodes2.insertFromCache(id);
+        Model model = (Model) mruNodes2.get(id);
         if(model != null)
             return model;
         model = Model.getModel(modelID);
@@ -403,11 +403,11 @@ public final class ItemDef
         }
         model.preprocess(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
         model.aBoolean1659 = true;
-        mruNodes2.removeFromCache(model, id);
+        mruNodes2.put(model, id);
         return model;
     }
 
-    public Model method202(int i)
+    public Model get_inventory_model(int i)
     {
         if(stackIDs != null && i > 1)
         {
@@ -417,7 +417,7 @@ public final class ItemDef
                     j = stackIDs[k];
 
             if(j != -1)
-                return forID(j).method202(1);
+                return forID(j).get_inventory_model(1);
         }
         Model model = Model.getModel(modelID);
         if(model == null)
