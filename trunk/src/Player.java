@@ -83,26 +83,26 @@ public final class Player extends Entity
         return model;
     }
 
-    public void updatePlayer(Stream stream)
+    public void updatePlayer(Packet stream)
     {
-        stream.currentOffset = 0;
-        anInt1702 = stream.readUnsignedByte();
-        headIcon = stream.readUnsignedByte();
+        stream.pos = 0;
+        anInt1702 = stream.g1();
+        headIcon = stream.g1();
         desc = null;
         team = 0;
         for(int j = 0; j < 12; j++)
         {
-            int k = stream.readUnsignedByte();
+            int k = stream.g1();
             if(k == 0)
             {
                 appearance_models[j] = 0;
                 continue;
             }
-            int i1 = stream.readUnsignedByte();
+            int i1 = stream.g1();
             appearance_models[j] = (k << 8) + i1;
             if(j == 0 && appearance_models[0] == 65535)
             {
-                desc = EntityDef.forID(stream.readUnsignedWord());
+                desc = EntityDef.forID(stream.g2());
                 break;
             }
             if(appearance_models[j] >= 512 && appearance_models[j] - 512 < ItemDef.totalItems)
@@ -115,36 +115,36 @@ public final class Player extends Entity
 
         for(int l = 0; l < 5; l++)
         {
-            int j1 = stream.readUnsignedByte();
+            int j1 = stream.g1();
             if(j1 < 0 || j1 >= client.PLAYER_BODY_RECOLOURS[l].length)
                 j1 = 0;
             appearance_colours[l] = j1;
         }
 
-        super.anInt1511 = stream.readUnsignedWord();
+        super.anInt1511 = stream.g2();
         if(super.anInt1511 == 65535)
             super.anInt1511 = -1;
-        super.anInt1512 = stream.readUnsignedWord();
+        super.anInt1512 = stream.g2();
         if(super.anInt1512 == 65535)
             super.anInt1512 = -1;
-        super.anInt1554 = stream.readUnsignedWord();
+        super.anInt1554 = stream.g2();
         if(super.anInt1554 == 65535)
             super.anInt1554 = -1;
-        super.anInt1555 = stream.readUnsignedWord();
+        super.anInt1555 = stream.g2();
         if(super.anInt1555 == 65535)
             super.anInt1555 = -1;
-        super.anInt1556 = stream.readUnsignedWord();
+        super.anInt1556 = stream.g2();
         if(super.anInt1556 == 65535)
             super.anInt1556 = -1;
-        super.anInt1557 = stream.readUnsignedWord();
+        super.anInt1557 = stream.g2();
         if(super.anInt1557 == 65535)
             super.anInt1557 = -1;
-        super.anInt1505 = stream.readUnsignedWord();
+        super.anInt1505 = stream.g2();
         if(super.anInt1505 == 65535)
             super.anInt1505 = -1;
-        name = TextClass.fixName(TextClass.nameForLong(stream.readQWord()));
-        combatLevel = stream.readUnsignedByte();
-        skill = stream.readUnsignedWord();
+        name = TextClass.fixName(TextClass.nameForLong(stream.g8()));
+        combatLevel = stream.g1();
+        skill = stream.g2();
         visible = true;
         aLong1718 = 0L;
         for(int k1 = 0; k1 < 12; k1++)
@@ -274,11 +274,11 @@ public final class Player extends Entity
         Model model_2 = Model.aModel_1621;
         model_2.method464(model_1, AnimationFrame.method532(k) & AnimationFrame.method532(i1));
         if(k != -1 && i1 != -1)
-            model_2.method471(Animation.anims[super.animation].animationFlowControl, i1, k);
+            model_2.mix_anim_frames(Animation.anims[super.animation].animationFlowControl, i1, k);
         else
         if(k != -1)
             model_2.applyTransform(k);
-        model_2.method466();
+        model_2.calculate_diagonals();
         model_2.triangleSkin = null;
         model_2.vertexSkin = null;
         return model_2;

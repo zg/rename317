@@ -6,8 +6,8 @@ public final class SpotAnim {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(jagexArchive.getDataForName("spotanim.dat"));
-        int length = stream.readUnsignedWord();
+        Packet stream = new Packet(jagexArchive.getDataForName("spotanim.dat"));
+        int length = stream.g2();
         if(cache == null)
             cache = new SpotAnim[length];
         for(int j = 0; j < length; j++)
@@ -20,42 +20,42 @@ public final class SpotAnim {
 
     }
 
-    private void readValues(Stream stream)
+    private void readValues(Packet stream)
     {
         do
         {
-            int i = stream.readUnsignedByte();
+            int i = stream.g1();
             if(i == 0)
                 return;
             if(i == 1)
-                modelID = stream.readUnsignedWord();
+                modelID = stream.g2();
             else
             if(i == 2)
             {
-                animationID = stream.readUnsignedWord();
+                animationID = stream.g2();
                 if(Animation.anims != null)
                     aAnimation_407 = Animation.anims[animationID];
             } else
             if(i == 4)
-                resizeXY = stream.readUnsignedWord();
+                resizeXY = stream.g2();
             else
             if(i == 5)
-                resizeZ = stream.readUnsignedWord();
+                resizeZ = stream.g2();
             else
             if(i == 6)
-                rotation = stream.readUnsignedWord();
+                rotation = stream.g2();
             else
             if(i == 7)
-                modelBrightness = stream.readUnsignedByte();
+                modelBrightness = stream.g1();
             else
             if(i == 8)
-                modelShadow = stream.readUnsignedByte();
+                modelShadow = stream.g1();
             else
             if(i >= 40 && i < 50)
-                originalModelColours[i - 40] = stream.readUnsignedWord();
+                originalModelColours[i - 40] = stream.g2();
             else
             if(i >= 50 && i < 60)
-                modifiedModelColours[i - 50] = stream.readUnsignedWord();
+                modifiedModelColours[i - 50] = stream.g2();
             else
                 System.out.println("Error unrecognised spotanim config code: " + i);
         } while(true);

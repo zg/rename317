@@ -6,8 +6,8 @@ public final class Flo {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(jagexArchive.getDataForName("flo.dat"));
-        int cacheSize = stream.readUnsignedWord();
+        Packet stream = new Packet(jagexArchive.getDataForName("flo.dat"));
+        int cacheSize = stream.g2();
         if(cache == null)
             cache = new Flo[cacheSize];
         for(int j = 0; j < cacheSize; j++)
@@ -19,22 +19,22 @@ public final class Flo {
 
     }
 
-    private void readValues(Stream stream)
+    private void readValues(Packet stream)
     {
         do
         {
-            int i = stream.readUnsignedByte();
+            int i = stream.g1();
             boolean dummy;
             if(i == 0)
                 return;
             else
             if(i == 1)
             {
-                colour2 = stream.read3Bytes();
+                colour2 = stream.g3();
                 rgb2hls(colour2);
             } else
             if(i == 2)
-                texture = stream.readUnsignedByte();
+                texture = stream.g1();
             else
             if(i == 3)
                 dummy = true;
@@ -43,7 +43,7 @@ public final class Flo {
                 occlude = false;
             else
             if(i == 6)
-                stream.readString();//name
+                stream.gstr();//name
             else
             if(i == 7)
             {
@@ -51,7 +51,7 @@ public final class Flo {
                 int k = saturation;
                 int l = lightness;
                 int i1 = hue2;
-                int j1 = stream.read3Bytes();
+                int j1 = stream.g3();
                 rgb2hls(j1);
                 hue = j;
                 saturation = k;

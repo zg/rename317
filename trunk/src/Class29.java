@@ -5,23 +5,23 @@
 final class Class29
 {
 
-    public void method325(Stream stream)
+    public void method325(Packet stream)
     {
-        anInt540 = stream.readUnsignedByte();
-            anInt538 = stream.readDWord();
-            anInt539 = stream.readDWord();
+        anInt540 = stream.g1();
+            anInt538 = stream.g4();
+            anInt539 = stream.g4();
             method326(stream);
     }
 
-    public void method326(Stream stream)
+    public void method326(Packet stream)
     {
-        anInt535 = stream.readUnsignedByte();
+        anInt535 = stream.g1();
         anIntArray536 = new int[anInt535];
         anIntArray537 = new int[anInt535];
         for(int i = 0; i < anInt535; i++)
         {
-            anIntArray536[i] = stream.readUnsignedWord();
-            anIntArray537[i] = stream.readUnsignedWord();
+            anIntArray536[i] = stream.g2();
+            anIntArray537[i] = stream.g2();
         }
 
     }

@@ -417,14 +417,14 @@ label5:
         return k;
     }
 
-    public static void prefetchObjects(Stream stream, OnDemandFetcher class42_sub1)
+    public static void prefetchObjects(Packet stream, OnDemandFetcher class42_sub1)
     {
 label0:
         {
             int i = -1;
             do
             {
-                int j = stream.readSpaceSaver();
+                int j = stream.gsmarts();
                 if(j == 0)
                     break label0;
                 i += j;
@@ -432,10 +432,10 @@ label0:
                 class46.method574(class42_sub1);
                 do
                 {
-                    int k = stream.readSpaceSaver();
+                    int k = stream.gsmarts();
                     if(k == 0)
                         break;
-                    stream.readUnsignedByte();
+                    stream.g1();
                 } while(true);
             } while(true);
         }
@@ -534,7 +534,7 @@ label0:
                         {
                             for(int k5 = 0; k5 <= l4; k5++)
                             {
-                                int l5 = model.anInt1650 / 4;
+                                int l5 = model.diagonal_2D_aboveorigin / 4;
                                 if(l5 > 30)
                                     l5 = 30;
                                 if(l5 > object_shadow_data[k][l + j5][i + k5])
@@ -849,7 +849,7 @@ label0:
                     aclass11[k1].clipData[l + i2][l1 + j2] &= 0xfeffffff;
 
         }
-        Stream stream = new Stream(abyte0);
+        Packet stream = new Packet(abyte0);
         for(int l2 = 0; l2 < 4; l2++)
         {
             for(int i3 = 0; i3 < 64; i3++)
@@ -880,7 +880,7 @@ label0:
 
         }
 
-        Stream stream = new Stream(abyte0);
+        Packet stream = new Packet(abyte0);
         for(int l1 = 0; l1 < 4; l1++)
         {
             for(int i2 = 0; i2 < 64; i2++)
@@ -893,7 +893,7 @@ label0:
         }
     }
 
-    private void readTile(int i, int j, Stream stream, int k, int l, int i1,
+    private void readTile(int i, int j, Packet stream, int k, int l, int i1,
                                  int k1)
     {
         if(k >= 0 && k < 104 && i >= 0 && i < 104)
@@ -901,7 +901,7 @@ label0:
             tileSettings[l][k][i] = 0;
             do
             {
-                int l1 = stream.readUnsignedByte();
+                int l1 = stream.g1();
                 if(l1 == 0)
                     if(l == 0)
                     {
@@ -914,7 +914,7 @@ label0:
                     }
                 if(l1 == 1)
                 {
-                    int j2 = stream.readUnsignedByte();
+                    int j2 = stream.g1();
                     if(j2 == 1)
                         j2 = 0;
                     if(l == 0)
@@ -929,7 +929,7 @@ label0:
                 }
                 if(l1 <= 49)
                 {
-                    overLay[l][k][i] = stream.readSignedByte();
+                    overLay[l][k][i] = stream.g1b();
                     shapeA[l][k][i] = (byte)((l1 - 2) / 4);
                     shapeB[l][k][i] = (byte)((l1 - 2) + i1 & 3);
                 } else
@@ -941,16 +941,16 @@ label0:
         }
         do
         {
-            int i2 = stream.readUnsignedByte();
+            int i2 = stream.g1();
             if(i2 == 0)
                 break;
             if(i2 == 1)
             {
-                stream.readUnsignedByte();
+                stream.g1();
                 return;
             }
             if(i2 <= 49)
-                stream.readUnsignedByte();
+                stream.g1();
         } while(true);
     }
 
@@ -969,25 +969,25 @@ label0:
     {
 label0:
         {
-            Stream stream = new Stream(abyte0);
+            Packet stream = new Packet(abyte0);
             int l1 = -1;
             do
             {
-                int i2 = stream.readSpaceSaver();
+                int i2 = stream.gsmarts();
                 if(i2 == 0)
                     break label0;
                 l1 += i2;
                 int j2 = 0;
                 do
                 {
-                    int k2 = stream.readSpaceSaver();
+                    int k2 = stream.gsmarts();
                     if(k2 == 0)
                         break;
                     j2 += k2 - 1;
                     int l2 = j2 & 0x3f;
                     int i3 = j2 >> 6 & 0x3f;
                     int j3 = j2 >> 12;
-                    int k3 = stream.readUnsignedByte();
+                    int k3 = stream.g1();
                     int l3 = k3 >> 2;
                     int i4 = k3 & 3;
                     if(j3 == i && i3 >= i1 && i3 < i1 + 8 && l2 >= k && l2 < k + 8)
@@ -1278,11 +1278,11 @@ label0:
   ) //xxx bad method, decompiled with JODE
   {
     boolean bool = true;
-    Stream stream = new Stream(is);
+    Packet stream = new Packet(is);
     int i_252_ = -1;
     for (;;)
       {
-	int i_253_ = stream.readSpaceSaver();
+	int i_253_ = stream.gsmarts();
 	if (i_253_ == 0)
 	  break;
 	i_252_ += i_253_;
@@ -1292,20 +1292,20 @@ label0:
 	  {
 	    if (bool_255_)
 	      {
-		int i_256_ = stream.readSpaceSaver();
+		int i_256_ = stream.gsmarts();
 		if (i_256_ == 0)
 		  break;
-		stream.readUnsignedByte();
+		stream.g1();
 	      }
 	    else
 	      {
-		int i_257_ = stream.readSpaceSaver();
+		int i_257_ = stream.gsmarts();
 		if (i_257_ == 0)
 		  break;
 		i_254_ += i_257_ - 1;
 		int i_258_ = i_254_ & 0x3f;
 		int i_259_ = i_254_ >> 6 & 0x3f;
-		int i_260_ = stream.readUnsignedByte() >> 2;
+		int i_260_ = stream.g1() >> 2;
 		int i_261_ = i_259_ + i;
 		int i_262_ = i_258_ + i_250_;
 		if (i_261_ > 0 && i_262_ > 0 && i_261_ < 103 && i_262_ < 103)
@@ -1328,25 +1328,25 @@ label0:
     {
 label0:
         {
-            Stream stream = new Stream(abyte0);
+            Packet stream = new Packet(abyte0);
             int objID = -1;
             do
             {
-                int readOID = stream.readSpaceSaver();
+                int readOID = stream.gsmarts();
                 if(readOID == 0)
                     break label0;
                 objID += readOID;
                 int coordSetting = 0;
                 do
                 {
-                    int coordSS = stream.readSpaceSaver();
+                    int coordSS = stream.gsmarts();
                     if(coordSS == 0)
                         break;
                     coordSetting += coordSS - 1;
                     int rY = coordSetting & 0x3f;
                     int rX = coordSetting >> 6 & 0x3f;
                     int Z = coordSetting >> 12;
-                    int objByte = stream.readUnsignedByte();
+                    int objByte = stream.g1();
                     int objType = objByte >> 2;
                     int face = objByte & 3;
                     int X = rX + xOff;

@@ -6,14 +6,14 @@ final class Censor {
 
     public static void loadConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(jagexArchive.getDataForName("fragmentsenc.txt"));
-        Stream stream_1 = new Stream(jagexArchive.getDataForName("badenc.txt"));
-        Stream stream_2 = new Stream(jagexArchive.getDataForName("domainenc.txt"));
-        Stream stream_3 = new Stream(jagexArchive.getDataForName("tldlist.txt"));
+        Packet stream = new Packet(jagexArchive.getDataForName("fragmentsenc.txt"));
+        Packet stream_1 = new Packet(jagexArchive.getDataForName("badenc.txt"));
+        Packet stream_2 = new Packet(jagexArchive.getDataForName("domainenc.txt"));
+        Packet stream_3 = new Packet(jagexArchive.getDataForName("tldlist.txt"));
         readValues(stream, stream_1, stream_2, stream_3);
     }
 
-    private static void readValues(Stream stream, Stream stream_1, Stream stream_2, Stream stream_3)
+    private static void readValues(Packet stream, Packet stream_1, Packet stream_2, Packet stream_3)
     {
         readBadEnc(stream_1);
         readDomainEnc(stream_2);
@@ -21,59 +21,59 @@ final class Censor {
         readTldList(stream_3);
     }
 
-    private static void readTldList(Stream stream)
+    private static void readTldList(Packet stream)
     {
-        int i = stream.readDWord();
+        int i = stream.g4();
         aCharArrayArray624 = new char[i][];
         anIntArray625 = new int[i];
         for(int j = 0; j < i; j++)
         {
-            anIntArray625[j] = stream.readUnsignedByte();
-            char ac[] = new char[stream.readUnsignedByte()];
+            anIntArray625[j] = stream.g1();
+            char ac[] = new char[stream.g1()];
             for(int k = 0; k < ac.length; k++)
-                ac[k] = (char) stream.readUnsignedByte();
+                ac[k] = (char) stream.g1();
 
             aCharArrayArray624[j] = ac;
         }
 
     }
 
-    private static void readBadEnc(Stream stream)
+    private static void readBadEnc(Packet stream)
     {
-        int j = stream.readDWord();
+        int j = stream.g4();
         aCharArrayArray621 = new char[j][];
         aByteArrayArrayArray622 = new byte[j][][];
         method493(stream, aCharArrayArray621, aByteArrayArrayArray622);
     }
 
-    private static void readDomainEnc(Stream stream)
+    private static void readDomainEnc(Packet stream)
     {
-        int i = stream.readDWord();
+        int i = stream.g4();
         aCharArrayArray623 = new char[i][];
             method494(aCharArrayArray623, stream);
     }
 
-    private static void readFragmentsEnc(Stream stream)
+    private static void readFragmentsEnc(Packet stream)
     {
-        anIntArray620 = new int[stream.readDWord()];
+        anIntArray620 = new int[stream.g4()];
         for(int i = 0; i < anIntArray620.length; i++)
-            anIntArray620[i] = stream.readUnsignedWord();
+            anIntArray620[i] = stream.g2();
     }
 
-    private static void method493(Stream stream, char ac[][], byte abyte0[][][])
+    private static void method493(Packet stream, char ac[][], byte abyte0[][][])
     {
         for(int j = 0; j < ac.length; j++)
         {
-            char ac1[] = new char[stream.readUnsignedByte()];
+            char ac1[] = new char[stream.g1()];
             for(int k = 0; k < ac1.length; k++)
-                ac1[k] = (char) stream.readUnsignedByte();
+                ac1[k] = (char) stream.g1();
 
             ac[j] = ac1;
-            byte abyte1[][] = new byte[stream.readUnsignedByte()][2];
+            byte abyte1[][] = new byte[stream.g1()][2];
             for(int l = 0; l < abyte1.length; l++)
             {
-                abyte1[l][0] = (byte) stream.readUnsignedByte();
-                abyte1[l][1] = (byte) stream.readUnsignedByte();
+                abyte1[l][0] = (byte) stream.g1();
+                abyte1[l][1] = (byte) stream.g1();
             }
 
             if(abyte1.length > 0)
@@ -82,13 +82,13 @@ final class Censor {
 
     }
 
-    private static void method494(char ac[][], Stream stream)
+    private static void method494(char ac[][], Packet stream)
     {
         for(int j = 0; j < ac.length; j++)
         {
-            char ac1[] = new char[stream.readUnsignedByte()];
+            char ac1[] = new char[stream.g1()];
             for(int k = 0; k < ac1.length; k++)
-                ac1[k] = (char) stream.readUnsignedByte();
+                ac1[k] = (char) stream.g1();
 
             ac[j] = ac1;
         }

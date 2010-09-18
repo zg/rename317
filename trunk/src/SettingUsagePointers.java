@@ -6,9 +6,9 @@ public final class SettingUsagePointers {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(jagexArchive.getDataForName("varp.dat"));
+        Packet stream = new Packet(jagexArchive.getDataForName("varp.dat"));
         anInt702 = 0;
-        int cacheSize = stream.readUnsignedWord();
+        int cacheSize = stream.g2();
         if(cache == null)
             cache = new SettingUsagePointers[cacheSize];
         if(anIntArray703 == null)
@@ -19,23 +19,23 @@ public final class SettingUsagePointers {
                 cache[j] = new SettingUsagePointers();
             cache[j].readValues(stream, j);
         }
-        if(stream.currentOffset != stream.buffer.length)
+        if(stream.pos != stream.data.length)
             System.out.println("varptype load mismatch");
     }
 
-    private void readValues(Stream stream, int i)
+    private void readValues(Packet stream, int i)
     {
         do
         {
-            int j = stream.readUnsignedByte();
+            int j = stream.g1();
             if(j == 0)
                 return;
             int dummy;
             if(j == 1)
-                 stream.readUnsignedByte();
+                 stream.g1();
             else
             if(j == 2)
-                stream.readUnsignedByte();
+                stream.g1();
             else
             if(j == 3)
                 anIntArray703[anInt702++] = i;
@@ -44,25 +44,25 @@ public final class SettingUsagePointers {
                 dummy = 2;
             else
             if(j == 5)
-                usage = stream.readUnsignedWord();
+                usage = stream.g2();
             else
             if(j == 6)
                 dummy = 2;
             else
             if(j == 7)
-                stream.readDWord();
+                stream.g4();
             else
             if(j == 8)
                 aBoolean713 = true;
              else
             if(j == 10)
-                 stream.readString();
+                 stream.gstr();
             else
             if(j == 11)
                 aBoolean713 = true;
             else
             if(j == 12)
-                stream.readDWord();
+                stream.g4();
             else
             if(j == 13)
                 dummy = 2;

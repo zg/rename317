@@ -12,7 +12,7 @@ public final class ISAACRandomGen {
         initializeKeySet();
     }
 
-    public int getNextKey()
+    public int next()
     {
         if(count-- == 0)
         {

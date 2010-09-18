@@ -16,25 +16,25 @@ public final class RSFont extends DrawingArea {
         rsb = new int[256];
         aRandom1498 = new Random();
         isStrikethrough = false;
-        Stream data = new Stream(jagexArchive.getDataForName(s + ".dat"));
-        Stream index = new Stream(jagexArchive.getDataForName("index.dat"));
-        index.currentOffset = data.readUnsignedWord() + 4;
-        int k = index.readUnsignedByte();
+        Packet data = new Packet(jagexArchive.getDataForName(s + ".dat"));
+        Packet index = new Packet(jagexArchive.getDataForName("index.dat"));
+        index.pos = data.g2() + 4;
+        int k = index.g1();
         if(k > 0)
-            index.currentOffset += 3 * (k - 1);
+            index.pos += 3 * (k - 1);
         for(int l = 0; l < 256; l++)
         {
-            horizontalKerning[l] = index.readUnsignedByte();
-            verticalKerning[l] = index.readUnsignedByte();
-            int i1 = glyphWidth[l] = index.readUnsignedWord();
-            int j1 = glyphHeight[l] = index.readUnsignedWord();
-            int k1 = index.readUnsignedByte();
+            horizontalKerning[l] = index.g1();
+            verticalKerning[l] = index.g1();
+            int i1 = glyphWidth[l] = index.g2();
+            int j1 = glyphHeight[l] = index.g2();
+            int k1 = index.g1();
             int l1 = i1 * j1;
             glyphPixels[l] = new byte[l1];
             if(k1 == 0)
             {
                 for(int i2 = 0; i2 < l1; i2++)
-                    glyphPixels[l][i2] = data.readSignedByte();
+                    glyphPixels[l][i2] = data.g1b();
 
             } else
             if(k1 == 1)
@@ -42,7 +42,7 @@ public final class RSFont extends DrawingArea {
                 for(int j2 = 0; j2 < i1; j2++)
                 {
                     for(int l2 = 0; l2 < j1; l2++)
-                        glyphPixels[l][j2 + l2 * i1] = data.readSignedByte();
+                        glyphPixels[l][j2 + l2 * i1] = data.g1b();
 
                 }
 
