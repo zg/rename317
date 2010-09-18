@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="b89b271f-bcab-4808-b81f-ee8fd61b54e9" name="Default" comment="" />
-    <ignored path=".idea/workspace.xml" />
     <ignored path="src.iws" />
+    <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,16 +63,7 @@
       <file leaf-file-name="SceneGraph.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SceneGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="132" column="51" selection-start="4309" selection-end="4309" vertical-scroll-proportion="0.66853935">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlainTile.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PlainTile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
+            <state line="415" column="102" selection-start="14588" selection-end="14588" vertical-scroll-proportion="0.044619422">
               <folding />
             </state>
           </provider>
@@ -405,14 +396,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PlainTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="-0.23869346" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SceneGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="51" selection-start="4309" selection-end="4309" vertical-scroll-proportion="0.66853935">
+        <state line="415" column="102" selection-start="14588" selection-end="14588" vertical-scroll-proportion="0.044619422">
           <folding />
         </state>
       </provider>
