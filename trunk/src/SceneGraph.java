@@ -125,13 +125,13 @@ final class SceneGraph {
         }
     }
 
-    public void addTile(int zz, int x, int y, int l, int i1, int j1, int k1,
-            int l1, int i2, int j2, int k2, int l2, int i3, int j3, 
-            int k3, int l3, int i4, int j4, int k4, int l4)
+    public void addTile(int zz, int x, int y, int shapeA, int shapeB, int j1, int zA,
+            int zB, int zD, int zC, int colourA, int colourB, int colourD, int colourC,
+            int colourAA, int colourBA, int colourDA, int colourCA, int cRGB2, int RGBA)
     {
-        if(l == 0)
+        if(shapeA == 0)
         {
-            PlainTile plainTile = new PlainTile(k2, l2, i3, j3, -1, k4, false);
+            PlainTile plainTile = new PlainTile(colourA, colourB, colourD, colourC, -1, cRGB2, false);
             for(int heightLevel = zz; heightLevel >= 0; heightLevel--)
                 if(tileArray[heightLevel][x][y] == null)
                     tileArray[heightLevel][x][y] = new Tile(heightLevel, x, y);
@@ -139,9 +139,9 @@ final class SceneGraph {
             tileArray[zz][x][y].myPlainTile = plainTile;
             return;
         }
-        if(l == 1)
+        if(shapeA == 1)
         {
-            PlainTile plainTile_1 = new PlainTile(k3, l3, i4, j4, j1, l4, k1 == l1 && k1 == i2 && k1 == j2);
+            PlainTile plainTile_1 = new PlainTile(colourAA, colourBA, colourDA, colourCA, j1, RGBA, zA == zB && zA == zD && zA == zC);
             for(int j5 = zz; j5 >= 0; j5--)
                 if(tileArray[j5][x][y] == null)
                     tileArray[j5][x][y] = new Tile(j5, x, y);
@@ -149,12 +149,12 @@ final class SceneGraph {
             tileArray[zz][x][y].myPlainTile = plainTile_1;
             return;
         }
-        ShapedTile shapedTile = new ShapedTile(y, k3, j3, i2, j1, i4, i1, k2, k4, i3, j2, l1, k1, l, j4, l3, l2, x, l4);
+        ShapedTile shapedTile = new ShapedTile(y, colourAA, colourC, zD, j1, colourDA, shapeB, colourA, cRGB2, colourD, zC, zB, zA, shapeA, colourCA, colourBA, colourB, x, RGBA);
         for(int k5 = zz; k5 >= 0; k5--)
             if(tileArray[k5][x][y] == null)
                 tileArray[k5][x][y] = new Tile(k5, x, y);
 
-        tileArray[zz][x][y].aShapedTile_1312 = shapedTile;
+        tileArray[zz][x][y].shapedTile = shapedTile;
     }
 
     public void addObj3(int Z, int z3d, int Y, Animable class30_sub2_sub4, byte byte0, int uid,
@@ -778,7 +778,7 @@ final class SceneGraph {
 
             return;
         }
-        ShapedTile shapedTile = class30_sub3.aShapedTile_1312;
+        ShapedTile shapedTile = class30_sub3.shapedTile;
         if(shapedTile == null)
             return;
         int l1 = shapedTile.shapeA;
@@ -1168,8 +1168,8 @@ label0:
                         if(!method320(0, X, Y))
                             renderTile(class30_sub3_7.myPlainTile, 0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
                     } else
-                    if(class30_sub3_7.aShapedTile_1312 != null && !method320(0, X, Y))
-                        drawShapedTile(X, yCurveSine, xCurveSine, class30_sub3_7.aShapedTile_1312, yCurveCosine, Y, xCurveCosine);
+                    if(class30_sub3_7.shapedTile != null && !method320(0, X, Y))
+                        drawShapedTile(X, yCurveSine, xCurveSine, class30_sub3_7.shapedTile, yCurveCosine, Y, xCurveCosine);
                     Object1 class10 = class30_sub3_7.obj1;
                     if(class10 != null)
                         class10.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10.anInt274 - xCameraPosition, class10.anInt273 - zCameraPosition, class10.anInt275 - yCameraPosition, class10.uid);
@@ -1190,10 +1190,10 @@ label0:
                         renderTile(TILE.myPlainTile, l, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
                     }
                 } else
-                if(TILE.aShapedTile_1312 != null && !method320(l, X, Y))
+                if(TILE.shapedTile != null && !method320(l, X, Y))
                 {
                     flag1 = true;
-                    drawShapedTile(X, yCurveSine, xCurveSine, TILE.aShapedTile_1312, yCurveCosine, Y, xCurveCosine);
+                    drawShapedTile(X, yCurveSine, xCurveSine, TILE.shapedTile, yCurveCosine, Y, xCurveCosine);
                 }
                 int j1 = 0;
                 int j2 = 0;
