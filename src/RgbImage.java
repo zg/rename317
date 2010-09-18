@@ -42,38 +42,38 @@ public final class RgbImage extends DrawingArea {
 
     public RgbImage(JagexArchive jagexArchive, String s, int i)
     {
-        Stream stream = new Stream(jagexArchive.getDataForName(s + ".dat"));
-        Stream stream_1 = new Stream(jagexArchive.getDataForName("index.dat"));
-        stream_1.currentOffset = stream.readUnsignedWord();
-        w2 = stream_1.readUnsignedWord();
-        h2 = stream_1.readUnsignedWord();
-        int j = stream_1.readUnsignedByte();
+        Packet stream = new Packet(jagexArchive.getDataForName(s + ".dat"));
+        Packet stream_1 = new Packet(jagexArchive.getDataForName("index.dat"));
+        stream_1.pos = stream.g2();
+        w2 = stream_1.g2();
+        h2 = stream_1.g2();
+        int j = stream_1.g1();
         int ai[] = new int[j];
         for(int k = 0; k < j - 1; k++)
         {
-            ai[k + 1] = stream_1.read3Bytes();
+            ai[k + 1] = stream_1.g3();
             if(ai[k + 1] == 0)
                 ai[k + 1] = 1;
         }
 
         for(int l = 0; l < i; l++)
         {
-            stream_1.currentOffset += 2;
-            stream.currentOffset += stream_1.readUnsignedWord() * stream_1.readUnsignedWord();
-            stream_1.currentOffset++;
+            stream_1.pos += 2;
+            stream.pos += stream_1.g2() * stream_1.g2();
+            stream_1.pos++;
         }
 
-        xDrawOffset = stream_1.readUnsignedByte();
-        yDrawOffset = stream_1.readUnsignedByte();
-        myWidth = stream_1.readUnsignedWord();
-        myHeight = stream_1.readUnsignedWord();
-        int i1 = stream_1.readUnsignedByte();
+        xDrawOffset = stream_1.g1();
+        yDrawOffset = stream_1.g1();
+        myWidth = stream_1.g2();
+        myHeight = stream_1.g2();
+        int i1 = stream_1.g1();
         int j1 = myWidth * myHeight;
         myPixels = new int[j1];
         if(i1 == 0)
         {
             for(int k1 = 0; k1 < j1; k1++)
-                myPixels[k1] = ai[stream.readUnsignedByte()];
+                myPixels[k1] = ai[stream.g1()];
 
             return;
         }
@@ -82,7 +82,7 @@ public final class RgbImage extends DrawingArea {
             for(int l1 = 0; l1 < myWidth; l1++)
             {
                 for(int i2 = 0; i2 < myHeight; i2++)
-                    myPixels[l1 + i2 * myWidth] = ai[stream.readUnsignedByte()];
+                    myPixels[l1 + i2 * myWidth] = ai[stream.g1()];
 
             }
 

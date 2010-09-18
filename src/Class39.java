@@ -65,22 +65,22 @@ final class Class39
         return anIntArray665[i] * 2;
     }
 
-    public void method545(Stream stream, Class29 class29)
+    public void method545(Packet stream, Class29 class29)
     {
-        int i = stream.readUnsignedByte();
+        int i = stream.g1();
         anIntArray665[0] = i >> 4;
         anIntArray665[1] = i & 0xf;
         if(i != 0)
         {
-            anIntArray668[0] = stream.readUnsignedWord();
-            anIntArray668[1] = stream.readUnsignedWord();
-            int j = stream.readUnsignedByte();
+            anIntArray668[0] = stream.g2();
+            anIntArray668[1] = stream.g2();
+            int j = stream.g1();
             for(int k = 0; k < 2; k++)
             {
                 for(int l = 0; l < anIntArray665[k]; l++)
                 {
-                    anIntArrayArrayArray666[k][0][l] = stream.readUnsignedWord();
-                    anIntArrayArrayArray667[k][0][l] = stream.readUnsignedWord();
+                    anIntArrayArrayArray666[k][0][l] = stream.g2();
+                    anIntArrayArrayArray667[k][0][l] = stream.g2();
                 }
 
             }
@@ -90,8 +90,8 @@ final class Class39
                 for(int j1 = 0; j1 < anIntArray665[i1]; j1++)
                     if((j & 1 << i1 * 4 << j1) != 0)
                     {
-                        anIntArrayArrayArray666[i1][1][j1] = stream.readUnsignedWord();
-                        anIntArrayArrayArray667[i1][1][j1] = stream.readUnsignedWord();
+                        anIntArrayArrayArray666[i1][1][j1] = stream.g2();
+                        anIntArrayArrayArray667[i1][1][j1] = stream.g2();
                     } else
                     {
                         anIntArrayArrayArray666[i1][1][j1] = anIntArrayArrayArray666[i1][0][j1];

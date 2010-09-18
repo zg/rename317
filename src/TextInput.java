@@ -4,13 +4,13 @@
 
 final class TextInput {
 
-    public static String method525(int i, Stream stream)
+    public static String method525(int i, Packet stream)
     {
         int j = 0;
         int k = -1;
         for(int l = 0; l < i; l++)
         {
-            int i1 = stream.readUnsignedByte();
+            int i1 = stream.g1();
             int j1 = i1 >> 4 & 0xf;
             if(k == -1)
             {
@@ -52,7 +52,7 @@ final class TextInput {
         return new String(aCharArray631, 0, j);
     }
 
-    public static void method526(String s, Stream stream)
+    public static void method526(String s, Packet stream)
     {
         if(s.length() > 80)
             s = s.substring(0, 80);
@@ -77,35 +77,35 @@ final class TextInput {
                 if(k < 13)
                     i = k;
                 else
-                    stream.writeWordBigEndian(k);
+                    stream.p1(k);
             } else
             if(k < 13)
             {
-                stream.writeWordBigEndian((i << 4) + k);
+                stream.p1((i << 4) + k);
                 i = -1;
             } else
             {
-                stream.writeWordBigEndian((i << 4) + (k >> 4));
+                stream.p1((i << 4) + (k >> 4));
                 i = k & 0xf;
             }
         }
         if(i != -1)
-            stream.writeWordBigEndian(i << 4);
+            stream.p1(i << 4);
     }
 
     public static String processText(String s)
     {
-        stream.currentOffset = 0;
+        stream.pos = 0;
         method526(s, stream);
-        int j = stream.currentOffset;
-        stream.currentOffset = 0;
+        int j = stream.pos;
+        stream.pos = 0;
         String s1 = method525(j, stream);
         return s1;
     }
 
     private static final boolean aBoolean630 = true;
     private static final char[] aCharArray631 = new char[100];
-    private static final Stream stream = new Stream(new byte[100]);
+    private static final Packet stream = new Packet(new byte[100]);
     private static final char[] validChars = {
         ' ', 'e', 't', 'a', 'o', 'i', 'h', 'n', 's', 'r', 
         'd', 'l', 'u', 'm', 'w', 'c', 'y', 'f', 'g', 'p', 

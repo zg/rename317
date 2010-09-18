@@ -709,13 +709,13 @@ final class SceneGraph {
             if(vertexNormal_1.magnitude != 0)
             {
                 int i2 = model.vertexY[j1] - t_Y;
-                if(i2 <= model_1.anInt1651)
+                if(i2 <= model_1.max_y)
                 {
                     int j2 = model.vertexX[j1] - t_x;
-                    if(j2 >= model_1.anInt1646 && j2 <= model_1.anInt1647)
+                    if(j2 >= model_1.min_x && j2 <= model_1.max_x)
                     {
                         int k2 = model.vertexZ[j1] - k;
-                        if(k2 >= model_1.anInt1649 && k2 <= model_1.anInt1648)
+                        if(k2 >= model_1.min_z && k2 <= model_1.max_z)
                         {
                             for(int l2 = 0; l2 < i1; l2++)
                             {

@@ -13,7 +13,7 @@ public final class EntityDef
 
         anInt56 = (anInt56 + 1) % 20;
         EntityDef entityDef = cache[anInt56] = new EntityDef();
-        stream.currentOffset = streamIndices[i];
+        stream.pos = streamIndices[i];
         entityDef.type = i;
         entityDef.readValues(stream);
         return entityDef;
@@ -78,15 +78,15 @@ public final class EntityDef
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        stream = new Stream(jagexArchive.getDataForName("npc.dat"));
-        Stream stream2 = new Stream(jagexArchive.getDataForName("npc.idx"));
-        int totalNPCs = stream2.readUnsignedWord();
+        stream = new Packet(jagexArchive.getDataForName("npc.dat"));
+        Packet stream2 = new Packet(jagexArchive.getDataForName("npc.idx"));
+        int totalNPCs = stream2.g2();
         streamIndices = new int[totalNPCs];
         int i = 2;
         for(int j = 0; j < totalNPCs; j++)
         {
             streamIndices[j] = i;
-            i += stream2.readUnsignedWord();
+            i += stream2.g2();
         }
 
         cache = new EntityDef[20];
@@ -144,13 +144,13 @@ public final class EntityDef
         Model model_1 = Model.aModel_1621;
         model_1.method464(model, AnimationFrame.method532(frameId) & AnimationFrame.method532(j));
         if(frameId != -1 && j != -1)
-            model_1.method471(ai, j, frameId);
+            model_1.mix_anim_frames(ai, j, frameId);
         else
         if(frameId != -1)
             model_1.applyTransform(frameId);
         if(anInt91 != 128 || anInt86 != 128)
             model_1.scaleT(anInt91, anInt91, anInt86);
-        model_1.method466();
+        model_1.calculate_diagonals();
         model_1.triangleSkin = null;
         model_1.vertexSkin = null;
         if(aByte68 == 1)
@@ -158,120 +158,120 @@ public final class EntityDef
         return model_1;
     }
 
-    private void readValues(Stream stream)
+    private void readValues(Packet stream)
     {
         do
         {
-            int i = stream.readUnsignedByte();
+            int i = stream.g1();
             if(i == 0)
                 return;
             if(i == 1)
             {
-                int j = stream.readUnsignedByte();
+                int j = stream.g1();
                 anIntArray94 = new int[j];
                 for(int j1 = 0; j1 < j; j1++)
-                    anIntArray94[j1] = stream.readUnsignedWord();
+                    anIntArray94[j1] = stream.g2();
 
             } else
             if(i == 2)
-                name = stream.readString();
+                name = stream.gstr();
             else
             if(i == 3)
-                description = stream.readBytes();
+                description = stream.gstrbyte();
             else
             if(i == 12)
-                aByte68 = stream.readSignedByte();
+                aByte68 = stream.g1b();
             else
             if(i == 13)
-                idleAnimation = stream.readUnsignedWord();
+                idleAnimation = stream.g2();
             else
             if(i == 14)
-                anInt67 = stream.readUnsignedWord();
+                anInt67 = stream.g2();
             else
             if(i == 17)
             {
-                anInt67 = stream.readUnsignedWord();
-                anInt58 = stream.readUnsignedWord();
-                anInt83 = stream.readUnsignedWord();
-                anInt55 = stream.readUnsignedWord();
+                anInt67 = stream.g2();
+                anInt58 = stream.g2();
+                anInt83 = stream.g2();
+                anInt55 = stream.g2();
             } else
             if(i >= 30 && i < 40)
             {
                 if(actions == null)
                     actions = new String[5];
-                actions[i - 30] = stream.readString();
+                actions[i - 30] = stream.gstr();
                 if(actions[i - 30].equalsIgnoreCase("hidden"))
                     actions[i - 30] = null;
             } else
             if(i == 40)
             {
-                int k = stream.readUnsignedByte();
+                int k = stream.g1();
                 anIntArray76 = new int[k];
                 anIntArray70 = new int[k];
                 for(int k1 = 0; k1 < k; k1++)
                 {
-                    anIntArray76[k1] = stream.readUnsignedWord();
-                    anIntArray70[k1] = stream.readUnsignedWord();
+                    anIntArray76[k1] = stream.g2();
+                    anIntArray70[k1] = stream.g2();
                 }
 
             } else
             if(i == 60)
             {
-                int l = stream.readUnsignedByte();
+                int l = stream.g1();
                 anIntArray73 = new int[l];
                 for(int l1 = 0; l1 < l; l1++)
-                    anIntArray73[l1] = stream.readUnsignedWord();
+                    anIntArray73[l1] = stream.g2();
 
             } else
             if(i == 90)
-                stream.readUnsignedWord();
+                stream.g2();
             else
             if(i == 91)
-                stream.readUnsignedWord();
+                stream.g2();
             else
             if(i == 92)
-                stream.readUnsignedWord();
+                stream.g2();
             else
             if(i == 93)
                 aBoolean87 = false;
             else
             if(i == 95)
-                combatLevel = stream.readUnsignedWord();
+                combatLevel = stream.g2();
             else
             if(i == 97)
-                anInt91 = stream.readUnsignedWord();
+                anInt91 = stream.g2();
             else
             if(i == 98)
-                anInt86 = stream.readUnsignedWord();
+                anInt86 = stream.g2();
             else
             if(i == 99)
                 aBoolean93 = true;
             else
             if(i == 100)
-                anInt85 = stream.readSignedByte();
+                anInt85 = stream.g1b();
             else
             if(i == 101)
-                anInt92 = stream.readSignedByte() * 5;
+                anInt92 = stream.g1b() * 5;
             else
             if(i == 102)
-                anInt75 = stream.readUnsignedWord();
+                anInt75 = stream.g2();
             else
             if(i == 103)
-                anInt79 = stream.readUnsignedWord();
+                anInt79 = stream.g2();
             else
             if(i == 106)
             {
-                anInt57 = stream.readUnsignedWord();
+                anInt57 = stream.g2();
                 if(anInt57 == 65535)
                     anInt57 = -1;
-                anInt59 = stream.readUnsignedWord();
+                anInt59 = stream.g2();
                 if(anInt59 == 65535)
                     anInt59 = -1;
-                int i1 = stream.readUnsignedByte();
+                int i1 = stream.g1();
                 childrenIDs = new int[i1 + 1];
                 for(int i2 = 0; i2 <= i1; i2++)
                 {
-                    childrenIDs[i2] = stream.readUnsignedWord();
+                    childrenIDs[i2] = stream.g2();
                     if(childrenIDs[i2] == 65535)
                         childrenIDs[i2] = -1;
                 }
@@ -309,7 +309,7 @@ public final class EntityDef
     private int anInt57;
     public int anInt58;
     private int anInt59;
-    private static Stream stream;
+    private static Packet stream;
     public int combatLevel;
     private final int anInt64;
     public String name;

@@ -6,8 +6,8 @@ public final class IdentityKit {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(jagexArchive.getDataForName("idk.dat"));
-        length = stream.readUnsignedWord();
+        Packet stream = new Packet(jagexArchive.getDataForName("idk.dat"));
+        length = stream.g2();
         if(cache == null)
             cache = new IdentityKit[length];
         for(int j = 0; j < length; j++)
@@ -18,35 +18,35 @@ public final class IdentityKit {
         }
     }
 
-    private void readValues(Stream stream)
+    private void readValues(Packet stream)
     {
         do
         {
-            int opcode = stream.readUnsignedByte();
+            int opcode = stream.g1();
             if(opcode == 0)
                 return;
             if(opcode == 1)
-                body_part_id = stream.readUnsignedByte();
+                body_part_id = stream.g1();
             else
             if(opcode == 2)
             {
-                int model_count = stream.readUnsignedByte();
+                int model_count = stream.g1();
                 body_model_ids = new int[model_count];
                 for(int ptr = 0; ptr < model_count; ptr++)
-                    body_model_ids[ptr] = stream.readUnsignedWord();
+                    body_model_ids[ptr] = stream.g2();
 
             } else
             if(opcode == 3)
                 not_selectable = true;
             else
             if(opcode >= 40 && opcode < 50)
-                recolour_original[opcode - 40] = stream.readUnsignedWord();
+                recolour_original[opcode - 40] = stream.g2();
             else
             if(opcode >= 50 && opcode < 60)
-                recolour_target[opcode - 50] = stream.readUnsignedWord();
+                recolour_target[opcode - 50] = stream.g2();
             else
             if(opcode >= 60 && opcode < 70)
-                head_model_ids[opcode - 60] = stream.readUnsignedWord();
+                head_model_ids[opcode - 60] = stream.g2();
             else
                 System.out.println("Error unrecognised config code: " + opcode);
         } while(true);

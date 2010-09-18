@@ -9,14 +9,14 @@ final class Sounds {
         aSoundTrackArray329 = new SoundTrack[10];
     }
 
-    public static void unpack(Stream stream)
+    public static void unpack(Packet stream)
     {
         waveGenerationBuffer = new byte[0x6baa8];
-        waveGenerationStream = new Stream(waveGenerationBuffer);
+        waveGenerationStream = new Packet(waveGenerationBuffer);
         SoundTrack.initialise();
         do
         {
-            int j = stream.readUnsignedWord();
+            int j = stream.g2();
             if(j == 65535)
                 return;
             sound_gererator_list[j] = new Sounds();
@@ -25,7 +25,7 @@ final class Sounds {
         } while(true);
     }
 
-    public static Stream generateWaveData(int i, int j)
+    public static Packet generateWaveData(int i, int j)
     {
         if(sound_gererator_list[j] != null)
         {
@@ -37,20 +37,20 @@ final class Sounds {
         }
     }
 
-    private void load(Stream stream)
+    private void load(Packet stream)
     {
         for(int i = 0; i < 10; i++)
         {
-            int j = stream.readUnsignedByte();
+            int j = stream.g1();
             if(j != 0)
             {
-                stream.currentOffset--;
+                stream.pos--;
                 aSoundTrackArray329[i] = new SoundTrack();
                 aSoundTrackArray329[i].unpack(stream);
             }
         }
-        anInt330 = stream.readUnsignedWord();
-        anInt331 = stream.readUnsignedWord();
+        anInt330 = stream.g2();
+        anInt331 = stream.g2();
     }
 
     private int method243()
@@ -76,24 +76,24 @@ final class Sounds {
         return j;
     }
 
-    private Stream writeWaveHeader(int i)
+    private Packet writeWaveHeader(int i)
     {
         int k = method245(i);
-        waveGenerationStream.currentOffset = 0;
-        waveGenerationStream.writeDWord(0x52494646);//RIFF
-        waveGenerationStream.method403(36 + k);
-        waveGenerationStream.writeDWord(0x57415645);//Wave
-        waveGenerationStream.writeDWord(0x666d7420);//FMT
-        waveGenerationStream.method403(16);//PCM Header size
-        waveGenerationStream.method400(1);//PCM Audio size
-        waveGenerationStream.method400(1);//MONO
-        waveGenerationStream.method403(22050);//SampleRate
-        waveGenerationStream.method403(22050);//ByteRate
-        waveGenerationStream.method400(1);//BlockAlign
-        waveGenerationStream.method400(8);//bitsPerSample
-        waveGenerationStream.writeDWord(0x64617461);//data
-        waveGenerationStream.method403(k);
-        waveGenerationStream.currentOffset += k;
+        waveGenerationStream.pos = 0;
+        waveGenerationStream.p4(0x52494646);//RIFF
+        waveGenerationStream.ip4(36 + k);
+        waveGenerationStream.p4(0x57415645);//Wave
+        waveGenerationStream.p4(0x666d7420);//FMT
+        waveGenerationStream.ip4(16);//PCM Header size
+        waveGenerationStream.ip2(1);//PCM Audio size
+        waveGenerationStream.ip2(1);//MONO
+        waveGenerationStream.ip4(22050);//SampleRate
+        waveGenerationStream.ip4(22050);//ByteRate
+        waveGenerationStream.ip2(1);//BlockAlign
+        waveGenerationStream.ip2(8);//bitsPerSample
+        waveGenerationStream.p4(0x64617461);//data
+        waveGenerationStream.ip4(k);
+        waveGenerationStream.pos += k;
         return waveGenerationStream;
     }
 
@@ -150,7 +150,7 @@ final class Sounds {
     private static final Sounds[] sound_gererator_list = new Sounds[5000];
     public static final int[] anIntArray326 = new int[5000];
     private static byte[] waveGenerationBuffer;
-    private static Stream waveGenerationStream;
+    private static Packet waveGenerationStream;
     private final SoundTrack[] aSoundTrackArray329;
     private int anInt330;
     private int anInt331;

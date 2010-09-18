@@ -6,32 +6,32 @@ final class JagexArchive {
 
     public JagexArchive(byte in[])
     {
-               Stream stream = new Stream(in);
-        int resultLength = stream.read3Bytes();
-        int rawLength = stream.read3Bytes();
+               Packet stream = new Packet(in);
+        int resultLength = stream.g3();
+        int rawLength = stream.g3();
         if(rawLength != resultLength)
         {
             byte out[] = new byte[resultLength];
             BZIP2Decompressor.decompress(out, resultLength, in, rawLength, 6);
             outputData = out;
-            stream = new Stream(outputData);
+            stream = new Packet(outputData);
             isCompressed = true;
         } else
         {
             outputData = in;
             isCompressed = false;
         }
-        dataSize = stream.readUnsignedWord();
+        dataSize = stream.g2();
         myNameIndexes = new int[dataSize];
         myFileSizes = new int[dataSize];
         myOnDiskFileSizes = new int[dataSize];
         myFileOffsets = new int[dataSize];
-        int k = stream.currentOffset + dataSize * 10;
+        int k = stream.pos + dataSize * 10;
         for(int l = 0; l < dataSize; l++)
         {
-            myNameIndexes[l] = stream.readDWord();
-            myFileSizes[l] = stream.read3Bytes();
-            myOnDiskFileSizes[l] = stream.read3Bytes();
+            myNameIndexes[l] = stream.g4();
+            myFileSizes[l] = stream.g3();
+            myOnDiskFileSizes[l] = stream.g3();
             myFileOffsets[l] = k;
             k += myOnDiskFileSizes[l];
         }

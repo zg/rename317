@@ -6,8 +6,8 @@ public final class Animation {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Stream stream = new Stream(jagexArchive.getDataForName("seq.dat"));
-        int length = stream.readUnsignedWord();
+        Packet stream = new Packet(jagexArchive.getDataForName("seq.dat"));
+        int length = stream.g2();
         if(anims == null)
             anims = new Animation[length];
         for(int j = 0; j < length; j++)
@@ -32,38 +32,38 @@ public final class Animation {
         return j;
     }
 
-    private void readValues(Stream stream)
+    private void readValues(Packet stream)
     {
         do
         {
-            int i = stream.readUnsignedByte();
+            int i = stream.g1();
             if(i == 0)
                 break;
             if(i == 1)
             {
-                frameCount = stream.readUnsignedByte();
+                frameCount = stream.g1();
                 frame2IDS = new int[frameCount];
                 frame1IDS = new int[frameCount];
                 frameLengths = new int[frameCount];
                 for(int j = 0; j < frameCount; j++)
                 {
-                    frame2IDS[j] = stream.readUnsignedWord();
-                    frame1IDS[j] = stream.readUnsignedWord();
+                    frame2IDS[j] = stream.g2();
+                    frame1IDS[j] = stream.g2();
                     if(frame1IDS[j] == 65535)
                         frame1IDS[j] = -1;
-                    frameLengths[j] = stream.readUnsignedWord();
+                    frameLengths[j] = stream.g2();
                 }
 
             } else
             if(i == 2)
-                frameStep = stream.readUnsignedWord();
+                frameStep = stream.g2();
             else
             if(i == 3)
             {
-                int k = stream.readUnsignedByte();
+                int k = stream.g1();
                 animationFlowControl = new int[k + 1];
                 for(int l = 0; l < k; l++)
-                    animationFlowControl[l] = stream.readUnsignedByte();
+                    animationFlowControl[l] = stream.g1();
 
                 animationFlowControl[k] = 0x98967f;
             } else
@@ -71,28 +71,28 @@ public final class Animation {
                 aBoolean358 = true;
             else
             if(i == 5)
-                anInt359 = stream.readUnsignedByte();
+                anInt359 = stream.g1();
             else
             if(i == 6)
-                anInt360 = stream.readUnsignedWord();
+                anInt360 = stream.g2();
             else
             if(i == 7)
-                anInt361 = stream.readUnsignedWord();
+                anInt361 = stream.g2();
             else
             if(i == 8)
-                anInt362 = stream.readUnsignedByte();
+                anInt362 = stream.g1();
             else
             if(i == 9)
-                anInt363 = stream.readUnsignedByte();
+                anInt363 = stream.g1();
             else
             if(i == 10)
-                priority = stream.readUnsignedByte();
+                priority = stream.g1();
             else
             if(i == 11)
-                anInt365 = stream.readUnsignedByte();
+                anInt365 = stream.g1();
             else
             if(i == 12)
-                stream.readDWord();
+                stream.g4();
             else
                 System.out.println("Error unrecognised seq config code: " + i);
         } while(true);

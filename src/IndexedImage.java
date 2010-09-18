@@ -6,34 +6,34 @@ public final class IndexedImage extends DrawingArea {
 
     public IndexedImage(JagexArchive jagexArchive, String s, int i)
     {
-        Stream stream = new Stream(jagexArchive.getDataForName(s + ".dat"));
-        Stream stream_1 = new Stream(jagexArchive.getDataForName("index.dat"));
-        stream_1.currentOffset = stream.readUnsignedWord();
-        libWidth = stream_1.readUnsignedWord();
-        libHeight = stream_1.readUnsignedWord();
-        int j = stream_1.readUnsignedByte();
+        Packet stream = new Packet(jagexArchive.getDataForName(s + ".dat"));
+        Packet stream_1 = new Packet(jagexArchive.getDataForName("index.dat"));
+        stream_1.pos = stream.g2();
+        libWidth = stream_1.g2();
+        libHeight = stream_1.g2();
+        int j = stream_1.g1();
         palette = new int[j];
         for(int k = 0; k < j - 1; k++)
-            palette[k + 1] = stream_1.read3Bytes();
+            palette[k + 1] = stream_1.g3();
 
         for(int l = 0; l < i; l++)
         {
-            stream_1.currentOffset += 2;
-            stream.currentOffset += stream_1.readUnsignedWord() * stream_1.readUnsignedWord();
-            stream_1.currentOffset++;
+            stream_1.pos += 2;
+            stream.pos += stream_1.g2() * stream_1.g2();
+            stream_1.pos++;
         }
 
-        xDrawOffset = stream_1.readUnsignedByte();
-        yDrawOffset = stream_1.readUnsignedByte();
-        imgWidth = stream_1.readUnsignedWord();
-        imgHeight = stream_1.readUnsignedWord();
-        int imgType = stream_1.readUnsignedByte();
+        xDrawOffset = stream_1.g1();
+        yDrawOffset = stream_1.g1();
+        imgWidth = stream_1.g2();
+        imgHeight = stream_1.g2();
+        int imgType = stream_1.g1();
         int j1 = imgWidth * imgHeight;
         imgPixels = new byte[j1];
         if(imgType == 0)
         {
             for(int k1 = 0; k1 < j1; k1++)
-                imgPixels[k1] = stream.readSignedByte();
+                imgPixels[k1] = stream.g1b();
 
             return;
         }
@@ -42,7 +42,7 @@ public final class IndexedImage extends DrawingArea {
             for(int l1 = 0; l1 < imgWidth; l1++)
             {
                 for(int i2 = 0; i2 < imgHeight; i2++)
-                    imgPixels[l1 + i2 * imgWidth] = stream.readSignedByte();
+                    imgPixels[l1 + i2 * imgWidth] = stream.g1b();
 
             }
 

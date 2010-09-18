@@ -14,7 +14,7 @@ public final class ObjectDef
 
         cacheIndex = (cacheIndex + 1) % 20;
         ObjectDef class46 = cache[cacheIndex];
-        stream.currentOffset = streamIndices[i];
+        stream.pos = streamIndices[i];
         class46.type = i;
         class46.setDefaults();
         class46.readValues(stream);
@@ -80,15 +80,15 @@ stream = null;
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        stream = new Stream(jagexArchive.getDataForName("loc.dat"));
-        Stream stream = new Stream(jagexArchive.getDataForName("loc.idx"));
-        int totalObjects = stream.readUnsignedWord();
+        stream = new Packet(jagexArchive.getDataForName("loc.dat"));
+        Packet stream = new Packet(jagexArchive.getDataForName("loc.idx"));
+        int totalObjects = stream.g2();
         streamIndices = new int[totalObjects];
         int i = 2;
         for(int j = 0; j < totalObjects; j++)
         {
             streamIndices[j] = i;
-            i += stream.readUnsignedWord();
+            i += stream.g2();
         }
 
         cache = new ObjectDef[20];
@@ -273,7 +273,7 @@ stream = null;
         return model_3;
     }
 
-    private void readValues(Stream stream)
+    private void readValues(Packet stream)
     {
         int i = -1;
 label0:
@@ -282,12 +282,12 @@ label0:
             int j;
             do
             {
-                j = stream.readUnsignedByte();
+                j = stream.g1();
                 if(j == 0)
                     break label0;
                 if(j == 1)
                 {
-                    int k = stream.readUnsignedByte();
+                    int k = stream.g1();
                     if(k > 0)
                         if(objectModelIDs == null || lowMem)
                         {
@@ -295,42 +295,42 @@ label0:
                             objectModelIDs = new int[k];
                             for(int k1 = 0; k1 < k; k1++)
                             {
-                                objectModelIDs[k1] = stream.readUnsignedWord();
-                                types[k1] = stream.readUnsignedByte();
+                                objectModelIDs[k1] = stream.g2();
+                                types[k1] = stream.g1();
                             }
 
                         } else
                         {
-                            stream.currentOffset += k * 3;
+                            stream.pos += k * 3;
                         }
                 } else
                 if(j == 2)
-                    name = stream.readString();
+                    name = stream.gstr();
                 else
                 if(j == 3)
-                    description = stream.readBytes();
+                    description = stream.gstrbyte();
                 else
                 if(j == 5)
                 {
-                    int l = stream.readUnsignedByte();
+                    int l = stream.g1();
                     if(l > 0)
                         if(objectModelIDs == null || lowMem)
                         {
                             types = null;
                             objectModelIDs = new int[l];
                             for(int l1 = 0; l1 < l; l1++)
-                                objectModelIDs[l1] = stream.readUnsignedWord();
+                                objectModelIDs[l1] = stream.g2();
 
                         } else
                         {
-                            stream.currentOffset += l * 2;
+                            stream.pos += l * 2;
                         }
                 } else
                 if(j == 14)
-                    sizeX = stream.readUnsignedByte();
+                    sizeX = stream.g1();
                 else
                 if(j == 15)
-                    sizeY = stream.readUnsignedByte();
+                    sizeY = stream.g1();
                 else
                 if(j == 17)
                     isUnwalkable = false;
@@ -340,7 +340,7 @@ label0:
                 else
                 if(j == 19)
                 {
-                    i = stream.readUnsignedByte();
+                    i = stream.g1();
                     if(i == 1)
                         hasActions = true;
                 } else
@@ -355,41 +355,41 @@ label0:
                 else
                 if(j == 24)
                 {
-                    animationID = stream.readUnsignedWord();
+                    animationID = stream.g2();
                     if(animationID == 65535)
                         animationID = -1;
                 } else
                 if(j == 28)
-                    anInt775 = stream.readUnsignedByte();
+                    anInt775 = stream.g1();
                 else
                 if(j == 29)
-                    brightness = stream.readSignedByte();
+                    brightness = stream.g1b();
                 else
                 if(j == 39)
-                    contrast = stream.readSignedByte();
+                    contrast = stream.g1b();
                 else
                 if(j >= 30 && j < 39)
                 {
                     if(actions == null)
                         actions = new String[5];
-                    actions[j - 30] = stream.readString();
+                    actions[j - 30] = stream.gstr();
                     if(actions[j - 30].equalsIgnoreCase("hidden"))
                         actions[j - 30] = null;
                 } else
                 if(j == 40)
                 {
-                    int i1 = stream.readUnsignedByte();
+                    int i1 = stream.g1();
                     modifiedModelColors = new int[i1];
                     originalModelColors = new int[i1];
                     for(int i2 = 0; i2 < i1; i2++)
                     {
-                        modifiedModelColors[i2] = stream.readUnsignedWord();
-                        originalModelColors[i2] = stream.readUnsignedWord();
+                        modifiedModelColors[i2] = stream.g2();
+                        originalModelColors[i2] = stream.g2();
                     }
 
                 } else
                 if(j == 60)
-                    mapFunctionID = stream.readUnsignedWord();
+                    mapFunctionID = stream.g2();
                 else
                 if(j == 62)
                     aBoolean751 = true;
@@ -398,28 +398,28 @@ label0:
                     aBoolean779 = false;
                 else
                 if(j == 65)
-                    modelSizeX = stream.readUnsignedWord();
+                    modelSizeX = stream.g2();
                 else
                 if(j == 66)
-                    modelSizeH = stream.readUnsignedWord();
+                    modelSizeH = stream.g2();
                 else
                 if(j == 67)
-                    modelSizeY = stream.readUnsignedWord();
+                    modelSizeY = stream.g2();
                 else
                 if(j == 68)
-                    mapSceneID = stream.readUnsignedWord();
+                    mapSceneID = stream.g2();
                 else
                 if(j == 69)
-                    anInt768 = stream.readUnsignedByte();
+                    anInt768 = stream.g1();
                 else
                 if(j == 70)
-                    offsetX = stream.readSignedWord();
+                    offsetX = stream.g2b();
                 else
                 if(j == 71)
-                    offsetH = stream.readSignedWord();
+                    offsetH = stream.g2b();
                 else
                 if(j == 72)
-                    offsetY = stream.readSignedWord();
+                    offsetY = stream.g2b();
                 else
                 if(j == 73)
                     aBoolean736 = true;
@@ -431,21 +431,21 @@ label0:
                 {
                     if(j != 75)
                         continue;
-                    anInt760 = stream.readUnsignedByte();
+                    anInt760 = stream.g1();
                 }
                 continue label0;
             } while(j != 77);
-            configId_1 = stream.readUnsignedWord();
+            configId_1 = stream.g2();
             if(configId_1 == 65535)
                 configId_1 = -1;
-            configID = stream.readUnsignedWord();
+            configID = stream.g2();
             if(configID == 65535)
                 configID = -1;
-            int j1 = stream.readUnsignedByte();
+            int j1 = stream.g1();
             configObjectIDs = new int[j1 + 1];
             for(int j2 = 0; j2 <= j1; j2++)
             {
-                configObjectIDs[j2] = stream.readUnsignedWord();
+                configObjectIDs[j2] = stream.g2();
                 if(configObjectIDs[j2] == 65535)
                     configObjectIDs[j2] = -1;
             }
@@ -486,7 +486,7 @@ label0:
     public int configID;
     private boolean aBoolean751;
     public static boolean lowMem;
-    private static Stream stream;
+    private static Packet stream;
     public int type;
     private static int[] streamIndices;
     public boolean aBoolean757;

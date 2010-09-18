@@ -218,34 +218,34 @@ final class SoundTrack
             return 0;
     }
 
-    public void unpack(Stream stream)
+    public void unpack(Packet stream)
     {
         samp1 = new Class29();
         samp1.method325(stream);
         samp2 = new Class29();
         samp2.method325(stream);
-        int i = stream.readUnsignedByte();
+        int i = stream.g1();
         if(i != 0)
         {
-            stream.currentOffset--;
+            stream.pos--;
             samp3 = new Class29();
             samp3.method325(stream);
             samp4 = new Class29();
             samp4.method325(stream);
         }
-        i = stream.readUnsignedByte();
+        i = stream.g1();
         if(i != 0)
         {
-            stream.currentOffset--;
+            stream.pos--;
             samp5 = new Class29();
             samp5.method325(stream);
             samp6 = new Class29();
             samp6.method325(stream);
         }
-        i = stream.readUnsignedByte();
+        i = stream.g1();
         if(i != 0)
         {
-            stream.currentOffset--;
+            stream.pos--;
             aClass29_104 = new Class29();
             aClass29_104.method325(stream);
             aClass29_105 = new Class29();
@@ -253,18 +253,18 @@ final class SoundTrack
         }
         for(int j = 0; j < 10; j++)
         {
-            int k = stream.readSpaceSaver();
+            int k = stream.gsmarts();
             if(k == 0)
                 break;
             anIntArray106[j] = k;
-            anIntArray107[j] = stream.readSpaceSaver2();
-            anIntArray108[j] = stream.readSpaceSaver();
+            anIntArray107[j] = stream.gsmart();
+            anIntArray108[j] = stream.gsmarts();
         }
 
-        anInt109 = stream.readSpaceSaver();
-        gain = stream.readSpaceSaver();
-        msLength = stream.readUnsignedWord();
-        anInt114 = stream.readUnsignedWord();
+        anInt109 = stream.gsmarts();
+        gain = stream.gsmarts();
+        msLength = stream.g2();
+        anInt114 = stream.g2();
         aClass39_111 = new Class39();
         aClass29_112 = new Class29();
         aClass39_111.method545(stream, aClass29_112);
