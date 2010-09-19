@@ -60,10 +60,28 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SceneGraph.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SceneGraph.java">
+      <file leaf-file-name="Model.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="415" column="102" selection-start="14588" selection-end="14588" vertical-scroll-proportion="0.044619422">
+            <state line="626" column="57" selection-start="17929" selection-end="17929" vertical-scroll-proportion="-0.098314606">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModelHeader.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ModelHeader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="16" selection-start="330" selection-end="355" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Packet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Packet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="131" column="21" selection-start="3060" selection-end="3060" vertical-scroll-proportion="-8.28">
               <folding />
             </state>
           </provider>
@@ -84,7 +102,6 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/ModelHeader.java" />
-        <option value="$PROJECT_DIR$/Model.java" />
         <option value="$PROJECT_DIR$/Class33.java" />
         <option value="$PROJECT_DIR$/IndexedImage.java" />
         <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
@@ -99,6 +116,7 @@
         <option value="$PROJECT_DIR$/client.java" />
         <option value="$PROJECT_DIR$/RgbImage.java" />
         <option value="$PROJECT_DIR$/SceneGraph.java" />
+        <option value="$PROJECT_DIR$/Model.java" />
       </list>
     </option>
   </component>
@@ -137,7 +155,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
@@ -159,7 +177,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -276,20 +294,20 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32958034" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28045034" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24974412" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4752941" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24974412" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -324,16 +342,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="36" selection-start="418" selection-end="418" vertical-scroll-proportion="0.6834171" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GameObjectSpawnRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="33" selection-start="406" selection-end="406" vertical-scroll-proportion="0.6407035" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DrawingArea.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="13" selection-start="164" selection-end="164" vertical-scroll-proportion="-9.7979" />
@@ -342,11 +350,6 @@
     <entry file="file://$PROJECT_DIR$/ObjectDef.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="62" column="24" selection-start="1612" selection-end="1612" vertical-scroll-proportion="0.044619422" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="31" selection-start="274" selection-end="280" vertical-scroll-proportion="0.044619422" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ObjectOnTile.java">
@@ -401,7 +404,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SceneGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="415" column="102" selection-start="14588" selection-end="14588" vertical-scroll-proportion="0.044619422">
+        <state line="428" column="73" selection-start="14872" selection-end="14872" vertical-scroll-proportion="0.62467194">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Packet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="131" column="21" selection-start="3060" selection-end="3060" vertical-scroll-proportion="-8.28">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ModelHeader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="16" selection-start="330" selection-end="355" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="626" column="57" selection-start="17929" selection-end="17929" vertical-scroll-proportion="-0.098314606">
           <folding />
         </state>
       </provider>

@@ -34,6 +34,510 @@ public final class Model extends Animable {
         aOnDemandFetcherParent_1662 = onDemandFetcherParent;
     }
 
+
+        public Model(int modelId,int j)
+    {
+	 byte[] is = modelHeaderCache[modelId].modelData;
+        if(is[is.length - 1] == -1 && is[is.length - 2] == -1)
+                readNewModel(is, modelId);
+        else
+                readOldModel(modelId);
+    }
+
+        private void readOldModel(int i)
+    {
+		//int j = -870;
+        //anInt1614 = 9;
+        //aBoolean1615 = false;
+        //anInt1616 = 360;
+        //anInt1617 = 1;
+        //aBoolean1618 = true;
+        aBoolean1659 = false;
+        //anInt1620++;
+        ModelHeader class21 = modelHeaderCache[i];
+        verticeCount = class21.modelVerticeCount;
+        triangleCount = class21.modelTriangleCount;
+        texturedTriangeAmmount = class21.modelTextureTriangleCount;
+        vertexX = new int[verticeCount];//vertexX
+        vertexY = new int[verticeCount];//vy
+        vertexZ = new int[verticeCount];//vz
+        triangleA = new int[triangleCount];//trianglea
+        triangleB = new int[triangleCount];//b
+        triangleC = new int[triangleCount];//c
+        tri_a_buffer = new int[texturedTriangeAmmount];//tri_a_buffer
+        tri_b_buffer = new int[texturedTriangeAmmount];//b
+        tri_c_buffer = new int[texturedTriangeAmmount];//c
+        if(class21.anInt376 >= 0)
+            vertex_vskin = new int[verticeCount];//vertex_vskin
+        if(class21.anInt380 >= 0)
+            triangle_draw_type = new int[triangleCount];//triangle_draw_type
+        if(class21.anInt381 >= 0)
+            face_priority = new int[triangleCount];//face_priority
+        else
+            anInt1641 = -class21.anInt381 - 1;
+        if(class21.alpha_basepos >= 0)//alpha_basepos
+            triangleAlpha = new int[triangleCount];//triangleAlpha
+        if(class21.tskin_basepos >= 0)//tskin_basepos
+            triangle_tskin = new int[triangleCount];//triangle_tskin
+        triangleColours = new int[triangleCount];//triangleColours
+        Packet class30_sub2_sub2 = new Packet(class21.modelData);
+        class30_sub2_sub2.pos = class21.vertexModOffset;
+        Packet class30_sub2_sub2_1 = new Packet(class21.modelData);
+        class30_sub2_sub2_1.pos = class21.vertexXOffset;
+        Packet class30_sub2_sub2_2 = new Packet(class21.modelData);
+        class30_sub2_sub2_2.pos = class21.vertexYOffset;
+        Packet class30_sub2_sub2_3 = new Packet(class21.modelData);
+        class30_sub2_sub2_3.pos = class21.vertexZOffset;
+        Packet class30_sub2_sub2_4 = new Packet(class21.modelData);
+        class30_sub2_sub2_4.pos = class21.anInt376;
+        int k = 0;
+        int l = 0;
+        int i1 = 0;
+        for(int j1 = 0; j1 < verticeCount; j1++)
+        {
+            int k1 = class30_sub2_sub2.g1();
+            int i2 = 0;
+            if((k1 & 1) != 0)
+                i2 = class30_sub2_sub2_1.gsmart();
+            int k2 = 0;
+            if((k1 & 2) != 0)
+                k2 = class30_sub2_sub2_2.gsmart();
+            int i3 = 0;
+            if((k1 & 4) != 0)
+                i3 = class30_sub2_sub2_3.gsmart();
+            vertexX[j1] = k + i2;
+            vertexY[j1] = l + k2;
+            vertexZ[j1] = i1 + i3;
+            k = vertexX[j1];
+            l = vertexY[j1];
+            i1 = vertexZ[j1];
+            if(vertex_vskin != null)
+                vertex_vskin[j1] = class30_sub2_sub2_4.g1();
+        }
+
+        class30_sub2_sub2.pos = class21.triColourOffset;
+        class30_sub2_sub2_1.pos = class21.anInt380;
+        class30_sub2_sub2_2.pos = class21.anInt381;
+        class30_sub2_sub2_3.pos = class21.alpha_basepos;
+        class30_sub2_sub2_4.pos = class21.tskin_basepos;
+        for(int l1 = 0; l1 < triangleCount; l1++)
+        {
+            triangleColours[l1] = class30_sub2_sub2.g2();
+            if(triangle_draw_type != null)
+                triangle_draw_type[l1] = class30_sub2_sub2_1.g1();
+            if(face_priority != null)
+                face_priority[l1] = class30_sub2_sub2_2.g1();
+            if(triangleAlpha != null){
+                triangleAlpha[l1] = class30_sub2_sub2_3.g1();
+		}
+            if(triangle_tskin != null)
+                triangle_tskin[l1] = class30_sub2_sub2_4.g1();
+        }
+
+        class30_sub2_sub2.pos = class21.triVPointOffset;
+        class30_sub2_sub2_1.pos = class21.triMeshLinkOffset;
+        int j2 = 0;
+        int l2 = 0;
+        int j3 = 0;
+        int k3 = 0;
+        for(int l3 = 0; l3 < triangleCount; l3++)
+        {
+            int i4 = class30_sub2_sub2_1.g1();
+            if(i4 == 1)
+            {
+                j2 = class30_sub2_sub2.gsmart() + k3;
+                k3 = j2;
+                l2 = class30_sub2_sub2.gsmart() + k3;
+                k3 = l2;
+                j3 = class30_sub2_sub2.gsmart() + k3;
+                k3 = j3;
+                triangleA[l3] = j2;
+                triangleB[l3] = l2;
+                triangleC[l3] = j3;
+            }
+            if(i4 == 2)
+            {
+                j2 = j2;
+                l2 = j3;
+                j3 = class30_sub2_sub2.gsmart() + k3;
+                k3 = j3;
+                triangleA[l3] = j2;
+                triangleB[l3] = l2;
+                triangleC[l3] = j3;
+            }
+            if(i4 == 3)
+            {
+                j2 = j3;
+                l2 = l2;
+                j3 = class30_sub2_sub2.gsmart() + k3;
+                k3 = j3;
+                triangleA[l3] = j2;
+                triangleB[l3] = l2;
+                triangleC[l3] = j3;
+            }
+            if(i4 == 4)
+            {
+                int k4 = j2;
+                j2 = l2;
+                l2 = k4;
+                j3 = class30_sub2_sub2.gsmart() + k3;
+                k3 = j3;
+                triangleA[l3] = j2;
+                triangleB[l3] = l2;
+                triangleC[l3] = j3;
+            }
+        }
+
+        class30_sub2_sub2.pos = class21.anInt384;
+        for(int j4 = 0; j4 < texturedTriangeAmmount; j4++)
+        {
+            tri_a_buffer[j4] = class30_sub2_sub2.g2();
+            tri_b_buffer[j4] = class30_sub2_sub2.g2();
+            tri_c_buffer[j4] = class30_sub2_sub2.g2();
+        }
+	}
+        public void readNewModel(byte abyte0[], int modelID) {
+        Packet nc1 = new Packet(abyte0);
+        Packet nc2 = new Packet(abyte0);
+        Packet nc3 = new Packet(abyte0);
+        Packet nc4 = new Packet(abyte0);
+        Packet nc5 = new Packet(abyte0);
+        Packet nc6 = new Packet(abyte0);
+        Packet nc7 = new Packet(abyte0);
+		nc1.pos = abyte0.length - 23;
+		int numVertices = nc1.g2();
+		int numTriangles = nc1.g2();
+		int numTexTriangles = nc1.g1();
+		ModelHeader ModelDef_1 = modelHeaderCache[modelID] = new ModelHeader();
+		ModelDef_1.modelData = abyte0;
+		ModelDef_1.modelVerticeCount = numVertices;
+		ModelDef_1.modelTriangleCount = numTriangles;
+		ModelDef_1.modelTextureTriangleCount = numTexTriangles;
+		int l1 = nc1.g1();
+		boolean bool = (0x1 & l1 ^ 0xffffffff) == -2;
+		boolean bool_78_ = (l1 & 0x2 ^ 0xffffffff) == -3;
+		int i2 = nc1.g1();
+		int j2 = nc1.g1();
+		int k2 = nc1.g1();
+		int l2 = nc1.g1();
+		int i3 = nc1.g1();
+		int j3 = nc1.g2();
+		int k3 = nc1.g2();
+		int l3 = nc1.g2();
+		int i4 = nc1.g2();
+		int j4 = nc1.g2();
+		int k4 = 0;
+		int l4 = 0;
+		int i5 = 0;
+		int v = 0;
+		int hb = 0;
+		int P = 0;
+		byte G = 0;
+		byte[] x = null;
+		byte[] O = null;
+		byte[] J = null;
+		byte[] F = null;
+		byte[] cb = null;
+		byte[] gb = null;
+		byte[] lb = null;
+		int[] ab = null;
+		int[] kb = null;
+		int[] y = null;
+		int[] N = null;
+		short[] D = null;
+		int[] triangleColours2 = new int[numTriangles];
+		if(numTexTriangles > 0) {
+			O = new byte[numTexTriangles];
+			nc1.pos = 0;
+			for(int j5 = 0; j5 < numTexTriangles; j5++)
+			{
+			byte byte0 = O[j5] = nc1.g1b();
+			if(byte0 == 0)
+				k4++;
+			if(byte0 >= 1 && byte0 <= 3)
+				l4++;
+			if(byte0 == 2)
+				i5++;
+			}
+		}
+		int k5 = numTexTriangles;
+		int l5 = k5;
+		k5 += numVertices;
+		int i6 = k5;
+		if(l1 == 1)
+			k5 += numTriangles;
+		int j6 = k5;
+		k5 += numTriangles;
+		int k6 = k5;
+		if(i2 == 255)
+			k5 += numTriangles;
+		int l6 = k5;
+		if(k2 == 1)
+			k5 += numTriangles;
+		int i7 = k5;
+		if(i3 == 1)
+			k5 += numVertices;
+		int j7 = k5;
+		if(j2 == 1)
+			k5 += numTriangles;
+		int k7 = k5;
+		k5 += i4;
+		int l7 = k5;
+		if(l2 == 1)
+			k5 += numTriangles * 2;
+		int i8 = k5;
+		k5 += j4;
+		int j8 = k5;
+		k5 += numTriangles * 2;
+		int k8 = k5;
+		k5 += j3;
+		int l8 = k5;
+		k5 += k3;
+		int i9 = k5;
+		k5 += l3;
+		int j9 = k5;
+		k5 += k4 * 6;
+		int k9 = k5;
+		k5 += l4 * 6;
+		int l9 = k5;
+		k5 += l4 * 6;
+		int i10 = k5;
+		k5 += l4;
+		int j10 = k5;
+		k5 += l4;
+		int k10 = k5;
+		k5 += l4 + i5 * 2;
+		v = numVertices;
+		hb = numTriangles;
+		P = numTexTriangles;
+		int[] vertexX2 = new int[numVertices];
+		int[] vertexY2 = new int[numVertices];
+		int[] vertexZ2 = new int[numVertices];
+		int[] facePoint1 = new int[numTriangles];
+		int[] facePoint2 = new int[numTriangles];
+		int[] facePoint3 = new int[numTriangles];
+			vertex_vskin = new int[numVertices];
+			triangle_draw_type = new int[numTriangles];
+			face_priority = new int[numTriangles];
+			triangleAlpha = new int[numTriangles];
+			triangle_tskin = new int[numTriangles];
+
+
+
+
+		if(i3 == 1)
+			vertex_vskin = new int[numVertices];
+		if(bool)
+			triangle_draw_type = new int[numTriangles];
+		if(i2 == 255)
+			face_priority = new int[numTriangles];
+		else
+			G = (byte)i2;
+		if(j2 == 1)
+			triangleAlpha = new int[numTriangles];
+		if(k2 == 1)
+			triangle_tskin = new int[numTriangles];
+		if(l2 == 1)
+			D = new short[numTriangles];
+		if(l2 == 1 && numTexTriangles > 0)
+			x = new byte[numTriangles];
+		triangleColours2 = new int[numTriangles];
+		int i_115_ = k5;
+		int[] texTrianglesPoint1 = null;
+		int[] texTrianglesPoint2 = null;
+		int[] texTrianglesPoint3 = null;
+		if(numTexTriangles > 0) {
+			texTrianglesPoint1 = new int[numTexTriangles];
+			texTrianglesPoint2 = new int[numTexTriangles];
+			texTrianglesPoint3 = new int[numTexTriangles];
+			if(l4 > 0) {
+				kb = new int[l4];
+				N = new int[l4];
+				y = new int[l4];
+				gb = new byte[l4];
+				lb = new byte[l4];
+				F = new byte[l4];
+			}
+			if(i5 > 0) {
+				cb = new byte[i5];
+				J = new byte[i5];
+			}
+		}
+		nc1.pos = l5;
+		nc2.pos = k8;
+		nc3.pos = l8;
+		nc4.pos = i9;
+		nc5.pos = i7;
+		int l10 = 0;
+		int i11 = 0;
+		int j11 = 0;
+		for(int k11 = 0; k11 < numVertices; k11++) {
+			int l11 = nc1.g1();
+			int j12 = 0;
+			if((l11 & 1) != 0)
+				j12 = nc2.gsmart();
+			int l12 = 0;
+			if((l11 & 2) != 0)
+				l12 = nc3.gsmart();
+			int j13 = 0;
+			if((l11 & 4) != 0)
+				j13 = nc4.gsmart();
+			vertexX2[k11] = l10 + j12;
+			vertexY2[k11] = i11 + l12;
+			vertexZ2[k11] = j11 + j13;
+			l10 = vertexX2[k11];
+			i11 = vertexY2[k11];
+			j11 = vertexZ2[k11];
+			if(vertex_vskin != null)
+			vertex_vskin[k11] = nc5.g1();
+		}
+		nc1.pos = j8;
+		nc2.pos = i6;
+		nc3.pos = k6;
+		nc4.pos = j7;
+		nc5.pos = l6;
+		nc6.pos = l7;
+		nc7.pos = i8;
+		for(int i12 = 0; i12 < numTriangles; i12++) {
+
+
+			triangleColours2[i12] = nc1.g2();
+			if(l1 == 1){
+				triangle_draw_type[i12] = nc2.g1b();
+				if(triangle_draw_type[i12] == 2)triangleColours2[i12] = 65535;
+				triangle_draw_type[i12] = 0;
+			}
+			if(i2 == 255){
+			face_priority[i12] = nc3.g1b();
+			}
+			if(j2 == 1){
+			triangleAlpha[i12] = nc4.g1b();
+			if(triangleAlpha[i12] < 0)
+			triangleAlpha[i12] = (256+triangleAlpha[i12]);
+			}
+			if(k2 == 1)
+			triangle_tskin[i12] = nc5.g1();
+			if(l2 == 1)
+			D[i12] = (short)(nc6.g2() - 1);
+
+			if(x != null)
+			if(D[i12] != -1)
+				x[i12] = (byte)(nc7.g1() -1);
+			else
+				x[i12] = -1;
+		}
+		nc1.pos = k7;
+		nc2.pos = j6;
+		int k12 = 0;
+		int i13 = 0;
+		int k13 = 0;
+		int l13 = 0;
+		for(int i14 = 0; i14 < numTriangles; i14++) {
+			int j14 = nc2.g1();
+			if(j14 == 1) {
+				k12 = nc1.gsmart() + l13;
+				l13 = k12;
+				i13 = nc1.gsmart() + l13;
+				l13 = i13;
+				k13 = nc1.gsmart() + l13;
+				l13 = k13;
+				facePoint1[i14] = k12;
+				facePoint2[i14] = i13;
+				facePoint3[i14] = k13;
+			}
+			if(j14 == 2) {
+				i13 = k13;
+				k13 = nc1.gsmart() + l13;
+				l13 = k13;
+				facePoint1[i14] = k12;
+				facePoint2[i14] = i13;
+				facePoint3[i14] = k13;
+			}
+			if(j14 == 3) {
+				k12 = k13;
+				k13 = nc1.gsmart() + l13;
+				l13 = k13;
+				facePoint1[i14] = k12;
+				facePoint2[i14] = i13;
+				facePoint3[i14] = k13;
+			}
+			if(j14 == 4) {
+				int l14 = k12;
+				k12 = i13;
+				i13 = l14;
+				k13 = nc1.gsmart() + l13;
+				l13 = k13;
+				facePoint1[i14] = k12;
+				facePoint2[i14] = i13;
+				facePoint3[i14] = k13;
+			}
+		}
+		nc1.pos = j9;
+		nc2.pos = k9;
+		nc3.pos = l9;
+		nc4.pos = i10;
+		nc5.pos = j10;
+		nc6.pos = k10;
+		for(int k14 = 0; k14 < numTexTriangles; k14++) {
+			int i15 = O[k14] & 0xff;
+			if(i15 == 0) {
+				texTrianglesPoint1[k14] = nc1.g2();
+				texTrianglesPoint2[k14] = nc1.g2();
+				texTrianglesPoint3[k14] = nc1.g2();
+			}
+			if(i15 == 1) {
+				texTrianglesPoint1[k14] = nc2.g2();
+				texTrianglesPoint2[k14] = nc2.g2();
+				texTrianglesPoint3[k14] = nc2.g2();
+				kb[k14] = nc3.g2();
+				N[k14] = nc3.g2();
+				y[k14] = nc3.g2();
+				gb[k14] = nc4.g1b();
+				lb[k14] = nc5.g1b();
+				F[k14] = nc6.g1b();
+			}
+			if(i15 == 2) {
+				texTrianglesPoint1[k14] = nc2.g2();
+				texTrianglesPoint2[k14] = nc2.g2();
+				texTrianglesPoint3[k14] = nc2.g2();
+				kb[k14] = nc3.g2();
+				N[k14] = nc3.g2();
+				y[k14] = nc3.g2();
+				gb[k14] = nc4.g1b();
+				lb[k14] = nc5.g1b();
+				F[k14] = nc6.g1b();
+				cb[k14] = nc6.g1b();
+				J[k14] = nc6.g1b();
+			}
+			if(i15 == 3) {
+				texTrianglesPoint1[k14] = nc2.g2();
+				texTrianglesPoint2[k14] = nc2.g2();
+				texTrianglesPoint3[k14] = nc2.g2();
+				kb[k14] = nc3.g2();
+				N[k14] = nc3.g2();
+				y[k14] = nc3.g2();
+				gb[k14] = nc4.g1b();
+				lb[k14] = nc5.g1b();
+				F[k14] = nc6.g1b();
+			}
+		}
+
+	if (i2 != 255) {
+		for(int i12 = 0; i12 < numTriangles; i12++)
+			face_priority[i12] = i2;
+
+	}
+		triangleColours = triangleColours2;
+		verticeCount = numVertices;
+		triangleCount = numTriangles;
+		vertexX = vertexX2;
+		vertexY = vertexY2;
+		vertexZ = vertexZ2;
+		triangleA= facePoint1;
+		triangleB= facePoint2;
+		triangleC= facePoint3;
+}
+
     public static void method460(byte abyte0[], int j)
     {
         if(abyte0 == null)
@@ -120,7 +624,7 @@ public final class Model extends Animable {
             return null;
         } else
         {
-            return new Model(j);
+            return new Model(j,0);//edited for new engine
         }
     }
 
