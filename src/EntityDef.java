@@ -66,10 +66,10 @@ public final class EntityDef
             int l = varBit.least_significant_bit;
             int i1 = varBit.most_significant_bit;
             int j1 = client.BITFIELD_MAX_VALUE[i1 - l];
-            j = clientInstance.variousSettings[k] >> l & j1;
+            j = clientInstance.session_settings[k] >> l & j1;
         } else
         if(anInt59 != -1)
-            j = clientInstance.variousSettings[anInt59];
+            j = clientInstance.session_settings[anInt59];
         if(j < 0 || j >= childrenIDs.length || childrenIDs[j] == -1)
             return null;
         else

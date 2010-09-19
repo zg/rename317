@@ -106,7 +106,7 @@ public class RSApplet extends Applet
                 saveClickY = clickY;
                 aLong29 = clickTime;
                 clickMode1 = 0;
-                processGameLoop();
+                client_main_loop();
                 readIndex = writeIndex;
             }
 
@@ -411,7 +411,7 @@ public class RSApplet extends Applet
     {
     }
 
-    void processGameLoop()
+    void client_main_loop()
     {
     }
 

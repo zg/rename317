@@ -3,16 +3,16 @@
 // Decompiler options: packimports(3) 
 
 
-final class Skills
+final class SKILLS
 {
 
-    public static final int skillsCount = 25;
+    public static final int COUNT = 25;
     public static final String[] skillNames = {
         "attack", "defence", "strength", "hitpoints", "ranged", "prayer", "magic", "cooking", "woodcutting", "fletching", 
         "fishing", "firemaking", "crafting", "smithing", "mining", "herblore", "agility", "thieving", "slayer", "farming", 
         "runecraft", "-unused-", "-unused-", "-unused-", "-unused-"
     };
-    public static final boolean[] skillEnabled = {
+    public static final boolean[] ENABLED = {
         true, true, true, true, true, true, true, true, true, true, 
         true, true, true, true, true, true, true, true, true, false, 
         true, false, false, false, false
