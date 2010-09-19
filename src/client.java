@@ -2446,7 +2446,7 @@ public final class client extends RSApplet {
             int j = method54();
             if(j != 0 && System.currentTimeMillis() - aLong824 > 0x57e40L)
             {
-                signlink.reporterror(myUsername + " glcfb " + aLong1215 + "," + j + "," + lowMem + "," + decompressors[0] + "," + onDemandFetcher.getNodeCount() + "," + plane + "," + anInt1069 + "," + anInt1070);
+                signlink.reporterror(myUsername + " glcfb " + aLong1215 + "," + j + "," + lowMem + "," + jagexFileStores[0] + "," + onDemandFetcher.getNodeCount() + "," + plane + "," + anInt1069 + "," + anInt1070);
                 aLong824 = System.currentTimeMillis();
             }
         }
@@ -3260,8 +3260,8 @@ public final class client extends RSApplet {
         int l = 5;
         try
         {
-            if(decompressors[0] != null)
-                abyte0 = decompressors[0].decompress(i);
+            if(jagexFileStores[0] != null)
+                abyte0 = jagexFileStores[0].decompress(i);
         }
         catch(Exception _ex) { }
         if(abyte0 != null)
@@ -3315,12 +3315,12 @@ public final class client extends RSApplet {
                 datainputstream.close();
                 try
                 {
-                    if(decompressors[0] != null)
-                        decompressors[0].put(abyte0.length, abyte0, i);
+                    if(jagexFileStores[0] != null)
+                        jagexFileStores[0].put(abyte0.length, abyte0, i);
                 }
                 catch(Exception _ex)
                 {
-                    decompressors[0] = null;
+                    jagexFileStores[0] = null;
                 }
    /*             if(abyte0 != null)
                 {
@@ -6650,7 +6650,7 @@ public final class client extends RSApplet {
         if(signlink.cache_dat != null)
         {
             for(int i = 0; i < 5; i++)
-                decompressors[i] = new Decompressor(signlink.cache_dat, signlink.cache_idx[i], i + 1);
+                jagexFileStores[i] = new JagexFileStore(signlink.cache_dat, signlink.cache_idx[i], i + 1);
 
         }
         try
@@ -6751,7 +6751,7 @@ public final class client extends RSApplet {
                 }
                 catch(Exception _ex) { }
             }
-            if(decompressors[0] != null)
+            if(jagexFileStores[0] != null)
             {
                 drawLoadingText(75, "Requesting maps");
                 onDemandFetcher.method558(3, onDemandFetcher.method562(0, 48, 47));
@@ -11671,7 +11671,7 @@ public final class client extends RSApplet {
         spriteDrawY = -1;
         anIntArray968 = new int[33];
         anIntArray969 = new int[256];
-        decompressors = new Decompressor[5];
+        jagexFileStores = new JagexFileStore[5];
         variousSettings = new int[2000];
         aBoolean972 = false;
         anInt975 = 50;
@@ -11904,7 +11904,7 @@ public final class client extends RSApplet {
     private IndexedImage aIndexedImage_967;
     private final int[] anIntArray968;
     private final int[] anIntArray969;
-    final Decompressor[] decompressors;
+    final JagexFileStore[] jagexFileStores;
     public int variousSettings[];
     private boolean aBoolean972;
     private final int anInt975;

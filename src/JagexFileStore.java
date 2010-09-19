@@ -4,9 +4,9 @@
 
 import java.io.*;
 
-final class Decompressor {
+final class JagexFileStore {
  //todo - think of new name - not all data is compressed (light232)
-    public Decompressor(RandomAccessFile randomaccessfile, RandomAccessFile randomaccessfile1, int j)
+    public JagexFileStore(RandomAccessFile randomaccessfile, RandomAccessFile randomaccessfile1, int j)
     {
         indexID = j;
             dataFile = randomaccessfile;
