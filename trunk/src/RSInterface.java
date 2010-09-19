@@ -35,7 +35,7 @@ public final class RSInterface
             rsInterface.parentID = i;
             rsInterface.type = stream.g1();
             rsInterface.atActionType = stream.g1();
-            rsInterface.anInt214 = stream.g2();
+            rsInterface.content_type = stream.g2();
             rsInterface.width = stream.g2();
             rsInterface.height = stream.g2();
             rsInterface.aByte254 = (byte) stream.g1();
@@ -47,25 +47,25 @@ public final class RSInterface
             int i1 = stream.g1();
             if(i1 > 0)
             {
-                rsInterface.anIntArray245 = new int[i1];
-                rsInterface.anIntArray212 = new int[i1];
+                rsInterface.condition_type = new int[i1];
+                rsInterface.condition_value_to_compare = new int[i1];
                 for(int j1 = 0; j1 < i1; j1++)
                 {
-                    rsInterface.anIntArray245[j1] = stream.g1();
-                    rsInterface.anIntArray212[j1] = stream.g2();
+                    rsInterface.condition_type[j1] = stream.g1();
+                    rsInterface.condition_value_to_compare[j1] = stream.g2();
                 }
 
             }
             int k1 = stream.g1();
             if(k1 > 0)
             {
-                rsInterface.valueIndexArray = new int[k1][];
+                rsInterface.dynamic_value_formulas = new int[k1][];
                 for(int l1 = 0; l1 < k1; l1++)
                 {
                     int i3 = stream.g2();
-                    rsInterface.valueIndexArray[l1] = new int[i3];
+                    rsInterface.dynamic_value_formulas[l1] = new int[i3];
                     for(int l4 = 0; l4 < i3; l4++)
-                        rsInterface.valueIndexArray[l1][l4] = stream.g2();
+                        rsInterface.dynamic_value_formulas[l1][l4] = stream.g2();
 
                 }
 
@@ -73,7 +73,7 @@ public final class RSInterface
             if(rsInterface.type == 0)
             {
                 rsInterface.scrollMax = stream.g2();
-                rsInterface.aBoolean266 = stream.g1() == 1;
+                rsInterface.hidden_until_mouseover = stream.g1() == 1;
                 int i2 = stream.g2();
                 rsInterface.children = new int[i2];
                 rsInterface.childX = new int[i2];
@@ -130,27 +130,27 @@ public final class RSInterface
 
             }
             if(rsInterface.type == 3)
-                rsInterface.aBoolean227 = stream.g1() == 1;
+                rsInterface.filled = stream.g1() == 1;
             if(rsInterface.type == 4 || rsInterface.type == 1)
             {
-                rsInterface.aBoolean223 = stream.g1() == 1;
+                rsInterface.text_centered = stream.g1() == 1;
                 int k2 = stream.g1();
                 if(RSFonts != null)
-                    rsInterface.textDrawingAreas = RSFonts[k2];
-                rsInterface.aBoolean268 = stream.g1() == 1;
+                    rsInterface.font = RSFonts[k2];
+                rsInterface.text_shadow = stream.g1() == 1;
             }
             if(rsInterface.type == 4)
             {
-                rsInterface.message = stream.gstr();
-                rsInterface.aString228 = stream.gstr();
+                rsInterface.text_conditionfalse = stream.gstr();
+                rsInterface.text_conditiontrue = stream.gstr();
             }
             if(rsInterface.type == 1 || rsInterface.type == 3 || rsInterface.type == 4)
-                rsInterface.textColor = stream.g4();
+                rsInterface.colour_conditionfalse = stream.g4();
             if(rsInterface.type == 3 || rsInterface.type == 4)
             {
-                rsInterface.anInt219 = stream.g4();
-                rsInterface.anInt216 = stream.g4();
-                rsInterface.anInt239 = stream.g4();
+                rsInterface.colour_conditiontrue = stream.g4();
+                rsInterface.colour_conditionfalse_mouseover = stream.g4();
+                rsInterface.colour_conditiontrue_mouseover = stream.g4();
             }
             if(rsInterface.type == 5)
             {
@@ -158,13 +158,13 @@ public final class RSInterface
                 if(jagexArchive_1 != null && s.length() > 0)
                 {
                     int i4 = s.lastIndexOf(",");
-                    rsInterface.sprite1 = method207(Integer.parseInt(s.substring(i4 + 1)), jagexArchive_1, s.substring(0, i4));
+                    rsInterface.image_conditionfalse = method207(Integer.parseInt(s.substring(i4 + 1)), jagexArchive_1, s.substring(0, i4));
                 }
                 s = stream.gstr();
                 if(jagexArchive_1 != null && s.length() > 0)
                 {
                     int j4 = s.lastIndexOf(",");
-                    rsInterface.sprite2 = method207(Integer.parseInt(s.substring(j4 + 1)), jagexArchive_1, s.substring(0, j4));
+                    rsInterface.image_conditiontrue = method207(Integer.parseInt(s.substring(j4 + 1)), jagexArchive_1, s.substring(0, j4));
                 }
             }
             if(rsInterface.type == 6)
@@ -183,14 +183,14 @@ public final class RSInterface
                 }
                 l = stream.g1();
                 if(l != 0)
-                    rsInterface.anInt257 = (l - 1 << 8) + stream.g1();
+                    rsInterface.animation_conditionfalse = (l - 1 << 8) + stream.g1();
                 else
-                    rsInterface.anInt257 = -1;
+                    rsInterface.animation_conditionfalse = -1;
                 l = stream.g1();
                 if(l != 0)
-                    rsInterface.anInt258 = (l - 1 << 8) + stream.g1();
+                    rsInterface.animation_conditiontrue = (l - 1 << 8) + stream.g1();
                 else
-                    rsInterface.anInt258 = -1;
+                    rsInterface.animation_conditiontrue = -1;
                 rsInterface.anInt269 = stream.g2();
                 rsInterface.anInt270 = stream.g2();
                 rsInterface.anInt271 = stream.g2();
@@ -199,12 +199,12 @@ public final class RSInterface
             {
                 rsInterface.inv = new int[rsInterface.width * rsInterface.height];
                 rsInterface.invStackSizes = new int[rsInterface.width * rsInterface.height];
-                rsInterface.aBoolean223 = stream.g1() == 1;
+                rsInterface.text_centered = stream.g1() == 1;
                 int l2 = stream.g1();
                 if(RSFonts != null)
-                    rsInterface.textDrawingAreas = RSFonts[l2];
-                rsInterface.aBoolean268 = stream.g1() == 1;
-                rsInterface.textColor = stream.g4();
+                    rsInterface.font = RSFonts[l2];
+                rsInterface.text_shadow = stream.g1() == 1;
+                rsInterface.colour_conditionfalse = stream.g4();
                 rsInterface.invSpritePadX = stream.g2b();
                 rsInterface.invSpritePadY = stream.g2b();
                 rsInterface.isInventoryInterface = stream.g1() == 1;
@@ -225,7 +225,7 @@ public final class RSInterface
             }
 
             if(rsInterface.type == 8)
-			  rsInterface.message = stream.gstr();
+			  rsInterface.text_conditionfalse = stream.gstr();
 
             if(rsInterface.atActionType == 1 || rsInterface.atActionType == 4 || rsInterface.atActionType == 5 || rsInterface.atActionType == 6)
             {
@@ -323,45 +323,45 @@ public final class RSInterface
     {
     }
 
-    public RgbImage sprite1;
+    public RgbImage image_conditionfalse;
     public int anInt208;
     public RgbImage rgbImages[];
     public static RSInterface interfaceCache[];
-    public int anIntArray212[];
-    public int anInt214;
+    public int condition_value_to_compare[];
+    public int content_type;
     public int spritesX[];
-    public int anInt216;
+    public int colour_conditionfalse_mouseover;
     public int atActionType;
     public String spellName;
-    public int anInt219;
+    public int colour_conditiontrue;
     public int width;
     public String tooltip;
     public String selectedActionName;
-    public boolean aBoolean223;
+    public boolean text_centered;
     public int scrollPosition;
     public String actions[];
-    public int valueIndexArray[][];
-    public boolean aBoolean227;
-    public String aString228;
+    public int dynamic_value_formulas[][];
+    public boolean filled;
+    public String text_conditiontrue;
     public int anInt230;
     public int invSpritePadX;
-    public int textColor;
+    public int colour_conditionfalse;
     public int anInt233;
     public int mediaID;
     public boolean aBoolean235;
     public int parentID;
     public int spellUsableOn;
     private static MRUNodes aMRUNodes_238;
-    public int anInt239;
+    public int colour_conditiontrue_mouseover;
     public int children[];
     public int childX[];
     public boolean usableItemInterface;
-    public RSFont textDrawingAreas;
+    public RSFont font;
     public int invSpritePadY;
-    public int anIntArray245[];
-    public int anInt246;
+    public int condition_type[];
+    public int anim_frame;
     public int spritesY[];
-    public String message;
+    public String text_conditionfalse;
     public boolean isInventoryInterface;
     public int id;
     public int invStackSizes[];
@@ -369,18 +369,18 @@ public final class RSInterface
     public byte aByte254;
     private int anInt255;
     private int anInt256;
-    public int anInt257;
-    public int anInt258;
+    public int animation_conditionfalse;
+    public int animation_conditiontrue;
     public boolean aBoolean259;
-    public RgbImage sprite2;
+    public RgbImage image_conditiontrue;
     public int scrollMax;
     public int type;
-    public int anInt263;
+    public int x_offset;
     private static final MRUNodes model_cache = new MRUNodes(30);
-    public int anInt265;
-    public boolean aBoolean266;
+    public int y_offset;
+    public boolean hidden_until_mouseover;
     public int height;
-    public boolean aBoolean268;
+    public boolean text_shadow;
     public int anInt269;
     public int anInt270;
     public int anInt271;

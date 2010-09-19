@@ -163,10 +163,10 @@ stream = null;
             int k = varBit.least_significant_bit;
             int l = varBit.most_significant_bit;
             int i1 = client.BITFIELD_MAX_VALUE[l - k];
-            i = clientInstance.variousSettings[j] >> k & i1;
+            i = clientInstance.session_settings[j] >> k & i1;
         } else
         if(configID != -1)
-            i = clientInstance.variousSettings[configID];
+            i = clientInstance.session_settings[configID];
         if(i < 0 || i >= configObjectIDs.length || configObjectIDs[i] == -1)
             return null;
         else

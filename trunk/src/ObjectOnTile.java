@@ -52,10 +52,10 @@ final class ObjectOnTile extends Animable {
             int l = varBit.least_significant_bit;
             int i1 = varBit.most_significant_bit;
             int j1 = client.BITFIELD_MAX_VALUE[i1 - l];
-            i = clientInstance.variousSettings[k] >> l & j1;
+            i = clientInstance.session_settings[k] >> l & j1;
         } else
         if(anInt1602 != -1)
-            i = clientInstance.variousSettings[anInt1602];
+            i = clientInstance.session_settings[anInt1602];
         if(i < 0 || i >= anIntArray1600.length || anIntArray1600[i] == -1)
             return null;
         else
