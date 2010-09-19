@@ -64,9 +64,9 @@ public final class Model extends Animable {
         triangleA = new int[triangleCount];//trianglea
         triangleB = new int[triangleCount];//b
         triangleC = new int[triangleCount];//c
-        tri_a_buffer = new int[texturedTriangeAmmount];//tri_a_buffer
-        tri_b_buffer = new int[texturedTriangeAmmount];//b
-        tri_c_buffer = new int[texturedTriangeAmmount];//c
+        tri_p_index = new int[texturedTriangeAmmount];//tri_a_buffer
+        tri_m_index = new int[texturedTriangeAmmount];//b
+        tri_n_index = new int[texturedTriangeAmmount];//c
         if(class21.anInt376 >= 0)
             vertex_vskin = new int[verticeCount];//vertex_vskin
         if(class21.anInt380 >= 0)
@@ -191,9 +191,9 @@ public final class Model extends Animable {
         class30_sub2_sub2.pos = class21.anInt384;
         for(int j4 = 0; j4 < texturedTriangeAmmount; j4++)
         {
-            tri_a_buffer[j4] = class30_sub2_sub2.g2();
-            tri_b_buffer[j4] = class30_sub2_sub2.g2();
-            tri_c_buffer[j4] = class30_sub2_sub2.g2();
+            tri_p_index[j4] = class30_sub2_sub2.g2();
+            tri_m_index[j4] = class30_sub2_sub2.g2();
+            tri_n_index[j4] = class30_sub2_sub2.g2();
         }
 	}
         public void readNewModel(byte abyte0[], int modelID) {
@@ -661,9 +661,9 @@ public final class Model extends Animable {
         triangleA = new int[triangleCount];
         triangleB = new int[triangleCount];
         triangleC = new int[triangleCount];
-        tri_a_buffer = new int[texturedTriangeAmmount];
-        tri_b_buffer = new int[texturedTriangeAmmount];
-        tri_c_buffer = new int[texturedTriangeAmmount];
+        tri_p_index = new int[texturedTriangeAmmount];
+        tri_m_index = new int[texturedTriangeAmmount];
+        tri_n_index = new int[texturedTriangeAmmount];
         if(modelHeader.anInt376 >= 0)
             vertex_vskin = new int[verticeCount];
         if(modelHeader.anInt380 >= 0)
@@ -787,9 +787,9 @@ public final class Model extends Animable {
         stream.pos = modelHeader.anInt384;
         for(int j4 = 0; j4 < texturedTriangeAmmount; j4++)
         {
-            tri_a_buffer[j4] = stream.g2();
-            tri_b_buffer[j4] = stream.g2();
-            tri_c_buffer[j4] = stream.g2();
+            tri_p_index[j4] = stream.g2();
+            tri_m_index[j4] = stream.g2();
+            tri_n_index[j4] = stream.g2();
         }
 
     }
@@ -836,9 +836,9 @@ public final class Model extends Animable {
         triangleA = new int[triangleCount];
         triangleB = new int[triangleCount];
         triangleC = new int[triangleCount];
-        tri_a_buffer = new int[texturedTriangeAmmount];
-        tri_b_buffer = new int[texturedTriangeAmmount];
-        tri_c_buffer = new int[texturedTriangeAmmount];
+        tri_p_index = new int[texturedTriangeAmmount];
+        tri_m_index = new int[texturedTriangeAmmount];
+        tri_n_index = new int[texturedTriangeAmmount];
         if(flag)
             triangle_draw_type = new int[triangleCount];
         if(flag1)
@@ -891,9 +891,9 @@ public final class Model extends Animable {
 
                 for(int l1 = 0; l1 < model_1.texturedTriangeAmmount; l1++)
                 {
-                    tri_a_buffer[texturedTriangeAmmount] = method465(model_1, model_1.tri_a_buffer[l1]);
-                    tri_b_buffer[texturedTriangeAmmount] = method465(model_1, model_1.tri_b_buffer[l1]);
-                    tri_c_buffer[texturedTriangeAmmount] = method465(model_1, model_1.tri_c_buffer[l1]);
+                    tri_p_index[texturedTriangeAmmount] = method465(model_1, model_1.tri_p_index[l1]);
+                    tri_m_index[texturedTriangeAmmount] = method465(model_1, model_1.tri_m_index[l1]);
+                    tri_n_index[texturedTriangeAmmount] = method465(model_1, model_1.tri_n_index[l1]);
                     texturedTriangeAmmount++;
                 }
 
@@ -948,9 +948,9 @@ public final class Model extends Animable {
         triangle_hsl_a = new int[triangleCount];
         triangle_hsl_b = new int[triangleCount];
         triangle_hsl_c = new int[triangleCount];
-        tri_a_buffer = new int[texturedTriangeAmmount];
-        tri_b_buffer = new int[texturedTriangeAmmount];
-        tri_c_buffer = new int[texturedTriangeAmmount];
+        tri_p_index = new int[texturedTriangeAmmount];
+        tri_m_index = new int[texturedTriangeAmmount];
+        tri_n_index = new int[texturedTriangeAmmount];
         if(flag1)
             triangle_draw_type = new int[triangleCount];
         if(flag2)
@@ -1013,9 +1013,9 @@ public final class Model extends Animable {
 
                 for(int k2 = 0; k2 < model_1.texturedTriangeAmmount; k2++)
                 {
-                    tri_a_buffer[texturedTriangeAmmount] = model_1.tri_a_buffer[k2] + k1;
-                    tri_b_buffer[texturedTriangeAmmount] = model_1.tri_b_buffer[k2] + k1;
-                    tri_c_buffer[texturedTriangeAmmount] = model_1.tri_c_buffer[k2] + k1;
+                    tri_p_index[texturedTriangeAmmount] = model_1.tri_p_index[k2] + k1;
+                    tri_m_index[texturedTriangeAmmount] = model_1.tri_m_index[k2] + k1;
+                    tri_n_index[texturedTriangeAmmount] = model_1.tri_n_index[k2] + k1;
                     texturedTriangeAmmount++;
                 }
 
@@ -1084,9 +1084,9 @@ public final class Model extends Animable {
         triangleC = model.triangleC;
         face_priority = model.face_priority;
         anInt1641 = model.anInt1641;
-        tri_a_buffer = model.tri_a_buffer;
-        tri_b_buffer = model.tri_b_buffer;
-        tri_c_buffer = model.tri_c_buffer;
+        tri_p_index = model.tri_p_index;
+        tri_m_index = model.tri_m_index;
+        tri_n_index = model.tri_n_index;
     }
 
     public Model(boolean flag, boolean flag1, Model model)
@@ -1155,9 +1155,9 @@ public final class Model extends Animable {
         triangleA = model.triangleA;
         triangleB = model.triangleB;
         triangleC = model.triangleC;
-        tri_a_buffer = model.tri_a_buffer;
-        tri_b_buffer = model.tri_b_buffer;
-        tri_c_buffer = model.tri_c_buffer;
+        tri_p_index = model.tri_p_index;
+        tri_m_index = model.tri_m_index;
+        tri_n_index = model.tri_n_index;
         super.modelHeight = model.modelHeight;
         max_y = model.max_y; 
         diagonal_2D_aboveorigin = model.diagonal_2D_aboveorigin;
@@ -1221,9 +1221,9 @@ public final class Model extends Animable {
         triangle_hsl_a = model.triangle_hsl_a;
         triangle_hsl_b = model.triangle_hsl_b;
         triangle_hsl_c = model.triangle_hsl_c;
-        tri_a_buffer = model.tri_a_buffer;
-        tri_b_buffer = model.tri_b_buffer;
-        tri_c_buffer = model.tri_c_buffer;
+        tri_p_index = model.tri_p_index;
+        tri_m_index = model.tri_m_index;
+        tri_n_index = model.tri_n_index;
     }
 
     private int method465(Model model, int i)
@@ -1777,7 +1777,7 @@ public final class Model extends Animable {
         }
     }
 
-    public void do_shading(int off, int mag, int l_x, int l_y, int l_z)
+    public void do_shading(int intensity, int falloff, int l_x, int l_y, int l_z)
     {
         for(int t_id = 0; t_id < triangleCount; t_id++)
         {
@@ -1788,27 +1788,27 @@ public final class Model extends Animable {
             {
                 int t_hsl = triangleColours[t_id];
                 VertexNormal vertexNormal = super.vertex_normal[t_a];
-                int l = off + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (mag * vertexNormal.magnitude);
+                int l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
                 triangle_hsl_a[t_id] = mix_lightness(t_hsl, l, 0);
                 vertexNormal = super.vertex_normal[t_b];
-                l = off + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (mag * vertexNormal.magnitude);
+                l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
                 triangle_hsl_b[t_id] = mix_lightness(t_hsl, l, 0);
                 vertexNormal = super.vertex_normal[t_c];
-                l = off + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (mag * vertexNormal.magnitude);
+                l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
                 triangle_hsl_c[t_id] = mix_lightness(t_hsl, l, 0);
             } else if((triangle_draw_type[t_id] & 1) == 0){
-            	//Bit 2 of triangle_draw_type ON means mix_lightness returns just lightness
+            	//Bit 1 of triangle_draw_type ON means mix_lightness returns just lightness
             	//instead of mixed hsl
                 int t_hsl = triangleColours[t_id];
                 int t_flags = triangle_draw_type[t_id];
                 VertexNormal vertexNormal_1 = super.vertex_normal[t_a];
-                int l = off + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (mag * vertexNormal_1.magnitude);
+                int l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
                 triangle_hsl_a[t_id] = mix_lightness(t_hsl, l, t_flags);
                 vertexNormal_1 = super.vertex_normal[t_b];
-                l = off + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (mag * vertexNormal_1.magnitude);
+                l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
                 triangle_hsl_b[t_id] = mix_lightness(t_hsl, l, t_flags);
                 vertexNormal_1 = super.vertex_normal[t_c];
-                l = off + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (mag * vertexNormal_1.magnitude);
+                l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
                 triangle_hsl_c[t_id] = mix_lightness(t_hsl, l, t_flags);
             }
         }
@@ -2239,18 +2239,18 @@ public final class Model extends Animable {
         if(i1 == 2)
         {
             int j1 = triangle_draw_type[i] >> 2;
-            int l1 = tri_a_buffer[j1];
-            int j2 = tri_b_buffer[j1];
-            int l2 = tri_c_buffer[j1];
+            int l1 = tri_p_index[j1];
+            int j2 = tri_m_index[j1];
+            int l2 = tri_n_index[j1];
             ThreeDimensionalDrawingArea.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangle_hsl_a[i], triangle_hsl_b[i], triangle_hsl_c[i], anIntArray1668[l1], anIntArray1668[j2], anIntArray1668[l2], vertexBY[l1], vertexBY[j2], vertexBY[l2], anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], triangleColours[i]);
             return;
         }
         if(i1 == 3)
         {
             int k1 = triangle_draw_type[i] >> 2;
-            int i2 = tri_a_buffer[k1];
-            int k2 = tri_b_buffer[k1];
-            int i3 = tri_c_buffer[k1];
+            int i2 = tri_p_index[k1];
+            int k2 = tri_m_index[k1];
+            int i3 = tri_n_index[k1];
             ThreeDimensionalDrawingArea.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangle_hsl_a[i], triangle_hsl_a[i], triangle_hsl_a[i], anIntArray1668[i2], anIntArray1668[k2], anIntArray1668[i3], vertexBY[i2], vertexBY[k2], vertexBY[i3], anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], triangleColours[i]);
         }
     }
@@ -2368,17 +2368,17 @@ public final class Model extends Animable {
                 if(l7 == 2)
                 {
                     int j8 = triangle_draw_type[i] >> 2;
-                    int k9 = tri_a_buffer[j8];
-                    int k10 = tri_b_buffer[j8];
-                    int k11 = tri_c_buffer[j8];
+                    int k9 = tri_p_index[j8];
+                    int k10 = tri_m_index[j8];
+                    int k11 = tri_n_index[j8];
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[k9], anIntArray1668[k10], anIntArray1668[k11], vertexBY[k9], vertexBY[k10], vertexBY[k11], anIntArray1670[k9], anIntArray1670[k10], anIntArray1670[k11], triangleColours[i]);
                 } else
                 if(l7 == 3)
                 {
                     int k8 = triangle_draw_type[i] >> 2;
-                    int l9 = tri_a_buffer[k8];
-                    int l10 = tri_b_buffer[k8];
-                    int l11 = tri_c_buffer[k8];
+                    int l9 = tri_p_index[k8];
+                    int l10 = tri_m_index[k8];
+                    int l11 = tri_n_index[k8];
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangle_hsl_a[i], triangle_hsl_a[i], triangle_hsl_a[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11], vertexBY[l9], vertexBY[l10], vertexBY[l11], anIntArray1670[l9], anIntArray1670[l10], anIntArray1670[l11], triangleColours[i]);
                 }
             }
@@ -2407,9 +2407,9 @@ public final class Model extends Animable {
                 if(i8 == 2)
                 {
                     int i9 = triangle_draw_type[i] >> 2;
-                    int i10 = tri_a_buffer[i9];
-                    int i11 = tri_b_buffer[i9];
-                    int i12 = tri_c_buffer[i9];
+                    int i10 = tri_p_index[i9];
+                    int i11 = tri_m_index[i9];
+                    int i12 = tri_n_index[i9];
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColours[i]);
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColours[i]);
                     return;
@@ -2417,9 +2417,9 @@ public final class Model extends Animable {
                 if(i8 == 3)
                 {
                     int j9 = triangle_draw_type[i] >> 2;
-                    int j10 = tri_a_buffer[j9];
-                    int j11 = tri_b_buffer[j9];
-                    int j12 = tri_c_buffer[j9];
+                    int j10 = tri_p_index[j9];
+                    int j11 = tri_m_index[j9];
+                    int j12 = tri_n_index[j9];
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangle_hsl_a[i], triangle_hsl_a[i], triangle_hsl_a[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangle_hsl_a[i], triangle_hsl_a[i], triangle_hsl_a[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
                 }
@@ -2459,9 +2459,9 @@ public final class Model extends Animable {
     public int triangleColours[];
     private int anInt1641;
     private int texturedTriangeAmmount;
-    private int[] tri_a_buffer;
-    private int[] tri_b_buffer;
-    private int[] tri_c_buffer;
+    private int[] tri_p_index;
+    private int[] tri_m_index;
+    private int[] tri_n_index;
     public int min_x;
     public int max_x;
     public int max_z;
