@@ -141,7 +141,8 @@ public final class signlink
 
     private static String findcachedir()
     {
-        return "./cache/";
+return findcachedirORIG();
+//        return "./cache/";
     }
 
     public static String findcachedirORIG()
@@ -152,7 +153,7 @@ public final class signlink
         };
         if(storeid < 32 || storeid > 34)
             storeid = 32;
-        String s = ".file_store_" + storeid;
+        String s = ".mpr_file_store_" + storeid;
         for(int i = 0; i < as.length; i++)
             try
             {
