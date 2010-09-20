@@ -2618,8 +2618,8 @@ public final class client extends RSApplet {
                             inputTaken = true;
                     }
                 }
-                if(onDemandData.dataType == 1 && onDemandData.buffer != null)
-                    AnimationFrame.method529(onDemandData.buffer);
+                //if(onDemandData.dataType == 1 && onDemandData.buffer != null)
+                //    AnimationFrame.method529(onDemandData.buffer);
                 if(onDemandData.dataType == 2 && onDemandData.ID == nextSong && onDemandData.buffer != null)
                     saveMidi(songChanging, onDemandData.buffer);
                 if(onDemandData.dataType == 3 && loadingStage == 1)
