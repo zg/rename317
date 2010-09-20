@@ -29,6 +29,14 @@ public final class Packet extends NodeSub {
         return stream_1;
     }
 
+	public int readShort2() {
+		pos += 2;
+		int i = ((data[pos - 2] & 0xff) << 8) + (data[pos - 1] & 0xff);
+		if(i  > 60000)
+		i = -65535+i;
+		return i;
+	}
+
     private Packet()
     {
     }
@@ -188,6 +196,14 @@ public final class Packet extends NodeSub {
     {
         for(int l = offset; l < offset + length; l++)
             buffer[l] = data[pos++];
+    }
+
+    public byte[] getData(byte[] buffer)
+    {
+	for(int i = 0; i < buffer.length; i++)
+		buffer[i] = data[pos++];
+
+return buffer;
     }
 
     public void begin_bit_block()

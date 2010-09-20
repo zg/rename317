@@ -7,6 +7,7 @@ public final class ModelTransform
 
     public ModelTransform(Packet stream)
     {
+/*
         int length = stream.g1();
         opcodes = new int[length];
         skinList = new int[length][];
@@ -21,6 +22,21 @@ public final class ModelTransform
                 skinList[stepId][skinIDX] = stream.g1();
 
         }
+
+*/
+
+int length = stream.g2();
+opcodes = new int[length];
+skinList = new int[length][];
+for(int j = 0; j < length; j++)
+opcodes[j] = stream.g2();
+
+for(int j = 0; j < length; j++)
+skinList[j] = new int[stream.g2()];
+
+for(int j = 0; j < length; j++)
+for(int l = 0; l < skinList[j].length; l++)
+skinList[j][l] = stream.g2();
 
     }
 

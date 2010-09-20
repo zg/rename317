@@ -6,8 +6,10 @@ public final class Animation {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Packet stream = new Packet(jagexArchive.getDataForName("seq.dat"));
+//        Packet stream = new Packet(jagexArchive.getDataForName("seq.dat"));
+Packet stream = new Packet(FileOperations.ReadFile("./extras/seq.dat"));
         int length = stream.g2();
+System.out.println("Reading new animations... "+length+" new animations");
         if(anims == null)
             anims = new Animation[length];
         for(int j = 0; j < length; j++)
@@ -32,6 +34,35 @@ public final class Animation {
         return j;
     }
 
+    private void readValues(Packet stream)
+    {
+        	do {
+			anInt360 = stream.g2();
+			if(anInt360 == 65535)
+			   anInt360 = -1;
+			anInt361 = stream.g2();
+			if(anInt361 == 65535)
+			   anInt361 = -1;
+			anInt359 = stream.g1();
+			anInt362 = stream.g1();
+			anInt363 = stream.g1();
+			priority = stream.g1();
+		  	frameCount = stream.g2();
+			frame2IDS = new int[frameCount];
+			frame1IDS = new int[frameCount];
+			frameLengths = new int[frameCount];
+			for(int i=0; i < frameCount; i++)
+			  frame2IDS[i] = stream.g4();
+			for(int i=0; i < frameCount; i++)
+			  frame1IDS[i] = -1;
+			for(int i=0; i < frameCount; i++)
+			  frameLengths[i] = stream.g1();
+			break;
+		} while(true);
+    }
+
+
+/*
     private void readValues(Packet stream)
     {
         do
@@ -121,6 +152,7 @@ public final class Animation {
             priority = 0;
         }
     }
+*/
 
     private Animation()
     {

@@ -6,7 +6,8 @@ public final class SpotAnim {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Packet stream = new Packet(jagexArchive.getDataForName("spotanim.dat"));
+//        Packet stream = new Packet(jagexArchive.getDataForName("spotanim.dat"));
+Packet stream = new Packet(FileOperations.ReadFile("./extras/spotanim.dat"));
         int length = stream.g2();
         if(cache == null)
             cache = new SpotAnim[length];
@@ -19,7 +20,7 @@ public final class SpotAnim {
         }
 
     }
-
+/*
     private void readValues(Packet stream)
     {
         do
@@ -60,6 +61,26 @@ public final class SpotAnim {
                 System.out.println("Error unrecognised spotanim config code: " + i);
         } while(true);
     }
+*/
+
+	private void readValues(Packet stream) {//new format type
+	do {
+		modelID = stream.g2();
+		animationID = stream.g2();
+        if(Animation.anims != null && animationID != 65535 && animationID != -1)
+			aAnimation_407 = Animation.anims[animationID];
+        	resizeXY = stream.g1();
+        	resizeZ = stream.g1();
+			int j = stream.g1();
+			if(j != 0){
+			for (int k = 0; k < j; k++)
+				originalModelColours[k] = stream.g2();
+			for (int k = 0; k < j; k++)
+				modifiedModelColours[k] = stream.g2();
+			}
+			break;
+		}while(true);
+	}
 
     public Model getModel()
     {
