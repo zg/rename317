@@ -72,10 +72,10 @@ public final class ItemDef
             };
             model = new Model(2, aclass30_sub2_sub4_sub6s);
         }
-        if(modifiedModelColors != null)
+        if(originalModelColours != null)
         {
-            for(int i1 = 0; i1 < modifiedModelColors.length; i1++)
-                model.recolour(modifiedModelColors[i1], originalModelColors[i1]);
+            for(int i1 = 0; i1 < originalModelColours.length; i1++)
+                model.recolour(originalModelColours[i1], modifiedModelColours[i1]);
 
         }
         return model;
@@ -139,10 +139,10 @@ public final class ItemDef
             model.translate(0, aByte205, 0);
         if(i == 1 && aByte154 != 0)
             model.translate(0, aByte154, 0);
-        if(modifiedModelColors != null)
+        if(originalModelColours != null)
         {
-            for(int i1 = 0; i1 < modifiedModelColors.length; i1++)
-                model.recolour(modifiedModelColors[i1], originalModelColors[i1]);
+            for(int i1 = 0; i1 < originalModelColours.length; i1++)
+                model.recolour(originalModelColours[i1], modifiedModelColours[i1]);
 
         }
         return model;
@@ -153,8 +153,8 @@ public final class ItemDef
         modelID = 0;
         name = null;
         description = null;
-        modifiedModelColors = null;
-        originalModelColors = null;
+        originalModelColours = null;
+        modifiedModelColours = null;
         modelZoom = 2000;
         sprite_rotation_scale = 0;
         modelRotation2 = 0;
@@ -226,8 +226,8 @@ public final class ItemDef
         anInt204 = itemDef.anInt204;
         modelOffset1 = itemDef.modelOffset1;
         modelOffset2 = itemDef.modelOffset2;
-        modifiedModelColors = itemDef.modifiedModelColors;
-        originalModelColors = itemDef.originalModelColors;
+        originalModelColours = itemDef.originalModelColours;
+        modifiedModelColours = itemDef.modifiedModelColours;
         ItemDef itemDef_1 = forID(certID);
         name = itemDef_1.name;
         membersObject = itemDef_1.membersObject;
@@ -395,10 +395,10 @@ public final class ItemDef
             return null;
         if(anInt167 != 128 || anInt192 != 128 || anInt191 != 128)
             model.scaleT(anInt167, anInt191, anInt192);
-        if(modifiedModelColors != null)
+        if(originalModelColours != null)
         {
-            for(int l = 0; l < modifiedModelColors.length; l++)
-                model.recolour(modifiedModelColors[l], originalModelColors[l]);
+            for(int l = 0; l < originalModelColours.length; l++)
+                model.recolour(originalModelColours[l], modifiedModelColours[l]);
 
         }
         model.preprocess(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
@@ -422,10 +422,10 @@ public final class ItemDef
         Model model = Model.getModel(modelID);
         if(model == null)
             return null;
-        if(modifiedModelColors != null)
+        if(originalModelColours != null)
         {
-            for(int l = 0; l < modifiedModelColors.length; l++)
-                model.recolour(modifiedModelColors[l], originalModelColors[l]);
+            for(int l = 0; l < originalModelColours.length; l++)
+                model.recolour(originalModelColours[l], modifiedModelColours[l]);
 
         }
         return model;
@@ -513,12 +513,12 @@ public final class ItemDef
             if(i == 40)
             {
                 int j = stream.g1();
-                modifiedModelColors = new int[j];
-                originalModelColors = new int[j];
+                originalModelColours = new int[j];
+                modifiedModelColours = new int[j];
                 for(int k = 0; k < j; k++)
                 {
-                    modifiedModelColors[k] = stream.g2();
-                    originalModelColors[k] = stream.g2();
+                    originalModelColours[k] = stream.g2();
+                    modifiedModelColours[k] = stream.g2();
                 }
 
             } else
@@ -586,11 +586,11 @@ public final class ItemDef
 
     private byte aByte154;
     public int value;
-    private int[] modifiedModelColors;
+    private int[] originalModelColours;
     public int id;
     static MRUNodes mruNodes1 = new MRUNodes(100);
     public static MRUNodes mruNodes2 = new MRUNodes(50);
-    private int[] originalModelColors;
+    private int[] modifiedModelColours;
     public boolean membersObject;
     private int anInt162;
     private int certTemplateID;

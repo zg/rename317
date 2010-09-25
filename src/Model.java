@@ -30,7 +30,7 @@ public final class Model extends Animable {
 
     public static void method459(int i, OnDemandFetcherParent onDemandFetcherParent)
     {
-        modelHeaderCache = new ModelHeader[i];
+        modelHeaderCache = new ModelHeader[i+30000];
         aOnDemandFetcherParent_1662 = onDemandFetcherParent;
     }
 
@@ -197,6 +197,7 @@ public final class Model extends Animable {
         }
 	}
         public void readNewModel(byte abyte0[], int modelID) {
+	System.out.println("reading new model "+modelID);
         Packet nc1 = new Packet(abyte0);
         Packet nc2 = new Packet(abyte0);
         Packet nc3 = new Packet(abyte0);
