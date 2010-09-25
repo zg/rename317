@@ -24,6 +24,55 @@ public final class client extends RSApplet {
         return " " + s;
     }
 
+    public static int TotalRead = 0;
+      public static String getFileNameWithoutExtension(String fileName) {
+      File tmpFile = new File(fileName);
+      tmpFile.getName();
+      int whereDot = tmpFile.getName().lastIndexOf('.');
+      if (0 < whereDot && whereDot <= tmpFile.getName().length() - 2 ) {
+      return tmpFile.getName().substring(0, whereDot);
+      }
+      return "";
+      }
+public void preloadModels() {
+
+File file = new File("../../origcode/src/model/");
+File[] fileArray = file.listFiles();
+for(int y = 0; y < fileArray.length; y++)
+{
+try{
+String sss = fileArray[y].getName();
+//System.out.println("Parsing model file "+sss);
+byte[] buffer = ReadFile("../../origcode/src/model/"+sss);
+Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss));
+}catch(Exception e){e.printStackTrace();}
+
+}
+
+}
+
+
+    public static final byte[] ReadFile(String s)
+    {
+	try
+	{
+        byte abyte0[];
+        File file = new File(s);
+        int i = (int)file.length();
+        abyte0 = new byte[i];
+   	     DataInputStream datainputstream = new DataInputStream(new BufferedInputStream(new FileInputStream(s)));
+  	     	 datainputstream.readFully(abyte0, 0, i);
+        datainputstream.close();
+      	  TotalRead++;
+       	 return abyte0;
+	}
+	catch(Exception e)
+	{
+	        System.out.println((new StringBuilder()).append("Read Error: ").append(s).toString());
+ 	       return null;
+	}
+    }
+
     private void stopMidi()
     {
         signlink.midifade = 0;
@@ -6682,6 +6731,7 @@ public final class client extends RSApplet {
             onDemandFetcher.start(jagexArchive_6, this);
             AnimationFrame.method528(onDemandFetcher.getAnimCount());
             Model.method459(onDemandFetcher.getVersionCount(0), onDemandFetcher);
+	preloadModels();
             if(!lowMem)
             {
                 nextSong = 0;
