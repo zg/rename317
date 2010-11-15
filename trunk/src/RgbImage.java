@@ -4,6 +4,9 @@
 
 import java.awt.*;
 import java.awt.image.PixelGrabber;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.ImageIO;
 
 public final class RgbImage extends DrawingArea {
 
@@ -13,6 +16,32 @@ public final class RgbImage extends DrawingArea {
         myWidth = w2 = i;
         myHeight = h2 = j;
         xDrawOffset = yDrawOffset = 0;
+    }
+
+    public RgbImage(String filename)//clienthaxs own code :P
+    {
+
+        javax.swing.ImageIcon icon =new javax.swing.ImageIcon (filename);
+        icon.getIconHeight();
+        icon.getIconWidth();
+        System.out.println(icon.getIconHeight()+" "+icon.getIconWidth());
+        try
+        {
+            Image image = Toolkit.getDefaultToolkit().createImage(FileOperations.ReadFile(filename));
+            myWidth = icon.getIconWidth();
+            myHeight = icon.getIconHeight();
+            w2 = myWidth;
+            h2 = myHeight;
+            xDrawOffset = 0;
+            yDrawOffset = 0;
+            myPixels = new int[myWidth * myHeight];
+            PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, myWidth, myHeight, myPixels, 0, myWidth);
+            pixelgrabber.grabPixels();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public RgbImage(byte abyte0[], Component component)
@@ -544,6 +573,44 @@ public final class RgbImage extends DrawingArea {
         }
 
     }
+
+    	public void drawSpriteWithDimens(int xPos, int yPos, int vertSize) {
+		xPos += xDrawOffset;
+		yPos += yDrawOffset;
+		int l = xPos + yPos * DrawingArea.width;
+		int i1 = 0;
+		int horizSize = myWidth;
+		int l1 = DrawingArea.width - horizSize;
+		int i2 = 0;
+		if (yPos < DrawingArea.topY) {
+			int j2 = DrawingArea.topY - yPos;
+			vertSize -= j2;
+			yPos = DrawingArea.topY;
+			i1 += j2 * horizSize;
+			l += j2 * DrawingArea.width;
+		}
+		if (yPos + vertSize > DrawingArea.viewport_h)
+			vertSize -= (yPos + vertSize) - DrawingArea.viewport_h;
+		if (xPos < DrawingArea.topX) {
+			int k2 = DrawingArea.topX - xPos;
+			horizSize -= k2;
+			xPos = DrawingArea.topX;
+			i1 += k2;
+			l += k2;
+			i2 += k2;
+			l1 += k2;
+		}
+		if (xPos + horizSize > DrawingArea.viewport_h) {
+			int l2 = (xPos + horizSize) - DrawingArea.viewport_h;
+			horizSize -= l2;
+			i2 += l2;
+			l1 += l2;
+		}
+		if (!(horizSize <= 0 || vertSize <= 0)) {
+			method349(DrawingArea.pixels, myPixels, i1, l, horizSize, vertSize,
+					l1, i2);
+		}
+	}
 
     public int myPixels[];
     public int myWidth;

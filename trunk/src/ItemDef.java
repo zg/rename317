@@ -83,13 +83,13 @@ public final class ItemDef
 
     public boolean method195(int j)
     {
-        int k = anInt165;
-        int l = anInt188;
+        int k = maleEquip1;
+        int l = femaleEquip1;
         int i1 = anInt185;
         if(j == 1)
         {
-            k = anInt200;
-            l = anInt164;
+            k = maleEquip2;
+            l = femaleEquip2;
             i1 = anInt162;
         }
         if(k == -1)
@@ -106,13 +106,13 @@ public final class ItemDef
 
     public Model method196(int i)
     {
-        int j = anInt165;
-        int k = anInt188;
+        int j = maleEquip1;
+        int k = femaleEquip1;
         int l = anInt185;
         if(i == 1)
         {
-            j = anInt200;
-            k = anInt164;
+            j = maleEquip2;
+            k = femaleEquip2;
             l = anInt162;
         }
         if(j == -1)
@@ -166,11 +166,11 @@ public final class ItemDef
         membersObject = false;
         groundActions = null;
         actions = null;
-        anInt165 = -1;
-        anInt188 = -1;
+        maleEquip1 = -1;
+        femaleEquip1 = -1;
         aByte205 = 0;
-        anInt200 = -1;
-        anInt164 = -1;
+        maleEquip2 = -1;
+        femaleEquip2 = -1;
         aByte154 = 0;
         anInt185 = -1;
         anInt162 = -1;
@@ -482,19 +482,19 @@ public final class ItemDef
             else
             if(i == 23)
             {
-                anInt165 = stream.g2();
+                maleEquip1 = stream.g2();
                 aByte205 = stream.g1b();
             } else
             if(i == 24)
-                anInt188 = stream.g2();
+                femaleEquip1 = stream.g2();
             else
             if(i == 25)
             {
-                anInt200 = stream.g2();
+                maleEquip2 = stream.g2();
                 aByte154 = stream.g1b();
             } else
             if(i == 26)
-                anInt164 = stream.g2();
+                femaleEquip2 = stream.g2();
             else
             if(i >= 30 && i < 35)
             {
@@ -594,8 +594,8 @@ public final class ItemDef
     public boolean membersObject;
     private int anInt162;
     private int certTemplateID;
-    private int anInt164;
-    private int anInt165;
+    private int femaleEquip2;
+    private int maleEquip1;
     private int anInt166;
     private int anInt167;
     public String groundActions[];
@@ -614,7 +614,7 @@ public final class ItemDef
     private static Packet stream;
     private int anInt184;
     private int anInt185;
-    private int anInt188;
+    private int femaleEquip1;
     public String actions[];
     public int sprite_rotation_scale;
     private int anInt191;
@@ -625,7 +625,7 @@ public final class ItemDef
     private int anInt196;
     private int anInt197;
     public int modelRotation2;
-    private int anInt200;
+    private int maleEquip2;
     private int[] stackAmounts;
     public int team;
     public static int totalItems;
