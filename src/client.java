@@ -1,6 +1,14 @@
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
+
+/*
+todo add gameframe(copy from 304)
+fix 377 cache loading
+try and rename those last few classes
+figure out how music system works
+add sound system
+rename fonts and crap
+include cache in new svn
+try and rename the animation system a bit more
+ */
 
 import java.applet.AppletContext;
 import java.awt.*;
@@ -9,7 +17,9 @@ import java.net.*;
 
 import sign.signlink;
 
-public final class client extends RSApplet {
+
+
+public class client extends RSApplet {
 
     private static String logic_get_amount_string_full_name(int i)
     {
@@ -171,23 +181,23 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         chatBack.drawImage(0, 0);
         if(messagePromptRaised)
         {
-            chatRSFont.drawText(0, aString1121, 40, 239);
-            chatRSFont.drawText(128, promptInput + "*", 60, 239);
+            boldFont.drawText(0, aString1121, 40, 239);
+            boldFont.drawText(128, promptInput + "*", 60, 239);
         } else
         if(inputDialogState == 1)
         {
-            chatRSFont.drawText(0, "Enter amount:", 40, 239);
-            chatRSFont.drawText(128, amountOrNameInput + "*", 60, 239);
+            boldFont.drawText(0, "Enter amount:", 40, 239);
+            boldFont.drawText(128, amountOrNameInput + "*", 60, 239);
         } else
         if(inputDialogState == 2)
         {
-            chatRSFont.drawText(0, "Enter name:", 40, 239);
-            chatRSFont.drawText(128, amountOrNameInput + "*", 60, 239);
+            boldFont.drawText(0, "Enter name:", 40, 239);
+            boldFont.drawText(128, amountOrNameInput + "*", 60, 239);
         } else
         if(aString844 != null)
         {
-            chatRSFont.drawText(0, aString844, 40, 239);
-            chatRSFont.drawText(128, "Click to continue", 60, 239);
+            boldFont.drawText(0, aString844, 40, 239);
+            boldFont.drawText(128, "Click to continue", 60, 239);
         } else
         if(backDialogID != -1)
             interface_render(0, 0, 0, RSInterface.interfaceCache[backDialogID]);
@@ -197,7 +207,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             interface_render(0, 0, 0, RSInterface.interfaceCache[dialogID]);
         } else
         {
-            RSFont RSFont = aRSFont_1271;
+            RSFont RSFont = plainFont;
             int j = 0;
             DrawingArea.setDrawingArea(77, 0, 463, 0);
             for(int k = 0; k < 100; k++)
@@ -318,7 +328,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
     }
 
     public void init()
-    {
+    {  /*
         network_worldid = Integer.parseInt(getParameter("nodeid"));
         portOff = Integer.parseInt(getParameter("portoff"));
         String s = getParameter("lowmem");
@@ -329,6 +339,12 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         String s1 = getParameter("free");
         isMembers = !(s1 != null && s1.equals("1"));
         initClientFrame(503, 765);
+           */
+        network_worldid = 9;
+        portOff = 0;
+        setHighMem();
+        isMembers = true;
+        initClientFrame(503,765);
     }
 
     public void startRunnable(Runnable runnable, int i)
@@ -350,7 +366,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         if(signlink.mainapp != null)
             return signlink.opensocket(i);
         else
-            return new Socket(InetAddress.getByName(getCodeBase().getHost()), i);
+            return new Socket(server, i);
     }
 
     private void processMenuClick()
@@ -1389,8 +1405,8 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                 npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height);
                 if(spriteDrawX > -1 && anInt974 < anInt975)
                 {
-                    anIntArray979[anInt974] = chatRSFont.method384(((Entity) (obj)).textSpoken) / 2;
-                    anIntArray978[anInt974] = chatRSFont.charHeight;
+                    anIntArray979[anInt974] = boldFont.method384(((Entity) (obj)).textSpoken) / 2;
+                    anIntArray978[anInt974] = boldFont.charHeight;
                     anIntArray976[anInt974] = spriteDrawX;
                     anIntArray977[anInt974] = spriteDrawY;
                     anIntArray980[anInt974] = ((Entity) (obj)).anInt1513;
@@ -1440,8 +1456,8 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                             spriteDrawY -= 10;
                         }
                         hitMarks[((Entity) (obj)).hitMarkTypes[j1]].drawSprite(spriteDrawX - 12, spriteDrawY - 12);
-                        aRSFont_1270.drawText(0, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 4, spriteDrawX);
-                        aRSFont_1270.drawText(0xffffff, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 3, spriteDrawX - 1);
+                        smallFont.drawText(0, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 4, spriteDrawX);
+                        smallFont.drawText(0xffffff, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 3, spriteDrawX - 1);
                     }
                 }
 
@@ -1516,31 +1532,31 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                 }
                 if(anIntArray981[k] == 0)
                 {
-                    chatRSFont.drawText(0, s, spriteDrawY + 1, spriteDrawX);
-                    chatRSFont.drawText(i3, s, spriteDrawY, spriteDrawX);
+                    boldFont.drawText(0, s, spriteDrawY + 1, spriteDrawX);
+                    boldFont.drawText(i3, s, spriteDrawY, spriteDrawX);
                 }
                 if(anIntArray981[k] == 1)
                 {
-                    chatRSFont.method386(0, s, spriteDrawX, anInt1265, spriteDrawY + 1);
-                    chatRSFont.method386(i3, s, spriteDrawX, anInt1265, spriteDrawY);
+                    boldFont.method386(0, s, spriteDrawX, anInt1265, spriteDrawY + 1);
+                    boldFont.method386(i3, s, spriteDrawX, anInt1265, spriteDrawY);
                 }
                 if(anIntArray981[k] == 2)
                 {
-                    chatRSFont.method387(spriteDrawX, s, anInt1265, spriteDrawY + 1, 0);
-                    chatRSFont.method387(spriteDrawX, s, anInt1265, spriteDrawY, i3);
+                    boldFont.method387(spriteDrawX, s, anInt1265, spriteDrawY + 1, 0);
+                    boldFont.method387(spriteDrawX, s, anInt1265, spriteDrawY, i3);
                 }
                 if(anIntArray981[k] == 3)
                 {
-                    chatRSFont.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY + 1, spriteDrawX, 0);
-                    chatRSFont.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY, spriteDrawX, i3);
+                    boldFont.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY + 1, spriteDrawX, 0);
+                    boldFont.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY, spriteDrawX, i3);
                 }
                 if(anIntArray981[k] == 4)
                 {
-                    int i4 = chatRSFont.method384(s);
+                    int i4 = boldFont.method384(s);
                     int k4 = ((150 - anIntArray982[k]) * (i4 + 100)) / 150;
                     DrawingArea.setDrawingArea(334, spriteDrawX - 50, spriteDrawX + 50, 0);
-                    chatRSFont.drawTextHLeftVMid(0, s, spriteDrawY + 1, (spriteDrawX + 50) - k4);
-                    chatRSFont.drawTextHLeftVMid(i3, s, spriteDrawY, (spriteDrawX + 50) - k4);
+                    boldFont.drawTextHLeftVMid(0, s, spriteDrawY + 1, (spriteDrawX + 50) - k4);
+                    boldFont.drawTextHLeftVMid(i3, s, spriteDrawY, (spriteDrawX + 50) - k4);
                     DrawingArea.defaultDrawingAreaSize();
                 }
                 if(anIntArray981[k] == 5)
@@ -1552,15 +1568,15 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                     else
                     if(j4 > 125)
                         l4 = j4 - 125;
-                    DrawingArea.setDrawingArea(spriteDrawY + 5, 0, 512, spriteDrawY - chatRSFont.charHeight - 1);
-                    chatRSFont.drawText(0, s, spriteDrawY + 1 + l4, spriteDrawX);
-                    chatRSFont.drawText(i3, s, spriteDrawY + l4, spriteDrawX);
+                    DrawingArea.setDrawingArea(spriteDrawY + 5, 0, 512, spriteDrawY - boldFont.charHeight - 1);
+                    boldFont.drawText(0, s, spriteDrawY + 1 + l4, spriteDrawX);
+                    boldFont.drawText(i3, s, spriteDrawY + l4, spriteDrawX);
                     DrawingArea.defaultDrawingAreaSize();
                 }
             } else
             {
-                chatRSFont.drawText(0, s, spriteDrawY + 1, spriteDrawX);
-                chatRSFont.drawText(0xffff00, s, spriteDrawY, spriteDrawX);
+                boldFont.drawText(0, s, spriteDrawY + 1, spriteDrawX);
+                boldFont.drawText(0xffff00, s, spriteDrawY, spriteDrawX);
             }
         }
     }catch(Exception e){ }
@@ -1816,7 +1832,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         DrawingArea.fillRect(i, j, k, l, i1);
         DrawingArea.fillRect(i + 1, j + 1, k - 2, 16, 0);
         DrawingArea.drawRect(i + 1, j + 18, k - 2, l - 19, 0);
-        chatRSFont.drawTextHLeftVMid(i1, "Choose Option", j + 14, i + 3);
+        boldFont.drawTextHLeftVMid(i1, "Choose Option", j + 14, i + 3);
         int j1 = super.mouseX;
         int k1 = super.mouseY;
         if(menuScreenArea == 0)
@@ -1840,7 +1856,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             int j2 = 0xffffff;
             if(j1 > i && j1 < i + k && k1 > i2 - 13 && k1 < i2 + 3)
                 j2 = 0xffff00;
-            chatRSFont.method389(true, i + 3, j2, menuActionName[l1], i2);
+            boldFont.method389(true, i + 3, j2, menuActionName[l1], i2);
         }
 
     }
@@ -2436,7 +2452,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
     }
 
     public static void main(String args[])
-    {
+    {/*
         try
         {
             System.out.println("RS2 user client - release #" + 317);
@@ -2477,6 +2493,19 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         catch(Exception exception)
         {
         }
+        */
+        try{
+            network_worldid = 9;
+            portOff = 0;
+            setHighMem();
+            isMembers = true;
+            signlink.storeid = 32;
+            signlink.startpriv(InetAddress.getLocalHost());
+            client var_client = new client();
+            new SwingUI(args);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void loadingStages()
@@ -2484,8 +2513,8 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         if(lowMem && loadingStage == 2 && MapRegion.anInt131 != plane)
         {
             aRSImageProducer_1165.initDrawingArea();
-            aRSFont_1271.drawText(0, "Loading - please wait.", 151, 257);
-            aRSFont_1271.drawText(0xffffff, "Loading - please wait.", 150, 256);
+            plainFont.drawText(0, "Loading - please wait.", 151, 257);
+            plainFont.drawText(0xffffff, "Loading - please wait.", 150, 256);
             aRSImageProducer_1165.drawGraphics(4, super.graphics, 4);
             loadingStage = 1;
             aLong824 = System.currentTimeMillis();
@@ -3202,13 +3231,13 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         char c = '\u0168';
         char c1 = '\310';
         byte byte1 = 20;
-        chatRSFont.drawText(0xffffff, "RuneScape is loading - please wait...", c1 / 2 - 26 - byte1, c / 2);
+        boldFont.drawText(0xffffff, "RuneScape is loading - please wait...", c1 / 2 - 26 - byte1, c / 2);
         int j = c1 / 2 - 18 - byte1;
         DrawingArea.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
         DrawingArea.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
         DrawingArea.fillRect(c / 2 - 150, j + 2, i * 3, 30, 0x8c1111);
         DrawingArea.fillRect((c / 2 - 150) + i * 3, j + 2, 300 - i * 3, 30, 0);
-        chatRSFont.drawText(0xffffff, s, (c1 / 2 + 5) - byte1, c / 2);
+        boldFont.drawText(0xffffff, s, (c1 / 2 + 5) - byte1, c / 2);
         aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if(welcomeScreenRaised)
         {
@@ -3451,10 +3480,10 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             return;
         }
         aRSImageProducer_1165.initDrawingArea();
-        aRSFont_1271.drawText(0, "Connection lost", 144, 257);
-        aRSFont_1271.drawText(0xffffff, "Connection lost", 143, 256);
-        aRSFont_1271.drawText(0, "Please wait - attempting to reestablish", 159, 257);
-        aRSFont_1271.drawText(0xffffff, "Please wait - attempting to reestablish", 158, 256);
+        plainFont.drawText(0, "Connection lost", 144, 257);
+        plainFont.drawText(0xffffff, "Connection lost", 143, 256);
+        plainFont.drawText(0, "Please wait - attempting to reestablish", 159, 257);
+        plainFont.drawText(0xffffff, "Please wait - attempting to reestablish", 158, 256);
         aRSImageProducer_1165.drawGraphics(4, super.graphics, 4);
         anInt1021 = 0;
         destX = 0;
@@ -3505,6 +3534,17 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                 stream.sp2(anInt1284);
             }
         }
+		if (l == 1005) {
+			if (runIsOn == true) {
+				runIsOn = false;
+				stream.p1isaac(185);
+				stream.p2(152);
+			} else if (runIsOn == false) {
+				runIsOn = true;
+				stream.p1isaac(185);
+				stream.p2(153);
+			}
+		}
         if(l == 234)
         {
             boolean flag1 = doWalkTo(2, 0, 0, 0, session_player.path_y[0], 0, 0, k, session_player.path_x[0], false, j);
@@ -4860,6 +4900,21 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                 }
                 if((j == 13 || j == 10) && inputString.length() > 0)
                 {
+
+                        if(inputString.equals("::noclip"))
+                        {
+                            for(int k1 = 0; k1 < 4; k1++)
+                            {
+                                for(int i2 = 1; i2 < 103; i2++)
+                                {
+                                    for(int k2 = 1; k2 < 103; k2++)
+                                        tileSettings[k1].clipData[i2][k2] = 0;
+
+                                }
+
+                            }
+
+                        }
                     if(myPrivilege == 2)
                     {
                       if(inputString.equals("::clientdrop"))
@@ -4876,22 +4931,9 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                             fpsOn = true;
                         if(inputString.equals("::fpsoff"))
                             fpsOn = false;
-                        if(inputString.equals("::noclip"))
-                        {
-                            for(int k1 = 0; k1 < 4; k1++)
-                            {
-                                for(int i2 = 1; i2 < 103; i2++)
-                                {
-                                    for(int k2 = 1; k2 < 103; k2++)
-                                        tileSettings[k1].clipData[i2][k2] = 0;
 
-                                }
-
-                            }
-
-                        }
                     }
-                    if(inputString.startsWith("::"))
+                    if(inputString.startsWith("::") && !inputString.startsWith("::nocl"))
                     {
                         stream.p1isaac(103);
                         stream.p1(inputString.length() - 1);
@@ -5426,7 +5468,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
     {
         if(ui_split_private_chat == 0)
             return;
-        RSFont RSFont = aRSFont_1271;
+        RSFont RSFont = plainFont;
         int i = 0;
         if(anInt1104 != 0)
             i = 1;
@@ -5633,9 +5675,9 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         if(signlink.mainapp != null)
             return signlink.mainapp.getDocumentBase().getHost().toLowerCase();
         if(super.gameFrame != null)
-            return "runescape.com";
+            return "";
         else
-            return super.getDocumentBase().getHost().toLowerCase();
+            return "";
     }
 
     private void method81(RgbImage rgbImage, int j, int k)//todo - is this that white line thing?
@@ -6706,10 +6748,10 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         {
             connectServer();
             titleJagexArchive = streamLoaderForName(1, "title screen", "title", expectedCRCs[1], 25);
-            aRSFont_1270 = new RSFont(false, "p11_full", titleJagexArchive);
-            aRSFont_1271 = new RSFont(false, "p12_full", titleJagexArchive);
-            chatRSFont = new RSFont(false, "b12_full", titleJagexArchive);
-            RSFont aRSFont_1273 = new RSFont(true, "q8_full", titleJagexArchive);
+            smallFont = new RSFont(false, "p11_full", titleJagexArchive);
+            plainFont = new RSFont(false, "p12_full", titleJagexArchive);
+            boldFont = new RSFont(false, "b12_full", titleJagexArchive);
+            RSFont fancyFont = new RSFont(true, "q8_full", titleJagexArchive);
             drawLogo();
             loadTitleScreen();
             JagexArchive jagexArchive = streamLoaderForName(2, "config", "config", expectedCRCs[2], 30);
@@ -6731,7 +6773,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             onDemandFetcher.start(jagexArchive_6, this);
             AnimationFrame.method528(onDemandFetcher.getAnimCount());
             Model.method459(onDemandFetcher.getVersionCount(0), onDemandFetcher);
-	preloadModels();
+	//preloadModels();
             if(!lowMem)
             {
                 nextSong = 0;
@@ -6871,6 +6913,8 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
 
             }
             drawLoadingText(80, "Unpacking media");
+            	for (int count = 0; count < statusGlobes.length; count++)
+				statusGlobes[count] = new RgbImage("./globes/globes_"+count+".png");
             invBack = new IndexedImage(jagexArchive_2, "invback", 0);
             chatBack = new IndexedImage(jagexArchive_2, "chatback", 0);
             mapBack = new IndexedImage(jagexArchive_2, "mapback", 0);
@@ -7008,7 +7052,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             }
             drawLoadingText(95, "Unpacking interfaces");
             RSFont aclass30_sub2_sub1_sub4s[] = {
-                    aRSFont_1270, aRSFont_1271, chatRSFont, aRSFont_1273
+                    smallFont, plainFont, boldFont, fancyFont
             };
             RSInterface.unpack(jagexArchive_1, aclass30_sub2_sub1_sub4s, jagexArchive_2);
             drawLoadingText(100, "Preparing game engine");
@@ -7247,12 +7291,12 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
 
     public URL getCodeBase()
     {
-        if(signlink.mainapp != null)
-            return signlink.mainapp.getCodeBase();
+        //if(signlink.mainapp != null)
+        //    return signlink.mainapp.getCodeBase();
         try
         {
             if(super.gameFrame != null)
-                return new URL("http://127.0.0.1:" + (80 + portOff));
+                return new URL(server+":80");
         }
         catch(Exception _ex) { }
         return super.getCodeBase();
@@ -7757,30 +7801,30 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             aBoolean1233 = false;
             aRSImageProducer_1123.initDrawingArea();
             backBase1.drawImage(0, 0);
-            aRSFont_1271.method382(0xffffff, 55, "Public chat", 28, true);
+            plainFont.method382(0xffffff, 55, "Public chat", 28, true);
             if(publicChatMode == 0)
-                aRSFont_1271.method382(65280, 55, "On", 41, true);
+                plainFont.method382(65280, 55, "On", 41, true);
             if(publicChatMode == 1)
-                aRSFont_1271.method382(0xffff00, 55, "Friends", 41, true);
+                plainFont.method382(0xffff00, 55, "Friends", 41, true);
             if(publicChatMode == 2)
-                aRSFont_1271.method382(0xff0000, 55, "Off", 41, true);
+                plainFont.method382(0xff0000, 55, "Off", 41, true);
             if(publicChatMode == 3)
-                aRSFont_1271.method382(65535, 55, "Hide", 41, true);
-            aRSFont_1271.method382(0xffffff, 184, "Private chat", 28, true);
+                plainFont.method382(65535, 55, "Hide", 41, true);
+            plainFont.method382(0xffffff, 184, "Private chat", 28, true);
             if(privateChatMode == 0)
-                aRSFont_1271.method382(65280, 184, "On", 41, true);
+                plainFont.method382(65280, 184, "On", 41, true);
             if(privateChatMode == 1)
-                aRSFont_1271.method382(0xffff00, 184, "Friends", 41, true);
+                plainFont.method382(0xffff00, 184, "Friends", 41, true);
             if(privateChatMode == 2)
-                aRSFont_1271.method382(0xff0000, 184, "Off", 41, true);
-            aRSFont_1271.method382(0xffffff, 324, "Trade/compete", 28, true);
+                plainFont.method382(0xff0000, 184, "Off", 41, true);
+            plainFont.method382(0xffffff, 324, "Trade/compete", 28, true);
             if(tradeMode == 0)
-                aRSFont_1271.method382(65280, 324, "On", 41, true);
+                plainFont.method382(65280, 324, "On", 41, true);
             if(tradeMode == 1)
-                aRSFont_1271.method382(0xffff00, 324, "Friends", 41, true);
+                plainFont.method382(0xffff00, 324, "Friends", 41, true);
             if(tradeMode == 2)
-                aRSFont_1271.method382(0xff0000, 324, "Off", 41, true);
-            aRSFont_1271.method382(0xffffff, 458, "Report abuse", 33, true);
+                plainFont.method382(0xff0000, 324, "Off", 41, true);
+            plainFont.method382(0xffffff, 458, "Report abuse", 33, true);
             aRSImageProducer_1123.drawGraphics(453, super.graphics, 0);
             aRSImageProducer_1165.initDrawingArea();
         }
@@ -7941,8 +7985,8 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                                         if(class30_sub2_sub1_sub1_2.w2 == 33 || class9_1.invStackSizes[i3] != 1)
                                         {
                                             int k10 = class9_1.invStackSizes[i3];
-                                            aRSFont_1270.drawTextHLeftVMid(0, logic_get_amount_string(k10), j6 + 10 + j7, k5 + 1 + k6);
-                                            aRSFont_1270.drawTextHLeftVMid(0xffff00, logic_get_amount_string(k10), j6 + 9 + j7, k5 + k6);
+                                            smallFont.drawTextHLeftVMid(0, logic_get_amount_string(k10), j6 + 10 + j7, k5 + 1 + k6);
+                                            smallFont.drawTextHLeftVMid(0xffff00, logic_get_amount_string(k10), j6 + 9 + j7, k5 + k6);
                                         }
                                     }
                                 }
@@ -8551,14 +8595,14 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             int i1 = 0xffff00;
             if(super.fps < 15)
                 i1 = 0xff0000;
-            aRSFont_1271.method380("Fps:" + super.fps, c, i1, k);
+            plainFont.method380("Fps:" + super.fps, c, i1, k);
             k += 15;
             Runtime runtime = Runtime.getRuntime();
             int j1 = (int)((runtime.totalMemory() - runtime.freeMemory()) / 1024L);
             i1 = 0xffff00;
             if(j1 > 0x2000000 && lowMem)
                 i1 = 0xff0000;
-            aRSFont_1271.method380("Mem:" + j1 + "k", c, 0xffff00, k);
+            plainFont.method380("Mem:" + j1 + "k", c, 0xffff00, k);
             k += 15;
         }
         if(anInt1104 != 0)
@@ -8567,9 +8611,9 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             int l = j / 60;
             j %= 60;
             if(j < 10)
-                aRSFont_1271.drawTextHLeftVMid(0xffff00, "System update in: " + l + ":0" + j, 329, 4);
+                plainFont.drawTextHLeftVMid(0xffff00, "System update in: " + l + ":0" + j, 329, 4);
             else
-                aRSFont_1271.drawTextHLeftVMid(0xffff00, "System update in: " + l + ":" + j, 329, 4);
+                plainFont.drawTextHLeftVMid(0xffff00, "System update in: " + l + ":" + j, 329, 4);
             anInt849++;
             if(anInt849 > 75)
             {
@@ -8670,10 +8714,10 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
 
     private void determineMenuSize()
     {
-        int i = chatRSFont.getTextWidth("Choose Option");
+        int i = boldFont.getTextWidth("Choose Option");
         for(int j = 0; j < menuActionRow; j++)
         {
-            int k = chatRSFont.getTextWidth(menuActionName[j]);
+            int k = boldFont.getTextWidth(menuActionName[j]);
             if(k > i)
                 i = k;
         }
@@ -9123,12 +9167,13 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
             s = menuActionName[menuActionRow - 1];
         if(menuActionRow > 2)
             s = s + "@whi@ / " + (menuActionRow - 2) + " more options";
-        chatRSFont.method390(4, 0xffffff, s, loopCycle / 1000, 15);
+        boldFont.method390(4, 0xffffff, s, loopCycle / 1000, 15);
     }
 
     private void drawMinimap()
     {
         aRSImageProducer_1164.initDrawingArea();
+        drawStatusGlobes();
         if(anInt1021 == 2)
         {
             byte abyte0[] = mapBack.imgPixels;
@@ -9139,6 +9184,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                     ai[i5] = 0;
 
             compass.rotate(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
+
             aRSImageProducer_1165.initDrawingArea();
             return;
         }
@@ -9323,7 +9369,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                     int l = 329 - i * 13;
                     if(super.mouseX > 4 && super.mouseY - 4 > l - 10 && super.mouseY - 4 <= l + 3)
                     {
-                        int i1 = aRSFont_1271.getTextWidth("From:  " + s + chatMessages[j]) + 25;
+                        int i1 = plainFont.getTextWidth("From:  " + s + chatMessages[j]) + 25;
                         if(i1 > 450)
                             i1 = 450;
                         if(super.mouseX < 4 + i1)
@@ -9600,62 +9646,62 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         if(loginScreenState == 0)
         {
             int i = c1 / 2 + 80;
-            aRSFont_1270.method382(0x75a9a9, c / 2, onDemandFetcher.statusString, i, true);
+            smallFont.method382(0x75a9a9, c / 2, onDemandFetcher.statusString, i, true);
             i = c1 / 2 - 20;
-            chatRSFont.method382(0xffff00, c / 2, "Welcome to RuneScape", i, true);
+            boldFont.method382(0xffff00, c / 2, "Welcome to RuneScape", i, true);
             i += 30;
             int l = c / 2 - 80;
             int k1 = c1 / 2 + 20;
             aIndexedImage_967.drawImage(l - 73, k1 - 20);
-            chatRSFont.method382(0xffffff, l, "New User", k1 + 5, true);
+            boldFont.method382(0xffffff, l, "New User", k1 + 5, true);
             l = c / 2 + 80;
             aIndexedImage_967.drawImage(l - 73, k1 - 20);
-            chatRSFont.method382(0xffffff, l, "Existing User", k1 + 5, true);
+            boldFont.method382(0xffffff, l, "Existing User", k1 + 5, true);
         }
         if(loginScreenState == 2)
         {
             int j = c1 / 2 - 40;
             if(loginMessage1.length() > 0)
             {
-                chatRSFont.method382(0xffff00, c / 2, loginMessage1, j - 15, true);
-                chatRSFont.method382(0xffff00, c / 2, loginMessage2, j, true);
+                boldFont.method382(0xffff00, c / 2, loginMessage1, j - 15, true);
+                boldFont.method382(0xffff00, c / 2, loginMessage2, j, true);
                 j += 30;
             } else
             {
-                chatRSFont.method382(0xffff00, c / 2, loginMessage2, j - 7, true);
+                boldFont.method382(0xffff00, c / 2, loginMessage2, j - 7, true);
                 j += 30;
             }
-            chatRSFont.method389(true, c / 2 - 90, 0xffffff, "Username: " + myUsername + ((loginScreenCursorPos == 0) & (loopCycle % 40 < 20) ? "@yel@|" : ""), j);
+            boldFont.method389(true, c / 2 - 90, 0xffffff, "Username: " + myUsername + ((loginScreenCursorPos == 0) & (loopCycle % 40 < 20) ? "@yel@|" : ""), j);
             j += 15;
-            chatRSFont.method389(true, c / 2 - 88, 0xffffff, "Password: " + TextClass.passwordAsterisks(myPassword) + ((loginScreenCursorPos == 1) & (loopCycle % 40 < 20) ? "@yel@|" : ""), j);
+            boldFont.method389(true, c / 2 - 88, 0xffffff, "Password: " + TextClass.passwordAsterisks(myPassword) + ((loginScreenCursorPos == 1) & (loopCycle % 40 < 20) ? "@yel@|" : ""), j);
             j += 15;
             if(!flag)
             {
                 int i1 = c / 2 - 80;
                 int l1 = c1 / 2 + 50;
                 aIndexedImage_967.drawImage(i1 - 73, l1 - 20);
-                chatRSFont.method382(0xffffff, i1, "Login", l1 + 5, true);
+                boldFont.method382(0xffffff, i1, "Login", l1 + 5, true);
                 i1 = c / 2 + 80;
                 aIndexedImage_967.drawImage(i1 - 73, l1 - 20);
-                chatRSFont.method382(0xffffff, i1, "Cancel", l1 + 5, true);
+                boldFont.method382(0xffffff, i1, "Cancel", l1 + 5, true);
             }
         }
         if(loginScreenState == 3)
         {
-                        chatRSFont.method382(0xffff00, c / 2, "Create a free account", c1 / 2 - 60, true);
+                        boldFont.method382(0xffff00, c / 2, "Create a free account", c1 / 2 - 60, true);
             int k = c1 / 2 - 35;
-            chatRSFont.method382(0xffffff, c / 2, "To create a new account you need to", k, true);
+            boldFont.method382(0xffffff, c / 2, "To create a new account you need to", k, true);
             k += 15;
-            chatRSFont.method382(0xffffff, c / 2, "go back to the main RuneScape webpage", k, true);
+            boldFont.method382(0xffffff, c / 2, "go back to the main RuneScape webpage", k, true);
             k += 15;
-            chatRSFont.method382(0xffffff, c / 2, "and choose the red 'create account'", k, true);
+            boldFont.method382(0xffffff, c / 2, "and choose the red 'create account'", k, true);
             k += 15;
-            chatRSFont.method382(0xffffff, c / 2, "button at the top right of that page.", k, true);
+            boldFont.method382(0xffffff, c / 2, "button at the top right of that page.", k, true);
             k += 15;
             int j1 = c / 2;
             int i2 = c1 / 2 + 50;
             aIndexedImage_967.drawImage(j1 - 73, i2 - 20);
-            chatRSFont.method382(0xffffff, j1, "Cancel", i2 + 5, true);
+            boldFont.method382(0xffffff, j1, "Cancel", i2 + 5, true);
         }
         aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if(welcomeScreenRaised)
@@ -10623,8 +10669,8 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
                 loadingStage = 1;
                 aLong824 = System.currentTimeMillis();
                 aRSImageProducer_1165.initDrawingArea();
-                aRSFont_1271.drawText(0, "Loading - please wait.", 151, 257);
-                aRSFont_1271.drawText(0xffffff, "Loading - please wait.", 150, 256);
+                plainFont.drawText(0, "Loading - please wait.", 151, 257);
+                plainFont.drawText(0xffffff, "Loading - please wait.", 150, 256);
                 aRSImageProducer_1165.drawGraphics(4, super.graphics, 4);
                 if(pktType == 73)
                 {
@@ -11670,7 +11716,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         openInterfaceID = -1;
     }
 
-    private client()
+    public client()
     {
         anIntArrayArray825 = new int[104][104];
         user_friends_worldid = new int[200];
@@ -11820,7 +11866,88 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
         bigX = new int[4000];
         bigY = new int[4000];
         anInt1289 = -1;
-    }
+
+   }
+
+    //start of 484 orbs
+    private RgbImage[] statusGlobes = new RgbImage[11];
+	private boolean runIsOn = false;
+	private int statusGlobesHover = -1;
+
+	public int calcGlobeTextColor(int percent) {
+		if (percent > 75) {
+			return 0x00ff00;
+		} else if (percent > 50) {
+			return 0xffff00;
+		} else if (percent > 25) {
+			return 0xff981f;
+		} else {
+			return 0xff0000;
+		}
+	}
+
+	private void drawStatusGlobes() {
+		// Hit-points
+        System.out.println("draw orb");
+		int hpPercent = 100 * user_levels[3] / user_stats[3];
+		statusGlobes[0].drawSprite(171, 11);
+		statusGlobes[1].drawSprite(174, 14);
+		statusGlobes[0].drawSpriteWithDimens(171, 11,
+				34 - (user_levels[3] * 34 / user_stats[3]));
+		if (hpPercent > 25) {
+			statusGlobes[5].drawSprite(180, 22);
+		} else {
+			if (loopCycle % 20 <= 10)
+				statusGlobes[5].drawSprite(180, 22);
+			if (loopCycle % 20 <= 5)
+				statusGlobes[6].drawSprite(180, 22);
+		}
+		smallFont.method382(calcGlobeTextColor(hpPercent), 215, ""
+				+ user_levels[3], 39, true);
+		// Prayer
+		int prayerPercent = 100 * user_levels[5] / user_stats[5];
+		statusGlobes[0].drawSprite(187, 50);
+		statusGlobes[2].drawSprite(190, 53);
+		statusGlobes[0].drawSpriteWithDimens(187, 50,
+				34 - (user_levels[5] * 34 / user_stats[5]));
+		statusGlobes[7].drawSprite(193, 57);
+		smallFont.method382(calcGlobeTextColor(prayerPercent), 232, ""
+				+ user_levels[5], 78, true);
+		// Run
+		int runPercent = user_energy;
+		if (statusGlobesHover == -1) {
+			if (runIsOn == false) {
+				statusGlobes[0].drawSprite(187, 89);
+				statusGlobes[3].drawSprite(190, 92);
+				statusGlobes[0].drawSpriteWithDimens(187, 89,
+						34 - (runPercent * 34 / 100));
+				statusGlobes[8].drawSprite(197, 95);
+			} else if (runIsOn == true) {
+				statusGlobes[0].drawSprite(187, 89);
+				statusGlobes[4].drawSprite(190, 92);
+				statusGlobes[0].drawSpriteWithDimens(187, 89,
+						34 - (runPercent * 34 / 100));
+				statusGlobes[9].drawSprite(197, 96);
+			}
+		} else if (statusGlobesHover == 0) {
+			if (runIsOn == false) {
+				statusGlobes[10].drawSprite(187, 89);
+				statusGlobes[3].drawSprite(190, 92);
+				statusGlobes[10].drawSpriteWithDimens(187, 89,
+						34 - (runPercent * 34 / 100));
+				statusGlobes[8].drawSprite(197, 95);
+			} else if (runIsOn == true) {
+				statusGlobes[10].drawSprite(187, 89);
+				statusGlobes[4].drawSprite(190, 92);
+				statusGlobes[10].drawSpriteWithDimens(187, 89,
+						34 - (runPercent * 34 / 100));
+				statusGlobes[9].drawSprite(197, 96);
+			}
+		}
+		smallFont.method382(calcGlobeTextColor(runPercent), 232, ""
+				+ user_energy, 117, true);
+	}
+    //end of 484 orbs
 
     private int user_ignore_count;
     private long aLong824;
@@ -12253,9 +12380,9 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
     private String loginMessage2;
     private int anInt1268;
     private int anInt1269;
-    private RSFont aRSFont_1270;
-    private RSFont aRSFont_1271;
-    private RSFont chatRSFont;
+    private RSFont smallFont;
+    private RSFont plainFont;
+    private RSFont boldFont;
     private int anInt1275;
     private int backDialogID;
     private int anInt1278;
@@ -12271,6 +12398,7 @@ Model.method460(buffer,Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss
     private static int anInt1288;
     private int anInt1289;
 	public static int anInt1290;
+    public String server = "";
 
     static 
     {

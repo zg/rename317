@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="b89b271f-bcab-4808-b81f-ee8fd61b54e9" name="Default" comment="" />
-    <ignored path="src.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="src.iws" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,10 +60,32 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ItemDef.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ItemDef.java">
+      <file leaf-file-name="client.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="516" column="28" selection-start="16188" selection-end="16188" vertical-scroll-proportion="0.6535433">
+            <state line="11877" column="39" selection-start="452966" selection-end="452966" vertical-scroll-proportion="0.31014493">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RgbImage.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RgbImage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="19" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RSFont.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RSFont.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="89" column="89" selection-start="2671" selection-end="2671" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -83,9 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/IndexedImage.java" />
-        <option value="$PROJECT_DIR$/BZIP2Decompressor.java" />
-        <option value="$PROJECT_DIR$/ObjectDef.java" />
         <option value="$PROJECT_DIR$/SpotAnim.java" />
         <option value="$PROJECT_DIR$/VertexNormal.java" />
         <option value="$PROJECT_DIR$/Class47.java" />
@@ -93,14 +112,20 @@
         <option value="$PROJECT_DIR$/Animable.java" />
         <option value="$PROJECT_DIR$/Decompressor.java" />
         <option value="$PROJECT_DIR$/ObjectOnTile.java" />
-        <option value="$PROJECT_DIR$/client.java" />
-        <option value="$PROJECT_DIR$/RgbImage.java" />
         <option value="$PROJECT_DIR$/SceneGraph.java" />
         <option value="$PROJECT_DIR$/Model.java" />
         <option value="$PROJECT_DIR$/JagexFileStore.java" />
         <option value="$PROJECT_DIR$/ItemDef.java" />
+        <option value="$PROJECT_DIR$/SwingUI.java" />
+        <option value="$PROJECT_DIR$/sign/signlink.java" />
+        <option value="$PROJECT_DIR$/RSFont.java" />
+        <option value="$PROJECT_DIR$/RgbImage.java" />
+        <option value="$PROJECT_DIR$/client.java" />
       </list>
     </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="#JAVA_INTERNAL" />
   </component>
   <component name="ModuleEditorState">
     <option name="LAST_EDITED_MODULE_NAME" />
@@ -138,7 +163,6 @@
     </navigator>
     <panes>
       <pane id="Favorites" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -157,15 +181,31 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sign" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -266,12 +306,12 @@
     <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <configuration useDefault="true">C:\Documents and Settings\cex slough\Application Data\Subversion</configuration>
+    <configuration useDefault="true">C:\Users\clienthax\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1032" height="574" extended-state="6" />
+    <frame x="-8" y="-8" width="1040" height="576" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -282,7 +322,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28045034" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27002054" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -323,72 +363,11 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/OnDemandData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2501" column="38" selection-start="96004" selection-end="96004" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DummyClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.13421053" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OnDemandFetcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="69" selection-start="517" selection-end="517" vertical-scroll-proportion="0.044619422" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RgbImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="455" column="20" selection-start="13250" selection-end="13250" vertical-scroll-proportion="0.40419948" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MapRegion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="20" selection-start="11981" selection-end="11981" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CullingCluster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="23" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PlainTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="172" selection-end="172" vertical-scroll-proportion="-0.23869346" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SceneGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="428" column="73" selection-start="14872" selection-end="14872" vertical-scroll-proportion="0.62467194" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="626" column="57" selection-start="17929" selection-end="17929" vertical-scroll-proportion="-0.098314606" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ModelHeader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="16" selection-start="330" selection-end="355" vertical-scroll-proportion="0.42713568" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Packet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="21" selection-start="3060" selection-end="3060" vertical-scroll-proportion="0.58146065" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AnimationFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="19" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IdentityKit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="19" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" />
@@ -396,18 +375,146 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/JagexFileStore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="187" selection-end="187" vertical-scroll-proportion="0.044619422">
-          <folding />
-        </state>
+        <state line="6" column="17" selection-start="187" selection-end="187" vertical-scroll-proportion="0.044619422" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ItemDef.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="516" column="28" selection-start="16188" selection-end="16188" vertical-scroll-proportion="0.6535433">
+        <state line="209" column="83" selection-start="5654" selection-end="5654" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VertexNormal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="12" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VarBit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Skills.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.04857143">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Class4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="12" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.04857143">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SettingUsagePointers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="170" selection-end="170" vertical-scroll-proportion="0.046321526">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SizeConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.046321526">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ThreeDimensionalDrawingArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.045945946">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SwingUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="58" selection-start="453" selection-end="453" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sign/signlink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="143" column="2" selection-start="3981" selection-end="3981" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RSFont.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="89" column="89" selection-start="2671" selection-end="2671" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RgbImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="19" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11877" column="39" selection-start="452966" selection-end="452966" vertical-scroll-proportion="0.31014493">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+          <settings />
+        </UIState>
+      </state>
+      <state key="Copyright.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+        </UIState>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl>
+              <option name="proportions">
+                <list>
+                  <option value="0.2" />
+                </list>
+              </option>
+            </SplitterProportionsDataImpl>
+          </splitter-proportions>
+          <last-edited>1.6</last-edited>
+        </UIState>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <UIState>
+          <splitter-proportions>
+            <SplitterProportionsDataImpl />
+          </splitter-proportions>
+          <settings />
+        </UIState>
+      </state>
+    </states>
   </component>
 </project>
 

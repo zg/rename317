@@ -87,7 +87,7 @@ public final class RSFont extends DrawingArea {
         drawTextHLeftVMid(i, s, k, l - method384(s) / 2);
     }
 
-    public void method382(int i, int j, String s, int l, boolean flag)
+    public void method382(int i, int j, String s, int l, boolean flag)//drawcenteredtext?
     {
         method389(flag, j - getTextWidth(s) / 2, i, s, l);
     }

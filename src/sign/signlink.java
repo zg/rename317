@@ -141,8 +141,8 @@ public final class signlink
 
     private static String findcachedir()
     {
-return findcachedirORIG();
-//        return "./cache/";
+//return findcachedirORIG();
+        return "./cache/";
     }
 
     public static String findcachedirORIG()
