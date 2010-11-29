@@ -8,6 +8,10 @@ add sound system
 rename fonts and crap
 include cache in new svn
 try and rename the animation system a bit more
+
+fix all the shit with the new title screen
+(try to get the animated stuff from rs)
+
 */
 
 import java.applet.AppletContext;
@@ -2365,6 +2369,7 @@ public class client extends RSApplet {
 		titlebox = new RgbImage("./cache/sprites/title.png");
 		passwordhover = new RgbImage("./cache/sprites/pH.png");
 		loginhover = new RgbImage("./cache/sprites/LH.png");
+		loadingBox1 = new RgbImage("./cache/sprites/LoadingCircle/Loading1.png");
 		aIndexedImageArray1152s = new IndexedImage[12];
 		int j = 0;
 		try
@@ -2617,8 +2622,9 @@ public class client extends RSApplet {
 		return super.getAppletContext();
 	}
 
-	private void drawLogo()
+	private void drawLogo()//this isnt a logo its more of a login screen
 	{
+		
 		byte abyte0[] = titleJagexArchive.getDataForName("title.dat");
 		RgbImage rgbImage = new RgbImage(abyte0, this);
 		aRSImageProducer_1110.initDrawingArea();
@@ -2667,13 +2673,15 @@ public class client extends RSApplet {
 		rgbImage.method346(254, -171);
 		aRSImageProducer_1115.initDrawingArea();
 		rgbImage.method346(-180, -171);
+
 		rgbImage = new RgbImage(titleJagexArchive, "logo", 0);
 		aRSImageProducer_1107.initDrawingArea();
-		rgbImage.drawSprite(382 - rgbImage.myWidth / 2 - 128, 18);
+		//rgbImage.drawSprite(382 - rgbImage.myWidth / 2 - 128, 18);
 		rgbImage = null;
 		Object obj = null;
 		Object obj1 = null;
 		System.gc();
+		
 
 	}
 
@@ -3228,8 +3236,8 @@ public class client extends RSApplet {
 			super.drawLoadingText(i, s);
 			return;
 		}
-		aRSImageProducer_1109.initDrawingArea();
-		char c = '\u0168';
+		aRSImageProducer_1109.initDrawingArea();//loading area ??
+		char c = '\u0168';//what are these?
 		char c1 = '\310';
 		byte byte1 = 20;
 		boldFont.drawText(0xffffff, "RuneScape is loading - please wait...", c1 / 2 - 26 - byte1, c / 2);
@@ -5777,8 +5785,11 @@ public class client extends RSApplet {
 		return ((r & 0xff00ff) * l + (g & 0xff00ff) * b & 0xff00ff00) + ((r & 0xff00) * l + (g & 0xff00) * b & 0xff0000) >> 8;
 	}
 
-	private void login(String s, String s1, boolean flag)
+	private void login(String s, String s1, boolean flag)//flag = reconnecting?
 	{
+
+
+
 		signlink.errorname = s;
 		try
 		{
@@ -5786,7 +5797,7 @@ public class client extends RSApplet {
 			{
 				loginMessage1 = "";
 				loginMessage2 = "Connecting to server...";
-				drawLoginScreen(true);
+				drawLoginScreen(true, 1);
 			}
 			socketStream = new RSSocket(this, openSocket(43594 + portOff));
 			long l = TextClass.longForName(s);
@@ -6070,7 +6081,7 @@ public class client extends RSApplet {
 				{
 					loginMessage1 = "You have only just left another world";
 					loginMessage2 = "Your profile will be transferred in: " + k1 + " seconds";
-					drawLoginScreen(true);
+					drawLoginScreen(true, 0);
 					try
 					{
 						Thread.sleep(1000L);
@@ -8512,7 +8523,7 @@ public class client extends RSApplet {
 		}
 		anInt1061++;
 		if(!loggedIn)
-		drawLoginScreen(false);
+		drawLoginScreen(false, 0);
 		else
 		drawGameScreen();
 		anInt1213 = 0;
@@ -8853,6 +8864,7 @@ public class client extends RSApplet {
 		titlebox = null;
 		loginhover = null;
 		passwordhover = null;
+		loadingBox1 = null;
 		aIndexedImageArray1152s = null;
 		anIntArray850 = null;
 		anIntArray851 = null;
@@ -9643,14 +9655,24 @@ public class client extends RSApplet {
 		}
 	}
 
-	private void drawLoginScreen(boolean flag)
+	private void drawLoginScreen(boolean flag,int stage)
 	{
 		resetImageProducers();
 		aRSImageProducer_1109.initDrawingArea();
+		if(stage != 1)
+		{
 		titlebox.drawSprite(0, 0);
-		char c = '\u0168';
+		}
+		else
+		{
+		DrawingArea.reset_image();//need to redraw titlescreen (black space)
+		drawLogo();
+		aRSImageProducer_1109.initDrawingArea();
+		loadingBox1.drawSprite(60, 20);
+		}
+		char c = '\u0168';//TODO change these to ints or something
 		char c1 = '\310';
-		if(loginScreenState == 0)
+		if(loginScreenState == 0 && stage != 1)
 		{
 			int j = c1 / 2 - 40;
 			if(super.mouseX >= 291 && super.mouseX <= 467 && super.mouseY >= 333 && super.mouseY <= 355)
@@ -9661,11 +9683,13 @@ public class client extends RSApplet {
 			passwordhover.drawSprite(68, 58); // user hover
 			if(loginMessage1.length() > 0)
 			{
+				//loadingBox1.drawSprite(0, 0);
 				plainFont.method382(0xffff00, c / 2, loginMessage1, j - 6, true);
 				plainFont.method382(0xffff00, c / 2, loginMessage2, j - 6, true);
 				j += 30;
 			} else
 			{
+				//loadingBox1.drawSprite(0, 0);
 				boldFont.method382(0xffff00, c / 2, loginMessage2, j - 6, true);
 				j += 30;
 			}
@@ -9679,6 +9703,7 @@ public class client extends RSApplet {
 				int l1 = c1 / 2 + 50;
 			}
 		}
+		
 		aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
 		if(welcomeScreenRaised)
 		{
@@ -11774,8 +11799,8 @@ public class client extends RSApplet {
 		aBoolean1159 = false;
 		aBoolean1160 = false;
 		anInt1171 = 1;
-		myUsername = "mopar";
-		myPassword = "bob";
+		myUsername = "";
+		myPassword = "";
 		genericLoadingError = false;
 		reportAbuseInterfaceID = -1;
 		aClass19_1179 = new NodeList();
@@ -12045,6 +12070,7 @@ public class client extends RSApplet {
 	private RgbImage titlebox;
 	private RgbImage passwordhover;
 	private RgbImage loginhover;
+	private RgbImage loadingBox1;
 	
 	private int anInt988;
 	private int anInt989;
