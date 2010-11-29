@@ -63,10 +63,8 @@
       <file leaf-file-name="client.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11877" column="39" selection-start="452966" selection-end="452966" vertical-scroll-proportion="0.31014493">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="11876" column="58" selection-start="453079" selection-end="453079" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,9 +73,7 @@
         <entry file="file://$PROJECT_DIR$/RgbImage.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="20" column="19" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -162,6 +158,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
@@ -198,14 +195,13 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -311,7 +307,7 @@
     <supportedVersion>125</supportedVersion>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1040" height="576" extended-state="0" />
+    <frame x="-8" y="-8" width="1036" height="576" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -322,7 +318,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27002054" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26907218" sideWeight="0.5082353" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -395,9 +391,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Skills.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.04857143">
-          <folding />
-        </state>
+        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.04857143" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Class4.java">
@@ -407,70 +401,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SceneGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.04857143">
-          <folding />
-        </state>
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.04857143" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SettingUsagePointers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="19" selection-start="170" selection-end="170" vertical-scroll-proportion="0.046321526">
-          <folding />
-        </state>
+        <state line="4" column="19" selection-start="170" selection-end="170" vertical-scroll-proportion="0.046321526" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SizeConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.046321526">
-          <folding />
-        </state>
+        <state line="5" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.046321526" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ThreeDimensionalDrawingArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.045945946">
-          <folding />
-        </state>
+        <state line="4" column="12" selection-start="163" selection-end="163" vertical-scroll-proportion="0.045945946" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SwingUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="58" selection-start="453" selection-end="453" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="15" column="58" selection-start="453" selection-end="453" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sign/signlink.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="2" selection-start="3981" selection-end="3981" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RSFont.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="89" selection-start="2671" selection-end="2671" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="143" column="2" selection-start="3981" selection-end="3981" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RgbImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="19" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="20" column="19" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RSFont.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="89" column="89" selection-start="2671" selection-end="2671" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11877" column="39" selection-start="452966" selection-end="452966" vertical-scroll-proportion="0.31014493">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="11876" column="58" selection-start="453079" selection-end="453079" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
