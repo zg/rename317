@@ -77,27 +77,29 @@ final class Sounds {
     }
 
     private Packet writeWaveHeader(int i)
-    {
-        int k = method245(i);
+    {//http://soundfile.sapp.org/doc/WaveFormat/
+        int SubChunk2Size = method245(i);
         waveGenerationStream.pos = 0;
         waveGenerationStream.p4(0x52494646);//RIFF
-        waveGenerationStream.ip4(36 + k);
-        waveGenerationStream.p4(0x57415645);//Wave
-        waveGenerationStream.p4(0x666d7420);//FMT
+        waveGenerationStream.ip4(36 + SubChunk2Size);//36 + SubChunk2Size, or more precisely: 4+(8+SubChunk1Size)+(8+SubChunk2Size)
+        waveGenerationStream.p4(0x57415645);//Wave in big-endian
+
+        waveGenerationStream.p4(0x666d7420);//FMT - SubChunk1ID
         waveGenerationStream.ip4(16);//PCM Header size
-        waveGenerationStream.ip2(1);//PCM Audio size
+        waveGenerationStream.ip2(1);//PCM Linear quantization
         waveGenerationStream.ip2(1);//MONO
         waveGenerationStream.ip4(22050);//SampleRate
         waveGenerationStream.ip4(22050);//ByteRate
         waveGenerationStream.ip2(1);//BlockAlign
         waveGenerationStream.ip2(8);//bitsPerSample
+
         waveGenerationStream.p4(0x64617461);//data
-        waveGenerationStream.ip4(k);
-        waveGenerationStream.pos += k;
+        waveGenerationStream.ip4(SubChunk2Size);
+        waveGenerationStream.pos += SubChunk2Size;
         return waveGenerationStream;
     }
 
-    private int method245(int i)
+    private int method245(int i)//getSubChunk2Size
     {
         int j = 0;
         for(int k = 0; k < 10; k++)
@@ -123,7 +125,8 @@ final class Sounds {
                 int ai[] = aSoundTrackArray329[i2].buildSoundData(j2, aSoundTrackArray329[i2].msLength);
                 for(int l3 = 0; l3 < j2; l3++)
                     waveGenerationBuffer[l3 + i3 + 44] += (byte)(ai[l3] >> 8);
-
+//44 is the data byte offset Type_WAV_PCM
+//http://soundfile.sapp.org/src/SoundHeader.cpp
             }
 
         if(i > 1)
