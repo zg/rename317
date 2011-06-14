@@ -11,37 +11,37 @@ public class Entity extends Animable {
             animation = -1;
         if(!flag)
         {
-            int dx = x - path_x[0];
-            int dy = y - path_y[0];
+            int dx = x - pathX[0];
+            int dy = y - pathY[0];
             if(dx >= -8 && dx <= 8 && dy >= -8 && dy <= 8)
             {
-                if(path_length < 9)
-                    path_length++;
-                for(int i1 = path_length; i1 > 0; i1--)
+                if(pathLength < 9)
+                    pathLength++;
+                for(int i1 = pathLength; i1 > 0; i1--)
                 {
-                    path_x[i1] = path_x[i1 - 1];
-                    path_y[i1] = path_y[i1 - 1];
-                    path_run[i1] = path_run[i1 - 1];
+                    pathX[i1] = pathX[i1 - 1];
+                    pathY[i1] = pathY[i1 - 1];
+                    pathRun[i1] = pathRun[i1 - 1];
                 }
 
-                path_x[0] = x;
-                path_y[0] = y;
-                path_run[0] = false;
+                pathX[0] = x;
+                pathY[0] = y;
+                pathRun[0] = false;
                 return;
             }
         }
-        path_length = 0;
+        pathLength = 0;
         anInt1542 = 0;
         anInt1503 = 0;
-        path_x[0] = x;
-        path_y[0] = y;
-        this.bound_extent_x = path_x[0] * 128 + bound_dim * 64;
-        this.bound_extent_y = path_y[0] * 128 + bound_dim * 64;
+        pathX[0] = x;
+        pathY[0] = y;
+        this.boundExtentX = pathX[0] * 128 + boundDim * 64;
+        this.boundExtentY = pathY[0] * 128 + boundDim * 64;
     }
 
     public final void method446()
     {
-        path_length = 0;
+        pathLength = 0;
         anInt1542 = 0;
     }
 
@@ -59,8 +59,8 @@ public class Entity extends Animable {
 
     public final void move(boolean run, int dir)
     {
-        int x = path_x[0];
-        int y = path_y[0];
+        int x = pathX[0];
+        int y = pathY[0];
         if(dir == 0)
         {
             x--;
@@ -91,17 +91,17 @@ public class Entity extends Animable {
         }
         if(animation != -1 && Animation.anims[animation].priority == 1)
             animation = -1;
-        if(path_length < 9)
-            path_length++;
-        for(int l = path_length; l > 0; l--)
+        if(pathLength < 9)
+            pathLength++;
+        for(int l = pathLength; l > 0; l--)
         {
-            path_x[l] = path_x[l - 1];
-            path_y[l] = path_y[l - 1];
-            path_run[l] = path_run[l - 1];
+            pathX[l] = pathX[l - 1];
+            pathY[l] = pathY[l - 1];
+            pathRun[l] = pathRun[l - 1];
         }
-            path_x[0] = x;
-            path_y[0] = y;
-            path_run[0] = run;
+            pathX[0] = x;
+            pathY[0] = y;
+            pathRun[0] = run;
     }
 
     public int entScreenX;
@@ -114,8 +114,8 @@ public class Entity extends Animable {
 
     Entity()
     {
-        path_x = new int[10];
-        path_y = new int[10];
+        pathX = new int[10];
+        pathY = new int[10];
         interactingEntity = -1;
         anInt1504 = 32;
         anInt1505 = -1;
@@ -130,17 +130,17 @@ public class Entity extends Animable {
         animation = -1;
         loopCycleStatus = -1000;
         textCycle = 100;
-        bound_dim = 1;
+        boundDim = 1;
         aBoolean1541 = false;
-        path_run = new boolean[10];
+        pathRun = new boolean[10];
         anInt1554 = -1;
         anInt1555 = -1;
         anInt1556 = -1;
         anInt1557 = -1;
     }
 
-    public final int[] path_x;
-    public final int[] path_y;
+    public final int[] pathX;
+    public final int[] pathY;
     public int interactingEntity;
     int anInt1503;
     int anInt1504;
@@ -162,7 +162,7 @@ public class Entity extends Animable {
     int anInt1522;
     int anInt1523;
     int anInt1524;
-    int path_length;
+    int pathLength;
     public int animation;
     int anInt1527;
     int anInt1528;
@@ -176,7 +176,7 @@ public class Entity extends Animable {
     int anInt1537;
     int anInt1538;
     int anInt1539;
-    int bound_dim;
+    int boundDim;
     boolean aBoolean1541;
     int anInt1542;
     int anInt1543;
@@ -186,10 +186,10 @@ public class Entity extends Animable {
     int anInt1547;
     int anInt1548;
     int anInt1549;
-    public int bound_extent_x;
-    public int bound_extent_y;
+    public int boundExtentX;
+    public int boundExtentY;
     int anInt1552;
-    final boolean[] path_run;
+    final boolean[] pathRun;
     int anInt1554;
     int anInt1555;
     int anInt1556;
