@@ -6,6 +6,9 @@
 package sign;
 
 import java.applet.Applet;
+
+//todo - add sound system
+
 import java.io.*;
 import java.net.*;
 
