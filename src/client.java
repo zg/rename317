@@ -9866,7 +9866,7 @@ public class client extends RSApplet {
 				int k20 = intGroundArray[plane][j4][i7 + 1];
 				if(j16 == 0)
 				{
-					Object1 class10 = sceneGraph.method296(plane, j4, i7);
+					WallObject class10 = sceneGraph.method296(plane, j4, i7);
 					if(class10 != null)
 					{
 						int k21 = class10.uid >> 14 & 0x7fff;
@@ -9882,13 +9882,13 @@ public class client extends RSApplet {
 				}
 				if(j16 == 1)
 				{
-					Object2 class26 = sceneGraph.method297(j4, i7, plane);
+					WallDecoration class26 = sceneGraph.method297(j4, i7, plane);
 					if(class26 != null)
 					class26.myMob = new ObjectOnTile(class26.uid >> 14 & 0x7fff, 0, 4, i19, l19, j18, k20, j17, false);
 				}
 				if(j16 == 2)
 				{
-					Object5 class28 = sceneGraph.method298(j4, i7, plane);
+					InteractableObject class28 = sceneGraph.method298(j4, i7, plane);
 					if(j12 == 11)
 					j12 = 10;
 					if(class28 != null)
@@ -9896,7 +9896,7 @@ public class client extends RSApplet {
 				}
 				if(j16 == 3)
 				{
-					Object3 class49 = sceneGraph.method299(i7, j4, plane);
+					GroundDecoration class49 = sceneGraph.method299(i7, j4, plane);
 					if(class49 != null)
 					class49.aClass30_Sub2_Sub4_814 = new ObjectOnTile(class49.uid >> 14 & 0x7fff, k14, 22, i19, l19, j18, k20, j17, false);
 				}

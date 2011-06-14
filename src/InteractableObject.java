@@ -3,22 +3,22 @@
 // Decompiler options: packimports(3) 
 
 
-public final class Object5
+public final class InteractableObject
 {
 
-    public Object5()
+    public InteractableObject()
     {
     }
 
-    int tile_z;
+    int tileZ;
     int anInt518;
     int anInt519;
     int anInt520;
     public Animable aClass30_Sub2_Sub4_521;
     public int anInt522;
-    int tile_x;
+    int tileX;
     int anInt524;
-    int tile_y;
+    int tileY;
     int anInt526;
     int anInt527;
     int anInt528;

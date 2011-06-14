@@ -137,10 +137,10 @@ public final class Flo {
         else
         if(lightrand > 255)
             lightrand = 255;
-        hslcolour = pack_hsl(huerand, satrand, lightrand);
+        hslColour = packHSL(huerand, satrand, lightrand);
     }
 
-    private int pack_hsl(int hue, int saturation, int lightness)
+    private int packHSL(int hue, int saturation, int lightness)
     {
         if(lightness > 179)
             saturation /= 2;
@@ -168,5 +168,5 @@ public final class Flo {
     public int lightness;
     public int hue2;
     public int pCDivider;
-    public int hslcolour;
+    public int hslColour;
 }

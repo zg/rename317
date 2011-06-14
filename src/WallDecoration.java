@@ -3,10 +3,10 @@
 // Decompiler options: packimports(3) 
 
 
-public final class Object2
+public final class WallDecoration
 {
 
-    public Object2()
+    public WallDecoration()
     {
     }
 

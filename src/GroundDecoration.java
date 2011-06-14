@@ -3,10 +3,10 @@
 // Decompiler options: packimports(3) 
 
 
-public final class Object3
+public final class GroundDecoration
 {
 
-    public Object3()
+    public GroundDecoration()
     {
     }
 
