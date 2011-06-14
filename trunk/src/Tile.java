@@ -23,7 +23,7 @@ public final class Tile extends Node {
     public Object1 obj1;
     public Object2 obj2;
     public Object3 obj3;
-    public Object4 obj4;
+    public GroundItemTile obj4;
     int entity_count;
     public final Object5[] entities;
     final int[] anIntArray1319;
