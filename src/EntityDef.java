@@ -19,7 +19,7 @@ public final class EntityDef
         return entityDef;
     }
 
-    public Model get_head_model()
+    public Model getHeadModel()
     {
         if(childrenIDs != null)
         {
@@ -27,7 +27,7 @@ public final class EntityDef
             if(entityDef == null)
                 return null;
             else
-                return entityDef.get_head_model();
+                return entityDef.getHeadModel();
         }
         if(anIntArray73 == null)
             return null;
@@ -150,7 +150,7 @@ public final class EntityDef
             model_1.applyTransform(frameId);
         if(anInt91 != 128 || anInt86 != 128)
             model_1.scaleT(anInt91, anInt91, anInt86);
-        model_1.calculate_diagonals();
+        model_1.calculateDiagonals();
         model_1.triangleSkin = null;
         model_1.vertexSkin = null;
         if(aByte68 == 1)

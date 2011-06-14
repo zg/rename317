@@ -1024,7 +1024,7 @@ public final class Model extends Animable {
             }
         }
 
-        calculate_diagonals();
+        calculateDiagonals();
     }
 
     public Model(boolean flag, boolean flag1, boolean flag2, Model model)
@@ -1253,7 +1253,7 @@ public final class Model extends Animable {
         return j;
     }
 
-    public void calculate_diagonals()
+    public void calculateDiagonals()
     {
         super.modelHeight = 0;
         diagonal_2D_aboveorigin = 0;
@@ -1771,7 +1771,7 @@ public final class Model extends Animable {
         }
         if(flat_shading)
         {
-            calculate_diagonals();
+            calculateDiagonals();
         } else
         {
             calculate_diagonals_and_stats();

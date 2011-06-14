@@ -52,7 +52,7 @@ public final class IdentityKit {
         } while(true);
     }
 
-    public boolean is_body_downloaded()
+    public boolean isBodyDownloaded()
     {
         if(body_model_ids == null)
             return true;
@@ -64,7 +64,7 @@ public final class IdentityKit {
         return is_downloaded;
     }
 
-    public Model get_body_model()
+    public Model getBodyModel()
     {
         if(body_model_ids == null)
             return null;
@@ -87,7 +87,7 @@ public final class IdentityKit {
         return model;
     }
 
-    public boolean is_head_downloaded()
+    public boolean isHeadDownloaded()
     {
         boolean is_downloaded = true;
         for(int ptr = 0; ptr < 5; ptr++)
@@ -97,7 +97,7 @@ public final class IdentityKit {
         return is_downloaded;
     }
 
-    public Model get_head_model()
+    public Model getHeadModel()
     {
         Model sub_models[] = new Model[5];
         int model_ptr = 0;

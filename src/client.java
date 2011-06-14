@@ -2150,8 +2150,8 @@ public class client extends RSApplet {
 			int direction = j & 1;
 			int current_colour = char_edit_colours[type];
 			if(direction == 0 && --current_colour < 0)
-			current_colour = PLAYER_BODY_RECOLOURS[type].length - 1;
-			if(direction == 1 && ++current_colour >= PLAYER_BODY_RECOLOURS[type].length)
+			current_colour = playerBodyRecolours[type].length - 1;
+			if(direction == 1 && ++current_colour >= playerBodyRecolours[type].length)
 			current_colour = 0;
 			char_edit_colours[type] = current_colour;
 			char_edit_model_changed = true;
@@ -5288,7 +5288,7 @@ public class client extends RSApplet {
 				for(int idkit_ptr = 0; idkit_ptr < 7; idkit_ptr++)
 				{
 					int idkit_id = char_edit_idkits[idkit_ptr];
-					if(idkit_id >= 0 && !IdentityKit.cache[idkit_id].is_body_downloaded())
+					if(idkit_id >= 0 && !IdentityKit.cache[idkit_id].isBodyDownloaded())
 					return;
 				}
 
@@ -5299,16 +5299,16 @@ public class client extends RSApplet {
 				{
 					int idkit_id = char_edit_idkits[idkit_ptr];
 					if(idkit_id >= 0)
-					sub_models[model_ptr++] = IdentityKit.cache[idkit_id].get_body_model();
+					sub_models[model_ptr++] = IdentityKit.cache[idkit_id].getBodyModel();
 				}
 
 				Model model = new Model(model_ptr, sub_models);
 				for(int idkit_ptr = 0; idkit_ptr < 5; idkit_ptr++)
 				if(char_edit_colours[idkit_ptr] != 0)
 				{
-					model.recolour(PLAYER_BODY_RECOLOURS[idkit_ptr][0], PLAYER_BODY_RECOLOURS[idkit_ptr][char_edit_colours[idkit_ptr]]);
+					model.recolour(playerBodyRecolours[idkit_ptr][0], playerBodyRecolours[idkit_ptr][char_edit_colours[idkit_ptr]]);
 					if(idkit_ptr == 1)
-					model.recolour(SKIN_COLOURS[0], SKIN_COLOURS[char_edit_colours[idkit_ptr]]);
+					model.recolour(skinColours[0], skinColours[char_edit_colours[idkit_ptr]]);
 				}
 
 				model.calcSkinning();
@@ -10457,7 +10457,7 @@ public class client extends RSApplet {
 				int k = inStream.isg2();
 				RSInterface.interfaceCache[k].anInt233 = 3;
 				if(session_player.desc == null)
-				RSInterface.interfaceCache[k].mediaID = (session_player.appearance_colours[0] << 25) + (session_player.appearance_colours[4] << 20) + (session_player.appearance_models[0] << 15) + (session_player.appearance_models[8] << 10) + (session_player.appearance_models[11] << 5) + session_player.appearance_models[1];
+				RSInterface.interfaceCache[k].mediaID = (session_player.appearanceColours[0] << 25) + (session_player.appearanceColours[4] << 20) + (session_player.appearanceModels[0] << 15) + (session_player.appearanceModels[8] << 10) + (session_player.appearanceModels[11] << 5) + session_player.appearanceModels[1];
 				else
 				RSInterface.interfaceCache[k].mediaID = (int)(0x12345678L + session_player.desc.type);
 				pktType = -1;
@@ -12085,7 +12085,7 @@ public class client extends RSApplet {
 	private ISAACRandomGen encryption;
 	private RgbImage mapEdge;
 	private final int anInt1002;
-	static final int[][] PLAYER_BODY_RECOLOURS = {
+	static final int[][] playerBodyRecolours = {
 		{
 			6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 
 			2983, 54193
@@ -12292,7 +12292,7 @@ public class client extends RSApplet {
 	private RgbImage aClass30_Sub2_Sub1_Sub1_1201;
 	private RgbImage aClass30_Sub2_Sub1_Sub1_1202;
 	private final int[] anIntArray1203;
-	static final int[] SKIN_COLOURS = {
+	static final int[] skinColours = {
 		9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 
 		58654, 5027, 1457, 16565, 34991, 25486
 	};
