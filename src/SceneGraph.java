@@ -102,17 +102,17 @@ final class SceneGraph {
                                  int search_mask)
     {
         CullingCluster culling_cluster = new CullingCluster();
-        culling_cluster.tile_start_x = lowest_x / 128;
-        culling_cluster.tile_end_x = highest_x / 128;
-        culling_cluster.tile_start_y = lowest_y / 128;
-        culling_cluster.tile_end_y = highest_y / 128;
-        culling_cluster.search_mask = search_mask;
-        culling_cluster.world_start_x = lowest_x;
-        culling_cluster.world_end_x = highest_x;
-        culling_cluster.world_start_y = lowest_y;
-        culling_cluster.world_end_y = highest_y;
-        culling_cluster.world_start_z = highest_z;
-        culling_cluster.world_end_z = lowest_z;
+        culling_cluster.tileStartX = lowest_x / 128;
+        culling_cluster.tileEndX = highest_x / 128;
+        culling_cluster.tileStartY = lowest_y / 128;
+        culling_cluster.tileEndY = highest_y / 128;
+        culling_cluster.searchMask = search_mask;
+        culling_cluster.worldStartX = lowest_x;
+        culling_cluster.worldEndX = highest_x;
+        culling_cluster.worldStartY = lowest_y;
+        culling_cluster.worldEndY = highest_y;
+        culling_cluster.worldStartZ = highest_z;
+        culling_cluster.worldEndZ = lowest_z;
         culling_clusters[z][culling_cluster_ptr[z]++] = culling_cluster;
     }
 
@@ -1799,15 +1799,15 @@ label0:
         for(int ptr = 0; ptr < cluster_count; ptr++)
         {
             CullingCluster cluster = clusters[ptr];
-            if(cluster.search_mask == 1)
+            if(cluster.searchMask == 1)
             {
-                int x_dist_from_camera_start = (cluster.tile_start_x - xCameraPositionTile) + 25;
+                int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + 25;
                 if(x_dist_from_camera_start < 0 || x_dist_from_camera_start > 50)
                     continue;
-                int y_dist_from_camera_start = (cluster.tile_start_y - yCameraPositionTile) + 25;
+                int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + 25;
                 if(y_dist_from_camera_start < 0)
                     y_dist_from_camera_start = 0;
-                int y_dist_from_camera_end = (cluster.tile_end_y - yCameraPositionTile) + 25;
+                int y_dist_from_camera_end = (cluster.tileEndY - yCameraPositionTile) + 25;
                 if(y_dist_from_camera_end > 50)
                     y_dist_from_camera_end = 50;
                 boolean is_visible = false;
@@ -1819,33 +1819,33 @@ label0:
                     }
                 if(!is_visible)
                     continue;
-                int x_dist_from_camera_start_real = xCameraPosition - cluster.world_start_x;
+                int x_dist_from_camera_start_real = xCameraPosition - cluster.worldStartX;
                 if(x_dist_from_camera_start_real > 32)
                 {
-                    cluster.tile_distance_enum = 1;
+                    cluster.tileDistanceEnum = 1;
                 } else
                 {
                     if(x_dist_from_camera_start_real >= -32)
                         continue;
-                    cluster.tile_distance_enum = 2;
+                    cluster.tileDistanceEnum = 2;
                     x_dist_from_camera_start_real = -x_dist_from_camera_start_real;
                 }
-                cluster.world_distance_from_camera_start_y = (cluster.world_start_y - yCameraPosition << 8) / x_dist_from_camera_start_real;
-                cluster.world_distance_from_camera_end_y = (cluster.world_end_y - yCameraPosition << 8) / x_dist_from_camera_start_real;
-                cluster.world_distance_from_camera_start_z = (cluster.world_start_z - zCameraPosition << 8) / x_dist_from_camera_start_real;
-                cluster.world_distance_from_camera_end_z = (cluster.world_end_z - zCameraPosition << 8) / x_dist_from_camera_start_real;
+                cluster.worldDistanceFromCameraStartY = (cluster.worldStartY - yCameraPosition << 8) / x_dist_from_camera_start_real;
+                cluster.worldDistanceFromCameraEndY = (cluster.worldEndY - yCameraPosition << 8) / x_dist_from_camera_start_real;
+                cluster.worldDistanceFromCameraStartZ = (cluster.worldStartZ - zCameraPosition << 8) / x_dist_from_camera_start_real;
+                cluster.worldDistanceFromCameraEndZ = (cluster.worldEndZ - zCameraPosition << 8) / x_dist_from_camera_start_real;
                 processed_culling_clusters[processed_culling_clusters_ptr++] = cluster;
                 continue;
             }
-            if(cluster.search_mask == 2)
+            if(cluster.searchMask == 2)
             {
-                int y_dist_from_camera_start = (cluster.tile_start_y - yCameraPositionTile) + 25;
+                int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + 25;
                 if(y_dist_from_camera_start < 0 || y_dist_from_camera_start > 50)
                     continue;
-                int x_dist_from_camera_start = (cluster.tile_start_x - xCameraPositionTile) + 25;
+                int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + 25;
                 if(x_dist_from_camera_start < 0)
                     x_dist_from_camera_start = 0;
-                int x_dist_from_camera_end = (cluster.tile_end_x - xCameraPositionTile) + 25;
+                int x_dist_from_camera_end = (cluster.tileEndX - xCameraPositionTile) + 25;
                 if(x_dist_from_camera_end > 50)
                     x_dist_from_camera_end = 50;
                 boolean is_visible = false;
@@ -1857,40 +1857,40 @@ label0:
                     }
                 if(!is_visible)
                     continue;
-                int y_dist_from_camera_start_real = yCameraPosition - cluster.world_start_y;
+                int y_dist_from_camera_start_real = yCameraPosition - cluster.worldStartY;
                 if(y_dist_from_camera_start_real > 32)
                 {
-                    cluster.tile_distance_enum = 3;
+                    cluster.tileDistanceEnum = 3;
                 } else
                 {
                     if(y_dist_from_camera_start_real >= -32)
                         continue;
-                    cluster.tile_distance_enum = 4;
+                    cluster.tileDistanceEnum = 4;
                     y_dist_from_camera_start_real = -y_dist_from_camera_start_real;
                 }
-                cluster.world_distance_from_camera_start_x = (cluster.world_start_x - xCameraPosition << 8) / y_dist_from_camera_start_real;
-                cluster.world_distance_from_camera_end_x = (cluster.world_end_x - xCameraPosition << 8) / y_dist_from_camera_start_real;
-                cluster.world_distance_from_camera_start_z = (cluster.world_start_z - zCameraPosition << 8) / y_dist_from_camera_start_real;
-                cluster.world_distance_from_camera_end_z = (cluster.world_end_z - zCameraPosition << 8) / y_dist_from_camera_start_real;
+                cluster.worldDistanceFromCameraStartX = (cluster.worldStartX - xCameraPosition << 8) / y_dist_from_camera_start_real;
+                cluster.worldDistanceFromCameraEndX = (cluster.worldEndX - xCameraPosition << 8) / y_dist_from_camera_start_real;
+                cluster.worldDistanceFromCameraStartZ = (cluster.worldStartZ - zCameraPosition << 8) / y_dist_from_camera_start_real;
+                cluster.worldDistanceFromCameraEndZ = (cluster.worldEndZ - zCameraPosition << 8) / y_dist_from_camera_start_real;
                 processed_culling_clusters[processed_culling_clusters_ptr++] = cluster;
             } else
-            if(cluster.search_mask == 4)
+            if(cluster.searchMask == 4)
             {
-                int z_dist_from_camera_start_real = cluster.world_start_z - zCameraPosition;
+                int z_dist_from_camera_start_real = cluster.worldStartZ - zCameraPosition;
                 if(z_dist_from_camera_start_real > 128)
                 {
-                    int y_dist_from_camera_start = (cluster.tile_start_y - yCameraPositionTile) + 25;
+                    int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + 25;
                     if(y_dist_from_camera_start < 0)
                         y_dist_from_camera_start = 0;
-                    int y_dist_from_camera_end = (cluster.tile_end_y - yCameraPositionTile) + 25;
+                    int y_dist_from_camera_end = (cluster.tileEndY - yCameraPositionTile) + 25;
                     if(y_dist_from_camera_end > 50)
                         y_dist_from_camera_end = 50;
                     if(y_dist_from_camera_start <= y_dist_from_camera_end)
                     {
-                        int x_dist_from_camera_start = (cluster.tile_start_x - xCameraPositionTile) + 25;
+                        int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + 25;
                         if(x_dist_from_camera_start < 0)
                             x_dist_from_camera_start = 0;
-                        int x_dist_from_camera_end = (cluster.tile_end_x - xCameraPositionTile) + 25;
+                        int x_dist_from_camera_end = (cluster.tileEndX - xCameraPositionTile) + 25;
                         if(x_dist_from_camera_end > 50)
                             x_dist_from_camera_end = 50;
                         boolean is_visible = false;
@@ -1909,11 +1909,11 @@ for_outer:
 
                         if(is_visible)
                         {
-                            cluster.tile_distance_enum = 5;
-                            cluster.world_distance_from_camera_start_x = (cluster.world_start_x - xCameraPosition << 8) / z_dist_from_camera_start_real;
-                            cluster.world_distance_from_camera_end_x = (cluster.world_end_x - xCameraPosition << 8) / z_dist_from_camera_start_real;
-                            cluster.world_distance_from_camera_start_y = (cluster.world_start_y - yCameraPosition << 8) / z_dist_from_camera_start_real;
-                            cluster.world_distance_from_camera_end_y = (cluster.world_end_y - yCameraPosition << 8) / z_dist_from_camera_start_real;
+                            cluster.tileDistanceEnum = 5;
+                            cluster.worldDistanceFromCameraStartX = (cluster.worldStartX - xCameraPosition << 8) / z_dist_from_camera_start_real;
+                            cluster.worldDistanceFromCameraEndX = (cluster.worldEndX - xCameraPosition << 8) / z_dist_from_camera_start_real;
+                            cluster.worldDistanceFromCameraStartY = (cluster.worldStartY - yCameraPosition << 8) / z_dist_from_camera_start_real;
+                            cluster.worldDistanceFromCameraEndY = (cluster.worldEndY - yCameraPosition << 8) / z_dist_from_camera_start_real;
                             processed_culling_clusters[processed_culling_clusters_ptr++] = cluster;
                         }
                     }
@@ -2090,67 +2090,67 @@ for_outer:
         for(int l = 0; l < processed_culling_clusters_ptr; l++)
         {
             CullingCluster class47 = processed_culling_clusters[l];
-            if(class47.tile_distance_enum == 1)
+            if(class47.tileDistanceEnum == 1)
             {
-                int i1 = class47.world_start_x - i;
+                int i1 = class47.worldStartX - i;
                 if(i1 > 0)
                 {
-                    int j2 = class47.world_start_y + (class47.world_distance_from_camera_start_y * i1 >> 8);
-                    int k3 = class47.world_end_y + (class47.world_distance_from_camera_end_y * i1 >> 8);
-                    int l4 = class47.world_start_z + (class47.world_distance_from_camera_start_z * i1 >> 8);
-                    int i6 = class47.world_end_z + (class47.world_distance_from_camera_end_z * i1 >> 8);
+                    int j2 = class47.worldStartY + (class47.worldDistanceFromCameraStartY * i1 >> 8);
+                    int k3 = class47.worldEndY + (class47.worldDistanceFromCameraEndY * i1 >> 8);
+                    int l4 = class47.worldStartZ + (class47.worldDistanceFromCameraStartZ * i1 >> 8);
+                    int i6 = class47.worldEndZ + (class47.worldDistanceFromCameraEndZ * i1 >> 8);
                     if(k >= j2 && k <= k3 && j >= l4 && j <= i6)
                         return true;
                 }
             } else
-            if(class47.tile_distance_enum == 2)
+            if(class47.tileDistanceEnum == 2)
             {
-                int j1 = i - class47.world_start_x;
+                int j1 = i - class47.worldStartX;
                 if(j1 > 0)
                 {
-                    int k2 = class47.world_start_y + (class47.world_distance_from_camera_start_y * j1 >> 8);
-                    int l3 = class47.world_end_y + (class47.world_distance_from_camera_end_y * j1 >> 8);
-                    int i5 = class47.world_start_z + (class47.world_distance_from_camera_start_z * j1 >> 8);
-                    int j6 = class47.world_end_z + (class47.world_distance_from_camera_end_z * j1 >> 8);
+                    int k2 = class47.worldStartY + (class47.worldDistanceFromCameraStartY * j1 >> 8);
+                    int l3 = class47.worldEndY + (class47.worldDistanceFromCameraEndY * j1 >> 8);
+                    int i5 = class47.worldStartZ + (class47.worldDistanceFromCameraStartZ * j1 >> 8);
+                    int j6 = class47.worldEndZ + (class47.worldDistanceFromCameraEndZ * j1 >> 8);
                     if(k >= k2 && k <= l3 && j >= i5 && j <= j6)
                         return true;
                 }
             } else
-            if(class47.tile_distance_enum == 3)
+            if(class47.tileDistanceEnum == 3)
             {
-                int k1 = class47.world_start_y - k;
+                int k1 = class47.worldStartY - k;
                 if(k1 > 0)
                 {
-                    int l2 = class47.world_start_x + (class47.world_distance_from_camera_start_x * k1 >> 8);
-                    int i4 = class47.world_end_x + (class47.world_distance_from_camera_end_x * k1 >> 8);
-                    int j5 = class47.world_start_z + (class47.world_distance_from_camera_start_z * k1 >> 8);
-                    int k6 = class47.world_end_z + (class47.world_distance_from_camera_end_z * k1 >> 8);
+                    int l2 = class47.worldStartX + (class47.worldDistanceFromCameraStartX * k1 >> 8);
+                    int i4 = class47.worldEndX + (class47.worldDistanceFromCameraEndX * k1 >> 8);
+                    int j5 = class47.worldStartZ + (class47.worldDistanceFromCameraStartZ * k1 >> 8);
+                    int k6 = class47.worldEndZ + (class47.worldDistanceFromCameraEndZ * k1 >> 8);
                     if(i >= l2 && i <= i4 && j >= j5 && j <= k6)
                         return true;
                 }
             } else
-            if(class47.tile_distance_enum == 4)
+            if(class47.tileDistanceEnum == 4)
             {
-                int l1 = k - class47.world_start_y;
+                int l1 = k - class47.worldStartY;
                 if(l1 > 0)
                 {
-                    int i3 = class47.world_start_x + (class47.world_distance_from_camera_start_x * l1 >> 8);
-                    int j4 = class47.world_end_x + (class47.world_distance_from_camera_end_x * l1 >> 8);
-                    int k5 = class47.world_start_z + (class47.world_distance_from_camera_start_z * l1 >> 8);
-                    int l6 = class47.world_end_z + (class47.world_distance_from_camera_end_z * l1 >> 8);
+                    int i3 = class47.worldStartX + (class47.worldDistanceFromCameraStartX * l1 >> 8);
+                    int j4 = class47.worldEndX + (class47.worldDistanceFromCameraEndX * l1 >> 8);
+                    int k5 = class47.worldStartZ + (class47.worldDistanceFromCameraStartZ * l1 >> 8);
+                    int l6 = class47.worldEndZ + (class47.worldDistanceFromCameraEndZ * l1 >> 8);
                     if(i >= i3 && i <= j4 && j >= k5 && j <= l6)
                         return true;
                 }
             } else
-            if(class47.tile_distance_enum == 5)
+            if(class47.tileDistanceEnum == 5)
             {
-                int i2 = j - class47.world_start_z;
+                int i2 = j - class47.worldStartZ;
                 if(i2 > 0)
                 {
-                    int j3 = class47.world_start_x + (class47.world_distance_from_camera_start_x * i2 >> 8);
-                    int k4 = class47.world_end_x + (class47.world_distance_from_camera_end_x * i2 >> 8);
-                    int l5 = class47.world_start_y + (class47.world_distance_from_camera_start_y * i2 >> 8);
-                    int i7 = class47.world_end_y + (class47.world_distance_from_camera_end_y * i2 >> 8);
+                    int j3 = class47.worldStartX + (class47.worldDistanceFromCameraStartX * i2 >> 8);
+                    int k4 = class47.worldEndX + (class47.worldDistanceFromCameraEndX * i2 >> 8);
+                    int l5 = class47.worldStartY + (class47.worldDistanceFromCameraStartY * i2 >> 8);
+                    int i7 = class47.worldEndY + (class47.worldDistanceFromCameraEndY * i2 >> 8);
                     if(i >= j3 && i <= k4 && k >= l5 && k <= i7)
                         return true;
                 }
