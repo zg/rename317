@@ -119,7 +119,7 @@ final class Censor {
 
     public static String doCensor(String s)
     {
-        long l = System.currentTimeMillis();
+        //long l = System.currentTimeMillis();//never used
         char ac[] = s.toCharArray();
         method495(ac);
         String s1 = (new String(ac)).trim();
@@ -141,7 +141,7 @@ final class Censor {
         }
         method498(s1.toCharArray(), ac);
         method499(ac);
-        long l1 = System.currentTimeMillis();
+        //long l1 = System.currentTimeMillis();//never used
         return (new String(ac)).trim(); //xxx chat filter, return s to avoid
     }
 
@@ -369,7 +369,7 @@ final class Censor {
                     flag1 = true;
                 if(i == 3 && k1 > 0 && l1 > 2)
                     flag1 = true;
-                boolean _tmp = i == 3 && k1 > 2 && l1 > 0;
+                //boolean _tmp = i == 3 && k1 > 2 && l1 > 0;//never used
                 if(flag1)
                 {
                     int i2 = k;
@@ -505,7 +505,7 @@ final class Censor {
     {
         if(ac1.length > ac.length)
             return;
-        boolean flag = true;
+        //boolean flag = true;//never used
         int j;
         for(int k = 0; k <= ac.length - ac1.length; k += j)
         {

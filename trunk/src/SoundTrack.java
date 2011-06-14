@@ -97,7 +97,7 @@ final class SoundTrack
             aClass29_104.resetValues();
             aClass29_105.resetValues();
             int i3 = 0;
-            boolean flag = false;
+            //boolean flag = false;//never used
             boolean flag1 = true;
             for(int i7 = 0; i7 < sampleLength; i7++)
             {
@@ -185,7 +185,7 @@ final class SoundTrack
                         i9 -= (int)((long) sampleBuffer[j7 - 1 - j10] * (long)Class39.anIntArrayArray670[1][j10] >> 16);
 
                     sampleBuffer[j7] = i9;
-                    int l3 = aClass29_112.readEnvelope(sampleLength + 1);
+                    //int l3 = aClass29_112.readEnvelope(sampleLength + 1);//never used
                 }
 
             }

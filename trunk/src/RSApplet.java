@@ -47,7 +47,7 @@ public class RSApplet extends Applet
         for(int k1 = 0; k1 < 10; k1++)
             otim[k1] = System.currentTimeMillis();
 
-        long l = System.currentTimeMillis();
+        //long l = System.currentTimeMillis();//never used
         while(anInt4 >= 0) 
         {
             if(anInt4 > 0)

@@ -1,5 +1,3 @@
-import sign.signlink;
-import java.lang.reflect.Method;
 import java.net.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -13,7 +11,11 @@ import javax.swing.*;
 
 public class SwingUI extends client implements ActionListener {
 
-    private static JMenuItem menuItem;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6669540533506671428L;
+	private static JMenuItem menuItem;
 	private JFrame frame;
 
 	public SwingUI(String args[]) {

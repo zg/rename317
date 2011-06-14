@@ -2507,6 +2507,7 @@ public class client extends RSApplet {
 			isMembers = true;
 			signlink.storeid = 32;
 			signlink.startpriv(InetAddress.getLocalHost());
+			@SuppressWarnings("unused")
 			client var_client = new client();
 			new SwingUI(args);
 		} catch(Exception e){
@@ -2678,8 +2679,8 @@ public class client extends RSApplet {
 		aRSImageProducer_1107.initDrawingArea();
 		//rgbImage.drawSprite(382 - rgbImage.myWidth / 2 - 128, 18);
 		rgbImage = null;
-		Object obj = null;
-		Object obj1 = null;
+		//Object obj = null;//never used
+		//Object obj1 = null;//never used
 		System.gc();
 		
 
@@ -3368,7 +3369,7 @@ public class client extends RSApplet {
 		{
 			String s2 = "Unknown error";
 			drawLoadingText(k, "Requesting " + s);
-			Object obj = null;
+			//Object obj = null;//never used
 			try
 			{
 				int k1 = 0;
@@ -5089,16 +5090,16 @@ public class client extends RSApplet {
 			if(k1 < -20)
 			break;
 			String s = chatNames[i1];
-			boolean flag = false;
+			//boolean flag = false;//never used
 			if(s != null && s.startsWith("@cr1@"))
 			{
 				s = s.substring(5);
-				boolean flag1 = true;
+				//boolean flag1 = true;//never used
 			}
 			if(s != null && s.startsWith("@cr2@"))
 			{
 				s = s.substring(5);
-				byte byte0 = 2;
+				//byte byte0 = 2;//never used
 			}
 			if(j1 == 0)
 			l++;
@@ -5963,8 +5964,8 @@ public class client extends RSApplet {
 				anInt1188 = 0;
 				anInt1155 = 0;
 				anInt1226 = 0;
-				int anInt941 = 0;
-				int anInt1260 = 0;
+				//int anInt941 = 0;//never used
+				//int anInt1260 = 0;//never used
 				resetImageProducers2();
 				return;
 			}
@@ -9372,16 +9373,16 @@ public class client extends RSApplet {
 		{
 			int k = chatTypes[j];
 			String s = chatNames[j];
-			boolean flag1 = false;
+			//boolean flag1 = false;//never used
 			if(s != null && s.startsWith("@cr1@"))
 			{
 				s = s.substring(5);
-				boolean flag2 = true;
+				//boolean flag2 = true;//never used
 			}
 			if(s != null && s.startsWith("@cr2@"))
 			{
 				s = s.substring(5);
-				byte byte0 = 2;
+				//byte byte0 = 2;//never used
 			}
 			if((k == 3 || k == 7) && (k == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s)))
 			{
@@ -9699,8 +9700,8 @@ public class client extends RSApplet {
 			j += 15;
 			if(!flag)
 			{
-				int i1 = c / 2 - 80;
-				int l1 = c1 / 2 + 50;
+				//int i1 = c / 2 - 80;//never used
+				//int l1 = c1 / 2 + 50;//never used
 			}
 		}
 		
