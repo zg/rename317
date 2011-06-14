@@ -107,13 +107,13 @@ stream = null;
                 return true;
             boolean flag1 = true;
             for(int k = 0; k < objectModelIDs.length; k++)
-                flag1 &= Model.is_downloaded(objectModelIDs[k] & 0xffff);
+                flag1 &= Model.isDownloaded(objectModelIDs[k] & 0xffff);
 
             return flag1;
         }
         for(int j = 0; j < types.length; j++)
             if(types[j] == i)
-                return Model.is_downloaded(objectModelIDs[j] & 0xffff);
+                return Model.isDownloaded(objectModelIDs[j] & 0xffff);
 
         return true;
     }
@@ -149,7 +149,7 @@ stream = null;
             return true;
         boolean flag1 = true;
         for(int i = 0; i < objectModelIDs.length; i++)
-            flag1 &= Model.is_downloaded(objectModelIDs[i] & 0xffff);
+            flag1 &= Model.isDownloaded(objectModelIDs[i] & 0xffff);
             return flag1;
     }
 

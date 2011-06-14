@@ -24,7 +24,7 @@ final class ModelHeader
     public int triColourOffset;
     public int anInt380;
     public int anInt381;
-    public int alpha_basepos;
-    public int tskin_basepos;
+    public int alphaBasepos;
+    public int tskinBasepos;
     public int anInt384;
 }

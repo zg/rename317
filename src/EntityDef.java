@@ -33,7 +33,7 @@ public final class EntityDef
             return null;
         boolean flag1 = false;
         for(int i = 0; i < anIntArray73.length; i++)
-            if(!Model.is_downloaded(anIntArray73[i]))
+            if(!Model.isDownloaded(anIntArray73[i]))
                 flag1 = true;
 
         if(flag1)
@@ -118,7 +118,7 @@ public final class EntityDef
         {
             boolean flag = false;
             for(int i1 = 0; i1 < anIntArray94.length; i1++)
-                if(!Model.is_downloaded(anIntArray94[i1]))
+                if(!Model.isDownloaded(anIntArray94[i1]))
                     flag = true;
 
             if(flag)
@@ -144,7 +144,7 @@ public final class EntityDef
         Model model_1 = Model.aModel_1621;
         model_1.method464(model, AnimationFrame.method532(frameId) & AnimationFrame.method532(j));
         if(frameId != -1 && j != -1)
-            model_1.mix_anim_frames(ai, j, frameId);
+            model_1.mixAnimationFrames(ai, j, frameId);
         else
         if(frameId != -1)
             model_1.applyTransform(frameId);

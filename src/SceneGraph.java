@@ -585,32 +585,32 @@ final class SceneGraph {
                     if(tile != null)
                     {
                         Object1 class10 = tile.obj1;
-                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertex_normal != null)
+                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormal != null)
                         {
                             method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_278);
-                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertex_normal != null)
+                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormal != null)
                             {
                                 method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_279);
                                 method308((Model)class10.aClass30_Sub2_Sub4_278, (Model)class10.aClass30_Sub2_Sub4_279, 0, 0, 0, false);
-                                ((Model)class10.aClass30_Sub2_Sub4_279).do_shading(lightness, l_magnitude, l_x, l_y, l_z);
+                                ((Model)class10.aClass30_Sub2_Sub4_279).doShading(lightness, l_magnitude, l_x, l_y, l_z);
                             }
-                            ((Model)class10.aClass30_Sub2_Sub4_278).do_shading(lightness, l_magnitude, l_x, l_y, l_z);
+                            ((Model)class10.aClass30_Sub2_Sub4_278).doShading(lightness, l_magnitude, l_x, l_y, l_z);
                         }
                         for(int k2 = 0; k2 < tile.entity_count; k2++)
                         {
                             Object5 class28 = tile.entities[k2];
-                            if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertex_normal != null)
+                            if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertexNormal != null)
                             {
                                 method307(_z, (class28.anInt524 - class28.tile_x) + 1, (class28.anInt526 - class28.tile_y) + 1, _x, _y, (Model)class28.aClass30_Sub2_Sub4_521);
-                                ((Model)class28.aClass30_Sub2_Sub4_521).do_shading(lightness, l_magnitude, l_x, l_y, l_z);
+                                ((Model)class28.aClass30_Sub2_Sub4_521).doShading(lightness, l_magnitude, l_x, l_y, l_z);
                             }
                         }
 
                         Object3 class49 = tile.obj3;
-                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.vertex_normal != null)
+                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.vertexNormal != null)
                         {
                             method306(_x, _z, (Model)class49.aClass30_Sub2_Sub4_814, _y);
-                            ((Model)class49.aClass30_Sub2_Sub4_814).do_shading(lightness, l_magnitude, l_x, l_y, l_z);
+                            ((Model)class49.aClass30_Sub2_Sub4_814).doShading(lightness, l_magnitude, l_x, l_y, l_z);
                         }
                     }
                 }
@@ -626,25 +626,25 @@ final class SceneGraph {
         if(i < xMapSize)
         {
             Tile class30_sub3 = tileArray[j][i + 1][k];
-            if(class30_sub3 != null && class30_sub3.obj3 != null && class30_sub3.obj3.aClass30_Sub2_Sub4_814.vertex_normal != null)
+            if(class30_sub3 != null && class30_sub3.obj3 != null && class30_sub3.obj3.aClass30_Sub2_Sub4_814.vertexNormal != null)
                 method308(model, (Model)class30_sub3.obj3.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
         }
         if(k < xMapSize)
         {
             Tile class30_sub3_1 = tileArray[j][i][k + 1];
-            if(class30_sub3_1 != null && class30_sub3_1.obj3 != null && class30_sub3_1.obj3.aClass30_Sub2_Sub4_814.vertex_normal != null)
+            if(class30_sub3_1 != null && class30_sub3_1.obj3 != null && class30_sub3_1.obj3.aClass30_Sub2_Sub4_814.vertexNormal != null)
                 method308(model, (Model)class30_sub3_1.obj3.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
         }
         if(i < xMapSize && k < yMapSize)
         {
             Tile class30_sub3_2 = tileArray[j][i + 1][k + 1];
-            if(class30_sub3_2 != null && class30_sub3_2.obj3 != null && class30_sub3_2.obj3.aClass30_Sub2_Sub4_814.vertex_normal != null)
+            if(class30_sub3_2 != null && class30_sub3_2.obj3 != null && class30_sub3_2.obj3.aClass30_Sub2_Sub4_814.vertexNormal != null)
                 method308(model, (Model)class30_sub3_2.obj3.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
         }
         if(i < xMapSize && k > 0)
         {
             Tile class30_sub3_3 = tileArray[j][i + 1][k - 1];
-            if(class30_sub3_3 != null && class30_sub3_3.obj3 != null && class30_sub3_3.obj3.aClass30_Sub2_Sub4_814.vertex_normal != null)
+            if(class30_sub3_3 != null && class30_sub3_3.obj3 != null && class30_sub3_3.obj3.aClass30_Sub2_Sub4_814.vertexNormal != null)
                 method308(model, (Model)class30_sub3_3.obj3.aClass30_Sub2_Sub4_814, 128, 0, -128, true);
         }
     }
@@ -670,14 +670,14 @@ final class SceneGraph {
                                 {
                                     int i3 = (heightmap[j2][k2][l2] + heightmap[j2][k2 + 1][l2] + heightmap[j2][k2][l2 + 1] + heightmap[j2][k2 + 1][l2 + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
                                     Object1 class10 = class30_sub3.obj1;
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertex_normal != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormal != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertex_normal != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormal != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_279, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
                                     for(int j3 = 0; j3 < class30_sub3.entity_count; j3++)
                                     {
                                         Object5 class28 = class30_sub3.entities[j3];
-                                        if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertex_normal != null)
+                                        if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertexNormal != null)
                                         {
                                             int k3 = (class28.anInt524 - class28.tile_x) + 1;
                                             int l3 = (class28.anInt526 - class28.tile_y) + 1;
@@ -704,23 +704,23 @@ final class SceneGraph {
         int i1 = model_1.verticeCount;
         for(int j1 = 0; j1 < model.verticeCount; j1++)
         {
-            VertexNormal vertexNormal = model.vertex_normal[j1];
-            VertexNormal vertexNormal_1 = model.vertex_normal_offset[j1];
+            VertexNormal vertexNormal = model.vertexNormal[j1];
+            VertexNormal vertexNormal_1 = model.vertexNormalOffset[j1];
             if(vertexNormal_1.magnitude != 0)
             {
                 int i2 = model.vertexY[j1] - t_Y;
-                if(i2 <= model_1.max_y)
+                if(i2 <= model_1.maxY)
                 {
                     int j2 = model.vertexX[j1] - t_x;
-                    if(j2 >= model_1.min_x && j2 <= model_1.max_x)
+                    if(j2 >= model_1.minX && j2 <= model_1.maxX)
                     {
                         int k2 = model.vertexZ[j1] - k;
-                        if(k2 >= model_1.min_z && k2 <= model_1.max_z)
+                        if(k2 >= model_1.minZ && k2 <= model_1.maxZ)
                         {
                             for(int l2 = 0; l2 < i1; l2++)
                             {
-                                VertexNormal normal = model_1.vertex_normal[l2];
-                                VertexNormal normal_offset = model_1.vertex_normal_offset[l2];
+                                VertexNormal normal = model_1.vertexNormal[l2];
+                                VertexNormal normal_offset = model_1.vertexNormalOffset[l2];
                                 if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && normal_offset.magnitude != 0)
                                 {
                                     vertexNormal.x += normal_offset.x;
@@ -747,11 +747,11 @@ final class SceneGraph {
             return;
         for(int k1 = 0; k1 < model.triangleCount; k1++)
             if(anIntArray486[model.triangleA[k1]] == anInt488 && anIntArray486[model.triangleB[k1]] == anInt488 && anIntArray486[model.triangleC[k1]] == anInt488)
-                model.triangle_draw_type[k1] = -1;
+                model.triangleDrawType[k1] = -1;
 
         for(int l1 = 0; l1 < model_1.triangleCount; l1++)
             if(anIntArray487[model_1.triangleA[l1]] == anInt488 && anIntArray487[model_1.triangleB[l1]] == anInt488 && anIntArray487[model_1.triangleC[l1]] == anInt488)
-                model_1.triangle_draw_type[l1] = -1;
+                model_1.triangleDrawType[l1] = -1;
 
     }
 
@@ -1643,7 +1643,7 @@ label0:
         ThreeDimensionalDrawingArea.alpha = 0;
         if((screenXD - screenXC) * (screenYB - screenYC) - (screenYD - screenYC) * (screenXB - screenXC) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > DrawingArea.viewport_r_x || screenXC > DrawingArea.viewport_r_x || screenXB > DrawingArea.viewport_r_x;
+            ThreeDimensionalDrawingArea.aBoolean1462 = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > DrawingArea.viewportRx || screenXC > DrawingArea.viewportRx || screenXB > DrawingArea.viewportRx;
             if(isClicked && isTriangleClicked(clickX, clickY, screenYD, screenYC, screenYB, screenXD, screenXC, screenXB))
             {
                 clickedTileX = tX;
@@ -1668,7 +1668,7 @@ label0:
         }
         if((screenXA - screenXB) * (screenYC - screenYB) - (screenYA - screenYB) * (screenXC - screenXB) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > DrawingArea.viewport_r_x || screenXB > DrawingArea.viewport_r_x || screenXC > DrawingArea.viewport_r_x;
+            ThreeDimensionalDrawingArea.aBoolean1462 = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > DrawingArea.viewportRx || screenXB > DrawingArea.viewportRx || screenXC > DrawingArea.viewportRx;
             if(isClicked && isTriangleClicked(clickX, clickY, screenYA, screenYB, screenYC, screenXA, screenXB, screenXC))
             {
                 clickedTileX = tX;
@@ -1735,7 +1735,7 @@ label0:
             int sYC = ShapedTile.screenY[indexC];
             if((sXA - sXB) * (sYC - sYB) - (sYA - sYB) * (sXC - sXB) > 0)
             {
-                ThreeDimensionalDrawingArea.aBoolean1462 = sXA < 0 || sXB < 0 || sXC < 0 || sXA > DrawingArea.viewport_r_x || sXB > DrawingArea.viewport_r_x || sXC > DrawingArea.viewport_r_x;
+                ThreeDimensionalDrawingArea.aBoolean1462 = sXA < 0 || sXB < 0 || sXC < 0 || sXA > DrawingArea.viewportRx || sXB > DrawingArea.viewportRx || sXC > DrawingArea.viewportRx;
                 if(isClicked && isTriangleClicked(clickX, clickY, sYA, sYB, sYC, sXA, sXB, sXC))
                 {
                     clickedTileX = i;

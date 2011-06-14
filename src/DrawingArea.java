@@ -18,8 +18,8 @@ public class DrawingArea extends NodeSub {
             topY = 0;
             viewport_w = width;
             viewport_h = height;
-            viewport_r_x = viewport_w - 1;
-            viewport_c_x = viewport_w / 2;
+            viewportRx = viewport_w - 1;
+            viewportCx = viewport_w / 2;
     }
 
     public static void setDrawingArea(int i, int j, int k, int l)
@@ -36,9 +36,9 @@ public class DrawingArea extends NodeSub {
         topY = l;
         viewport_w = k;
         viewport_h = i;
-        viewport_r_x = viewport_w - 1;
-        viewport_c_x = viewport_w / 2;
-        viewport_c_y = viewport_h / 2;
+        viewportRx = viewport_w - 1;
+        viewportCx = viewport_w / 2;
+        viewportCy = viewport_h / 2;
     }
 
     public static void reset_image()
@@ -233,8 +233,8 @@ public class DrawingArea extends NodeSub {
     public static int viewport_h;
     public static int topX;
     public static int viewport_w;
-    public static int viewport_r_x;
-    public static int viewport_c_x;
-    public static int viewport_c_y;
+    public static int viewportRx;
+    public static int viewportCx;
+    public static int viewportCy;
 
 }

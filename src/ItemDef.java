@@ -26,9 +26,9 @@ public final class ItemDef
         if(k == -1)
             return true;
         boolean flag = true;
-        if(!Model.is_downloaded(k))
+        if(!Model.isDownloaded(k))
             flag = false;
-        if(l != -1 && !Model.is_downloaded(l))
+        if(l != -1 && !Model.isDownloaded(l))
             flag = false;
         return flag;
     }
@@ -95,11 +95,11 @@ public final class ItemDef
         if(k == -1)
             return true;
         boolean flag = true;
-        if(!Model.is_downloaded(k))
+        if(!Model.isDownloaded(k))
             flag = false;
-        if(l != -1 && !Model.is_downloaded(l))
+        if(l != -1 && !Model.isDownloaded(l))
             flag = false;
-        if(i1 != -1 && !Model.is_downloaded(i1))
+        if(i1 != -1 && !Model.isDownloaded(i1))
             flag = false;
         return flag;
     }

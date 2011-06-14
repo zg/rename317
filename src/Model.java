@@ -11,12 +11,12 @@ public final class Model extends Animable {
         aBooleanArray1664 = null;
         anIntArray1665 = null;
         anIntArray1666 = null;
-        camera_depth = null;
+        cameraDepth = null;
         anIntArray1668 = null;
         vertexBY = null;
         anIntArray1670 = null;
-        depth_list_indices = null;
-        face_lists = null;
+        depthListIndices = null;
+        faceLists = null;
         anIntArray1673 = null;
         anIntArrayArray1674 = null;
         anIntArray1675 = null;
@@ -30,7 +30,7 @@ public final class Model extends Animable {
 
     public static void method459(int i, OnDemandFetcherParent onDemandFetcherParent)
     {
-        modelHeaderCache = new ModelHeader[i+30000];
+        modelHeaderCache = new ModelHeader[i+30000];//wtf PETER!!!
         aOnDemandFetcherParent_1662 = onDemandFetcherParent;
     }
 
@@ -64,21 +64,21 @@ public final class Model extends Animable {
         triangleA = new int[triangleCount];//trianglea
         triangleB = new int[triangleCount];//b
         triangleC = new int[triangleCount];//c
-        tri_p_index = new int[texturedTriangeAmmount];//tri_a_buffer
-        tri_m_index = new int[texturedTriangeAmmount];//b
-        tri_n_index = new int[texturedTriangeAmmount];//c
+        triPIndex = new int[texturedTriangeAmmount];//tri_a_buffer
+        triMIndex = new int[texturedTriangeAmmount];//b
+        triNIndex = new int[texturedTriangeAmmount];//c
         if(class21.anInt376 >= 0)
-            vertex_vskin = new int[verticeCount];//vertex_vskin
+            vertexVSkin = new int[verticeCount];//vertex_vskin
         if(class21.anInt380 >= 0)
-            triangle_draw_type = new int[triangleCount];//triangle_draw_type
+            triangleDrawType = new int[triangleCount];//triangle_draw_type
         if(class21.anInt381 >= 0)
-            face_priority = new int[triangleCount];//face_priority
+            facePriority = new int[triangleCount];//face_priority
         else
             anInt1641 = -class21.anInt381 - 1;
-        if(class21.alpha_basepos >= 0)//alpha_basepos
+        if(class21.alphaBasepos >= 0)//alpha_basepos
             triangleAlpha = new int[triangleCount];//triangleAlpha
-        if(class21.tskin_basepos >= 0)//tskin_basepos
-            triangle_tskin = new int[triangleCount];//triangle_tskin
+        if(class21.tskinBasepos >= 0)//tskin_basepos
+            triangleTSkin = new int[triangleCount];//triangle_tskin
         triangleColours = new int[triangleCount];//triangleColours
         Packet class30_sub2_sub2 = new Packet(class21.modelData);
         class30_sub2_sub2.pos = class21.vertexModOffset;
@@ -111,27 +111,27 @@ public final class Model extends Animable {
             k = vertexX[j1];
             l = vertexY[j1];
             i1 = vertexZ[j1];
-            if(vertex_vskin != null)
-                vertex_vskin[j1] = class30_sub2_sub2_4.g1();
+            if(vertexVSkin != null)
+                vertexVSkin[j1] = class30_sub2_sub2_4.g1();
         }
 
         class30_sub2_sub2.pos = class21.triColourOffset;
         class30_sub2_sub2_1.pos = class21.anInt380;
         class30_sub2_sub2_2.pos = class21.anInt381;
-        class30_sub2_sub2_3.pos = class21.alpha_basepos;
-        class30_sub2_sub2_4.pos = class21.tskin_basepos;
+        class30_sub2_sub2_3.pos = class21.alphaBasepos;
+        class30_sub2_sub2_4.pos = class21.tskinBasepos;
         for(int l1 = 0; l1 < triangleCount; l1++)
         {
             triangleColours[l1] = class30_sub2_sub2.g2();
-            if(triangle_draw_type != null)
-                triangle_draw_type[l1] = class30_sub2_sub2_1.g1();
-            if(face_priority != null)
-                face_priority[l1] = class30_sub2_sub2_2.g1();
+            if(triangleDrawType != null)
+                triangleDrawType[l1] = class30_sub2_sub2_1.g1();
+            if(facePriority != null)
+                facePriority[l1] = class30_sub2_sub2_2.g1();
             if(triangleAlpha != null){
                 triangleAlpha[l1] = class30_sub2_sub2_3.g1();
 		}
-            if(triangle_tskin != null)
-                triangle_tskin[l1] = class30_sub2_sub2_4.g1();
+            if(triangleTSkin != null)
+                triangleTSkin[l1] = class30_sub2_sub2_4.g1();
         }
 
         class30_sub2_sub2.pos = class21.triVPointOffset;
@@ -191,9 +191,9 @@ public final class Model extends Animable {
         class30_sub2_sub2.pos = class21.anInt384;
         for(int j4 = 0; j4 < texturedTriangeAmmount; j4++)
         {
-            tri_p_index[j4] = class30_sub2_sub2.g2();
-            tri_m_index[j4] = class30_sub2_sub2.g2();
-            tri_n_index[j4] = class30_sub2_sub2.g2();
+            triPIndex[j4] = class30_sub2_sub2.g2();
+            triMIndex[j4] = class30_sub2_sub2.g2();
+            triNIndex[j4] = class30_sub2_sub2.g2();
         }
 	}
         public void readNewModel(byte abyte0[], int modelID) {
@@ -317,27 +317,27 @@ public final class Model extends Animable {
 		int[] facePoint1 = new int[numTriangles];
 		int[] facePoint2 = new int[numTriangles];
 		int[] facePoint3 = new int[numTriangles];
-			vertex_vskin = new int[numVertices];
-			triangle_draw_type = new int[numTriangles];
-			face_priority = new int[numTriangles];
+			vertexVSkin = new int[numVertices];
+			triangleDrawType = new int[numTriangles];
+			facePriority = new int[numTriangles];
 			triangleAlpha = new int[numTriangles];
-			triangle_tskin = new int[numTriangles];
+			triangleTSkin = new int[numTriangles];
 
 
 
 
 		if(i3 == 1)
-			vertex_vskin = new int[numVertices];
+			vertexVSkin = new int[numVertices];
 		if(bool)
-			triangle_draw_type = new int[numTriangles];
+			triangleDrawType = new int[numTriangles];
 		if(i2 == 255)
-			face_priority = new int[numTriangles];
+			facePriority = new int[numTriangles];
 		else
 			G = (byte)i2;
 		if(j2 == 1)
 			triangleAlpha = new int[numTriangles];
 		if(k2 == 1)
-			triangle_tskin = new int[numTriangles];
+			triangleTSkin = new int[numTriangles];
 		if(l2 == 1)
 			D = new short[numTriangles];
 		if(l2 == 1 && numTexTriangles > 0)
@@ -389,8 +389,8 @@ public final class Model extends Animable {
 			l10 = vertexX2[k11];
 			i11 = vertexY2[k11];
 			j11 = vertexZ2[k11];
-			if(vertex_vskin != null)
-			vertex_vskin[k11] = nc5.g1();
+			if(vertexVSkin != null)
+			vertexVSkin[k11] = nc5.g1();
 		}
 		nc1.pos = j8;
 		nc2.pos = i6;
@@ -404,12 +404,12 @@ public final class Model extends Animable {
 
 			triangleColours2[i12] = nc1.g2();
 			if(l1 == 1){
-				triangle_draw_type[i12] = nc2.g1b();
-				if(triangle_draw_type[i12] == 2)triangleColours2[i12] = 65535;
-				triangle_draw_type[i12] = 0;
+				triangleDrawType[i12] = nc2.g1b();
+				if(triangleDrawType[i12] == 2)triangleColours2[i12] = 65535;
+				triangleDrawType[i12] = 0;
 			}
 			if(i2 == 255){
-			face_priority[i12] = nc3.g1b();
+			facePriority[i12] = nc3.g1b();
 			}
 			if(j2 == 1){
 			triangleAlpha[i12] = nc4.g1b();
@@ -417,7 +417,7 @@ public final class Model extends Animable {
 			triangleAlpha[i12] = (256+triangleAlpha[i12]);
 			}
 			if(k2 == 1)
-			triangle_tskin[i12] = nc5.g1();
+			triangleTSkin[i12] = nc5.g1();
 			if(l2 == 1)
 			D[i12] = (short)(nc6.g2() - 1);
 
@@ -525,7 +525,7 @@ public final class Model extends Animable {
 
 	if (i2 != 255) {
 		for(int i12 = 0; i12 < numTriangles; i12++)
-			face_priority[i12] = i2;
+			facePriority[i12] = i2;
 
 	}
 		triangleColours = triangleColours2;
@@ -575,11 +575,11 @@ public final class Model extends Animable {
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.anInt381 = -l - 1;
-        modelHeader_1.tskin_basepos = l2;
+        modelHeader_1.tskinBasepos = l2;
         if(j1 == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
-            modelHeader_1.tskin_basepos = -1;
+            modelHeader_1.tskinBasepos = -1;
         modelHeader_1.anInt380 = l2;
         if(k == 1)
             l2 += modelHeader_1.modelTriangleCount;
@@ -590,11 +590,11 @@ public final class Model extends Animable {
             l2 += modelHeader_1.modelVerticeCount;
         else
             modelHeader_1.anInt376 = -1;
-        modelHeader_1.alpha_basepos = l2;
+        modelHeader_1.alphaBasepos = l2;
         if(i1 == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
-            modelHeader_1.alpha_basepos = -1;
+            modelHeader_1.alphaBasepos = -1;
         modelHeader_1.triVPointOffset = l2;
         l2 += k2;
         modelHeader_1.triColourOffset = l2;
@@ -629,7 +629,7 @@ public final class Model extends Animable {
         }
     }
 
-    public static boolean is_downloaded(int i)
+    public static boolean isDownloaded(int i)
     {
         if(modelHeaderCache == null)
             return false;
@@ -662,21 +662,21 @@ public final class Model extends Animable {
         triangleA = new int[triangleCount];
         triangleB = new int[triangleCount];
         triangleC = new int[triangleCount];
-        tri_p_index = new int[texturedTriangeAmmount];
-        tri_m_index = new int[texturedTriangeAmmount];
-        tri_n_index = new int[texturedTriangeAmmount];
+        triPIndex = new int[texturedTriangeAmmount];
+        triMIndex = new int[texturedTriangeAmmount];
+        triNIndex = new int[texturedTriangeAmmount];
         if(modelHeader.anInt376 >= 0)
-            vertex_vskin = new int[verticeCount];
+            vertexVSkin = new int[verticeCount];
         if(modelHeader.anInt380 >= 0)
-            triangle_draw_type = new int[triangleCount];
+            triangleDrawType = new int[triangleCount];
         if(modelHeader.anInt381 >= 0)
-            face_priority = new int[triangleCount];
+            facePriority = new int[triangleCount];
         else
             anInt1641 = -modelHeader.anInt381 - 1;
-        if(modelHeader.alpha_basepos >= 0)
+        if(modelHeader.alphaBasepos >= 0)
             triangleAlpha = new int[triangleCount];
-        if(modelHeader.tskin_basepos >= 0)
-            triangle_tskin = new int[triangleCount];
+        if(modelHeader.tskinBasepos >= 0)
+            triangleTSkin = new int[triangleCount];
         triangleColours = new int[triangleCount];
         Packet stream = new Packet(modelHeader.modelData);
         stream.pos = modelHeader.vertexModOffset;
@@ -709,26 +709,26 @@ public final class Model extends Animable {
             oldVX = vertexX[vID];
             oldVY = vertexY[vID];
             oldVZ = vertexZ[vID];
-            if(vertex_vskin != null)
-                vertex_vskin[vID] = stream_4.g1();
+            if(vertexVSkin != null)
+                vertexVSkin[vID] = stream_4.g1();
         }
 
         stream.pos = modelHeader.triColourOffset;
         vXStream.pos = modelHeader.anInt380;
         vYStream.pos = modelHeader.anInt381;
-        vZStream.pos = modelHeader.alpha_basepos;
-        stream_4.pos = modelHeader.tskin_basepos;
+        vZStream.pos = modelHeader.alphaBasepos;
+        stream_4.pos = modelHeader.tskinBasepos;
         for(int l1 = 0; l1 < triangleCount; l1++)
         {
             triangleColours[l1] = stream.g2();
-            if(triangle_draw_type != null)
-                triangle_draw_type[l1] = vXStream.g1();
-            if(face_priority != null)
-                face_priority[l1] = vYStream.g1();
+            if(triangleDrawType != null)
+                triangleDrawType[l1] = vXStream.g1();
+            if(facePriority != null)
+                facePriority[l1] = vYStream.g1();
             if(triangleAlpha != null)
                 triangleAlpha[l1] = vZStream.g1();
-            if(triangle_tskin != null)
-                triangle_tskin[l1] = stream_4.g1();
+            if(triangleTSkin != null)
+                triangleTSkin[l1] = stream_4.g1();
         }
 
         stream.pos = modelHeader.triVPointOffset;
@@ -788,9 +788,9 @@ public final class Model extends Animable {
         stream.pos = modelHeader.anInt384;
         for(int j4 = 0; j4 < texturedTriangeAmmount; j4++)
         {
-            tri_p_index[j4] = stream.g2();
-            tri_m_index[j4] = stream.g2();
-            tri_n_index[j4] = stream.g2();
+            triPIndex[j4] = stream.g2();
+            triMIndex[j4] = stream.g2();
+            triNIndex[j4] = stream.g2();
         }
 
     }
@@ -814,8 +814,8 @@ public final class Model extends Animable {
                 verticeCount += model.verticeCount;
                 triangleCount += model.triangleCount;
                 texturedTriangeAmmount += model.texturedTriangeAmmount;
-                flag |= model.triangle_draw_type != null;
-                if(model.face_priority != null)
+                flag |= model.triangleDrawType != null;
+                if(model.facePriority != null)
                 {
                     flag1 = true;
                 } else
@@ -826,28 +826,28 @@ public final class Model extends Animable {
                         flag1 = true;
                 }
                 flag2 |= model.triangleAlpha != null;
-                flag3 |= model.triangle_tskin != null;
+                flag3 |= model.triangleTSkin != null;
             }
         }
 
         vertexX = new int[verticeCount];
         vertexY = new int[verticeCount];
         vertexZ = new int[verticeCount];
-        vertex_vskin = new int[verticeCount];
+        vertexVSkin = new int[verticeCount];
         triangleA = new int[triangleCount];
         triangleB = new int[triangleCount];
         triangleC = new int[triangleCount];
-        tri_p_index = new int[texturedTriangeAmmount];
-        tri_m_index = new int[texturedTriangeAmmount];
-        tri_n_index = new int[texturedTriangeAmmount];
+        triPIndex = new int[texturedTriangeAmmount];
+        triMIndex = new int[texturedTriangeAmmount];
+        triNIndex = new int[texturedTriangeAmmount];
         if(flag)
-            triangle_draw_type = new int[triangleCount];
+            triangleDrawType = new int[triangleCount];
         if(flag1)
-            face_priority = new int[triangleCount];
+            facePriority = new int[triangleCount];
         if(flag2)
             triangleAlpha = new int[triangleCount];
         if(flag3)
-            triangle_tskin = new int[triangleCount];
+            triangleTSkin = new int[triangleCount];
         triangleColours = new int[triangleCount];
         verticeCount = 0;
         triangleCount = 0;
@@ -861,28 +861,28 @@ public final class Model extends Animable {
                 for(int j1 = 0; j1 < model_1.triangleCount; j1++)
                 {
                     if(flag)
-                        if(model_1.triangle_draw_type == null)
+                        if(model_1.triangleDrawType == null)
                         {
-                            triangle_draw_type[triangleCount] = 0;
+                            triangleDrawType[triangleCount] = 0;
                         } else
                         {
-                            int k1 = model_1.triangle_draw_type[j1];
+                            int k1 = model_1.triangleDrawType[j1];
                             if((k1 & 2) == 2)
                                 k1 += l << 2;
-                            triangle_draw_type[triangleCount] = k1;
+                            triangleDrawType[triangleCount] = k1;
                         }
                     if(flag1)
-                        if(model_1.face_priority == null)
-                            face_priority[triangleCount] = model_1.anInt1641;
+                        if(model_1.facePriority == null)
+                            facePriority[triangleCount] = model_1.anInt1641;
                         else
-                            face_priority[triangleCount] = model_1.face_priority[j1];
+                            facePriority[triangleCount] = model_1.facePriority[j1];
                     if(flag2)
                         if(model_1.triangleAlpha == null)
                             triangleAlpha[triangleCount] = 0;
                         else
                             triangleAlpha[triangleCount] = model_1.triangleAlpha[j1];
-                    if(flag3 && model_1.triangle_tskin != null)
-                        triangle_tskin[triangleCount] = model_1.triangle_tskin[j1];
+                    if(flag3 && model_1.triangleTSkin != null)
+                        triangleTSkin[triangleCount] = model_1.triangleTSkin[j1];
                     triangleColours[triangleCount] = model_1.triangleColours[j1];
                     triangleA[triangleCount] = method465(model_1, model_1.triangleA[j1]);
                     triangleB[triangleCount] = method465(model_1, model_1.triangleB[j1]);
@@ -892,9 +892,9 @@ public final class Model extends Animable {
 
                 for(int l1 = 0; l1 < model_1.texturedTriangeAmmount; l1++)
                 {
-                    tri_p_index[texturedTriangeAmmount] = method465(model_1, model_1.tri_p_index[l1]);
-                    tri_m_index[texturedTriangeAmmount] = method465(model_1, model_1.tri_m_index[l1]);
-                    tri_n_index[texturedTriangeAmmount] = method465(model_1, model_1.tri_n_index[l1]);
+                    triPIndex[texturedTriangeAmmount] = method465(model_1, model_1.triPIndex[l1]);
+                    triMIndex[texturedTriangeAmmount] = method465(model_1, model_1.triMIndex[l1]);
+                    triNIndex[texturedTriangeAmmount] = method465(model_1, model_1.triNIndex[l1]);
                     texturedTriangeAmmount++;
                 }
 
@@ -924,8 +924,8 @@ public final class Model extends Animable {
                 verticeCount += model.verticeCount;
                 triangleCount += model.triangleCount;
                 texturedTriangeAmmount += model.texturedTriangeAmmount;
-                flag1 |= model.triangle_draw_type != null;
-                if(model.face_priority != null)
+                flag1 |= model.triangleDrawType != null;
+                if(model.facePriority != null)
                 {
                     flag2 = true;
                 } else
@@ -946,16 +946,16 @@ public final class Model extends Animable {
         triangleA = new int[triangleCount];
         triangleB = new int[triangleCount];
         triangleC = new int[triangleCount];
-        triangle_hsl_a = new int[triangleCount];
-        triangle_hsl_b = new int[triangleCount];
-        triangle_hsl_c = new int[triangleCount];
-        tri_p_index = new int[texturedTriangeAmmount];
-        tri_m_index = new int[texturedTriangeAmmount];
-        tri_n_index = new int[texturedTriangeAmmount];
+        triangleHslA = new int[triangleCount];
+        triangleHslB = new int[triangleCount];
+        triangleHslC = new int[triangleCount];
+        triPIndex = new int[texturedTriangeAmmount];
+        triMIndex = new int[texturedTriangeAmmount];
+        triNIndex = new int[texturedTriangeAmmount];
         if(flag1)
-            triangle_draw_type = new int[triangleCount];
+            triangleDrawType = new int[triangleCount];
         if(flag2)
-            face_priority = new int[triangleCount];
+            facePriority = new int[triangleCount];
         if(flag3)
             triangleAlpha = new int[triangleCount];
         if(flag4)
@@ -983,25 +983,25 @@ public final class Model extends Animable {
                     triangleA[triangleCount] = model_1.triangleA[i2] + k1;
                     triangleB[triangleCount] = model_1.triangleB[i2] + k1;
                     triangleC[triangleCount] = model_1.triangleC[i2] + k1;
-                    triangle_hsl_a[triangleCount] = model_1.triangle_hsl_a[i2];
-                    triangle_hsl_b[triangleCount] = model_1.triangle_hsl_b[i2];
-                    triangle_hsl_c[triangleCount] = model_1.triangle_hsl_c[i2];
+                    triangleHslA[triangleCount] = model_1.triangleHslA[i2];
+                    triangleHslB[triangleCount] = model_1.triangleHslB[i2];
+                    triangleHslC[triangleCount] = model_1.triangleHslC[i2];
                     if(flag1)
-                        if(model_1.triangle_draw_type == null)
+                        if(model_1.triangleDrawType == null)
                         {
-                            triangle_draw_type[triangleCount] = 0;
+                            triangleDrawType[triangleCount] = 0;
                         } else
                         {
-                            int j2 = model_1.triangle_draw_type[i2];
+                            int j2 = model_1.triangleDrawType[i2];
                             if((j2 & 2) == 2)
                                 j2 += i1 << 2;
-                            triangle_draw_type[triangleCount] = j2;
+                            triangleDrawType[triangleCount] = j2;
                         }
                     if(flag2)
-                        if(model_1.face_priority == null)
-                            face_priority[triangleCount] = model_1.anInt1641;
+                        if(model_1.facePriority == null)
+                            facePriority[triangleCount] = model_1.anInt1641;
                         else
-                            face_priority[triangleCount] = model_1.face_priority[i2];
+                            facePriority[triangleCount] = model_1.facePriority[i2];
                     if(flag3)
                         if(model_1.triangleAlpha == null)
                             triangleAlpha[triangleCount] = 0;
@@ -1014,9 +1014,9 @@ public final class Model extends Animable {
 
                 for(int k2 = 0; k2 < model_1.texturedTriangeAmmount; k2++)
                 {
-                    tri_p_index[texturedTriangeAmmount] = model_1.tri_p_index[k2] + k1;
-                    tri_m_index[texturedTriangeAmmount] = model_1.tri_m_index[k2] + k1;
-                    tri_n_index[texturedTriangeAmmount] = model_1.tri_n_index[k2] + k1;
+                    triPIndex[texturedTriangeAmmount] = model_1.triPIndex[k2] + k1;
+                    triMIndex[texturedTriangeAmmount] = model_1.triMIndex[k2] + k1;
+                    triNIndex[texturedTriangeAmmount] = model_1.triNIndex[k2] + k1;
                     texturedTriangeAmmount++;
                 }
 
@@ -1077,17 +1077,17 @@ public final class Model extends Animable {
 
             }
         }
-        vertex_vskin = model.vertex_vskin;
-        triangle_tskin = model.triangle_tskin;
-        triangle_draw_type = model.triangle_draw_type;
+        vertexVSkin = model.vertexVSkin;
+        triangleTSkin = model.triangleTSkin;
+        triangleDrawType = model.triangleDrawType;
         triangleA = model.triangleA;
         triangleB = model.triangleB;
         triangleC = model.triangleC;
-        face_priority = model.face_priority;
+        facePriority = model.facePriority;
         anInt1641 = model.anInt1641;
-        tri_p_index = model.tri_p_index;
-        tri_m_index = model.tri_m_index;
-        tri_n_index = model.tri_n_index;
+        triPIndex = model.triPIndex;
+        triMIndex = model.triMIndex;
+        triNIndex = model.triNIndex;
     }
 
     public Model(boolean flag, boolean flag1, Model model)
@@ -1107,67 +1107,67 @@ public final class Model extends Animable {
         }
         if(flag1)
         {
-            triangle_hsl_a = new int[triangleCount];
-            triangle_hsl_b = new int[triangleCount];
-            triangle_hsl_c = new int[triangleCount];
+            triangleHslA = new int[triangleCount];
+            triangleHslB = new int[triangleCount];
+            triangleHslC = new int[triangleCount];
             for(int k = 0; k < triangleCount; k++)
             {
-                triangle_hsl_a[k] = model.triangle_hsl_a[k];
-                triangle_hsl_b[k] = model.triangle_hsl_b[k];
-                triangle_hsl_c[k] = model.triangle_hsl_c[k];
+                triangleHslA[k] = model.triangleHslA[k];
+                triangleHslB[k] = model.triangleHslB[k];
+                triangleHslC[k] = model.triangleHslC[k];
             }
 
-            triangle_draw_type = new int[triangleCount];
-            if(model.triangle_draw_type == null)
+            triangleDrawType = new int[triangleCount];
+            if(model.triangleDrawType == null)
             {
                 for(int l = 0; l < triangleCount; l++)
-                    triangle_draw_type[l] = 0;
+                    triangleDrawType[l] = 0;
 
             } else
             {
-                System.arraycopy(model.triangle_draw_type, 0, triangle_draw_type, 0, triangleCount);
+                System.arraycopy(model.triangleDrawType, 0, triangleDrawType, 0, triangleCount);
 
             }
-            super.vertex_normal = new VertexNormal[verticeCount];
+            super.vertexNormal = new VertexNormal[verticeCount];
             for(int j1 = 0; j1 < verticeCount; j1++)
             {
-                VertexNormal vertexNormal = super.vertex_normal[j1] = new VertexNormal();
-                VertexNormal vertexNormal_1 = model.vertex_normal[j1];
+                VertexNormal vertexNormal = super.vertexNormal[j1] = new VertexNormal();
+                VertexNormal vertexNormal_1 = model.vertexNormal[j1];
                 vertexNormal.x = vertexNormal_1.x;
                 vertexNormal.y = vertexNormal_1.y;
                 vertexNormal.z = vertexNormal_1.z;
                 vertexNormal.magnitude = vertexNormal_1.magnitude;
             }
 
-            vertex_normal_offset = model.vertex_normal_offset;
+            vertexNormalOffset = model.vertexNormalOffset;
         } else
         {
-            triangle_hsl_a = model.triangle_hsl_a;
-            triangle_hsl_b = model.triangle_hsl_b;
-            triangle_hsl_c = model.triangle_hsl_c;
-            triangle_draw_type = model.triangle_draw_type;
+            triangleHslA = model.triangleHslA;
+            triangleHslB = model.triangleHslB;
+            triangleHslC = model.triangleHslC;
+            triangleDrawType = model.triangleDrawType;
         }
         vertexX = model.vertexX;
         vertexZ = model.vertexZ;
         triangleColours = model.triangleColours;
         triangleAlpha = model.triangleAlpha;
-        face_priority = model.face_priority;
+        facePriority = model.facePriority;
         anInt1641 = model.anInt1641;
         triangleA = model.triangleA;
         triangleB = model.triangleB;
         triangleC = model.triangleC;
-        tri_p_index = model.tri_p_index;
-        tri_m_index = model.tri_m_index;
-        tri_n_index = model.tri_n_index;
+        triPIndex = model.triPIndex;
+        triMIndex = model.triMIndex;
+        triNIndex = model.triNIndex;
         super.modelHeight = model.modelHeight;
-        max_y = model.max_y; 
-        diagonal_2D_aboveorigin = model.diagonal_2D_aboveorigin;
-        diagonal_3D_aboveorigin = model.diagonal_3D_aboveorigin;
-        diagonal_3D = model.diagonal_3D;
-        min_x = model.min_x;
-        max_z = model.max_z;
-        min_z = model.min_z;
-        max_x = model.max_x;
+        maxY = model.maxY; 
+        diagonal2DAboveorigin = model.diagonal2DAboveorigin;
+        diagonal3DAboveorigin = model.diagonal3DAboveorigin;
+        diagonal3D = model.diagonal3D;
+        minX = model.minX;
+        maxZ = model.maxZ;
+        minZ = model.minZ;
+        maxX = model.maxX;
     }
 
     public void method464(Model model, boolean flag)
@@ -1210,21 +1210,21 @@ public final class Model extends Animable {
 
             }
         }
-        triangle_draw_type = model.triangle_draw_type;
+        triangleDrawType = model.triangleDrawType;
         triangleColours = model.triangleColours;
-        face_priority = model.face_priority;
+        facePriority = model.facePriority;
         anInt1641 = model.anInt1641;
         triangleSkin = model.triangleSkin;
         vertexSkin = model.vertexSkin;
         triangleA = model.triangleA;
         triangleB = model.triangleB;
         triangleC = model.triangleC;
-        triangle_hsl_a = model.triangle_hsl_a;
-        triangle_hsl_b = model.triangle_hsl_b;
-        triangle_hsl_c = model.triangle_hsl_c;
-        tri_p_index = model.tri_p_index;
-        tri_m_index = model.tri_m_index;
-        tri_n_index = model.tri_n_index;
+        triangleHslA = model.triangleHslA;
+        triangleHslB = model.triangleHslB;
+        triangleHslC = model.triangleHslC;
+        triPIndex = model.triPIndex;
+        triMIndex = model.triMIndex;
+        triNIndex = model.triNIndex;
     }
 
     private int method465(Model model, int i)
@@ -1246,8 +1246,8 @@ public final class Model extends Animable {
             vertexX[verticeCount] = k;
             vertexY[verticeCount] = l;
             vertexZ[verticeCount] = i1;
-            if(model.vertex_vskin != null)
-                vertex_vskin[verticeCount] = model.vertex_vskin[i];
+            if(model.vertexVSkin != null)
+                vertexVSkin[verticeCount] = model.vertexVSkin[i];
             j = verticeCount++;
         }
         return j;
@@ -1256,88 +1256,88 @@ public final class Model extends Animable {
     public void calculateDiagonals()
     {
         super.modelHeight = 0;
-        diagonal_2D_aboveorigin = 0;
-        max_y = 0;
-        for(int v_ptr = 0; v_ptr < verticeCount; v_ptr++)
+        diagonal2DAboveorigin = 0;
+        maxY = 0;
+        for(int verticePointer = 0; verticePointer < verticeCount; verticePointer++)
         {
-            int v_x = vertexX[v_ptr];
-            int v_y = vertexY[v_ptr];
-            int v_z = vertexZ[v_ptr];
+            int v_x = vertexX[verticePointer];
+            int v_y = vertexY[verticePointer];
+            int v_z = vertexZ[verticePointer];
             if(-v_y > super.modelHeight)
                 super.modelHeight = -v_y;
-            if(v_y > max_y)
-                max_y = v_y;
+            if(v_y > maxY)
+                maxY = v_y;
             int bounds_diagonal = v_x * v_x + v_z * v_z;
-            if(bounds_diagonal > diagonal_2D_aboveorigin)
-                diagonal_2D_aboveorigin = bounds_diagonal;
+            if(bounds_diagonal > diagonal2DAboveorigin)
+                diagonal2DAboveorigin = bounds_diagonal;
         }
-        diagonal_2D_aboveorigin = (int)(Math.sqrt(diagonal_2D_aboveorigin) + 0.98999999999999999D);
-        diagonal_3D_aboveorigin = (int)(Math.sqrt(diagonal_2D_aboveorigin * diagonal_2D_aboveorigin + super.modelHeight * super.modelHeight) + 0.98999999999999999D);
-        diagonal_3D = diagonal_3D_aboveorigin + (int)(Math.sqrt(diagonal_2D_aboveorigin * diagonal_2D_aboveorigin + max_y * max_y) + 0.98999999999999999D);
+        diagonal2DAboveorigin = (int)(Math.sqrt(diagonal2DAboveorigin) + 0.98999999999999999D);
+        diagonal3DAboveorigin = (int)(Math.sqrt(diagonal2DAboveorigin * diagonal2DAboveorigin + super.modelHeight * super.modelHeight) + 0.98999999999999999D);
+        diagonal3D = diagonal3DAboveorigin + (int)(Math.sqrt(diagonal2DAboveorigin * diagonal2DAboveorigin + maxY * maxY) + 0.98999999999999999D);
     }
 
     public void method467()
     {
         super.modelHeight = 0;
-        max_y = 0;
+        maxY = 0;
         for(int i = 0; i < verticeCount; i++)
         {
             int j = vertexY[i];
             if(-j > super.modelHeight)
                 super.modelHeight = -j;
-            if(j > max_y)
-                max_y = j;
+            if(j > maxY)
+                maxY = j;
         }
 
-        diagonal_3D_aboveorigin = (int)(Math.sqrt(diagonal_2D_aboveorigin * diagonal_2D_aboveorigin + super.modelHeight * super.modelHeight) + 0.98999999999999999D);
-        diagonal_3D = diagonal_3D_aboveorigin + (int)(Math.sqrt(diagonal_2D_aboveorigin * diagonal_2D_aboveorigin + max_y * max_y) + 0.98999999999999999D);
+        diagonal3DAboveorigin = (int)(Math.sqrt(diagonal2DAboveorigin * diagonal2DAboveorigin + super.modelHeight * super.modelHeight) + 0.98999999999999999D);
+        diagonal3D = diagonal3DAboveorigin + (int)(Math.sqrt(diagonal2DAboveorigin * diagonal2DAboveorigin + maxY * maxY) + 0.98999999999999999D);
     }
 
-    private void calculate_diagonals_and_stats()
+    private void calculateDiagonalsAndStats()
     {
         super.modelHeight = 0;
-        diagonal_2D_aboveorigin = 0;
-        max_y = 0;
-        min_x = 0xf423f;
-        max_x = 0xfff0bdc1;
-        max_z = 0xfffe7961;
-        min_z = 0x1869f;
+        diagonal2DAboveorigin = 0;
+        maxY = 0;
+        minX = 0xf423f;//todo - change to int - 999999
+        maxX = 0xfff0bdc1;//4293967297
+        maxZ = 0xfffe7961;//4294867297
+        minZ = 0x1869f;//99999
         for(int j = 0; j < verticeCount; j++)
         {
             int v_x = vertexX[j];
             int v_y = vertexY[j];
             int v_z = vertexZ[j];
-            if(v_x < min_x)
-                min_x = v_x;
-            if(v_x > max_x)
-                max_x = v_x;
-            if(v_z < min_z)
-                min_z = v_z;
-            if(v_z > max_z)
-                max_z = v_z;
+            if(v_x < minX)
+                minX = v_x;
+            if(v_x > maxX)
+                maxX = v_x;
+            if(v_z < minZ)
+                minZ = v_z;
+            if(v_z > maxZ)
+                maxZ = v_z;
             if(-v_y > super.modelHeight)
                 super.modelHeight = -v_y;
-            if(v_y > max_y)
-                max_y = v_y;
+            if(v_y > maxY)
+                maxY = v_y;
             int _diagonal_2D_aboveorigin = v_x * v_x + v_z * v_z;
-            if(_diagonal_2D_aboveorigin > diagonal_2D_aboveorigin)
-                diagonal_2D_aboveorigin = _diagonal_2D_aboveorigin;
+            if(_diagonal_2D_aboveorigin > diagonal2DAboveorigin)
+                diagonal2DAboveorigin = _diagonal_2D_aboveorigin;
         }
 
-        diagonal_2D_aboveorigin = (int)Math.sqrt(diagonal_2D_aboveorigin);
-        diagonal_3D_aboveorigin = (int)Math.sqrt(diagonal_2D_aboveorigin * diagonal_2D_aboveorigin + super.modelHeight * super.modelHeight);
-            diagonal_3D = diagonal_3D_aboveorigin + (int)Math.sqrt(diagonal_2D_aboveorigin * diagonal_2D_aboveorigin + max_y * max_y);
+        diagonal2DAboveorigin = (int)Math.sqrt(diagonal2DAboveorigin);
+        diagonal3DAboveorigin = (int)Math.sqrt(diagonal2DAboveorigin * diagonal2DAboveorigin + super.modelHeight * super.modelHeight);
+            diagonal3D = diagonal3DAboveorigin + (int)Math.sqrt(diagonal2DAboveorigin * diagonal2DAboveorigin + maxY * maxY);
     }
 
     public void calcSkinning()
     {
-        if(vertex_vskin != null)
+        if(vertexVSkin != null)
         {
             int ai[] = new int[256];
             int j = 0;
             for(int l = 0; l < verticeCount; l++)
             {
-                int j1 = vertex_vskin[l];
+                int j1 = vertexVSkin[l];
                 ai[j1]++;
                 if(j1 > j)
                     j = j1;
@@ -1352,19 +1352,19 @@ public final class Model extends Animable {
 
             for(int j2 = 0; j2 < verticeCount; j2++)
             {
-                int l2 = vertex_vskin[j2];
+                int l2 = vertexVSkin[j2];
                 vertexSkin[l2][ai[l2]++] = j2;
             }
 
-            vertex_vskin = null;
+            vertexVSkin = null;
         }
-        if(triangle_tskin != null)
+        if(triangleTSkin != null)
         {
             int ai1[] = new int[256];
             int k = 0;
             for(int i1 = 0; i1 < triangleCount; i1++)
             {
-                int l1 = triangle_tskin[i1];
+                int l1 = triangleTSkin[i1];
                 ai1[l1]++;
                 if(l1 > k)
                     k = l1;
@@ -1379,11 +1379,11 @@ public final class Model extends Animable {
 
             for(int k2 = 0; k2 < triangleCount; k2++)
             {
-                int i3 = triangle_tskin[k2];
+                int i3 = triangleTSkin[k2];
                 triangleSkin[i3][ai1[i3]++] = k2;
             }
 
-            triangle_tskin = null;
+            triangleTSkin = null;
         }
     }
 
@@ -1408,22 +1408,22 @@ public final class Model extends Animable {
 
     }
 
-    public void mix_anim_frames(int frames_from_2[], int frame_id_2, int frame_id_1)
+    public void mixAnimationFrames(int framesFrom2[], int frameId2, int frameId1)
     {
-        if(frame_id_1 == -1)
+        if(frameId1 == -1)
             return;
-        if(frames_from_2 == null || frame_id_2 == -1)
+        if(framesFrom2 == null || frameId2 == -1)
         {
-            applyTransform(frame_id_1);
+            applyTransform(frameId1);
             return;
         }
-        AnimationFrame animationFrame = AnimationFrame.forID(frame_id_1);
+        AnimationFrame animationFrame = AnimationFrame.forID(frameId1);
         if(animationFrame == null)
             return;
-        AnimationFrame animationFrame_1 = AnimationFrame.forID(frame_id_2);
+        AnimationFrame animationFrame_1 = AnimationFrame.forID(frameId2);
         if(animationFrame_1 == null)
         {
-            applyTransform(frame_id_1);
+            applyTransform(frameId1);
             return;
         }
         ModelTransform modelTransform = animationFrame.myModelTransform;
@@ -1431,11 +1431,11 @@ public final class Model extends Animable {
         vertexYModifier = 0;
         vertexZModifier = 0;
         int l = 0;
-        int stepIDD = frames_from_2[l++];
+        int stepIDD = framesFrom2[l++];
         for(int j1 = 0; j1 < animationFrame.anInt638; j1++)
         {
             int k1;
-            for(k1 = animationFrame.opcodeLinkTable[j1]; k1 > stepIDD; stepIDD = frames_from_2[l++]);
+            for(k1 = animationFrame.opcodeLinkTable[j1]; k1 > stepIDD; stepIDD = framesFrom2[l++]);
             if(k1 != stepIDD || modelTransform.opcodes[k1] == 0)
                 transformStep(modelTransform.opcodes[k1], modelTransform.skinList[k1], animationFrame.modifier1[j1], animationFrame.modifier2[j1], animationFrame.modifier3[j1]);
         }
@@ -1444,11 +1444,11 @@ public final class Model extends Animable {
         vertexYModifier = 0;
         vertexZModifier = 0;
         l = 0;
-        stepIDD = frames_from_2[l++];
+        stepIDD = framesFrom2[l++];
         for(int l1 = 0; l1 < animationFrame_1.anInt638; l1++)
         {
             int stepID;
-            for(stepID = animationFrame_1.opcodeLinkTable[l1]; stepID > stepIDD; stepIDD = frames_from_2[l++]);
+            for(stepID = animationFrame_1.opcodeLinkTable[l1]; stepID > stepIDD; stepIDD = framesFrom2[l++]);
             if(stepID == stepIDD || modelTransform.opcodes[stepID] == 0)
                 transformStep(modelTransform.opcodes[stepID], modelTransform.skinList[stepID], animationFrame_1.modifier1[l1], animationFrame_1.modifier2[l1], animationFrame_1.modifier3[l1]);
         }
@@ -1685,83 +1685,84 @@ public final class Model extends Animable {
 
     }
 
-    public void preprocess(int light_mod, int mag_mult, int l_x, int l_y, int l_z, boolean flat_shading)
+    public void preprocess(int lightMod, int magMultiplyer, int l_x, int l_y, int l_z, boolean flatShading)
     {
         int _mag_pre = (int)Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
-        int mag = mag_mult * _mag_pre >> 8;
-        if(triangle_hsl_a == null)
+        int mag = magMultiplyer * _mag_pre >> 8;
+        if(triangleHslA == null)
         {
-            triangle_hsl_a = new int[triangleCount];
-            triangle_hsl_b = new int[triangleCount];
-            triangle_hsl_c = new int[triangleCount];
+            triangleHslA = new int[triangleCount];
+            triangleHslB = new int[triangleCount];
+            triangleHslC = new int[triangleCount];
         }
-        if(super.vertex_normal == null)
+        if(super.vertexNormal == null)
         {
-            super.vertex_normal = new VertexNormal[verticeCount];
+            super.vertexNormal = new VertexNormal[verticeCount];
             for(int l1 = 0; l1 < verticeCount; l1++)
-                super.vertex_normal[l1] = new VertexNormal();
+                super.vertexNormal[l1] = new VertexNormal();
 
         }
-        for(int t_id = 0; t_id < triangleCount; t_id++)
-        {
-            int t_a = triangleA[t_id];
-            int t_b = triangleB[t_id];
-            int t_c = triangleC[t_id];
+        for(int triID = 0; triID < triangleCount; triID++)
+        {//todo - rename this to camelcode in future (peter plz do this, looks fucking complicated >:)
+            int t_a = triangleA[triID];
+            int t_b = triangleB[triID];
+            int t_c = triangleC[triID];
             int d_a_b_x = vertexX[t_b] - vertexX[t_a];
             int d_a_b_y = vertexY[t_b] - vertexY[t_a];
             int d_a_b_z = vertexZ[t_b] - vertexZ[t_a];
             int d_c_a_x = vertexX[t_c] - vertexX[t_a];
             int d_c_a_y = vertexY[t_c] - vertexY[t_a];
             int d_c_a_z = vertexZ[t_c] - vertexZ[t_a];
-            int normal_x = d_a_b_y * d_c_a_z - d_c_a_y * d_a_b_z;
-            int normal_y = d_a_b_z * d_c_a_x - d_c_a_z * d_a_b_x;
-            int normal_z;
-            for(normal_z = d_a_b_x * d_c_a_y - d_c_a_x * d_a_b_y; normal_x > 8192 || normal_y > 8192 || normal_z > 8192 || normal_x < -8192 || normal_y < -8192 || normal_z < -8192; normal_z >>= 1)
+            int normalX = d_a_b_y * d_c_a_z - d_c_a_y * d_a_b_z;
+            int normalY = d_a_b_z * d_c_a_x - d_c_a_z * d_a_b_x;
+            int normalZ;
+            for(normalZ = d_a_b_x * d_c_a_y - d_c_a_x * d_a_b_y; normalX > 8192 || normalY > 8192 || normalZ > 8192 || normalX < -8192 || normalY < -8192 || normalZ < -8192; normalZ >>= 1)
             {
-                normal_x >>= 1;
-                normal_y >>= 1;
+                normalX >>= 1;
+                normalY >>= 1;
             }
 
-            int normal_length = (int)Math.sqrt(normal_x * normal_x + normal_y * normal_y + normal_z * normal_z);
+            int normal_length = (int)Math.sqrt(normalX * normalX + normalY * normalY + normalZ * normalZ);
             if(normal_length <= 0)
                 normal_length = 1;
-            normal_x = (normal_x * 256) / normal_length;//Normalization
-            normal_y = (normal_y * 256) / normal_length;
-            normal_z = (normal_z * 256) / normal_length;
-            if(triangle_draw_type == null || (triangle_draw_type[t_id] & 1) == 0)
+            normalX = (normalX * 256) / normal_length;//Normalization
+            normalY = (normalY * 256) / normal_length;
+            normalZ = (normalZ * 256) / normal_length;
+            if(triangleDrawType == null || (triangleDrawType[triID] & 1) == 0)
             {
-                VertexNormal vertexNormal_2 = super.vertex_normal[t_a];
-                vertexNormal_2.x += normal_x;
-                vertexNormal_2.y += normal_y;
-                vertexNormal_2.z += normal_z;
+                VertexNormal vertexNormal_2 = super.vertexNormal[t_a];
+                vertexNormal_2.x += normalX;
+                vertexNormal_2.y += normalY;
+                vertexNormal_2.z += normalZ;
                 vertexNormal_2.magnitude++;
-                vertexNormal_2 = super.vertex_normal[t_b];
-                vertexNormal_2.x += normal_x;
-                vertexNormal_2.y += normal_y;
-                vertexNormal_2.z += normal_z;
+                vertexNormal_2 = super.vertexNormal[t_b];
+                vertexNormal_2.x += normalX;
+                vertexNormal_2.y += normalY;
+                vertexNormal_2.z += normalZ;
                 vertexNormal_2.magnitude++;
-                vertexNormal_2 = super.vertex_normal[t_c];
-                vertexNormal_2.x += normal_x;
-                vertexNormal_2.y += normal_y;
-                vertexNormal_2.z += normal_z;
+                vertexNormal_2 = super.vertexNormal[t_c];
+                vertexNormal_2.x += normalX;
+                vertexNormal_2.y += normalY;
+                vertexNormal_2.z += normalZ;
                 vertexNormal_2.magnitude++;
             } else
             {
-                int lightness = light_mod + (l_x * normal_x + l_y * normal_y + l_z * normal_z) / (mag + mag / 2);
-                triangle_hsl_a[t_id] = mix_lightness(triangleColours[t_id], lightness, triangle_draw_type[t_id]);
+                int lightness = lightMod + (l_x * normalX + l_y * normalY + l_z * normalZ) / (mag + mag / 2);
+                triangleHslA[triID] = mixLightness(triangleColours[triID], lightness, triangleDrawType[triID]);
             }
         }
-
-        if(flat_shading)
+//todo - this can be condensed
+        
+        if(flatShading)
         {
-            do_shading(light_mod, mag, l_x, l_y, l_z);
+            doShading(lightMod, mag, l_x, l_y, l_z);
         } else
         {
-            vertex_normal_offset = new VertexNormal[verticeCount];
-            for(int vertex_ptr = 0; vertex_ptr < verticeCount; vertex_ptr++)
+            vertexNormalOffset = new VertexNormal[verticeCount];
+            for(int vertexPointer = 0; vertexPointer < verticeCount; vertexPointer++)
             {
-                VertexNormal vertexNormal = super.vertex_normal[vertex_ptr];
-                VertexNormal vertexNormal_1 = vertex_normal_offset[vertex_ptr] = new VertexNormal();
+                VertexNormal vertexNormal = super.vertexNormal[vertexPointer];
+                VertexNormal vertexNormal_1 = vertexNormalOffset[vertexPointer] = new VertexNormal();
                 vertexNormal_1.x = vertexNormal.x;
                 vertexNormal_1.y = vertexNormal.y;
                 vertexNormal_1.z = vertexNormal.z;
@@ -1769,66 +1770,66 @@ public final class Model extends Animable {
             }
 
         }
-        if(flat_shading)
+        if(flatShading)
         {
             calculateDiagonals();
         } else
         {
-            calculate_diagonals_and_stats();
+            calculateDiagonalsAndStats();
         }
     }
 
-    public void do_shading(int intensity, int falloff, int l_x, int l_y, int l_z)
+    public void doShading(int intensity, int falloff, int l_x, int l_y, int l_z)
     {
-        for(int t_id = 0; t_id < triangleCount; t_id++)
+        for(int triID = 0; triID < triangleCount; triID++)
         {
-            int t_a = triangleA[t_id];
-            int t_b = triangleB[t_id];
-            int t_c = triangleC[t_id];
-            if(triangle_draw_type == null)
+            int triA = triangleA[triID];
+            int triB = triangleB[triID];
+            int triC = triangleC[triID];
+            if(triangleDrawType == null)
             {
-                int t_hsl = triangleColours[t_id];
-                VertexNormal vertexNormal = super.vertex_normal[t_a];
+                int t_hsl = triangleColours[triID];
+                VertexNormal vertexNormal = super.vertexNormal[triA];
                 int l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
-                triangle_hsl_a[t_id] = mix_lightness(t_hsl, l, 0);
-                vertexNormal = super.vertex_normal[t_b];
+                triangleHslA[triID] = mixLightness(t_hsl, l, 0);
+                vertexNormal = super.vertexNormal[triB];
                 l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
-                triangle_hsl_b[t_id] = mix_lightness(t_hsl, l, 0);
-                vertexNormal = super.vertex_normal[t_c];
+                triangleHslB[triID] = mixLightness(t_hsl, l, 0);
+                vertexNormal = super.vertexNormal[triC];
                 l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
-                triangle_hsl_c[t_id] = mix_lightness(t_hsl, l, 0);
-            } else if((triangle_draw_type[t_id] & 1) == 0){
+                triangleHslC[triID] = mixLightness(t_hsl, l, 0);
+            } else if((triangleDrawType[triID] & 1) == 0){
             	//Bit 1 of triangle_draw_type ON means mix_lightness returns just lightness
             	//instead of mixed hsl
-                int t_hsl = triangleColours[t_id];
-                int t_flags = triangle_draw_type[t_id];
-                VertexNormal vertexNormal_1 = super.vertex_normal[t_a];
+                int t_hsl = triangleColours[triID];
+                int t_flags = triangleDrawType[triID];
+                VertexNormal vertexNormal_1 = super.vertexNormal[triA];
                 int l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
-                triangle_hsl_a[t_id] = mix_lightness(t_hsl, l, t_flags);
-                vertexNormal_1 = super.vertex_normal[t_b];
+                triangleHslA[triID] = mixLightness(t_hsl, l, t_flags);
+                vertexNormal_1 = super.vertexNormal[triB];
                 l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
-                triangle_hsl_b[t_id] = mix_lightness(t_hsl, l, t_flags);
-                vertexNormal_1 = super.vertex_normal[t_c];
+                triangleHslB[triID] = mixLightness(t_hsl, l, t_flags);
+                vertexNormal_1 = super.vertexNormal[triC];
                 l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
-                triangle_hsl_c[t_id] = mix_lightness(t_hsl, l, t_flags);
+                triangleHslC[triID] = mixLightness(t_hsl, l, t_flags);
             }
         }
 
-        super.vertex_normal = null;
-        vertex_normal_offset = null;
-        vertex_vskin = null;
-        triangle_tskin = null;
-        if(triangle_draw_type != null)
+        super.vertexNormal = null;
+        vertexNormalOffset = null;
+        vertexVSkin = null;
+        triangleTSkin = null;
+        if(triangleDrawType != null)
         {
             for(int l1 = 0; l1 < triangleCount; l1++)
-                if((triangle_draw_type[l1] & 2) == 2)
+                if((triangleDrawType[l1] & 2) == 2)
                     return;
 
         }
         triangleColours = null;
     }
 
-    private static int mix_lightness(int hsl, int l, int flags)
+    private static int mixLightness(int hsl, int l, int flags)
     {
         if((flags & 2) == 2)
         {
@@ -1850,12 +1851,12 @@ public final class Model extends Animable {
     }
 
     public void rendersingle(int j, int k, int l, int i1, int j1, int k1)
-    {
+    {//todo figure if i has any significence to its value.
         int i = 0; //was a parameter
         int l1 = ThreeDimensionalDrawingArea.xMidPos;
         int i2 = ThreeDimensionalDrawingArea.yMidPos;
-        int j2 = SINE[i];
-        int k2 = COSINE[i];
+        int j2 = SINE[i];//[i]
+        int k2 = COSINE[i];//[i]
         int l2 = SINE[j];
         int i3 = COSINE[j];
         int j3 = SINE[k];
@@ -1892,7 +1893,7 @@ public final class Model extends Animable {
             int j6 = i5 * i4 - j5 * l3 >> 16;
             j5 = i5 * l3 + j5 * i4 >> 16;
             i5 = j6;
-            camera_depth[k4] = j5 - j4;
+            cameraDepth[k4] = j5 - j4;
             anIntArray1665[k4] = l1 + (l4 << 9) / j5;
             anIntArray1666[k4] = i2 + (i5 << 9) / j5;
             if(texturedTriangeAmmount > 0)
@@ -1917,25 +1918,25 @@ public final class Model extends Animable {
     {
         int j2 = l1 * i1 - j1 * l >> 16;
         int k2 = k1 * j + j2 * k >> 16;
-        int l2 = diagonal_2D_aboveorigin * k >> 16;
+        int l2 = diagonal2DAboveorigin * k >> 16;
         int i3 = k2 + l2;
         if(i3 <= 50 || k2 >= 3500)
             return;
         int j3 = l1 * l + j1 * i1 >> 16;
-        int k3 = j3 - diagonal_2D_aboveorigin << 9;
-        if(k3 / i3 >= DrawingArea.viewport_c_x)
+        int k3 = j3 - diagonal2DAboveorigin << 9;
+        if(k3 / i3 >= DrawingArea.viewportCx)
             return;
-        int l3 = j3 + diagonal_2D_aboveorigin << 9;
-        if(l3 / i3 <= -DrawingArea.viewport_c_x)
+        int l3 = j3 + diagonal2DAboveorigin << 9;
+        if(l3 / i3 <= -DrawingArea.viewportCx)
             return;
         int i4 = k1 * k - j2 * j >> 16;
-        int j4 = diagonal_2D_aboveorigin * j >> 16;
+        int j4 = diagonal2DAboveorigin * j >> 16;
         int k4 = i4 + j4 << 9;
-        if(k4 / i3 <= -DrawingArea.viewport_c_y)
+        if(k4 / i3 <= -DrawingArea.viewportCy)
             return;
         int l4 = j4 + (super.modelHeight * k >> 16);
         int i5 = i4 - l4 << 9;
-        if(i5 / i3 >= DrawingArea.viewport_c_y)
+        if(i5 / i3 >= DrawingArea.viewportCy)
             return;
         int j5 = l2 + (super.modelHeight * j >> 16);
         boolean flag = false;
@@ -2002,7 +2003,7 @@ public final class Model extends Animable {
             k8 = l7 * k - i8 * j >> 16;
             i8 = l7 * j + i8 * k >> 16;
             l7 = k8;
-            camera_depth[j7] = i8 - k2;
+            cameraDepth[j7] = i8 - k2;
             if(i8 >= 50)
             {
                 anIntArray1665[j7] = l5 + (k7 << 9) / i8;
@@ -2031,11 +2032,11 @@ public final class Model extends Animable {
 
     private void method483(boolean flag, boolean flag1, int i)
     {
-        for(int j = 0; j < diagonal_3D; j++)
-            depth_list_indices[j] = 0;
+        for(int j = 0; j < diagonal3D; j++)
+            depthListIndices[j] = 0;
 
         for(int k = 0; k < triangleCount; k++)
-            if(triangle_draw_type == null || triangle_draw_type[k] != -1)
+            if(triangleDrawType == null || triangleDrawType[k] != -1)
             {
                 int l = triangleA[k];
                 int k1 = triangleB[k];
@@ -2046,8 +2047,8 @@ public final class Model extends Animable {
                 if(flag && (i3 == -5000 || l3 == -5000 || k4 == -5000))
                 {
                     aBooleanArray1664[k] = true;
-                    int j5 = (camera_depth[l] + camera_depth[k1] + camera_depth[j2]) / 3 + diagonal_3D_aboveorigin;
-                    face_lists[j5][depth_list_indices[j5]++] = k;
+                    int j5 = (cameraDepth[l] + cameraDepth[k1] + cameraDepth[j2]) / 3 + diagonal3DAboveorigin;
+                    faceLists[j5][depthListIndices[j5]++] = k;
                 } else
                 {
                     if(flag1 && method486(anInt1685, anInt1686, anIntArray1666[l], anIntArray1666[k1], anIntArray1666[j2], i3, l3, k4))
@@ -2058,21 +2059,21 @@ public final class Model extends Animable {
                     if((i3 - l3) * (anIntArray1666[j2] - anIntArray1666[k1]) - (anIntArray1666[l] - anIntArray1666[k1]) * (k4 - l3) > 0)
                     {
                         aBooleanArray1664[k] = false;
-                        aBooleanArray1663[k] = i3 < 0 || l3 < 0 || k4 < 0 || i3 > DrawingArea.viewport_r_x || l3 > DrawingArea.viewport_r_x || k4 > DrawingArea.viewport_r_x;
-                        int k5 = (camera_depth[l] + camera_depth[k1] + camera_depth[j2]) / 3 + diagonal_3D_aboveorigin;
-                        face_lists[k5][depth_list_indices[k5]++] = k;
+                        aBooleanArray1663[k] = i3 < 0 || l3 < 0 || k4 < 0 || i3 > DrawingArea.viewportRx || l3 > DrawingArea.viewportRx || k4 > DrawingArea.viewportRx;
+                        int k5 = (cameraDepth[l] + cameraDepth[k1] + cameraDepth[j2]) / 3 + diagonal3DAboveorigin;
+                        faceLists[k5][depthListIndices[k5]++] = k;
                     }
                 }
             }
 
-        if(face_priority == null)
+        if(facePriority == null)
         {
-            for(int i1 = diagonal_3D - 1; i1 >= 0; i1--)
+            for(int i1 = diagonal3D - 1; i1 >= 0; i1--)
             {
-                int l1 = depth_list_indices[i1];
+                int l1 = depthListIndices[i1];
                 if(l1 > 0)
                 {
-                    int ai[] = face_lists[i1];
+                    int ai[] = faceLists[i1];
                     for(int j3 = 0; j3 < l1; j3++)
                         rasterize(ai[j3]);
 
@@ -2087,16 +2088,16 @@ public final class Model extends Animable {
             anIntArray1677[j1] = 0;
         }
 
-        for(int i2 = diagonal_3D - 1; i2 >= 0; i2--)
+        for(int i2 = diagonal3D - 1; i2 >= 0; i2--)
         {
-            int k2 = depth_list_indices[i2];
+            int k2 = depthListIndices[i2];
             if(k2 > 0)
             {
-                int ai1[] = face_lists[i2];
+                int ai1[] = faceLists[i2];
                 for(int i4 = 0; i4 < k2; i4++)
                 {
                     int l4 = ai1[i4];
-                    int l5 = face_priority[l4];
+                    int l5 = facePriority[l4];
                     int j6 = anIntArray1673[l5]++;
                     anIntArrayArray1674[l5][j6] = l4;
                     if(l5 < 10)
@@ -2223,36 +2224,36 @@ public final class Model extends Animable {
         else
             ThreeDimensionalDrawingArea.alpha = triangleAlpha[i];
         int i1;
-        if(triangle_draw_type == null)
+        if(triangleDrawType == null)
             i1 = 0;
         else
-            i1 = triangle_draw_type[i] & 3;
+            i1 = triangleDrawType[i] & 3;
         if(i1 == 0)
         {
-            ThreeDimensionalDrawingArea.drawColouredTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangle_hsl_a[i], triangle_hsl_b[i], triangle_hsl_c[i]);
+            ThreeDimensionalDrawingArea.drawColouredTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i]);
             return;
         }
         if(i1 == 1)
         {
-            ThreeDimensionalDrawingArea.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], modelIntArray3[triangle_hsl_a[i]]);
+            ThreeDimensionalDrawingArea.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], modelIntArray3[triangleHslA[i]]);
             return;
         }
         if(i1 == 2)
         {
-            int j1 = triangle_draw_type[i] >> 2;
-            int l1 = tri_p_index[j1];
-            int j2 = tri_m_index[j1];
-            int l2 = tri_n_index[j1];
-            ThreeDimensionalDrawingArea.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangle_hsl_a[i], triangle_hsl_b[i], triangle_hsl_c[i], anIntArray1668[l1], anIntArray1668[j2], anIntArray1668[l2], vertexBY[l1], vertexBY[j2], vertexBY[l2], anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], triangleColours[i]);
+            int j1 = triangleDrawType[i] >> 2;
+            int l1 = triPIndex[j1];
+            int j2 = triMIndex[j1];
+            int l2 = triNIndex[j1];
+            ThreeDimensionalDrawingArea.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i], anIntArray1668[l1], anIntArray1668[j2], anIntArray1668[l2], vertexBY[l1], vertexBY[j2], vertexBY[l2], anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], triangleColours[i]);
             return;
         }
         if(i1 == 3)
         {
-            int k1 = triangle_draw_type[i] >> 2;
-            int i2 = tri_p_index[k1];
-            int k2 = tri_m_index[k1];
-            int i3 = tri_n_index[k1];
-            ThreeDimensionalDrawingArea.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangle_hsl_a[i], triangle_hsl_a[i], triangle_hsl_a[i], anIntArray1668[i2], anIntArray1668[k2], anIntArray1668[i3], vertexBY[i2], vertexBY[k2], vertexBY[i3], anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], triangleColours[i]);
+            int k1 = triangleDrawType[i] >> 2;
+            int i2 = triPIndex[k1];
+            int k2 = triMIndex[k1];
+            int i3 = triNIndex[k1];
+            ThreeDimensionalDrawingArea.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[i2], anIntArray1668[k2], anIntArray1668[i3], vertexBY[i2], vertexBY[k2], vertexBY[i3], anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], triangleColours[i]);
         }
     }
 
@@ -2271,75 +2272,75 @@ public final class Model extends Animable {
         {
             anIntArray1678[l] = anIntArray1665[i1];
             anIntArray1679[l] = anIntArray1666[i1];
-            anIntArray1680[l++] = triangle_hsl_a[i];
+            anIntArray1680[l++] = triangleHslA[i];
         } else
         {
             int k2 = anIntArray1668[i1];
             int k3 = vertexBY[i1];
-            int k4 = triangle_hsl_a[i];
+            int k4 = triangleHslA[i];
             if(j2 >= 50)
             {
                 int k5 = (50 - l1) * modelIntArray4[j2 - l1];
                 anIntArray1678[l] = j + (k2 + ((anIntArray1668[k1] - k2) * k5 >> 16) << 9) / 50;
                 anIntArray1679[l] = k + (k3 + ((vertexBY[k1] - k3) * k5 >> 16) << 9) / 50;
-                anIntArray1680[l++] = k4 + ((triangle_hsl_c[i] - k4) * k5 >> 16);
+                anIntArray1680[l++] = k4 + ((triangleHslC[i] - k4) * k5 >> 16);
             }
             if(i2 >= 50)
             {
                 int l5 = (50 - l1) * modelIntArray4[i2 - l1];
                 anIntArray1678[l] = j + (k2 + ((anIntArray1668[j1] - k2) * l5 >> 16) << 9) / 50;
                 anIntArray1679[l] = k + (k3 + ((vertexBY[j1] - k3) * l5 >> 16) << 9) / 50;
-                anIntArray1680[l++] = k4 + ((triangle_hsl_b[i] - k4) * l5 >> 16);
+                anIntArray1680[l++] = k4 + ((triangleHslB[i] - k4) * l5 >> 16);
             }
         }
         if(i2 >= 50)
         {
             anIntArray1678[l] = anIntArray1665[j1];
             anIntArray1679[l] = anIntArray1666[j1];
-            anIntArray1680[l++] = triangle_hsl_b[i];
+            anIntArray1680[l++] = triangleHslB[i];
         } else
         {
             int l2 = anIntArray1668[j1];
             int l3 = vertexBY[j1];
-            int l4 = triangle_hsl_b[i];
+            int l4 = triangleHslB[i];
             if(l1 >= 50)
             {
                 int i6 = (50 - i2) * modelIntArray4[l1 - i2];
                 anIntArray1678[l] = j + (l2 + ((anIntArray1668[i1] - l2) * i6 >> 16) << 9) / 50;
                 anIntArray1679[l] = k + (l3 + ((vertexBY[i1] - l3) * i6 >> 16) << 9) / 50;
-                anIntArray1680[l++] = l4 + ((triangle_hsl_a[i] - l4) * i6 >> 16);
+                anIntArray1680[l++] = l4 + ((triangleHslA[i] - l4) * i6 >> 16);
             }
             if(j2 >= 50)
             {
                 int j6 = (50 - i2) * modelIntArray4[j2 - i2];
                 anIntArray1678[l] = j + (l2 + ((anIntArray1668[k1] - l2) * j6 >> 16) << 9) / 50;
                 anIntArray1679[l] = k + (l3 + ((vertexBY[k1] - l3) * j6 >> 16) << 9) / 50;
-                anIntArray1680[l++] = l4 + ((triangle_hsl_c[i] - l4) * j6 >> 16);
+                anIntArray1680[l++] = l4 + ((triangleHslC[i] - l4) * j6 >> 16);
             }
         }
         if(j2 >= 50)
         {
             anIntArray1678[l] = anIntArray1665[k1];
             anIntArray1679[l] = anIntArray1666[k1];
-            anIntArray1680[l++] = triangle_hsl_c[i];
+            anIntArray1680[l++] = triangleHslC[i];
         } else
         {
             int i3 = anIntArray1668[k1];
             int i4 = vertexBY[k1];
-            int i5 = triangle_hsl_c[i];
+            int i5 = triangleHslC[i];
             if(i2 >= 50)
             {
                 int k6 = (50 - j2) * modelIntArray4[i2 - j2];
                 anIntArray1678[l] = j + (i3 + ((anIntArray1668[j1] - i3) * k6 >> 16) << 9) / 50;
                 anIntArray1679[l] = k + (i4 + ((vertexBY[j1] - i4) * k6 >> 16) << 9) / 50;
-                anIntArray1680[l++] = i5 + ((triangle_hsl_b[i] - i5) * k6 >> 16);
+                anIntArray1680[l++] = i5 + ((triangleHslB[i] - i5) * k6 >> 16);
             }
             if(l1 >= 50)
             {
                 int l6 = (50 - j2) * modelIntArray4[l1 - j2];
                 anIntArray1678[l] = j + (i3 + ((anIntArray1668[i1] - i3) * l6 >> 16) << 9) / 50;
                 anIntArray1679[l] = k + (i4 + ((vertexBY[i1] - i4) * l6 >> 16) << 9) / 50;
-                anIntArray1680[l++] = i5 + ((triangle_hsl_a[i] - i5) * l6 >> 16);
+                anIntArray1680[l++] = i5 + ((triangleHslA[i] - i5) * l6 >> 16);
             }
         }
         int j3 = anIntArray1678[0];
@@ -2353,45 +2354,45 @@ public final class Model extends Animable {
             ThreeDimensionalDrawingArea.aBoolean1462 = false;
             if(l == 3)
             {
-                if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewport_r_x || j4 > DrawingArea.viewport_r_x || j5 > DrawingArea.viewport_r_x)
+                if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewportRx || j4 > DrawingArea.viewportRx || j5 > DrawingArea.viewportRx)
                     ThreeDimensionalDrawingArea.aBoolean1462 = true;
                 int l7;
-                if(triangle_draw_type == null)
+                if(triangleDrawType == null)
                     l7 = 0;
                 else
-                    l7 = triangle_draw_type[i] & 3;
+                    l7 = triangleDrawType[i] & 3;
                 if(l7 == 0)
                     ThreeDimensionalDrawingArea.drawColouredTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
                 else
                 if(l7 == 1)
-                    ThreeDimensionalDrawingArea.method376(i7, j7, k7, j3, j4, j5, modelIntArray3[triangle_hsl_a[i]]);
+                    ThreeDimensionalDrawingArea.method376(i7, j7, k7, j3, j4, j5, modelIntArray3[triangleHslA[i]]);
                 else
                 if(l7 == 2)
                 {
-                    int j8 = triangle_draw_type[i] >> 2;
-                    int k9 = tri_p_index[j8];
-                    int k10 = tri_m_index[j8];
-                    int k11 = tri_n_index[j8];
+                    int j8 = triangleDrawType[i] >> 2;
+                    int k9 = triPIndex[j8];
+                    int k10 = triMIndex[j8];
+                    int k11 = triNIndex[j8];
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[k9], anIntArray1668[k10], anIntArray1668[k11], vertexBY[k9], vertexBY[k10], vertexBY[k11], anIntArray1670[k9], anIntArray1670[k10], anIntArray1670[k11], triangleColours[i]);
                 } else
                 if(l7 == 3)
                 {
-                    int k8 = triangle_draw_type[i] >> 2;
-                    int l9 = tri_p_index[k8];
-                    int l10 = tri_m_index[k8];
-                    int l11 = tri_n_index[k8];
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangle_hsl_a[i], triangle_hsl_a[i], triangle_hsl_a[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11], vertexBY[l9], vertexBY[l10], vertexBY[l11], anIntArray1670[l9], anIntArray1670[l10], anIntArray1670[l11], triangleColours[i]);
+                    int k8 = triangleDrawType[i] >> 2;
+                    int l9 = triPIndex[k8];
+                    int l10 = triMIndex[k8];
+                    int l11 = triNIndex[k8];
+                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11], vertexBY[l9], vertexBY[l10], vertexBY[l11], anIntArray1670[l9], anIntArray1670[l10], anIntArray1670[l11], triangleColours[i]);
                 }
             }
             if(l == 4)
             {
-                if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewport_r_x || j4 > DrawingArea.viewport_r_x || j5 > DrawingArea.viewport_r_x || anIntArray1678[3] < 0 || anIntArray1678[3] > DrawingArea.viewport_r_x)
+                if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewportRx || j4 > DrawingArea.viewportRx || j5 > DrawingArea.viewportRx || anIntArray1678[3] < 0 || anIntArray1678[3] > DrawingArea.viewportRx)
                     ThreeDimensionalDrawingArea.aBoolean1462 = true;
                 int i8;
-                if(triangle_draw_type == null)
+                if(triangleDrawType == null)
                     i8 = 0;
                 else
-                    i8 = triangle_draw_type[i] & 3;
+                    i8 = triangleDrawType[i] & 3;
                 if(i8 == 0)
                 {
                     ThreeDimensionalDrawingArea.drawColouredTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
@@ -2400,29 +2401,29 @@ public final class Model extends Animable {
                 }
                 if(i8 == 1)
                 {
-                    int l8 = modelIntArray3[triangle_hsl_a[i]];
+                    int l8 = modelIntArray3[triangleHslA[i]];
                     ThreeDimensionalDrawingArea.method376(i7, j7, k7, j3, j4, j5, l8);
                     ThreeDimensionalDrawingArea.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8);
                     return;
                 }
                 if(i8 == 2)
                 {
-                    int i9 = triangle_draw_type[i] >> 2;
-                    int i10 = tri_p_index[i9];
-                    int i11 = tri_m_index[i9];
-                    int i12 = tri_n_index[i9];
+                    int i9 = triangleDrawType[i] >> 2;
+                    int i10 = triPIndex[i9];
+                    int i11 = triMIndex[i9];
+                    int i12 = triNIndex[i9];
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColours[i]);
                     ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColours[i]);
                     return;
                 }
                 if(i8 == 3)
                 {
-                    int j9 = triangle_draw_type[i] >> 2;
-                    int j10 = tri_p_index[j9];
-                    int j11 = tri_m_index[j9];
-                    int j12 = tri_n_index[j9];
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangle_hsl_a[i], triangle_hsl_a[i], triangle_hsl_a[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangle_hsl_a[i], triangle_hsl_a[i], triangle_hsl_a[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
+                    int j9 = triangleDrawType[i] >> 2;
+                    int j10 = triPIndex[j9];
+                    int j11 = triMIndex[j9];
+                    int j12 = triNIndex[j9];
+                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
+                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
                 }
             }
         }
@@ -2451,45 +2452,46 @@ public final class Model extends Animable {
     public int triangleA[];
     public int triangleB[];
     public int triangleC[];
-    private int[] triangle_hsl_a;
-    private int[] triangle_hsl_b;
-    private int[] triangle_hsl_c;
-    public int triangle_draw_type[];
-    private int[] face_priority;
+    private int[] triangleHslA;
+    private int[] triangleHslB;
+    private int[] triangleHslC;
+    public int triangleDrawType[];
+    private int[] facePriority;
     private int[] triangleAlpha;
     public int triangleColours[];
+  
     private int anInt1641;
     private int texturedTriangeAmmount;
-    private int[] tri_p_index;
-    private int[] tri_m_index;
-    private int[] tri_n_index;
-    public int min_x;
-    public int max_x;
-    public int max_z;
-    public int min_z;
-    public int diagonal_2D_aboveorigin;
-    public int max_y;
-    private int diagonal_3D;
-    private int diagonal_3D_aboveorigin;
+    private int[] triPIndex;
+    private int[] triMIndex;
+    private int[] triNIndex;
+    public int minX;
+    public int maxX;
+    public int maxZ;
+    public int minZ;
+    public int diagonal2DAboveorigin;
+    public int maxY;
+    private int diagonal3D;
+    private int diagonal3DAboveorigin;
     public int anInt1654;
-    private int[] vertex_vskin;
-    private int[] triangle_tskin;
+    private int[] vertexVSkin;
+    private int[] triangleTSkin;
     public int vertexSkin[][];
     public int triangleSkin[][];
     public boolean aBoolean1659;
-    VertexNormal vertex_normal_offset[];
+    VertexNormal vertexNormalOffset[];
     private static ModelHeader[] modelHeaderCache;
     private static OnDemandFetcherParent aOnDemandFetcherParent_1662;
     private static boolean[] aBooleanArray1663 = new boolean[4096];
     private static boolean[] aBooleanArray1664 = new boolean[4096];
     private static int[] anIntArray1665 = new int[4096];
     private static int[] anIntArray1666 = new int[4096];
-    private static int[] camera_depth = new int[4096];
+    private static int[] cameraDepth = new int[4096];
     private static int[] anIntArray1668 = new int[4096];
     private static int[] vertexBY = new int[4096];
     private static int[] anIntArray1670 = new int[4096];
-    private static int[] depth_list_indices = new int[1500];
-    private static int[][] face_lists = new int[1500][512];
+    private static int[] depthListIndices = new int[1500];
+    private static int[][] faceLists = new int[1500][512];
     private static int[] anIntArray1673 = new int[12];
     private static int[][] anIntArrayArray1674 = new int[12][2000];
     private static int[] anIntArray1675 = new int[2000];

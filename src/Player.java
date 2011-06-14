@@ -274,7 +274,7 @@ public final class Player extends Entity
         Model model_2 = Model.aModel_1621;
         model_2.method464(model_1, AnimationFrame.method532(k) & AnimationFrame.method532(i1));
         if(k != -1 && i1 != -1)
-            model_2.mix_anim_frames(Animation.anims[super.animation].animationFlowControl, i1, k);
+            model_2.mixAnimationFrames(Animation.anims[super.animation].animationFlowControl, i1, k);
         else
         if(k != -1)
             model_2.applyTransform(k);

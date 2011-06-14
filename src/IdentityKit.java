@@ -58,7 +58,7 @@ public final class IdentityKit {
             return true;
         boolean is_downloaded = true;
         for(int ptr = 0; ptr < body_model_ids.length; ptr++)
-            if(!Model.is_downloaded(body_model_ids[ptr]))
+            if(!Model.isDownloaded(body_model_ids[ptr]))
                 is_downloaded = false;
 
         return is_downloaded;
@@ -91,7 +91,7 @@ public final class IdentityKit {
     {
         boolean is_downloaded = true;
         for(int ptr = 0; ptr < 5; ptr++)
-            if(head_model_ids[ptr] != -1 && !Model.is_downloaded(head_model_ids[ptr]))
+            if(head_model_ids[ptr] != -1 && !Model.isDownloaded(head_model_ids[ptr]))
                 is_downloaded = false;
 
         return is_downloaded;

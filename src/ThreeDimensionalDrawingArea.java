@@ -741,8 +741,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                     l1 = (k1 - jgx) / (i1 - l);
                 else
                     l1 = 0;
-                if(i1 > DrawingArea.viewport_r_x)
-                    i1 = DrawingArea.viewport_r_x;
+                if(i1 > DrawingArea.viewportRx)
+                    i1 = DrawingArea.viewportRx;
                 if(l < 0)
                 {
                     jgx -= l * l1;
@@ -815,8 +815,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         int i2 = (k1 - jgx) / (i1 - l);
         if(aBoolean1462)
         {
-            if(i1 > DrawingArea.viewport_r_x)
-                i1 = DrawingArea.viewport_r_x;
+            if(i1 > DrawingArea.viewportRx)
+                i1 = DrawingArea.viewportRx;
             if(l < 0)
             {
                 jgx -= l * i2;
@@ -1197,8 +1197,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         int k;//was parameter
         if(aBoolean1462)
         {
-            if(i1 > DrawingArea.viewport_r_x)
-                i1 = DrawingArea.viewport_r_x;
+            if(i1 > DrawingArea.viewportRx)
+                i1 = DrawingArea.viewportRx;
             if(l < 0)
                 l = 0;
         }
@@ -1809,8 +1809,8 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         if(aBoolean1462)
         {
             j3 = (k1 - j1) / (i1 - l);
-            if(i1 > DrawingArea.viewport_r_x)
-                i1 = DrawingArea.viewport_r_x;
+            if(i1 > DrawingArea.viewportRx)
+                i1 = DrawingArea.viewportRx;
             if(l < 0)
             {
                 j1 -= l * j3;
