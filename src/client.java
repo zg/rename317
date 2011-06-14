@@ -680,7 +680,7 @@ public class client extends RSApplet {
 
 		}
 		System.gc();
-		ThreeDimensionalDrawingArea.initialize_texture_array_pools(20);
+		ThreeDimensionalDrawingArea.initializeTextureArrayPools(20);
 		onDemandFetcher.method566();
 		int k = (anInt1069 - 6) / 8 - 1;
 		int j1 = (anInt1069 + 6) / 8 + 1;
@@ -1639,7 +1639,7 @@ public class client extends RSApplet {
 	{
 		if(!lowMem)
 		{
-			if(ThreeDimensionalDrawingArea.texture_last_used[17] >= j)
+			if(ThreeDimensionalDrawingArea.textureLastUsed[17] >= j)
 			{
 				IndexedImage indexedImage = ThreeDimensionalDrawingArea.textureImages[17];
 				int k = indexedImage.imgWidth * indexedImage.imgHeight - 1;
@@ -1651,7 +1651,7 @@ public class client extends RSApplet {
 
 				indexedImage.imgPixels = abyte3;
 				aByteArray912 = abyte0;
-				ThreeDimensionalDrawingArea.free_texture(17);
+				ThreeDimensionalDrawingArea.freeTexture(17);
 				anInt854++;
 				if(anInt854 > 1235)
 				{
@@ -1673,7 +1673,7 @@ public class client extends RSApplet {
 					stream.psize1(stream.pos - l2);
 				}
 			}
-			if(ThreeDimensionalDrawingArea.texture_last_used[24] >= j)
+			if(ThreeDimensionalDrawingArea.textureLastUsed[24] >= j)
 			{
 				IndexedImage indexedImage_1 = ThreeDimensionalDrawingArea.textureImages[24];
 				int l = indexedImage_1.imgWidth * indexedImage_1.imgHeight - 1;
@@ -1685,9 +1685,9 @@ public class client extends RSApplet {
 
 				indexedImage_1.imgPixels = abyte4;
 				aByteArray912 = abyte1;
-				ThreeDimensionalDrawingArea.free_texture(24);
+				ThreeDimensionalDrawingArea.freeTexture(24);
 			}
-			if(ThreeDimensionalDrawingArea.texture_last_used[34] >= j)
+			if(ThreeDimensionalDrawingArea.textureLastUsed[34] >= j)
 			{
 				IndexedImage indexedImage_2 = ThreeDimensionalDrawingArea.textureImages[34];
 				int i1 = indexedImage_2.imgWidth * indexedImage_2.imgHeight - 1;
@@ -1699,7 +1699,7 @@ public class client extends RSApplet {
 
 				indexedImage_2.imgPixels = abyte5;
 				aByteArray912 = abyte2;
-				ThreeDimensionalDrawingArea.free_texture(34);
+				ThreeDimensionalDrawingArea.freeTexture(34);
 			}
 		}
 	}
@@ -7044,7 +7044,7 @@ public class client extends RSApplet {
 			drawLoadingText(83, "Unpacking textures");
 			ThreeDimensionalDrawingArea.loadTextures(jagexArchive_3);
 			ThreeDimensionalDrawingArea.setBrightness(0.80000000000000004D);
-			ThreeDimensionalDrawingArea.initialize_texture_array_pools(20);
+			ThreeDimensionalDrawingArea.initializeTextureArrayPools(20);
 			drawLoadingText(86, "Unpacking config");
 			Animation.unpackConfig(jagexArchive);
 			ObjectDef.unpackConfig(jagexArchive);
@@ -9132,8 +9132,8 @@ public class client extends RSApplet {
 					int j2 = ai[l++];
 					VarBit varBit = VarBit.cache[j2];
 					int l3 = varBit.configId;
-					int i4 = varBit.least_significant_bit;
-					int j4 = varBit.most_significant_bit;
+					int i4 = varBit.leastSignificantBit;
+					int j4 = varBit.mostSignificantBit;
 					int k4 = BITFIELD_MAX_VALUE[j4 - i4];
 					k1 = session_settings[l3] >> i4 & k4;
 				}
@@ -11643,7 +11643,7 @@ public class client extends RSApplet {
 			}
 		}
 
-		int k2 = ThreeDimensionalDrawingArea.texture_get_count;
+		int k2 = ThreeDimensionalDrawingArea.textureGetCount;
 		Model.aBoolean1684 = true;
 		Model.resourceCount = 0;
 		Model.cursorXPos = super.mouseX - 4;

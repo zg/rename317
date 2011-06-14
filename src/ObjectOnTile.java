@@ -49,8 +49,8 @@ final class ObjectOnTile extends Animable {
         {
             VarBit varBit = VarBit.cache[anInt1601];
             int k = varBit.configId;
-            int l = varBit.least_significant_bit;
-            int i1 = varBit.most_significant_bit;
+            int l = varBit.leastSignificantBit;
+            int i1 = varBit.mostSignificantBit;
             int j1 = client.BITFIELD_MAX_VALUE[i1 - l];
             i = clientInstance.session_settings[k] >> l & j1;
         } else

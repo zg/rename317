@@ -12,11 +12,11 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
         COSINE = null;
         lineOffsets = null;
         textureImages = null;
-        texture_is_transparent = null;
-        texture_replacement_colour = null;
-        texture_pixel_array_pool = null;
-        texture_pixel_cache = null;
-        texture_last_used = null;
+        textureIsTransparent = null;
+        textureReplacementColour = null;
+        texturePixelArrayPool = null;
+        texturePixelCache = null;
+        textureLastUsed = null;
         HSL2RGB = null;
         texturePalettes = null;
     }
@@ -43,23 +43,23 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     public static void nullInit()
     {
-        texture_pixel_array_pool = null;
+        texturePixelArrayPool = null;
         for(int j = 0; j < 50; j++)
-            texture_pixel_cache[j] = null;
+            texturePixelCache[j] = null;
 
     }
 
-    public static void initialize_texture_array_pools(int tex_pool_size)
+    public static void initializeTextureArrayPools(int texturePoolSize)
     {
-        if(texture_pixel_array_pool == null)
+        if(texturePixelArrayPool == null)
         {
-            texture_pixel_array_pool_ptr = tex_pool_size;//was parameter
+            texturePixelArrayPoolPointer = texturePoolSize;//was parameter
             if(lowMem)
-                texture_pixel_array_pool = new int[texture_pixel_array_pool_ptr][16384];
+                texturePixelArrayPool = new int[texturePixelArrayPoolPointer][16384];
             else
-                texture_pixel_array_pool = new int[texture_pixel_array_pool_ptr][0x10000];
+                texturePixelArrayPool = new int[texturePixelArrayPoolPointer][0x10000];
             for(int k = 0; k < 50; k++)
-                texture_pixel_cache[k] = null;
+                texturePixelCache[k] = null;
 
         }
     }
@@ -81,77 +81,77 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
 
     }
 
-    public static int calculate_texture_colour(int tex_id)
+    public static int calculateTextureColour(int textureID)
     {
-        if(texture_replacement_colour[tex_id] != 0)
-            return texture_replacement_colour[tex_id];
+        if(textureReplacementColour[textureID] != 0)
+            return textureReplacementColour[textureID];
         int red = 0;
         int green = 0;
         int blue = 0;
-        int colour_count = texturePalettes[tex_id].length;
-        for(int colour_ptr = 0; colour_ptr < colour_count; colour_ptr++)
+        int colourCount = texturePalettes[textureID].length;
+        for(int colourPointer = 0; colourPointer < colourCount; colourPointer++)
         {
-            red += texturePalettes[tex_id][colour_ptr] >> 16 & 0xff;
-            green += texturePalettes[tex_id][colour_ptr] >> 8 & 0xff;
-            blue += texturePalettes[tex_id][colour_ptr] & 0xff;
+            red += texturePalettes[textureID][colourPointer] >> 16 & 0xff;
+            green += texturePalettes[textureID][colourPointer] >> 8 & 0xff;
+            blue += texturePalettes[textureID][colourPointer] & 0xff;
         }
 
-        int rgb = (red / colour_count << 16) + (green / colour_count << 8) + blue / colour_count;
+        int rgb = (red / colourCount << 16) + (green / colourCount << 8) + blue / colourCount;
         rgb = applyBrightnessToRGB(rgb, 1.3999999999999999D);
         if(rgb == 0)
             rgb = 1;
-        texture_replacement_colour[tex_id] = rgb;
+        textureReplacementColour[textureID] = rgb;
         return rgb;
     }
 
-    public static void free_texture(int texID)
+    public static void freeTexture(int texID)
     {
-        if(texture_pixel_cache[texID] == null)
+        if(texturePixelCache[texID] == null)
             return;
-        texture_pixel_array_pool[texture_pixel_array_pool_ptr++] = texture_pixel_cache[texID];
-        texture_pixel_cache[texID] = null;
+        texturePixelArrayPool[texturePixelArrayPoolPointer++] = texturePixelCache[texID];
+        texturePixelCache[texID] = null;
     }
 
-    private static int[] getTexturePixels(int tex_id)
+    private static int[] getTexturePixels(int textureID)
     {
-        texture_last_used[tex_id] = texture_get_count++;
-        if(texture_pixel_cache[tex_id] != null)
-            return texture_pixel_cache[tex_id];
-        int texture_pixel_data[];
+        textureLastUsed[textureID] = textureGetCount++;
+        if(texturePixelCache[textureID] != null)
+            return texturePixelCache[textureID];
+        int texturePixelData[];
         //Start of mem management code
-        if(texture_pixel_array_pool_ptr > 0)
+        if(texturePixelArrayPoolPointer > 0)
         {	//Freed texture data arrays available
-            texture_pixel_data = texture_pixel_array_pool[--texture_pixel_array_pool_ptr];
-            texture_pixel_array_pool[texture_pixel_array_pool_ptr] = null;
+            texturePixelData = texturePixelArrayPool[--texturePixelArrayPoolPointer];
+            texturePixelArrayPool[texturePixelArrayPoolPointer] = null;
         } else
         {   //No freed texture data arrays available, recycle least used texture's array
-            int lowest_usage_count = 0;
-            int cached_texture_to_use = -1;
+            int lowestUsageCount = 0;
+            int cachedTextureToUse = -1;
             for(int l = 0; l < loadedTextureCount; l++)
-                if(texture_pixel_cache[l] != null && (texture_last_used[l] < lowest_usage_count || cached_texture_to_use == -1))
+                if(texturePixelCache[l] != null && (textureLastUsed[l] < lowestUsageCount || cachedTextureToUse == -1))
                 {
-                    lowest_usage_count = texture_last_used[l];
-                    cached_texture_to_use = l;
+                    lowestUsageCount = textureLastUsed[l];
+                    cachedTextureToUse = l;
                 }
 
-            texture_pixel_data = texture_pixel_cache[cached_texture_to_use];
-            texture_pixel_cache[cached_texture_to_use] = null;
+            texturePixelData = texturePixelCache[cachedTextureToUse];
+            texturePixelCache[cachedTextureToUse] = null;
         }
-        texture_pixel_cache[tex_id] = texture_pixel_data;
+        texturePixelCache[textureID] = texturePixelData;
         //End of mem management code
-        IndexedImage indexedImage = textureImages[tex_id];
-        int ai1[] = texturePalettes[tex_id];
+        IndexedImage indexedImage = textureImages[textureID];
+        int ai1[] = texturePalettes[textureID];
         if(lowMem)
         {
-            texture_is_transparent[tex_id] = false;
+            textureIsTransparent[textureID] = false;
             for(int i1 = 0; i1 < 4096; i1++)
             {
-                int i2 = texture_pixel_data[i1] = ai1[indexedImage.imgPixels[i1]] & 0xf8f8ff;
+                int i2 = texturePixelData[i1] = ai1[indexedImage.imgPixels[i1]] & 0xf8f8ff;
                 if(i2 == 0)
-                    texture_is_transparent[tex_id] = true;
-                texture_pixel_data[4096 + i1] = i2 - (i2 >>> 3) & 0xf8f8ff;
-                texture_pixel_data[8192 + i1] = i2 - (i2 >>> 2) & 0xf8f8ff;
-                texture_pixel_data[12288 + i1] = i2 - (i2 >>> 2) - (i2 >>> 3) & 0xf8f8ff;
+                    textureIsTransparent[textureID] = true;
+                texturePixelData[4096 + i1] = i2 - (i2 >>> 3) & 0xf8f8ff;
+                texturePixelData[8192 + i1] = i2 - (i2 >>> 2) & 0xf8f8ff;
+                texturePixelData[12288 + i1] = i2 - (i2 >>> 2) - (i2 >>> 3) & 0xf8f8ff;
             }
 
         } else
@@ -161,30 +161,30 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
                 for(int j1 = 0; j1 < 128; j1++)
                 {
                     for(int j2 = 0; j2 < 128; j2++)
-                        texture_pixel_data[j2 + (j1 << 7)] = ai1[indexedImage.imgPixels[(j2 >> 1) + ((j1 >> 1) << 6)]];
+                        texturePixelData[j2 + (j1 << 7)] = ai1[indexedImage.imgPixels[(j2 >> 1) + ((j1 >> 1) << 6)]];
 
                 }
 
             } else
             {
                 for(int k1 = 0; k1 < 16384; k1++)
-                    texture_pixel_data[k1] = ai1[indexedImage.imgPixels[k1]];
+                    texturePixelData[k1] = ai1[indexedImage.imgPixels[k1]];
 
             }
-            texture_is_transparent[tex_id] = false;
+            textureIsTransparent[textureID] = false;
             for(int l1 = 0; l1 < 16384; l1++)
             {
-                texture_pixel_data[l1] &= 0xf8f8ff;
-                int k2 = texture_pixel_data[l1];
+                texturePixelData[l1] &= 0xf8f8ff;
+                int k2 = texturePixelData[l1];
                 if(k2 == 0)
-                    texture_is_transparent[tex_id] = true;
-                texture_pixel_data[16384 + l1] = k2 - (k2 >>> 3) & 0xf8f8ff;
-                texture_pixel_data[32768 + l1] = k2 - (k2 >>> 2) & 0xf8f8ff;
-                texture_pixel_data[49152 + l1] = k2 - (k2 >>> 2) - (k2 >>> 3) & 0xf8f8ff;
+                    textureIsTransparent[textureID] = true;
+                texturePixelData[16384 + l1] = k2 - (k2 >>> 3) & 0xf8f8ff;
+                texturePixelData[32768 + l1] = k2 - (k2 >>> 2) & 0xf8f8ff;
+                texturePixelData[49152 + l1] = k2 - (k2 >>> 2) - (k2 >>> 3) & 0xf8f8ff;
             }
 
         }
-        return texture_pixel_data;
+        return texturePixelData;
     }
 
     public static void setBrightness(double brightness)
@@ -274,7 +274,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             }
 
         for(int i1 = 0; i1 < 50; i1++)
-            free_texture(i1);
+            freeTexture(i1);
 
     }
 
@@ -1240,7 +1240,7 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
             int l3, int i4, int j4, int k4)
     {
         int ai[] = getTexturePixels(k4);
-        aBoolean1463 = !texture_is_transparent[k4];
+        aBoolean1463 = !textureIsTransparent[k4];
         k2 = j2 - k2;
         j3 = i3 - j3;
         i4 = l3 - i4;
@@ -2186,13 +2186,13 @@ final class ThreeDimensionalDrawingArea extends DrawingArea {
     public static int lineOffsets[];
     private static int loadedTextureCount;
     public static IndexedImage textureImages[] = new IndexedImage[50];
-    private static boolean[] texture_is_transparent = new boolean[50];
-    private static int[] texture_replacement_colour = new int[50];
-    private static int texture_pixel_array_pool_ptr;
-    private static int[][] texture_pixel_array_pool;
-    private static int[][] texture_pixel_cache = new int[50][];
-    public static int texture_last_used[] = new int[50];
-    public static int texture_get_count;
+    private static boolean[] textureIsTransparent = new boolean[50];
+    private static int[] textureReplacementColour = new int[50];
+    private static int texturePixelArrayPoolPointer;
+    private static int[][] texturePixelArrayPool;
+    private static int[][] texturePixelCache = new int[50][];
+    public static int textureLastUsed[] = new int[50];
+    public static int textureGetCount;
     public static int HSL2RGB[] = new int[0x10000];
     private static int[][] texturePalettes = new int[50][];
 

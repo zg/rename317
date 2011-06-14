@@ -1,7 +1,3 @@
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
-
 public final class VarBit {
 
     public static void unpackConfig(JagexArchive jagexArchive)
@@ -33,8 +29,8 @@ public final class VarBit {
             if(j == 1)
             {
                 configId = stream.g2();
-                least_significant_bit = stream.g1();
-                most_significant_bit = stream.g1();
+                leastSignificantBit = stream.g1();
+                mostSignificantBit = stream.g1();
             } else
             if(j == 10)
                 stream.gstr();
@@ -59,7 +55,7 @@ public final class VarBit {
 
     public static VarBit cache[];
     public int configId;
-    public int least_significant_bit;
-    public int most_significant_bit;
+    public int leastSignificantBit;
+    public int mostSignificantBit;
     private boolean aBoolean651;
 }
