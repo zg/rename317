@@ -86,7 +86,7 @@ public final class Player extends Entity
     public void updatePlayer(Packet stream)
     {
         stream.pos = 0;
-        anInt1702 = stream.g1();
+        playerGender = stream.g1();
         headIcon = stream.g1();
         desc = null;
         team = 0;
@@ -165,7 +165,7 @@ public final class Player extends Entity
         }
 
         aLong1718 <<= 1;
-        aLong1718 += anInt1702;
+        aLong1718 += playerGender;
     }
 
     private Model method452()
@@ -218,7 +218,7 @@ public final class Player extends Entity
                     k2 = j1;
                 if(k2 >= 256 && k2 < 512 && !IdentityKit.cache[k2 - 256].is_body_downloaded())
                     flag = true;
-                if(k2 >= 512 && !ItemDef.forID(k2 - 512).method195(anInt1702))
+                if(k2 >= 512 && !ItemDef.forID(k2 - 512).method195(playerGender))
                     flag = true;
             }
 
@@ -249,7 +249,7 @@ public final class Player extends Entity
                 }
                 if(i3 >= 512)
                 {
-                    Model model_4 = ItemDef.forID(i3 - 512).method196(anInt1702);
+                    Model model_4 = ItemDef.forID(i3 - 512).method196(playerGender);
                     if(model_4 != null)
                         aclass30_sub2_sub4_sub6s[j2++] = model_4;
                 }
@@ -302,7 +302,7 @@ public final class Player extends Entity
             int j = appearance_models[i];
             if(j >= 256 && j < 512 && !IdentityKit.cache[j - 256].is_head_downloaded())
                 is_downloaded = true;
-            if(j >= 512 && !ItemDef.forID(j - 512).is_downloaded(anInt1702))
+            if(j >= 512 && !ItemDef.forID(j - 512).is_downloaded(playerGender))
                 is_downloaded = true;
         }
 
@@ -321,7 +321,7 @@ public final class Player extends Entity
             }
             if(model_id >= 512)
             {
-                Model item_model = ItemDef.forID(model_id - 512).get_head_model(anInt1702);
+                Model item_model = ItemDef.forID(model_id - 512).get_head_model(playerGender);
                 if(item_model != null)
                     sub_models[model_ptr++] = item_model;
             }
@@ -354,7 +354,7 @@ public final class Player extends Entity
     boolean aBoolean1699;
     final int[] appearance_colours;
     public int team;
-    private int anInt1702;
+    private int playerGender;//gender
     public String name;
     static MRUNodes mruNodes = new MRUNodes(260);
     public int combatLevel;
