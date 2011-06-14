@@ -534,7 +534,7 @@ label0:
                         {
                             for(int k5 = 0; k5 <= l4; k5++)
                             {
-                                int l5 = model.diagonal_2D_aboveorigin / 4;
+                                int l5 = model.diagonal2DAboveorigin / 4;
                                 if(l5 > 30)
                                     l5 = 30;
                                 if(l5 > object_shadow_data[k][l + j5][i + k5])
