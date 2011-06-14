@@ -148,9 +148,9 @@ public class Entity extends Animable {
     public String textSpoken;
     public int height;
     public int turnDirection;
-    int anInt1511;
-    int anInt1512;
-    int anInt1513;
+    int anInt1511;//idle?
+    int anInt1512;//idleTurn?
+    int anInt1513;//
     final int[] hitArray;
     final int[] hitMarkTypes;
     final int[] hitsLoopCycle;
@@ -190,8 +190,8 @@ public class Entity extends Animable {
     public int boundExtentY;
     int anInt1552;
     final boolean[] pathRun;
-    int anInt1554;
-    int anInt1555;
-    int anInt1556;
-    int anInt1557;
+    int anInt1554;//walk?
+    int anInt1555;//turn180?
+    int anInt1556;//turn90clockwise?
+    int anInt1557;//turn90counterclockwise?
 }
