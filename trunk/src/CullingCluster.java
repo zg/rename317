@@ -1,8 +1,3 @@
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
-
-//eah...
 final class CullingCluster
 {
 
@@ -10,22 +5,22 @@ final class CullingCluster
     {
     }
     //map culling
-    int tile_start_x;
-    int tile_end_x;
-    int tile_start_y;
-    int tile_end_y;
-    int search_mask;
-    int world_start_x;
-    int world_end_x;
-    int world_start_y;
-    int world_end_y;
-    int world_start_z;
-    int world_end_z;
-    int tile_distance_enum;
-    int world_distance_from_camera_start_x;
-    int world_distance_from_camera_end_x;
-    int world_distance_from_camera_start_y;
-    int world_distance_from_camera_end_y;
-    int world_distance_from_camera_start_z;
-    int world_distance_from_camera_end_z;
+    int tileStartX;
+    int tileEndX;
+    int tileStartY;
+    int tileEndY;
+    int searchMask;
+    int worldStartX;
+    int worldEndX;
+    int worldStartY;
+    int worldEndY;
+    int worldStartZ;
+    int worldEndZ;
+    int tileDistanceEnum;
+    int worldDistanceFromCameraStartX;
+    int worldDistanceFromCameraEndX;
+    int worldDistanceFromCameraStartY;
+    int worldDistanceFromCameraEndY;
+    int worldDistanceFromCameraStartZ;
+    int worldDistanceFromCameraEndZ;
 }
