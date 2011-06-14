@@ -256,9 +256,9 @@ public final class RSInterface
         if(type == 1)
             model = Model.getModel(j);
         if(type == 2)
-            model = EntityDef.forID(j).get_head_model();
+            model = EntityDef.forID(j).getHeadModel();
         if(type == 3)
-            model = client.session_player.get_head_model();
+            model = client.session_player.getHeadModel();
         if(type == 4)
             model = ItemDef.forID(j).get_inventory_model(50);
         if(type == 5)

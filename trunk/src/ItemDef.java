@@ -14,7 +14,7 @@ public final class ItemDef
         stream = null;
     }
 
-    public boolean is_downloaded(int j)
+    public boolean isDownloaded(int j)
     {
         int k = anInt175;
         int l = anInt166;
