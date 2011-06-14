@@ -230,10 +230,10 @@ public final class Model extends Animable {
 		int k4 = 0;
 		int l4 = 0;
 		int i5 = 0;
-		int v = 0;
-		int hb = 0;
-		int P = 0;
-		byte G = 0;
+		//int v = 0;//never used
+		//int hb = 0;//never used
+		//int P = 0;//never used
+		//byte G = 0;//never used
 		byte[] x = null;
 		byte[] O = null;
 		byte[] J = null;
@@ -308,9 +308,9 @@ public final class Model extends Animable {
 		k5 += l4;
 		int k10 = k5;
 		k5 += l4 + i5 * 2;
-		v = numVertices;
-		hb = numTriangles;
-		P = numTexTriangles;
+		//v = numVertices;
+		//hb = numTriangles;
+		//P = numTexTriangles;
 		int[] vertexX2 = new int[numVertices];
 		int[] vertexY2 = new int[numVertices];
 		int[] vertexZ2 = new int[numVertices];
@@ -333,7 +333,7 @@ public final class Model extends Animable {
 		if(i2 == 255)
 			facePriority = new int[numTriangles];
 		else
-			G = (byte)i2;
+			{}//G = (byte)i2;
 		if(j2 == 1)
 			triangleAlpha = new int[numTriangles];
 		if(k2 == 1)

@@ -24,7 +24,7 @@ public final class Flo {
         do
         {
             int i = stream.g1();
-            boolean dummy;
+            
             if(i == 0)
                 return;
             else
@@ -37,7 +37,7 @@ public final class Flo {
                 texture = stream.g1();
             else
             if(i == 3)
-                dummy = true;
+            {}
             else
             if(i == 5)
                 occlude = false;

@@ -1,9 +1,5 @@
  import java.util.zip.GZIPInputStream;
-import java.io.OutputStream;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
 import java.io.*;
-import java.io.IOException;
 
 public class JavaUncompress{
 

@@ -30,7 +30,7 @@ public final class SettingUsagePointers {
             int j = stream.g1();
             if(j == 0)
                 return;
-            int dummy;
+            //int dummy;
             if(j == 1)
                  stream.g1();
             else
@@ -41,13 +41,13 @@ public final class SettingUsagePointers {
                 anIntArray703[anInt702++] = i;
             else
             if(j == 4)
-                dummy = 2;
+                {}//dummy = 2;
             else
             if(j == 5)
                 usage = stream.g2();
             else
             if(j == 6)
-                dummy = 2;
+                {}//dummy = 2;
             else
             if(j == 7)
                 stream.g4();
@@ -65,7 +65,7 @@ public final class SettingUsagePointers {
                 stream.g4();
             else
             if(j == 13)
-                dummy = 2;
+                {}//dummy = 2;
             else
                 System.out.println("Error unrecognised config code: " + j);
         } while(true);

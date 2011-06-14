@@ -949,7 +949,7 @@ label0:
         yCameraPosition = yCampos;
         xCameraPositionTile = xCampos / 128;
         yCameraPositionTile = yCampos / 128;
-        this.plane = plane;
+        SceneGraph.plane = plane;
         anInt449 = xCameraPositionTile - 25;
         if(anInt449 < 0)
             anInt449 = 0;

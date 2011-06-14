@@ -29,7 +29,8 @@ final class BZIP2Decompressor
         }
     }
 
-    private static void method226(BZ2Entry BZ2Entry)
+    @SuppressWarnings("static-access")
+	private static void method226(BZ2Entry BZ2Entry)
     {
         byte byte4 = BZ2Entry.aByte573;
         int i = BZ2Entry.anInt574;
@@ -156,7 +157,8 @@ label0:
         BZ2Entry.anInt570 = j1;
     }
 
-    private static void method227(BZ2Entry BZ2Entry)
+    @SuppressWarnings("static-access")
+	private static void method227(BZ2Entry BZ2Entry)
     {
         int k8 = 0;
         int ai[] = null;
@@ -283,7 +285,7 @@ label0:
             }
 
             int l4 = BZ2Entry.nInUse + 1;
-            int l5 = 0x186a0 * BZ2Entry.anInt578;
+            //int l5 = 0x186a0 * BZ2Entry.anInt578;//never used
             int i5 = -1;
             int j5 = 0;
             for(int i2 = 0; i2 <= 255; i2++)
