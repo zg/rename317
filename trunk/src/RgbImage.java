@@ -4,9 +4,9 @@
 
 import java.awt.*;
 import java.awt.image.PixelGrabber;
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.ImageIO;
+//import java.awt.image.*;
+//import java.io.*;
+//import javax.imageio.ImageIO;
 
 public final class RgbImage extends DrawingArea {
 
