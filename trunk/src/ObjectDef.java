@@ -160,8 +160,8 @@ stream = null;
         {
             VarBit varBit = VarBit.cache[configId_1];
             int j = varBit.configId;
-            int k = varBit.least_significant_bit;
-            int l = varBit.most_significant_bit;
+            int k = varBit.leastSignificantBit;
+            int l = varBit.mostSignificantBit;
             int i1 = client.BITFIELD_MAX_VALUE[l - k];
             i = clientInstance.session_settings[j] >> k & i1;
         } else

@@ -9,12 +9,12 @@ public final class Tile extends Node {
     {
         entities = new Object5[5];
         anIntArray1319 = new int[5];
-        anInt1310 = tile_z = i;
+        anInt1310 = tileZ = i;
         anInt1308 = j;
         anInt1309 = k;
     }
 
-    int tile_z;
+    int tileZ;
     final int anInt1308;
     final int anInt1309;
     final int anInt1310;
@@ -23,7 +23,7 @@ public final class Tile extends Node {
     public Object1 obj1;
     public Object2 obj2;
     public Object3 obj3;
-    public GroundItemTile obj4;
+    public GroundItemTile groundItemTile;
     int entity_count;
     public final Object5[] entities;
     final int[] anIntArray1319;
@@ -36,5 +36,5 @@ public final class Tile extends Node {
     int anInt1326;
     int anInt1327;
     int anInt1328;
-    public Tile tile_below0;
+    public Tile tileBelow0;
 }

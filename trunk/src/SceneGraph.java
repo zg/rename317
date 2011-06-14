@@ -82,7 +82,7 @@ final class SceneGraph {
             Tile tile = tileArray[_z][x][y] = tileArray[_z + 1][x][y];
             if(tile != null)
             {
-                tile.tile_z--;
+                tile.tileZ--;
                 for(int ptr = 0; ptr < tile.entity_count; ptr++)
                 {
                     Object5 world_entity = tile.entities[ptr];
@@ -94,7 +94,7 @@ final class SceneGraph {
         }
         if(tileArray[0][x][y] == null)
             tileArray[0][x][y] = new Tile(0, x, y);
-        tileArray[0][x][y].tile_below0 = level0_tile;
+        tileArray[0][x][y].tileBelow0 = level0_tile;
         tileArray[3][x][y] = null;
     }
 
@@ -201,7 +201,7 @@ final class SceneGraph {
         object4.anInt52 = j1;
         if(tileArray[l][i][i1] == null)
             tileArray[l][i][i1] = new Tile(l, i, i1);
-        tileArray[l][i][i1].obj4 = object4;
+        tileArray[l][i][i1].groundItemTile = object4;
     }
 
     public void addObject1(int i, Animable class30_sub2_sub4, int j, int k, byte byte0, int l,
@@ -466,7 +466,7 @@ final class SceneGraph {
         Tile class30_sub3 = tileArray[i][j][k];
         if(class30_sub3 != null)
         {
-            class30_sub3.obj4 = null;
+            class30_sub3.groundItemTile = null;
         }
     }
 
@@ -1118,7 +1118,7 @@ label0:
             } while(!TILE.aBoolean1323);
             int X = TILE.anInt1308;
             int Y = TILE.anInt1309;
-            int k = TILE.tile_z;
+            int k = TILE.tileZ;
             int l = TILE.anInt1310;
             Tile aclass30_sub3[][] = tileArray[k];
             if(TILE.aBoolean1322)
@@ -1160,9 +1160,9 @@ label0:
                     flag = true;
                 }
                 TILE.aBoolean1322 = false;
-                if(TILE.tile_below0 != null)
+                if(TILE.tileBelow0 != null)
                 {
-                    Tile class30_sub3_7 = TILE.tile_below0;
+                    Tile class30_sub3_7 = TILE.tileBelow0;
                     if(class30_sub3_7.myPlainTile != null)
                     {
                         if(!method320(0, X, Y))
@@ -1288,7 +1288,7 @@ label0:
                     Object3 class49 = TILE.obj3;
                     if(class49 != null)
                         class49.aClass30_Sub2_Sub4_814.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class49.X3D - xCameraPosition, class49.Z3D - zCameraPosition, class49.Y3D - yCameraPosition, class49.uid);
-                    GroundItemTile object4_1 = TILE.obj4;
+                    GroundItemTile object4_1 = TILE.groundItemTile;
                     if(object4_1 != null && object4_1.anInt52 == 0)
                     {
                         if(object4_1.secondGroundItem != null)
@@ -1482,7 +1482,7 @@ label0:
             }
             TILE.aBoolean1323 = false;
             anInt446--;
-            GroundItemTile object4 = TILE.obj4;
+            GroundItemTile object4 = TILE.groundItemTile;
             if(object4 != null && object4.anInt52 != 0)
             {
                 if(object4.secondGroundItem != null)
