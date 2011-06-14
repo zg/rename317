@@ -5,11 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import java.util.Arrays;
-import java.io.File;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+//import javax.swing.plaf.metal.MetalLookAndFeel;
+//import java.util.Arrays;
+//import java.io.File;
+//import javax.imageio.ImageIO;
+//import java.awt.image.BufferedImage;
 
 public class SwingUI extends client implements ActionListener {
 

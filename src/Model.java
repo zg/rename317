@@ -157,7 +157,7 @@ public final class Model extends Animable {
             }
             if(i4 == 2)
             {
-                j2 = j2;
+                //j2 = j2;
                 l2 = j3;
                 j3 = class30_sub2_sub2.gsmart() + k3;
                 k3 = j3;
@@ -168,7 +168,7 @@ public final class Model extends Animable {
             if(i4 == 3)
             {
                 j2 = j3;
-                l2 = l2;
+                //l2 = l2;
                 j3 = class30_sub2_sub2.gsmart() + k3;
                 k3 = j3;
                 triangleA[l3] = j2;
@@ -754,7 +754,7 @@ public final class Model extends Animable {
             }
             if(i4 == 2)
             {
-                triA = triA;
+                //triA = triA;
                 triB = triC;
                 triC = stream.gsmart() + oldTriX;
                 oldTriX = triC;
@@ -765,7 +765,7 @@ public final class Model extends Animable {
             if(i4 == 3)
             {
                 triA = triC;
-                triB = triB;
+                //triB = triB;
                 triC = stream.gsmart() + oldTriX;
                 oldTriX = triC;
                 triangleA[l3] = triA;
