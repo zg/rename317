@@ -1966,8 +1966,8 @@ public final class Model extends Animable {
                 k4 /= i3;
                 i5 /= k5;
             }
-            int i6 = anInt1685 - ThreeDimensionalDrawingArea.xMidPos;
-            int k6 = anInt1686 - ThreeDimensionalDrawingArea.yMidPos;
+            int i6 = cursorXPos - ThreeDimensionalDrawingArea.xMidPos;
+            int k6 = cursorYPos - ThreeDimensionalDrawingArea.yMidPos;
             if(i6 > k3 && i6 < l3 && k6 > i5 && k6 < k4)
                 if(aBoolean1659)
                     resourceIDTAG[resourceCount++] = i2;
@@ -2051,7 +2051,7 @@ public final class Model extends Animable {
                     faceLists[j5][depthListIndices[j5]++] = k;
                 } else
                 {
-                    if(flag1 && method486(anInt1685, anInt1686, anIntArray1666[l], anIntArray1666[k1], anIntArray1666[j2], i3, l3, k4))
+                    if(flag1 && method486(cursorXPos, cursorYPos, anIntArray1666[l], anIntArray1666[k1], anIntArray1666[j2], i3, l3, k4))
                     {
                         resourceIDTAG[resourceCount++] = i;
                         flag1 = false;
@@ -2504,8 +2504,8 @@ public final class Model extends Animable {
     private static int vertexYModifier;
     private static int vertexZModifier;
     public static boolean aBoolean1684;
-    public static int anInt1685;
-    public static int anInt1686;
+    public static int cursorXPos;//1685
+    public static int cursorYPos;//1686
     public static int resourceCount;
     public static final int[] resourceIDTAG = new int[1000];
     public static int SINE[];

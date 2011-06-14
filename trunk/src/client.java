@@ -11646,8 +11646,8 @@ public class client extends RSApplet {
 		int k2 = ThreeDimensionalDrawingArea.texture_get_count;
 		Model.aBoolean1684 = true;
 		Model.resourceCount = 0;
-		Model.anInt1685 = super.mouseX - 4;
-		Model.anInt1686 = super.mouseY - 4;
+		Model.cursorXPos = super.mouseX - 4;
+		Model.cursorYPos = super.mouseY - 4;
 		DrawingArea.reset_image();
 		//xxx disables graphics            if(graphicsEnabled){
 		sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
