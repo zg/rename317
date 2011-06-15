@@ -6,7 +6,6 @@ final class SceneGraph {
         int length = 104;//was parameter
         int width = 104;//was parameter
         int height = 4;//was parameter
-        aBoolean434 = true;
         interactableObjectCache = new InteractableObject[5000];
         anIntArray486 = new int[10000];
         anIntArray487 = new int[10000];
@@ -31,12 +30,12 @@ final class SceneGraph {
 
     public void initToNull()
     {
-        for(int j = 0; j < zMapSize; j++)
+        for(int z = 0; z < zMapSize; z++)
         {
-            for(int k = 0; k < xMapSize; k++)
+            for(int x = 0; x < xMapSize; x++)
             {
-                for(int i1 = 0; i1 < yMapSize; i1++)
-                    tileArray[j][k][i1] = null;
+                for(int y = 0; y < yMapSize; y++)
+                    tileArray[z][x][y] = null;
 
             }
 
@@ -58,14 +57,14 @@ final class SceneGraph {
 
     }
 
-    public void resetTilesHL(int i)
+    public void resetTilesHL(int z)
     {
-        anInt442 = i;
-        for(int k = 0; k < xMapSize; k++)
+        anInt442 = z;
+        for(int x = 0; x < xMapSize; x++)
         {
-            for(int l = 0; l < yMapSize; l++)
-                if(tileArray[i][k][l] == null)
-                    tileArray[i][k][l] = new Tile(i, k, l);
+            for(int y = 0; y < yMapSize; y++)
+                if(tileArray[z][x][y] == null)
+                    tileArray[z][x][y] = new Tile(z, x, y);
 
         }
 
@@ -115,8 +114,8 @@ final class SceneGraph {
 
     public void setTileLogicHeight(int z, int x, int y, int l_z)
     {
-        Tile class30_sub3 = tileArray[z][x][y];
-        if(class30_sub3 != null)
+        Tile tile = tileArray[z][x][y];
+        if(tile != null)
         {
             tileArray[z][x][y].logicHeight = l_z;
         }
@@ -139,17 +138,17 @@ final class SceneGraph {
         if(shapeA == 1)
         {
             PlainTile plainTile_1 = new PlainTile(colourAA, colourBA, colourDA, colourCA, j1, RGBA, zA == zB && zA == zD && zA == zC);
-            for(int j5 = zz; j5 >= 0; j5--)
-                if(tileArray[j5][x][y] == null)
-                    tileArray[j5][x][y] = new Tile(j5, x, y);
+            for(int z = zz; z >= 0; z--)
+                if(tileArray[z][x][y] == null)
+                    tileArray[z][x][y] = new Tile(z, x, y);
 
             tileArray[zz][x][y].myPlainTile = plainTile_1;
             return;
         }
         ShapedTile shapedTile = new ShapedTile(y, colourAA, colourC, zD, j1, colourDA, shapeB, colourA, cRGB2, colourD, zC, zB, zA, shapeA, colourCA, colourBA, colourB, x, RGBA);
-        for(int k5 = zz; k5 >= 0; k5--)
-            if(tileArray[k5][x][y] == null)
-                tileArray[k5][x][y] = new Tile(k5, x, y);
+        for(int z = zz; z >= 0; z--)
+            if(tileArray[z][x][y] == null)
+                tileArray[z][x][y] = new Tile(z, x, y);
 
         tileArray[zz][x][y].shapedTile = shapedTile;
     }
@@ -291,16 +290,16 @@ final class SceneGraph {
         return class30_sub2_sub4 == null || addEntityC(j, l1, k2, (i2 - l1) + 1, (i1 - k2) + 1, j1, k, k1, class30_sub2_sub4, l, true, j2, (byte) 0);
     }
 
-    private boolean addEntityC(int i, int j, int k, int l, int i1, int j1, int k1,
+    private boolean addEntityC(int z, int j, int k, int l, int i1, int j1, int k1,
             int l1, Animable class30_sub2_sub4, int i2, boolean flag, int j2, byte byte0)
     {
-        for(int k2 = j; k2 < j + l; k2++)
+        for(int x = j; x < j + l; x++)
         {
-            for(int l2 = k; l2 < k + i1; l2++)
+            for(int y = k; y < k + i1; y++)
             {
-                if(k2 < 0 || l2 < 0 || k2 >= xMapSize || l2 >= yMapSize)
+                if(x < 0 || y < 0 || x >= xMapSize || y >= yMapSize)
                     return false;
-                Tile class30_sub3 = tileArray[i][k2][l2];
+                Tile class30_sub3 = tileArray[z][x][y];
                 if(class30_sub3 != null && class30_sub3.entityCount >= 5)
                     return false;
             }
@@ -310,7 +309,7 @@ final class SceneGraph {
         InteractableObject class28 = new InteractableObject();
         class28.uid = j2;
         class28.aByte530 = byte0;
-        class28.tileZ = i;
+        class28.tileZ = z;
         class28.anInt519 = j1;
         class28.anInt520 = k1;
         class28.anInt518 = l1;
@@ -333,11 +332,11 @@ final class SceneGraph {
                     k3 += 8;
                 if(j3 < (k + i1) - 1)
                     k3 += 2;
-                for(int l3 = i; l3 >= 0; l3--)
+                for(int l3 = z; l3 >= 0; l3--)
                     if(tileArray[l3][i3][j3] == null)
                         tileArray[l3][i3][j3] = new Tile(l3, i3, j3);
 
-                Tile class30_sub3_1 = tileArray[i][i3][j3];
+                Tile class30_sub3_1 = tileArray[z][i3][j3];
                 class30_sub3_1.interactableObjects[class30_sub3_1.entityCount] = class28;
                 class30_sub3_1.anIntArray1319[class30_sub3_1.entityCount] = k3;
                 class30_sub3_1.anInt1320 |= k3;
@@ -365,31 +364,31 @@ final class SceneGraph {
 
     private void method289(InteractableObject interactableObject)
     {
-        for(int j = interactableObject.tileX; j <= interactableObject.anInt524; j++)
+        for(int x = interactableObject.tileX; x <= interactableObject.anInt524; x++)
         {
-            for(int k = interactableObject.tileY; k <= interactableObject.anInt526; k++)
+            for(int y = interactableObject.tileY; y <= interactableObject.anInt526; y++)
             {
-                Tile class30_sub3 = tileArray[interactableObject.tileZ][j][k];
-                if(class30_sub3 != null)
+                Tile tile = tileArray[interactableObject.tileZ][x][y];
+                if(tile != null)
                 {
-                    for(int l = 0; l < class30_sub3.entityCount; l++)
+                    for(int l = 0; l < tile.entityCount; l++)
                     {
-                        if(class30_sub3.interactableObjects[l] != interactableObject)
+                        if(tile.interactableObjects[l] != interactableObject)
                             continue;
-                        class30_sub3.entityCount--;
-                        for(int i1 = l; i1 < class30_sub3.entityCount; i1++)
+                        tile.entityCount--;
+                        for(int i1 = l; i1 < tile.entityCount; i1++)
                         {
-                            class30_sub3.interactableObjects[i1] = class30_sub3.interactableObjects[i1 + 1];
-                            class30_sub3.anIntArray1319[i1] = class30_sub3.anIntArray1319[i1 + 1];
+                            tile.interactableObjects[i1] = tile.interactableObjects[i1 + 1];
+                            tile.anIntArray1319[i1] = tile.anIntArray1319[i1 + 1];
                         }
 
-                        class30_sub3.interactableObjects[class30_sub3.entityCount] = null;
+                        tile.interactableObjects[tile.entityCount] = null;
                         break;
                     }
 
-                    class30_sub3.anInt1320 = 0;
-                    for(int j1 = 0; j1 < class30_sub3.entityCount; j1++)
-                        class30_sub3.anInt1320 |= class30_sub3.anIntArray1319[j1];
+                    tile.anInt1320 = 0;
+                    for(int j1 = 0; j1 < tile.entityCount; j1++)
+                        tile.anInt1320 |= tile.anIntArray1319[j1];
 
                 }
             }
@@ -398,52 +397,50 @@ final class SceneGraph {
 
     }
 
-    public void method290(int i, int k, int l, int i1)
+    public void method290(int y, int k, int x, int z)
     {
-        Tile class30_sub3 = tileArray[i1][l][i];
-        if(class30_sub3 == null)
+        Tile tile = tileArray[z][x][y];
+        if(tile == null)
             return;
-        WallDecoration wallDecoration = class30_sub3.wallDecoration;
+        WallDecoration wallDecoration = tile.wallDecoration;
         if(wallDecoration != null)
         {
-            int j1 = l * 128 + 64;
-            int k1 = i * 128 + 64;
+            int j1 = x * 128 + 64;
+            int k1 = y * 128 + 64;
             wallDecoration.xPos = j1 + ((wallDecoration.xPos - j1) * k) / 16;
             wallDecoration.yPos = k1 + ((wallDecoration.yPos - k1) * k) / 16;
         }
     }
 
-    public void method291(int i, int j, int k, byte byte0)
+    public void removeWallObject(int x, int z, int y)
     {
-        Tile class30_sub3 = tileArray[j][i][k];
-        if(byte0 != -119)
-            aBoolean434 = !aBoolean434;
+        Tile class30_sub3 = tileArray[z][x][y];
         if(class30_sub3 != null)
         {
             class30_sub3.wallObject = null;
         }
     }
 
-    public void method292(int j, int k, int l)
+    public void removeWallDecoration(int y, int z, int x)
     {
-        Tile class30_sub3 = tileArray[k][l][j];
-        if(class30_sub3 != null)
+        Tile tile = tileArray[z][x][y];
+        if(tile != null)
         {
-            class30_sub3.wallDecoration = null;
+            tile.wallDecoration = null;
         }
     }
 
-    public void method293(int i, int k, int l)
+    public void method293(int z, int x, int y)
     {
-        Tile tile = tileArray[i][k][l];
+        Tile tile = tileArray[z][x][y];
         if(tile == null)
             return;
         for(int j1 = 0; j1 < tile.entityCount; j1++)
         {
-            InteractableObject class28 = tile.interactableObjects[j1];
-            if((class28.uid >> 29 & 3) == 2 && class28.tileX == k && class28.tileY == l)
+            InteractableObject interactableObject = tile.interactableObjects[j1];
+            if((interactableObject.uid >> 29 & 3) == 2 && interactableObject.tileX == x && interactableObject.tileY == y)
             {
-                method289(class28);
+                method289(interactableObject);
                 return;
             }
         }
@@ -541,7 +538,7 @@ final class SceneGraph {
         return 0;
     }
 
-    public int getGroundDecorationUID(int z, int x, int y)//todo getGroundDecorationUID
+    public int getGroundDecorationUID(int z, int x, int y)//TODO getGroundDecorationUID
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.groundDecoration == null)
@@ -550,19 +547,19 @@ final class SceneGraph {
             return tile.groundDecoration.uid;
     }
 
-    public int getIDTAGForXYZ(int i, int j, int k, int l)
+    public int getIDTAGForXYZ(int z, int x, int y, int interactableObjectUID)
     {
-        Tile class30_sub3 = tileArray[i][j][k];
+        Tile class30_sub3 = tileArray[z][x][y];
         if(class30_sub3 == null)
             return -1;
-        if(class30_sub3.wallObject != null && class30_sub3.wallObject.uid == l)
+        if(class30_sub3.wallObject != null && class30_sub3.wallObject.uid == interactableObjectUID)
             return class30_sub3.wallObject.aByte281 & 0xff;
-        if(class30_sub3.wallDecoration != null && class30_sub3.wallDecoration.uid == l)
+        if(class30_sub3.wallDecoration != null && class30_sub3.wallDecoration.uid == interactableObjectUID)
             return class30_sub3.wallDecoration.objConf & 0xff;
-        if(class30_sub3.groundDecoration != null && class30_sub3.groundDecoration.uid == l)
+        if(class30_sub3.groundDecoration != null && class30_sub3.groundDecoration.uid == interactableObjectUID)
             return class30_sub3.groundDecoration.objConf & 0xff;
         for(int i1 = 0; i1 < class30_sub3.entityCount; i1++)
-            if(class30_sub3.interactableObjects[i1].uid == l)
+            if(class30_sub3.interactableObjects[i1].uid == interactableObjectUID)
                 return class30_sub3.interactableObjects[i1].aByte530 & 0xff;
 
         return -1;
@@ -618,31 +615,31 @@ final class SceneGraph {
 
     }
 
-    private void method306(int i, int j, Model model, int k)
+    private void method306(int x, int z, Model model, int y)
     {
-        if(i < xMapSize)
+        if(x < xMapSize)
         {
-            Tile class30_sub3 = tileArray[j][i + 1][k];
-            if(class30_sub3 != null && class30_sub3.groundDecoration != null && class30_sub3.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
-                method308(model, (Model)class30_sub3.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
+            Tile tile = tileArray[z][x + 1][y];
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
+                method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
         }
-        if(k < xMapSize)
+        if(y < xMapSize)
         {
-            Tile class30_sub3_1 = tileArray[j][i][k + 1];
-            if(class30_sub3_1 != null && class30_sub3_1.groundDecoration != null && class30_sub3_1.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
-                method308(model, (Model)class30_sub3_1.groundDecoration.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
+            Tile tile = tileArray[z][x][y + 1];
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
+                method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
         }
-        if(i < xMapSize && k < yMapSize)
+        if(x < xMapSize && y < yMapSize)
         {
-            Tile class30_sub3_2 = tileArray[j][i + 1][k + 1];
-            if(class30_sub3_2 != null && class30_sub3_2.groundDecoration != null && class30_sub3_2.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
-                method308(model, (Model)class30_sub3_2.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
+            Tile tile = tileArray[z][x + 1][y + 1];
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
+                method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
         }
-        if(i < xMapSize && k > 0)
+        if(x < xMapSize && y > 0)
         {
-            Tile class30_sub3_3 = tileArray[j][i + 1][k - 1];
-            if(class30_sub3_3 != null && class30_sub3_3.groundDecoration != null && class30_sub3_3.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
-                method308(model, (Model)class30_sub3_3.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, -128, true);
+            Tile tile = tileArray[z][x + 1][y - 1];
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
+                method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, -128, true);
         }
     }
 
@@ -653,24 +650,24 @@ final class SceneGraph {
         int k1 = l + j;
         int l1 = i1 - 1;
         int i2 = i1 + k;
-        for(int j2 = i; j2 <= i + 1; j2++)
-            if(j2 != zMapSize)
+        for(int z = i; z <= i + 1; z++)
+            if(z != zMapSize)
             {
-                for(int k2 = j1; k2 <= k1; k2++)
-                    if(k2 >= 0 && k2 < xMapSize)
+                for(int x = j1; x <= k1; x++)
+                    if(x >= 0 && x < xMapSize)
                     {
-                        for(int l2 = l1; l2 <= i2; l2++)
-                            if(l2 >= 0 && l2 < yMapSize && (!flag || k2 >= k1 || l2 >= i2 || l2 < i1 && k2 != l))
+                        for(int y = l1; y <= i2; y++)
+                            if(y >= 0 && y < yMapSize && (!flag || x >= k1 || y >= i2 || y < i1 && x != l))
                             {
-                                Tile class30_sub3 = tileArray[j2][k2][l2];
+                                Tile class30_sub3 = tileArray[z][x][y];
                                 if(class30_sub3 != null)
                                 {
-                                    int i3 = (heightmap[j2][k2][l2] + heightmap[j2][k2 + 1][l2] + heightmap[j2][k2][l2 + 1] + heightmap[j2][k2 + 1][l2 + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
+                                    int i3 = (heightmap[z][x][y] + heightmap[z][x + 1][y] + heightmap[z][x][y + 1] + heightmap[z][x + 1][y + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
                                     WallObject class10 = class30_sub3.wallObject;
                                     if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormal != null)
-                                        method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
+                                        method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
                                     if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormal != null)
-                                        method308(model, (Model)class10.aClass30_Sub2_Sub4_279, (k2 - l) * 128 + (1 - j) * 64, i3, (l2 - i1) * 128 + (1 - k) * 64, flag);
+                                        method308(model, (Model)class10.aClass30_Sub2_Sub4_279, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
                                     for(int j3 = 0; j3 < class30_sub3.entityCount; j3++)
                                     {
                                         InteractableObject class28 = class30_sub3.interactableObjects[j3];
@@ -961,25 +958,25 @@ label0:
             anInt452 = yMapSize;
         process_culling();
         anInt446 = 0;
-        for(int k1 = anInt442; k1 < zMapSize; k1++)
+        for(int z = anInt442; z < zMapSize; z++)
         {
-            Tile aclass30_sub3[][] = tileArray[k1];
-            for(int i2 = anInt449; i2 < anInt450; i2++)
+            Tile floorTiles[][] = tileArray[z];
+            for(int x = anInt449; x < anInt450; x++)
             {
-                for(int k2 = anInt451; k2 < anInt452; k2++)
+                for(int y = anInt451; y < anInt452; y++)
                 {
-                    Tile class30_sub3 = aclass30_sub3[i2][k2];
-                    if(class30_sub3 != null)
-                        if(class30_sub3.logicHeight > plane || !TILE_VISIBILITY_MAP[(i2 - xCameraPositionTile) + 25][(k2 - yCameraPositionTile) + 25] && heightmap[k1][i2][k2] - zCampos < 2000)
+                    Tile singleTile = floorTiles[x][y];
+                    if(singleTile != null)
+                        if(singleTile.logicHeight > plane || !TILE_VISIBILITY_MAP[(x - xCameraPositionTile) + 25][(y - yCameraPositionTile) + 25] && heightmap[z][x][y] - zCampos < 2000)
                         {
-                            class30_sub3.aBoolean1322 = false;
-                            class30_sub3.aBoolean1323 = false;
-                            class30_sub3.anInt1325 = 0;
+                            singleTile.aBoolean1322 = false;
+                            singleTile.aBoolean1323 = false;
+                            singleTile.anInt1325 = 0;
                         } else
                         {
-                            class30_sub3.aBoolean1322 = true;
-                            class30_sub3.aBoolean1323 = true;
-                            class30_sub3.aBoolean1324 = class30_sub3.entityCount > 0;
+                            singleTile.aBoolean1322 = true;
+                            singleTile.aBoolean1323 = true;
+                            singleTile.aBoolean1324 = singleTile.entityCount > 0;
                             anInt446++;
                         }
                 }
@@ -988,45 +985,45 @@ label0:
 
         }
 
-        for(int l1 = anInt442; l1 < zMapSize; l1++)
+        for(int z = anInt442; z < zMapSize; z++)
         {
-            Tile aclass30_sub3_1[][] = tileArray[l1];
+            Tile floorTiles[][] = tileArray[z];
             for(int l2 = -25; l2 <= 0; l2++)
             {
-                int i3 = xCameraPositionTile + l2;
-                int k3 = xCameraPositionTile - l2;
-                if(i3 >= anInt449 || k3 < anInt450)
+                int x = xCameraPositionTile + l2;
+                int x2 = xCameraPositionTile - l2;
+                if(x >= anInt449 || x2 < anInt450)
                 {
                     for(int i4 = -25; i4 <= 0; i4++)
                     {
-                        int k4 = yCameraPositionTile + i4;
-                        int i5 = yCameraPositionTile - i4;
-                        if(i3 >= anInt449)
+                        int y = yCameraPositionTile + i4;
+                        int y2 = yCameraPositionTile - i4;
+                        if(x >= anInt449)
                         {
-                            if(k4 >= anInt451)
+                            if(y >= anInt451)
                             {
-                                Tile class30_sub3_1 = aclass30_sub3_1[i3][k4];
+                                Tile class30_sub3_1 = floorTiles[x][y];
                                 if(class30_sub3_1 != null && class30_sub3_1.aBoolean1322)
                                     renderTileF(class30_sub3_1, true);
                             }
-                            if(i5 < anInt452)
+                            if(y2 < anInt452)
                             {
-                                Tile class30_sub3_2 = aclass30_sub3_1[i3][i5];
+                                Tile class30_sub3_2 = floorTiles[x][y2];
                                 if(class30_sub3_2 != null && class30_sub3_2.aBoolean1322)
                                     renderTileF(class30_sub3_2, true);
                             }
                         }
-                        if(k3 < anInt450)
+                        if(x2 < anInt450)
                         {
-                            if(k4 >= anInt451)
+                            if(y >= anInt451)
                             {
-                                Tile class30_sub3_3 = aclass30_sub3_1[k3][k4];
+                                Tile class30_sub3_3 = floorTiles[x2][y];
                                 if(class30_sub3_3 != null && class30_sub3_3.aBoolean1322)
                                     renderTileF(class30_sub3_3, true);
                             }
-                            if(i5 < anInt452)
+                            if(y2 < anInt452)
                             {
-                                Tile class30_sub3_4 = aclass30_sub3_1[k3][i5];
+                                Tile class30_sub3_4 = floorTiles[x2][y2];
                                 if(class30_sub3_4 != null && class30_sub3_4.aBoolean1322)
                                     renderTileF(class30_sub3_4, true);
                             }
@@ -2157,7 +2154,7 @@ for_outer:
         return false;
     }
 
-    private boolean aBoolean434;
+
     public static boolean lowMem = true;
     private final int zMapSize;
     private final int xMapSize;
