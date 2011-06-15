@@ -760,19 +760,19 @@ public class client extends RSApplet {
 
 		aRSImageProducer_1165.initDrawingArea();
 		numOfMapMarkers = 0;
-		for(int k2 = 0; k2 < 104; k2++)
+		for(int x = 0; x < 104; x++)
 		{
-			for(int l2 = 0; l2 < 104; l2++)
+			for(int y = 0; y < 104; y++)
 			{
-				int i3 = sceneGraph.getGroundDecorationUID(plane, k2, l2);
+				int i3 = sceneGraph.getGroundDecorationUID(plane, x, y);
 				if(i3 != 0)
 				{
 					i3 = i3 >> 14 & 0x7fff;
 					int j3 = ObjectDef.forID(i3).mapFunctionID;
 					if(j3 >= 0)
 					{
-						int k3 = k2;
-						int l3 = l2;
+						int k3 = x;
+						int l3 = y;
 						if(j3 != 22 && j3 != 29 && j3 != 34 && j3 != 36 && j3 != 46 && j3 != 47 && j3 != 48)
 						{
 							byte byte0 = 104;
@@ -781,13 +781,13 @@ public class client extends RSApplet {
 							for(int i4 = 0; i4 < 10; i4++)
 							{
 								int j4 = (int)(Math.random() * 4D);
-								if(j4 == 0 && k3 > 0 && k3 > k2 - 3 && (ai1[k3 - 1][l3] & 0x1280108) == 0)
+								if(j4 == 0 && k3 > 0 && k3 > x - 3 && (ai1[k3 - 1][l3] & 0x1280108) == 0)
 								k3--;
-								if(j4 == 1 && k3 < byte0 - 1 && k3 < k2 + 3 && (ai1[k3 + 1][l3] & 0x1280180) == 0)
+								if(j4 == 1 && k3 < byte0 - 1 && k3 < x + 3 && (ai1[k3 + 1][l3] & 0x1280180) == 0)
 								k3++;
-								if(j4 == 2 && l3 > 0 && l3 > l2 - 3 && (ai1[k3][l3 - 1] & 0x1280102) == 0)
+								if(j4 == 2 && l3 > 0 && l3 > y - 3 && (ai1[k3][l3 - 1] & 0x1280102) == 0)
 								l3--;
-								if(j4 == 3 && l3 < byte1 - 1 && l3 < l2 + 3 && (ai1[k3][l3 + 1] & 0x1280120) == 0)
+								if(j4 == 3 && l3 < byte1 - 1 && l3 < y + 3 && (ai1[k3][l3 + 1] & 0x1280120) == 0)
 								l3++;
 							}
 
@@ -2209,20 +2209,20 @@ public class client extends RSApplet {
 
 	}
 
-	private void drawMapScenes(int i, int k, int l, int i1, int j1)
+	private void drawMapScenes(int y, int k, int x, int i1, int z)
 	{
-		int k1 = sceneGraph.getWallObjectUID(j1, l, i);
-		if(k1 != 0)
+		int interactableObjectUID = sceneGraph.getWallObjectUID(z, x, y);
+		if(interactableObjectUID != 0)
 		{
-			int l1 = sceneGraph.getIDTAGForXYZ(j1, l, i, k1);
+			int l1 = sceneGraph.getIDTAGForXYZ(z, x, y, interactableObjectUID);
 			int k2 = l1 >> 6 & 3;
 			int i3 = l1 & 0x1f;
 			int k3 = k;
-			if(k1 > 0)
+			if(interactableObjectUID > 0)
 			k3 = i1;
 			int ai[] = aClass30_Sub2_Sub1_Sub1_1263.myPixels;
-			int k4 = 24624 + l * 4 + (103 - i) * 512 * 4;
-			int i5 = k1 >> 14 & 0x7fff;
+			int k4 = 24624 + x * 4 + (103 - y) * 512 * 4;
+			int i5 = interactableObjectUID >> 14 & 0x7fff;
 			ObjectDef class46_2 = ObjectDef.forID(i5);
 			if(class46_2.mapSceneID != -1)
 			{
@@ -2231,7 +2231,7 @@ public class client extends RSApplet {
 				{
 					int i6 = (class46_2.sizeX * 4 - indexedImage_2.imgWidth) / 2;
 					int j6 = (class46_2.sizeY * 4 - indexedImage_2.imgHeight) / 2;
-					indexedImage_2.drawImage(48 + l * 4 + i6, 48 + (104 - i - class46_2.sizeY) * 4 + j6);
+					indexedImage_2.drawImage(48 + x * 4 + i6, 48 + (104 - y - class46_2.sizeY) * 4 + j6);
 				}
 			} else
 			{
@@ -2307,13 +2307,13 @@ public class client extends RSApplet {
 				}
 			}
 		}
-		k1 = sceneGraph.getInteractableObjectUID(j1, l, i);
-		if(k1 != 0)
+		interactableObjectUID = sceneGraph.getInteractableObjectUID(z, x, y);
+		if(interactableObjectUID != 0)
 		{
-			int i2 = sceneGraph.getIDTAGForXYZ(j1, l, i, k1);
+			int i2 = sceneGraph.getIDTAGForXYZ(z, x, y, interactableObjectUID);
 			int l2 = i2 >> 6 & 3;
 			int j3 = i2 & 0x1f;
-			int l3 = k1 >> 14 & 0x7fff;
+			int l3 = interactableObjectUID >> 14 & 0x7fff;
 			ObjectDef class46_1 = ObjectDef.forID(l3);
 			if(class46_1.mapSceneID != -1)
 			{
@@ -2322,16 +2322,16 @@ public class client extends RSApplet {
 				{
 					int j5 = (class46_1.sizeX * 4 - indexedImage_1.imgWidth) / 2;
 					int k5 = (class46_1.sizeY * 4 - indexedImage_1.imgHeight) / 2;
-					indexedImage_1.drawImage(48 + l * 4 + j5, 48 + (104 - i - class46_1.sizeY) * 4 + k5);
+					indexedImage_1.drawImage(48 + x * 4 + j5, 48 + (104 - y - class46_1.sizeY) * 4 + k5);
 				}
 			} else
 			if(j3 == 9)
 			{
 				int l4 = 0xeeeeee;
-				if(k1 > 0)
+				if(interactableObjectUID > 0)
 				l4 = 0xee0000;
 				int ai1[] = aClass30_Sub2_Sub1_Sub1_1263.myPixels;
-				int l5 = 24624 + l * 4 + (103 - i) * 512 * 4;
+				int l5 = 24624 + x * 4 + (103 - y) * 512 * 4;
 				if(l2 == 0 || l2 == 2)
 				{
 					ai1[l5 + 1536] = l4;
@@ -2347,10 +2347,10 @@ public class client extends RSApplet {
 				}
 			}
 		}
-		k1 = sceneGraph.getGroundDecorationUID(j1, l, i);
-		if(k1 != 0)
+		interactableObjectUID = sceneGraph.getGroundDecorationUID(z, x, y);
+		if(interactableObjectUID != 0)
 		{
-			int j2 = k1 >> 14 & 0x7fff;
+			int j2 = interactableObjectUID >> 14 & 0x7fff;
 			ObjectDef class46 = ObjectDef.forID(j2);
 			if(class46.mapSceneID != -1)
 			{
@@ -2359,7 +2359,7 @@ public class client extends RSApplet {
 				{
 					int i4 = (class46.sizeX * 4 - indexedImage.imgWidth) / 2;
 					int j4 = (class46.sizeY * 4 - indexedImage.imgHeight) / 2;
-					indexedImage.drawImage(48 + l * 4 + i4, 48 + (104 - i - class46.sizeY) * 4 + j4);
+					indexedImage.drawImage(48 + x * 4 + i4, 48 + (104 - y - class46.sizeY) * 4 + j4);
 				}
 			}
 		}
@@ -9854,44 +9854,44 @@ public class client extends RSApplet {
 		if(j == 160)
 		{
 			int k1 = stream.sg1();
-			int j4 = anInt1268 + (k1 >> 4 & 7);
-			int i7 = anInt1269 + (k1 & 7);
+			int x = anInt1268 + (k1 >> 4 & 7);
+			int y = anInt1269 + (k1 & 7);
 			int l9 = stream.sg1();
 			int j12 = l9 >> 2;
 			int k14 = l9 & 3;
 			int j16 = anIntArray1177[j12];
 			int j17 = stream.sg2();
-			if(j4 >= 0 && i7 >= 0 && j4 < 103 && i7 < 103)
+			if(x >= 0 && y >= 0 && x < 103 && y < 103)
 			{
-				int j18 = intGroundArray[plane][j4][i7];
-				int i19 = intGroundArray[plane][j4 + 1][i7];
-				int l19 = intGroundArray[plane][j4 + 1][i7 + 1];
-				int k20 = intGroundArray[plane][j4][i7 + 1];
+				int j18 = intGroundArray[plane][x][y];
+				int i19 = intGroundArray[plane][x + 1][y];
+				int l19 = intGroundArray[plane][x + 1][y + 1];
+				int k20 = intGroundArray[plane][x][y + 1];
 				if(j16 == 0)
 				{
-					WallObject class10 = sceneGraph.getWallObject(plane, j4, i7);
-					if(class10 != null)
+					WallObject wallObject = sceneGraph.getWallObject(plane, x, y);
+					if(wallObject != null)
 					{
-						int k21 = class10.uid >> 14 & 0x7fff;
+						int k21 = wallObject.uid >> 14 & 0x7fff;
 						if(j12 == 2)
 						{
-							class10.aClass30_Sub2_Sub4_278 = new ObjectOnTile(k21, 4 + k14, 2, i19, l19, j18, k20, j17, false);
-							class10.aClass30_Sub2_Sub4_279 = new ObjectOnTile(k21, k14 + 1 & 3, 2, i19, l19, j18, k20, j17, false);
+							wallObject.aClass30_Sub2_Sub4_278 = new ObjectOnTile(k21, 4 + k14, 2, i19, l19, j18, k20, j17, false);
+							wallObject.aClass30_Sub2_Sub4_279 = new ObjectOnTile(k21, k14 + 1 & 3, 2, i19, l19, j18, k20, j17, false);
 						} else
 						{
-							class10.aClass30_Sub2_Sub4_278 = new ObjectOnTile(k21, k14, j12, i19, l19, j18, k20, j17, false);
+							wallObject.aClass30_Sub2_Sub4_278 = new ObjectOnTile(k21, k14, j12, i19, l19, j18, k20, j17, false);
 						}
 					}
 				}
 				if(j16 == 1)
 				{
-					WallDecoration class26 = sceneGraph.getWallDecoration(j4, i7, plane);
-					if(class26 != null)
-					class26.myMob = new ObjectOnTile(class26.uid >> 14 & 0x7fff, 0, 4, i19, l19, j18, k20, j17, false);
+					WallDecoration wallDecoration = sceneGraph.getWallDecoration(x, y, plane);
+					if(wallDecoration != null)
+					wallDecoration.myMob = new ObjectOnTile(wallDecoration.uid >> 14 & 0x7fff, 0, 4, i19, l19, j18, k20, j17, false);
 				}
 				if(j16 == 2)
 				{
-					InteractableObject class28 = sceneGraph.getInteractableObject(j4, i7, plane);
+					InteractableObject class28 = sceneGraph.getInteractableObject(x, y, plane);
 					if(j12 == 11)
 					j12 = 10;
 					if(class28 != null)
@@ -9899,7 +9899,7 @@ public class client extends RSApplet {
 				}
 				if(j16 == 3)
 				{
-					GroundDecoration class49 = sceneGraph.getGroundDecoration(i7, j4, plane);
+					GroundDecoration class49 = sceneGraph.getGroundDecoration(y, x, plane);
 					if(class49 != null)
 					class49.aClass30_Sub2_Sub4_814 = new ObjectOnTile(class49.uid >> 14 & 0x7fff, k14, 22, i19, l19, j18, k20, j17, false);
 				}
@@ -10223,60 +10223,60 @@ public class client extends RSApplet {
 		}
 	}
 
-	private void method142(int i, int j, int k, int l, int i1, int j1, int k1
+	private void method142(int y, int z, int k, int l, int x, int j1, int k1
 	)
 	{
-		if(i1 >= 1 && i >= 1 && i1 <= 102 && i <= 102)
+		if(x >= 1 && y >= 1 && x <= 102 && y <= 102)
 		{
-			if(lowMem && j != plane)
+			if(lowMem && z != plane)
 			return;
 			int i2 = 0;
 			if(j1 == 0)
-			i2 = sceneGraph.getWallObjectUID(j, i1, i);
+			i2 = sceneGraph.getWallObjectUID(z, x, y);
 			if(j1 == 1)
-			i2 = sceneGraph.getWallDecorationUID(j, i1, i);
+			i2 = sceneGraph.getWallDecorationUID(z, x, y);
 			if(j1 == 2)
-			i2 = sceneGraph.getInteractableObjectUID(j, i1, i);
+			i2 = sceneGraph.getInteractableObjectUID(z, x, y);
 			if(j1 == 3)
-			i2 = sceneGraph.getGroundDecorationUID(j, i1, i);
+			i2 = sceneGraph.getGroundDecorationUID(z, x, y);
 			if(i2 != 0)
 			{
-				int i3 = sceneGraph.getIDTAGForXYZ(j, i1, i, i2);
+				int i3 = sceneGraph.getIDTAGForXYZ(z, x, y, i2);
 				int j2 = i2 >> 14 & 0x7fff;
 				int k2 = i3 & 0x1f;
 				int l2 = i3 >> 6;
 				if(j1 == 0)
 				{
-					sceneGraph.method291(i1, j, i, (byte)-119);
+					sceneGraph.removeWallObject(x, z, y);
 					ObjectDef class46 = ObjectDef.forID(j2);
 					if(class46.isUnwalkable)
-					tileSettings[j].method215(l2, k2, class46.aBoolean757, i1, i);
+					tileSettings[z].method215(l2, k2, class46.aBoolean757, x, y);
 				}
 				if(j1 == 1)
-				sceneGraph.method292(i, j, i1);
+				sceneGraph.removeWallDecoration(y, z, x);
 				if(j1 == 2)
 				{
-					sceneGraph.method293(j, i1, i);
+					sceneGraph.method293(z, x, y);
 					ObjectDef class46_1 = ObjectDef.forID(j2);
-					if(i1 + class46_1.sizeX > 103 || i + class46_1.sizeX > 103 || i1 + class46_1.sizeY > 103 || i + class46_1.sizeY > 103)
+					if(x + class46_1.sizeX > 103 || y + class46_1.sizeX > 103 || x + class46_1.sizeY > 103 || y + class46_1.sizeY > 103)
 					return;
 					if(class46_1.isUnwalkable)
-					tileSettings[j].method216(l2, class46_1.sizeX, i1, i, class46_1.sizeY, class46_1.aBoolean757);
+					tileSettings[z].method216(l2, class46_1.sizeX, x, y, class46_1.sizeY, class46_1.aBoolean757);
 				}
 				if(j1 == 3)
 				{
-					sceneGraph.removeGroundDecoration(j, i, i1);
+					sceneGraph.removeGroundDecoration(z, y, x);
 					ObjectDef class46_2 = ObjectDef.forID(j2);
 					if(class46_2.isUnwalkable && class46_2.hasActions)
-					tileSettings[j].method218(i, i1);
+					tileSettings[z].method218(y, x);
 				}
 			}
 			if(k1 >= 0)
 			{
-				int j3 = j;
-				if(j3 < 3 && (byteGroundArray[1][i1][i] & 2) == 2)
+				int j3 = z;
+				if(j3 < 3 && (byteGroundArray[1][x][y] & 2) == 2)
 				j3++;
-				MapRegion.method188(sceneGraph, k, i, l, j3, tileSettings[j], intGroundArray, i1, k1, j);
+				MapRegion.method188(sceneGraph, k, y, l, j3, tileSettings[z], intGroundArray, x, k1, z);
 			}
 		}
 	}
