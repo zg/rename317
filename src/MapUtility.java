@@ -1,6 +1,6 @@
 //Class4
 final class MapUtility
-{//todo - speak to brendan about this class
+{//Thanks Xaves
 
     public static int getRotatedMapChunkX(int rotation, int y, int x)
     {

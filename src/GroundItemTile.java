@@ -9,7 +9,7 @@ final class GroundItemTile {
     int zPos;//45
     int xPos;//46
     int yPos;//47
-    Animable topGroundItem;//30_2_4_48
+    Animable firstGroundItem;//30_2_4_48
     Animable secondGroundItem;
     Animable thirdGroundItem;
     int uid;

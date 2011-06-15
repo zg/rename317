@@ -1,6 +1,3 @@
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
 
 final class SceneGraph {
 
@@ -157,7 +154,7 @@ final class SceneGraph {
         tileArray[zz][x][y].shapedTile = shapedTile;
     }
 
-    public void addObj3(int Z, int z3d, int Y, Animable class30_sub2_sub4, byte byte0, int uid,
+    public void addGroundDecoration(int Z, int z3d, int Y, Animable class30_sub2_sub4, byte byte0, int uid,
                           int X)
     {
         if(class30_sub2_sub4 == null)
@@ -174,19 +171,19 @@ final class SceneGraph {
         tileArray[Z][X][Y].obj3 = class49;
     }
 
-    public void method281(int i, int j, Animable class30_sub2_sub4, int k, Animable class30_sub2_sub4_1, Animable class30_sub2_sub4_2,
-                          int l, int i1)
+    public void method281(int x, int uid, Animable secondGroundItem, int k, Animable thirdGroundItem, Animable firstGroundItem,
+                          int z, int y)
     {
-        GroundItemTile object4 = new GroundItemTile();
-        object4.topGroundItem = class30_sub2_sub4_2;
-        object4.xPos = i * 128 + 64;
-        object4.yPos = i1 * 128 + 64;
-        object4.zPos = k;
-        object4.uid = j;
-        object4.secondGroundItem = class30_sub2_sub4;
-        object4.thirdGroundItem = class30_sub2_sub4_1;
+        GroundItemTile itemTile = new GroundItemTile();
+        itemTile.firstGroundItem = firstGroundItem;
+        itemTile.xPos = x * 128 + 64;
+        itemTile.yPos = y * 128 + 64;
+        itemTile.zPos = k;
+        itemTile.uid = uid;
+        itemTile.secondGroundItem = secondGroundItem;
+        itemTile.thirdGroundItem = thirdGroundItem;
         int j1 = 0;
-        Tile class30_sub3 = tileArray[l][i][i1];
+        Tile class30_sub3 = tileArray[z][x][y];
         if(class30_sub3 != null)
         {
             for(int k1 = 0; k1 < class30_sub3.entity_count; k1++)
@@ -198,53 +195,53 @@ final class SceneGraph {
                 }
 
         }
-        object4.anInt52 = j1;
-        if(tileArray[l][i][i1] == null)
-            tileArray[l][i][i1] = new Tile(l, i, i1);
-        tileArray[l][i][i1].groundItemTile = object4;
+        itemTile.anInt52 = j1;
+        if(tileArray[z][x][y] == null)
+            tileArray[z][x][y] = new Tile(z, x, y);
+        tileArray[z][x][y].groundItemTile = itemTile;
     }
 
-    public void addObject1(int i, Animable class30_sub2_sub4, int j, int k, byte byte0, int l,
+    public void addWallObject(int i, Animable class30_sub2_sub4, int uid, int y, byte byte0, int x,
                           Animable class30_sub2_sub4_1, int i1, int j1, int k1)
     {
         if(class30_sub2_sub4 == null && class30_sub2_sub4_1 == null)
             return;
-        WallObject object1 = new WallObject();
-        object1.uid = j;
-        object1.aByte281 = byte0;
-        object1.anInt274 = l * 128 + 64;
-        object1.anInt275 = k * 128 + 64;
-        object1.anInt273 = i1;
-        object1.aClass30_Sub2_Sub4_278 = class30_sub2_sub4;
-        object1.aClass30_Sub2_Sub4_279 = class30_sub2_sub4_1;
-        object1.orientation = i;
-        object1.orientation1 = j1;
-        for(int l1 = k1; l1 >= 0; l1--)
-            if(tileArray[l1][l][k] == null)
-                tileArray[l1][l][k] = new Tile(l1, l, k);
+        WallObject wallObject = new WallObject();
+        wallObject.uid = uid;
+        wallObject.aByte281 = byte0;
+        wallObject.xPos = x * 128 + 64;
+        wallObject.yPos = y * 128 + 64;
+        wallObject.zPos = i1;
+        wallObject.aClass30_Sub2_Sub4_278 = class30_sub2_sub4;
+        wallObject.aClass30_Sub2_Sub4_279 = class30_sub2_sub4_1;
+        wallObject.orientation = i;
+        wallObject.orientation1 = j1;
+        for(int z = k1; z >= 0; z--)
+            if(tileArray[z][x][y] == null)
+                tileArray[z][x][y] = new Tile(z, x, y);
 
-        tileArray[k1][l][k].obj1 = object1;
+        tileArray[k1][x][y].obj1 = wallObject;
     }
 
-    public void addObject(int i, int tileY, int face, int tileZ, int x3dOff, int z3d,
+    public void addWallDecoration(int i, int tileY, int face, int tileZ, int x3dOff, int z3d,
                           Animable animable, int tileX, byte obConfig, int y3dOff, int facebits)
     {
         if(animable == null)
             return;
-        WallDecoration object2 = new WallDecoration();
-        object2.uid = i;
-        object2.objConf = obConfig;
-        object2.X3D = tileX * 128 + 64 + x3dOff;
-        object2.Y3D = tileY * 128 + 64 + y3dOff;
-        object2.Z3D = z3d;
-        object2.myMob = animable;
-        object2.configBits = facebits;
-        object2.face = face;
+        WallDecoration wallDecoration = new WallDecoration();
+        wallDecoration.uid = i;
+        wallDecoration.objConf = obConfig;
+        wallDecoration.xPos = tileX * 128 + 64 + x3dOff;
+        wallDecoration.yPos = tileY * 128 + 64 + y3dOff;
+        wallDecoration.zPos = z3d;
+        wallDecoration.myMob = animable;
+        wallDecoration.configBits = facebits;
+        wallDecoration.face = face;
         for(int k2 = tileZ; k2 >= 0; k2--)
             if(tileArray[k2][tileX][tileY] == null)
                 tileArray[k2][tileX][tileY] = new Tile(k2, tileX, tileY);
 
-        tileArray[tileZ][tileX][tileY].obj2 = object2;
+        tileArray[tileZ][tileX][tileY].obj2 = wallDecoration;
     }
 
     public boolean addEntityB(int i, byte byte0, int j, int k, Animable class30_sub2_sub4, int l, int i1,
@@ -411,8 +408,8 @@ final class SceneGraph {
         {
             int j1 = l * 128 + 64;
             int k1 = i * 128 + 64;
-            class26.X3D = j1 + ((class26.X3D - j1) * k) / 16;
-            class26.Y3D = k1 + ((class26.Y3D - k1) * k) / 16;
+            class26.xPos = j1 + ((class26.xPos - j1) * k) / 16;
+            class26.yPos = k1 + ((class26.yPos - k1) * k) / 16;
         }
     }
 
@@ -1172,7 +1169,7 @@ label0:
                         drawShapedTile(X, yCurveSine, xCurveSine, class30_sub3_7.shapedTile, yCurveCosine, Y, xCurveCosine);
                     WallObject class10 = class30_sub3_7.obj1;
                     if(class10 != null)
-                        class10.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10.anInt274 - xCameraPosition, class10.anInt273 - zCameraPosition, class10.anInt275 - yCameraPosition, class10.uid);
+                        class10.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10.xPos - xCameraPosition, class10.zPos - zCameraPosition, class10.yPos - yCameraPosition, class10.uid);
                     for(int i2 = 0; i2 < class30_sub3_7.entity_count; i2++)
                     {
                         InteractableObject class28 = class30_sub3_7.entities[i2];
@@ -1246,19 +1243,19 @@ label0:
                         TILE.anInt1325 = 0;
                     }
                     if((class10_3.orientation & j2) != 0 && !method321(l, X, Y, class10_3.orientation))
-                        class10_3.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_3.anInt274 - xCameraPosition, class10_3.anInt273 - zCameraPosition, class10_3.anInt275 - yCameraPosition, class10_3.uid);
+                        class10_3.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_3.xPos - xCameraPosition, class10_3.zPos - zCameraPosition, class10_3.yPos - yCameraPosition, class10_3.uid);
                     if((class10_3.orientation1 & j2) != 0 && !method321(l, X, Y, class10_3.orientation1))
-                        class10_3.aClass30_Sub2_Sub4_279.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_3.anInt274 - xCameraPosition, class10_3.anInt273 - zCameraPosition, class10_3.anInt275 - yCameraPosition, class10_3.uid);
+                        class10_3.aClass30_Sub2_Sub4_279.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_3.xPos - xCameraPosition, class10_3.zPos - zCameraPosition, class10_3.yPos - yCameraPosition, class10_3.uid);
                 }
                 if(class26_1 != null && !method322(l, X, Y, class26_1.myMob.modelHeight))
                     if((class26_1.configBits & j2) != 0)
-                        class26_1.myMob.renderAtPoint(class26_1.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class26_1.X3D - xCameraPosition, class26_1.Z3D - zCameraPosition, class26_1.Y3D - yCameraPosition, class26_1.uid);
+                        class26_1.myMob.renderAtPoint(class26_1.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class26_1.xPos - xCameraPosition, class26_1.zPos - zCameraPosition, class26_1.yPos - yCameraPosition, class26_1.uid);
                     else
                     if((class26_1.configBits & 0x300) != 0)
                     {
-                        int j4 = class26_1.X3D - xCameraPosition;
-                        int l5 = class26_1.Z3D - zCameraPosition;
-                        int k6 = class26_1.Y3D - yCameraPosition;
+                        int j4 = class26_1.xPos - xCameraPosition;
+                        int l5 = class26_1.zPos - zCameraPosition;
+                        int k6 = class26_1.yPos - yCameraPosition;
                         int i8 = class26_1.face;
                         int k9;
                         if(i8 == 1 || i8 == 2)
@@ -1295,8 +1292,8 @@ label0:
                             object4_1.secondGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.xPos - xCameraPosition, object4_1.zPos - zCameraPosition, object4_1.yPos - yCameraPosition, object4_1.uid);
                         if(object4_1.thirdGroundItem != null)
                             object4_1.thirdGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.xPos - xCameraPosition, object4_1.zPos - zCameraPosition, object4_1.yPos - yCameraPosition, object4_1.uid);
-                        if(object4_1.topGroundItem != null)
-                            object4_1.topGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.xPos - xCameraPosition, object4_1.zPos - zCameraPosition, object4_1.yPos - yCameraPosition, object4_1.uid);
+                        if(object4_1.firstGroundItem != null)
+                            object4_1.firstGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.xPos - xCameraPosition, object4_1.zPos - zCameraPosition, object4_1.yPos - yCameraPosition, object4_1.uid);
                     }
                 }
                 int k4 = TILE.anInt1320;
@@ -1343,7 +1340,7 @@ label0:
                 {
                     WallObject class10_1 = TILE.obj1;
                     if(!method321(l, X, Y, class10_1.orientation))
-                        class10_1.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_1.anInt274 - xCameraPosition, class10_1.anInt273 - zCameraPosition, class10_1.anInt275 - yCameraPosition, class10_1.uid);
+                        class10_1.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_1.xPos - xCameraPosition, class10_1.zPos - zCameraPosition, class10_1.yPos - yCameraPosition, class10_1.uid);
                     TILE.anInt1325 = 0;
                 }
             }
@@ -1489,21 +1486,21 @@ label0:
                     object4.secondGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.xPos - xCameraPosition, object4.zPos - zCameraPosition - object4.anInt52, object4.yPos - yCameraPosition, object4.uid);
                 if(object4.thirdGroundItem != null)
                     object4.thirdGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.xPos - xCameraPosition, object4.zPos - zCameraPosition - object4.anInt52, object4.yPos - yCameraPosition, object4.uid);
-                if(object4.topGroundItem != null)
-                    object4.topGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.xPos - xCameraPosition, object4.zPos - zCameraPosition - object4.anInt52, object4.yPos - yCameraPosition, object4.uid);
+                if(object4.firstGroundItem != null)
+                    object4.firstGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.xPos - xCameraPosition, object4.zPos - zCameraPosition - object4.anInt52, object4.yPos - yCameraPosition, object4.uid);
             }
             if(TILE.anInt1328 != 0)
             {
                 WallDecoration wallDecoration = TILE.obj2;
                 if(wallDecoration != null && !method322(l, X, Y, wallDecoration.myMob.modelHeight))
                     if((wallDecoration.configBits & TILE.anInt1328) != 0)
-                        wallDecoration.myMob.renderAtPoint(wallDecoration.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallDecoration.X3D - xCameraPosition, wallDecoration.Z3D - zCameraPosition, wallDecoration.Y3D - yCameraPosition, wallDecoration.uid);
+                        wallDecoration.myMob.renderAtPoint(wallDecoration.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallDecoration.xPos - xCameraPosition, wallDecoration.zPos - zCameraPosition, wallDecoration.yPos - yCameraPosition, wallDecoration.uid);
                     else
                     if((wallDecoration.configBits & 0x300) != 0)
                     {
-                        int l2 = wallDecoration.X3D - xCameraPosition;
-                        int j3 = wallDecoration.Z3D - zCameraPosition;
-                        int i4 = wallDecoration.Y3D - yCameraPosition;
+                        int l2 = wallDecoration.xPos - xCameraPosition;
+                        int j3 = wallDecoration.zPos - zCameraPosition;
+                        int i4 = wallDecoration.yPos - yCameraPosition;
                         int k5 = wallDecoration.face;
                         int j6;
                         if(k5 == 1 || k5 == 2)
@@ -1532,9 +1529,9 @@ label0:
                 if(class10_2 != null)
                 {
                     if((class10_2.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, class10_2.orientation1))
-                        class10_2.aClass30_Sub2_Sub4_279.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_2.anInt274 - xCameraPosition, class10_2.anInt273 - zCameraPosition, class10_2.anInt275 - yCameraPosition, class10_2.uid);
+                        class10_2.aClass30_Sub2_Sub4_279.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_2.xPos - xCameraPosition, class10_2.zPos - zCameraPosition, class10_2.yPos - yCameraPosition, class10_2.uid);
                     if((class10_2.orientation & TILE.anInt1328) != 0 && !method321(l, X, Y, class10_2.orientation))
-                        class10_2.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_2.anInt274 - xCameraPosition, class10_2.anInt273 - zCameraPosition, class10_2.anInt275 - yCameraPosition, class10_2.uid);
+                        class10_2.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_2.xPos - xCameraPosition, class10_2.zPos - zCameraPosition, class10_2.yPos - yCameraPosition, class10_2.uid);
                 }
             }
             if(k < zMapSize - 1)

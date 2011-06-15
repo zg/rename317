@@ -10,9 +10,9 @@ public final class WallObject
     {
     }
 
-    int anInt273;
-    int anInt274;
-    int anInt275;
+    int zPos;
+    int xPos;
+    int yPos;
     int orientation;
     int orientation1;
     public Animable aClass30_Sub2_Sub4_278;
