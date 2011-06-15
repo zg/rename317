@@ -37,7 +37,7 @@ final class JagexArchive {
         }
     }
 
-    public byte[] getDataForName(String s)
+    public byte[] getDataForName(String s)//TODO abyte0 is always null =.= fix it up
     {
         byte abyte0[] = null; //was a parameter
         int i = 0;

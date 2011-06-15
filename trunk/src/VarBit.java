@@ -11,8 +11,7 @@ public final class VarBit {
             if(cache[j] == null)
                 cache[j] = new VarBit();
             cache[j].readValues(stream);
-            if(cache[j].aBoolean651)
-                SettingUsagePointers.cache[cache[j].configId].aBoolean713 = true;
+
         }
 
         if(stream.pos != stream.data.length)
@@ -36,7 +35,7 @@ public final class VarBit {
                 stream.gstr();
             else
             if(j == 2)
-                aBoolean651 = true;
+                {}
             else
             if(j == 3)
                 stream.g4();
@@ -50,12 +49,10 @@ public final class VarBit {
 
     private VarBit()
     {
-        aBoolean651 = false;
     }
 
     public static VarBit cache[];
     public int configId;
     public int leastSignificantBit;
     public int mostSignificantBit;
-    private boolean aBoolean651;
 }

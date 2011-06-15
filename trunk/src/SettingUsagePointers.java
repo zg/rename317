@@ -53,13 +53,13 @@ public final class SettingUsagePointers {
                 stream.g4();
             else
             if(j == 8)
-                aBoolean713 = true;
+                {}//aBoolean713 = true;
              else
             if(j == 10)
                  stream.gstr();
             else
             if(j == 11)
-                aBoolean713 = true;
+                {}//aBoolean713 = true;
             else
             if(j == 12)
                 stream.g4();
@@ -73,13 +73,11 @@ public final class SettingUsagePointers {
 
     private SettingUsagePointers()
     {
-        aBoolean713 = false;
     }
 
     public static SettingUsagePointers cache[];
     private static int anInt702;
     private static int[] anIntArray703;
     public int usage;
-    public boolean aBoolean713;
 
 }
