@@ -10,9 +10,9 @@ public final class WallDecoration
     {
     }
 
-    int Z3D;
-    int X3D;
-    int Y3D;
+    int zPos;
+    int xPos;
+    int yPos;
     int configBits;
     int face;
     public Animable myMob;
