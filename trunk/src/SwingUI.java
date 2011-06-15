@@ -15,7 +15,7 @@ public class SwingUI extends client implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = -6669540533506671428L;
-	private static JMenuItem menuItem;
+	//private static JMenuItem menuItem;
 	private JFrame frame;
 
 	public SwingUI(String args[]) {

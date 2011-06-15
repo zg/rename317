@@ -196,7 +196,8 @@ public final class Model extends Animable {
             triNIndex[j4] = class30_sub2_sub2.g2();
         }
 	}
-        public void readNewModel(byte abyte0[], int modelID) {
+        @SuppressWarnings("unused")
+		public void readNewModel(byte abyte0[], int modelID) {
 	System.out.println("reading new model "+modelID);
         Packet nc1 = new Packet(abyte0);
         Packet nc2 = new Packet(abyte0);
@@ -649,7 +650,7 @@ public final class Model extends Animable {
         aBoolean1659 = false;
     }
 
-    private Model(int i)
+    /*private Model(int i)//never used O_o
     {
         aBoolean1659 = false;
         ModelHeader modelHeader = modelHeaderCache[i];
@@ -793,7 +794,7 @@ public final class Model extends Animable {
             triNIndex[j4] = stream.g2();
         }
 
-    }
+    }*/
 
     public Model(int i, Model aclass30_sub2_sub4_sub6s[])
     {
@@ -1751,11 +1752,12 @@ public final class Model extends Animable {
                 triangleHslA[triID] = mixLightness(triangleColours[triID], lightness, triangleDrawType[triID]);
             }
         }
-//todo - this can be condensed
+//todo - this can be condensed - DONE
         
         if(flatShading)
         {
             doShading(lightMod, mag, l_x, l_y, l_z);
+            calculateDiagonals();
         } else
         {
             vertexNormalOffset = new VertexNormal[verticeCount];
@@ -1768,13 +1770,6 @@ public final class Model extends Animable {
                 vertexNormal_1.z = vertexNormal.z;
                 vertexNormal_1.magnitude = vertexNormal.magnitude;
             }
-
-        }
-        if(flatShading)
-        {
-            calculateDiagonals();
-        } else
-        {
             calculateDiagonalsAndStats();
         }
     }

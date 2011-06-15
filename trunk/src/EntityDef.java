@@ -289,7 +289,7 @@ public final class EntityDef
         anInt58 = -1;
         anInt59 = -1;
         combatLevel = -1;
-        anInt64 = 1834;
+        //anInt64 = 1834;//never used
         anInt67 = -1;
         aByte68 = 1;
         anInt75 = -1;
@@ -311,7 +311,7 @@ public final class EntityDef
     private int anInt59;
     private static Packet stream;
     public int combatLevel;
-    private final int anInt64;
+    //private final int anInt64;//never used
     public String name;
     public String actions[];
     public int anInt67;

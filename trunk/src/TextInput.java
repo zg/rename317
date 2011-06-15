@@ -103,7 +103,7 @@ final class TextInput {
         return s1;
     }
 
-    private static final boolean aBoolean630 = true;
+    //private static final boolean aBoolean630 = true;//never used
     private static final char[] aCharArray631 = new char[100];
     private static final Packet stream = new Packet(new byte[100]);
     private static final char[] validChars = {

@@ -205,6 +205,6 @@ repeat
     public int modifier1[];
     public int modifier2[];
     public int modifier3[];
-    private static boolean[] aBooleanArray643;
+    //private static boolean[] aBooleanArray643;//never used
 
 }

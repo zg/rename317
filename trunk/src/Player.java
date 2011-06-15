@@ -345,7 +345,7 @@ public final class Player extends Entity
         aBoolean1699 = false;
         appearanceColours = new int[5];
         visible = false;
-        anInt1715 = 9;
+        //anInt1715 = 9;//never used
         appearanceModels = new int[12];
     }
 
@@ -367,7 +367,7 @@ public final class Player extends Entity
     int anInt1712;
     int anInt1713;
     Model aModel_1714;
-    private int anInt1715;
+    //private int anInt1715;//never used
     public final int[] appearanceModels;
     private long aLong1718;
     int anInt1719;
