@@ -95,7 +95,7 @@ final class SceneGraph {
         tileArray[3][x][y] = null;
     }
 
-    public static void create_culling_cluster(int z, int lowest_x, int lowest_y, int lowest_z, int highest_x, int highest_y, int highest_z,
+    public static void createCullingCluster(int z, int lowest_x, int lowest_y, int lowest_z, int highest_x, int highest_y, int highest_z,
                                  int search_mask)
     {
         CullingCluster culling_cluster = new CullingCluster();
@@ -113,7 +113,7 @@ final class SceneGraph {
         cullingClusters[z][cullingClusterPointer[z]++] = culling_cluster;
     }
 
-    public void set_tile_logic_height(int z, int x, int y, int l_z)
+    public void setTileLogicHeight(int z, int x, int y, int l_z)
     {
         Tile class30_sub3 = tileArray[z][x][y];
         if(class30_sub3 != null)
@@ -171,8 +171,8 @@ final class SceneGraph {
         tileArray[Z][X][Y].groundDecoration = class49;
     }
 
-    public void method281(int x, int uid, Animable secondGroundItem, int k, Animable thirdGroundItem, Animable firstGroundItem,
-                          int z, int y)
+    public void addGroundItemTile(int x, int uid, Animable secondGroundItem, int k, Animable thirdGroundItem, Animable firstGroundItem,
+                          int z, int y)//todo - addGroundItemTile
     {
         GroundItemTile itemTile = new GroundItemTile();
         itemTile.firstGroundItem = firstGroundItem;
@@ -351,7 +351,7 @@ final class SceneGraph {
         return true;
     }
 
-    public void clearObj5Cache()
+    public void clearInteractableObjectCache()
     {
         for(int i = 0; i < interactableObjectCacheCurrPos; i++)
         {
@@ -450,7 +450,7 @@ final class SceneGraph {
 
     }
 
-    public void method294(int z, int y, int x)//todo - removeGroundDecoration?
+    public void removeGroundDecoration(int z, int y, int x)//todo - removeGroundDecoration?
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -458,7 +458,7 @@ final class SceneGraph {
         tile.groundDecoration = null;
     }
 
-    public void method295(int z, int x, int y)//todo - removeGroundItemTile
+    public void removeGroundItemTile(int z, int x, int y)//todo - removeGroundItemTile
     {
         Tile tile = tileArray[z][x][y];
         if(tile != null)
@@ -467,7 +467,7 @@ final class SceneGraph {
         }
     }
 
-    public WallObject method296(int z, int x, int y)//todo - getWallObject
+    public WallObject getWallObject(int z, int x, int y)//todo - getWallObject
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -476,7 +476,7 @@ final class SceneGraph {
             return tile.wallObject;
     }
 
-    public WallDecoration method297(int x, int y, int z)//todo - getWallDecoration
+    public WallDecoration getWallDecoration(int x, int y, int z)//todo - getWallDecoration
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -485,7 +485,7 @@ final class SceneGraph {
             return tile.wallDecoration;
     }
 
-    public InteractableObject method298(int x, int y, int z)//todo - getInteractableObject
+    public InteractableObject getInteractableObject(int x, int y, int z)//todo - getInteractableObject
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -499,7 +499,7 @@ final class SceneGraph {
         return null;
     }
 
-    public GroundDecoration method299(int y, int x, int z)//todo - getGroundDecoration
+    public GroundDecoration getGroundDecoration(int y, int x, int z)//todo - getGroundDecoration
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.groundDecoration == null)
@@ -508,7 +508,7 @@ final class SceneGraph {
             return tile.groundDecoration;
     }
 
-    public int method300(int z, int x, int y)//todo - getWallObjectUID
+    public int getWallObjectUID(int z, int x, int y)//todo - getWallObjectUID
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.wallObject == null)
@@ -517,7 +517,7 @@ final class SceneGraph {
             return tile.wallObject.uid;
     }
 
-    public int method301(int z, int x, int y)//todo - getWallDecorationUID
+    public int getWallDecorationUID(int z, int x, int y)//todo - getWallDecorationUID
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.wallDecoration == null)
@@ -526,7 +526,7 @@ final class SceneGraph {
             return tile.wallDecoration.uid;
     }
 
-    public int method302(int z, int x, int y)//todo - getInteractableObjectUID
+    public int getInteractableObjectUID(int z, int x, int y)//todo - getInteractableObjectUID
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -541,7 +541,7 @@ final class SceneGraph {
         return 0;
     }
 
-    public int method303(int z, int x, int y)//todo getGroundDecorationUID
+    public int getGroundDecorationUID(int z, int x, int y)//todo getGroundDecorationUID
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.groundDecoration == null)
