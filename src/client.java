@@ -49,6 +49,9 @@ public class client extends RSApplet {
 		}
 		return "";
 	}
+
+	private boolean connectserver = false;
+	
 	public void preloadModels() {
 
 		File file = new File("../../origcode/src/model/");
@@ -96,23 +99,26 @@ public class client extends RSApplet {
 
 	private void connectServer()
 	{
-		/*      int j = 5;
+			if(!connectserver)
+				return;//anti retard protection layer
+			
+		      int j = 5;
 		expectedCRCs[8] = 0;
 		int k = 0;
 		while(expectedCRCs[8] == 0)
 		{
 			String s = "Unknown problem";
-			drawLoadingText(20, (byte)4, "Connecting to web server");
+			drawLoadingText(20, "Connecting to web server");
 			try
 			{
 				DataInputStream datainputstream = openJagGrabInputStream("crc" + (int)(Math.random() * 99999999D) + "-" + 317);
-				Stream class30_sub2_sub2 = new Stream(new byte[40], 891);
-				datainputstream.readFully(class30_sub2_sub2.buffer, 0, 40);
+				Packet class30_sub2_sub2 = new Packet(new byte[40]);
+				datainputstream.readFully(class30_sub2_sub2.data, 0, 40);
 				datainputstream.close();
 				for(int i1 = 0; i1 < 9; i1++)
-					expectedCRCs[i1] = class30_sub2_sub2.readDWord();
+					expectedCRCs[i1] = class30_sub2_sub2.g4();
 
-				int j1 = class30_sub2_sub2.readDWord();
+				int j1 = class30_sub2_sub2.g4();
 				int k1 = 1234;
 				for(int l1 = 0; l1 < 9; l1++)
 					k1 = (k1 << 1) + expectedCRCs[l1];
@@ -147,11 +153,11 @@ public class client extends RSApplet {
 				{
 					if(k >= 10)
 					{
-						drawLoadingText(10, (byte)4, "Game updated - please reload page");
+						drawLoadingText(10, "Game updated - please reload page");
 						l = 10;
 					} else
 					{
-						drawLoadingText(10, (byte)4, s + " - Will retry in " + l + " secs.");
+						drawLoadingText(10, s + " - Will retry in " + l + " secs.");
 					}
 					try
 					{
@@ -166,7 +172,7 @@ public class client extends RSApplet {
 				aBoolean872 = !aBoolean872;
 			}
 		}
-*/
+
 	}
 	
 	private boolean menuHasAddFriend(int j)
