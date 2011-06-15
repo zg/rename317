@@ -1250,7 +1250,7 @@ public class client extends RSApplet {
 		int j = SettingUsagePointers.cache[i].usage;
 		if(j == 0)
 		return;
-		int k = session_settings[i];
+		int k = sessionSettings[i];
 		if(j == 1)
 		{
 			if(k == 1)
@@ -3973,9 +3973,9 @@ public class client extends RSApplet {
 			if(class9_2.dynamic_value_formulas != null && class9_2.dynamic_value_formulas[0][0] == 5)
 			{
 				int i2 = class9_2.dynamic_value_formulas[0][1];
-				if(session_settings[i2] != class9_2.condition_value_to_compare[0])
+				if(sessionSettings[i2] != class9_2.condition_value_to_compare[0])
 				{
-					session_settings[i2] = class9_2.condition_value_to_compare[0];
+					sessionSettings[i2] = class9_2.condition_value_to_compare[0];
 					method33(i2);
 					needDrawTabArea = true;
 				}
@@ -4336,7 +4336,7 @@ public class client extends RSApplet {
 			if(class9_3.dynamic_value_formulas != null && class9_3.dynamic_value_formulas[0][0] == 5)
 			{
 				int l2 = class9_3.dynamic_value_formulas[0][1];
-				session_settings[l2] = 1 - session_settings[l2];
+				sessionSettings[l2] = 1 - sessionSettings[l2];
 				method33(l2);
 				needDrawTabArea = true;
 			}
@@ -4710,7 +4710,7 @@ public class client extends RSApplet {
 		menuActionID = null;
 		menuActionCmd1 = null;
 		menuActionName = null;
-		session_settings = null;
+		sessionSettings = null;
 		markPosX = null;
 		markPosY = null;
 		markGraphic = null;
@@ -9090,11 +9090,11 @@ public class client extends RSApplet {
 					}
 				}
 				if(j1 == 5)
-				k1 = session_settings[ai[l++]];
+				k1 = sessionSettings[ai[l++]];
 				if(j1 == 6)
 				k1 = XP_FOR_LEVEL[user_stats[ai[l++]] - 1];
 				if(j1 == 7)
-				k1 = (session_settings[ai[l++]] * 100) / 46875;
+				k1 = (sessionSettings[ai[l++]] * 100) / 46875;
 				if(j1 == 8)
 				k1 = session_player.combatLevel;
 				if(j1 == 9)
@@ -9126,7 +9126,7 @@ public class client extends RSApplet {
 				k1 = user_weight;
 				if(j1 == 13)
 				{
-					int i2 = session_settings[ai[l++]];
+					int i2 = sessionSettings[ai[l++]];
 					int i3 = ai[l++];
 					k1 = (i2 & 1 << i3) == 0 ? 0 : 1;
 				}
@@ -9138,7 +9138,7 @@ public class client extends RSApplet {
 					int i4 = varBit.leastSignificantBit;
 					int j4 = varBit.mostSignificantBit;
 					int k4 = BITFIELD_MAX_VALUE[j4 - i4];
-					k1 = session_settings[l3] >> i4 & k4;
+					k1 = sessionSettings[l3] >> i4 & k4;
 				}
 				if(j1 == 15)
 				byte0 = 1;
@@ -11136,10 +11136,10 @@ public class client extends RSApplet {
 			}
 			if(pktType == 68)
 			{
-				for(int k5 = 0; k5 < session_settings.length; k5++)
-				if(session_settings[k5] != anIntArray1045[k5])
+				for(int k5 = 0; k5 < sessionSettings.length; k5++)
+				if(sessionSettings[k5] != anIntArray1045[k5])
 				{
-					session_settings[k5] = anIntArray1045[k5];
+					sessionSettings[k5] = anIntArray1045[k5];
 					method33(k5);
 					needDrawTabArea = true;
 				}
@@ -11455,9 +11455,9 @@ public class client extends RSApplet {
 				int j8 = inStream.ig2();
 				int l14 = inStream.big4();
 				anIntArray1045[j8] = l14;
-				if(session_settings[j8] != l14)
+				if(sessionSettings[j8] != l14)
 				{
-					session_settings[j8] = l14;
+					sessionSettings[j8] = l14;
 					method33(j8);
 					needDrawTabArea = true;
 					if(dialogID != -1)
@@ -11471,9 +11471,9 @@ public class client extends RSApplet {
 				int k8 = inStream.ig2();
 				byte byte0 = inStream.g1b();
 				anIntArray1045[k8] = byte0;
-				if(session_settings[k8] != byte0)
+				if(sessionSettings[k8] != byte0)
 				{
-					session_settings[k8] = byte0;
+					sessionSettings[k8] = byte0;
 					method33(k8);
 					needDrawTabArea = true;
 					if(dialogID != -1)
@@ -11740,7 +11740,7 @@ public class client extends RSApplet {
 		anIntArray968 = new int[33];
 		anIntArray969 = new int[256];
 		jagexFileStores = new JagexFileStore[5];
-		session_settings = new int[2000];
+		sessionSettings = new int[2000];
 		aBoolean972 = false;
 		anInt975 = 50;
 		anIntArray976 = new int[anInt975];
@@ -12057,7 +12057,7 @@ public class client extends RSApplet {
 	private final int[] anIntArray968;
 	private final int[] anIntArray969;
 	final JagexFileStore[] jagexFileStores;
-	public int session_settings[];
+	public int sessionSettings[];
 	private boolean aBoolean972;
 	private final int anInt975;
 	private final int[] anIntArray976;
