@@ -23,6 +23,7 @@ import sign.signlink;
 
 
 
+@SuppressWarnings("serial")
 public class client extends RSApplet {
 
 	private static String logic_get_amount_string_full_name(int i)
@@ -2735,6 +2736,7 @@ public class client extends RSApplet {
 		} while(true);
 	}
 
+	@SuppressWarnings("unused")
 	private void calcFlamesPosition()
 	{
 		char c = '\u0100';
@@ -8859,9 +8861,9 @@ public class client extends RSApplet {
 			}
 			catch(Exception _ex) { }
 		}
-		aIndexedImage_966 = null;
-		aIndexedImage_967 = null;
-		aIndexedImage_999 = null;
+		//aIndexedImage_966 = null;//never used
+		//aIndexedImage_967 = null;//never used
+		//aIndexedImage_999 = null;//never used
 		titlebox = null;
 		loginhover = null;
 		passwordhover = null;
@@ -10060,6 +10062,7 @@ public class client extends RSApplet {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private static void setLowMem()
 	{
 		SceneGraph.lowMem = true;
@@ -11855,6 +11858,7 @@ public class client extends RSApplet {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void drawStatusGlobes() {
 		// Hit-points
 		System.out.println("draw orb");
@@ -12046,9 +12050,9 @@ public class client extends RSApplet {
 	private final int[] anIntArray965 = {
 		0xffff00, 0xff0000, 65280, 65535, 0xff00ff, 0xffffff
 	};
-	private IndexedImage aIndexedImage_966;
-	private IndexedImage aIndexedImage_999;
-	private IndexedImage aIndexedImage_967;
+	//private IndexedImage aIndexedImage_966;//never used
+	//private IndexedImage aIndexedImage_999;//never used
+	//private IndexedImage aIndexedImage_967;//never used
 	
 	private final int[] anIntArray968;
 	private final int[] anIntArray969;

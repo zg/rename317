@@ -6,6 +6,7 @@ import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class RSApplet extends Applet
     implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener
 {

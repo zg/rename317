@@ -4,6 +4,7 @@
 
 import java.awt.*;
 
+@SuppressWarnings("serial")
 final class RSFrame extends Frame
 {
 

@@ -1382,7 +1382,7 @@ label0:
     private static final int faceXOffset[] = {
         1, 0, -1, 0
     };
-    private static final int anInt138 = 323;
+    //private static final int anInt138 = 323;//never used
     private final int[][] tile_shadow;
     private static final int anIntArray140[] = {
         16, 32, 64, 128

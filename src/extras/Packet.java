@@ -1,3 +1,5 @@
+package extras;
+
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimporsts(3) 
@@ -16,7 +18,8 @@ public final class Packet {
 		return i;
 	}
 
-    private Packet()
+    @SuppressWarnings("unused")
+	private Packet()
     {
     }
 
@@ -365,7 +368,8 @@ this.data[pos++] = data[i];
         0xfffff, 0x1fffff, 0x3fffff, 0x7fffff, 0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff, 
         0x3fffffff, 0x7fffffff, -1
     };
-    private static int stream_pool_ptr;
+    @SuppressWarnings("unused")
+	private static int stream_pool_ptr;
 
     //removed useless static initializer
 }
