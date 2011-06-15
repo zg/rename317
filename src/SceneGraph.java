@@ -1356,12 +1356,12 @@ label0:
 label0:
                     for(int k2 = 0; k2 < i1; k2++)
                     {
-                        InteractableObject class28_1 = TILE.entities[k2];
-                        if(class28_1.anInt528 == anInt448)
+                        InteractableObject interactableObject = TILE.entities[k2];
+                        if(interactableObject.anInt528 == anInt448)
                             continue;
-                        for(int k3 = class28_1.tileX; k3 <= class28_1.anInt524; k3++)
+                        for(int k3 = interactableObject.tileX; k3 <= interactableObject.anInt524; k3++)
                         {
-                            for(int l4 = class28_1.tileY; l4 <= class28_1.anInt526; l4++)
+                            for(int l4 = interactableObject.tileY; l4 <= interactableObject.anInt526; l4++)
                             {
                                 Tile class30_sub3_21 = aclass30_sub3[k3][l4];
                                 if(class30_sub3_21.aBoolean1322)
@@ -1372,13 +1372,13 @@ label0:
                                     if(class30_sub3_21.anInt1325 == 0)
                                         continue;
                                     int l6 = 0;
-                                    if(k3 > class28_1.tileX)
+                                    if(k3 > interactableObject.tileX)
                                         l6++;
-                                    if(k3 < class28_1.anInt524)
+                                    if(k3 < interactableObject.anInt524)
                                         l6 += 4;
-                                    if(l4 > class28_1.tileY)
+                                    if(l4 > interactableObject.tileY)
                                         l6 += 8;
-                                    if(l4 < class28_1.anInt526)
+                                    if(l4 < interactableObject.anInt526)
                                         l6 += 2;
                                     if((l6 & class30_sub3_21.anInt1325) != TILE.anInt1327)
                                         continue;
@@ -1389,17 +1389,17 @@ label0:
 
                         }
 
-                        aClass28Array462[l1++] = class28_1;
-                        int i5 = xCameraPositionTile - class28_1.tileX;
-                        int i6 = class28_1.anInt524 - xCameraPositionTile;
+                        aClass28Array462[l1++] = interactableObject;
+                        int i5 = xCameraPositionTile - interactableObject.tileX;
+                        int i6 = interactableObject.anInt524 - xCameraPositionTile;
                         if(i6 > i5)
                             i5 = i6;
-                        int i7 = yCameraPositionTile - class28_1.tileY;
-                        int j8 = class28_1.anInt526 - yCameraPositionTile;
+                        int i7 = yCameraPositionTile - interactableObject.tileY;
+                        int j8 = interactableObject.anInt526 - yCameraPositionTile;
                         if(j8 > i7)
-                            class28_1.anInt527 = i5 + j8;
+                            interactableObject.anInt527 = i5 + j8;
                         else
-                            class28_1.anInt527 = i5 + i7;
+                            interactableObject.anInt527 = i5 + i7;
                     }
 
                     while(l1 > 0) 
@@ -1408,17 +1408,17 @@ label0:
                         int l3 = -1;
                         for(int j5 = 0; j5 < l1; j5++)
                         {
-                            InteractableObject class28_2 = aClass28Array462[j5];
-                            if(class28_2.anInt528 != anInt448)
-                                if(class28_2.anInt527 > i3)
+                            InteractableObject interactableObject = aClass28Array462[j5];
+                            if(interactableObject.anInt528 != anInt448)
+                                if(interactableObject.anInt527 > i3)
                                 {
-                                    i3 = class28_2.anInt527;
+                                    i3 = interactableObject.anInt527;
                                     l3 = j5;
                                 } else
-                                if(class28_2.anInt527 == i3)
+                                if(interactableObject.anInt527 == i3)
                                 {
-                                    int j7 = class28_2.anInt519 - xCameraPosition;
-                                    int k8 = class28_2.anInt520 - yCameraPosition;
+                                    int j7 = interactableObject.anInt519 - xCameraPosition;
+                                    int k8 = interactableObject.anInt520 - yCameraPosition;
                                     int l9 = aClass28Array462[l3].anInt519 - xCameraPosition;
                                     int l10 = aClass28Array462[l3].anInt520 - yCameraPosition;
                                     if(j7 * j7 + k8 * k8 > l9 * l9 + l10 * l10)
@@ -1494,17 +1494,17 @@ label0:
             }
             if(TILE.anInt1328 != 0)
             {
-                WallDecoration class26 = TILE.obj2;
-                if(class26 != null && !method322(l, X, Y, class26.myMob.modelHeight))
-                    if((class26.configBits & TILE.anInt1328) != 0)
-                        class26.myMob.renderAtPoint(class26.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class26.X3D - xCameraPosition, class26.Z3D - zCameraPosition, class26.Y3D - yCameraPosition, class26.uid);
+                WallDecoration wallDecoration = TILE.obj2;
+                if(wallDecoration != null && !method322(l, X, Y, wallDecoration.myMob.modelHeight))
+                    if((wallDecoration.configBits & TILE.anInt1328) != 0)
+                        wallDecoration.myMob.renderAtPoint(wallDecoration.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallDecoration.X3D - xCameraPosition, wallDecoration.Z3D - zCameraPosition, wallDecoration.Y3D - yCameraPosition, wallDecoration.uid);
                     else
-                    if((class26.configBits & 0x300) != 0)
+                    if((wallDecoration.configBits & 0x300) != 0)
                     {
-                        int l2 = class26.X3D - xCameraPosition;
-                        int j3 = class26.Z3D - zCameraPosition;
-                        int i4 = class26.Y3D - yCameraPosition;
-                        int k5 = class26.face;
+                        int l2 = wallDecoration.X3D - xCameraPosition;
+                        int j3 = wallDecoration.Z3D - zCameraPosition;
+                        int i4 = wallDecoration.Y3D - yCameraPosition;
+                        int k5 = wallDecoration.face;
                         int j6;
                         if(k5 == 1 || k5 == 2)
                             j6 = -l2;
@@ -1515,17 +1515,17 @@ label0:
                             l7 = -i4;
                         else
                             l7 = i4;
-                        if((class26.configBits & 0x100) != 0 && l7 >= j6)
+                        if((wallDecoration.configBits & 0x100) != 0 && l7 >= j6)
                         {
                             int i9 = l2 + faceXOffset2[k5];
                             int i10 = i4 + faceYOffset2[k5];
-                            class26.myMob.renderAtPoint(k5 * 512 + 256, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, i9, j3, i10, class26.uid);
+                            wallDecoration.myMob.renderAtPoint(k5 * 512 + 256, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, i9, j3, i10, wallDecoration.uid);
                         }
-                        if((class26.configBits & 0x200) != 0 && l7 <= j6)
+                        if((wallDecoration.configBits & 0x200) != 0 && l7 <= j6)
                         {
                             int j9 = l2 + faceXOffset3[k5];
                             int j10 = i4 + faceYOffset3[k5];
-                            class26.myMob.renderAtPoint(k5 * 512 + 1280 & 0x7ff, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, j9, j3, j10, class26.uid);
+                            wallDecoration.myMob.renderAtPoint(k5 * 512 + 1280 & 0x7ff, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, j9, j3, j10, wallDecoration.uid);
                         }
                     }
                 WallObject class10_2 = TILE.obj1;
