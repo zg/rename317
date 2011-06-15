@@ -1,19 +1,3 @@
-
-/*
-todo add gameframe(copy from 304)
-fix 377 cache loading
-try and rename those last few classes
-figure out how music system works
-add sound system
-rename fonts and crap
-include cache in new svn
-try and rename the animation system a bit more
-
-fix all the shit with the new title screen
-(try to get the animated stuff from rs)
-
-*/
-
 import java.applet.AppletContext;
 import java.awt.*;
 import java.io.*;
