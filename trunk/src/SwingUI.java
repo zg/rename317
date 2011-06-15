@@ -20,6 +20,7 @@ public class SwingUI extends client implements ActionListener {
 
 	public SwingUI(String args[]) {
 		super();
+		super.guiLaunch = true;
 		try {
 			sign.signlink.startpriv(InetAddress.getByName(server));
 			initUI();
