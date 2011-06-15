@@ -7,7 +7,7 @@ public final class Tile extends Node {
 
     public Tile(int i, int j, int k)
     {
-        entities = new InteractableObject[5];
+        interactableObjects = new InteractableObject[5];
         anIntArray1319 = new int[5];
         anInt1310 = tileZ = i;
         anInt1308 = j;
@@ -20,15 +20,15 @@ public final class Tile extends Node {
     final int anInt1310;
     public PlainTile myPlainTile;
     public ShapedTile shapedTile;
-    public WallObject obj1;
-    public WallDecoration obj2;
-    public GroundDecoration obj3;
+    public WallObject wallObject;
+    public WallDecoration wallDecoration;
+    public GroundDecoration groundDecoration;
     public GroundItemTile groundItemTile;
-    int entity_count;
-    public final InteractableObject[] entities;
+    int entityCount;
+    public final InteractableObject[] interactableObjects;
     final int[] anIntArray1319;
     int anInt1320;
-    int logic_height;
+    int logicHeight;
     boolean aBoolean1322;
     boolean aBoolean1323;
     boolean aBoolean1324;
