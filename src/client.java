@@ -2449,7 +2449,27 @@ public class client extends RSApplet {
 	}
 
 	public static void main(String args[])
-	{/*
+	{
+		try{
+		if(args[0] != null)
+			guiLaunch = false;
+		}catch(Exception e){}
+		
+		if(guiLaunch)
+			try{
+				network_worldid = 9;
+				portOff = 0;
+				setHighMem();
+				isMembers = true;
+				signlink.storeid = 32;
+				signlink.startpriv(InetAddress.getLocalHost());
+				@SuppressWarnings("unused")
+				client var_client = new client();
+				new SwingUI(args);
+			} catch(Exception e){
+				e.printStackTrace();
+			}
+			else
 		try
 		{
 			System.out.println("RS2 user client - release #" + 317);
@@ -2490,20 +2510,8 @@ public class client extends RSApplet {
 		catch(Exception exception)
 		{
 		}
-		*/
-		try{
-			network_worldid = 9;
-			portOff = 0;
-			setHighMem();
-			isMembers = true;
-			signlink.storeid = 32;
-			signlink.startpriv(InetAddress.getLocalHost());
-			@SuppressWarnings("unused")
-			client var_client = new client();
-			new SwingUI(args);
-		} catch(Exception e){
-			e.printStackTrace();
-		}
+		
+
 	}
 
 	private void loadingStages()
@@ -12368,6 +12376,7 @@ public class client extends RSApplet {
 	private int anInt1289;
 	public static int anInt1290;
 	public String server = "";
+	public static boolean guiLaunch = true;
 
 	static 
 	{
