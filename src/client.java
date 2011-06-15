@@ -764,7 +764,7 @@ public class client extends RSApplet {
 		{
 			for(int l2 = 0; l2 < 104; l2++)
 			{
-				int i3 = sceneGraph.method303(plane, k2, l2);
+				int i3 = sceneGraph.getGroundDecorationUID(plane, k2, l2);
 				if(i3 != 0)
 				{
 					i3 = i3 >> 14 & 0x7fff;
@@ -809,7 +809,7 @@ public class client extends RSApplet {
 		NodeList class19 = groundArray[plane][i][j];
 		if(class19 == null)
 		{
-			sceneGraph.method295(plane, i, j);
+			sceneGraph.removeGroundItemTile(plane, i, j);
 			return;
 		}
 		int k = 0xfa0a1f01;
@@ -841,7 +841,7 @@ public class client extends RSApplet {
 		}
 
 		int i1 = i + (j << 7) + 0x60000000;
-		sceneGraph.method281(i, i1, ((Animable) (obj1)), method42(plane, j * 128 + 64, i * 128 + 64), ((Animable) (obj2)), ((Animable) (obj)), plane, j);
+		sceneGraph.addGroundItemTile(i, i1, ((Animable) (obj1)), method42(plane, j * 128 + 64, i * 128 + 64), ((Animable) (obj2)), ((Animable) (obj)), plane, j);
 	}
 
 	private void renderNPCs(boolean flag)//todo- check this
@@ -2211,7 +2211,7 @@ public class client extends RSApplet {
 
 	private void drawMapScenes(int i, int k, int l, int i1, int j1)
 	{
-		int k1 = sceneGraph.method300(j1, l, i);
+		int k1 = sceneGraph.getWallObjectUID(j1, l, i);
 		if(k1 != 0)
 		{
 			int l1 = sceneGraph.getIDTAGForXYZ(j1, l, i, k1);
@@ -2307,7 +2307,7 @@ public class client extends RSApplet {
 				}
 			}
 		}
-		k1 = sceneGraph.method302(j1, l, i);
+		k1 = sceneGraph.getInteractableObjectUID(j1, l, i);
 		if(k1 != 0)
 		{
 			int i2 = sceneGraph.getIDTAGForXYZ(j1, l, i, k1);
@@ -2347,7 +2347,7 @@ public class client extends RSApplet {
 				}
 			}
 		}
-		k1 = sceneGraph.method303(j1, l, i);
+		k1 = sceneGraph.getGroundDecorationUID(j1, l, i);
 		if(k1 != 0)
 		{
 			int j2 = k1 >> 14 & 0x7fff;
@@ -6635,13 +6635,13 @@ public class client extends RSApplet {
 		int k = 0;
 		int l = 0;
 		if(gameObjectSpawnRequest.anInt1296 == 0)
-		i = sceneGraph.method300(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
+		i = sceneGraph.getWallObjectUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
 		if(gameObjectSpawnRequest.anInt1296 == 1)
-		i = sceneGraph.method301(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
+		i = sceneGraph.getWallDecorationUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
 		if(gameObjectSpawnRequest.anInt1296 == 2)
-		i = sceneGraph.method302(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
+		i = sceneGraph.getInteractableObjectUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
 		if(gameObjectSpawnRequest.anInt1296 == 3)
-		i = sceneGraph.method303(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
+		i = sceneGraph.getGroundDecorationUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z);
 		if(i != 0)
 		{
 			int i1 = sceneGraph.getIDTAGForXYZ(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.z, i);
@@ -9869,7 +9869,7 @@ public class client extends RSApplet {
 				int k20 = intGroundArray[plane][j4][i7 + 1];
 				if(j16 == 0)
 				{
-					WallObject class10 = sceneGraph.method296(plane, j4, i7);
+					WallObject class10 = sceneGraph.getWallObject(plane, j4, i7);
 					if(class10 != null)
 					{
 						int k21 = class10.uid >> 14 & 0x7fff;
@@ -9885,13 +9885,13 @@ public class client extends RSApplet {
 				}
 				if(j16 == 1)
 				{
-					WallDecoration class26 = sceneGraph.method297(j4, i7, plane);
+					WallDecoration class26 = sceneGraph.getWallDecoration(j4, i7, plane);
 					if(class26 != null)
 					class26.myMob = new ObjectOnTile(class26.uid >> 14 & 0x7fff, 0, 4, i19, l19, j18, k20, j17, false);
 				}
 				if(j16 == 2)
 				{
-					InteractableObject class28 = sceneGraph.method298(j4, i7, plane);
+					InteractableObject class28 = sceneGraph.getInteractableObject(j4, i7, plane);
 					if(j12 == 11)
 					j12 = 10;
 					if(class28 != null)
@@ -9899,7 +9899,7 @@ public class client extends RSApplet {
 				}
 				if(j16 == 3)
 				{
-					GroundDecoration class49 = sceneGraph.method299(i7, j4, plane);
+					GroundDecoration class49 = sceneGraph.getGroundDecoration(i7, j4, plane);
 					if(class49 != null)
 					class49.aClass30_Sub2_Sub4_814 = new ObjectOnTile(class49.uid >> 14 & 0x7fff, k14, 22, i19, l19, j18, k20, j17, false);
 				}
@@ -10232,13 +10232,13 @@ public class client extends RSApplet {
 			return;
 			int i2 = 0;
 			if(j1 == 0)
-			i2 = sceneGraph.method300(j, i1, i);
+			i2 = sceneGraph.getWallObjectUID(j, i1, i);
 			if(j1 == 1)
-			i2 = sceneGraph.method301(j, i1, i);
+			i2 = sceneGraph.getWallDecorationUID(j, i1, i);
 			if(j1 == 2)
-			i2 = sceneGraph.method302(j, i1, i);
+			i2 = sceneGraph.getInteractableObjectUID(j, i1, i);
 			if(j1 == 3)
-			i2 = sceneGraph.method303(j, i1, i);
+			i2 = sceneGraph.getGroundDecorationUID(j, i1, i);
 			if(i2 != 0)
 			{
 				int i3 = sceneGraph.getIDTAGForXYZ(j, i1, i, i2);
@@ -10265,7 +10265,7 @@ public class client extends RSApplet {
 				}
 				if(j1 == 3)
 				{
-					sceneGraph.method294(j, i, i1);
+					sceneGraph.removeGroundDecoration(j, i, i1);
 					ObjectDef class46_2 = ObjectDef.forID(j2);
 					if(class46_2.isUnwalkable && class46_2.hasActions)
 					tileSettings[j].method218(i, i1);
@@ -11655,7 +11655,7 @@ public class client extends RSApplet {
 		DrawingArea.reset_image();
 		//xxx disables graphics            if(graphicsEnabled){
 		sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
-		sceneGraph.clearObj5Cache();
+		sceneGraph.clearInteractableObjectCache();
 		updateEntities();
 		drawHeadIcon();
 		method37(k2);

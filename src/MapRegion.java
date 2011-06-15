@@ -240,7 +240,7 @@ final class MapRegion {
             for(int _y = 1; _y < yMapSize - 1; _y++)
             {
                 for(int _x = 1; _x < xMapSize - 1; _x++)
-                    sceneGraph.set_tile_logic_height(z, _x, _y, get_logic_height(z, _x, _y));
+                    sceneGraph.setTileLogicHeight(z, _x, _y, get_logic_height(z, _x, _y));
 
             }
 
@@ -304,7 +304,7 @@ for_highest_z_flagged:
                                 char c1 = '\360';
                                 int h_a = heightMap[highest_z_flagged][__x][lowest_y_flagged] - c1;
                                 int h_b = heightMap[lowest_z_flagged][__x][lowest_y_flagged];
-                                SceneGraph.create_culling_cluster(_z, __x * 128, lowest_y_flagged * 128, h_b, __x * 128, highest_y_flagged * 128 + 128, h_a, 1);
+                                SceneGraph.createCullingCluster(_z, __x * 128, lowest_y_flagged * 128, h_b, __x * 128, highest_y_flagged * 128 + 128, h_a, 1);
                                 for(int ___z = lowest_z_flagged; ___z <= highest_z_flagged; ___z++)
                                 {
                                     for(int ___y = lowest_y_flagged; ___y <= highest_y_flagged; ___y++)
@@ -346,7 +346,7 @@ for_highest_z_flagged:
                                 char c2 = '\360';
                                 int h_a = heightMap[highest_z_flagged][lowest_x_flagged][__y] - c2;
                                 int h_b = heightMap[lowest_z_flagged][lowest_x_flagged][__y];
-                                SceneGraph.create_culling_cluster(_z, lowest_x_flagged * 128, __y * 128, h_b, highest_x_flagged * 128 + 128, __y * 128, h_a, 2);
+                                SceneGraph.createCullingCluster(_z, lowest_x_flagged * 128, __y * 128, h_b, highest_x_flagged * 128 + 128, __y * 128, h_a, 2);
                                 for(int ___z = lowest_z_flagged; ___z <= highest_z_flagged; ___z++)
                                 {
                                     for(int ___x = lowest_x_flagged; ___x <= highest_x_flagged; ___x++)
@@ -385,7 +385,7 @@ label5:
                             if(((j6 - i5) + 1) * ((i9 - k7) + 1) >= 4)
                             {
                                 int j12 = heightMap[__z][i5][k7];
-                                SceneGraph.create_culling_cluster(_z, i5 * 128, k7 * 128, j12, j6 * 128 + 128, i9 * 128 + 128, j12, 4);
+                                SceneGraph.createCullingCluster(_z, i5 * 128, k7 * 128, j12, j6 * 128 + 128, i9 * 128 + 128, j12, 4);
                                 for(int k13 = i5; k13 <= j6; k13++)
                                 {
                                     for(int i15 = k7; i15 <= i9; i15++)
@@ -759,7 +759,7 @@ label0:
         if(j == 5)
         {
             int i4 = 16;
-            int k4 = sceneGraph.method300(k, l, i);
+            int k4 = sceneGraph.getWallObjectUID(k, l, i);
             if(k4 > 0)
                 i4 = ObjectDef.forID(k4 >> 14 & 0x7fff).anInt775;
             Object obj13;
@@ -1232,7 +1232,7 @@ label0:
         if(k == 5)
         {
             int j4 = 16;
-            int l4 = sceneGraph.method300(k1, i1, j);
+            int l4 = sceneGraph.getWallObjectUID(k1, i1, j);
             if(l4 > 0)
                 j4 = ObjectDef.forID(l4 >> 14 & 0x7fff).anInt775;
             Object obj13;
