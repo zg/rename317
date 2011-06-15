@@ -4740,7 +4740,6 @@ public class client extends RSApplet {
 		Flo.cache = null;
 		IdentityKit.cache = null;
 		RSInterface.interfaceCache = null;
-		DummyClass.cache = null;
 		Animation.anims = null;
 		SpotAnim.cache = null;
 		SpotAnim.aMRUNodes_415 = null;
