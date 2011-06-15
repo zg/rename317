@@ -246,12 +246,12 @@ final class MapRegion {
 
         }
 
-        sceneGraph.shade_models(-50, -10, -50, 768, 64);
+        sceneGraph.shadeModels(-50, -10, -50, 768, 64);
         for(int _x = 0; _x < xMapSize; _x++)
         {
             for(int _y = 0; _y < yMapSize; _y++)
                 if((tileSettings[1][_x][_y] & 2) == 2)
-                    sceneGraph.apply_bridge_mode(_x, _y);
+                    sceneGraph.applyBridgeMode(_x, _y);
 
         }
 
