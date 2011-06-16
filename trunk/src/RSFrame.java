@@ -1,7 +1,4 @@
 
-
-
-
 import java.awt.*;
 
 @SuppressWarnings("serial")
@@ -13,10 +10,8 @@ final class RSFrame extends Frame
         rsApplet = RSApplet_;
         setTitle("Jagex");
         setResizable(false);
-        //show();        //deprecated
         setVisible(true);
         toFront();
-        //resize(i + 8, j + 28);   //deprecated
         setSize(i + 8, j + 28);
     }
 

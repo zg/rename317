@@ -630,7 +630,7 @@ public final class Model extends Animable {
         }
     }
 
-    public static boolean isDownloaded(int i)
+    public static boolean isCached(int i)
     {
         if(modelHeaderCache == null)
             return false;

@@ -8,10 +8,12 @@ public class FileOperations {
 
     public FileOperations() {
     }
-public static boolean FileExists(String s)
-{
-return new File(s).exists();
-}
+
+    public static boolean FileExists(String s)
+    {
+    	return new File(s).exists();
+    }
+    
     public static final byte[] ReadFile(String s) {
         try {
             byte abyte0[];
