@@ -9,15 +9,19 @@ final class BZIP2Decompressor
         synchronized(Bzip2Decompressor)
         {
             Bzip2Decompressor.inputBuffer = inputBuf;
-            Bzip2Decompressor.fileStartOffsets = offset;
+            Bzip2Decompressor.nextIn = offset;
             Bzip2Decompressor.outputBuffer = outputBuf;
             Bzip2Decompressor.compressedSize = compressedSize;
             Bzip2Decompressor.decompressedSize = decompressedSize;
-            Bzip2Decompressor.bitPos = 0;
-            Bzip2Decompressor.anInt569 = 0;
-            Bzip2Decompressor.current2Bytes = 0;
-            Bzip2Decompressor.anInt571 = 0;
-            Bzip2Decompressor.anInt572 = 0;
+            Bzip2Decompressor.bsLive = 0;
+            Bzip2Decompressor.availOut = 0;
+            Bzip2Decompressor.bsBuff = 0;
+            Bzip2Decompressor.totalInLo32 = 0;
+            Bzip2Decompressor.totalInHi32 = 0;
+            Bzip2Decompressor.totalOutLo32 = 0;
+            Bzip2Decompressor.totalOutHi32 = 0;
+            Bzip2Decompressor.junk3 = 0;
+           
             getNextBlock(Bzip2Decompressor);
             decompressedSize -= Bzip2Decompressor.decompressedSize;
             return decompressedSize;
@@ -27,128 +31,128 @@ final class BZIP2Decompressor
     @SuppressWarnings("static-access")
 	private static void getNextFileHeader(BZ2Entry archive)
     {
-        byte byte4 = archive.aByte573;
-        int i = archive.anInt574;
-        int j = archive.anInt584;
-        int k = archive.anInt582;
-        int buf[] = archive.anIntArray587;
-        int l = archive.anInt581;
+        byte stateOutCh = archive.stateOutCh;
+        int stateOutLen = archive.stateOutLen;
+        int nBlockUsed = archive.nBlockUsed;
+        int k = archive.k0;
+        int out[] = archive.anIntArray587;
+        int nextOut = archive.nextOut;
         byte outBuf[] = archive.outputBuffer;
-        int i1 = archive.anInt569;
+        int availOut = archive.availOut;
         int decompressedSize = archive.decompressedSize;
         int k1 = decompressedSize;
-        int l1 = archive.anInt601 + 1;
+        int nBlock_pp = archive.nBlock_pp + 1;
 label0:
         do
         {
-            if(i > 0)
+            if(stateOutLen > 0)
             {
                 do
                 {
                     if(decompressedSize == 0)
                         break label0;
-                    if(i == 1)
+                    if(stateOutLen == 1)
                         break;
-                    outBuf[i1] = byte4;
-                    i--;
-                    i1++;
+                    outBuf[availOut] = stateOutCh;
+                    stateOutLen--;
+                    availOut++;
                     decompressedSize--;
                 } while(true);
                 if(decompressedSize == 0)
                 {
-                    i = 1;
+                    stateOutLen = 1;
                     break;
                 }
-                outBuf[i1] = byte4;
-                i1++;
+                outBuf[availOut] = stateOutCh;
+                availOut++;
                 decompressedSize--;
             }
             boolean flag = true;
             while(flag) 
             {
                 flag = false;
-                if(j == l1)
+                if(nBlockUsed == nBlock_pp)
                 {
-                    i = 0;
+                    stateOutLen = 0;
                     break label0;
                 }
-                byte4 = (byte)k;
-                l = buf[l];
-                byte byte0 = (byte)(l & 0xff);
-                l >>= 8;
-                j++;
+                stateOutCh = (byte)k;
+                nextOut = out[nextOut];
+                byte byte0 = (byte)(nextOut & 0xff);
+                nextOut >>= 8;
+                nBlockUsed++;
                 if(byte0 != k)
                 {
                     k = byte0;
                     if(decompressedSize == 0)
                     {
-                        i = 1;
+                        stateOutLen = 1;
                     } else
                     {
-                        outBuf[i1] = byte4;
-                        i1++;
+                        outBuf[availOut] = stateOutCh;
+                        availOut++;
                         decompressedSize--;
                         flag = true;
                         continue;
                     }
                     break label0;
                 }
-                if(j != l1)
+                if(nBlockUsed != nBlock_pp)
                     continue;
                 if(decompressedSize == 0)
                 {
-                    i = 1;
+                    stateOutLen = 1;
                     break label0;
                 }
-                outBuf[i1] = byte4;
-                i1++;
+                outBuf[availOut] = stateOutCh;
+                availOut++;
                 decompressedSize--;
                 flag = true;
             }
-            i = 2;
-            l = buf[l];
-            byte byte1 = (byte)(l & 0xff);
-            l >>= 8;
-            if(++j != l1)
+            stateOutLen = 2;
+            nextOut = out[nextOut];
+            byte byte1 = (byte)(nextOut & 0xff);
+            nextOut >>= 8;
+            if(++nBlockUsed != nBlock_pp)
                 if(byte1 != k)
                 {
                     k = byte1;
                 } else
                 {
-                    i = 3;
-                    l = buf[l];
-                    byte byte2 = (byte)(l & 0xff);
-                    l >>= 8;
-                    if(++j != l1)
+                    stateOutLen = 3;
+                    nextOut = out[nextOut];
+                    byte byte2 = (byte)(nextOut & 0xff);
+                    nextOut >>= 8;
+                    if(++nBlockUsed != nBlock_pp)
                         if(byte2 != k)
                         {
                             k = byte2;
                         } else
                         {
-                            l = buf[l];
-                            byte byte3 = (byte)(l & 0xff);
-                            l >>= 8;
-                            j++;
-                            i = (byte3 & 0xff) + 4;
-                            l = buf[l];
-                            k = (byte)(l & 0xff);
-                            l >>= 8;
-                            j++;
+                            nextOut = out[nextOut];
+                            byte byte3 = (byte)(nextOut & 0xff);
+                            nextOut >>= 8;
+                            nBlockUsed++;
+                            stateOutLen = (byte3 & 0xff) + 4;
+                            nextOut = out[nextOut];
+                            k = (byte)(nextOut & 0xff);
+                            nextOut >>= 8;
+                            nBlockUsed++;
                         }
                 }
         } while(true);
-        int i2 = archive.anInt571;
-        archive.anInt571 += k1 - decompressedSize;
-        if(archive.anInt571 < i2)
-            archive.anInt572++;
-        archive.aByte573 = byte4;
-        archive.anInt574 = i;
-        archive.anInt584 = j;
-        archive.anInt582 = k;
-        archive.anIntArray587 = buf;
-        archive.anInt581 = l;
+        int i2 = archive.totalOutLo32;
+        archive.totalOutLo32 += k1 - decompressedSize;
+        if(archive.totalOutLo32 < i2)
+            archive.totalOutHi32++;
+        archive.stateOutCh = stateOutCh;
+        archive.stateOutLen = stateOutLen;
+        archive.nBlockUsed = nBlockUsed;
+        archive.k0 = k;
+        archive.anIntArray587 = out;
+        archive.nextOut = nextOut;
         archive.outputBuffer = outBuf;
-        archive.anInt569 = i1;
+        archive.availOut = availOut;
         archive.decompressedSize = decompressedSize;
     }
 
@@ -165,35 +169,36 @@ label0:
         boolean reading = true;
         while(reading) 
         {
-            byte currentBlock = getByte(BZ2Entry);
+            byte currentBlock = readUChar(BZ2Entry);
             if(currentBlock == 23)
                 return;
             /* Magic Numbers */
-            currentBlock = getByte(BZ2Entry);// 0x41
-            currentBlock = getByte(BZ2Entry);// 0x59
-            currentBlock = getByte(BZ2Entry);// 0x26
-            currentBlock = getByte(BZ2Entry);// 0x53
-            currentBlock = getByte(BZ2Entry);// 0x59
+            currentBlock = readUChar(BZ2Entry);// 0x41
+            currentBlock = readUChar(BZ2Entry);// 0x59
+            currentBlock = readUChar(BZ2Entry);// 0x26
+            currentBlock = readUChar(BZ2Entry);// 0x53
+            currentBlock = readUChar(BZ2Entry);// 0x59
+            BZ2Entry.junk3++;
             /* CRC Checksums */
-            currentBlock = getByte(BZ2Entry);
-            currentBlock = getByte(BZ2Entry);
-            currentBlock = getByte(BZ2Entry);
-            currentBlock = getByte(BZ2Entry);
+            currentBlock = readUChar(BZ2Entry);
+            currentBlock = readUChar(BZ2Entry);
+            currentBlock = readUChar(BZ2Entry);
+            currentBlock = readUChar(BZ2Entry);
             /* Randomized block, 1 = randomized */
-            currentBlock = getBit(BZ2Entry);
+            currentBlock = readBit(BZ2Entry);
             BZ2Entry.randomized = currentBlock != 0;
             if(BZ2Entry.randomized)
                 System.out.println("PANIC! RANDOMISED BLOCK!");
             BZ2Entry.origPointer = 0;
-            currentBlock = getByte(BZ2Entry);
+            currentBlock = readUChar(BZ2Entry);
             BZ2Entry.origPointer = BZ2Entry.origPointer << 8 | currentBlock & 0xff;
-            currentBlock = getByte(BZ2Entry);
+            currentBlock = readUChar(BZ2Entry);
             BZ2Entry.origPointer = BZ2Entry.origPointer << 8 | currentBlock & 0xff;
-            currentBlock = getByte(BZ2Entry);
+            currentBlock = readUChar(BZ2Entry);
             BZ2Entry.origPointer = BZ2Entry.origPointer << 8 | currentBlock & 0xff;
             for(int j = 0; j < 16; j++)
             {
-                byte byte1 = getBit(BZ2Entry);
+                byte byte1 = readBit(BZ2Entry);
                 BZ2Entry.inUse16[j] = byte1 == 1;
             }
 
@@ -205,7 +210,7 @@ label0:
                 {
                     for(int idx2 = 0; idx2 < 16; idx2++)
                     {
-                        byte byte2 = getBit(BZ2Entry);
+                        byte byte2 = readBit(BZ2Entry);
                         if(byte2 == 1)
                             BZ2Entry.inUse[idx * 16 + idx2] = true;
                     }
@@ -221,7 +226,7 @@ label0:
                 int selectorValue = 0;
                 do
                 {
-                    byte byte3 = getBit(BZ2Entry);
+                    byte byte3 = readBit(BZ2Entry);
                     if(byte3 == 0)
                         break;
                     selectorValue++;
@@ -251,10 +256,10 @@ label0:
                 {
                     do
                     {
-                        byte flag = getBit(BZ2Entry);
+                        byte flag = readBit(BZ2Entry);
                         if(flag == 0)
                             break;
-                        flag = getBit(BZ2Entry);
+                        flag = readBit(BZ2Entry);
                         if(flag == 0)
                             curr++;
                         else
@@ -318,7 +323,7 @@ label0:
             for(zvec = getBits(zt, BZ2Entry); zvec > tLimit[zt]; zvec = zvec << 1 | bit)
             {
                 zt++;
-                bit = getBit(BZ2Entry);
+                bit = readBit(BZ2Entry);
             }
 
             for(int nextSym = tPerm[zvec - tBase[zt]]; nextSym != endOfBlock;)
@@ -351,7 +356,7 @@ label0:
                         for(zvec_ = getBits(zt_, BZ2Entry); zvec_ > tLimit[zt_]; zvec_ = zvec_ << 1 | byte10)
                         {
                             zt_++;
-                            byte10 = getBit(BZ2Entry);
+                            byte10 = readBit(BZ2Entry);
                         }
 
                         nextSym = tPerm[zvec_ - tBase[zt_]];
@@ -440,14 +445,14 @@ label0:
                     for(j8 = getBits(k7, BZ2Entry); j8 > tLimit[k7]; j8 = j8 << 1 | byte11)
                     {
                         k7++;
-                        byte11 = getBit(BZ2Entry);
+                        byte11 = readBit(BZ2Entry);
                     }
 
                     nextSym = tPerm[j8 - tBase[k7]];
                 }
 
-            BZ2Entry.anInt574 = 0;
-            BZ2Entry.aByte573 = 0;
+            BZ2Entry.stateOutLen = 0;
+            BZ2Entry.stateOutCh = 0;
             BZ2Entry.cftab[0] = 0;
             for(int j2 = 1; j2 <= 256; j2++)
                 BZ2Entry.cftab[j2] = BZ2Entry.unzftab[j2 - 1];
@@ -457,51 +462,54 @@ label0:
 
             for(int l2 = 0; l2 < last; l2++)
             {
-                byte byte7 = (byte)(BZ2Entry.anIntArray587[l2] & 0xff);
-                BZ2Entry.anIntArray587[BZ2Entry.cftab[byte7 & 0xff]] |= l2 << 8;
-                BZ2Entry.cftab[byte7 & 0xff]++;
+                byte ch = (byte)(BZ2Entry.anIntArray587[l2] & 0xff);
+                BZ2Entry.anIntArray587[BZ2Entry.cftab[ch & 0xff]] |= l2 << 8;
+                BZ2Entry.cftab[ch & 0xff]++;
             }
 
-            BZ2Entry.anInt581 = BZ2Entry.anIntArray587[BZ2Entry.origPointer] >> 8;
-            BZ2Entry.anInt584 = 0;
-            BZ2Entry.anInt581 = BZ2Entry.anIntArray587[BZ2Entry.anInt581];
-            BZ2Entry.anInt582 = (byte)(BZ2Entry.anInt581 & 0xff);
-            BZ2Entry.anInt581 >>= 8;
-            BZ2Entry.anInt584++;
-            BZ2Entry.anInt601 = last;
+            BZ2Entry.nextOut = BZ2Entry.anIntArray587[BZ2Entry.origPointer] >> 8;
+            BZ2Entry.nBlockUsed = 0;
+            BZ2Entry.nextOut = BZ2Entry.anIntArray587[BZ2Entry.nextOut];
+            BZ2Entry.k0 = (byte)(BZ2Entry.nextOut & 0xff);
+            BZ2Entry.nextOut >>= 8;
+            BZ2Entry.nBlockUsed++;
+            BZ2Entry.nBlock_pp = last;
             getNextFileHeader(BZ2Entry);
-            reading = BZ2Entry.anInt584 == BZ2Entry.anInt601 + 1 && BZ2Entry.anInt574 == 0;
+            reading = BZ2Entry.nBlockUsed == BZ2Entry.nBlock_pp + 1 && BZ2Entry.stateOutLen == 0;
         }
     }
 
-    private static byte getByte(BZ2Entry BZ2Entry)
+    private static byte readUChar(BZ2Entry BZ2Entry)
     {
         return (byte) getBits(8, BZ2Entry);
     }
 
-    private static byte getBit(BZ2Entry BZ2Entry)
+    private static byte readBit(BZ2Entry BZ2Entry)
     {
         return (byte) getBits(1, BZ2Entry);
     }
 
     private static int getBits(int i, BZ2Entry BZ2Entry)
     {
-        int j;
+        int dest;
         do
         {
-            if(BZ2Entry.bitPos >= i)
+            if(BZ2Entry.bsLive >= i)
             {
-                int k = BZ2Entry.current2Bytes >> BZ2Entry.bitPos - i & (1 << i) - 1;
-                BZ2Entry.bitPos -= i;
-                j = k;
+                int tmp = BZ2Entry.bsBuff >> BZ2Entry.bsLive - i & (1 << i) - 1;
+                BZ2Entry.bsLive -= i;
+                dest = tmp;
                 break;
             }
-            BZ2Entry.current2Bytes = BZ2Entry.current2Bytes << 8 | BZ2Entry.inputBuffer[BZ2Entry.fileStartOffsets] & 0xff;
-            BZ2Entry.bitPos += 8;
-            BZ2Entry.fileStartOffsets++;
+            BZ2Entry.bsBuff = BZ2Entry.bsBuff << 8 | BZ2Entry.inputBuffer[BZ2Entry.nextIn] & 0xff;
+            BZ2Entry.bsLive += 8;
+            BZ2Entry.nextIn++;
             BZ2Entry.compressedSize--;
+            BZ2Entry.totalInLo32++;
+            if(BZ2Entry.totalInLo32 == 0)
+            	BZ2Entry.totalInHi32++;
         } while(true);
-        return j;
+        return dest;
     }
 
     private static void makeMaps(BZ2Entry BZ2Entry)

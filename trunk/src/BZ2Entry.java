@@ -22,24 +22,27 @@ final class BZ2Entry
     }
 
     byte inputBuffer[];
-    int fileStartOffsets;
+    int nextIn;
     int compressedSize;
+    int totalInLo32;
+    int totalInHi32;
     byte outputBuffer[];
-    int anInt569;
+    int availOut;
     int decompressedSize;
-    int anInt571;
-    int anInt572;
-    byte aByte573;
-    int anInt574;
+    int totalOutLo32;
+    int totalOutHi32;
+    byte stateOutCh;
+    int stateOutLen;
     boolean randomized;
-    int current2Bytes;
-    int bitPos;
+    int bsBuff;
+    int bsLive;
     int blockSize;
+    int junk3;
     int origPointer;
-    int anInt581;
-    int anInt582;
+    int nextOut;
+    int k0;
     final int[] unzftab;
-    int anInt584;
+    int nBlockUsed;
     final int[] cftab;
     public static int anIntArray587[];
     int inUseOff;
@@ -55,5 +58,5 @@ final class BZ2Entry
     final int[][] base;
     final int[][] perm;
     final int[] minLens;
-    int anInt601;
+    int nBlock_pp;
 }
