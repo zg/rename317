@@ -33,7 +33,7 @@ public final class EntityDef
             return null;
         boolean flag1 = false;
         for(int i = 0; i < anIntArray73.length; i++)
-            if(!Model.isDownloaded(anIntArray73[i]))
+            if(!Model.isCached(anIntArray73[i]))
                 flag1 = true;
 
         if(flag1)
@@ -118,7 +118,7 @@ public final class EntityDef
         {
             boolean flag = false;
             for(int i1 = 0; i1 < anIntArray94.length; i1++)
-                if(!Model.isDownloaded(anIntArray94[i1]))
+                if(!Model.isCached(anIntArray94[i1]))
                     flag = true;
 
             if(flag)

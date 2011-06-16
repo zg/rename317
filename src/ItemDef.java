@@ -16,19 +16,19 @@ public final class ItemDef
 
     public boolean isDownloaded(int j)
     {
-        int k = anInt175;
-        int l = anInt166;
+        int k = maleDialogue;
+        int l = maleDialogueHat;
         if(j == 1)
         {
-            k = anInt197;
-            l = anInt173;
+            k = femaleDialogue;
+            l = femaleDialogueHat;
         }
         if(k == -1)
             return true;
         boolean flag = true;
-        if(!Model.isDownloaded(k))
+        if(!Model.isCached(k))
             flag = false;
-        if(l != -1 && !Model.isDownloaded(l))
+        if(l != -1 && !Model.isCached(l))
             flag = false;
         return flag;
     }
@@ -52,14 +52,14 @@ public final class ItemDef
 
     }
 
-    public Model get_head_model(int j)
+    public Model getHeadModel(int gender)
     {
-        int k = anInt175;
-        int l = anInt166;
-        if(j == 1)
+        int k = maleDialogue;
+        int l = maleDialogueHat;
+        if(gender == 1)
         {
-            k = anInt197;
-            l = anInt173;
+            k = femaleDialogue;
+            l = femaleDialogueHat;
         }
         if(k == -1)
             return null;
@@ -81,39 +81,39 @@ public final class ItemDef
         return model;
     }
 
-    public boolean method195(int j)
+    public boolean hasItemEquipped(int gender)
     {
-        int k = maleEquip1;
-        int l = femaleEquip1;
-        int i1 = anInt185;
-        if(j == 1)
+        int primaryModel = maleEquip1;
+        int secondaryModel = maleEquip2;
+        int emblem = maleEmblem;
+        if(gender == 1)
         {
-            k = maleEquip2;
-            l = femaleEquip2;
-            i1 = anInt162;
+            primaryModel = femaleEquip1;
+            secondaryModel = femaleEquip2;
+            emblem = femaleEmblem;
         }
-        if(k == -1)
+        if(primaryModel == -1)
             return true;
-        boolean flag = true;
-        if(!Model.isDownloaded(k))
-            flag = false;
-        if(l != -1 && !Model.isDownloaded(l))
-            flag = false;
-        if(i1 != -1 && !Model.isDownloaded(i1))
-            flag = false;
-        return flag;
+        boolean isEquipted = true;
+        if(!Model.isCached(primaryModel))
+            isEquipted = false;
+        if(secondaryModel != -1 && !Model.isCached(secondaryModel))
+            isEquipted = false;
+        if(emblem != -1 && !Model.isCached(emblem))
+            isEquipted = false;
+        return isEquipted;
     }
 
     public Model method196(int i)
     {
         int j = maleEquip1;
-        int k = femaleEquip1;
-        int l = anInt185;
+        int k = maleEquip2;
+        int l = maleEmblem;
         if(i == 1)
         {
-            j = maleEquip2;
+            j = femaleEquip1;
             k = femaleEquip2;
-            l = anInt162;
+            l = femaleEmblem;
         }
         if(j == -1)
             return null;
@@ -167,17 +167,17 @@ public final class ItemDef
         groundActions = null;
         actions = null;
         maleEquip1 = -1;
-        femaleEquip1 = -1;
-        aByte205 = 0;
         maleEquip2 = -1;
+        aByte205 = 0;
+        femaleEquip1 = -1;
         femaleEquip2 = -1;
         aByte154 = 0;
-        anInt185 = -1;
-        anInt162 = -1;
-        anInt175 = -1;
-        anInt166 = -1;
-        anInt197 = -1;
-        anInt173 = -1;
+        maleEmblem = -1;
+        femaleEmblem = -1;
+        maleDialogue = -1;
+        maleDialogueHat = -1;
+        femaleDialogue = -1;
+        femaleDialogueHat = -1;
         stackIDs = null;
         stackAmounts = null;
         certID = -1;
@@ -486,11 +486,11 @@ public final class ItemDef
                 aByte205 = stream.g1b();
             } else
             if(i == 24)
-                femaleEquip1 = stream.g2();
+                maleEquip2 = stream.g2();
             else
             if(i == 25)
             {
-                maleEquip2 = stream.g2();
+                femaleEquip1 = stream.g2();
                 aByte154 = stream.g1b();
             } else
             if(i == 26)
@@ -523,22 +523,22 @@ public final class ItemDef
 
             } else
             if(i == 78)
-                anInt185 = stream.g2();
+                maleEmblem = stream.g2();
             else
             if(i == 79)
-                anInt162 = stream.g2();
+                femaleEmblem = stream.g2();
             else
             if(i == 90)
-                anInt175 = stream.g2();
+                maleDialogue = stream.g2();
             else
             if(i == 91)
-                anInt197 = stream.g2();
+                femaleDialogue = stream.g2();
             else
             if(i == 92)
-                anInt166 = stream.g2();
+                maleDialogueHat = stream.g2();
             else
             if(i == 93)
-                anInt173 = stream.g2();
+                femaleDialogueHat = stream.g2();
             else
             if(i == 95)
                 anInt204 = stream.g2();
@@ -592,19 +592,19 @@ public final class ItemDef
     public static MRUNodes mruNodes2 = new MRUNodes(50);
     private int[] modifiedModelColours;
     public boolean membersObject;
-    private int anInt162;
+    private int femaleEmblem;
     private int certTemplateID;
     private int femaleEquip2;
     private int maleEquip1;
-    private int anInt166;
+    private int maleDialogueHat;
     private int anInt167;
     public String groundActions[];
     private int modelOffset1;
     public String name;
     private static ItemDef[] cache;
-    private int anInt173;
+    private int femaleDialogueHat;
     private int modelID;
-    private int anInt175;
+    private int maleDialogue;
     public boolean stackable;
     public byte description[];
     private int certID;
@@ -613,8 +613,8 @@ public final class ItemDef
     public static boolean isMembers = true;
     private static Packet stream;
     private int anInt184;
-    private int anInt185;
-    private int femaleEquip1;
+    private int maleEmblem;
+    private int maleEquip2;
     public String actions[];
     public int sprite_rotation_scale;
     private int anInt191;
@@ -623,9 +623,9 @@ public final class ItemDef
     private int modelOffset2;
     private static int[] streamIndices;
     private int anInt196;
-    private int anInt197;
+    private int femaleDialogue;
     public int modelRotation2;
-    private int maleEquip2;
+    private int femaleEquip1;
     private int[] stackAmounts;
     public int team;
     public static int totalItems;

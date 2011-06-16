@@ -5,7 +5,7 @@
 
 final class SizeConstants {
 
-    public static final int[] anIntArray552 = {
+    public static final int[] anIntArray552 = {//never used in client..
         6, 21, 25, 33, 254, 127, 183, 87, 216, 215, 
         211, 48, 15, 195, 149, 233, 162, 102, 104, 179, 
         222, 103, 224, 81, 152, 89, 45, 11, 197, 187, 

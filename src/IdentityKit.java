@@ -1,7 +1,4 @@
 
-
-
-
 public final class IdentityKit {
 
     public static void unpackConfig(JagexArchive jagexArchive)
@@ -58,7 +55,7 @@ public final class IdentityKit {
             return true;
         boolean is_downloaded = true;
         for(int ptr = 0; ptr < bodyModelIDs.length; ptr++)
-            if(!Model.isDownloaded(bodyModelIDs[ptr]))
+            if(!Model.isCached(bodyModelIDs[ptr]))
                 is_downloaded = false;
 
         return is_downloaded;
@@ -68,20 +65,20 @@ public final class IdentityKit {
     {
         if(bodyModelIDs == null)
             return null;
-        Model sub_models[] = new Model[bodyModelIDs.length];
-        for(int model_ptr = 0; model_ptr < bodyModelIDs.length; model_ptr++)
-            sub_models[model_ptr] = Model.getModel(bodyModelIDs[model_ptr]);
+        Model subModels[] = new Model[bodyModelIDs.length];
+        for(int modelPointer = 0; modelPointer < bodyModelIDs.length; modelPointer++)
+            subModels[modelPointer] = Model.getModel(bodyModelIDs[modelPointer]);
 
         Model model;
-        if(sub_models.length == 1)
-            model = sub_models[0];
+        if(subModels.length == 1)
+            model = subModels[0];
         else
-            model = new Model(sub_models.length, sub_models);
-        for(int colour_ptr = 0; colour_ptr < 6; colour_ptr++)
+            model = new Model(subModels.length, subModels);
+        for(int colourPointer = 0; colourPointer < 6; colourPointer++)
         {
-            if(recolourOriginal[colour_ptr] == 0)
+            if(recolourOriginal[colourPointer] == 0)
                 break;
-            model.recolour(recolourOriginal[colour_ptr], recolourTarget[colour_ptr]);
+            model.recolour(recolourOriginal[colourPointer], recolourTarget[colourPointer]);
         }
 
         return model;
@@ -91,7 +88,7 @@ public final class IdentityKit {
     {
         boolean isDownloaded = true;
         for(int ptr = 0; ptr < 5; ptr++)
-            if(headModelIDs[ptr] != -1 && !Model.isDownloaded(headModelIDs[ptr]))
+            if(headModelIDs[ptr] != -1 && !Model.isCached(headModelIDs[ptr]))
                 isDownloaded = false;
 
         return isDownloaded;
@@ -106,11 +103,11 @@ public final class IdentityKit {
                 sub_models[model_ptr++] = Model.getModel(headModelIDs[id_ptr]);
 
         Model model = new Model(model_ptr, sub_models);
-        for(int colour_ptr = 0; colour_ptr < 6; colour_ptr++)
+        for(int colourPointer = 0; colourPointer < 6; colourPointer++)
         {
-            if(recolourOriginal[colour_ptr] == 0)
+            if(recolourOriginal[colourPointer] == 0)
                 break;
-            model.recolour(recolourOriginal[colour_ptr], recolourTarget[colour_ptr]);
+            model.recolour(recolourOriginal[colourPointer], recolourTarget[colourPointer]);
         }
 
         return model;

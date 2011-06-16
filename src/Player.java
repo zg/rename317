@@ -218,7 +218,7 @@ public final class Player extends Entity
                     k2 = j1;
                 if(k2 >= 256 && k2 < 512 && !IdentityKit.cache[k2 - 256].isBodyDownloaded())
                     flag = true;
-                if(k2 >= 512 && !ItemDef.forID(k2 - 512).method195(playerGender))
+                if(k2 >= 512 && !ItemDef.forID(k2 - 512).hasItemEquipped(playerGender))
                     flag = true;
             }
 
@@ -321,7 +321,7 @@ public final class Player extends Entity
             }
             if(modelID >= 512)
             {
-                Model itemModel = ItemDef.forID(modelID - 512).get_head_model(playerGender);
+                Model itemModel = ItemDef.forID(modelID - 512).getHeadModel(playerGender);
                 if(itemModel != null)
                     subModels[modelPointer++] = itemModel;
             }

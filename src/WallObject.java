@@ -1,8 +1,4 @@
 
-
-
-
-
 public final class WallObject
 {
 
