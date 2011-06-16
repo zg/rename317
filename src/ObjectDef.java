@@ -75,7 +75,7 @@ public final class ObjectDef
         mruNodes2 = null;
         streamIndices = null;
         cache = null;
-stream = null;
+        stream = null;
     }
 
     public static void unpackConfig(JagexArchive jagexArchive)

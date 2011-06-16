@@ -7,7 +7,7 @@ public final class SpotAnim {
     public static void unpackConfig(JagexArchive jagexArchive)
     {
 //        Packet stream = new Packet(jagexArchive.getDataForName("spotanim.dat"));
-Packet stream = new Packet(FileOperations.ReadFile("./extras/spotanim.dat"));
+    	Packet stream = new Packet(FileOperations.ReadFile("./extras/spotanim.dat"));
         int length = stream.g2();
         if(cache == null)
             cache = new SpotAnim[length];
