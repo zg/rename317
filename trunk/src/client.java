@@ -1967,7 +1967,7 @@ public class client extends RSApplet {
 			char_edit_idkits[type] = -1;
 			for(int idkit_ptr = 0; idkit_ptr < IdentityKit.length; idkit_ptr++)
 			{
-				if(IdentityKit.cache[idkit_ptr].not_selectable || IdentityKit.cache[idkit_ptr].body_part_id != type + (char_edit_gender ? 0 : 7))
+				if(IdentityKit.cache[idkit_ptr].notSelectable || IdentityKit.cache[idkit_ptr].bodyPartID != type + (char_edit_gender ? 0 : 7))
 				continue;
 				char_edit_idkits[type] = idkit_ptr;
 				break;
@@ -2130,7 +2130,7 @@ public class client extends RSApplet {
 					current_id = IdentityKit.length - 1;
 					if(direction == 1 && ++current_id >= IdentityKit.length)
 					current_id = 0;
-				} while(IdentityKit.cache[current_id].not_selectable || IdentityKit.cache[current_id].body_part_id != type + (char_edit_gender ? 0 : 7));
+				} while(IdentityKit.cache[current_id].notSelectable || IdentityKit.cache[current_id].bodyPartID != type + (char_edit_gender ? 0 : 7));
 				char_edit_idkits[type] = current_id;
 				char_edit_model_changed = true;
 			}
@@ -10059,7 +10059,7 @@ public class client extends RSApplet {
 		}
 	}
 
-	@SuppressWarnings("unused")
+	
 	private static void setLowMem()
 	{
 		SceneGraph.lowMem = true;
