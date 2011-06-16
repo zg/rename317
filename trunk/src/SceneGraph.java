@@ -82,8 +82,8 @@ final class SceneGraph {
                 for(int ptr = 0; ptr < tile.entityCount; ptr++)
                 {
                     InteractableObject worldEntity = tile.interactableObjects[ptr];
-                    if((worldEntity.uid >> 29 & 3) == 2 && worldEntity.tileX == x && worldEntity.tileY == y)
-                        worldEntity.tileZ--;
+                    if((worldEntity.uid >> 29 & 3) == 2 && worldEntity.xPos == x && worldEntity.yPos == y)
+                        worldEntity.zPos--;
                 }
 
             }
@@ -309,14 +309,14 @@ final class SceneGraph {
         InteractableObject class28 = new InteractableObject();
         class28.uid = j2;
         class28.aByte530 = byte0;
-        class28.tileZ = z;
+        class28.zPos = z;
         class28.anInt519 = j1;
         class28.anInt520 = k1;
         class28.anInt518 = l1;
         class28.aClass30_Sub2_Sub4_521 = class30_sub2_sub4;
         class28.anInt522 = i2;
-        class28.tileX = j;
-        class28.tileY = k;
+        class28.xPos = j;
+        class28.yPos = k;
         class28.anInt524 = (j + l) - 1;
         class28.anInt526 = (k + i1) - 1;
         for(int i3 = j; i3 < j + l; i3++)
@@ -364,11 +364,11 @@ final class SceneGraph {
 
     private void method289(InteractableObject interactableObject)
     {
-        for(int x = interactableObject.tileX; x <= interactableObject.anInt524; x++)
+        for(int x = interactableObject.xPos; x <= interactableObject.anInt524; x++)
         {
-            for(int y = interactableObject.tileY; y <= interactableObject.anInt526; y++)
+            for(int y = interactableObject.yPos; y <= interactableObject.anInt526; y++)
             {
-                Tile tile = tileArray[interactableObject.tileZ][x][y];
+                Tile tile = tileArray[interactableObject.zPos][x][y];
                 if(tile != null)
                 {
                     for(int l = 0; l < tile.entityCount; l++)
@@ -438,7 +438,7 @@ final class SceneGraph {
         for(int j1 = 0; j1 < tile.entityCount; j1++)
         {
             InteractableObject interactableObject = tile.interactableObjects[j1];
-            if((interactableObject.uid >> 29 & 3) == 2 && interactableObject.tileX == x && interactableObject.tileY == y)
+            if((interactableObject.uid >> 29 & 3) == 2 && interactableObject.xPos == x && interactableObject.yPos == y)
             {
                 method289(interactableObject);
                 return;
@@ -490,7 +490,7 @@ final class SceneGraph {
         for(int l = 0; l < tile.entityCount; l++)
         {
             InteractableObject interactableObject = tile.interactableObjects[l];
-            if((interactableObject.uid >> 29 & 3) == 2 && interactableObject.tileX == x && interactableObject.tileY == y)
+            if((interactableObject.uid >> 29 & 3) == 2 && interactableObject.xPos == x && interactableObject.yPos == y)
                 return interactableObject;
         }
         return null;
@@ -531,7 +531,7 @@ final class SceneGraph {
         for(int l = 0; l < tile.entityCount; l++)
         {
             InteractableObject interactableObject = tile.interactableObjects[l];
-            if((interactableObject.uid >> 29 & 3) == 2 && interactableObject.tileX == x && interactableObject.tileY == y)
+            if((interactableObject.uid >> 29 & 3) == 2 && interactableObject.xPos == x && interactableObject.yPos == y)
                 return interactableObject.uid;
         }
 
@@ -595,7 +595,7 @@ final class SceneGraph {
                             InteractableObject class28 = tile.interactableObjects[k2];
                             if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertexNormal != null)
                             {
-                                method307(_z, (class28.anInt524 - class28.tileX) + 1, (class28.anInt526 - class28.tileY) + 1, _x, _y, (Model)class28.aClass30_Sub2_Sub4_521);
+                                method307(_z, (class28.anInt524 - class28.xPos) + 1, (class28.anInt526 - class28.yPos) + 1, _x, _y, (Model)class28.aClass30_Sub2_Sub4_521);
                                 ((Model)class28.aClass30_Sub2_Sub4_521).doShading(lightness, l_magnitude, l_x, l_y, l_z);
                             }
                         }
@@ -673,9 +673,9 @@ final class SceneGraph {
                                         InteractableObject class28 = class30_sub3.interactableObjects[j3];
                                         if(class28 != null && class28.aClass30_Sub2_Sub4_521 != null && class28.aClass30_Sub2_Sub4_521.vertexNormal != null)
                                         {
-                                            int k3 = (class28.anInt524 - class28.tileX) + 1;
-                                            int l3 = (class28.anInt526 - class28.tileY) + 1;
-                                            method308(model, (Model)class28.aClass30_Sub2_Sub4_521, (class28.tileX - l) * 128 + (k3 - j) * 64, i3, (class28.tileY - i1) * 128 + (l3 - k) * 64, flag);
+                                            int k3 = (class28.anInt524 - class28.xPos) + 1;
+                                            int l3 = (class28.anInt526 - class28.yPos) + 1;
+                                            method308(model, (Model)class28.aClass30_Sub2_Sub4_521, (class28.xPos - l) * 128 + (k3 - j) * 64, i3, (class28.yPos - i1) * 128 + (l3 - k) * 64, flag);
                                         }
                                     }
 
@@ -1353,9 +1353,9 @@ label0:
                         InteractableObject interactableObject = TILE.interactableObjects[k2];
                         if(interactableObject.anInt528 == anInt448)
                             continue;
-                        for(int k3 = interactableObject.tileX; k3 <= interactableObject.anInt524; k3++)
+                        for(int k3 = interactableObject.xPos; k3 <= interactableObject.anInt524; k3++)
                         {
-                            for(int l4 = interactableObject.tileY; l4 <= interactableObject.anInt526; l4++)
+                            for(int l4 = interactableObject.yPos; l4 <= interactableObject.anInt526; l4++)
                             {
                                 Tile class30_sub3_21 = aclass30_sub3[k3][l4];
                                 if(class30_sub3_21.aBoolean1322)
@@ -1366,11 +1366,11 @@ label0:
                                     if(class30_sub3_21.anInt1325 == 0)
                                         continue;
                                     int l6 = 0;
-                                    if(k3 > interactableObject.tileX)
+                                    if(k3 > interactableObject.xPos)
                                         l6++;
                                     if(k3 < interactableObject.anInt524)
                                         l6 += 4;
-                                    if(l4 > interactableObject.tileY)
+                                    if(l4 > interactableObject.yPos)
                                         l6 += 8;
                                     if(l4 < interactableObject.anInt526)
                                         l6 += 2;
@@ -1384,11 +1384,11 @@ label0:
                         }
 
                         interactableObjects[l1++] = interactableObject;
-                        int i5 = xCameraPositionTile - interactableObject.tileX;
+                        int i5 = xCameraPositionTile - interactableObject.xPos;
                         int i6 = interactableObject.anInt524 - xCameraPositionTile;
                         if(i6 > i5)
                             i5 = i6;
-                        int i7 = yCameraPositionTile - interactableObject.tileY;
+                        int i7 = yCameraPositionTile - interactableObject.yPos;
                         int j8 = interactableObject.anInt526 - yCameraPositionTile;
                         if(j8 > i7)
                             interactableObject.anInt527 = i5 + j8;
@@ -1424,11 +1424,11 @@ label0:
                             break;
                         InteractableObject class28_3 = interactableObjects[l3];
                         class28_3.anInt528 = anInt448;
-                        if(!method323(l, class28_3.tileX, class28_3.anInt524, class28_3.tileY, class28_3.anInt526, class28_3.aClass30_Sub2_Sub4_521.modelHeight))
+                        if(!method323(l, class28_3.xPos, class28_3.anInt524, class28_3.yPos, class28_3.anInt526, class28_3.aClass30_Sub2_Sub4_521.modelHeight))
                             class28_3.aClass30_Sub2_Sub4_521.renderAtPoint(class28_3.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28_3.anInt519 - xCameraPosition, class28_3.anInt518 - zCameraPosition, class28_3.anInt520 - yCameraPosition, class28_3.uid);
-                        for(int k7 = class28_3.tileX; k7 <= class28_3.anInt524; k7++)
+                        for(int k7 = class28_3.xPos; k7 <= class28_3.anInt524; k7++)
                         {
-                            for(int l8 = class28_3.tileY; l8 <= class28_3.anInt526; l8++)
+                            for(int l8 = class28_3.yPos; l8 <= class28_3.anInt526; l8++)
                             {
                                 Tile class30_sub3_22 = aclass30_sub3[k7][l8];
                                 if(class30_sub3_22.anInt1325 != 0)

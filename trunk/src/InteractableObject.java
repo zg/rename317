@@ -10,15 +10,15 @@ public final class InteractableObject
     {
     }
 
-    int tileZ;
+    int zPos;
     int anInt518;
     int anInt519;
     int anInt520;
     public Animable aClass30_Sub2_Sub4_521;
     public int anInt522;
-    int tileX;
+    int xPos;
     int anInt524;
-    int tileY;
+    int yPos;
     int anInt526;
     int anInt527;
     int anInt528;
