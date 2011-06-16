@@ -1848,8 +1848,8 @@ public final class Model extends Animable {
     public void rendersingle(int j, int k, int l, int i1, int j1, int k1)
     {//todo figure if i has any significence to its value.
         int i = 0; //was a parameter
-        int l1 = ThreeDimensionalDrawingArea.xMidPos;
-        int i2 = ThreeDimensionalDrawingArea.yMidPos;
+        int l1 = Rasterizer.centerX;
+        int i2 = Rasterizer.centerY;
         int j2 = SINE[i];//[i]
         int k2 = COSINE[i];//[i]
         int l2 = SINE[j];
@@ -1961,16 +1961,16 @@ public final class Model extends Animable {
                 k4 /= i3;
                 i5 /= k5;
             }
-            int i6 = cursorXPos - ThreeDimensionalDrawingArea.xMidPos;
-            int k6 = cursorYPos - ThreeDimensionalDrawingArea.yMidPos;
+            int i6 = cursorXPos - Rasterizer.centerX;
+            int k6 = cursorYPos - Rasterizer.centerY;
             if(i6 > k3 && i6 < l3 && k6 > i5 && k6 < k4)
                 if(aBoolean1659)
                     resourceIDTAG[resourceCount++] = i2;
                 else
                     flag1 = true;
         }
-        int l5 = ThreeDimensionalDrawingArea.xMidPos;
-        int j6 = ThreeDimensionalDrawingArea.yMidPos;
+        int l5 = Rasterizer.centerX;
+        int j6 = Rasterizer.centerY;
         int l6 = 0;
         int i7 = 0;
         if(i != 0)
@@ -2213,11 +2213,11 @@ public final class Model extends Animable {
         int j = triangleA[i];
         int k = triangleB[i];
         int l = triangleC[i];
-        ThreeDimensionalDrawingArea.aBoolean1462 = aBooleanArray1663[i];
+        Rasterizer.aBoolean1462 = aBooleanArray1663[i];
         if(triangleAlpha == null)
-            ThreeDimensionalDrawingArea.alpha = 0;
+            Rasterizer.alpha = 0;
         else
-            ThreeDimensionalDrawingArea.alpha = triangleAlpha[i];
+            Rasterizer.alpha = triangleAlpha[i];
         int i1;
         if(triangleDrawType == null)
             i1 = 0;
@@ -2225,12 +2225,12 @@ public final class Model extends Animable {
             i1 = triangleDrawType[i] & 3;
         if(i1 == 0)
         {
-            ThreeDimensionalDrawingArea.drawColouredTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i]);
+            Rasterizer.drawTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i]);
             return;
         }
         if(i1 == 1)
         {
-            ThreeDimensionalDrawingArea.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], modelIntArray3[triangleHslA[i]]);
+            Rasterizer.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], modelIntArray3[triangleHslA[i]]);
             return;
         }
         if(i1 == 2)
@@ -2239,7 +2239,7 @@ public final class Model extends Animable {
             int l1 = triPIndex[j1];
             int j2 = triMIndex[j1];
             int l2 = triNIndex[j1];
-            ThreeDimensionalDrawingArea.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i], anIntArray1668[l1], anIntArray1668[j2], anIntArray1668[l2], vertexBY[l1], vertexBY[j2], vertexBY[l2], anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], triangleColours[i]);
+            Rasterizer.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i], anIntArray1668[l1], anIntArray1668[j2], anIntArray1668[l2], vertexBY[l1], vertexBY[j2], vertexBY[l2], anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], triangleColours[i]);
             return;
         }
         if(i1 == 3)
@@ -2248,14 +2248,14 @@ public final class Model extends Animable {
             int i2 = triPIndex[k1];
             int k2 = triMIndex[k1];
             int i3 = triNIndex[k1];
-            ThreeDimensionalDrawingArea.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[i2], anIntArray1668[k2], anIntArray1668[i3], vertexBY[i2], vertexBY[k2], vertexBY[i3], anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], triangleColours[i]);
+            Rasterizer.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[i2], anIntArray1668[k2], anIntArray1668[i3], vertexBY[i2], vertexBY[k2], vertexBY[i3], anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], triangleColours[i]);
         }
     }
 
     private void method485(int i)
     {
-        int j = ThreeDimensionalDrawingArea.xMidPos;
-        int k = ThreeDimensionalDrawingArea.yMidPos;
+        int j = Rasterizer.centerX;
+        int k = Rasterizer.centerY;
         int l = 0;
         int i1 = triangleA[i];
         int j1 = triangleB[i];
@@ -2346,21 +2346,21 @@ public final class Model extends Animable {
         int k7 = anIntArray1679[2];
         if((j3 - j4) * (k7 - j7) - (i7 - j7) * (j5 - j4) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = false;
+            Rasterizer.aBoolean1462 = false;
             if(l == 3)
             {
                 if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewportRx || j4 > DrawingArea.viewportRx || j5 > DrawingArea.viewportRx)
-                    ThreeDimensionalDrawingArea.aBoolean1462 = true;
+                    Rasterizer.aBoolean1462 = true;
                 int l7;
                 if(triangleDrawType == null)
                     l7 = 0;
                 else
                     l7 = triangleDrawType[i] & 3;
                 if(l7 == 0)
-                    ThreeDimensionalDrawingArea.drawColouredTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
+                    Rasterizer.drawTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
                 else
                 if(l7 == 1)
-                    ThreeDimensionalDrawingArea.method376(i7, j7, k7, j3, j4, j5, modelIntArray3[triangleHslA[i]]);
+                    Rasterizer.method376(i7, j7, k7, j3, j4, j5, modelIntArray3[triangleHslA[i]]);
                 else
                 if(l7 == 2)
                 {
@@ -2368,7 +2368,7 @@ public final class Model extends Animable {
                     int k9 = triPIndex[j8];
                     int k10 = triMIndex[j8];
                     int k11 = triNIndex[j8];
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[k9], anIntArray1668[k10], anIntArray1668[k11], vertexBY[k9], vertexBY[k10], vertexBY[k11], anIntArray1670[k9], anIntArray1670[k10], anIntArray1670[k11], triangleColours[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[k9], anIntArray1668[k10], anIntArray1668[k11], vertexBY[k9], vertexBY[k10], vertexBY[k11], anIntArray1670[k9], anIntArray1670[k10], anIntArray1670[k11], triangleColours[i]);
                 } else
                 if(l7 == 3)
                 {
@@ -2376,13 +2376,13 @@ public final class Model extends Animable {
                     int l9 = triPIndex[k8];
                     int l10 = triMIndex[k8];
                     int l11 = triNIndex[k8];
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11], vertexBY[l9], vertexBY[l10], vertexBY[l11], anIntArray1670[l9], anIntArray1670[l10], anIntArray1670[l11], triangleColours[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11], vertexBY[l9], vertexBY[l10], vertexBY[l11], anIntArray1670[l9], anIntArray1670[l10], anIntArray1670[l11], triangleColours[i]);
                 }
             }
             if(l == 4)
             {
                 if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewportRx || j4 > DrawingArea.viewportRx || j5 > DrawingArea.viewportRx || anIntArray1678[3] < 0 || anIntArray1678[3] > DrawingArea.viewportRx)
-                    ThreeDimensionalDrawingArea.aBoolean1462 = true;
+                    Rasterizer.aBoolean1462 = true;
                 int i8;
                 if(triangleDrawType == null)
                     i8 = 0;
@@ -2390,15 +2390,15 @@ public final class Model extends Animable {
                     i8 = triangleDrawType[i] & 3;
                 if(i8 == 0)
                 {
-                    ThreeDimensionalDrawingArea.drawColouredTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
-                    ThreeDimensionalDrawingArea.drawColouredTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3]);
+                    Rasterizer.drawTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
+                    Rasterizer.drawTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3]);
                     return;
                 }
                 if(i8 == 1)
                 {
                     int l8 = modelIntArray3[triangleHslA[i]];
-                    ThreeDimensionalDrawingArea.method376(i7, j7, k7, j3, j4, j5, l8);
-                    ThreeDimensionalDrawingArea.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8);
+                    Rasterizer.method376(i7, j7, k7, j3, j4, j5, l8);
+                    Rasterizer.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8);
                     return;
                 }
                 if(i8 == 2)
@@ -2407,8 +2407,8 @@ public final class Model extends Animable {
                     int i10 = triPIndex[i9];
                     int i11 = triMIndex[i9];
                     int i12 = triNIndex[i9];
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColours[i]);
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColours[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColours[i]);
+                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColours[i]);
                     return;
                 }
                 if(i8 == 3)
@@ -2417,8 +2417,8 @@ public final class Model extends Animable {
                     int j10 = triPIndex[j9];
                     int j11 = triMIndex[j9];
                     int j12 = triNIndex[j9];
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
+                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColours[i]);
                 }
             }
         }
@@ -2510,9 +2510,9 @@ public final class Model extends Animable {
 
     static 
     {
-        SINE = ThreeDimensionalDrawingArea.SINE;
-        COSINE = ThreeDimensionalDrawingArea.COSINE;
-        modelIntArray3 = ThreeDimensionalDrawingArea.HSL2RGB;
-        modelIntArray4 = ThreeDimensionalDrawingArea.anIntArray1469;
+        SINE = Rasterizer.SINE;
+        COSINE = Rasterizer.COSINE;
+        modelIntArray3 = Rasterizer.HSL2RGB;
+        modelIntArray4 = Rasterizer.anIntArray1469;
     }
 }

@@ -39,9 +39,9 @@ public final class Player extends Entity
         }
         if(aModel_1714 != null)
         {
-            if(client.loopCycle >= anInt1708)
+            if(client.currentTime >= anInt1708)
                 aModel_1714 = null;
-            if(client.loopCycle >= anInt1707 && client.loopCycle < anInt1708)
+            if(client.currentTime >= anInt1707 && client.currentTime < anInt1708)
             {
                 Model model_1 = aModel_1714;
                 model_1.translate(anInt1711 - super.boundExtentX, anInt1712 - anInt1709, anInt1713 - super.boundExtentY);

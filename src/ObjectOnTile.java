@@ -9,7 +9,7 @@ final class ObjectOnTile extends Animable {
         int j = -1;
         if(animation != null)
         {
-            int k = client.loopCycle - delay;
+            int k = client.currentTime - delay;
             if(k > 100 && animation.frameStep > 0)
                 k = 100;
             while(k > animation.getFrameLength(frame))
@@ -24,7 +24,7 @@ final class ObjectOnTile extends Animable {
                 animation = null;
                 break;
             }
-            delay = client.loopCycle - k;
+            delay = client.currentTime - k;
             if(animation != null)
                 j = animation.frame2IDS[frame];
         }
@@ -76,7 +76,7 @@ final class ObjectOnTile extends Animable {
         {
             animation = Animation.anims[l1];
             frame = 0;
-            delay = client.loopCycle;
+            delay = client.currentTime;
             if(randomize && animation.frameStep != -1)
             {
                 frame = (int)(Math.random() * (double) animation.frameCount);
