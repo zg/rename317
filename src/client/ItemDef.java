@@ -14,7 +14,7 @@ public final class ItemDef
         stream = null;
     }
 
-    public boolean isDownloaded(int j)
+    public boolean areHeadModelsDownloaded(int j)
     {
         int k = maleDialogue;
         int l = maleDialogueHat;
@@ -81,7 +81,7 @@ public final class ItemDef
         return model;
     }
 
-    public boolean hasItemEquipped(int gender)
+    public boolean areEquipModelsDownloaded(int gender)
     {
         int primaryModel = maleEquip1;
         int secondaryModel = maleEquip2;

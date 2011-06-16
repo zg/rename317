@@ -218,7 +218,7 @@ public final class Player extends Entity
                     k2 = j1;
                 if(k2 >= 256 && k2 < 512 && !IdentityKit.cache[k2 - 256].isBodyDownloaded())
                     flag = true;
-                if(k2 >= 512 && !ItemDef.forID(k2 - 512).hasItemEquipped(playerGender))
+                if(k2 >= 512 && !ItemDef.forID(k2 - 512).areEquipModelsDownloaded(playerGender))
                     flag = true;
             }
 
@@ -302,7 +302,7 @@ public final class Player extends Entity
             int j = appearanceModels[i];
             if(j >= 256 && j < 512 && !IdentityKit.cache[j - 256].isHeadDownloaded())
                 isDownloaded = true;
-            if(j >= 512 && !ItemDef.forID(j - 512).isDownloaded(playerGender))
+            if(j >= 512 && !ItemDef.forID(j - 512).areHeadModelsDownloaded(playerGender))
                 isDownloaded = true;
         }
 
