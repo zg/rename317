@@ -1626,18 +1626,18 @@ label0:
         zC = l4;
         if(yC < 50)
             return;
-        int screenXA = ThreeDimensionalDrawingArea.xMidPos + (xA << 9) / yA;
-        int screenYA = ThreeDimensionalDrawingArea.yMidPos + (zA << 9) / yA;
-        int screenXB = ThreeDimensionalDrawingArea.xMidPos + (xB << 9) / yB;
-        int screenYB = ThreeDimensionalDrawingArea.yMidPos + (zB << 9) / yB;
-        int screenXD = ThreeDimensionalDrawingArea.xMidPos + (xD << 9) / yD;
-        int screenYD = ThreeDimensionalDrawingArea.yMidPos + (zD << 9) / yD;
-        int screenXC = ThreeDimensionalDrawingArea.xMidPos + (xC << 9) / yC;
-        int screenYC = ThreeDimensionalDrawingArea.yMidPos + (zC << 9) / yC;
-        ThreeDimensionalDrawingArea.alpha = 0;
+        int screenXA = Rasterizer.centerX + (xA << 9) / yA;
+        int screenYA = Rasterizer.centerY + (zA << 9) / yA;
+        int screenXB = Rasterizer.centerX + (xB << 9) / yB;
+        int screenYB = Rasterizer.centerY + (zB << 9) / yB;
+        int screenXD = Rasterizer.centerX + (xD << 9) / yD;
+        int screenYD = Rasterizer.centerY + (zD << 9) / yD;
+        int screenXC = Rasterizer.centerX + (xC << 9) / yC;
+        int screenYC = Rasterizer.centerY + (zC << 9) / yC;
+        Rasterizer.alpha = 0;
         if((screenXD - screenXC) * (screenYB - screenYC) - (screenYD - screenYC) * (screenXB - screenXC) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > DrawingArea.viewportRx || screenXC > DrawingArea.viewportRx || screenXB > DrawingArea.viewportRx;
+            Rasterizer.aBoolean1462 = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > DrawingArea.viewportRx || screenXC > DrawingArea.viewportRx || screenXB > DrawingArea.viewportRx;
             if(isClicked && isTriangleClicked(clickX, clickY, screenYD, screenYC, screenYB, screenXD, screenXC, screenXB))
             {
                 clickedTileX = tX;
@@ -1646,23 +1646,23 @@ label0:
             if(plainTile.texture == -1)
             {
                 if(plainTile.colourD != 0xbc614e)
-                    ThreeDimensionalDrawingArea.drawColouredTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB);
+                    Rasterizer.drawTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB);
             } else
             if(!lowMem)
             {
                 if(plainTile.flat)
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB, xA, xB, xC, zA, zB, zC, yA, yB, yC, plainTile.texture);
+                    Rasterizer.drawTexturedTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB, xA, xB, xC, zA, zB, zC, yA, yB, yC, plainTile.texture);
                 else
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB, xD, xC, xB, zD, zC, zB, yD, yC, yB, plainTile.texture);
+                    Rasterizer.drawTexturedTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB, xD, xC, xB, zD, zC, zB, yD, yC, yB, plainTile.texture);
             } else
             {
                 int i7 = textureRGBColour[plainTile.texture];
-                ThreeDimensionalDrawingArea.drawColouredTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, mixColour(i7, plainTile.colourD), mixColour(i7, plainTile.colourC), mixColour(i7, plainTile.colourB));
+                Rasterizer.drawTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, mixColour(i7, plainTile.colourD), mixColour(i7, plainTile.colourC), mixColour(i7, plainTile.colourB));
             }
         }
         if((screenXA - screenXB) * (screenYC - screenYB) - (screenYA - screenYB) * (screenXC - screenXB) > 0)
         {
-            ThreeDimensionalDrawingArea.aBoolean1462 = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > DrawingArea.viewportRx || screenXB > DrawingArea.viewportRx || screenXC > DrawingArea.viewportRx;
+            Rasterizer.aBoolean1462 = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > DrawingArea.viewportRx || screenXB > DrawingArea.viewportRx || screenXC > DrawingArea.viewportRx;
             if(isClicked && isTriangleClicked(clickX, clickY, screenYA, screenYB, screenYC, screenXA, screenXB, screenXC))
             {
                 clickedTileX = tX;
@@ -1672,17 +1672,17 @@ label0:
             {
                 if(plainTile.colourA != 0xbc614e)
                 {
-                    ThreeDimensionalDrawingArea.drawColouredTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC);
+                    Rasterizer.drawTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC);
                 }
             } else
             {
                 if(!lowMem)
                 {
-                    ThreeDimensionalDrawingArea.drawTexturedTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC, xA, xB, xC, zA, zB, zC, yA, yB, yC, plainTile.texture);
+                    Rasterizer.drawTexturedTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC, xA, xB, xC, zA, zB, zC, yA, yB, yC, plainTile.texture);
                     return;
                 }
                 int j7 = textureRGBColour[plainTile.texture];
-                ThreeDimensionalDrawingArea.drawColouredTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, mixColour(j7, plainTile.colourA), mixColour(j7, plainTile.colourB), mixColour(j7, plainTile.colourC));
+                Rasterizer.drawTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, mixColour(j7, plainTile.colourA), mixColour(j7, plainTile.colourB), mixColour(j7, plainTile.colourC));
             }
         }
     }
@@ -1710,11 +1710,11 @@ label0:
                 ShapedTile.veritceZ[vID] = k2;
                 ShapedTile.veritceY[vID] = i3;
             }
-            ShapedTile.screenX[vID] = ThreeDimensionalDrawingArea.xMidPos + (i2 << 9) / i3;
-            ShapedTile.screenY[vID] = ThreeDimensionalDrawingArea.yMidPos + (k2 << 9) / i3;
+            ShapedTile.screenX[vID] = Rasterizer.centerX + (i2 << 9) / i3;
+            ShapedTile.screenY[vID] = Rasterizer.centerY + (k2 << 9) / i3;
         }
 
-        ThreeDimensionalDrawingArea.alpha = 0;
+        Rasterizer.alpha = 0;
         k1 = shapedTile.indexA.length;
         for(int j2 = 0; j2 < k1; j2++)
         {
@@ -1729,7 +1729,7 @@ label0:
             int sYC = ShapedTile.screenY[indexC];
             if((sXA - sXB) * (sYC - sYB) - (sYA - sYB) * (sXC - sXB) > 0)
             {
-                ThreeDimensionalDrawingArea.aBoolean1462 = sXA < 0 || sXB < 0 || sXC < 0 || sXA > DrawingArea.viewportRx || sXB > DrawingArea.viewportRx || sXC > DrawingArea.viewportRx;
+                Rasterizer.aBoolean1462 = sXA < 0 || sXB < 0 || sXC < 0 || sXA > DrawingArea.viewportRx || sXB > DrawingArea.viewportRx || sXC > DrawingArea.viewportRx;
                 if(isClicked && isTriangleClicked(clickX, clickY, sYA, sYB, sYC, sXA, sXB, sXC))
                 {
                     clickedTileX = i;
@@ -1738,18 +1738,18 @@ label0:
                 if(shapedTile.triTex == null || shapedTile.triTex[j2] == -1)
                 {
                     if(shapedTile.verticeColourA[j2] != 0xbc614e)
-                        ThreeDimensionalDrawingArea.drawColouredTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2]);
+                        Rasterizer.drawTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2]);
                 } else
                 if(!lowMem)
                 {
                     if(shapedTile.flat)
-                        ThreeDimensionalDrawingArea.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2], ShapedTile.veritceX[0], ShapedTile.veritceX[1], ShapedTile.veritceX[3], ShapedTile.veritceZ[0], ShapedTile.veritceZ[1], ShapedTile.veritceZ[3], ShapedTile.veritceY[0], ShapedTile.veritceY[1], ShapedTile.veritceY[3], shapedTile.triTex[j2]);
+                        Rasterizer.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2], ShapedTile.veritceX[0], ShapedTile.veritceX[1], ShapedTile.veritceX[3], ShapedTile.veritceZ[0], ShapedTile.veritceZ[1], ShapedTile.veritceZ[3], ShapedTile.veritceY[0], ShapedTile.veritceY[1], ShapedTile.veritceY[3], shapedTile.triTex[j2]);
                     else
-                        ThreeDimensionalDrawingArea.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2], ShapedTile.veritceX[indexA], ShapedTile.veritceX[indexB], ShapedTile.veritceX[indexC], ShapedTile.veritceZ[indexA], ShapedTile.veritceZ[indexB], ShapedTile.veritceZ[indexC], ShapedTile.veritceY[indexA], ShapedTile.veritceY[indexB], ShapedTile.veritceY[indexC], shapedTile.triTex[j2]);
+                        Rasterizer.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2], ShapedTile.veritceX[indexA], ShapedTile.veritceX[indexB], ShapedTile.veritceX[indexC], ShapedTile.veritceZ[indexA], ShapedTile.veritceZ[indexB], ShapedTile.veritceZ[indexC], ShapedTile.veritceY[indexA], ShapedTile.veritceY[indexB], ShapedTile.veritceY[indexC], shapedTile.triTex[j2]);
                 } else
                 {
                     int k5 = textureRGBColour[shapedTile.triTex[j2]];
-                    ThreeDimensionalDrawingArea.drawColouredTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.verticeColourA[j2]), mixColour(k5, shapedTile.verticeColourB[j2]), mixColour(k5, shapedTile.verticeColourC[j2]));
+                    Rasterizer.drawTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.verticeColourA[j2]), mixColour(k5, shapedTile.verticeColourB[j2]), mixColour(k5, shapedTile.verticeColourC[j2]));
                 }
             }
         }

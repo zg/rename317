@@ -204,7 +204,7 @@ final class MapRegion {
                                 }
                                 int underlay_rgb = 0;
                                 if(underlay_hsl_real != -1)
-                                    underlay_rgb = ThreeDimensionalDrawingArea.HSL2RGB[mix_lightness(underlay_hsl, 96)];
+                                    underlay_rgb = Rasterizer.HSL2RGB[mix_lightness(underlay_hsl, 96)];
                                 if(overlay_id == 0)
                                 {
                                     sceneGraph.addTile(z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), 0, 0, 0, 0, underlay_rgb, 0);
@@ -218,7 +218,7 @@ final class MapRegion {
                                     int overlay_rgb;
                                     if(overlay_texture >= 0)
                                     {
-                                        overlay_rgb = ThreeDimensionalDrawingArea.calculateTextureColour(overlay_texture);
+                                        overlay_rgb = Rasterizer.calculateTextureColour(overlay_texture);
                                         overlay_hsl = -1;//Grayscale
                                     } else if(overlay.colour2 == 0xff00ff) {
                                         overlay_rgb = 0;
@@ -226,7 +226,7 @@ final class MapRegion {
                                         overlay_texture = -1;
                                     } else {
                                         overlay_hsl = pack_hsl(overlay.hue, overlay.saturation, overlay.lightness);
-                                        overlay_rgb = ThreeDimensionalDrawingArea.HSL2RGB[mix_lightness_gt(overlay.hslColour, 96)];
+                                        overlay_rgb = Rasterizer.HSL2RGB[mix_lightness_gt(overlay.hslColour, 96)];
                                     }
                                     sceneGraph.addTile(z, X, Y, shapea, shapeb, overlay_texture, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), mix_lightness_gt(overlay_hsl, shadow_a), mix_lightness_gt(overlay_hsl, shadow_b), mix_lightness_gt(overlay_hsl, shadow_d), mix_lightness_gt(overlay_hsl, shadow_c), underlay_rgb, overlay_rgb);
                                 }
@@ -1013,7 +1013,7 @@ label0:
 
     private static int method184(int i, int j, int k, int l)
     {
-        int i1 = 0x10000 - ThreeDimensionalDrawingArea.COSINE[(k * 1024) / l] >> 1;
+        int i1 = 0x10000 - Rasterizer.COSINE[(k * 1024) / l] >> 1;
         return (i * (0x10000 - i1) >> 16) + (j * i1 >> 16);
     }
 
