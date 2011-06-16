@@ -24,8 +24,6 @@ final class BZ2Entry
     byte inputBuffer[];
     int fileStartOffsets;
     int compressedSize;
-    int junk1;
-    int junk2;
     byte outputBuffer[];
     int anInt569;
     int decompressedSize;
@@ -37,7 +35,6 @@ final class BZ2Entry
     int current2Bytes;
     int bitPos;
     int blockSize;
-    int junk3;
     int origPointer;
     int anInt581;
     int anInt582;

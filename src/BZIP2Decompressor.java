@@ -11,16 +11,13 @@ final class BZIP2Decompressor
             Bzip2Decompressor.inputBuffer = inputBuf;
             Bzip2Decompressor.fileStartOffsets = offset;
             Bzip2Decompressor.outputBuffer = outputBuf;
-            Bzip2Decompressor.anInt569 = 0;
             Bzip2Decompressor.compressedSize = compressedSize;
             Bzip2Decompressor.decompressedSize = decompressedSize;
             Bzip2Decompressor.bitPos = 0;
+            Bzip2Decompressor.anInt569 = 0;
             Bzip2Decompressor.current2Bytes = 0;
-            Bzip2Decompressor.junk1 = 0;
-            Bzip2Decompressor.junk2 = 0;
             Bzip2Decompressor.anInt571 = 0;
             Bzip2Decompressor.anInt572 = 0;
-            Bzip2Decompressor.junk3 = 0;
             getNextBlock(Bzip2Decompressor);
             decompressedSize -= Bzip2Decompressor.decompressedSize;
             return decompressedSize;
@@ -177,7 +174,6 @@ label0:
             currentBlock = getByte(BZ2Entry);// 0x26
             currentBlock = getByte(BZ2Entry);// 0x53
             currentBlock = getByte(BZ2Entry);// 0x59
-            BZ2Entry.junk3++;
             /* CRC Checksums */
             currentBlock = getByte(BZ2Entry);
             currentBlock = getByte(BZ2Entry);
@@ -504,9 +500,6 @@ label0:
             BZ2Entry.bitPos += 8;
             BZ2Entry.fileStartOffsets++;
             BZ2Entry.compressedSize--;
-            BZ2Entry.junk1++;
-            if(BZ2Entry.junk1 == 0)
-                BZ2Entry.junk2++;
         } while(true);
         return j;
     }
