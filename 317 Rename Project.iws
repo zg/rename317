@@ -2,112 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/extras" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pgle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iml" afterPath="$PROJECT_DIR$/317 Rename Project.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compile.bat" afterPath="$PROJECT_DIR$/compile.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Animation.html" afterPath="$PROJECT_DIR$/jdocs/Animation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/AnimationFrame.html" afterPath="$PROJECT_DIR$/jdocs/AnimationFrame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/DummyClass.html" afterPath="$PROJECT_DIR$/jdocs/DummyClass.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/EntityDef.html" afterPath="$PROJECT_DIR$/jdocs/EntityDef.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Flo.html" afterPath="$PROJECT_DIR$/jdocs/Flo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/ISAACRandomGen.html" afterPath="$PROJECT_DIR$/jdocs/ISAACRandomGen.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/IdentityKit.html" afterPath="$PROJECT_DIR$/jdocs/IdentityKit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/IndexedImage.html" afterPath="$PROJECT_DIR$/jdocs/IndexedImage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/ItemDef.html" afterPath="$PROJECT_DIR$/jdocs/ItemDef.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/MRUNodes.html" afterPath="$PROJECT_DIR$/jdocs/MRUNodes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Model.html" afterPath="$PROJECT_DIR$/jdocs/Model.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/ModelTransform.html" afterPath="$PROJECT_DIR$/jdocs/ModelTransform.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/NPC.html" afterPath="$PROJECT_DIR$/jdocs/NPC.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Object1.html" afterPath="$PROJECT_DIR$/jdocs/Object1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Object2.html" afterPath="$PROJECT_DIR$/jdocs/Object2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Object3.html" afterPath="$PROJECT_DIR$/jdocs/Object3.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Object5.html" afterPath="$PROJECT_DIR$/jdocs/Object5.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/ObjectDef.html" afterPath="$PROJECT_DIR$/jdocs/ObjectDef.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/OnDemandData.html" afterPath="$PROJECT_DIR$/jdocs/OnDemandData.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/OnDemandFetcher.html" afterPath="$PROJECT_DIR$/jdocs/OnDemandFetcher.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Packet.html" afterPath="$PROJECT_DIR$/jdocs/Packet.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Player.html" afterPath="$PROJECT_DIR$/jdocs/Player.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/RSFont.html" afterPath="$PROJECT_DIR$/jdocs/RSFont.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/RSInterface.html" afterPath="$PROJECT_DIR$/jdocs/RSInterface.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/RgbImage.html" afterPath="$PROJECT_DIR$/jdocs/RgbImage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/SettingUsagePointers.html" afterPath="$PROJECT_DIR$/jdocs/SettingUsagePointers.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/SpotAnim.html" afterPath="$PROJECT_DIR$/jdocs/SpotAnim.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/Tile.html" afterPath="$PROJECT_DIR$/jdocs/Tile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/VarBit.html" afterPath="$PROJECT_DIR$/jdocs/VarBit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/client.html" afterPath="$PROJECT_DIR$/jdocs/client.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extras/Packet.java" afterPath="$PROJECT_DIR$/src/extras/Packet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Animation.java" afterPath="$PROJECT_DIR$/src/rs2/Animation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/AnimationFrame.java" afterPath="$PROJECT_DIR$/src/rs2/AnimationFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/BZ2Entry.java" afterPath="$PROJECT_DIR$/src/rs2/BZ2Entry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/BZIP2Decompressor.java" afterPath="$PROJECT_DIR$/src/rs2/BZIP2Decompressor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Censor.java" afterPath="$PROJECT_DIR$/src/rs2/Censor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Class29.java" afterPath="$PROJECT_DIR$/src/rs2/Class29.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Class39.java" afterPath="$PROJECT_DIR$/src/rs2/Class39.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/CullingCluster.java" afterPath="$PROJECT_DIR$/src/rs2/CullingCluster.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/EntityDef.java" afterPath="$PROJECT_DIR$/src/rs2/EntityDef.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Flo.java" afterPath="$PROJECT_DIR$/src/rs2/Flo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GameObjectSpawnRequest.java" afterPath="$PROJECT_DIR$/src/rs2/GameObjectSpawnRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GroundDecoration.java" afterPath="$PROJECT_DIR$/src/rs2/GroundDecoration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GroundItemTile.java" afterPath="$PROJECT_DIR$/src/rs2/GroundItemTile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ISAACRandomGen.java" afterPath="$PROJECT_DIR$/src/rs2/ISAACRandomGen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/IdentityKit.java" afterPath="$PROJECT_DIR$/src/rs2/IdentityKit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/IndexedImage.java" afterPath="$PROJECT_DIR$/src/rs2/IndexedImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/InteractableObject.java" afterPath="$PROJECT_DIR$/src/rs2/InteractableObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Item.java" afterPath="$PROJECT_DIR$/src/rs2/Item.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ItemDef.java" afterPath="$PROJECT_DIR$/src/rs2/ItemDef.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/JagexArchive.java" afterPath="$PROJECT_DIR$/src/rs2/JagexArchive.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/JagexFileStore.java" afterPath="$PROJECT_DIR$/src/rs2/JagexFileStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MRUNodes.java" afterPath="$PROJECT_DIR$/src/rs2/MRUNodes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MapRegion.java" afterPath="$PROJECT_DIR$/src/rs2/MapRegion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MapUtility.java" afterPath="$PROJECT_DIR$/src/rs2/MapUtility.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Model.java" afterPath="$PROJECT_DIR$/src/rs2/Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ModelHeader.java" afterPath="$PROJECT_DIR$/src/rs2/ModelHeader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ModelTransform.java" afterPath="$PROJECT_DIR$/src/rs2/ModelTransform.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MouseDetection.java" afterPath="$PROJECT_DIR$/src/rs2/MouseDetection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/NPC.java" afterPath="$PROJECT_DIR$/src/rs2/NPC.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/NodeCache.java" afterPath="$PROJECT_DIR$/src/rs2/NodeCache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/NodeList.java" afterPath="$PROJECT_DIR$/src/rs2/NodeList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/NodeSubList.java" afterPath="$PROJECT_DIR$/src/rs2/NodeSubList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ObjectDef.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectDef.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ObjectOnTile.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectOnTile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/OnDemandData.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Packet.java" afterPath="$PROJECT_DIR$/src/rs2/Packet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/PlainTile.java" afterPath="$PROJECT_DIR$/src/rs2/PlainTile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Player.java" afterPath="$PROJECT_DIR$/src/rs2/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Projectile.java" afterPath="$PROJECT_DIR$/src/rs2/Projectile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSFont.java" afterPath="$PROJECT_DIR$/src/rs2/RSFont.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSFrame.java" afterPath="$PROJECT_DIR$/src/rs2/RSFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSImageProducer.java" afterPath="$PROJECT_DIR$/src/rs2/RSImageProducer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSInterface.java" afterPath="$PROJECT_DIR$/src/rs2/RSInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSSocket.java" afterPath="$PROJECT_DIR$/src/rs2/RSSocket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Rasterizer.java" afterPath="$PROJECT_DIR$/src/rs2/Rasterizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RgbImage.java" afterPath="$PROJECT_DIR$/src/rs2/RgbImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SettingUsagePointers.java" afterPath="$PROJECT_DIR$/src/rs2/SettingUsagePointers.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ShapedTile.java" afterPath="$PROJECT_DIR$/src/rs2/ShapedTile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SizeConstants.java" afterPath="$PROJECT_DIR$/src/rs2/SizeConstants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Skills.java" afterPath="$PROJECT_DIR$/src/rs2/Skills.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SoundTrack.java" afterPath="$PROJECT_DIR$/src/rs2/SoundTrack.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Sounds.java" afterPath="$PROJECT_DIR$/src/rs2/Sounds.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SpotAnim.java" afterPath="$PROJECT_DIR$/src/rs2/SpotAnim.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/StillGraphics.java" afterPath="$PROJECT_DIR$/src/rs2/StillGraphics.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/TextClass.java" afterPath="$PROJECT_DIR$/src/rs2/TextClass.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/TextInput.java" afterPath="$PROJECT_DIR$/src/rs2/TextInput.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Tile.java" afterPath="$PROJECT_DIR$/src/rs2/Tile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/TileSetting.java" afterPath="$PROJECT_DIR$/src/rs2/TileSetting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/VarBit.java" afterPath="$PROJECT_DIR$/src/rs2/VarBit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/VertexNormal.java" afterPath="$PROJECT_DIR$/src/rs2/VertexNormal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/WallDecoration.java" afterPath="$PROJECT_DIR$/src/rs2/WallDecoration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/WallObject.java" afterPath="$PROJECT_DIR$/src/rs2/WallObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sign/signlink.java" afterPath="$PROJECT_DIR$/src/sign/signlink.java" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\extras\Frames.dat" afterPath="$PROJECT_DIR$/extras/Frames.dat" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\extras\Skins.dat" afterPath="$PROJECT_DIR$/extras/Skins.dat" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\extras\seq.dat" afterPath="$PROJECT_DIR$/extras/seq.dat" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\extras\spotanim.dat" afterPath="$PROJECT_DIR$/extras/spotanim.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/client.java" afterPath="$PROJECT_DIR$/src/rs2/client.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -189,10 +85,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="compile.bat" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="compile.bat" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/compile.bat">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="44" selection-start="135" selection-end="135" vertical-scroll-proportion="0.23097827">
+            <state line="5" column="44" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -201,7 +97,34 @@
       <file leaf-file-name="MapRegion.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1375" column="30" selection-start="55133" selection-end="55133" vertical-scroll-proportion="0.0">
+            <state line="35" column="34" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileSetting.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/TileSetting.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="13" selection-start="28" selection-end="28" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Skills.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Skills.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="19" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rs2/client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9100" column="41" selection-start="249299" selection-end="249299" vertical-scroll-proportion="0.33239436">
               <folding />
             </state>
           </provider>
@@ -217,7 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Sounds.java" />
         <option value="$PROJECT_DIR$/src/Rasterizer.java" />
         <option value="$PROJECT_DIR$/src/client.java" />
         <option value="$PROJECT_DIR$/src/jgle_graphics/JgleManager.java" />
@@ -232,6 +154,8 @@
         <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
         <option value="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" />
         <option value="$PROJECT_DIR$/compile.bat" />
+        <option value="$PROJECT_DIR$/src/rs2/Skills.java" />
+        <option value="$PROJECT_DIR$/src/rs2/client.java" />
       </list>
     </option>
   </component>
@@ -802,13 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1375" column="30" selection-start="55133" selection-end="55133" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pgle/RsTerrainSource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="10" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0">
@@ -825,7 +742,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/compile.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="44" selection-start="135" selection-end="135" vertical-scroll-proportion="0.23097827">
+        <state line="5" column="44" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="34" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/TileSetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="13" selection-start="28" selection-end="28" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Skills.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="19" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9100" column="41" selection-start="249299" selection-end="249299" vertical-scroll-proportion="0.33239436">
           <folding />
         </state>
       </provider>
