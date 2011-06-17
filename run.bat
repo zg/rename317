@@ -1,2 +1,2 @@
-java -cp ./bin client.SwingUI
+java -cp ./bin rs2.SwingUI
 pause

@@ -26,7 +26,7 @@ byte[][] datacache = new byte[numFrames][];
 
 for(int i = 0; i < numFrames; i++)
 {
-byte[] frameData; //= FileOperations.ReadFile("./frames/"+i+".dat");
+byte[] frameData; //= rs2.FileOperations.ReadFile("./frames/"+i+".dat");
 frameData = CompressingFile.getCompressedData("./frames/"+i+".dat");
 datacache[i] = frameData;
 spaceNeeded += frameData.length + 6;
@@ -40,7 +40,7 @@ Packet stream = new Packet(new byte[spaceNeeded]);
 stream.p2(numFrames);
 for(int i = 0; i < numFrames; i++)
 {
-//byte[] frameData = FileOperations.ReadFile("./frames/"+i+".dat");
+//byte[] frameData = rs2.FileOperations.ReadFile("./frames/"+i+".dat");
 byte[] frameData = datacache[i];
 
 stream.p2(i);
