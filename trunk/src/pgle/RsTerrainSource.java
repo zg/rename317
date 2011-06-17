@@ -3,6 +3,7 @@ package pgle;
 import org.lwjgl.util.Color;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
 import org.peterbjornx.pgl2.texture.Texture2D;
+import rs2.Flo;
 import rs2.MapRegion;
 import sun.text.normalizer.IntTrie;
 
@@ -19,10 +20,22 @@ public class RsTerrainSource implements TerrainSource {
     private Color[][] colourMap = new Color[104][104];
     private int heightLevel = 0;
 
-    private void update(){
+    public RsTerrainSource(MapRegion mapRegion) {
+        this.mapRegion = mapRegion;
+    }
+
+    private void updateMap(){
+        byte[][] underlays = mapRegion.getUnderLay()[heightLevel];
+        int[][] underlaysRgb = mapRegion.getUnderlayRgb()[heightLevel];
         for (int x = 0;x < 104;x++)
-            for (int z = 0;z < 104;z++);
-                ;
+            for (int z = 0;z < 104;z++){
+                if (underlays[x][z] == 0)
+                    underlays[x][z] = 1;
+                Flo underlay = Flo.cache[underlays[x][z] - 1];
+                int underlayRgb = underlaysRgb[x][z];
+                colourMap[x][z] = new Color(underlayRgb >> 16,underlayRgb >> 8,underlayRgb & 0xFF);
+                textureMap[x][z] = underlay.texture;
+            }
     }
 
     public int[][] getHeightMap() {

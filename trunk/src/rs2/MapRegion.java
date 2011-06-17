@@ -4,6 +4,8 @@ package rs2;
 
 public class MapRegion {
 
+    private int[][][] underlayRgb = new int[4][104][104];
+
     public MapRegion(byte tsettings[][][], int hmap[][][])
     {
         setZ = 99;
@@ -79,10 +81,10 @@ public class MapRegion {
                     int hDX = heightMap[z][X + 1][Y] - heightMap[z][X - 1][Y];
                     int hDY = heightMap[z][X][Y + 1] - heightMap[z][X][Y - 1];
                     int square = (int)Math.sqrt(hDX * hDX + 0x10000 + hDY * hDY);
-                    int k12 = (hDX << 8) / square;
-                    int l13 = 0x10000 / square;
-                    int j15 = (hDY << 8) / square;
-                    int j16 = light_off + (l_x * k12 + l_y * l13 + l_z * j15) / sqrtA;
+                    int normal_x = (hDX << 8) / square;
+                    int normal_y = 0x10000 / square;
+                    int normal_z = (hDY << 8) / square;
+                    int j16 = light_off + (l_x * normal_x + l_y * normal_y + l_z * normal_z) / sqrtA;
                     int j17 = (something_with_objects[X - 1][Y] >> 2) + (something_with_objects[X + 1][Y] >> 3) + (something_with_objects[X][Y - 1] >> 2) + (something_with_objects[X][Y + 1] >> 3) + (something_with_objects[X][Y] >> 1);
                     tile_shadow[X][Y] = j16 - j17;
                 }
@@ -205,6 +207,7 @@ public class MapRegion {
                                 int underlay_rgb = 0;
                                 if(underlay_hsl_real != -1)
                                     underlay_rgb = Rasterizer.HSL2RGB[mix_lightness(underlay_hsl, 96)];
+                                underlayRgb[z][X][Y] = underlay_rgb;
                                 if(overlay_id == 0)
                                 {
                                     sceneGraph.addTile(z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), 0, 0, 0, 0, underlay_rgb, 0);
@@ -1384,6 +1387,10 @@ label0:
 
     public byte[][][] getUnderLay() {
         return underLay;
+    }
+
+    public int[][][] getUnderlayRgb() {
+        return underlayRgb;
     }
 
     public byte[][][] getTileSettings() {
