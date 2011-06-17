@@ -1,2 +1,3 @@
-java SwingUI 
+@echo off
+java -cp bin SwingUI 
 pause
