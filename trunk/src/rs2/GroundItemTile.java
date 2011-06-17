@@ -2,7 +2,7 @@ package rs2;
 
 //Object4
 //rs2.GroundItemTile: a tile with a groundItem on it.
-final class GroundItemTile {
+public class GroundItemTile {
 
     GroundItemTile()
     {

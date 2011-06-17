@@ -4,7 +4,7 @@ package rs2;
 import java.io.*;
 import java.net.Socket;
 
-final class RSSocket
+public class RSSocket
         implements Runnable
 {
 

@@ -1,6 +1,6 @@
 package rs2;
 
-final class Rasterizer extends DrawingArea {
+public class Rasterizer extends DrawingArea {
 
     public static void nullLoader()
     {

@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class EntityDef
+public class EntityDef
 {
 
     public static EntityDef forID(int i)

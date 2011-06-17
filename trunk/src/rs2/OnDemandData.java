@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class OnDemandData extends NodeSub {
+public class OnDemandData extends NodeSub {
 
     public OnDemandData()
     {

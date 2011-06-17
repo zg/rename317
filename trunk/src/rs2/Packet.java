@@ -5,7 +5,7 @@ package rs2;
 import java.math.BigInteger;
 import sign.signlink;
 
-public final class Packet extends NodeSub {
+public class Packet extends NodeSub {
 
     public static Packet create()
     {

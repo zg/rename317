@@ -1,6 +1,6 @@
 package rs2;
 
-public final class WallObject
+public class WallObject
 {
 
     public WallObject()

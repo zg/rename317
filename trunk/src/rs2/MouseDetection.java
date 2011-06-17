@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class MouseDetection
+public class MouseDetection
         implements Runnable
 {
 

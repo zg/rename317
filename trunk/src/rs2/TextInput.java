@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class TextInput {
+public class TextInput {
 
     public static String method525(int i, Packet stream)
     {

@@ -1,6 +1,6 @@
 package rs2;
 
-final class SceneGraph {
+public class SceneGraph {
 
     public SceneGraph(int heightmap[][][])
     {

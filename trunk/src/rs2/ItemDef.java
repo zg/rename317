@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class ItemDef
+public class ItemDef
 {
 
     public static void nullLoader()

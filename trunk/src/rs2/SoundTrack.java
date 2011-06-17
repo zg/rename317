@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class SoundTrack
+public class SoundTrack
 {
 
     public static void initialise()

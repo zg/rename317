@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class SKILLS
+public class SKILLS
 {
 
     public static final int COUNT = 25;

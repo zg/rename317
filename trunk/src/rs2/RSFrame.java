@@ -3,7 +3,7 @@ package rs2;
 import java.awt.*;
 
 @SuppressWarnings("serial")
-final class RSFrame extends Frame
+public class RSFrame extends Frame
 {
 
     public RSFrame(RSApplet RSApplet_, int i, int j)

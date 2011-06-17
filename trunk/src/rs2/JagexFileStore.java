@@ -2,7 +2,7 @@ package rs2;
 
 import java.io.*;
 
-final class JagexFileStore {//CacheIO or rs2.JagexFileStore..
+public class JagexFileStore {//CacheIO or rs2.JagexFileStore..
 	
     public JagexFileStore(RandomAccessFile randomaccessfile, RandomAccessFile randomaccessfile1, int j)
     {

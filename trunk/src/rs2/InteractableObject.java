@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class InteractableObject
+public class InteractableObject
 {
 
     public InteractableObject()

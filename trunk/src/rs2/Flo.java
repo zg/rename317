@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class Flo {
+public class Flo {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {

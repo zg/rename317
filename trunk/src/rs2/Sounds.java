@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class Sounds {
+public class Sounds {
 
     private Sounds()
     {

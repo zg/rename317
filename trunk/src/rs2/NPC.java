@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class NPC extends Entity
+public class NPC extends Entity
 {
 
     private Model method450()

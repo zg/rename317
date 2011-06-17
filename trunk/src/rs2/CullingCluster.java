@@ -1,6 +1,6 @@
 package rs2;
 
-final class CullingCluster
+public class CullingCluster
 {
 
     CullingCluster()

@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class TileSetting
+public class TileSetting
 {
 
     public TileSetting()

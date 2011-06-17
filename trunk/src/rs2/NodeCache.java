@@ -3,7 +3,7 @@ package rs2;
 
 import sign.signlink;
 
-final class NodeCache {
+public class NodeCache {
 
     public NodeCache()
     {

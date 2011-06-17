@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class ModelHeader
+public class ModelHeader
 {
 
     public ModelHeader()

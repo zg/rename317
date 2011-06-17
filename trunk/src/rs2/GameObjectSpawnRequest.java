@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class GameObjectSpawnRequest extends Node {
+public class GameObjectSpawnRequest extends Node {
 
     GameObjectSpawnRequest()
     {

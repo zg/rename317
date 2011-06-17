@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class Tile extends Node {
+public class Tile extends Node {
 
     public Tile(int i, int j, int k)
     {

@@ -1,6 +1,6 @@
 package rs2;
 
-final class Censor {
+public class Censor {
 
     public static void loadConfig(JagexArchive jagexArchive)
     {

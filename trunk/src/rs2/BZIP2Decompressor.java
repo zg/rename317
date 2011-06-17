@@ -1,6 +1,6 @@
 package rs2;//Thanks sadistic :3
 
-final class BZIP2Decompressor
+public class BZIP2Decompressor
 {
 
 

@@ -1,6 +1,6 @@
 package rs2;
 
-public final class GroundDecoration
+public class GroundDecoration
 {
 
     public GroundDecoration()
