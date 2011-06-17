@@ -3,19 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-//import javax.swing.plaf.metal.MetalLookAndFeel;
-//import java.util.Arrays;
-//import java.io.File;
-//import javax.imageio.ImageIO;
-//import java.awt.image.BufferedImage;
+// import javax.swing.plaf.metal.MetalLookAndFeel;
+// import java.util.Arrays;
+// import java.io.File;
+// import javax.imageio.ImageIO;
+// import java.awt.image.BufferedImage;
 
 public class SwingUI extends client implements ActionListener {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6669540533506671428L;
-	//private static JMenuItem menuItem;
+	// private static JMenuItem menuItem;
 	private JFrame frame;
 
 	public SwingUI(String args[]) {
@@ -38,85 +38,73 @@ public class SwingUI extends client implements ActionListener {
 			frame.setResizable(false);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			JPanel gamePanel = new JPanel();
-
 			gamePanel.setLayout(new BorderLayout());
 			gamePanel.add(this);
 			gamePanel.setPreferredSize(new Dimension(765, 503));
-
 			initMenubar();
 			frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
 			frame.pack();
-
 			frame.setVisible(true); // can see the client
 			frame.setResizable(false); // resizeable frame
-
 			init();
 		} catch (Exception e) {
-				e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
+	public void displayWorldSelect() {
+		try {
+			String s = JOptionPane.showInputDialog(this, "New IP:");
+			if (s == null) {
+			} else if (s.equalsIgnoreCase("")) {
+			} else {
+				server = s;
+			}
+		} catch (Exception e) {
+		}
+	}
 
-	    public void displayWorldSelect() {
-	      try {
-	       String s = JOptionPane.showInputDialog(this, "New IP:");
-
-	       if (s == null) {
-	       } else if (s.equalsIgnoreCase("")) {
-	        } else {
-	         server = s;
-	        }
-	      }
-	      catch (Exception e) {
-	     }
-	   }
-
-	    public void displayPaypal() {
-	      try {
-	       String s = JOptionPane.showInputDialog(this, "Pease donate paypal clienthax@gmail.com, msn haxerownsmopar@hotmail.co.uk");
-
-	       if (s == null) {
-	       } else if (s.equalsIgnoreCase("")) {
-	        } else {
-	        }
-	      }
-	      catch (Exception e) {
-	     }
-	   }
+	public void displayPaypal() {
+		try {
+			String s = JOptionPane.showInputDialog(this, "Pease donate paypal clienthax@gmail.com, msn haxerownsmopar@hotmail.co.uk");
+			if (s == null) {
+			} else if (s.equalsIgnoreCase("")) {
+			} else {
+			}
+		} catch (Exception e) {
+		}
+	}
 
 	public void initMenubar() {
-			JMenu fileMenu = new JMenu("File");
-			String[] mainButtons = new String[] { "Forums","IP", "-", "Exit" };
-			for (String name : mainButtons) {
-				JMenuItem menuItem = new JMenuItem(name);
-				if (name.equalsIgnoreCase("-")) {
-					fileMenu.addSeparator();
-				} else if(name.equalsIgnoreCase("Forums")) {
-					JMenu forumsMenu = new JMenu("Forums");
-					fileMenu.add(forumsMenu);
-					JMenuItem runeServer = new JMenuItem("Rune-Server");
-					runeServer.addActionListener(this);
-					forumsMenu.add(runeServer);
-				} else if(name.equalsIgnoreCase("IP")) {
-					JMenu IPmenu = new JMenu("IP");
-					fileMenu.add(IPmenu);
-					JMenuItem changeIP = new JMenuItem("change ip");
-					changeIP.addActionListener(this);
-					IPmenu.add(changeIP);
-				} else {
-					menuItem.addActionListener(this);
-					fileMenu.add(menuItem);
-				}
+		JMenu fileMenu = new JMenu("File");
+		String[] mainButtons = new String[] { "Forums", "IP", "-", "Exit" };
+		for (String name : mainButtons) {
+			JMenuItem menuItem = new JMenuItem(name);
+			if (name.equalsIgnoreCase("-")) {
+				fileMenu.addSeparator();
+			} else if (name.equalsIgnoreCase("Forums")) {
+				JMenu forumsMenu = new JMenu("Forums");
+				fileMenu.add(forumsMenu);
+				JMenuItem runeServer = new JMenuItem("Rune-Server");
+				runeServer.addActionListener(this);
+				forumsMenu.add(runeServer);
+			} else if (name.equalsIgnoreCase("IP")) {
+				JMenu IPmenu = new JMenu("IP");
+				fileMenu.add(IPmenu);
+				JMenuItem changeIP = new JMenuItem("change ip");
+				changeIP.addActionListener(this);
+				IPmenu.add(changeIP);
+			} else {
+				menuItem.addActionListener(this);
+				fileMenu.add(menuItem);
 			}
-
-displayPaypal();
-
-			JMenuBar menuBar = new JMenuBar();
-			JMenuBar jmenubar = new JMenuBar();
-
-			frame.add(jmenubar);
-			menuBar.add(fileMenu);
-			frame.getContentPane().add(menuBar, BorderLayout.NORTH);
+		}
+		displayPaypal();
+		JMenuBar menuBar = new JMenuBar();
+		JMenuBar jmenubar = new JMenuBar();
+		frame.add(jmenubar);
+		menuBar.add(fileMenu);
+		frame.getContentPane().add(menuBar, BorderLayout.NORTH);
 	}
 
 	public URL getCodeBase() {
@@ -136,7 +124,7 @@ displayPaypal();
 	}
 
 	public String getParameter(String key) {
-			return "";
+		return "";
 	}
 
 	private static void openURL(String url) {
@@ -158,7 +146,6 @@ displayPaypal();
 				} else if (cmd.equalsIgnoreCase("change ip")) {
 					displayWorldSelect();
 				}
-
 			}
 		} catch (Exception e) {
 		}
