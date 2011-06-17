@@ -1,6 +1,7 @@
 package pgle;
 
 import org.lwjgl.util.Color;
+import org.peterbjornx.pgl2.terrain.Terrain;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
 import org.peterbjornx.pgl2.texture.Texture2D;
 import rs2.Flo;
@@ -24,7 +25,7 @@ public class RsTerrainSource implements TerrainSource {
         this.mapRegion = mapRegion;
     }
 
-    private void updateMap(){
+    public void updateMap(){
         byte[][] underlays = mapRegion.getUnderLay()[heightLevel];
         int[][] underlaysRgb = mapRegion.getUnderlayRgb()[heightLevel];
         for (int x = 0;x < 104;x++)
@@ -34,7 +35,7 @@ public class RsTerrainSource implements TerrainSource {
                 Flo underlay = Flo.cache[underlays[x][z] - 1];
                 int underlayRgb = underlaysRgb[x][z];
                 colourMap[x][z] = new Color(underlayRgb >> 16,underlayRgb >> 8,underlayRgb & 0xFF);
-                textureMap[x][z] = underlay.texture;
+                textureMap[x][z] = underlay.hdTexture;
             }
     }
 
@@ -50,8 +51,8 @@ public class RsTerrainSource implements TerrainSource {
         return textureMap;
     }
 
-    public Texture2D getTexture(int i) {
-        return null;
+    public Texture2D getTexture(int id) {
+        return new Texture2D("./hddata/texture/" + id + ".png");
     }
 
     public int getTileSize() {

@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 
+import pgle.PglWrapper;
 import sign.signlink;
 
 
@@ -12,7 +13,9 @@ import sign.signlink;
 @SuppressWarnings("serial")
 public class client extends RSApplet {
 
-	private static String logicGetAmountString(int i)
+    private PglWrapper pglWrapper;
+
+    private static String logicGetAmountString(int i)
 	{
 		String s = String.valueOf(i);
 		for(int k = s.length() - 3; k > 0; k -= 3)
@@ -342,6 +345,7 @@ public class client extends RSApplet {
 		setHighMem();
 		isMembers = true;
 		initClientFrame(503,765);
+        pglWrapper = new PglWrapper();
 	}
 
 	public void startRunnable(Runnable runnable, int i)
@@ -485,7 +489,7 @@ public class client extends RSApplet {
 		signlink.midisave(abyte0, abyte0.length);
 	}
 
-	private void updateWorldObjects()
+	private void loadRegion()
 	{
 		try
 		{
@@ -628,6 +632,7 @@ public class client extends RSApplet {
 			}
 			stream.p1isaac(0);
 			mapRegion.addTiles(tileSettings, sceneGraph);
+            pglWrapper.loadNewRegion(mapRegion);
 			gameDrawingTarget.initDrawingArea();
 			stream.p1isaac(0);
 			int k3 = MapRegion.setZ;
@@ -2017,12 +2022,13 @@ public class client extends RSApplet {
 	public void client_main_loop()
 	{
 		if(rsAlreadyLoaded || loadingError || genericLoadingError)
-		return;
+		    return;
 		currentTime++;
 		if(!loggedIn)
-		login_screen_process();
+		    login_screen_process();
 		else
-		client_process();
+		    client_process();
+        pglWrapper.process();
 		on_demand_process();
 	}
 
@@ -2579,7 +2585,7 @@ public class client extends RSApplet {
 		{
 			loadingStage = 2;
 			MapRegion.anInt131 = plane;
-			updateWorldObjects();
+			loadRegion();
 			stream.p1isaac(121);
 			return 0;
 		}
@@ -7138,6 +7144,7 @@ public class client extends RSApplet {
 			ObjectOnTile.clientInstance = this;
 			ObjectDef.clientInstance = this;
 			EntityDef.clientInstance = this;
+            pglWrapper.initJgle();
 			return;
 		}
 		catch(Exception exception)
