@@ -48,7 +48,7 @@ public final class RgbImage extends DrawingArea {
     {
         try
         {
-            Image image = Toolkit.getDefaultToolkit().getImage("./cache/title.png");
+            Image image = Toolkit.getDefaultToolkit().getImage("cache/title.png");
             //Image image = Toolkit.getDefaultToolkit().createImage(abyte0);
             MediaTracker mediatracker = new MediaTracker(component);
             mediatracker.addImage(image, 0);

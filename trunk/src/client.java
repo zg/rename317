@@ -2357,10 +2357,10 @@ public class client extends RSApplet {
 
 	private void loadTitleScreen()
 	{
-		titlebox = new RgbImage("./cache/sprites/title.png");
-		passwordhover = new RgbImage("./cache/sprites/pH.png");
-		loginhover = new RgbImage("./cache/sprites/LH.png");
-		loadingBox1 = new RgbImage("./cache/sprites/LoadingCircle/Loading1.png");
+		titlebox = new RgbImage("cache/sprites/title.png");
+		passwordhover = new RgbImage("cache/sprites/pH.png");
+		loginhover = new RgbImage("cache/sprites/LH.png");
+		loadingBox1 = new RgbImage("cache/sprites/LoadingCircle/Loading1.png");
 		aIndexedImageArray1152s = new IndexedImage[12];
 		int j = 0;
 		try
