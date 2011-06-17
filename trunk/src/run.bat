@@ -1,3 +1,3 @@
 @echo off
-java -cp bin SwingUI 
+java -cp bin rs2.SwingUI 
 pause
