@@ -9098,8 +9098,8 @@ public class client extends RSApplet {
 				k1 = session_player.combatLevel;
 				if(j1 == 9)
 				{
-					for(int l1 = 0; l1 < SKILLS.COUNT; l1++)
-					if(SKILLS.ENABLED[l1])
+					for(int l1 = 0; l1 < Skills.COUNT; l1++)
+					if(Skills.ENABLED[l1])
 					k1 += user_stats[l1];
 
 				}
@@ -11700,7 +11700,7 @@ public class client extends RSApplet {
 		aStream_847 = Packet.create();
 		wave_on = true;
 		openInterfaceID = -1;
-		user_experience = new int[SKILLS.COUNT];
+		user_experience = new int[Skills.COUNT];
 		aBoolean872 = false;
 		anIntArray873 = new int[5];
 		anInt874 = -1;
@@ -11720,7 +11720,7 @@ public class client extends RSApplet {
 		anIntArrayArray901 = new int[104][104];
 		anInt902 = 0x766654;
 		aByteArray912 = new byte[16384];
-		user_levels = new int[SKILLS.COUNT];
+		user_levels = new int[Skills.COUNT];
 		user_ignore_names = new long[100];
 		loadingError = false;
 		anInt927 = 0x332d25;
@@ -11763,7 +11763,7 @@ public class client extends RSApplet {
 		char_edit_model_changed = false;
 		mapFunctions = new RgbImage[100];
 		dialogID = -1;
-		user_stats = new int[SKILLS.COUNT];
+		user_stats = new int[Skills.COUNT];
 		anIntArray1045 = new int[2000];
 		char_edit_gender = true;
 		anIntArray1052 = new int[151];
