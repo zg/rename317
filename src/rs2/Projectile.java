@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class Projectile extends Animable {
+public class Projectile extends Animable {
 
     public void method455(int i, int j, int k, int l)
     {

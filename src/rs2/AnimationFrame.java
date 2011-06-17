@@ -1,6 +1,6 @@
 package rs2;
 
-public final class AnimationFrame
+public class AnimationFrame
 {
 
 	public static byte[] getData(int i1, int i2) {
@@ -24,7 +24,7 @@ public final class AnimationFrame
 	public static void loadSkins()
 	{
 		System.out.println("Preloading Skins...");
-		Packet stream = new Packet(FileOperations.ReadFile("./extras/Skins.dat"));
+		Packet stream = new Packet(FileOperations.ReadFile("extras/Skins.dat"));
 
 /*
 Format
@@ -53,7 +53,7 @@ repeat
 	public static void loadFrames()
 	{
 		System.out.println("Preloading Frames...");
-		Packet stream = new Packet(FileOperations.ReadFile("./extras/Frames.dat"));
+		Packet stream = new Packet(FileOperations.ReadFile("extras/Frames.dat"));
 
 /*
 Format

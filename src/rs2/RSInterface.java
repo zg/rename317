@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class RSInterface
+public class RSInterface
 {
 
     public void swapInventoryItems(int i, int j)

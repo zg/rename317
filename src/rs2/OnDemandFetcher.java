@@ -7,7 +7,7 @@ import java.util.zip.CRC32;
 import java.util.zip.GZIPInputStream;
 import sign.signlink;
 
-public final class OnDemandFetcher extends OnDemandFetcherParent
+public class OnDemandFetcher extends OnDemandFetcherParent
         implements Runnable
 {
 

@@ -1,12 +1,12 @@
 package rs2;
 
 
-public final class SpotAnim {
+public class SpotAnim {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
 //        rs2.Packet stream = new rs2.Packet(jagexArchive.getDataForName("spotanim.dat"));
-    	Packet stream = new Packet(FileOperations.ReadFile("./extras/spotanim.dat"));
+    	Packet stream = new Packet(FileOperations.ReadFile("extras/spotanim.dat"));
         int length = stream.g2();
         if(cache == null)
             cache = new SpotAnim[length];

@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class StillGraphics extends Animable {
+public class StillGraphics extends Animable {
 
     public StillGraphics(int i, int j, int l, int i1, int j1, int k1,
                          int l1)

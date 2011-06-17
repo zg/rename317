@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class JagexArchive {
+public class JagexArchive {
 
     public JagexArchive(byte in[])
     {

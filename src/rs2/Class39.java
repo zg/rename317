@@ -1,6 +1,6 @@
 package rs2;
 
-final class Class39
+public class Class39
 {
 
     private float method541(int i, int j, float f)

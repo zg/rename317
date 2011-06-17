@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class SizeConstants {
+public class SizeConstants {
 
     public static final int[] anIntArray552 = {//never used in rs2.client..
         6, 21, 25, 33, 254, 127, 183, 87, 216, 215, 

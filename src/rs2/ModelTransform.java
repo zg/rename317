@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class ModelTransform
+public class ModelTransform
 {
 
     public ModelTransform(Packet stream)

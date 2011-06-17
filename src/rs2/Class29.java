@@ -1,6 +1,6 @@
 package rs2;
 
-final class Class29
+public class Class29
 {
 
     public void method325(Packet stream)

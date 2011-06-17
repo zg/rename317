@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class ObjectDef
+public class ObjectDef
 {
     //thanks for the variables Xaves
 

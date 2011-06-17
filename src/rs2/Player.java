@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class Player extends Entity
+public class Player extends Entity
 {
 
     public Model getRotatedModel()

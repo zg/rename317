@@ -1,6 +1,6 @@
 package rs2;
 
-public final class IdentityKit {
+public class IdentityKit {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {

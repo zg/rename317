@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class SettingUsagePointers {
+public class SettingUsagePointers {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {

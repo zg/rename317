@@ -1,11 +1,11 @@
 package rs2;
 
-public final class Animation {
+public class Animation {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
 //        rs2.Packet stream = new rs2.Packet(jagexArchive.getDataForName("seq.dat"));
-Packet stream = new Packet(FileOperations.ReadFile("./extras/seq.dat"));
+Packet stream = new Packet(FileOperations.ReadFile("extras/seq.dat"));
         int length = stream.g2();
 System.out.println("Reading new animations... "+length+" new animations");
         if(anims == null)

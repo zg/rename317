@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class ShapedTile
+public class ShapedTile
 {
 
     public ShapedTile(int i, int cAA, int cC, int zD, int i1, int cDA, int shapeB,

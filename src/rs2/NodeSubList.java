@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class NodeSubList {
+public class NodeSubList {
 
     public NodeSubList()
     {

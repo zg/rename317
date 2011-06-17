@@ -3,11 +3,8 @@ package rs2;
 
 import java.awt.*;
 import java.awt.image.PixelGrabber;
-//import java.awt.image.*;
-//import java.io.*;
-//import javax.imageio.ImageIO;
 
-public final class RgbImage extends DrawingArea {
+public class RgbImage extends DrawingArea {
 
     public RgbImage(int i, int j)
     {

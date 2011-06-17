@@ -3,7 +3,7 @@ package rs2;
 
 import sign.signlink;
 
-public final class MRUNodes {
+public class MRUNodes {
 
     public MRUNodes(int i)
     {

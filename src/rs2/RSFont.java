@@ -3,7 +3,7 @@ package rs2;
 
 import java.util.Random;
 
-public final class RSFont extends DrawingArea {
+public class RSFont extends DrawingArea {
 
     public RSFont(boolean flag, String s, JagexArchive jagexArchive)
     {

@@ -12,7 +12,7 @@ import java.applet.Applet;
 import java.io.*;
 import java.net.*;
 
-public final class signlink
+public class signlink
     implements Runnable
 {
 

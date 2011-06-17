@@ -3,7 +3,7 @@ package rs2;
 
 import sign.signlink;
 
-final class TextClass {
+public class TextClass {
 
     public static long longForName(String s)
     {

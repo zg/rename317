@@ -1,6 +1,6 @@
 package rs2;//Thanks sadistic :3
 
-final class BZ2Entry
+public class BZ2Entry
 {
 
     BZ2Entry()

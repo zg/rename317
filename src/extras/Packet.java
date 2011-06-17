@@ -7,7 +7,7 @@ package extras;
 import java.math.BigInteger;
 //import sign.signlink;
 
-public final class Packet {
+public class Packet {
 
 
 	public int readShort2() {

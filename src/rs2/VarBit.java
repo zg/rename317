@@ -1,6 +1,6 @@
 package rs2;
 
-public final class VarBit {
+public class VarBit {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {

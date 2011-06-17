@@ -1,6 +1,6 @@
 package rs2;
 
-final class VertexNormal
+public class VertexNormal
 {
 
     public VertexNormal()

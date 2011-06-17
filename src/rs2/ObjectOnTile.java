@@ -1,7 +1,7 @@
 package rs2;
 
 
-final class ObjectOnTile extends Animable {
+public class ObjectOnTile extends Animable {
                      //ObjectAnimation
     public Model getRotatedModel()
     {

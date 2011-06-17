@@ -2,7 +2,7 @@ package rs2;
 
 // Decompiler options: packimports(3)
 
-final class MapRegion {
+public class MapRegion {
 
     public MapRegion(byte tsettings[][][], int hmap[][][])
     {
@@ -1364,6 +1364,30 @@ label0:
                 } while(true);
             } while(true);
         }
+    }
+
+    public int[][][] getHeightMap() {
+        return heightMap;
+    }
+
+    public byte[][][] getOverLay() {
+        return overLay;
+    }
+
+    public byte[][][] getShapeA() {
+        return shapeA;
+    }
+
+    public byte[][][] getShapeB() {
+        return shapeB;
+    }
+
+    public byte[][][] getUnderLay() {
+        return underLay;
+    }
+
+    public byte[][][] getTileSettings() {
+        return tileSettings;
     }
 
     private static int hue_offset = (int)(Math.random() * 17D) - 8;

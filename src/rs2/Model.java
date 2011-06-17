@@ -1,7 +1,7 @@
 package rs2;
 
 
-public final class Model extends Animable {
+public class Model extends Animable {
 
     public static void nullLoader()
     {

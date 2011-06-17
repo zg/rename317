@@ -1,7 +1,7 @@
 package rs2;
 
 //Class4
-final class MapUtility
+public class MapUtility
 {//Thanks Xaves
 
     public static int getRotatedMapChunkX(int rotation, int y, int x)

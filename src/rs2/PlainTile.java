@@ -1,6 +1,6 @@
 package rs2;
 
-final class PlainTile
+public class PlainTile
 {
 
     public PlainTile(int cA, int cB, int cD, int cC, int tex, int cRGB2, boolean flag)

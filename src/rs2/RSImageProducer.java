@@ -4,7 +4,7 @@ package rs2;
 import java.awt.*;
 import java.awt.image.*;
 
-final class RSImageProducer
+public class RSImageProducer
         implements ImageProducer, ImageObserver
 {
 

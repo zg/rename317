@@ -1,6 +1,6 @@
 package rs2;
 
-public final class WallDecoration
+public class WallDecoration
 {
 
     public WallDecoration()
