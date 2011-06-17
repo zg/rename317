@@ -2,99 +2,85 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/PGLEngine2_Library.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/317 Rename Project.ipr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
-      <change type="DELETED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\CyRrna.iml" afterPath="" />
-      <change type="DELETED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\sprites\LoadingCircle\loading1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cache/sprites/LoadingCircle" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RgbImage.java" afterPath="$PROJECT_DIR$/src/RgbImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client.java" afterPath="$PROJECT_DIR$/src/client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sign/signlink.java" afterPath="$PROJECT_DIR$/src/sign/signlink.java" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\compile.bat" afterPath="$PROJECT_DIR$/compile.bat" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Animable.html" afterPath="$PROJECT_DIR$/jdocs/Animable.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Animation.html" afterPath="$PROJECT_DIR$/jdocs/Animation.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\AnimationFrame.html" afterPath="$PROJECT_DIR$/jdocs/AnimationFrame.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\DrawingArea.html" afterPath="$PROJECT_DIR$/jdocs/DrawingArea.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\DummyClass.html" afterPath="$PROJECT_DIR$/jdocs/DummyClass.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Entity.html" afterPath="$PROJECT_DIR$/jdocs/Entity.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\EntityDef.html" afterPath="$PROJECT_DIR$/jdocs/EntityDef.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Flo.html" afterPath="$PROJECT_DIR$/jdocs/Flo.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\ISAACRandomGen.html" afterPath="$PROJECT_DIR$/jdocs/ISAACRandomGen.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\IdentityKit.html" afterPath="$PROJECT_DIR$/jdocs/IdentityKit.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\IndexedImage.html" afterPath="$PROJECT_DIR$/jdocs/IndexedImage.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\ItemDef.html" afterPath="$PROJECT_DIR$/jdocs/ItemDef.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\MRUNodes.html" afterPath="$PROJECT_DIR$/jdocs/MRUNodes.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Model.html" afterPath="$PROJECT_DIR$/jdocs/Model.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\ModelTransform.html" afterPath="$PROJECT_DIR$/jdocs/ModelTransform.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\NPC.html" afterPath="$PROJECT_DIR$/jdocs/NPC.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Node.html" afterPath="$PROJECT_DIR$/jdocs/Node.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\NodeSub.html" afterPath="$PROJECT_DIR$/jdocs/NodeSub.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Object1.html" afterPath="$PROJECT_DIR$/jdocs/Object1.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Object2.html" afterPath="$PROJECT_DIR$/jdocs/Object2.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Object3.html" afterPath="$PROJECT_DIR$/jdocs/Object3.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Object5.html" afterPath="$PROJECT_DIR$/jdocs/Object5.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\ObjectDef.html" afterPath="$PROJECT_DIR$/jdocs/ObjectDef.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\OnDemandData.html" afterPath="$PROJECT_DIR$/jdocs/OnDemandData.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\OnDemandFetcher.html" afterPath="$PROJECT_DIR$/jdocs/OnDemandFetcher.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\OnDemandFetcherParent.html" afterPath="$PROJECT_DIR$/jdocs/OnDemandFetcherParent.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Packet.html" afterPath="$PROJECT_DIR$/jdocs/Packet.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Player.html" afterPath="$PROJECT_DIR$/jdocs/Player.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\RSApplet.html" afterPath="$PROJECT_DIR$/jdocs/RSApplet.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\RSFont.html" afterPath="$PROJECT_DIR$/jdocs/RSFont.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\RSInterface.html" afterPath="$PROJECT_DIR$/jdocs/RSInterface.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\RgbImage.html" afterPath="$PROJECT_DIR$/jdocs/RgbImage.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\SettingUsagePointers.html" afterPath="$PROJECT_DIR$/jdocs/SettingUsagePointers.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\SpotAnim.html" afterPath="$PROJECT_DIR$/jdocs/SpotAnim.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\Tile.html" afterPath="$PROJECT_DIR$/jdocs/Tile.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\VarBit.html" afterPath="$PROJECT_DIR$/jdocs/VarBit.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\allclasses-frame.html" afterPath="$PROJECT_DIR$/jdocs/allclasses-frame.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\allclasses-noframe.html" afterPath="$PROJECT_DIR$/jdocs/allclasses-noframe.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\client.html" afterPath="$PROJECT_DIR$/jdocs/client.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\constant-values.html" afterPath="$PROJECT_DIR$/jdocs/constant-values.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\deprecated-list.html" afterPath="$PROJECT_DIR$/jdocs/deprecated-list.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\help-doc.html" afterPath="$PROJECT_DIR$/jdocs/help-doc.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\index-all.html" afterPath="$PROJECT_DIR$/jdocs/index-all.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\index.html" afterPath="$PROJECT_DIR$/jdocs/index.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\overview-tree.html" afterPath="$PROJECT_DIR$/jdocs/overview-tree.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\package-frame.html" afterPath="$PROJECT_DIR$/jdocs/package-frame.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\package-summary.html" afterPath="$PROJECT_DIR$/jdocs/package-summary.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\package-tree.html" afterPath="$PROJECT_DIR$/jdocs/package-tree.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\serialized-form.html" afterPath="$PROJECT_DIR$/jdocs/serialized-form.html" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\stylesheet.css" afterPath="$PROJECT_DIR$/jdocs/stylesheet.css" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\run.bat" afterPath="$PROJECT_DIR$/run.bat" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\jingle1.mid" afterPath="$PROJECT_DIR$/cache/jingle1.mid" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\main_file_cache.dat" afterPath="$PROJECT_DIR$/cache/main_file_cache.dat" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\main_file_cache.idx0" afterPath="$PROJECT_DIR$/cache/main_file_cache.idx0" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\main_file_cache.idx1" afterPath="$PROJECT_DIR$/cache/main_file_cache.idx1" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\main_file_cache.idx2" afterPath="$PROJECT_DIR$/cache/main_file_cache.idx2" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\main_file_cache.idx3" afterPath="$PROJECT_DIR$/cache/main_file_cache.idx3" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\main_file_cache.idx4" afterPath="$PROJECT_DIR$/cache/main_file_cache.idx4" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\sprites\lH.png" afterPath="$PROJECT_DIR$/cache/sprites/lH.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\sprites\logo.png" afterPath="$PROJECT_DIR$/cache/sprites/logo.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\sprites\pH.png" afterPath="$PROJECT_DIR$/cache/sprites/pH.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\sprites\title.png" afterPath="$PROJECT_DIR$/cache/sprites/title.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\sprites" afterPath="$PROJECT_DIR$/cache/sprites" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\title.png" afterPath="$PROJECT_DIR$/cache/title.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache\uid.dat" afterPath="$PROJECT_DIR$/cache/uid.dat" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache" afterPath="$PROJECT_DIR$/cache" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_0.png" afterPath="$PROJECT_DIR$/globes/globes_0.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_1.png" afterPath="$PROJECT_DIR$/globes/globes_1.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_10.png" afterPath="$PROJECT_DIR$/globes/globes_10.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_2.png" afterPath="$PROJECT_DIR$/globes/globes_2.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_3.png" afterPath="$PROJECT_DIR$/globes/globes_3.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_4.png" afterPath="$PROJECT_DIR$/globes/globes_4.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_5.png" afterPath="$PROJECT_DIR$/globes/globes_5.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_6.png" afterPath="$PROJECT_DIR$/globes/globes_6.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_7.png" afterPath="$PROJECT_DIR$/globes/globes_7.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_8.png" afterPath="$PROJECT_DIR$/globes/globes_8.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes\globes_9.png" afterPath="$PROJECT_DIR$/globes/globes_9.png" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\globes" afterPath="$PROJECT_DIR$/globes" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\package-list" afterPath="$PROJECT_DIR$/jdocs/package-list" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\resources\inherit.gif" afterPath="$PROJECT_DIR$/jdocs/resources/inherit.gif" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs\resources" afterPath="$PROJECT_DIR$/jdocs/resources" />
-      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\jdocs" afterPath="$PROJECT_DIR$/jdocs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rs2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.bat" afterPath="$PROJECT_DIR$/run.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/extras/packFrames.java" afterPath="$PROJECT_DIR$/src/extras/packFrames.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Animable.java" afterPath="$PROJECT_DIR$/src/rs2/Animable.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Animation.java" afterPath="$PROJECT_DIR$/src/rs2/Animation.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\AnimationFrame.java" afterPath="$PROJECT_DIR$/src/rs2/AnimationFrame.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\BZ2Entry.java" afterPath="$PROJECT_DIR$/src/rs2/BZ2Entry.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\BZIP2Decompressor.java" afterPath="$PROJECT_DIR$/src/rs2/BZIP2Decompressor.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Censor.java" afterPath="$PROJECT_DIR$/src/rs2/Censor.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Class29.java" afterPath="$PROJECT_DIR$/src/rs2/Class29.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Class39.java" afterPath="$PROJECT_DIR$/src/rs2/Class39.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\CullingCluster.java" afterPath="$PROJECT_DIR$/src/rs2/CullingCluster.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\DrawingArea.java" afterPath="$PROJECT_DIR$/src/rs2/DrawingArea.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Entity.java" afterPath="$PROJECT_DIR$/src/rs2/Entity.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\EntityDef.java" afterPath="$PROJECT_DIR$/src/rs2/EntityDef.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\FileOperations.java" afterPath="$PROJECT_DIR$/src/rs2/FileOperations.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Flo.java" afterPath="$PROJECT_DIR$/src/rs2/Flo.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\GameObjectSpawnRequest.java" afterPath="$PROJECT_DIR$/src/rs2/GameObjectSpawnRequest.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\GroundDecoration.java" afterPath="$PROJECT_DIR$/src/rs2/GroundDecoration.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\GroundItemTile.java" afterPath="$PROJECT_DIR$/src/rs2/GroundItemTile.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\ISAACRandomGen.java" afterPath="$PROJECT_DIR$/src/rs2/ISAACRandomGen.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\IdentityKit.java" afterPath="$PROJECT_DIR$/src/rs2/IdentityKit.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\IndexedImage.java" afterPath="$PROJECT_DIR$/src/rs2/IndexedImage.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\InteractableObject.java" afterPath="$PROJECT_DIR$/src/rs2/InteractableObject.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Item.java" afterPath="$PROJECT_DIR$/src/rs2/Item.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\ItemDef.java" afterPath="$PROJECT_DIR$/src/rs2/ItemDef.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\JagexArchive.java" afterPath="$PROJECT_DIR$/src/rs2/JagexArchive.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\JagexFileStore.java" afterPath="$PROJECT_DIR$/src/rs2/JagexFileStore.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\JavaUncompress.java" afterPath="$PROJECT_DIR$/src/rs2/JavaUncompress.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\MRUNodes.java" afterPath="$PROJECT_DIR$/src/rs2/MRUNodes.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\MapRegion.java" afterPath="$PROJECT_DIR$/src/rs2/MapRegion.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\MapUtility.java" afterPath="$PROJECT_DIR$/src/rs2/MapUtility.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Model.java" afterPath="$PROJECT_DIR$/src/rs2/Model.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\ModelHeader.java" afterPath="$PROJECT_DIR$/src/rs2/ModelHeader.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\ModelTransform.java" afterPath="$PROJECT_DIR$/src/rs2/ModelTransform.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\MouseDetection.java" afterPath="$PROJECT_DIR$/src/rs2/MouseDetection.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\NPC.java" afterPath="$PROJECT_DIR$/src/rs2/NPC.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Node.java" afterPath="$PROJECT_DIR$/src/rs2/Node.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\NodeCache.java" afterPath="$PROJECT_DIR$/src/rs2/NodeCache.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\NodeList.java" afterPath="$PROJECT_DIR$/src/rs2/NodeList.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\NodeSub.java" afterPath="$PROJECT_DIR$/src/rs2/NodeSub.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\NodeSubList.java" afterPath="$PROJECT_DIR$/src/rs2/NodeSubList.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\ObjectDef.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectDef.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\ObjectOnTile.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectOnTile.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\OnDemandData.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandData.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\OnDemandFetcher.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\OnDemandFetcherParent.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandFetcherParent.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Packet.java" afterPath="$PROJECT_DIR$/src/rs2/Packet.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\PlainTile.java" afterPath="$PROJECT_DIR$/src/rs2/PlainTile.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Player.java" afterPath="$PROJECT_DIR$/src/rs2/Player.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Projectile.java" afterPath="$PROJECT_DIR$/src/rs2/Projectile.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\RSApplet.java" afterPath="$PROJECT_DIR$/src/rs2/RSApplet.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\RSFont.java" afterPath="$PROJECT_DIR$/src/rs2/RSFont.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\RSFrame.java" afterPath="$PROJECT_DIR$/src/rs2/RSFrame.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\RSImageProducer.java" afterPath="$PROJECT_DIR$/src/rs2/RSImageProducer.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\RSInterface.java" afterPath="$PROJECT_DIR$/src/rs2/RSInterface.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\RSSocket.java" afterPath="$PROJECT_DIR$/src/rs2/RSSocket.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Rasterizer.java" afterPath="$PROJECT_DIR$/src/rs2/Rasterizer.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\RgbImage.java" afterPath="$PROJECT_DIR$/src/rs2/RgbImage.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\SettingUsagePointers.java" afterPath="$PROJECT_DIR$/src/rs2/SettingUsagePointers.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\ShapedTile.java" afterPath="$PROJECT_DIR$/src/rs2/ShapedTile.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\SizeConstants.java" afterPath="$PROJECT_DIR$/src/rs2/SizeConstants.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Skills.java" afterPath="$PROJECT_DIR$/src/rs2/Skills.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\SoundTrack.java" afterPath="$PROJECT_DIR$/src/rs2/SoundTrack.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Sounds.java" afterPath="$PROJECT_DIR$/src/rs2/Sounds.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\SpotAnim.java" afterPath="$PROJECT_DIR$/src/rs2/SpotAnim.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\StillGraphics.java" afterPath="$PROJECT_DIR$/src/rs2/StillGraphics.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\SwingUI.java" afterPath="$PROJECT_DIR$/src/rs2/SwingUI.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\TextClass.java" afterPath="$PROJECT_DIR$/src/rs2/TextClass.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\TextInput.java" afterPath="$PROJECT_DIR$/src/rs2/TextInput.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\Tile.java" afterPath="$PROJECT_DIR$/src/rs2/Tile.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\TileSetting.java" afterPath="$PROJECT_DIR$/src/rs2/TileSetting.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\VarBit.java" afterPath="$PROJECT_DIR$/src/rs2/VarBit.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\VertexNormal.java" afterPath="$PROJECT_DIR$/src/rs2/VertexNormal.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\WallDecoration.java" afterPath="$PROJECT_DIR$/src/rs2/WallDecoration.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\WallObject.java" afterPath="$PROJECT_DIR$/src/rs2/WallObject.java" />
+      <change type="MOVED" beforePath="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\client.java" afterPath="$PROJECT_DIR$/src/rs2/client.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -158,10 +144,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RgbImage.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/RgbImage.java">
+      <file leaf-file-name="RgbImage.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/RgbImage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="1" selection-end="1" vertical-scroll-proportion="0.0">
+            <state line="1" column="0" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -169,10 +155,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SwingUI.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SwingUI.java">
+      <file leaf-file-name="run.bat" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/run.bat">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="13" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0">
+            <state line="0" column="15" selection-start="15" selection-end="15" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwingUI.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/SwingUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="13" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -200,6 +195,7 @@
         <option value="$PROJECT_DIR$/src/client/ObjectDef.java" />
         <option value="$PROJECT_DIR$/src/RgbImage.java" />
         <option value="$PROJECT_DIR$/compile.bat" />
+        <option value="$PROJECT_DIR$/src/rs2/RgbImage.java" />
         <option value="$PROJECT_DIR$/run.bat" />
       </list>
     </option>
@@ -241,10 +237,6 @@
               <option name="myItemId" value="317 Rename Project" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -267,6 +259,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rename317" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rs2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -306,6 +316,11 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="rs2" />
+    </key>
   </component>
   <component name="RestoreUpdateTree">
     <UpdateInfo date="Moments ago" ActionInfo="_Update">
@@ -568,15 +583,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293718" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2498096" sideWeight="0.28183362" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -586,7 +602,6 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -616,7 +631,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fixed dir tree&#10;-Prepared batches for packaging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Another try at packaging everything&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -633,6 +648,7 @@
     <MESSAGE value="- Idiotically big commit containing first bits of code for PGLEngine2 renderer" />
     <MESSAGE value="- Fixed dir tree&#10;" />
     <MESSAGE value="- Fixed dir tree&#10;-Prepared batches for packaging" />
+    <MESSAGE value="Another try at packaging everything&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -657,15 +673,6 @@
         <state line="14" column="19" selection-start="314" selection-end="314" vertical-scroll-proportion="0.27868852" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SwingUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/compile.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="49" selection-start="139" selection-end="139" vertical-scroll-proportion="0.0">
@@ -673,19 +680,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run.bat">
+    <entry file="file://$PROJECT_DIR$/src/rs2/RgbImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RgbImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="1" selection-end="1" vertical-scroll-proportion="0.0">
+        <state line="1" column="0" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/SwingUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="13" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="15" selection-start="15" selection-end="15" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
