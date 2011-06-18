@@ -1,7 +1,7 @@
 package rs2;
 
 
-public class NPC extends Mobile
+public class Npc extends Mobile
 {
 
     private Model method450()
@@ -60,7 +60,7 @@ public class NPC extends Mobile
         return desc != null;
     }
 
-    NPC()
+    Npc()
     {
     }
 

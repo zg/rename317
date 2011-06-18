@@ -17,7 +17,7 @@ public class DrawingArea extends NodeSub {
             topY = 0;
             viewport_w = width;
             viewport_h = height;
-            viewportRx = viewport_w - 1;
+            viewportRx = viewport_w;
             viewportCx = viewport_w / 2;
     }
 
@@ -35,7 +35,7 @@ public class DrawingArea extends NodeSub {
         topY = l;
         viewport_w = k;
         viewport_h = i;
-        viewportRx = viewport_w - 1;
+        viewportRx = viewport_w;
         viewportCx = viewport_w / 2;
         viewportCy = viewport_h / 2;
     }
