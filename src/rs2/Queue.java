@@ -1,28 +1,28 @@
 package rs2;
 
 
-public class NodeSubList {
+public class Queue {
 
-    public NodeSubList()
+    public Queue()
     {
         head = new NodeSub();
-        head.prevNodeSub = head;
-        head.nextNodeSub = head;
+        head.nextSub = head;
+        head.previousSub = head;
     }
 
-    public void insertHead(NodeSub nodeSub)
+    public void insertBack(NodeSub nodeSub)
     {
-        if(nodeSub.nextNodeSub != null)
+        if(nodeSub.previousSub != null)
             nodeSub.unlinkSub();
-        nodeSub.nextNodeSub = head.nextNodeSub;
-        nodeSub.prevNodeSub = head;
-        nodeSub.nextNodeSub.prevNodeSub = nodeSub;
-        nodeSub.prevNodeSub.nextNodeSub = nodeSub;
+        nodeSub.previousSub = head.previousSub;
+        nodeSub.nextSub = head;
+        nodeSub.previousSub.nextSub = nodeSub;
+        nodeSub.nextSub.previousSub = nodeSub;
     }
 
-    public NodeSub popTail()
+    public NodeSub popFront()
     {
-        NodeSub nodeSub = head.prevNodeSub;
+        NodeSub nodeSub = head.nextSub;
         if(nodeSub == head)
         {
             return null;
@@ -33,21 +33,21 @@ public class NodeSubList {
         }
     }
 
-    public NodeSub reverseGetFirst()
+    public NodeSub getFront()
     {
-        NodeSub nodeSub = head.prevNodeSub;
+        NodeSub nodeSub = head.nextSub;
         if(nodeSub == head)
         {
             current = null;
             return null;
         } else
         {
-            current = nodeSub.prevNodeSub;
+            current = nodeSub.nextSub;
             return nodeSub;
         }
     }
 
-    public NodeSub reverseGetNext()
+    public NodeSub getNext()
     {
         NodeSub nodeSub = current;
         if(nodeSub == head)
@@ -56,15 +56,15 @@ public class NodeSubList {
             return null;
         } else
         {
-            current = nodeSub.prevNodeSub;
+            current = nodeSub.nextSub;
             return nodeSub;
         }
     }
 
-    public int getNodeCount()
+    public int getSize()
     {
         int i = 0;
-        for(NodeSub nodeSub = head.prevNodeSub; nodeSub != head; nodeSub = nodeSub.prevNodeSub)
+        for(NodeSub nodeSub = head.nextSub; nodeSub != head; nodeSub = nodeSub.nextSub)
             i++;
 
         return i;

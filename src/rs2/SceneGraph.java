@@ -604,10 +604,10 @@ public class SceneGraph {
                     if(tile != null)
                     {
                         WallObject class10 = tile.wallObject;
-                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormal != null)
+                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertex != null)
                         {
                             method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_278);
-                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormal != null)
+                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertex != null)
                             {
                                 method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_279);
                                 method308((Model)class10.aClass30_Sub2_Sub4_278, (Model)class10.aClass30_Sub2_Sub4_279, 0, 0, 0, false);
@@ -618,7 +618,7 @@ public class SceneGraph {
                         for(int k2 = 0; k2 < tile.entityCount; k2++)
                         {
                             InteractableObject class28 = tile.interactableObjects[k2];
-                            if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertexNormal != null)
+                            if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertex != null)
                             {
                                 method307(_z, (class28.tileRight - class28.tileLeft) + 1, (class28.tileBottom - class28.tileTop) + 1, _x, _y, (Model)class28.jagexNode);
                                 ((Model)class28.jagexNode).doShading(lightness, l_magnitude, l_x, l_y, l_z);
@@ -626,7 +626,7 @@ public class SceneGraph {
                         }
 
                         GroundDecoration class49 = tile.groundDecoration;
-                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.vertexNormal != null)
+                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.vertex != null)
                         {
                             method306(_x, _z, (Model)class49.aClass30_Sub2_Sub4_814, _y);
                             ((Model)class49.aClass30_Sub2_Sub4_814).doShading(lightness, l_magnitude, l_x, l_y, l_z);
@@ -645,25 +645,25 @@ public class SceneGraph {
         if(x < xMapSize)
         {
             Tile tile = tileArray[z][x + 1][y];
-            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertex != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
         }
         if(y < xMapSize)
         {
             Tile tile = tileArray[z][x][y + 1];
-            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertex != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
         }
         if(x < xMapSize && y < yMapSize)
         {
             Tile tile = tileArray[z][x + 1][y + 1];
-            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertex != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
         }
         if(x < xMapSize && y > 0)
         {
             Tile tile = tileArray[z][x + 1][y - 1];
-            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormal != null)
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertex != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, -128, true);
         }
     }
@@ -689,14 +689,14 @@ public class SceneGraph {
                                 {
                                     int i3 = (heightmap[z][x][y] + heightmap[z][x + 1][y] + heightmap[z][x][y + 1] + heightmap[z][x + 1][y + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
                                     WallObject class10 = class30_sub3.wallObject;
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormal != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertex != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormal != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertex != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_279, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
                                     for(int j3 = 0; j3 < class30_sub3.entityCount; j3++)
                                     {
                                         InteractableObject class28 = class30_sub3.interactableObjects[j3];
-                                        if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertexNormal != null)
+                                        if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertex != null)
                                         {
                                             int k3 = (class28.tileRight - class28.tileLeft) + 1;
                                             int l3 = (class28.tileBottom - class28.tileTop) + 1;
@@ -723,9 +723,9 @@ public class SceneGraph {
         int i1 = model_1.verticeCount;
         for(int j1 = 0; j1 < model.verticeCount; j1++)
         {
-            VertexNormal vertexNormal = model.vertexNormal[j1];
-            VertexNormal vertexNormal_1 = model.vertexNormalOffset[j1];
-            if(vertexNormal_1.magnitude != 0)
+            Vertex vertex = model.vertex[j1];
+            Vertex vertex_1 = model.vertexOffset[j1];
+            if(vertex_1.magnitude != 0)
             {
                 int i2 = model.vertexY[j1] - t_Y;
                 if(i2 <= model_1.maxY)
@@ -738,18 +738,18 @@ public class SceneGraph {
                         {
                             for(int l2 = 0; l2 < i1; l2++)
                             {
-                                VertexNormal normal = model_1.vertexNormal[l2];
-                                VertexNormal normal_offset = model_1.vertexNormalOffset[l2];
-                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && normal_offset.magnitude != 0)
+                                Vertex normal = model_1.vertex[l2];
+                                Vertex _offset = model_1.vertexOffset[l2];
+                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && _offset.magnitude != 0)
                                 {
-                                    vertexNormal.x += normal_offset.x;
-                                    vertexNormal.y += normal_offset.y;
-                                    vertexNormal.z += normal_offset.z;
-                                    vertexNormal.magnitude += normal_offset.magnitude;
-                                    normal.x += vertexNormal_1.x;
-                                    normal.y += vertexNormal_1.y;
-                                    normal.z += vertexNormal_1.z;
-                                    normal.magnitude += vertexNormal_1.magnitude;
+                                    vertex.x += _offset.x;
+                                    vertex.y += _offset.y;
+                                    vertex.z += _offset.z;
+                                    vertex.magnitude += _offset.magnitude;
+                                    normal.x += vertex_1.x;
+                                    normal.y += vertex_1.y;
+                                    normal.z += vertex_1.z;
+                                    normal.magnitude += vertex_1.magnitude;
                                     l++;
                                     anIntArray486[j1] = anInt488;
                                     anIntArray487[l2] = anInt488;
@@ -1125,13 +1125,13 @@ label0:
 
     private void renderTileF(Tile class30_sub3, boolean flag)
     {
-        aClass19_477.insertHead(class30_sub3);
+        aClass19_477.insertBack(class30_sub3);
         do
         {
             Tile TILE;
             do
             {
-                TILE = (Tile)aClass19_477.popHead();
+                TILE = (Tile)aClass19_477.popFront();
                 if(TILE == null)
                     return;
             } while(!TILE.aBoolean1323);
@@ -1325,25 +1325,25 @@ label0:
                     {
                         Tile class30_sub3_17 = aclass30_sub3[X + 1][Y];
                         if(class30_sub3_17 != null && class30_sub3_17.aBoolean1323)
-                            aClass19_477.insertHead(class30_sub3_17);
+                            aClass19_477.insertBack(class30_sub3_17);
                     }
                     if(Y < yCameraPositionTile && (k4 & 2) != 0)
                     {
                         Tile class30_sub3_18 = aclass30_sub3[X][Y + 1];
                         if(class30_sub3_18 != null && class30_sub3_18.aBoolean1323)
-                            aClass19_477.insertHead(class30_sub3_18);
+                            aClass19_477.insertBack(class30_sub3_18);
                     }
                     if(X > xCameraPositionTile && (k4 & 1) != 0)
                     {
                         Tile class30_sub3_19 = aclass30_sub3[X - 1][Y];
                         if(class30_sub3_19 != null && class30_sub3_19.aBoolean1323)
-                            aClass19_477.insertHead(class30_sub3_19);
+                            aClass19_477.insertBack(class30_sub3_19);
                     }
                     if(Y > yCameraPositionTile && (k4 & 8) != 0)
                     {
                         Tile class30_sub3_20 = aclass30_sub3[X][Y - 1];
                         if(class30_sub3_20 != null && class30_sub3_20.aBoolean1323)
-                            aClass19_477.insertHead(class30_sub3_20);
+                            aClass19_477.insertBack(class30_sub3_20);
                     }
                 }
             }
@@ -1421,7 +1421,7 @@ label0:
                             interactableObject.anInt527 = i5 + i7;
                     }
 
-                    while(l1 > 0) 
+                    while(l1 > 0)
                     {
                         int i3 = -50;
                         int l3 = -1;
@@ -1457,10 +1457,10 @@ label0:
                             {
                                 Tile class30_sub3_22 = aclass30_sub3[k7][l8];
                                 if(class30_sub3_22.anInt1325 != 0)
-                                    aClass19_477.insertHead(class30_sub3_22);
+                                    aClass19_477.insertBack(class30_sub3_22);
                                 else
                                 if((k7 != X || l8 != Y) && class30_sub3_22.aBoolean1323)
-                                    aClass19_477.insertHead(class30_sub3_22);
+                                    aClass19_477.insertBack(class30_sub3_22);
                             }
 
                         }
@@ -1560,31 +1560,31 @@ label0:
             {
                 Tile class30_sub3_12 = tileArray[k + 1][X][Y];
                 if(class30_sub3_12 != null && class30_sub3_12.aBoolean1323)
-                    aClass19_477.insertHead(class30_sub3_12);
+                    aClass19_477.insertBack(class30_sub3_12);
             }
             if(X < xCameraPositionTile)
             {
                 Tile class30_sub3_13 = aclass30_sub3[X + 1][Y];
                 if(class30_sub3_13 != null && class30_sub3_13.aBoolean1323)
-                    aClass19_477.insertHead(class30_sub3_13);
+                    aClass19_477.insertBack(class30_sub3_13);
             }
             if(Y < yCameraPositionTile)
             {
                 Tile class30_sub3_14 = aclass30_sub3[X][Y + 1];
                 if(class30_sub3_14 != null && class30_sub3_14.aBoolean1323)
-                    aClass19_477.insertHead(class30_sub3_14);
+                    aClass19_477.insertBack(class30_sub3_14);
             }
             if(X > xCameraPositionTile)
             {
                 Tile class30_sub3_15 = aclass30_sub3[X - 1][Y];
                 if(class30_sub3_15 != null && class30_sub3_15.aBoolean1323)
-                    aClass19_477.insertHead(class30_sub3_15);
+                    aClass19_477.insertBack(class30_sub3_15);
             }
             if(Y > yCameraPositionTile)
             {
                 Tile class30_sub3_16 = aclass30_sub3[X][Y - 1];
                 if(class30_sub3_16 != null && class30_sub3_16.aBoolean1323)
-                    aClass19_477.insertHead(class30_sub3_16);
+                    aClass19_477.insertBack(class30_sub3_16);
             }
         } while(true);
     }
@@ -1830,7 +1830,7 @@ label0:
                 if(y_dist_from_camera_end > 50)
                     y_dist_from_camera_end = 50;
                 boolean is_visible = false;
-                while(y_dist_from_camera_start <= y_dist_from_camera_end) 
+                while(y_dist_from_camera_start <= y_dist_from_camera_end)
                     if(TILE_VISIBILITY_MAP[x_dist_from_camera_start][y_dist_from_camera_start++])
                     {
                         is_visible = true;
@@ -1868,7 +1868,7 @@ label0:
                 if(x_dist_from_camera_end > 50)
                     x_dist_from_camera_end = 50;
                 boolean is_visible = false;
-                while(x_dist_from_camera_start <= x_dist_from_camera_end) 
+                while(x_dist_from_camera_start <= x_dist_from_camera_end)
                     if(TILE_VISIBILITY_MAP[x_dist_from_camera_start++][y_dist_from_camera_start])
                     {
                         is_visible = true;
@@ -2229,7 +2229,7 @@ for_outer:
     private static CullingCluster[][] cullingClusters;
     private static int processed_culling_clusters_ptr;
     private static final CullingCluster[] processed_culling_clusters = new CullingCluster[500];
-    private static NodeList aClass19_477 = new NodeList();
+    private static Deque aClass19_477 = new Deque();
     private static final int[] anIntArray478 = {
         19, 55, 38, 155, 255, 110, 137, 205, 76
     };
@@ -2252,10 +2252,10 @@ for_outer:
         1, 1, 0, 0, 0, 8, 0, 0, 8
     };
     private static final int[] textureRGBColour = {
-        41, 39248, 41, 4643, 41, 41, 41, 41, 41, 41, 
-        41, 41, 41, 41, 41, 43086, 41, 41, 41, 41, 
-        41, 41, 41, 8602, 41, 28992, 41, 41, 41, 41, 
-        41, 5056, 41, 41, 41, 7079, 41, 41, 41, 41, 
+        41, 39248, 41, 4643, 41, 41, 41, 41, 41, 41,
+        41, 41, 41, 41, 41, 43086, 41, 41, 41, 41,
+        41, 41, 41, 8602, 41, 28992, 41, 41, 41, 41,
+        41, 5056, 41, 41, 41, 7079, 41, 41, 41, 41,
         41, 41, 41, 41, 41, 41, 3131, 41, 41, 41
     };
     private final int[] anIntArray486;
@@ -2263,56 +2263,56 @@ for_outer:
     private int anInt488;
     private final int[][] anIntArrayArray489 = {
         new int[16], {
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 1, 1, 1, 1, 1
         }, {
-            1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 
+            1, 0, 0, 0, 1, 1, 0, 0, 1, 1,
             1, 0, 1, 1, 1, 1
         }, {
-            1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 
+            1, 1, 0, 0, 1, 1, 0, 0, 1, 0,
             0, 0, 1, 0, 0, 0
         }, {
-            0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 
+            0, 0, 1, 1, 0, 0, 1, 1, 0, 0,
             0, 1, 0, 0, 0, 1
         }, {
-            0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 
+            0, 1, 1, 1, 0, 1, 1, 1, 1, 1,
             1, 1, 1, 1, 1, 1
         }, {
-            1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 
+            1, 1, 1, 0, 1, 1, 1, 0, 1, 1,
             1, 1, 1, 1, 1, 1
         }, {
-            1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 
+            1, 1, 0, 0, 1, 1, 0, 0, 1, 1,
             0, 0, 1, 1, 0, 0
         }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
+            0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
             0, 0, 1, 1, 0, 0
         }, {
-            1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 
+            1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
             1, 1, 0, 0, 1, 1
-        }, 
+        },
         {
-            1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 
+            1, 1, 1, 1, 1, 1, 0, 0, 1, 0,
             0, 0, 1, 0, 0, 0
         }, {
-            0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 
+            0, 0, 0, 0, 0, 0, 1, 1, 0, 1,
             1, 1, 0, 1, 1, 1
         }, {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
             1, 0, 1, 1, 1, 1
         }
     };
     private final int[][] anIntArrayArray490 = {
         {
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
             10, 11, 12, 13, 14, 15
         }, {
-            12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 
+            12, 8, 4, 0, 13, 9, 5, 1, 14, 10,
             6, 2, 15, 11, 7, 3
         }, {
-            15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 
+            15, 14, 13, 12, 11, 10, 9, 8, 7, 6,
             5, 4, 3, 2, 1, 0
         }, {
-            3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 
+            3, 7, 11, 15, 2, 6, 10, 14, 1, 5,
             9, 13, 0, 4, 8, 12
         }
     };
@@ -2326,7 +2326,7 @@ for_outer:
     private static int bottom;
 
     public static client clientInstance;
-    static 
+    static
     {
         anInt472 = 4;
         cullingClusterPointer = new int[anInt472];

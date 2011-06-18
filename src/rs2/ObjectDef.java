@@ -70,8 +70,8 @@ public class ObjectDef
 
     public static void nullLoader()
     {
-        mruNodes1 = null;
-        mruNodes2 = null;
+        memCache1 = null;
+        memCache2 = null;
         streamIndices = null;
         cache = null;
         stream = null;
@@ -181,7 +181,7 @@ public class ObjectDef
             if(j != 10)
                 return null;
             l1 = (long)((type << 6) + l) + ((long)(k + 1) << 32);
-            Model model_1 = (Model) mruNodes2.get(l1);
+            Model model_1 = (Model) memCache2.get(l1);
             if(model_1 != null)
                 return model_1;
             if(objectModelIDs == null)
@@ -193,7 +193,7 @@ public class ObjectDef
                 int l2 = objectModelIDs[i2];
                 if(flag1)
                     l2 += 0x10000;
-                model = (Model) mruNodes1.get(l2);
+                model = (Model) memCache1.get(l2);
                 if(model == null)
                 {
                     model = Model.getModel(l2 & 0xffff);
@@ -201,7 +201,7 @@ public class ObjectDef
                         return null;
                     if(flag1)
                         model.method477();
-                    mruNodes1.put(model, l2);
+                    memCache1.put(model, l2);
                 }
                 if(k1 > 1)
                     aModelArray741s[i2] = model;
@@ -223,14 +223,14 @@ public class ObjectDef
             if(i1 == -1)
                 return null;
             l1 = (long)((type << 6) + (i1 << 3) + l) + ((long)(k + 1) << 32);
-            Model model_2 = (Model) mruNodes2.get(l1);
+            Model model_2 = (Model) memCache2.get(l1);
             if(model_2 != null)
                 return model_2;
             int j2 = objectModelIDs[i1];
             boolean flag3 = aBoolean751 ^ (l > 3);
             if(flag3)
                 j2 += 0x10000;
-            model = (Model) mruNodes1.get(j2);
+            model = (Model) memCache1.get(j2);
             if(model == null)
             {
                 model = Model.getModel(j2 & 0xffff);
@@ -238,7 +238,7 @@ public class ObjectDef
                     return null;
                 if(flag3)
                     model.method477();
-                mruNodes1.put(model, j2);
+                memCache1.put(model, j2);
             }
         }
         boolean flag;
@@ -253,7 +253,7 @@ public class ObjectDef
             model_3.triangleSkin = null;
             model_3.vertexSkin = null;
         }
-        while(l-- > 0) 
+        while(l-- > 0)
             model_3.method473();
         if(modifiedModelColors != null)
         {
@@ -268,7 +268,7 @@ public class ObjectDef
         model_3.light(64 + brightness, 768 + contrast * 5, -50, -10, -50, !aBoolean769);
         if(anInt760 == 1)
             model_3.anInt1654 = model_3.modelHeight;
-        mruNodes2.put(model_3, l1);
+        memCache2.put(model_3, l1);
         return model_3;
     }
 
@@ -509,12 +509,12 @@ label0:
     public byte description[];
     public boolean hasActions;
     public boolean aBoolean779;
-    public static MRUNodes mruNodes2 = new MRUNodes(30);
+    public static MemCache memCache2 = new MemCache(30);
     public int animationID;
     private static ObjectDef[] cache;
     private int offsetY;
     private int[] modifiedModelColors;
-    public static MRUNodes mruNodes1 = new MRUNodes(500);
+    public static MemCache memCache1 = new MemCache(500);
     public String actions[];
 
 }

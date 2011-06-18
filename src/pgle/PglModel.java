@@ -10,8 +10,6 @@ import org.peterbjornx.pgl2.util.PglException;
 import rs2.Model;
 import rs2.Rasterizer;
 
-import javax.swing.text.DefaultStyledDocument;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -74,15 +72,15 @@ public class PglModel {
 
                 int bufAIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
-                        , new Vector3f(rsModel.vertexNormal[verAIdx].getX(), rsModel.vertexNormal[verAIdx].getY(), rsModel.vertexNormal[verAIdx].getZ())
+                        , new Vector3f(rsModel.vertex[verAIdx].getX(), rsModel.vertex[verAIdx].getY(), rsModel.vertex[verAIdx].getZ())
                         , new Vector3f(0, 0, 0), triangleColours[triIdx]);
                 int bufBIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verBIdx], -rsModel.vertexY[verBIdx], rsModel.vertexZ[verBIdx])
-                        , new Vector3f(rsModel.vertexNormal[verBIdx].getX(), rsModel.vertexNormal[verBIdx].getY(), rsModel.vertexNormal[verBIdx].getZ()),
+                        , new Vector3f(rsModel.vertex[verBIdx].getX(), rsModel.vertex[verBIdx].getY(), rsModel.vertex[verBIdx].getZ()),
                         new Vector3f(0, 0, 0), triangleColours[triIdx]);
                 int bufCIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verCIdx], -rsModel.vertexY[verCIdx], rsModel.vertexZ[verCIdx])
-                        , new Vector3f(rsModel.vertexNormal[verCIdx].getX(), rsModel.vertexNormal[verCIdx].getY(), rsModel.vertexNormal[verCIdx].getZ()),
+                        , new Vector3f(rsModel.vertex[verCIdx].getX(), rsModel.vertex[verCIdx].getY(), rsModel.vertex[verCIdx].getZ()),
                         new Vector3f(0, 0, 0), triangleColours[triIdx]);
                 List<Integer> polylist = new LinkedList<Integer>();
                 polylist.add(bufAIdx);
@@ -90,7 +88,7 @@ public class PglModel {
                 polylist.add(bufCIdx);
                 element.addPolygon(polylist);
             }
-            rsModel.vertexNormal = rsModel.vns;
+            rsModel.vertex = rsModel.vns;
         } catch (PglException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

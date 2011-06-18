@@ -6,8 +6,8 @@ public class ItemDef
 
     public static void nullLoader()
     {
-        mruNodes2 = null;
-        mruNodes1 = null;
+        memCache2 = null;
+        memCache1 = null;
         streamIndices = null;
         cache = null;
         stream = null;
@@ -243,7 +243,7 @@ public class ItemDef
     {
         if(k == 0)
         {
-            RgbImage rgbImage = (RgbImage) mruNodes1.get(i);
+            RgbImage rgbImage = (RgbImage) memCache1.get(i);
             if(rgbImage != null && rgbImage.h2 != j && rgbImage.h2 != -1)
             {
                 rgbImage.unlink();
@@ -359,7 +359,7 @@ public class ItemDef
             rgbImage.h2 = j6;
         }
         if(k == 0)
-            mruNodes1.put(sprite2, i);
+            memCache1.put(sprite2, i);
         DrawingArea.initDrawingArea(j2, i2, ai1);
         DrawingArea.setDrawingArea(j3, k2, l2, i3);
         Rasterizer.centerX = k1;
@@ -386,7 +386,7 @@ public class ItemDef
             if(j != -1)
                 return forID(j).method201(1);
         }
-        Model model = (Model) mruNodes2.get(id);
+        Model model = (Model) memCache2.get(id);
         if(model != null)
             return model;
         model = Model.getModel(modelID);
@@ -402,7 +402,7 @@ public class ItemDef
         }
         model.light(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
         model.aBoolean1659 = true;
-        mruNodes2.put(model, id);
+        memCache2.put(model, id);
         return model;
     }
 
@@ -587,8 +587,8 @@ public class ItemDef
     public int value;
     private int[] originalModelColours;
     public int id;
-    static MRUNodes mruNodes1 = new MRUNodes(100);
-    public static MRUNodes mruNodes2 = new MRUNodes(50);
+    static MemCache memCache1 = new MemCache(100);
+    public static MemCache memCache2 = new MemCache(50);
     private int[] modifiedModelColours;
     public boolean membersObject;
     private int femaleEmblem;

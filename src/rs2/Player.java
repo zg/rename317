@@ -204,7 +204,7 @@ public class Player extends Mobile
         } else
         if(super.anInt1517 >= 0)
             k = Sequence.anims[super.anInt1517].frame2IDS[super.anInt1518];
-        Model model_1 = (Model) mruNodes.get(l);
+        Model model_1 = (Model) memCache.get(l);
         if(model_1 == null)
         {
             boolean flag = false;
@@ -224,7 +224,7 @@ public class Player extends Mobile
             if(flag)
             {
                 if(aLong1697 != -1L)
-                    model_1 = (Model) mruNodes.get(aLong1697);
+                    model_1 = (Model) memCache.get(aLong1697);
                 if(model_1 == null)
                     return null;
             }
@@ -265,7 +265,7 @@ public class Player extends Mobile
 
             model_1.calcSkinning();
             model_1.light(64, 850, -30, -50, -30, true);
-            mruNodes.put(model_1, l);
+            memCache.put(model_1, l);
             aLong1697 = l;
         }
         if(aBoolean1699)
@@ -353,9 +353,9 @@ public class Player extends Mobile
     boolean aBoolean1699;
     final int[] appearanceColours;
     public int team;
-    private int playerGender;//gender in 0 or 1 
+    private int playerGender;//gender in 0 or 1
     public String name;
-    static MRUNodes mruNodes = new MRUNodes(260);
+    static MemCache memCache = new MemCache(260);
     public int combatLevel;
     public int headIcon;
     public int anInt1707;

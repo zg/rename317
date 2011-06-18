@@ -40,7 +40,7 @@ public class client extends RSApplet {
 	}
 
 	private boolean connectserver = false;
-	
+
 	public void preloadModels() {
 
 		File file = new File("../../origcode/src/model/");
@@ -90,7 +90,7 @@ public class client extends RSApplet {
 	{
 			if(!connectserver)
 				return;//anti retard protection layer
-			
+
 		      int j = 5;
 		expectedCRCs[8] = 0;
 		int k = 0;
@@ -163,7 +163,7 @@ public class client extends RSApplet {
 		}
 
 	}
-	
+
 	private boolean menuHasAddFriend(int j)
 	{
 		if(j < 0)
@@ -494,8 +494,8 @@ public class client extends RSApplet {
 		try
 		{
 			anInt985 = -1;
-			aClass19_1056.removeAll();
-			aClass19_1013.removeAll();
+			aClass19_1056.clear();
+			aClass19_1013.clear();
 			Rasterizer.nullInit();
 			unlinkMRUNodes();
 			sceneGraph.initToNull();
@@ -660,7 +660,7 @@ public class client extends RSApplet {
 			method63();
 		}
 		catch(Exception exception) { }
-		ObjectDef.mruNodes1.unlinkAll();
+		ObjectDef.memCache1.unlinkAll();
 		if(super.gameFrame != null)
 		{
 			stream.p1isaac(210);
@@ -710,13 +710,13 @@ public class client extends RSApplet {
 
 	private void unlinkMRUNodes()
 	{
-		ObjectDef.mruNodes1.unlinkAll();
-		ObjectDef.mruNodes2.unlinkAll();
-		NpcDef.mruNodes.unlinkAll();
-		ItemDef.mruNodes2.unlinkAll();
-		ItemDef.mruNodes1.unlinkAll();
-		Player.mruNodes.unlinkAll();
-		SpotAnim.aMRUNodes_415.unlinkAll();
+		ObjectDef.memCache1.unlinkAll();
+		ObjectDef.memCache2.unlinkAll();
+		NpcDef.memCache.unlinkAll();
+		ItemDef.memCache2.unlinkAll();
+		ItemDef.memCache1.unlinkAll();
+		Player.memCache.unlinkAll();
+		SpotAnim.memCache.unlinkAll();
 	}
 
 	private void rendedMapScene(int i)
@@ -803,7 +803,7 @@ public class client extends RSApplet {
 
 	private void spawnGroundItem(int i, int j)
 	{
-		NodeList class19 = groundArray[plane][i][j];
+		Deque class19 = groundArray[plane][i][j];
 		if(class19 == null)
 		{
 			sceneGraph.removeGroundItemTile(plane, i, j);
@@ -811,14 +811,14 @@ public class client extends RSApplet {
 		}
 		int k = 0xfa0a1f01;
 		Object obj = null;
-		for(Item item = (Item)class19.reverseGetFirst(); item != null; item = (Item)class19.reverseGetNext())
+		for(Item item = (Item)class19.getFront(); item != null; item = (Item)class19.getNext())
 		{
 			ItemDef itemDef = ItemDef.forID(item.ID);
 			int l = itemDef.value;
 			if(itemDef.stackable)
 			l *= item.anInt1559 + 1;
 			//	notifyItemSpawn(item, i + baseX, j + baseY);
-			
+
 			if(l > k)
 			{
 				k = l;
@@ -826,10 +826,10 @@ public class client extends RSApplet {
 			}
 		}
 
-		class19.insertTail(((Node) (obj)));
+		class19.insertFront(((Node) (obj)));
 		Object obj1 = null;
 		Object obj2 = null;
-		for(Item class30_sub2_sub4_sub2_1 = (Item)class19.reverseGetFirst(); class30_sub2_sub4_sub2_1 != null; class30_sub2_sub4_sub2_1 = (Item)class19.reverseGetNext())
+		for(Item class30_sub2_sub4_sub2_1 = (Item)class19.getFront(); class30_sub2_sub4_sub2_1 != null; class30_sub2_sub4_sub2_1 = (Item)class19.getNext())
 		{
 			if(class30_sub2_sub4_sub2_1.ID != ((Item) (obj)).ID && obj1 == null)
 			obj1 = class30_sub2_sub4_sub2_1;
@@ -845,7 +845,7 @@ public class client extends RSApplet {
 	{
 		for(int j = 0; j < sessionNpcCount; j++)
 		{
-			NPC npc = sessionNpcs[sessionNpcList[j]];
+			Npc npc = sessionNpcs[sessionNpcList[j]];
 			int k = 0x20000000 + (sessionNpcList[j] << 14);
 			if(npc == null || !npc.isVisible() || npc.desc.aBoolean93 != flag)
 			    continue;
@@ -1258,7 +1258,7 @@ public class client extends RSApplet {
 			Rasterizer.calculatePalette(0.69999999999999996D);
 			if(k == 4)
 			Rasterizer.calculatePalette(0.59999999999999998D);
-			ItemDef.mruNodes1.unlinkAll();
+			ItemDef.memCache1.unlinkAll();
 			welcomeScreenRaised = true;
 		}
 		if(j == 3)
@@ -1354,9 +1354,9 @@ public class client extends RSApplet {
 				obj = sessionNpcs[sessionNpcList[j - session_player_count]];
 				if(obj == null || !((Mobile) (obj)).isVisible())
 				continue;
-				if(obj instanceof NPC)
+				if(obj instanceof Npc)
 				{
-					NpcDef npcDef = ((NPC)obj).desc;
+					NpcDef npcDef = ((Npc)obj).desc;
 					if(npcDef.childrenIDs != null)
 					npcDef = npcDef.method161();
 					if(npcDef == null)
@@ -1388,7 +1388,7 @@ public class client extends RSApplet {
 					}
 				} else
 				{
-					NpcDef npcDef = ((NPC)obj).desc;
+					NpcDef npcDef = ((Npc)obj).desc;
 					if(npcDef.anInt75 >= 0 && npcDef.anInt75 < headIcons.length)
 					{
 						npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
@@ -1471,7 +1471,7 @@ public class client extends RSApplet {
 				int j2 = anIntArray979[k];
 				int k2 = anIntArray978[k];
 				boolean flag = true;
-				while(flag) 
+				while(flag)
 				{
 					flag = false;
 					for(int l2 = 0; l2 < k; l2++)
@@ -1723,7 +1723,7 @@ public class client extends RSApplet {
 		for(int k = 0; k < sessionNpcCount; k++)
 		{
 			int l = sessionNpcList[k];
-			NPC npc = sessionNpcs[l];
+			Npc npc = sessionNpcs[l];
 			if(npc != null && npc.textCycle > 0)
 			{
 				npc.textCycle--;
@@ -1992,8 +1992,8 @@ public class client extends RSApplet {
 			if(k == 16383)
 			break;
 			if(sessionNpcs[k] == null)
-			sessionNpcs[k] = new NPC();
-			NPC npc = sessionNpcs[k];
+			sessionNpcs[k] = new Npc();
+			Npc npc = sessionNpcs[k];
 			sessionNpcList[sessionNpcCount++] = k;
 			npc.time = currentTime;
 			int l = stream.gbits(5);
@@ -2461,7 +2461,7 @@ public class client extends RSApplet {
 		if(args[0] != null)
 			guiLaunch = false;
 		}catch(Exception e){}
-		
+
 		if(guiLaunch)
 			try{
 				network_worldid = 9;
@@ -2482,7 +2482,7 @@ public class client extends RSApplet {
 			System.out.println("RS2 user rs2.client - release #" + 317);
 			if(args.length != 5)
 			{
-				System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
+				System.out.println("Usage: node-hash, port-offset, [lowmem/highmem], [free/members], storeid");
 				return;
 			}
 			network_worldid = Integer.parseInt(args[0]);
@@ -2495,7 +2495,7 @@ public class client extends RSApplet {
 				setHighMem();
 			} else
 			{
-				System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
+				System.out.println("Usage: node-hash, port-offset, [lowmem/highmem], [free/members], storeid");
 				return;
 			}
 			if(args[3].equals("free"))
@@ -2506,7 +2506,7 @@ public class client extends RSApplet {
 				isMembers = true;
 			} else
 			{
-				System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
+				System.out.println("Usage: node-hash, port-offset, [lowmem/highmem], [free/members], storeid");
 				return;
 			}
 			signlink.storeid = Integer.parseInt(args[4]);
@@ -2517,7 +2517,7 @@ public class client extends RSApplet {
 		catch(Exception exception)
 		{
 		}
-		
+
 
 	}
 
@@ -2592,7 +2592,7 @@ public class client extends RSApplet {
 
 	private void renderProjectiles()//todo- confirm
 	{
-		for(Projectile class30_sub2_sub4_sub4 = (Projectile)aClass19_1013.reverseGetFirst(); class30_sub2_sub4_sub4 != null; class30_sub2_sub4_sub4 = (Projectile)aClass19_1013.reverseGetNext())
+		for(Projectile class30_sub2_sub4_sub4 = (Projectile)aClass19_1013.getFront(); class30_sub2_sub4_sub4 != null; class30_sub2_sub4_sub4 = (Projectile)aClass19_1013.getNext())
 		if(class30_sub2_sub4_sub4.anInt1597 != plane || currentTime > class30_sub2_sub4_sub4.anInt1572)
 		class30_sub2_sub4_sub4.unlink();
 		else
@@ -2600,7 +2600,7 @@ public class client extends RSApplet {
 		{
 			if(class30_sub2_sub4_sub4.anInt1590 > 0)
 			{
-				NPC npc = sessionNpcs[class30_sub2_sub4_sub4.anInt1590 - 1];
+				Npc npc = sessionNpcs[class30_sub2_sub4_sub4.anInt1590 - 1];
 				if(npc != null && npc.boundExtentX >= 0 && npc.boundExtentX < 13312 && npc.boundExtentY >= 0 && npc.boundExtentY < 13312)
 				class30_sub2_sub4_sub4.method455(currentTime, npc.boundExtentY, method42(class30_sub2_sub4_sub4.anInt1597, npc.boundExtentY, npc.boundExtentX) - class30_sub2_sub4_sub4.anInt1583, npc.boundExtentX);
 			}
@@ -2631,7 +2631,7 @@ public class client extends RSApplet {
 
 	private void drawLogo()//this isnt a logo its more of a login screen
 	{
-		
+
 		byte abyte0[] = titleJagexArchive.getDataForName("title.dat");
 		RgbImage rgbImage = new RgbImage(abyte0, this);
 		aRSImageProducer_1110.initDrawingArea();
@@ -2688,7 +2688,7 @@ public class client extends RSApplet {
 		//Object obj = null;//never used
 		//Object obj1 = null;//never used
 		System.gc();
-		
+
 
 	}
 
@@ -3183,8 +3183,8 @@ public class client extends RSApplet {
 
 	private void method63()
 	{
-		GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst();
-		for(; gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
+		GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.getFront();
+		for(; gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.getNext())
 		if(gameObjectSpawnRequest.anInt1294 == -1)
 		{
 			gameObjectSpawnRequest.anInt1302 = 0;
@@ -3390,7 +3390,7 @@ public class client extends RSApplet {
 				abyte0 = new byte[i2];
 				System.arraycopy(abyte1, 0, abyte0, 0, 6);
 
-				while(j2 < i2) 
+				while(j2 < i2)
 				{
 					int l2 = i2 - j2;
 					if(l2 > 1000)
@@ -3536,7 +3536,7 @@ public class client extends RSApplet {
 		l -= 2000;
 		if(l == 582)
 		{
-			NPC npc = sessionNpcs[i1];
+			Npc npc = sessionNpcs[i1];
 			if(npc != null)
 			{
 				doWalkTo(2, 0, 1, 0, session_player.pathY[0], 1, 0, npc.pathY[0], session_player.pathX[0], false, npc.pathX[0]);
@@ -3652,7 +3652,7 @@ public class client extends RSApplet {
 		}
 		if(l == 20)
 		{
-			NPC class30_sub2_sub4_sub1_sub1_1 = sessionNpcs[i1];
+			Npc class30_sub2_sub4_sub1_sub1_1 = sessionNpcs[i1];
 			if(class30_sub2_sub4_sub1_sub1_1 != null)
 			{
 				doWalkTo(2, 0, 1, 0, session_player.pathY[0], 1, 0, class30_sub2_sub4_sub1_sub1_1.pathY[0], session_player.pathX[0], false, class30_sub2_sub4_sub1_sub1_1.pathX[0]);
@@ -3988,7 +3988,7 @@ public class client extends RSApplet {
 		}
 		if(l == 225)
 		{
-			NPC class30_sub2_sub4_sub1_sub1_2 = sessionNpcs[i1];
+			Npc class30_sub2_sub4_sub1_sub1_2 = sessionNpcs[i1];
 			if(class30_sub2_sub4_sub1_sub1_2 != null)
 			{
 				doWalkTo(2, 0, 1, 0, session_player.pathY[0], 1, 0, class30_sub2_sub4_sub1_sub1_2.pathY[0], session_player.pathX[0], false, class30_sub2_sub4_sub1_sub1_2.pathX[0]);
@@ -4009,7 +4009,7 @@ public class client extends RSApplet {
 		}
 		if(l == 965)
 		{
-			NPC class30_sub2_sub4_sub1_sub1_3 = sessionNpcs[i1];
+			Npc class30_sub2_sub4_sub1_sub1_3 = sessionNpcs[i1];
 			if(class30_sub2_sub4_sub1_sub1_3 != null)
 			{
 				doWalkTo(2, 0, 1, 0, session_player.pathY[0], 1, 0, class30_sub2_sub4_sub1_sub1_3.pathY[0], session_player.pathX[0], false, class30_sub2_sub4_sub1_sub1_3.pathX[0]);
@@ -4030,7 +4030,7 @@ public class client extends RSApplet {
 		}
 		if(l == 413)
 		{
-			NPC class30_sub2_sub4_sub1_sub1_4 = sessionNpcs[i1];
+			Npc class30_sub2_sub4_sub1_sub1_4 = sessionNpcs[i1];
 			if(class30_sub2_sub4_sub1_sub1_4 != null)
 			{
 				doWalkTo(2, 0, 1, 0, session_player.pathY[0], 1, 0, class30_sub2_sub4_sub1_sub1_4.pathY[0], session_player.pathX[0], false, class30_sub2_sub4_sub1_sub1_4.pathX[0]);
@@ -4047,7 +4047,7 @@ public class client extends RSApplet {
 		clearTopInterfaces();
 		if(l == 1025)
 		{
-			NPC class30_sub2_sub4_sub1_sub1_5 = sessionNpcs[i1];
+			Npc class30_sub2_sub4_sub1_sub1_5 = sessionNpcs[i1];
 			if(class30_sub2_sub4_sub1_sub1_5 != null)
 			{
 				NpcDef npcDef = class30_sub2_sub4_sub1_sub1_5.desc;
@@ -4074,7 +4074,7 @@ public class client extends RSApplet {
 		}
 		if(l == 412)
 		{
-			NPC class30_sub2_sub4_sub1_sub1_6 = sessionNpcs[i1];
+			Npc class30_sub2_sub4_sub1_sub1_6 = sessionNpcs[i1];
 			if(class30_sub2_sub4_sub1_sub1_6 != null)
 			{
 				doWalkTo(2, 0, 1, 0, session_player.pathY[0], 1, 0, class30_sub2_sub4_sub1_sub1_6.pathY[0], session_player.pathX[0], false, class30_sub2_sub4_sub1_sub1_6.pathX[0]);
@@ -4275,7 +4275,7 @@ public class client extends RSApplet {
 		}
 		if(l == 478)
 		{
-			NPC class30_sub2_sub4_sub1_sub1_7 = sessionNpcs[i1];
+			Npc class30_sub2_sub4_sub1_sub1_7 = sessionNpcs[i1];
 			if(class30_sub2_sub4_sub1_sub1_7 != null)
 			{
 				doWalkTo(2, 0, 1, 0, session_player.pathY[0], 1, 0, class30_sub2_sub4_sub1_sub1_7.pathY[0], session_player.pathX[0], false, class30_sub2_sub4_sub1_sub1_7.pathX[0]);
@@ -4505,12 +4505,12 @@ public class client extends RSApplet {
 			}
 			if(k1 == 1)
 			{
-				NPC npc = sessionNpcs[l1];
+				Npc npc = sessionNpcs[l1];
 				if(npc.desc.aByte68 == 1 && (npc.boundExtentX & 0x7f) == 64 && (npc.boundExtentY & 0x7f) == 64)
 				{
 					for(int j2 = 0; j2 < sessionNpcCount; j2++)
 					{
-						NPC npc2 = sessionNpcs[sessionNpcList[j2]];
+						Npc npc2 = sessionNpcs[sessionNpcList[j2]];
 						if(npc2 != null && npc2 != npc && npc2.desc.aByte68 == 1 && npc2.boundExtentX == npc.boundExtentX && npc2.boundExtentY == npc.boundExtentY)
 						buildAtNPCMenu(npc2.desc, sessionNpcList[j2], j1, i1);
 					}
@@ -4532,7 +4532,7 @@ public class client extends RSApplet {
 				{
 					for(int k2 = 0; k2 < sessionNpcCount; k2++)
 					{
-						NPC class30_sub2_sub4_sub1_sub1_2 = sessionNpcs[sessionNpcList[k2]];
+						Npc class30_sub2_sub4_sub1_sub1_2 = sessionNpcs[sessionNpcList[k2]];
 						if(class30_sub2_sub4_sub1_sub1_2 != null && class30_sub2_sub4_sub1_sub1_2.desc.aByte68 == 1 && class30_sub2_sub4_sub1_sub1_2.boundExtentX == player.boundExtentX && class30_sub2_sub4_sub1_sub1_2.boundExtentY == player.boundExtentY)
 						buildAtNPCMenu(class30_sub2_sub4_sub1_sub1_2.desc, sessionNpcList[k2], j1, i1);
 					}
@@ -4549,10 +4549,10 @@ public class client extends RSApplet {
 			}
 			if(k1 == 3)
 			{
-				NodeList class19 = groundArray[plane][i1][j1];
+				Deque class19 = groundArray[plane][i1][j1];
 				if(class19 != null)
 				{
-					for(Item item = (Item)class19.getFirst(); item != null; item = (Item)class19.getNext())
+					for(Item item = (Item)class19.getBack(); item != null; item = (Item)class19.getPrevious())
 					{
 						ItemDef itemDef = ItemDef.forID(item.ID);
 						if(itemSelected == 1)
@@ -4741,10 +4741,10 @@ public class client extends RSApplet {
 		RSInterface.interfaceCache = null;
 		Sequence.anims = null;
 		SpotAnim.cache = null;
-		SpotAnim.aMRUNodes_415 = null;
+		SpotAnim.memCache = null;
 		SettingUsagePointers.cache = null;
 		super.fullGameScreen = null;
-		Player.mruNodes = null;
+		Player.memCache = null;
 		Rasterizer.nullLoader();
 		SceneGraph.nullLoader();
 		Model.nullLoader();
@@ -4956,7 +4956,7 @@ public class client extends RSApplet {
 						stream.pjstr(inputString.substring(2));
 					} else
 					{
-						String s = inputString.toLowerCase();	
+						String s = inputString.toLowerCase();
 						int j2 = 0;
 						if(s.startsWith("yellow:"))
 						{
@@ -5759,7 +5759,7 @@ public class client extends RSApplet {
 			anInt1039 = anInt886;
 		}
 		boolean flag = false;
-		while(!flag) 
+		while(!flag)
 		{
 			flag = true;
 			for(int j = 0; j < menuActionRow - 1; j++)
@@ -5922,8 +5922,8 @@ public class client extends RSApplet {
 				sessionNpcs[k2] = null;
 
 				session_player = session_players[session_player_idx] = new Player();
-				aClass19_1013.removeAll();
-				aClass19_1056.removeAll();
+				aClass19_1013.clear();
+				aClass19_1056.clear();
 				for(int l2 = 0; l2 < 4; l2++)
 				{
 					for(int i3 = 0; i3 < 104; i3++)
@@ -5935,7 +5935,7 @@ public class client extends RSApplet {
 
 				}
 
-				aClass19_1179 = new NodeList();
+				aClass19_1179 = new Deque();
 				network_friends_server_status = 0;
 				user_friends_count = 0;
 				dialogID = -1;
@@ -6020,7 +6020,7 @@ public class client extends RSApplet {
 			if(k == 10)
 			{
 				loginMessage1 = "Unable to connect.";
-				loginMessage2 = "Bad session id.";
+				loginMessage2 = "Bad session hash.";
 				return;
 			}
 			if(k == 11)
@@ -6166,7 +6166,7 @@ public class client extends RSApplet {
 		boolean flag1 = false;
 		int j4 = bigX.length;
 		int ai[][] = tileSettings[plane].clipData;
-		while(i4 != l3) 
+		while(i4 != l3)
 		{
 			j3 = bigX[i4];
 			k3 = bigY[i4];
@@ -6314,7 +6314,7 @@ public class client extends RSApplet {
 			k3--;
 		}
 		//	if(cancelWalk) { return i4 > 0; }
-		
+
 
 		if(i4 > 0)
 		{
@@ -6368,7 +6368,7 @@ public class client extends RSApplet {
 		for(int j = 0; j < sessionNpcsAwaitingUpdatePtr; j++)
 		{
 			int k = session_npcs_awaiting_update[j];
-			NPC npc = sessionNpcs[k];
+			Npc npc = sessionNpcs[k];
 			int l = stream.g1();
 			if((l & 0x10) != 0)
 			{
@@ -6432,7 +6432,7 @@ public class client extends RSApplet {
 				npc.textSpoken = stream.gstr();
 				npc.textCycle = 100;
 				//	entityMessage(npc);
-				
+
 			}
 			if((l & 0x40) != 0)
 			{
@@ -7330,7 +7330,7 @@ public class client extends RSApplet {
 		for(int j = 0; j < sessionNpcCount; j++)
 		{
 			int k = sessionNpcList[j];
-			NPC npc = sessionNpcs[k];
+			Npc npc = sessionNpcs[k];
 			if(npc != null)
 			entityUpdateBlock(npc);
 		}
@@ -7537,7 +7537,7 @@ public class client extends RSApplet {
 		return;
 		if(mobile.interactingEntity != -1 && mobile.interactingEntity < 32768)
 		{
-			NPC npc = sessionNpcs[mobile.interactingEntity];
+			Npc npc = sessionNpcs[mobile.interactingEntity];
 			if(npc != null)
 			{
 				int i1 = mobile.boundExtentX - npc.boundExtentX;
@@ -7891,8 +7891,8 @@ public class client extends RSApplet {
 
 	private void renderStationaryGraphics()
 	{
-		StillGraphics class30_sub2_sub4_sub3 = (StillGraphics)aClass19_1056.reverseGetFirst();
-		for(; class30_sub2_sub4_sub3 != null; class30_sub2_sub4_sub3 = (StillGraphics)aClass19_1056.reverseGetNext())
+		StillGraphics class30_sub2_sub4_sub3 = (StillGraphics)aClass19_1056.getFront();
+		for(; class30_sub2_sub4_sub3 != null; class30_sub2_sub4_sub3 = (StillGraphics)aClass19_1056.getNext())
 		if(class30_sub2_sub4_sub3.anInt1560 != plane || class30_sub2_sub4_sub3.aBoolean1567)
 		class30_sub2_sub4_sub3.unlink();
 		else
@@ -8367,7 +8367,7 @@ public class client extends RSApplet {
 					player.privelage = j2;
 
 					//entityMessage(player);
-					
+
 					player.anInt1531 = i1 & 0xff;
 					player.textCycle = 150;
 					if(j2 == 2 || j2 == 3)
@@ -8704,7 +8704,7 @@ public class client extends RSApplet {
 	{
 		if(loadingStage == 2)
 		{
-			for(GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
+			for(GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.getFront(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.getNext())
 			{
 				if(gameObjectSpawnRequest.anInt1294 > 0)
 				gameObjectSpawnRequest.anInt1294--;
@@ -8954,7 +8954,7 @@ public class client extends RSApplet {
 			{
 				int i2 = (l1 * 0x10000) / k1;
 				int k2 = 32768;
-				while(k != i1) 
+				while(k != i1)
 				{
 					if(k < i1)
 					k++;
@@ -8980,7 +8980,7 @@ public class client extends RSApplet {
 			{
 				int j2 = (k1 * 0x10000) / l1;
 				int l2 = 32768;
-				while(l != j1) 
+				while(l != j1)
 				{
 					if(l < j1)
 					l++;
@@ -9232,7 +9232,7 @@ public class client extends RSApplet {
 		{
 			for(int l5 = 0; l5 < 104; l5++)
 			{
-				NodeList class19 = groundArray[plane][k5][l5];
+				Deque class19 = groundArray[plane][k5][l5];
 				if(class19 != null)
 				{
 					int l = (k5 * 4 + 2) - session_player.boundExtentX / 32;
@@ -9245,7 +9245,7 @@ public class client extends RSApplet {
 
 		for(int i6 = 0; i6 < sessionNpcCount; i6++)
 		{
-			NPC npc = sessionNpcs[sessionNpcList[i6]];
+			Npc npc = sessionNpcs[sessionNpcList[i6]];
 			if(npc != null && npc.isVisible())
 			{
 				NpcDef npcDef = npc.desc;
@@ -9294,7 +9294,7 @@ public class client extends RSApplet {
 		{
 			if(anInt855 == 1 && anInt1222 >= 0 && anInt1222 < sessionNpcs.length)
 			{
-				NPC class30_sub2_sub4_sub1_sub1_1 = sessionNpcs[anInt1222];
+				Npc class30_sub2_sub4_sub1_sub1_1 = sessionNpcs[anInt1222];
 				if(class30_sub2_sub4_sub1_sub1_1 != null)
 				{
 					int k1 = class30_sub2_sub4_sub1_sub1_1.boundExtentX / 32 - session_player.boundExtentX / 32;
@@ -9429,7 +9429,7 @@ public class client extends RSApplet {
 	int l1, int i2, int j2)
 	{
 		GameObjectSpawnRequest gameObjectSpawnRequest = null;
-		for(GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
+		for(GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.getFront(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.getNext())
 		{
 			if(gameObjectSpawnRequest_1.plane != l1 || gameObjectSpawnRequest_1.x != i2 || gameObjectSpawnRequest_1.z != j1 || gameObjectSpawnRequest_1.anInt1296 != i1)
 			continue;
@@ -9445,7 +9445,7 @@ public class client extends RSApplet {
 			gameObjectSpawnRequest.x = i2;
 			gameObjectSpawnRequest.z = j1;
 			method89(gameObjectSpawnRequest);
-			aClass19_1179.insertHead(gameObjectSpawnRequest);
+			aClass19_1179.insertBack(gameObjectSpawnRequest);
 		}
 		gameObjectSpawnRequest.id2 = k;
 		gameObjectSpawnRequest.type2 = k1;
@@ -9716,7 +9716,7 @@ public class client extends RSApplet {
 				//int l1 = c1 / 2 + 50;//never used
 			}
 		}
-		
+
 		aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
 		if(welcomeScreenRaised)
 		{
@@ -9738,7 +9738,7 @@ public class client extends RSApplet {
 			long l = System.currentTimeMillis();
 			int i = 0;
 			int j = 20;
-			while(aBoolean831) 
+			while(aBoolean831)
 			{
 				anInt1208++;
 				//calcFlamesPosition();
@@ -9782,10 +9782,10 @@ public class client extends RSApplet {
 			int l13 = stream.g2();
 			if(j3 >= 0 && i6 >= 0 && j3 < 104 && i6 < 104)
 			{
-				NodeList class19_1 = groundArray[plane][j3][i6];
+				Deque class19_1 = groundArray[plane][j3][i6];
 				if(class19_1 != null)
 				{
-					for(Item class30_sub2_sub4_sub2_3 = (Item)class19_1.reverseGetFirst(); class30_sub2_sub4_sub2_3 != null; class30_sub2_sub4_sub2_3 = (Item)class19_1.reverseGetNext())
+					for(Item class30_sub2_sub4_sub2_3 = (Item)class19_1.getFront(); class30_sub2_sub4_sub2_3 != null; class30_sub2_sub4_sub2_3 = (Item)class19_1.getNext())
 					{
 						if(class30_sub2_sub4_sub2_3.ID != (l8 & 0x7fff) || class30_sub2_sub4_sub2_3.anInt1559 != k11)
 						continue;
@@ -9829,8 +9829,8 @@ public class client extends RSApplet {
 				class30_sub2_sub4_sub2_2.ID = i1;
 				class30_sub2_sub4_sub2_2.anInt1559 = j14;
 				if(groundArray[plane][k6][j9] == null)
-				groundArray[plane][k6][j9] = new NodeList();
-				groundArray[plane][k6][j9].insertHead(class30_sub2_sub4_sub2_2);
+				groundArray[plane][k6][j9] = new Deque();
+				groundArray[plane][k6][j9].insertBack(class30_sub2_sub4_sub2_2);
 				spawnGroundItem(k6, j9);
 			}
 			return;
@@ -9843,10 +9843,10 @@ public class client extends RSApplet {
 			int k9 = stream.g2();
 			if(i4 >= 0 && l6 >= 0 && i4 < 104 && l6 < 104)
 			{
-				NodeList class19 = groundArray[plane][i4][l6];
+				Deque class19 = groundArray[plane][i4][l6];
 				if(class19 != null)
 				{
-					for(Item item = (Item)class19.reverseGetFirst(); item != null; item = (Item)class19.reverseGetNext())
+					for(Item item = (Item)class19.getFront(); item != null; item = (Item)class19.getNext())
 					{
 						if(item.ID != (k9 & 0x7fff))
 						continue;
@@ -9854,7 +9854,7 @@ public class client extends RSApplet {
 						break;
 					}
 
-					if(class19.reverseGetFirst() == null)
+					if(class19.getFront() == null)
 					groundArray[plane][i4][l6] = null;
 					spawnGroundItem(i4, l6);
 				}
@@ -10008,7 +10008,7 @@ public class client extends RSApplet {
 				i5 = i5 * 128 + 64;
 				l7 = l7 * 128 + 64;
 				StillGraphics class30_sub2_sub4_sub3 = new StillGraphics(plane, currentTime, j15, k10, method42(plane, l7, i5) - l12, l7, i5);
-				aClass19_1056.insertHead(class30_sub2_sub4_sub3);
+				aClass19_1056.insertBack(class30_sub2_sub4_sub3);
 			}
 			return;
 		}
@@ -10025,8 +10025,8 @@ public class client extends RSApplet {
 				class30_sub2_sub4_sub2_1.ID = k2;
 				class30_sub2_sub4_sub2_1.anInt1559 = j5;
 				if(groundArray[plane][l10][i13] == null)
-				groundArray[plane][l10][i13] = new NodeList();
-				groundArray[plane][l10][i13].insertHead(class30_sub2_sub4_sub2_1);
+				groundArray[plane][l10][i13] = new Deque();
+				groundArray[plane][l10][i13].insertBack(class30_sub2_sub4_sub2_1);
 				spawnGroundItem(l10, i13);
 			}
 			return;
@@ -10067,12 +10067,12 @@ public class client extends RSApplet {
 				k13 = k13 * 128 + 64;
 				Projectile class30_sub2_sub4_sub4 = new Projectile(i21, l18, k19 + currentTime, j20 + currentTime, j21, plane, method42(plane, k8, l5) - i18, k8, l5, l15, i17);
 				class30_sub2_sub4_sub4.method455(k19 + currentTime, k13, method42(plane, k13, j11) - l18, j11);
-				aClass19_1013.insertHead(class30_sub2_sub4_sub4);
+				aClass19_1013.insertBack(class30_sub2_sub4_sub4);
 			}
 		}
 	}
 
-	
+
 	private static void setLowMem()
 	{
 		SceneGraph.lowMem = true;
@@ -10101,7 +10101,7 @@ public class client extends RSApplet {
 		for(int i1 = 0; i1 < k; i1++)
 		{
 			int j1 = sessionNpcList[i1];
-			NPC npc = sessionNpcs[j1];
+			Npc npc = sessionNpcs[j1];
 			int k1 = stream.gbits(1);
 			if(k1 == 0)
 			{
@@ -10169,7 +10169,7 @@ public class client extends RSApplet {
 					return;
 				}
 			}
-			
+
 			do
 			{
 				int l1 = readChar(-796);
@@ -10183,7 +10183,7 @@ public class client extends RSApplet {
 					flag1 = true;
 					break;
 				}
-				
+
 				if(loginScreenCursorPos == 0)
 				{
 					if(l1 == 8 && myUsername.length() > 0)
@@ -10209,7 +10209,7 @@ public class client extends RSApplet {
 			} while(true);
 			return;
 		}
-		
+
 	}
 
 	private void markMinimap(RgbImage rgbImage, int i, int j)
@@ -10459,7 +10459,7 @@ public class client extends RSApplet {
 
 				}
 
-				for(GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
+				for(GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.getFront(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest)aClass19_1179.getNext())
 				if(gameObjectSpawnRequest.x >= anInt1268 && gameObjectSpawnRequest.x < anInt1268 + 8 && gameObjectSpawnRequest.z >= anInt1269 && gameObjectSpawnRequest.z < anInt1269 + 8 && gameObjectSpawnRequest.plane == plane)
 				gameObjectSpawnRequest.anInt1294 = 0;
 
@@ -10601,7 +10601,7 @@ public class client extends RSApplet {
 			}
 			if(pktType == 73 || pktType == 241)
 			{
-				
+
 				//mapReset();
 				int l2 = anInt1069;
 				int i11 = anInt1070;
@@ -10753,7 +10753,7 @@ public class client extends RSApplet {
 				anInt1037 = baseY;
 				for(int j24 = 0; j24 < 16384; j24++)
 				{
-					NPC npc = sessionNpcs[j24];
+					Npc npc = sessionNpcs[j24];
 					if(npc != null)
 					{
 						for(int j29 = 0; j29 < 10; j29++)
@@ -10818,7 +10818,7 @@ public class client extends RSApplet {
 
 				}
 
-				for(GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetFirst(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.reverseGetNext())
+				for(GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.getFront(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest)aClass19_1179.getNext())
 				{
 					gameObjectSpawnRequest_1.x -= i17;
 					gameObjectSpawnRequest_1.z -= j21;
@@ -10986,7 +10986,7 @@ public class client extends RSApplet {
 				}
 				pktType = -1;
 				//serverMessage(s);
-				
+
 				return true;
 			}
 			if(pktType == 1)
@@ -11704,10 +11704,10 @@ public class client extends RSApplet {
 	{
 		anIntArrayArray825 = new int[104][104];
 		user_friends_worldid = new int[200];
-		groundArray = new NodeList[4][104][104];
+		groundArray = new Deque[4][104][104];
 		aBoolean831 = false;
 		aStream_834 = new Packet(new byte[5000]);
-		sessionNpcs = new NPC[16384];
+		sessionNpcs = new Npc[16384];
 		sessionNpcList = new int[16384];
 		anIntArray840 = new int[1000];
 		aStream_847 = Packet.create();
@@ -11769,7 +11769,7 @@ public class client extends RSApplet {
 		aBoolean994 = false;
 		anInt1002 = 0x23201b;
 		amountOrNameInput = "";
-		aClass19_1013 = new NodeList();
+		aClass19_1013 = new Deque();
 		aBoolean1017 = false;
 		anInt1018 = -1;
 		anIntArray1030 = new int[5];
@@ -11781,7 +11781,7 @@ public class client extends RSApplet {
 		char_edit_gender = true;
 		anIntArray1052 = new int[151];
 		anInt1054 = -1;
-		aClass19_1056 = new NodeList();
+		aClass19_1056 = new Deque();
 		anIntArray1057 = new int[33];
 		aClass9_1059 = new RSInterface();
 		mapScenes = new IndexedImage[100];
@@ -11819,7 +11819,7 @@ public class client extends RSApplet {
 		myPassword = "";
 		genericLoadingError = false;
 		reportAbuseInterfaceID = -1;
-		aClass19_1179 = new NodeList();
+		aClass19_1179 = new Deque();
 		anInt1184 = 128;
 		invOverlayInterfaceID = -1;
 		stream = Packet.create();
@@ -11938,14 +11938,14 @@ public class client extends RSApplet {
 	private long aLong824;
 	private int[][] anIntArrayArray825;
 	private int[] user_friends_worldid;
-	private NodeList[][][] groundArray;
+	private Deque[][][] groundArray;
 	private int[] anIntArray828;
 	private int[] anIntArray829;
 	private volatile boolean aBoolean831;
 	private Socket aSocket832;
 	private int loginScreenState;
 	private Packet aStream_834;
-	private NPC[] sessionNpcs;
+	private Npc[] sessionNpcs;
 	private int sessionNpcCount;
 	private int[] sessionNpcList;
 	private int anInt839;
@@ -12065,7 +12065,7 @@ public class client extends RSApplet {
 	//private rs2.IndexedImage aIndexedImage_966;//never used
 	//private rs2.IndexedImage aIndexedImage_999;//never used
 	//private rs2.IndexedImage aIndexedImage_967;//never used
-	
+
 	private final int[] anIntArray968;
 	private final int[] anIntArray969;
 	final JagexFileStore[] jagexFileStores;
@@ -12088,7 +12088,7 @@ public class client extends RSApplet {
 	private RgbImage passwordhover;
 	private RgbImage loginhover;
 	private RgbImage loadingBox1;
-	
+
 	private int anInt988;
 	private int anInt989;
 	private final int[] char_edit_colours;
@@ -12104,13 +12104,13 @@ public class client extends RSApplet {
 	private final int anInt1002;
 	static final int[][] playerBodyRecolours = {
 		{
-			6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 
+			6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433,
 			2983, 54193
 		}, {
-			8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 
+			8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153,
 			56621, 4783, 1341, 16578, 35003, 25239
 		}, {
-			25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 
+			25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094,
 			10153, 56621, 4783, 1341, 16578, 35003
 		}, {
 			4626, 11146, 6439, 12, 4758, 10270
@@ -12126,7 +12126,7 @@ public class client extends RSApplet {
 	private int anInt1009;
 	private int anInt1010;
 	private int anInt1011;
-	private NodeList aClass19_1013;
+	private Deque aClass19_1013;
 	private int anInt1014;
 	private int anInt1015;
 	private int anInt1016;
@@ -12165,7 +12165,7 @@ public class client extends RSApplet {
 	private JagexArchive titleJagexArchive;
 	private int anInt1054;
 	private int anInt1055;
-	private NodeList aClass19_1056;
+	private Deque aClass19_1056;
 	private final int[] anIntArray1057;
 	private final RSInterface aClass9_1059;
 	private IndexedImage[] mapScenes;
@@ -12232,7 +12232,7 @@ public class client extends RSApplet {
 	private final boolean[] atPlayerArray;
 	private final int[][][] anIntArrayArrayArray1129;
 	private final int[] tabInterfaceIDs = {
-		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 		-1, -1, -1, -1, -1
 	};
 	private int anInt1131;
@@ -12281,12 +12281,12 @@ public class client extends RSApplet {
 	private static int anInt1175;
 	private boolean genericLoadingError;
 	private final int[] anIntArray1177 = {
-		0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 
-		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+		0, 0, 0, 0, 1, 1, 1, 1, 1, 2,
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 		2, 2, 3
 	};
 	private int reportAbuseInterfaceID;
-	private NodeList aClass19_1179;
+	private Deque aClass19_1179;
 	private int[] anIntArray1180;
 	private int[] anIntArray1181;
 	private int[] anIntArray1182;
@@ -12310,7 +12310,7 @@ public class client extends RSApplet {
 	private RgbImage aClass30_Sub2_Sub1_Sub1_1202;
 	private final int[] anIntArray1203;
 	static final int[] skinColours = {
-		9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 
+		9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145,
 		58654, 5027, 1457, 16565, 34991, 25486
 	};
 	private static boolean flagged;
@@ -12393,7 +12393,7 @@ public class client extends RSApplet {
 	public String server = "";
 	public static boolean guiLaunch = true;
 
-	static 
+	static
 	{
 		XP_FOR_LEVEL = new int[99];
 		int i = 0;

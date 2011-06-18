@@ -3,23 +3,23 @@ package rs2;
 
 import sign.signlink;
 
-public class MRUNodes {
+public class MemCache {
 
-    public MRUNodes(int i)
+    public MemCache(int i)
     {
         emptyNodeSub = new NodeSub();
-        nodeSubList = new NodeSubList();
+        queue = new Queue();
         initialCount = i;
         spaceLeft = i;
-        nodeCache = new NodeCache();
+        hashTable = new HashTable();
     }
 
     public NodeSub get(long l)
     {
-        NodeSub nodeSub = (NodeSub) nodeCache.findNodeByID(l);
+        NodeSub nodeSub = (NodeSub) hashTable.findNodeByID(l);
         if(nodeSub != null)
         {
-            nodeSubList.insertHead(nodeSub);
+            queue.insertBack(nodeSub);
         }
         return nodeSub;
     }
@@ -30,12 +30,12 @@ public class MRUNodes {
         {
             if(spaceLeft == 0)
             {
-                NodeSub nodeSub_1 = nodeSubList.popTail();
+                NodeSub nodeSub_1 = queue.popFront();
                 nodeSub_1.unlink();
                 nodeSub_1.unlinkSub();
                 if(nodeSub_1 == emptyNodeSub)
                 {
-                    NodeSub nodeSub_2 = nodeSubList.popTail();
+                    NodeSub nodeSub_2 = queue.popFront();
                     nodeSub_2.unlink();
                     nodeSub_2.unlinkSub();
                 }
@@ -43,8 +43,8 @@ public class MRUNodes {
             {
                 spaceLeft--;
             }
-            nodeCache.removeFromCache(nodeSub, l);
-            nodeSubList.insertHead(nodeSub);
+            hashTable.removeFromCache(nodeSub, l);
+            queue.insertBack(nodeSub);
             return;
         }
         catch(RuntimeException runtimeexception)
@@ -58,7 +58,7 @@ public class MRUNodes {
     {
         do
         {
-            NodeSub nodeSub = nodeSubList.popTail();
+            NodeSub nodeSub = queue.popFront();
             if(nodeSub != null)
             {
                 nodeSub.unlink();
@@ -74,6 +74,6 @@ public class MRUNodes {
     private final NodeSub emptyNodeSub;
     private final int initialCount;
     private int spaceLeft;
-    private final NodeCache nodeCache;
-    private final NodeSubList nodeSubList;
+    private final HashTable hashTable;
+    private final Queue queue;
 }

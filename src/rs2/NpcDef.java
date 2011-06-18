@@ -96,7 +96,7 @@ public class NpcDef
 
     public static void nullLoader()
     {
-        mruNodes = null;
+        memCache = null;
         streamIndices = null;
         cache = null;
         stream = null;
@@ -112,7 +112,7 @@ public class NpcDef
             else
                 return npcDef.method164(j, frameId, ai);
         }
-        Model model = (Model) mruNodes.get(type);
+        Model model = (Model) memCache.get(type);
         if(model == null)
         {
             boolean flag = false;
@@ -138,7 +138,7 @@ public class NpcDef
             }
             model.calcSkinning();
             model.light(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
-            mruNodes.put(model, type);
+            memCache.put(model, type);
         }
         Model model_1 = Model.aModel_1621;
         model_1.method464(model, Animation.method532(frameId) & Animation.method532(j));
@@ -336,6 +336,6 @@ public class NpcDef
     private int anInt92;
     public boolean aBoolean93;
     private int[] anIntArray94;
-    public static MRUNodes mruNodes = new MRUNodes(30);
+    public static MemCache memCache = new MemCache(30);
 
 }

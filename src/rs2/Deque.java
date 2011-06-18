@@ -1,38 +1,38 @@
 package rs2;
 
 
-public class NodeList {
+public class Deque {
 
-    public NodeList()
+    public Deque()
     {
         head = new Node();
-        head.prev = head;
         head.next = head;
+        head.previous = head;
     }
 
-    public void insertHead(Node node)
+    public void insertBack(Node node)
     {
-        if(node.next != null)
+        if(node.previous != null)
             node.unlink();
-        node.next = head.next;
-        node.prev = head;
-        node.next.prev = node;
-        node.prev.next = node;
-    }
-
-    public void insertTail(Node node)
-    {
-        if(node.next != null)
-            node.unlink();
+        node.previous = head.previous;
         node.next = head;
-        node.prev = head.prev;
-        node.next.prev = node;
-        node.prev.next = node;
+        node.previous.next = node;
+        node.next.previous = node;
     }
 
-    public Node popHead()
+    public void insertFront(Node node)
     {
-        Node node = head.prev;
+        if(node.previous != null)
+            node.unlink();
+        node.previous = head;
+        node.next = head.next;
+        node.previous.next = node;
+        node.next.previous = node;
+    }
+
+    public Node popFront()
+    {
+        Node node = head.next;
         if(node == head)
         {
             return null;
@@ -43,21 +43,7 @@ public class NodeList {
         }
     }
 
-    public Node reverseGetFirst()
-    {
-        Node node = head.prev;
-        if(node == head)
-        {
-            current = null;
-            return null;
-        } else
-        {
-            current = node.prev;
-            return node;
-        }
-    }
-
-    public Node getFirst()
+    public Node getFront()
     {
         Node node = head.next;
         if(node == head)
@@ -71,16 +57,16 @@ public class NodeList {
         }
     }
 
-    public Node reverseGetNext()
+    public Node getBack()
     {
-        Node node = current;
+        Node node = head.previous;
         if(node == head)
         {
             current = null;
             return null;
         } else
         {
-            current = node.prev;
+            current = node.previous;
             return node;
         }
     }
@@ -92,18 +78,32 @@ public class NodeList {
         {
             current = null;
             return null;
+        } else
+        {
+            current = node.next;
+            return node;
         }
-        current = node.next;
+    }
+
+    public Node getPrevious()
+    {
+        Node node = current;
+        if(node == head)
+        {
+            current = null;
+            return null;
+        }
+        current = node.previous;
             return node;
     }
 
-    public void removeAll()
+    public void clear()
     {
-        if(head.prev == head)
+        if(head.next == head)
             return;
         do
         {
-            Node node = head.prev;
+            Node node = head.next;
             if(node == head)
                 return;
             node.unlink();
