@@ -861,7 +861,7 @@ public class client extends RSApplet {
 			}
 			if(!npc.desc.aBoolean84)
 			k += 0x80000000;
-			sceneGraph.addEntityA(plane, npc.anInt1552, method42(plane, npc.boundExtentY, npc.boundExtentX), k, npc.boundExtentY, (npc.boundDim - 1) * 64 + 60, npc.boundExtentX, npc, npc.aBoolean1541);
+			sceneGraph.addEntityA(plane, npc.currentRotation, method42(plane, npc.boundExtentY, npc.boundExtentX), k, npc.boundExtentY, (npc.boundDim - 1) * 64 + 60, npc.boundExtentX, npc, npc.aBoolean1541);
 		}
 	}
 
@@ -2062,7 +2062,7 @@ public class client extends RSApplet {
 			{
 				player.aBoolean1699 = false;
 				player.anInt1709 = method42(plane, player.boundExtentY, player.boundExtentX);
-				sceneGraph.addEntity(plane, player.boundExtentY, player, player.anInt1552, player.anInt1722, player.boundExtentX, player.anInt1709, player.anInt1719, player.anInt1721, i1, player.anInt1720);
+				sceneGraph.addEntity(plane, player.boundExtentY, player, player.currentRotation, player.anInt1722, player.boundExtentX, player.anInt1709, player.anInt1719, player.anInt1721, i1, player.anInt1720);
 				continue;
 			}
 			if((player.boundExtentX & 0x7f) == 64 && (player.boundExtentY & 0x7f) == 64)
@@ -2072,7 +2072,7 @@ public class client extends RSApplet {
 				anIntArrayArray929[j1][k1] = anInt1265;
 			}
 			player.anInt1709 = method42(plane, player.boundExtentY, player.boundExtentX);
-			sceneGraph.addEntityA(plane, player.anInt1552, player.anInt1709, i1, player.boundExtentY, 60, player.boundExtentX, player, player.aBoolean1541);
+			sceneGraph.addEntityA(plane, player.currentRotation, player.anInt1709, i1, player.boundExtentY, 60, player.boundExtentX, player, player.aBoolean1541);
 		}
 
 	}
@@ -5320,7 +5320,7 @@ public class client extends RSApplet {
 
 				model.calcSkinning();
 				model.applyTransform(Sequence.anims[session_player.anInt1511].frame2IDS[0]);
-				model.preprocess(64, 850, -30, -50, -30, true);
+				model.light(64, 850, -30, -50, -30, true);
 				class9.anInt233 = 5;
 				class9.mediaID = 0;
 				RSInterface.set_custom_model(aBoolean994, model);
@@ -7409,7 +7409,7 @@ public class client extends RSApplet {
 		mobile.turnDirection = 0;
 		if(mobile.anInt1549 == 3)
 		mobile.turnDirection = 512;
-		mobile.anInt1552 = mobile.turnDirection;
+		mobile.currentRotation = mobile.turnDirection;
 	}
 
 	private void method99(Mobile mobile)
@@ -7468,7 +7468,7 @@ public class client extends RSApplet {
 		mobile.turnDirection = 1024;
 		else
 		mobile.turnDirection = 0;
-		int i1 = mobile.turnDirection - mobile.anInt1552 & 0x7ff;
+		int i1 = mobile.turnDirection - mobile.currentRotation & 0x7ff;
 		if(i1 > 1024)
 		i1 -= 2048;
 		int j1 = mobile.anInt1555;
@@ -7484,7 +7484,7 @@ public class client extends RSApplet {
 		j1 = mobile.anInt1554;
 		mobile.anInt1517 = j1;
 		int k1 = 4;
-		if(mobile.anInt1552 != mobile.turnDirection && mobile.interactingEntity == -1 && mobile.anInt1504 != 0)
+		if(mobile.currentRotation != mobile.turnDirection && mobile.interactingEntity == -1 && mobile.anInt1504 != 0)
 		k1 = 2;
 		if(mobile.pathLength > 2)
 		k1 = 6;
@@ -7569,18 +7569,18 @@ public class client extends RSApplet {
 			mobile.anInt1538 = 0;
 			mobile.anInt1539 = 0;
 		}
-		int l = mobile.turnDirection - mobile.anInt1552 & 0x7ff;
+		int l = mobile.turnDirection - mobile.currentRotation & 0x7ff;
 		if(l != 0)
 		{
 			if(l < mobile.anInt1504 || l > 2048 - mobile.anInt1504)
-			mobile.anInt1552 = mobile.turnDirection;
+			mobile.currentRotation = mobile.turnDirection;
 			else
 			if(l > 1024)
-			mobile.anInt1552 -= mobile.anInt1504;
+			mobile.currentRotation -= mobile.anInt1504;
 			else
-			mobile.anInt1552 += mobile.anInt1504;
-			mobile.anInt1552 &= 0x7ff;
-			if(mobile.anInt1517 == mobile.anInt1511 && mobile.anInt1552 != mobile.turnDirection)
+			mobile.currentRotation += mobile.anInt1504;
+			mobile.currentRotation &= 0x7ff;
+			if(mobile.anInt1517 == mobile.anInt1511 && mobile.currentRotation != mobile.turnDirection)
 			{
 				if(mobile.anInt1512 != -1)
 				{

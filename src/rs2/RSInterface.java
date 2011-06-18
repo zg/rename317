@@ -314,7 +314,7 @@ public class RSInterface
             model_1.applyTransform(k);
         if(j != -1)
             model_1.applyTransform(j);
-        model_1.preprocess(64, 768, -50, -10, -50, true);
+        model_1.light(64, 768, -50, -10, -50, true);
             return model_1;
     }
 

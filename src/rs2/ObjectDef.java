@@ -265,7 +265,7 @@ public class ObjectDef
             model_3.scaleT(modelSizeX, modelSizeY, modelSizeH);
         if(flag2)
             model_3.translate(offsetX, offsetH, offsetY);
-        model_3.preprocess(64 + brightness, 768 + contrast * 5, -50, -10, -50, !aBoolean769);
+        model_3.light(64 + brightness, 768 + contrast * 5, -50, -10, -50, !aBoolean769);
         if(anInt760 == 1)
             model_3.anInt1654 = model_3.modelHeight;
         mruNodes2.put(model_3, l1);
