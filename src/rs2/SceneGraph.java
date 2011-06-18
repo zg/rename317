@@ -2,6 +2,9 @@ package rs2;
 
 import org.lwjgl.util.vector.Vector3f;
 import pgle.PglCubeStub;
+import pgle.PglModelNode;
+
+import javax.swing.event.MenuKeyEvent;
 
 public class SceneGraph {
 
@@ -295,7 +298,7 @@ public class SceneGraph {
     }
 
     private boolean addEntityC(int z, int x, int y, int tileHeight, int tileWidth, int j1, int k1,
-            int l1, Entity class30_sub2_sub4, int i2, boolean isDynamic, int j2, byte byte0)
+            int l1, Entity jagexNode, int i2, boolean isDynamic, int j2, byte byte0)
     {
         for(int _x = x; _x < x + tileHeight; _x++)
         {
@@ -317,18 +320,21 @@ public class SceneGraph {
         interactableObject.worldX = j1;
         interactableObject.worldY = k1;
         interactableObject.worldZ = l1;
-        interactableObject.jagexNode = class30_sub2_sub4;
+        interactableObject.jagexNode = jagexNode;
         interactableObject.anInt522 = i2;
         interactableObject.tileLeft = x;
         interactableObject.tileTop = y;
         interactableObject.tileRight = (x + tileHeight) - 1;
         interactableObject.tileBottom = (y + tileWidth) - 1;
-        org.peterbjornx.pgl2.model.Node node = new PglCubeStub(); //for now
-        //System.out.println("addentity");
-        if (isDynamic)
-            clientInstance.getPglWrapper().getRsTileManager().addPerFrame(node,z,x,y);
+        Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
+        org.peterbjornx.pgl2.model.Node node;
+        if (m != null)
+            node = new PglModelNode(m,isDynamic); //for now
         else
-            clientInstance.getPglWrapper().getRsTileManager().addPerRegion(node,z,x,y);
+            node = new PglCubeStub();
+        //System.out.println("addentity");
+        clientInstance.getPglWrapper().getRsTileManager().add(node,z,x,y);
+        interactableObject.pgleNode = node;
         node.setPosition(new Vector3f(j1-128*x,(-l1)-240*z,k1-128*y));
         for(int _x = x; _x < x + tileHeight; _x++)
         {
@@ -363,7 +369,6 @@ public class SceneGraph {
 
     public void clearInteractableObjectCache()
     {
-        clientInstance.getPglWrapper().getRsTileManager().removePerFrame();
         for(int i = 0; i < interactableObjectCacheCurrPos; i++)
         {
             InteractableObject object5 = interactableObjectCache[i];
@@ -376,6 +381,10 @@ public class SceneGraph {
 
     private void remove(InteractableObject interactableObject)
     {
+        if (interactableObject.pgleNode != null){
+            interactableObject.pgleNode.getParent().remove(interactableObject.pgleNode);
+            interactableObject.pgleNode = null;
+        }
         for(int x = interactableObject.tileLeft; x <= interactableObject.tileRight; x++)
         {
             for(int y = interactableObject.tileTop; y <= interactableObject.tileBottom; y++)

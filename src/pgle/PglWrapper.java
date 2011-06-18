@@ -55,6 +55,7 @@ public class PglWrapper {
             glEnable(GL_DEPTH_TEST);
             running = true;
         } catch (LWJGLException e) {
+
             e.printStackTrace();
             running = false;
             //System.exit(0);
@@ -90,6 +91,7 @@ public class PglWrapper {
             ServerMemoryManager.processQueues();
         } else {
             Display.destroy();
+            System.err.println("Closing window");
             running = false;
         }
     }
