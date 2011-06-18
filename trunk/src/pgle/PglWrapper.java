@@ -4,10 +4,13 @@ import com.sun.rowset.internal.InsertRow;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Color;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.peterbjornx.pgl2.camera.Camera;
 import org.peterbjornx.pgl2.input.cameracontrol.FirstPersonCamera;
+import org.peterbjornx.pgl2.light.OpenGLLightManager;
 import org.peterbjornx.pgl2.model.Node;
 import org.peterbjornx.pgl2.terrain.Terrain;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
@@ -32,6 +35,19 @@ public class PglWrapper {
     private boolean running = false;
     private RsTerrainSource rsTerrainSource;
     private RsTileManager rsTileManager;
+    private OpenGLLightManager lightManager;
+    private PglSun sun;
+
+    public void initLighting(){
+        glEnable(GL_COLOR_MATERIAL);
+        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+        glEnable(GL_LIGHTING);
+        lightManager = new OpenGLLightManager();
+        rsTileManager.setOpenGLLightManager(lightManager);
+        sun = new PglSun();
+        sun.setSunColor(new Color(0xFF,0xFF,0xFF,0xff),0.69921875F,1.2F,1.1523438F);
+        sun.setSunPosition(new Vector3f(0, 0, 0));
+    }
 
     /**
      * Initialize PGLEngine
@@ -53,6 +69,7 @@ public class PglWrapper {
             scene.add(rsTileManager);
             firstPersonCamera = new FirstPersonCamera();
             glEnable(GL_DEPTH_TEST);
+            initLighting();
             running = true;
         } catch (LWJGLException e) {
 
@@ -71,6 +88,7 @@ public class PglWrapper {
         } else {
             rsTerrainSource.updateMap();
             rsTerrain.update();
+
         }
     }
 
@@ -86,8 +104,15 @@ public class PglWrapper {
             return;
         if (!Display.isCloseRequested()) {
             preRender();
+            lightManager.startLighting(new Camera());
             scene.render(null);
-            Display.update();
+            lightManager.stopLighting();
+            try {
+                Display.swapBuffers();
+            } catch (LWJGLException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+            Display.processMessages();
             ServerMemoryManager.processQueues();
         } else {
             Display.destroy();
@@ -102,5 +127,16 @@ public class PglWrapper {
 
     public RsTileManager getRsTileManager() {
         return rsTileManager;
+    }
+
+    public void clearRegion() {
+
+        scene.remove(rsTerrain);
+        rsTerrain = null;
+        rsTerrainSource = null;
+        scene.remove(rsTileManager);
+        rsTileManager = new RsTileManager();
+        scene.add(rsTileManager);
+        System.gc();
     }
 }

@@ -65,26 +65,32 @@ public class PglModel {
         element = OpenGLBufferFactory.createElementBuffer(rsModel.triangleCount, GL11.GL_TRIANGLES);
         if (triangleColours == null)
             updateColours();
+        rsModel.calculateNormals();
         try {
             for (int triIdx = 0; triIdx < rsModel.triangleCount; triIdx++) {
                 int verAIdx = rsModel.triangleA[triIdx];
                 int verBIdx = rsModel.triangleB[triIdx];
                 int verCIdx = rsModel.triangleC[triIdx];
+
                 int bufAIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
-                        , new Vector3f(0, 1, 0), new Vector3f(0, 0, 0), triangleColours[triIdx]);
+                        , new Vector3f(rsModel.vertexNormal[verAIdx].getX(), rsModel.vertexNormal[verAIdx].getY(), rsModel.vertexNormal[verAIdx].getZ())
+                        , new Vector3f(0, 0, 0), triangleColours[triIdx]);
                 int bufBIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verBIdx], -rsModel.vertexY[verBIdx], rsModel.vertexZ[verBIdx])
-                        , new Vector3f(0, 1, 0), new Vector3f(0, 0, 0), triangleColours[triIdx]);
+                        , new Vector3f(rsModel.vertexNormal[verBIdx].getX(), rsModel.vertexNormal[verBIdx].getY(), rsModel.vertexNormal[verBIdx].getZ()),
+                        new Vector3f(0, 0, 0), triangleColours[triIdx]);
                 int bufCIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verCIdx], -rsModel.vertexY[verCIdx], rsModel.vertexZ[verCIdx])
-                        , new Vector3f(0, 1, 0), new Vector3f(0, 0, 0), triangleColours[triIdx]);
+                        , new Vector3f(rsModel.vertexNormal[verCIdx].getX(), rsModel.vertexNormal[verCIdx].getY(), rsModel.vertexNormal[verCIdx].getZ()),
+                        new Vector3f(0, 0, 0), triangleColours[triIdx]);
                 List<Integer> polylist = new LinkedList<Integer>();
                 polylist.add(bufAIdx);
                 polylist.add(bufBIdx);
                 polylist.add(bufCIdx);
                 element.addPolygon(polylist);
             }
+            rsModel.vertexNormal = rsModel.vns;
         } catch (PglException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

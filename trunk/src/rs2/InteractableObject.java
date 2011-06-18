@@ -12,7 +12,7 @@ public class InteractableObject
     public int worldX;
     public int worldY;
     public Entity jagexNode;
-    public int anInt522;
+    public int rotation;
     public org.peterbjornx.pgl2.model.Node pgleNode;
     public int tileLeft;
     public int tileRight;

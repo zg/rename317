@@ -187,7 +187,7 @@ public class Mobile extends Entity {
     int anInt1549;
     public int boundExtentX;
     public int boundExtentY;
-    int anInt1552;
+    int currentRotation;
     final boolean[] pathRun;
     int anInt1554;//walk?
     int anInt1555;//turn180?

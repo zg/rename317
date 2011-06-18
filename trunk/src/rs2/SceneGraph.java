@@ -1,10 +1,9 @@
 package rs2;
 
 import org.lwjgl.util.vector.Vector3f;
+import org.peterbjornx.pgl2.math.VectorMath;
 import pgle.PglCubeStub;
 import pgle.PglModelNode;
-
-import javax.swing.event.MenuKeyEvent;
 
 public class SceneGraph {
 
@@ -41,8 +40,9 @@ public class SceneGraph {
         {
             for(int x = 0; x < xMapSize; x++)
             {
-                for(int y = 0; y < yMapSize; y++)
+                for(int y = 0; y < yMapSize; y++){
                     tileArray[z][x][y] = null;
+                }
 
             }
 
@@ -61,6 +61,9 @@ public class SceneGraph {
         interactableObjectCacheCurrPos = 0;
         for(int l1 = 0; l1 < interactableObjects.length; l1++)
             interactableObjects[l1] = null;
+       // if (clientInstance != null)
+       // if (clientInstance.getPglWrapper() != null)
+       //     clientInstance.getPglWrapper().clearRegion();
 
     }
 
@@ -298,7 +301,7 @@ public class SceneGraph {
     }
 
     private boolean addEntityC(int z, int x, int y, int tileHeight, int tileWidth, int j1, int k1,
-            int l1, Entity jagexNode, int i2, boolean isDynamic, int j2, byte byte0)
+            int l1, Entity jagexNode, int rotation, boolean isDynamic, int j2, byte byte0)
     {
         for(int _x = x; _x < x + tileHeight; _x++)
         {
@@ -321,7 +324,7 @@ public class SceneGraph {
         interactableObject.worldY = k1;
         interactableObject.worldZ = l1;
         interactableObject.jagexNode = jagexNode;
-        interactableObject.anInt522 = i2;
+        interactableObject.rotation = rotation;
         interactableObject.tileLeft = x;
         interactableObject.tileTop = y;
         interactableObject.tileRight = (x + tileHeight) - 1;
@@ -336,6 +339,7 @@ public class SceneGraph {
         clientInstance.getPglWrapper().getRsTileManager().add(node,z,x,y);
         interactableObject.pgleNode = node;
         node.setPosition(new Vector3f(j1-128*x,(-l1)-240*z,k1-128*y));
+        node.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(-(rotation * 0.17578125f),0,0)));
         for(int _x = x; _x < x + tileHeight; _x++)
         {
             for(int _y = y; _y < y + tileWidth; _y++)
@@ -1192,7 +1196,7 @@ label0:
                     {
                         InteractableObject class28 = tile.interactableObjects[i2];
                         if(class28 != null)
-                            class28.jagexNode.renderAtPoint(class28.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28.worldX - xCameraPosition, class28.worldZ - zCameraPosition, class28.worldY - yCameraPosition, class28.uid);
+                            class28.jagexNode.renderAtPoint(class28.rotation, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28.worldX - xCameraPosition, class28.worldZ - zCameraPosition, class28.worldY - yCameraPosition, class28.uid);
                     }
 
                 }
@@ -1446,7 +1450,7 @@ label0:
                         InteractableObject class28_3 = interactableObjects[l3];
                         class28_3.anInt528 = anInt448;
                         if(!method323(l, class28_3.tileLeft, class28_3.tileRight, class28_3.tileTop, class28_3.tileBottom, class28_3.jagexNode.modelHeight))
-                            class28_3.jagexNode.renderAtPoint(class28_3.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28_3.worldX - xCameraPosition, class28_3.worldZ - zCameraPosition, class28_3.worldY - yCameraPosition, class28_3.uid);
+                            class28_3.jagexNode.renderAtPoint(class28_3.rotation, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28_3.worldX - xCameraPosition, class28_3.worldZ - zCameraPosition, class28_3.worldY - yCameraPosition, class28_3.uid);
                         for(int k7 = class28_3.tileLeft; k7 <= class28_3.tileRight; k7++)
                         {
                             for(int l8 = class28_3.tileTop; l8 <= class28_3.tileBottom; l8++)

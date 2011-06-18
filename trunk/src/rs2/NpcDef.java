@@ -137,7 +137,7 @@ public class NpcDef
 
             }
             model.calcSkinning();
-            model.preprocess(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
+            model.light(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
             mruNodes.put(model, type);
         }
         Model model_1 = Model.aModel_1621;

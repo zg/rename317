@@ -3,6 +3,8 @@ package rs2;
 
 public class Model extends Entity {
 
+    public VertexNormal[] vns;
+
     public static void nullLoader() {
         modelHeaderCache = null;
         aBooleanArray1663 = null;
@@ -1555,7 +1557,61 @@ public class Model extends Entity {
 
     }
 
-    public void preprocess(int lightMod, int magMultiplyer, int l_x, int l_y, int l_z, boolean flatShading) {
+     public void calculateNormals() {
+         vns = super.vertexNormal;
+         if (super.vertexNormal == null) {
+            super.vertexNormal = new VertexNormal[verticeCount];
+            for (int l1 = 0; l1 < verticeCount; l1++)
+                super.vertexNormal[l1] = new VertexNormal();
+
+        }
+        for (int triID = 0; triID < triangleCount; triID++) {//todo - rename this to camelcode in future (peter plz do this, looks fucking complicated >:)
+            int t_a = triangleA[triID];
+            int t_b = triangleB[triID];
+            int t_c = triangleC[triID];
+            int d_a_b_x = vertexX[t_b] - vertexX[t_a];
+            int d_a_b_y = vertexY[t_b] - vertexY[t_a];
+            int d_a_b_z = vertexZ[t_b] - vertexZ[t_a];
+            int d_c_a_x = vertexX[t_c] - vertexX[t_a];
+            int d_c_a_y = vertexY[t_c] - vertexY[t_a];
+            int d_c_a_z = vertexZ[t_c] - vertexZ[t_a];
+            int normalX = d_a_b_y * d_c_a_z - d_c_a_y * d_a_b_z;
+            int normalY = d_a_b_z * d_c_a_x - d_c_a_z * d_a_b_x;
+            int normalZ;
+            for (normalZ = d_a_b_x * d_c_a_y - d_c_a_x * d_a_b_y; normalX > 8192 || normalY > 8192 || normalZ > 8192 || normalX < -8192 || normalY < -8192 || normalZ < -8192; normalZ >>= 1) {
+                normalX >>= 1;
+                normalY >>= 1;
+            }
+
+            int normal_length = (int) Math.sqrt(normalX * normalX + normalY * normalY + normalZ * normalZ);
+            if (normal_length <= 0)
+                normal_length = 1;
+            normalX = (normalX * 256) / normal_length;//Normalization
+            normalY = (normalY * 256) / normal_length;
+            normalZ = (normalZ * 256) / normal_length;
+            if (triangleDrawType == null || (triangleDrawType[triID] & 1) == 0) {
+                VertexNormal vertexNormal_2 = super.vertexNormal[t_a];
+                vertexNormal_2.x += normalX;
+                vertexNormal_2.y += normalY;
+                vertexNormal_2.z += normalZ;
+                vertexNormal_2.magnitude++;
+                vertexNormal_2 = super.vertexNormal[t_b];
+                vertexNormal_2.x += normalX;
+                vertexNormal_2.y += normalY;
+                vertexNormal_2.z += normalZ;
+                vertexNormal_2.magnitude++;
+                vertexNormal_2 = super.vertexNormal[t_c];
+                vertexNormal_2.x += normalX;
+                vertexNormal_2.y += normalY;
+                vertexNormal_2.z += normalZ;
+                vertexNormal_2.magnitude++;
+            }
+        }
+    }
+
+
+
+    public void light(int lightMod, int magMultiplyer, int l_x, int l_y, int l_z, boolean flatShading) {
         int _mag_pre = (int) Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
         int mag = magMultiplyer * _mag_pre >> 8;
         if (triangleHslA == null) {

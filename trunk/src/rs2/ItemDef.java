@@ -400,7 +400,7 @@ public class ItemDef
                 model.recolour(originalModelColours[l], modifiedModelColours[l]);
 
         }
-        model.preprocess(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
+        model.light(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
         model.aBoolean1659 = true;
         mruNodes2.put(model, id);
         return model;

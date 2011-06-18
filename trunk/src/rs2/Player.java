@@ -29,7 +29,7 @@ public class Player extends Mobile
                 model_3.vertexSkin = null;
                 if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
                     model_3.scaleT(spotAnim.resizeXY, spotAnim.resizeXY, spotAnim.resizeZ);
-                model_3.preprocess(64 + spotAnim.modelBrightness, 850 + spotAnim.modelShadow, -30, -50, -30, true);
+                model_3.light(64 + spotAnim.modelBrightness, 850 + spotAnim.modelShadow, -30, -50, -30, true);
                 Model aclass30_sub2_sub4_sub6_1s[] = {
                         model, model_3
                 };
@@ -79,7 +79,7 @@ public class Player extends Mobile
             }
         }
         model.aBoolean1659 = true;
-        return aModel_1714 == null ? model : aModel_1714;
+        return model;
     }
 
     public void updatePlayer(Packet stream)
@@ -264,7 +264,7 @@ public class Player extends Mobile
                 }
 
             model_1.calcSkinning();
-            model_1.preprocess(64, 850, -30, -50, -30, true);
+            model_1.light(64, 850, -30, -50, -30, true);
             mruNodes.put(model_1, l);
             aLong1697 = l;
         }

@@ -48,7 +48,7 @@ public class StillGraphics extends Entity {
                 model_1.method473();
             }
         }
-        model_1.preprocess(64 + aSpotAnim_1568.modelBrightness, 850 + aSpotAnim_1568.modelShadow, -30, -50, -30, true);
+        model_1.light(64 + aSpotAnim_1568.modelBrightness, 850 + aSpotAnim_1568.modelShadow, -30, -50, -30, true);
         return model_1;
     }
 
