@@ -2028,7 +2028,6 @@ public class client extends RSApplet {
 		    login_screen_process();
 		else
 		    client_process();
-        pglWrapper.process();
 		on_demand_process();
 	}
 
@@ -7142,6 +7141,7 @@ public class client extends RSApplet {
 			mouseDetection = new MouseDetection(this);
 			startRunnable(mouseDetection, 10);
 			ObjectOnTile.clientInstance = this;
+			SceneGraph.clientInstance = this;
 			ObjectDef.clientInstance = this;
 			EntityDef.clientInstance = this;
             pglWrapper.initJgle();
@@ -9454,6 +9454,10 @@ public class client extends RSApplet {
 		gameObjectSpawnRequest.anInt1294 = j;
 	}
 
+    public PglWrapper getPglWrapper() {
+        return pglWrapper;
+    }
+
 	private boolean interface_test_condition(RSInterface class9)
 	{
 		if(class9.condition_type == null)
@@ -11661,6 +11665,8 @@ public class client extends RSApplet {
 		DrawingArea.reset_image();
 		//xxx disables graphics            if(graphicsEnabled){
 		sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
+        pglWrapper.setCameraPosition(xCameraPos,yCameraPos,zCameraPos);
+        pglWrapper.process();
 		sceneGraph.clearInteractableObjectCache();
 		updateEntities();
 		drawHeadIcon();

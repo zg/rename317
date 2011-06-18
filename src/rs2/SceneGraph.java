@@ -1,5 +1,12 @@
 package rs2;
 
+import org.lwjgl.util.vector.Vector3f;
+import org.peterbjornx.pgl2.model.*;
+import org.peterbjornx.pgl2.model.Node;
+import pgle.PglCubeStub;
+
+import java.util.Vector;
+
 public class SceneGraph {
 
     public SceneGraph(int heightmap[][][])
@@ -291,16 +298,16 @@ public class SceneGraph {
         return class30_sub2_sub4 == null || addEntityC(j, l1, k2, (i2 - l1) + 1, (i1 - k2) + 1, j1, k, k1, class30_sub2_sub4, l, true, j2, (byte) 0);
     }
 
-    private boolean addEntityC(int z, int j, int k, int l, int i1, int j1, int k1,
+    private boolean addEntityC(int z, int x, int y, int l, int i1, int j1, int k1,
             int l1, Animable class30_sub2_sub4, int i2, boolean flag, int j2, byte byte0)
     {
-        for(int x = j; x < j + l; x++)
+        for(int _x = x; _x < x + l; _x++)
         {
-            for(int y = k; y < k + i1; y++)
+            for(int _y = y; _y < y + i1; _y++)
             {
-                if(x < 0 || y < 0 || x >= xMapSize || y >= yMapSize)
+                if(_x < 0 || _y < 0 || _x >= xMapSize || _y >= yMapSize)
                     return false;
-                Tile class30_sub3 = tileArray[z][x][y];
+                Tile class30_sub3 = tileArray[z][_x][_y];
                 if(class30_sub3 != null && class30_sub3.entityCount >= 5)
                     return false;
             }
@@ -311,27 +318,34 @@ public class SceneGraph {
         class28.uid = j2;
         class28.aByte530 = byte0;
         class28.zPos = z;
-        class28.anInt519 = j1;
-        class28.anInt520 = k1;
-        class28.anInt518 = l1;
+        class28.worldX = j1;
+        class28.worldY = k1;
+        class28.worldZ = l1;
         class28.aClass30_Sub2_Sub4_521 = class30_sub2_sub4;
         class28.anInt522 = i2;
-        class28.xPos = j;
-        class28.yPos = k;
-        class28.anInt524 = (j + l) - 1;
-        class28.anInt526 = (k + i1) - 1;
-        for(int i3 = j; i3 < j + l; i3++)
+        class28.xPos = x;
+        class28.yPos = y;
+        class28.anInt524 = (x + l) - 1;
+        class28.anInt526 = (y + i1) - 1;
+        org.peterbjornx.pgl2.model.Node node = new PglCubeStub(); //for now
+        //System.out.println("addentity");
+        if (flag)
+            clientInstance.getPglWrapper().getRsTileManager().addPerFrame(node,z,x,y);
+        else
+            clientInstance.getPglWrapper().getRsTileManager().addPerRegion(node,z,x,y);
+        node.setPosition(new Vector3f(j1-128*x,(-l1)-240*z,k1-128*y));
+        for(int i3 = x; i3 < x + l; i3++)
         {
-            for(int j3 = k; j3 < k + i1; j3++)
+            for(int j3 = y; j3 < y + i1; j3++)
             {
                 int k3 = 0;
-                if(i3 > j)
+                if(i3 > x)
                     k3++;
-                if(i3 < (j + l) - 1)
+                if(i3 < (x + l) - 1)
                     k3 += 4;
-                if(j3 > k)
+                if(j3 > y)
                     k3 += 8;
-                if(j3 < (k + i1) - 1)
+                if(j3 < (y + i1) - 1)
                     k3 += 2;
                 for(int l3 = z; l3 >= 0; l3--)
                     if(tileArray[l3][i3][j3] == null)
@@ -353,6 +367,7 @@ public class SceneGraph {
 
     public void clearInteractableObjectCache()
     {
+        clientInstance.getPglWrapper().getRsTileManager().removePerFrame();
         for(int i = 0; i < interactableObjectCacheCurrPos; i++)
         {
             InteractableObject object5 = interactableObjectCache[i];
@@ -1172,7 +1187,7 @@ label0:
                     {
                         InteractableObject class28 = tile.interactableObjects[i2];
                         if(class28 != null)
-                            class28.aClass30_Sub2_Sub4_521.renderAtPoint(class28.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28.anInt519 - xCameraPosition, class28.anInt518 - zCameraPosition, class28.anInt520 - yCameraPosition, class28.uid);
+                            class28.aClass30_Sub2_Sub4_521.renderAtPoint(class28.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28.worldX - xCameraPosition, class28.worldZ - zCameraPosition, class28.worldY - yCameraPosition, class28.uid);
                     }
 
                 }
@@ -1412,10 +1427,10 @@ label0:
                                 } else
                                 if(interactableObject.anInt527 == i3)
                                 {
-                                    int j7 = interactableObject.anInt519 - xCameraPosition;
-                                    int k8 = interactableObject.anInt520 - yCameraPosition;
-                                    int l9 = interactableObjects[l3].anInt519 - xCameraPosition;
-                                    int l10 = interactableObjects[l3].anInt520 - yCameraPosition;
+                                    int j7 = interactableObject.worldX - xCameraPosition;
+                                    int k8 = interactableObject.worldY - yCameraPosition;
+                                    int l9 = interactableObjects[l3].worldX - xCameraPosition;
+                                    int l10 = interactableObjects[l3].worldY - yCameraPosition;
                                     if(j7 * j7 + k8 * k8 > l9 * l9 + l10 * l10)
                                         l3 = j5;
                                 }
@@ -1426,7 +1441,7 @@ label0:
                         InteractableObject class28_3 = interactableObjects[l3];
                         class28_3.anInt528 = anInt448;
                         if(!method323(l, class28_3.xPos, class28_3.anInt524, class28_3.yPos, class28_3.anInt526, class28_3.aClass30_Sub2_Sub4_521.modelHeight))
-                            class28_3.aClass30_Sub2_Sub4_521.renderAtPoint(class28_3.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28_3.anInt519 - xCameraPosition, class28_3.anInt518 - zCameraPosition, class28_3.anInt520 - yCameraPosition, class28_3.uid);
+                            class28_3.aClass30_Sub2_Sub4_521.renderAtPoint(class28_3.anInt522, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28_3.worldX - xCameraPosition, class28_3.worldZ - zCameraPosition, class28_3.worldY - yCameraPosition, class28_3.uid);
                         for(int k7 = class28_3.xPos; k7 <= class28_3.anInt524; k7++)
                         {
                             for(int l8 = class28_3.yPos; l8 <= class28_3.anInt526; l8++)
@@ -2301,6 +2316,7 @@ for_outer:
     private static int right;
     private static int bottom;
 
+    public static client clientInstance;
     static 
     {
         anInt472 = 4;
