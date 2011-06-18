@@ -12,7 +12,7 @@ public class InteractableObject
     int worldZ;
     int worldX;
     int worldY;
-    public Animable aClass30_Sub2_Sub4_521;
+    public Entity aClass30_Sub2_Sub4_521;
     public int anInt522;
     int xPos;
     int anInt524;

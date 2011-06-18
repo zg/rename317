@@ -1,11 +1,7 @@
 package rs2;
 
 import org.lwjgl.util.vector.Vector3f;
-import org.peterbjornx.pgl2.model.*;
-import org.peterbjornx.pgl2.model.Node;
 import pgle.PglCubeStub;
-
-import java.util.Vector;
 
 public class SceneGraph {
 
@@ -161,7 +157,7 @@ public class SceneGraph {
         tileArray[zz][x][y].shapedTile = shapedTile;
     }
 
-    public void addGroundDecoration(int Z, int z3d, int Y, Animable class30_sub2_sub4, byte byte0, int uid,
+    public void addGroundDecoration(int Z, int z3d, int Y, Entity class30_sub2_sub4, byte byte0, int uid,
                           int X)
     {
         if(class30_sub2_sub4 == null)
@@ -178,7 +174,7 @@ public class SceneGraph {
         tileArray[Z][X][Y].groundDecoration = class49;
     }
 
-    public void addGroundItemTile(int x, int uid, Animable secondGroundItem, int k, Animable thirdGroundItem, Animable firstGroundItem,
+    public void addGroundItemTile(int x, int uid, Entity secondGroundItem, int k, Entity thirdGroundItem, Entity firstGroundItem,
                           int z, int y)//todo - addGroundItemTile
     {
         GroundItemTile itemTile = new GroundItemTile();
@@ -208,8 +204,8 @@ public class SceneGraph {
         tileArray[z][x][y].groundItemTile = itemTile;
     }
 
-    public void addWallObject(int i, Animable class30_sub2_sub4, int uid, int y, byte byte0, int x,
-                          Animable class30_sub2_sub4_1, int i1, int j1, int k1)
+    public void addWallObject(int i, Entity class30_sub2_sub4, int uid, int y, byte byte0, int x,
+                          Entity class30_sub2_sub4_1, int i1, int j1, int k1)
     {
         if(class30_sub2_sub4 == null && class30_sub2_sub4_1 == null)
             return;
@@ -231,9 +227,9 @@ public class SceneGraph {
     }
 
     public void addWallDecoration(int i, int tileY, int face, int tileZ, int x3dOff, int z3d,
-                          Animable animable, int tileX, byte obConfig, int y3dOff, int facebits)
+                          Entity entity, int tileX, byte obConfig, int y3dOff, int facebits)
     {
-        if(animable == null)
+        if(entity == null)
             return;
         WallDecoration wallDecoration = new WallDecoration();
         wallDecoration.uid = i;
@@ -241,7 +237,7 @@ public class SceneGraph {
         wallDecoration.xPos = tileX * 128 + 64 + x3dOff;
         wallDecoration.yPos = tileY * 128 + 64 + y3dOff;
         wallDecoration.zPos = z3d;
-        wallDecoration.myMob = animable;
+        wallDecoration.myMob = entity;
         wallDecoration.configBits = facebits;
         wallDecoration.face = face;
         for(int k2 = tileZ; k2 >= 0; k2--)
@@ -251,7 +247,7 @@ public class SceneGraph {
         tileArray[tileZ][tileX][tileY].wallDecoration = wallDecoration;
     }
 
-    public boolean addEntityB(int i, byte byte0, int j, int k, Animable class30_sub2_sub4, int l, int i1,
+    public boolean addEntityB(int i, byte byte0, int j, int k, Entity class30_sub2_sub4, int l, int i1,
                              int j1, int k1, int l1)
     {
         if(class30_sub2_sub4 == null)
@@ -266,7 +262,7 @@ public class SceneGraph {
     }
 
     public boolean addEntityA(int i, int j, int k, int l, int i1, int j1,
-                             int k1, Animable class30_sub2_sub4, boolean flag)
+                             int k1, Entity class30_sub2_sub4, boolean flag)
     {
         if(class30_sub2_sub4 == null)
             return true;
@@ -292,14 +288,14 @@ public class SceneGraph {
         return addEntityC(i, l1, i2, (j2 - l1) + 1, (k2 - i2) + 1, k1, i1, k, class30_sub2_sub4, j, true, l, (byte)0);
     }
 
-    public boolean addEntity(int j, int k, Animable class30_sub2_sub4, int l, int i1, int j1,
+    public boolean addEntity(int j, int k, Entity class30_sub2_sub4, int l, int i1, int j1,
                              int k1, int l1, int i2, int j2, int k2)
     {
         return class30_sub2_sub4 == null || addEntityC(j, l1, k2, (i2 - l1) + 1, (i1 - k2) + 1, j1, k, k1, class30_sub2_sub4, l, true, j2, (byte) 0);
     }
 
     private boolean addEntityC(int z, int x, int y, int l, int i1, int j1, int k1,
-            int l1, Animable class30_sub2_sub4, int i2, boolean flag, int j2, byte byte0)
+            int l1, Entity class30_sub2_sub4, int i2, boolean flag, int j2, byte byte0)
     {
         for(int _x = x; _x < x + l; _x++)
         {

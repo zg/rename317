@@ -11,7 +11,7 @@ public class JagexArchive {
         if(rawLength != resultLength)
         {
             byte out[] = new byte[resultLength];
-            BZIP2Decompressor.decompressBuffer(out, resultLength, in, rawLength, 6);
+            BZ2InputStream.decompressBuffer(out, resultLength, in, rawLength, 6);
             outputData = out;
             stream = new Packet(outputData);
             isCompressed = true;
@@ -51,7 +51,7 @@ public class JagexArchive {
                     abyte0 = new byte[myFileSizes[k]];
                 if(!isCompressed)
                 {
-                    BZIP2Decompressor.decompressBuffer(abyte0, myFileSizes[k], outputData, myOnDiskFileSizes[k], myFileOffsets[k]);
+                    BZ2InputStream.decompressBuffer(abyte0, myFileSizes[k], outputData, myOnDiskFileSizes[k], myFileOffsets[k]);
                 } else
                 {
                     System.arraycopy(outputData, myFileOffsets[k], abyte0, 0, myFileSizes[k]);

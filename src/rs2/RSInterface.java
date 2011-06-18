@@ -255,7 +255,7 @@ public class RSInterface
         if(type == 1)
             model = Model.getModel(j);
         if(type == 2)
-            model = EntityDef.forID(j).getHeadModel();
+            model = NpcDef.forID(j).getHeadModel();
         if(type == 3)
             model = client.session_player.getHeadModel();
         if(type == 4)
@@ -307,7 +307,7 @@ public class RSInterface
             return null;
         if(k == -1 && j == -1 && model.triangleColours == null)
             return model;
-        Model model_1 = new Model(true, AnimationFrame.method532(k) & AnimationFrame.method532(j), false, model);
+        Model model_1 = new Model(true, Animation.method532(k) & Animation.method532(j), false, model);
         if(k != -1 || j != -1)
             model_1.calcSkinning();
         if(k != -1)

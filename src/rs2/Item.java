@@ -1,7 +1,7 @@
 package rs2;
 
 
-public class Item extends Animable {
+public class Item extends Entity {
 
     public final Model getRotatedModel()
     {

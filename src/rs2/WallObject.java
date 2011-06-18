@@ -12,8 +12,8 @@ public class WallObject
     int yPos;
     int orientation;
     int orientation1;
-    public Animable aClass30_Sub2_Sub4_278;
-    public Animable aClass30_Sub2_Sub4_279;
+    public Entity aClass30_Sub2_Sub4_278;
+    public Entity aClass30_Sub2_Sub4_279;
     public int uid;
     byte aByte281;
 }

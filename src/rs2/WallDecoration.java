@@ -12,7 +12,7 @@ public class WallDecoration
     int yPos;
     int configBits;
     int face;
-    public Animable myMob;
+    public Entity myMob;
     public int uid;
     byte objConf;
 }
