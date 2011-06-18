@@ -22,7 +22,7 @@ public class Model extends Entity {
         anIntArray1677 = null;
         SINE = null;
         COSINE = null;
-        modelIntArray3 = null;
+        HSL2RGB = null;
         modelIntArray4 = null;
     }
 
@@ -1676,7 +1676,7 @@ public class Model extends Entity {
                     return;
 
         }
-        triangleColours = null;
+        //triangleColours = null;
     }
 
     private static int mixLightness(int hsl, int l, int flags) {
@@ -2029,7 +2029,7 @@ public class Model extends Entity {
             return;
         }
         if (i1 == 1) {
-            Rasterizer.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], modelIntArray3[triangleHslA[i]]);
+            Rasterizer.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], HSL2RGB[triangleHslA[i]]);
             return;
         }
         if (i1 == 2) {
@@ -2141,7 +2141,7 @@ public class Model extends Entity {
                 if (l7 == 0)
                     Rasterizer.drawTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
                 else if (l7 == 1)
-                    Rasterizer.method376(i7, j7, k7, j3, j4, j5, modelIntArray3[triangleHslA[i]]);
+                    Rasterizer.method376(i7, j7, k7, j3, j4, j5, HSL2RGB[triangleHslA[i]]);
                 else if (l7 == 2) {
                     int j8 = triangleDrawType[i] >> 2;
                     int k9 = triPIndex[j8];
@@ -2170,7 +2170,7 @@ public class Model extends Entity {
                     return;
                 }
                 if (i8 == 1) {
-                    int l8 = modelIntArray3[triangleHslA[i]];
+                    int l8 = HSL2RGB[triangleHslA[i]];
                     Rasterizer.method376(i7, j7, k7, j3, j4, j5, l8);
                     Rasterizer.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8);
                     return;
@@ -2276,13 +2276,13 @@ public class Model extends Entity {
     public static final int[] resourceIDTAG = new int[1000];
     public static int SINE[];
     public static int COSINE[];
-    private static int[] modelIntArray3;
+    private static int[] HSL2RGB;
     private static int[] modelIntArray4;
 
     static {
         SINE = Rasterizer.SINE;
         COSINE = Rasterizer.COSINE;
-        modelIntArray3 = Rasterizer.HSL2RGB;
+        HSL2RGB = Rasterizer.HSL2RGB;
         modelIntArray4 = Rasterizer.anIntArray1469;
     }
 }

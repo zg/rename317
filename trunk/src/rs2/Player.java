@@ -79,7 +79,7 @@ public class Player extends Mobile
             }
         }
         model.aBoolean1659 = true;
-        return model;
+        return aModel_1714 == null ? model : aModel_1714;
     }
 
     public void updatePlayer(Packet stream)
