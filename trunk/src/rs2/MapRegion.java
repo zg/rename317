@@ -228,7 +228,7 @@ public class MapRegion {
                                         overlay_hsl = -2;//Transparent
                                         overlay_texture = -1;
                                     } else {
-                                        overlay_hsl = pack_hsl(overlay.hue, overlay.saturation, overlay.lightness);
+                                        overlay_hsl = overlay.hslColour;//pack_hsl(overlay.hue, overlay.saturation, overlay.lightness);
                                         overlay_rgb = Rasterizer.HSL2RGB[mix_lightness_gt(overlay.hslColour, 96)];
                                     }
                                     sceneGraph.addTile(z, X, Y, shapea, shapeb, overlay_texture, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), mix_lightness_gt(overlay_hsl, shadow_a), mix_lightness_gt(overlay_hsl, shadow_b), mix_lightness_gt(overlay_hsl, shadow_d), mix_lightness_gt(overlay_hsl, shadow_c), underlay_rgb, overlay_rgb);

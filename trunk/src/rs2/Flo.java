@@ -12,7 +12,7 @@ public class Flo {
                 cache[j] = new Flo();
             cache[j].readValues(stream);
         }
-        if (Config.LOAD_HD_FLO)
+        if (Config.LOAD_HD_FLO)  {
             for (int id = 0; id < cacheSize; id++) {
                 try {
                     cache[id].readValuesHD(new Packet(FileOperations.ReadFile("./hddata/flo/" + id + ".dat")));
@@ -20,6 +20,36 @@ public class Flo {
                     System.err.println("[FloorData] Error: Could not load new engine values for floor type " + id);
                 }
             }
+            for (int id = 0; id < cacheSize; id++) {
+                try {
+                    cache[id].readValuesHD2(new Packet(FileOperations.ReadFile("./hddata/underlayflo/" + id + ".dat")));
+                } catch (Exception e) {
+                    System.err.println("[FloorData] Error: Could not load new engine values for underlay floor type " + id);
+                }
+            }
+        }
+    }
+
+    public void readValuesHD2(Packet arg0) {
+        while (true) {
+            int opcode = arg0.g1();
+            if (opcode == 0)
+                return;
+            else if (opcode == 1) {
+                hdUlColour = arg0.g3();  //r3
+                rgb2hls(hdUlColour);
+            } else if (opcode == 2) {
+                hdUlTexture = arg0.g2();    //2
+                if ((hdUlTexture ^ 0xffffffff) == -65536)
+                    hdUlTexture = -1;
+            } else if (opcode == 3) {
+                textureC = arg0.g2();   //2
+            } else if (opcode == 4) {
+                ;//occlude = false;
+            } else {
+                System.err.println("[FloorData] Error unrecognised new engine config code: " + opcode);
+            }
+        }
     }
 
     private void readValuesHD(Packet stream) {
@@ -28,9 +58,20 @@ public class Flo {
             if (opcode == 0)
                 return;
             else if (opcode == 1) {
+                int j = hue;
+                int k = saturation;
+                int l = lightness;
+                int i1 = hue2;
                 hdColour = stream.g3();
+                rgb2hls(hdColour);
+                hue = j;
+                saturation = k;
+                lightness = l;
+                hue2 = i1;
+                pCDivider = i1;
+                //rgb2hls(colour2);
             } else if (opcode == 2) {
-                hdTexture = stream.g1();
+                texture = stream.g1();
             } else if (opcode == 3) //Replaced by texture_word in HD
             {
                 hdTexture = stream.g2();
@@ -181,7 +222,9 @@ public class Flo {
     public static Flo cache[];
     public int colour2;
     public int texture;
+    public int textureC;
     public int hdTexture;
+    public int hdUlTexture;
     public boolean occlude;
     public int hue;
     public int saturation;
@@ -190,5 +233,6 @@ public class Flo {
     public int pCDivider;
     public int hslColour;
     public int hdColour = 0xff00ff;
+    public int hdUlColour = 0xff00ff;
     public String name;
 }

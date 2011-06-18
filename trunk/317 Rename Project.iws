@@ -2,32 +2,139 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="Another try at packaging everything&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/linux/libjinput-linux.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/linux/libjinput-linux64.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/linux/liblwjgl.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/linux/liblwjgl64.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/linux/libopenal.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/linux/libopenal64.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/macosx/libjinput-osx.jnilib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/macosx/liblwjgl.jnilib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/macosx/openal.dylib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/solaris/liblwjgl.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/solaris/liblwjgl64.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/solaris/libopenal.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/solaris/libopenal64.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/windows/OpenAL32.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/windows/OpenAL64.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/windows/jinput-dx8.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/windows/jinput-dx8_64.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/windows/jinput-raw.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/windows/jinput-raw_64.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/windows/lwjgl.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native/windows/lwjgl64.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/native" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/0.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/1.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/10.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/102.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/11.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/110.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/111.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/112.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/114.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/115.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/117.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/12.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/120.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/121.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/123.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/124.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/125.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/128.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/13.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/137.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/138.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/139.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/14.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/140.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/141.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/142.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/143.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/144.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/145.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/146.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/147.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/148.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/149.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/15.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/16.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/17.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/18.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/19.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/2.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/20.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/21.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/22.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/23.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/24.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/25.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/26.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/27.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/28.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/29.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/3.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/30.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/31.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/32.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/33.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/34.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/35.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/36.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/37.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/38.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/39.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/4.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/40.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/41.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/42.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/43.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/44.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/45.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/46.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/47.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/48.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/49.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/5.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/50.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/51.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/52.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/53.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/54.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/55.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/56.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/57.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/58.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/59.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/6.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/60.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/61.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/62.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/63.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/64.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/65.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/66.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/67.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/68.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/69.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/7.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/70.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/71.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/72.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/73.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/74.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/75.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/76.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/77.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/78.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/79.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/8.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/80.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/81.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/82.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/83.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/84.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/85.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/86.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/9.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/91.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/92.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/93.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/94.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/95.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/96.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/97.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/98.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo/99.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hddata/underlayflo" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pgle/PglCubeStub.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pgle/RsTileManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/PGLEngine2_Library.jar" afterPath="$PROJECT_DIR$/lib/PGLEngine2_Library.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.bat" afterPath="$PROJECT_DIR$/run.bat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/PglWrapper.java" afterPath="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" afterPath="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Flo.java" afterPath="$PROJECT_DIR$/src/rs2/Flo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/InteractableObject.java" afterPath="$PROJECT_DIR$/src/rs2/InteractableObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MapRegion.java" afterPath="$PROJECT_DIR$/src/rs2/MapRegion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/client.java" afterPath="$PROJECT_DIR$/src/rs2/client.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
@@ -95,18 +202,7 @@
       <file leaf-file-name="RsTerrainSource.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pgle/RsTerrainSource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="46" selection-start="1684" selection-end="1684" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run.bat" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/run.bat">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="38" selection-start="73" selection-end="73" vertical-scroll-proportion="0.04857143">
+            <state line="40" column="48" selection-start="1529" selection-end="1529" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -115,10 +211,8 @@
       <file leaf-file-name="PglWrapper.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pgle/PglWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="0" selection-start="2310" selection-end="2310" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="66" column="57" selection-start="2119" selection-end="2119" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -126,54 +220,7 @@
       <file leaf-file-name="client.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="634" column="46" selection-start="15560" selection-end="15560" vertical-scroll-proportion="-6.88">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TerrainLayer.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/PGLEngine2_Library.jar!/org/peterbjornx/pgl2/terrain/TerrainLayer.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="0" selection-start="857" selection-end="857" vertical-scroll-proportion="-9.92">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Component.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/Component.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5343" column="50" selection-start="192559" selection-end="192559" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RSApplet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/RSApplet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="409" column="0" selection-start="9667" selection-end="9667" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SwingUI.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/SwingUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="13" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Container.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/Container.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2347" column="21" selection-start="89642" selection-end="89642" vertical-scroll-proportion="0.0">
+            <state line="11668" column="23" selection-start="316297" selection-end="316297" vertical-scroll-proportion="-40.2">
               <folding />
             </state>
           </provider>
@@ -182,8 +229,68 @@
       <file leaf-file-name="Flo.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/Flo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
+            <state line="15" column="64" selection-start="535" selection-end="535" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileOperations.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/FileOperations.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="13" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapRegion.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1113" column="34" selection-start="45546" selection-end="45546" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SceneGraph.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="336" column="39" selection-start="12299" selection-end="12299" vertical-scroll-proportion="0.82371795">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Object.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/lang/Object.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="364" column="29" selection-start="17894" selection-end="17894" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PglCubeStub.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pgle/PglCubeStub.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="27" selection-start="3084" selection-end="3084" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RsTileManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pgle/RsTileManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="7" selection-start="775" selection-end="775" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -198,22 +305,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/ItemDef.java" />
-        <option value="$PROJECT_DIR$/src/jgle_graphics/RsTerrainSource.java" />
-        <option value="$PROJECT_DIR$/src/client/MapRegion.java" />
-        <option value="$PROJECT_DIR$/src/client/ObjectDef.java" />
         <option value="$PROJECT_DIR$/src/RgbImage.java" />
         <option value="$PROJECT_DIR$/src/rs2/RgbImage.java" />
         <option value="$PROJECT_DIR$/jdocs/Animation.html" />
         <option value="$PROJECT_DIR$/compile.bat" />
         <option value="$PROJECT_DIR$/src/rs2/Skills.java" />
-        <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
         <option value="$PROJECT_DIR$/src/rs2/Config.java" />
-        <option value="$PROJECT_DIR$/src/rs2/Flo.java" />
-        <option value="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
-        <option value="$PROJECT_DIR$/src/rs2/client.java" />
-        <option value="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" />
         <option value="$PROJECT_DIR$/run.bat" />
+        <option value="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" />
+        <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Flo.java" />
+        <option value="$PROJECT_DIR$/src/pgle/PglCubeStub.java" />
+        <option value="$PROJECT_DIR$/lib/PGLEngine2_Library.jar!/org/peterbjornx/pgl2/tile/TileManagerNode.class" />
+        <option value="$PROJECT_DIR$/src/rs2/client.java" />
+        <option value="$PROJECT_DIR$/src/pgle/RsTileManager.java" />
+        <option value="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
+        <option value="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
       </list>
     </option>
   </component>
@@ -247,12 +354,17 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="317 Rename Project" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -377,14 +489,13 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -396,126 +507,14 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="rs2" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree">
-    <UpdateInfo date="Moments ago" ActionInfo="_Update">
-      <UpdatedFiles>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated from server" />
-          <option name="myStatusName" value="Changed on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CHANGED_ON_SERVER" />
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Updated" />
-            <option name="myStatusName" value="Changed" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="UPDATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Created" />
-            <option name="myStatusName" value="Created" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="CREATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Deleted" />
-            <option name="myStatusName" value="Deleted" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="true" />
-            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Restored" />
-            <option name="myStatusName" value="Will be restored" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="RESTORED" />
-          </FILE-GROUP>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Modified" />
-          <option name="myStatusName" value="Modified" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MODIFIED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Skipped" />
-          <option name="myStatusName" value="Skipped" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SKIPPED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with conflicts" />
-          <option name="myStatusName" value="Will be merged with conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with tree conflicts" />
-          <option name="myStatusName" value="Merged with tree conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-          <PATH vcs="svn" revision="100">I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317\src\cache</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged" />
-          <option name="myStatusName" value="Will be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Not in repository" />
-          <option name="myStatusName" value="Not in repository" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally added" />
-          <option name="myStatusName" value="Locally added" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_ADDED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed" />
-          <option name="myStatusName" value="Locally removed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Switched" />
-          <option name="myStatusName" value="Switched" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SWITCHED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with property conflicts" />
-          <option name="myStatusName" value="Will be merged with property conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-        </FILE-GROUP>
-      </UpdatedFiles>
-    </UpdateInfo>
   </component>
   <component name="RunManager" selected="Application.SwingUI">
     <configuration default="false" name="SwingUI" type="Applet" factoryName="Applet" temporary="true">
@@ -619,7 +618,13 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="317 Rename Project" />
       <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="49789" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -703,14 +708,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39898133" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -719,8 +723,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3998477" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2498096" sideWeight="0.6706282" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -778,121 +783,109 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rs2/TileSetting.java">
+    <entry file="file://$PROJECT_DIR$/src/rs2/RSApplet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="28" selection-end="28" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="409" column="0" selection-start="9667" selection-end="9667" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/Component.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="231" column="98" selection-start="11033" selection-end="11033" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5343" column="50" selection-start="192559" selection-end="192559" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/extras/FileOperations.java">
+    <entry file="jar://$PROJECT_DIR$/lib/PGLEngine2_Library.jar!/org/peterbjornx/pgl2/terrain/TerrainLayer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="49" selection-end="49" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="21" column="0" selection-start="857" selection-end="857" vertical-scroll-proportion="-9.92" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Config.java">
+    <entry file="file://$PROJECT_DIR$/run.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="53" selection-start="187" selection-end="239" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="1" column="27" selection-start="73" selection-end="73" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2347" column="21" selection-start="89642" selection-end="89642" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/FileOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="13" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Flo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
+        <state line="15" column="64" selection-start="535" selection-end="535" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/PGLEngine2_Library.jar!/org/peterbjornx/pgl2/terrain/Terrain.class">
+    <entry file="jar://$PROJECT_DIR$/lib/PGLEngine2_Library.jar!/org/peterbjornx/pgl2/tile/TileManagerNode.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="11" selection-start="439" selection-end="439" vertical-scroll-proportion="0.35692307">
+        <state line="32" column="1" selection-start="1606" selection-end="1606" vertical-scroll-proportion="0.7532051">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/SwingUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="13" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="368" column="34" selection-start="18060" selection-end="18060" vertical-scroll-proportion="0.5257143">
+        <state line="364" column="29" selection-start="17894" selection-end="17894" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/RSApplet.java">
+    <entry file="file://$PROJECT_DIR$/src/pgle/PglCubeStub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="409" column="0" selection-start="9667" selection-end="9667" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgle/PglWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="0" selection-start="2310" selection-end="2310" vertical-scroll-proportion="0.0">
+        <state line="54" column="27" selection-start="3084" selection-end="3084" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/Component.java">
+    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5343" column="50" selection-start="192559" selection-end="192559" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/awt/Container.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2347" column="21" selection-start="89642" selection-end="89642" vertical-scroll-proportion="0.0">
+        <state line="1113" column="34" selection-start="45546" selection-end="45546" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="634" column="46" selection-start="15560" selection-end="15560" vertical-scroll-proportion="-6.88">
+        <state line="11668" column="23" selection-start="316297" selection-end="316297" vertical-scroll-proportion="-40.2">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/PGLEngine2_Library.jar!/org/peterbjornx/pgl2/terrain/TerrainLayer.class">
+    <entry file="file://$PROJECT_DIR$/src/pgle/RsTileManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="857" selection-end="857" vertical-scroll-proportion="-9.92">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgle/RsTerrainSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="46" selection-start="1684" selection-end="1684" vertical-scroll-proportion="0.0">
+        <state line="25" column="7" selection-start="775" selection-end="775" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run.bat">
+    <entry file="file://$PROJECT_DIR$/src/pgle/RsTerrainSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="38" selection-start="73" selection-end="73" vertical-scroll-proportion="0.04857143">
+        <state line="40" column="48" selection-start="1529" selection-end="1529" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pgle/PglWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="57" selection-start="2119" selection-end="2119" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="336" column="39" selection-start="12299" selection-end="12299" vertical-scroll-proportion="0.82371795">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -954,6 +947,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

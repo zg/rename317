@@ -1,9 +1,11 @@
 package pgle;
 
+import com.sun.rowset.internal.InsertRow;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 import org.peterbjornx.pgl2.camera.Camera;
 import org.peterbjornx.pgl2.input.cameracontrol.FirstPersonCamera;
 import org.peterbjornx.pgl2.model.Node;
@@ -29,6 +31,7 @@ public class PglWrapper {
     private Terrain rsTerrain;
     private boolean running = false;
     private RsTerrainSource rsTerrainSource;
+    private RsTileManager rsTileManager;
 
     /**
      * Initialize PGLEngine
@@ -46,6 +49,8 @@ public class PglWrapper {
             camera.setFarClip(128 * 30.0f);
             camera.setActive(true);
             scene.add(camera);
+            rsTileManager = new RsTileManager();
+            scene.add(rsTileManager);
             firstPersonCamera = new FirstPersonCamera();
             glEnable(GL_DEPTH_TEST);
             running = true;
@@ -66,6 +71,10 @@ public class PglWrapper {
             rsTerrainSource.updateMap();
             rsTerrain.update();
         }
+    }
+
+    public void setCameraPosition(int x,int z,int y){
+        camera.setPosition(new Vector3f(x,-y,z));
     }
 
     /**
@@ -89,4 +98,7 @@ public class PglWrapper {
         firstPersonCamera.handleInput(camera);
     }
 
+    public RsTileManager getRsTileManager() {
+        return rsTileManager;
+    }
 }

@@ -1,5 +1,6 @@
 package pgle;
 
+import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
 import org.lwjgl.util.Color;
 import org.peterbjornx.pgl2.terrain.Terrain;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
@@ -19,6 +20,7 @@ public class RsTerrainSource implements TerrainSource {
     private MapRegion mapRegion;
     private int[][] textureMap = new int[104][104];
     private Color[][] colourMap = new Color[104][104];
+    private int[][] heightMap = new int[104][104];
     private int heightLevel = 0;
 
     public RsTerrainSource(MapRegion mapRegion) {
@@ -28,6 +30,7 @@ public class RsTerrainSource implements TerrainSource {
     public void updateMap(){
         byte[][] underlays = mapRegion.getUnderLay()[heightLevel];
         int[][] underlaysRgb = mapRegion.getUnderlayRgb()[heightLevel];
+        int[][] heightmap = mapRegion.getHeightMap()[heightLevel];
         for (int x = 0;x < 104;x++)
             for (int z = 0;z < 104;z++){
                 if (underlays[x][z] == 0)
@@ -35,12 +38,13 @@ public class RsTerrainSource implements TerrainSource {
                 Flo underlay = Flo.cache[underlays[x][z] - 1];
                 int underlayRgb = underlaysRgb[x][z];
                 colourMap[x][z] = new Color(underlayRgb >> 16,underlayRgb >> 8,underlayRgb & 0xFF);
-                textureMap[x][z] = underlay.hdTexture;
+                textureMap[x][z] = underlay.hdUlTexture;
+                heightMap[x][z] = -heightmap[x][z];
             }
     }
 
     public int[][] getHeightMap() {
-        return mapRegion.getHeightMap()[heightLevel];
+        return heightMap;
     }
 
     public Color[][] getColorMap() {

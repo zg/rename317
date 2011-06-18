@@ -9,9 +9,9 @@ public class InteractableObject
     }
 
     int zPos;
-    int anInt518;
-    int anInt519;
-    int anInt520;
+    int worldZ;
+    int worldX;
+    int worldY;
     public Animable aClass30_Sub2_Sub4_521;
     public int anInt522;
     int xPos;
