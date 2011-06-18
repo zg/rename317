@@ -1,22 +1,22 @@
 package rs2;
 
 
-public class NPC extends Entity
+public class NPC extends Mobile
 {
 
     private Model method450()
     {
         if(super.animation >= 0 && super.anInt1529 == 0)
         {
-            int k = Animation.anims[super.animation].frame2IDS[super.anInt1527];
+            int k = Sequence.anims[super.animation].frame2IDS[super.anInt1527];
             int i1 = -1;
             if(super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511)
-                i1 = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
-            return desc.method164(i1, k, Animation.anims[super.animation].animationFlowControl);
+                i1 = Sequence.anims[super.anInt1517].frame2IDS[super.anInt1518];
+            return desc.method164(i1, k, Sequence.anims[super.animation].animationFlowControl);
         }
         int l = -1;
         if(super.anInt1517 >= 0)
-            l = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
+            l = Sequence.anims[super.anInt1517].frame2IDS[super.anInt1518];
         return desc.method164(-1, l, null);
     }
 
@@ -34,8 +34,8 @@ public class NPC extends Entity
             Model model_1 = spotAnim.getModel();
             if(model_1 != null)
             {
-                int j = spotAnim.aAnimation_407.frame2IDS[super.anInt1521];
-                Model model_2 = new Model(true, AnimationFrame.method532(j), false, model_1);
+                int j = spotAnim.aSequence_407.frame2IDS[super.anInt1521];
+                Model model_2 = new Model(true, Animation.method532(j), false, model_1);
                 model_2.translate(0, -super.anInt1524, 0);
                 model_2.calcSkinning();
                 model_2.applyTransform(j);
@@ -64,5 +64,5 @@ public class NPC extends Entity
     {
     }
 
-    public EntityDef desc;
+    public NpcDef desc;
 }

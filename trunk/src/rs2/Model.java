@@ -1,7 +1,7 @@
 package rs2;
 
 
-public class Model extends Animable {
+public class Model extends Entity {
 
     public static void nullLoader()
     {
@@ -1393,17 +1393,17 @@ public class Model extends Animable {
             return;
         if(frameID == -1)
             return;
-        AnimationFrame animationFrame = AnimationFrame.forID(frameID);
-        if(animationFrame == null)
+        Animation animation = Animation.forID(frameID);
+        if(animation == null)
             return;
-        ModelTransform modelTransform = animationFrame.myModelTransform;
+        ModelTransform modelTransform = animation.myModelTransform;
         vertexXModifier = 0;
         vertexYModifier = 0;
         vertexZModifier = 0;
-        for(int k = 0; k < animationFrame.anInt638; k++)
+        for(int k = 0; k < animation.anInt638; k++)
         {
-            int opcodeID = animationFrame.opcodeLinkTable[k];
-            transformStep(modelTransform.opcodes[opcodeID], modelTransform.skinList[opcodeID], animationFrame.modifier1[k], animationFrame.modifier2[k], animationFrame.modifier3[k]);
+            int opcodeID = animation.opcodeLinkTable[k];
+            transformStep(modelTransform.opcodes[opcodeID], modelTransform.skinList[opcodeID], animation.modifier1[k], animation.modifier2[k], animation.modifier3[k]);
         }
 
     }
@@ -1417,27 +1417,27 @@ public class Model extends Animable {
             applyTransform(frameId1);
             return;
         }
-        AnimationFrame animationFrame = AnimationFrame.forID(frameId1);
-        if(animationFrame == null)
+        Animation animation = Animation.forID(frameId1);
+        if(animation == null)
             return;
-        AnimationFrame animationFrame_1 = AnimationFrame.forID(frameId2);
-        if(animationFrame_1 == null)
+        Animation animation_1 = Animation.forID(frameId2);
+        if(animation_1 == null)
         {
             applyTransform(frameId1);
             return;
         }
-        ModelTransform modelTransform = animationFrame.myModelTransform;
+        ModelTransform modelTransform = animation.myModelTransform;
         vertexXModifier = 0;
         vertexYModifier = 0;
         vertexZModifier = 0;
         int l = 0;
         int stepIDD = framesFrom2[l++];
-        for(int j1 = 0; j1 < animationFrame.anInt638; j1++)
+        for(int j1 = 0; j1 < animation.anInt638; j1++)
         {
             int k1;
-            for(k1 = animationFrame.opcodeLinkTable[j1]; k1 > stepIDD; stepIDD = framesFrom2[l++]);
+            for(k1 = animation.opcodeLinkTable[j1]; k1 > stepIDD; stepIDD = framesFrom2[l++]);
             if(k1 != stepIDD || modelTransform.opcodes[k1] == 0)
-                transformStep(modelTransform.opcodes[k1], modelTransform.skinList[k1], animationFrame.modifier1[j1], animationFrame.modifier2[j1], animationFrame.modifier3[j1]);
+                transformStep(modelTransform.opcodes[k1], modelTransform.skinList[k1], animation.modifier1[j1], animation.modifier2[j1], animation.modifier3[j1]);
         }
 
         vertexXModifier = 0;
@@ -1445,12 +1445,12 @@ public class Model extends Animable {
         vertexZModifier = 0;
         l = 0;
         stepIDD = framesFrom2[l++];
-        for(int l1 = 0; l1 < animationFrame_1.anInt638; l1++)
+        for(int l1 = 0; l1 < animation_1.anInt638; l1++)
         {
             int stepID;
-            for(stepID = animationFrame_1.opcodeLinkTable[l1]; stepID > stepIDD; stepIDD = framesFrom2[l++]);
+            for(stepID = animation_1.opcodeLinkTable[l1]; stepID > stepIDD; stepIDD = framesFrom2[l++]);
             if(stepID == stepIDD || modelTransform.opcodes[stepID] == 0)
-                transformStep(modelTransform.opcodes[stepID], modelTransform.skinList[stepID], animationFrame_1.modifier1[l1], animationFrame_1.modifier2[l1], animationFrame_1.modifier3[l1]);
+                transformStep(modelTransform.opcodes[stepID], modelTransform.skinList[stepID], animation_1.modifier1[l1], animation_1.modifier2[l1], animation_1.modifier3[l1]);
         }
 
     }

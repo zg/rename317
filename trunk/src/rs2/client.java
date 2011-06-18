@@ -712,7 +712,7 @@ public class client extends RSApplet {
 	{
 		ObjectDef.mruNodes1.unlinkAll();
 		ObjectDef.mruNodes2.unlinkAll();
-		EntityDef.mruNodes.unlinkAll();
+		NpcDef.mruNodes.unlinkAll();
 		ItemDef.mruNodes2.unlinkAll();
 		ItemDef.mruNodes1.unlinkAll();
 		Player.mruNodes.unlinkAll();
@@ -838,7 +838,7 @@ public class client extends RSApplet {
 		}
 
 		int i1 = i + (j << 7) + 0x60000000;
-		sceneGraph.addGroundItemTile(i, i1, ((Animable) (obj1)), method42(plane, j * 128 + 64, i * 128 + 64), ((Animable) (obj2)), ((Animable) (obj)), plane, j);
+		sceneGraph.addGroundItemTile(i, i1, ((Entity) (obj1)), method42(plane, j * 128 + 64, i * 128 + 64), ((Entity) (obj2)), ((Entity) (obj)), plane, j);
 	}
 
 	private void renderNPCs(boolean flag)//todo- check this
@@ -1352,14 +1352,14 @@ public class client extends RSApplet {
 				obj = session_players[session_player_list[j]];
 				else
 				obj = sessionNpcs[sessionNpcList[j - session_player_count]];
-				if(obj == null || !((Entity) (obj)).isVisible())
+				if(obj == null || !((Mobile) (obj)).isVisible())
 				continue;
 				if(obj instanceof NPC)
 				{
-					EntityDef entityDef = ((NPC)obj).desc;
-					if(entityDef.childrenIDs != null)
-					entityDef = entityDef.method161();
-					if(entityDef == null)
+					NpcDef npcDef = ((NPC)obj).desc;
+					if(npcDef.childrenIDs != null)
+					npcDef = npcDef.method161();
+					if(npcDef == null)
 					continue;
 				}
 				if(j < session_player_count)
@@ -1368,7 +1368,7 @@ public class client extends RSApplet {
 					Player player = (Player)obj;
 					if(player.headIcon != 0)
 					{
-						npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height + 15);
+						npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
 						if(spriteDrawX > -1)
 						{
 							for(int i2 = 0; i2 < 8; i2++)
@@ -1382,56 +1382,56 @@ public class client extends RSApplet {
 					}
 					if(j >= 0 && anInt855 == 10 && anInt933 == session_player_list[j])
 					{
-						npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height + 15);
+						npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
 						if(spriteDrawX > -1)
 						headIcons[7].drawSprite(spriteDrawX - 12, spriteDrawY - l);
 					}
 				} else
 				{
-					EntityDef entityDef_1 = ((NPC)obj).desc;
-					if(entityDef_1.anInt75 >= 0 && entityDef_1.anInt75 < headIcons.length)
+					NpcDef npcDef = ((NPC)obj).desc;
+					if(npcDef.anInt75 >= 0 && npcDef.anInt75 < headIcons.length)
 					{
-						npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height + 15);
+						npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
 						if(spriteDrawX > -1)
-						headIcons[entityDef_1.anInt75].drawSprite(spriteDrawX - 12, spriteDrawY - 30);
+						headIcons[npcDef.anInt75].drawSprite(spriteDrawX - 12, spriteDrawY - 30);
 					}
 					if(anInt855 == 1 && anInt1222 == sessionNpcList[j - session_player_count] && currentTime % 20 < 10)
 					{
-						npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height + 15);
+						npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
 						if(spriteDrawX > -1)
 						headIcons[2].drawSprite(spriteDrawX - 12, spriteDrawY - 28);
 					}
 				}
-				if(((Entity) (obj)).textSpoken != null && (j >= session_player_count || publicChatMode == 0 || publicChatMode == 3 || publicChatMode == 1 && isFriendOrSelf(((Player)obj).name)))
+				if(((Mobile) (obj)).textSpoken != null && (j >= session_player_count || publicChatMode == 0 || publicChatMode == 3 || publicChatMode == 1 && isFriendOrSelf(((Player)obj).name)))
 				{
-					npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height);
+					npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height);
 					if(spriteDrawX > -1 && anInt974 < anInt975)
 					{
-						anIntArray979[anInt974] = boldFont.method384(((Entity) (obj)).textSpoken) / 2;
+						anIntArray979[anInt974] = boldFont.method384(((Mobile) (obj)).textSpoken) / 2;
 						anIntArray978[anInt974] = boldFont.charHeight;
 						anIntArray976[anInt974] = spriteDrawX;
 						anIntArray977[anInt974] = spriteDrawY;
-						anIntArray980[anInt974] = ((Entity) (obj)).anInt1513;
-						anIntArray981[anInt974] = ((Entity) (obj)).anInt1531;
-						anIntArray982[anInt974] = ((Entity) (obj)).textCycle;
-						aStringArray983[anInt974++] = ((Entity) (obj)).textSpoken;
-						if(anInt1249 == 0 && ((Entity) (obj)).anInt1531 >= 1 && ((Entity) (obj)).anInt1531 <= 3)
+						anIntArray980[anInt974] = ((Mobile) (obj)).anInt1513;
+						anIntArray981[anInt974] = ((Mobile) (obj)).anInt1531;
+						anIntArray982[anInt974] = ((Mobile) (obj)).textCycle;
+						aStringArray983[anInt974++] = ((Mobile) (obj)).textSpoken;
+						if(anInt1249 == 0 && ((Mobile) (obj)).anInt1531 >= 1 && ((Mobile) (obj)).anInt1531 <= 3)
 						{
 							anIntArray978[anInt974] += 10;
 							anIntArray977[anInt974] += 5;
 						}
-						if(anInt1249 == 0 && ((Entity) (obj)).anInt1531 == 4)
+						if(anInt1249 == 0 && ((Mobile) (obj)).anInt1531 == 4)
 						anIntArray979[anInt974] = 60;
-						if(anInt1249 == 0 && ((Entity) (obj)).anInt1531 == 5)
+						if(anInt1249 == 0 && ((Mobile) (obj)).anInt1531 == 5)
 						anIntArray978[anInt974] += 5;
 					}
 				}
-				if(((Entity) (obj)).loopCycleStatus > currentTime)
+				if(((Mobile) (obj)).loopCycleStatus > currentTime)
 				{ try{
-						npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height + 15);
+						npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
 						if(spriteDrawX > -1)
 						{
-							int i1 = (((Entity) (obj)).currentHealth * 30) / ((Entity) (obj)).maxHealth;
+							int i1 = (((Mobile) (obj)).currentHealth * 30) / ((Mobile) (obj)).maxHealth;
 							if(i1 > 30)
 							i1 = 30;
 							DrawingArea.fillRect(spriteDrawX - 15, spriteDrawY - 3, i1, 5, 65280);
@@ -1440,9 +1440,9 @@ public class client extends RSApplet {
 					}catch(Exception e){ }
 				}
 				for(int j1 = 0; j1 < 4; j1++)
-				if(((Entity) (obj)).hitsLoopCycle[j1] > currentTime)
+				if(((Mobile) (obj)).hitsLoopCycle[j1] > currentTime)
 				{
-					npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height / 2);
+					npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height / 2);
 					if(spriteDrawX > -1)
 					{
 						if(j1 == 1)
@@ -1457,9 +1457,9 @@ public class client extends RSApplet {
 							spriteDrawX += 15;
 							spriteDrawY -= 10;
 						}
-						hitMarks[((Entity) (obj)).hitMarkTypes[j1]].drawSprite(spriteDrawX - 12, spriteDrawY - 12);
-						smallFont.drawText(0, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 4, spriteDrawX);
-						smallFont.drawText(0xffffff, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 3, spriteDrawX - 1);
+						hitMarks[((Mobile) (obj)).hitMarkTypes[j1]].drawSprite(spriteDrawX - 12, spriteDrawY - 12);
+						smallFont.drawText(0, String.valueOf(((Mobile) (obj)).hitArray[j1]), spriteDrawY + 4, spriteDrawX);
+						smallFont.drawText(0xffffff, String.valueOf(((Mobile) (obj)).hitArray[j1]), spriteDrawY + 3, spriteDrawX - 1);
 					}
 				}
 
@@ -2003,7 +2003,7 @@ public class client extends RSApplet {
 			if(i1 > 15)
 			i1 -= 32;
 			int j1 = stream.gbits(1);
-			npc.desc = EntityDef.forID(stream.gbits(12));
+			npc.desc = NpcDef.forID(stream.gbits(12));
 			int k1 = stream.gbits(1);
 			if(k1 == 1)
 			session_npcs_awaiting_update[sessionNpcsAwaitingUpdatePtr++] = k;
@@ -2713,7 +2713,7 @@ public class client extends RSApplet {
 					}
 				}
 				//if(onDemandData.dataType == 1 && onDemandData.buffer != null)
-				//    rs2.AnimationFrame.method529(onDemandData.buffer);
+				//    rs2.Animation.method529(onDemandData.buffer);
 				if(onDemandData.dataType == 2 && onDemandData.ID == nextSong && onDemandData.buffer != null)
 				saveMidi(songChanging, onDemandData.buffer);
 				if(onDemandData.dataType == 3 && loadingStage == 1)
@@ -4050,16 +4050,16 @@ public class client extends RSApplet {
 			NPC class30_sub2_sub4_sub1_sub1_5 = sessionNpcs[i1];
 			if(class30_sub2_sub4_sub1_sub1_5 != null)
 			{
-				EntityDef entityDef = class30_sub2_sub4_sub1_sub1_5.desc;
-				if(entityDef.childrenIDs != null)
-				entityDef = entityDef.method161();
-				if(entityDef != null)
+				NpcDef npcDef = class30_sub2_sub4_sub1_sub1_5.desc;
+				if(npcDef.childrenIDs != null)
+				npcDef = npcDef.method161();
+				if(npcDef != null)
 				{
 					String s9;
-					if(entityDef.description != null)
-					s9 = new String(entityDef.description);
+					if(npcDef.description != null)
+					s9 = new String(npcDef.description);
 					else
-					s9 = "It's a " + entityDef.name + ".";
+					s9 = "It's a " + npcDef.name + ".";
 					pushMessage(s9, 0, "");
 				}
 			}
@@ -4734,12 +4734,12 @@ public class client extends RSApplet {
 		aRSImageProducer_1115 = null;
 		nullLoader();
 		ObjectDef.nullLoader();
-		EntityDef.nullLoader();
+		NpcDef.nullLoader();
 		ItemDef.nullLoader();
 		Flo.cache = null;
 		IdentityKit.cache = null;
 		RSInterface.interfaceCache = null;
-		Animation.anims = null;
+		Sequence.anims = null;
 		SpotAnim.cache = null;
 		SpotAnim.aMRUNodes_415 = null;
 		SettingUsagePointers.cache = null;
@@ -4748,7 +4748,7 @@ public class client extends RSApplet {
 		Rasterizer.nullLoader();
 		SceneGraph.nullLoader();
 		Model.nullLoader();
-		AnimationFrame.nullLoader();
+		Animation.nullLoader();
 		System.gc();
 	}
 
@@ -5319,7 +5319,7 @@ public class client extends RSApplet {
 				}
 
 				model.calcSkinning();
-				model.applyTransform(Animation.anims[session_player.anInt1511].frame2IDS[0]);
+				model.applyTransform(Sequence.anims[session_player.anInt1511].frame2IDS[0]);
 				model.preprocess(64, 850, -30, -50, -30, true);
 				class9.anInt233 = 5;
 				class9.mediaID = 0;
@@ -6378,7 +6378,7 @@ public class client extends RSApplet {
 				int i2 = stream.g1();
 				if(i1 == npc.animation && i1 != -1)
 				{
-					int l2 = Animation.anims[i1].anInt365;
+					int l2 = Sequence.anims[i1].anInt365;
 					if(l2 == 1)
 					{
 						npc.anInt1527 = 0;
@@ -6389,7 +6389,7 @@ public class client extends RSApplet {
 					if(l2 == 2)
 					npc.anInt1530 = 0;
 				} else
-				if(i1 == -1 || npc.animation == -1 || Animation.anims[i1].anInt359 >= Animation.anims[npc.animation].anInt359)
+				if(i1 == -1 || npc.animation == -1 || Sequence.anims[i1].anInt359 >= Sequence.anims[npc.animation].anInt359)
 				{
 					npc.animation = i1;
 					npc.anInt1527 = 0;
@@ -6445,7 +6445,7 @@ public class client extends RSApplet {
 			}
 			if((l & 2) != 0)
 			{
-				npc.desc = EntityDef.forID(stream.isg2());
+				npc.desc = NpcDef.forID(stream.isg2());
 				npc.boundDim = npc.desc.aByte68;
 				npc.anInt1504 = npc.desc.anInt79;
 				npc.anInt1554 = npc.desc.anInt67;
@@ -6462,19 +6462,19 @@ public class client extends RSApplet {
 		}
 	}
 
-	private void buildAtNPCMenu(EntityDef entityDef, int i, int j, int k)
+	private void buildAtNPCMenu(NpcDef npcDef, int i, int j, int k)
 	{
 		if(menuActionRow >= 400)
 		return;
-		if(entityDef.childrenIDs != null)
-		entityDef = entityDef.method161();
-		if(entityDef == null)
+		if(npcDef.childrenIDs != null)
+		npcDef = npcDef.method161();
+		if(npcDef == null)
 		return;
-		if(!entityDef.aBoolean84)
+		if(!npcDef.aBoolean84)
 		return;
-		String s = entityDef.name;
-		if(entityDef.combatLevel != 0)
-		s = s + logic_get_combat_risk_colour(session_player.combatLevel, entityDef.combatLevel) + " (level-" + entityDef.combatLevel + ")";
+		String s = npcDef.name;
+		if(npcDef.combatLevel != 0)
+		s = s + logic_get_combat_risk_colour(session_player.combatLevel, npcDef.combatLevel) + " (level-" + npcDef.combatLevel + ")";
 		if(itemSelected == 1)
 		{
 			menuActionName[menuActionRow] = "Use " + selectedItemName + " with @yel@" + s;
@@ -6498,12 +6498,12 @@ public class client extends RSApplet {
 			}
 		} else
 		{
-			if(entityDef.actions != null)
+			if(npcDef.actions != null)
 			{
 				for(int l = 4; l >= 0; l--)
-				if(entityDef.actions[l] != null && !entityDef.actions[l].equalsIgnoreCase("attack"))
+				if(npcDef.actions[l] != null && !npcDef.actions[l].equalsIgnoreCase("attack"))
 				{
-					menuActionName[menuActionRow] = entityDef.actions[l] + " @yel@" + s;
+					menuActionName[menuActionRow] = npcDef.actions[l] + " @yel@" + s;
 					if(l == 0)
 					menuActionID[menuActionRow] = 20;
 					if(l == 1)
@@ -6521,15 +6521,15 @@ public class client extends RSApplet {
 				}
 
 			}
-			if(entityDef.actions != null)
+			if(npcDef.actions != null)
 			{
 				for(int i1 = 4; i1 >= 0; i1--)
-				if(entityDef.actions[i1] != null && entityDef.actions[i1].equalsIgnoreCase("attack"))
+				if(npcDef.actions[i1] != null && npcDef.actions[i1].equalsIgnoreCase("attack"))
 				{
 					char c = '\0';
-					if(entityDef.combatLevel > session_player.combatLevel)
+					if(npcDef.combatLevel > session_player.combatLevel)
 					c = '\u07D0';
-					menuActionName[menuActionRow] = entityDef.actions[i1] + " @yel@" + s;
+					menuActionName[menuActionRow] = npcDef.actions[i1] + " @yel@" + s;
 					if(i1 == 0)
 					menuActionID[menuActionRow] = 20 + c;
 					if(i1 == 1)
@@ -6547,7 +6547,7 @@ public class client extends RSApplet {
 				}
 
 			}
-			menuActionName[menuActionRow] = "Examine @yel@" + s + " @gre@(@whi@" + entityDef.type + "@gre@)";
+			menuActionName[menuActionRow] = "Examine @yel@" + s + " @gre@(@whi@" + npcDef.type + "@gre@)";
 			menuActionID[menuActionRow] = 1025;
 			menuActionCmd1[menuActionRow] = i;
 			menuActionCmd2[menuActionRow] = k;
@@ -6791,7 +6791,7 @@ public class client extends RSApplet {
 			drawLogo();
 			onDemandFetcher = new OnDemandFetcher();
 			onDemandFetcher.start(jagexArchive_6, this);
-			AnimationFrame.method528(onDemandFetcher.getAnimCount());
+			Animation.method528(onDemandFetcher.getAnimCount());
 			Model.method459(onDemandFetcher.getVersionCount(0), onDemandFetcher);
 			//preloadModels();
 			if(!lowMem)
@@ -7053,11 +7053,11 @@ public class client extends RSApplet {
 			Rasterizer.calculateColourConversionTable(0.80000000000000004D);
 			Rasterizer.initializeTexelPools(20);
 			drawLoadingText(86, "Unpacking config");
-			Animation.unpackConfig(jagexArchive);
+			Sequence.unpackConfig(jagexArchive);
 			ObjectDef.unpackConfig(jagexArchive);
 			Flo.unpackConfig(jagexArchive);
 			ItemDef.unpackConfig(jagexArchive);
-			EntityDef.unpackConfig(jagexArchive);
+			NpcDef.unpackConfig(jagexArchive);
 			IdentityKit.unpackConfig(jagexArchive);
 			SpotAnim.unpackConfig(jagexArchive);
 			SettingUsagePointers.unpackConfig(jagexArchive);
@@ -7143,7 +7143,7 @@ public class client extends RSApplet {
 			ObjectOnTile.clientInstance = this;
 			SceneGraph.clientInstance = this;
 			ObjectDef.clientInstance = this;
-			EntityDef.clientInstance = this;
+			NpcDef.clientInstance = this;
             pglWrapper.initJgle();
 			return;
 		}
@@ -7336,319 +7336,319 @@ public class client extends RSApplet {
 		}
 	}
 
-	private void entityUpdateBlock(Entity entity)//realy?
+	private void entityUpdateBlock(Mobile mobile)//realy?
 	{
-		if(entity.boundExtentX < 128 || entity.boundExtentY < 128 || entity.boundExtentX >= 13184 || entity.boundExtentY >= 13184)
+		if(mobile.boundExtentX < 128 || mobile.boundExtentY < 128 || mobile.boundExtentX >= 13184 || mobile.boundExtentY >= 13184)
 		{
-			entity.animation = -1;
-			entity.anInt1520 = -1;
-			entity.anInt1547 = 0;
-			entity.anInt1548 = 0;
-			entity.boundExtentX = entity.pathX[0] * 128 + entity.boundDim * 64;
-			entity.boundExtentY = entity.pathY[0] * 128 + entity.boundDim * 64;
-			entity.method446();
+			mobile.animation = -1;
+			mobile.anInt1520 = -1;
+			mobile.anInt1547 = 0;
+			mobile.anInt1548 = 0;
+			mobile.boundExtentX = mobile.pathX[0] * 128 + mobile.boundDim * 64;
+			mobile.boundExtentY = mobile.pathY[0] * 128 + mobile.boundDim * 64;
+			mobile.method446();
 		}
-		if(entity == session_player && (entity.boundExtentX < 1536 || entity.boundExtentY < 1536 || entity.boundExtentX >= 11776 || entity.boundExtentY >= 11776))
+		if(mobile == session_player && (mobile.boundExtentX < 1536 || mobile.boundExtentY < 1536 || mobile.boundExtentX >= 11776 || mobile.boundExtentY >= 11776))
 		{
-			entity.animation = -1;
-			entity.anInt1520 = -1;
-			entity.anInt1547 = 0;
-			entity.anInt1548 = 0;
-			entity.boundExtentX = entity.pathX[0] * 128 + entity.boundDim * 64;
-			entity.boundExtentY = entity.pathY[0] * 128 + entity.boundDim * 64;
-			entity.method446();
+			mobile.animation = -1;
+			mobile.anInt1520 = -1;
+			mobile.anInt1547 = 0;
+			mobile.anInt1548 = 0;
+			mobile.boundExtentX = mobile.pathX[0] * 128 + mobile.boundDim * 64;
+			mobile.boundExtentY = mobile.pathY[0] * 128 + mobile.boundDim * 64;
+			mobile.method446();
 		}
-		if(entity.anInt1547 > currentTime)
-		refreshEntityPosition(entity);
+		if(mobile.anInt1547 > currentTime)
+		refreshEntityPosition(mobile);
 		else
-		if(entity.anInt1548 >= currentTime)
-		refreshEntityFaceDirection(entity);
+		if(mobile.anInt1548 >= currentTime)
+		refreshEntityFaceDirection(mobile);
 		else
-		method99(entity);
-		appendFocusDestination(entity);
-		appendAnimation(entity);
+		method99(mobile);
+		appendFocusDestination(mobile);
+		appendAnimation(mobile);
 	}
 
-	private void refreshEntityPosition(Entity entity)
+	private void refreshEntityPosition(Mobile mobile)
 	{
-		int i = entity.anInt1547 - currentTime;
-		int j = entity.anInt1543 * 128 + entity.boundDim * 64;
-		int k = entity.anInt1545 * 128 + entity.boundDim * 64;
-		entity.boundExtentX += (j - entity.boundExtentX) / i;
-		entity.boundExtentY += (k - entity.boundExtentY) / i;
-		entity.anInt1503 = 0;
-		if(entity.anInt1549 == 0)
-		entity.turnDirection = 1024;
-		if(entity.anInt1549 == 1)
-		entity.turnDirection = 1536;
-		if(entity.anInt1549 == 2)
-		entity.turnDirection = 0;
-		if(entity.anInt1549 == 3)
-		entity.turnDirection = 512;
+		int i = mobile.anInt1547 - currentTime;
+		int j = mobile.anInt1543 * 128 + mobile.boundDim * 64;
+		int k = mobile.anInt1545 * 128 + mobile.boundDim * 64;
+		mobile.boundExtentX += (j - mobile.boundExtentX) / i;
+		mobile.boundExtentY += (k - mobile.boundExtentY) / i;
+		mobile.anInt1503 = 0;
+		if(mobile.anInt1549 == 0)
+		mobile.turnDirection = 1024;
+		if(mobile.anInt1549 == 1)
+		mobile.turnDirection = 1536;
+		if(mobile.anInt1549 == 2)
+		mobile.turnDirection = 0;
+		if(mobile.anInt1549 == 3)
+		mobile.turnDirection = 512;
 	}
 
-	private void refreshEntityFaceDirection(Entity entity)
+	private void refreshEntityFaceDirection(Mobile mobile)
 	{
-		if(entity.anInt1548 == currentTime || entity.animation == -1 || entity.anInt1529 != 0 || entity.anInt1528 + 1 > Animation.anims[entity.animation].getFrameLength(entity.anInt1527))
+		if(mobile.anInt1548 == currentTime || mobile.animation == -1 || mobile.anInt1529 != 0 || mobile.anInt1528 + 1 > Sequence.anims[mobile.animation].getFrameLength(mobile.anInt1527))
 		{
-			int i = entity.anInt1548 - entity.anInt1547;
-			int j = currentTime - entity.anInt1547;
-			int k = entity.anInt1543 * 128 + entity.boundDim * 64;
-			int l = entity.anInt1545 * 128 + entity.boundDim * 64;
-			int i1 = entity.anInt1544 * 128 + entity.boundDim * 64;
-			int j1 = entity.anInt1546 * 128 + entity.boundDim * 64;
-			entity.boundExtentX = (k * (i - j) + i1 * j) / i;
-			entity.boundExtentY = (l * (i - j) + j1 * j) / i;
+			int i = mobile.anInt1548 - mobile.anInt1547;
+			int j = currentTime - mobile.anInt1547;
+			int k = mobile.anInt1543 * 128 + mobile.boundDim * 64;
+			int l = mobile.anInt1545 * 128 + mobile.boundDim * 64;
+			int i1 = mobile.anInt1544 * 128 + mobile.boundDim * 64;
+			int j1 = mobile.anInt1546 * 128 + mobile.boundDim * 64;
+			mobile.boundExtentX = (k * (i - j) + i1 * j) / i;
+			mobile.boundExtentY = (l * (i - j) + j1 * j) / i;
 		}
-		entity.anInt1503 = 0;
-		if(entity.anInt1549 == 0)
-		entity.turnDirection = 1024;
-		if(entity.anInt1549 == 1)
-		entity.turnDirection = 1536;
-		if(entity.anInt1549 == 2)
-		entity.turnDirection = 0;
-		if(entity.anInt1549 == 3)
-		entity.turnDirection = 512;
-		entity.anInt1552 = entity.turnDirection;
+		mobile.anInt1503 = 0;
+		if(mobile.anInt1549 == 0)
+		mobile.turnDirection = 1024;
+		if(mobile.anInt1549 == 1)
+		mobile.turnDirection = 1536;
+		if(mobile.anInt1549 == 2)
+		mobile.turnDirection = 0;
+		if(mobile.anInt1549 == 3)
+		mobile.turnDirection = 512;
+		mobile.anInt1552 = mobile.turnDirection;
 	}
 
-	private void method99(Entity entity)
+	private void method99(Mobile mobile)
 	{
-		entity.anInt1517 = entity.anInt1511;
-		if(entity.pathLength == 0)
+		mobile.anInt1517 = mobile.anInt1511;
+		if(mobile.pathLength == 0)
 		{
-			entity.anInt1503 = 0;
+			mobile.anInt1503 = 0;
 			return;
 		}
-		if(entity.animation != -1 && entity.anInt1529 == 0)
+		if(mobile.animation != -1 && mobile.anInt1529 == 0)
 		{
-			Animation animation = Animation.anims[entity.animation];
-			if(entity.anInt1542 > 0 && animation.anInt363 == 0)
+			Sequence sequence = Sequence.anims[mobile.animation];
+			if(mobile.anInt1542 > 0 && sequence.anInt363 == 0)
 			{
-				entity.anInt1503++;
+				mobile.anInt1503++;
 				return;
 			}
-			if(entity.anInt1542 <= 0 && animation.priority == 0)
+			if(mobile.anInt1542 <= 0 && sequence.priority == 0)
 			{
-				entity.anInt1503++;
+				mobile.anInt1503++;
 				return;
 			}
 		}
-		int i = entity.boundExtentX;
-		int j = entity.boundExtentY;
-		int k = entity.pathX[entity.pathLength - 1] * 128 + entity.boundDim * 64;
-		int l = entity.pathY[entity.pathLength - 1] * 128 + entity.boundDim * 64;
+		int i = mobile.boundExtentX;
+		int j = mobile.boundExtentY;
+		int k = mobile.pathX[mobile.pathLength - 1] * 128 + mobile.boundDim * 64;
+		int l = mobile.pathY[mobile.pathLength - 1] * 128 + mobile.boundDim * 64;
 		if(k - i > 256 || k - i < -256 || l - j > 256 || l - j < -256)
 		{
-			entity.boundExtentX = k;
-			entity.boundExtentY = l;
+			mobile.boundExtentX = k;
+			mobile.boundExtentY = l;
 			return;
 		}
 		if(i < k)
 		{
 			if(j < l)
-			entity.turnDirection = 1280;
+			mobile.turnDirection = 1280;
 			else
 			if(j > l)
-			entity.turnDirection = 1792;
+			mobile.turnDirection = 1792;
 			else
-			entity.turnDirection = 1536;
+			mobile.turnDirection = 1536;
 		} else
 		if(i > k)
 		{
 			if(j < l)
-			entity.turnDirection = 768;
+			mobile.turnDirection = 768;
 			else
 			if(j > l)
-			entity.turnDirection = 256;
+			mobile.turnDirection = 256;
 			else
-			entity.turnDirection = 512;
+			mobile.turnDirection = 512;
 		} else
 		if(j < l)
-		entity.turnDirection = 1024;
+		mobile.turnDirection = 1024;
 		else
-		entity.turnDirection = 0;
-		int i1 = entity.turnDirection - entity.anInt1552 & 0x7ff;
+		mobile.turnDirection = 0;
+		int i1 = mobile.turnDirection - mobile.anInt1552 & 0x7ff;
 		if(i1 > 1024)
 		i1 -= 2048;
-		int j1 = entity.anInt1555;
+		int j1 = mobile.anInt1555;
 		if(i1 >= -256 && i1 <= 256)
-		j1 = entity.anInt1554;
+		j1 = mobile.anInt1554;
 		else
 		if(i1 >= 256 && i1 < 768)
-		j1 = entity.anInt1557;
+		j1 = mobile.anInt1557;
 		else
 		if(i1 >= -768 && i1 <= -256)
-		j1 = entity.anInt1556;
+		j1 = mobile.anInt1556;
 		if(j1 == -1)
-		j1 = entity.anInt1554;
-		entity.anInt1517 = j1;
+		j1 = mobile.anInt1554;
+		mobile.anInt1517 = j1;
 		int k1 = 4;
-		if(entity.anInt1552 != entity.turnDirection && entity.interactingEntity == -1 && entity.anInt1504 != 0)
+		if(mobile.anInt1552 != mobile.turnDirection && mobile.interactingEntity == -1 && mobile.anInt1504 != 0)
 		k1 = 2;
-		if(entity.pathLength > 2)
+		if(mobile.pathLength > 2)
 		k1 = 6;
-		if(entity.pathLength > 3)
+		if(mobile.pathLength > 3)
 		k1 = 8;
-		if(entity.anInt1503 > 0 && entity.pathLength > 1)
+		if(mobile.anInt1503 > 0 && mobile.pathLength > 1)
 		{
 			k1 = 8;
-			entity.anInt1503--;
+			mobile.anInt1503--;
 		}
-		if(entity.pathRun[entity.pathLength - 1])
+		if(mobile.pathRun[mobile.pathLength - 1])
 		k1 <<= 1;
-		if(k1 >= 8 && entity.anInt1517 == entity.anInt1554 && entity.anInt1505 != -1)
-		entity.anInt1517 = entity.anInt1505;
+		if(k1 >= 8 && mobile.anInt1517 == mobile.anInt1554 && mobile.anInt1505 != -1)
+		mobile.anInt1517 = mobile.anInt1505;
 		if(i < k)
 		{
-			entity.boundExtentX += k1;
-			if(entity.boundExtentX > k)
-			entity.boundExtentX = k;
+			mobile.boundExtentX += k1;
+			if(mobile.boundExtentX > k)
+			mobile.boundExtentX = k;
 		} else
 		if(i > k)
 		{
-			entity.boundExtentX -= k1;
-			if(entity.boundExtentX < k)
-			entity.boundExtentX = k;
+			mobile.boundExtentX -= k1;
+			if(mobile.boundExtentX < k)
+			mobile.boundExtentX = k;
 		}
 		if(j < l)
 		{
-			entity.boundExtentY += k1;
-			if(entity.boundExtentY > l)
-			entity.boundExtentY = l;
+			mobile.boundExtentY += k1;
+			if(mobile.boundExtentY > l)
+			mobile.boundExtentY = l;
 		} else
 		if(j > l)
 		{
-			entity.boundExtentY -= k1;
-			if(entity.boundExtentY < l)
-			entity.boundExtentY = l;
+			mobile.boundExtentY -= k1;
+			if(mobile.boundExtentY < l)
+			mobile.boundExtentY = l;
 		}
-		if(entity.boundExtentX == k && entity.boundExtentY == l)
+		if(mobile.boundExtentX == k && mobile.boundExtentY == l)
 		{
-			entity.pathLength--;
-			if(entity.anInt1542 > 0)
-			entity.anInt1542--;
+			mobile.pathLength--;
+			if(mobile.anInt1542 > 0)
+			mobile.anInt1542--;
 		}
 	}
 
-	private void appendFocusDestination(Entity entity)
+	private void appendFocusDestination(Mobile mobile)
 	{
-		if(entity.anInt1504 == 0)
+		if(mobile.anInt1504 == 0)
 		return;
-		if(entity.interactingEntity != -1 && entity.interactingEntity < 32768)
+		if(mobile.interactingEntity != -1 && mobile.interactingEntity < 32768)
 		{
-			NPC npc = sessionNpcs[entity.interactingEntity];
+			NPC npc = sessionNpcs[mobile.interactingEntity];
 			if(npc != null)
 			{
-				int i1 = entity.boundExtentX - npc.boundExtentX;
-				int k1 = entity.boundExtentY - npc.boundExtentY;
+				int i1 = mobile.boundExtentX - npc.boundExtentX;
+				int k1 = mobile.boundExtentY - npc.boundExtentY;
 				if(i1 != 0 || k1 != 0)
-				entity.turnDirection = (int)(Math.atan2(i1, k1) * 325.94900000000001D) & 0x7ff;
+				mobile.turnDirection = (int)(Math.atan2(i1, k1) * 325.94900000000001D) & 0x7ff;
 			}
 		}
-		if(entity.interactingEntity >= 32768)
+		if(mobile.interactingEntity >= 32768)
 		{
-			int j = entity.interactingEntity - 32768;
+			int j = mobile.interactingEntity - 32768;
 			if(j == unknownInt10)
 			j = session_player_idx;
 			Player player = session_players[j];
 			if(player != null)
 			{
-				int l1 = entity.boundExtentX - player.boundExtentX;
-				int i2 = entity.boundExtentY - player.boundExtentY;
+				int l1 = mobile.boundExtentX - player.boundExtentX;
+				int i2 = mobile.boundExtentY - player.boundExtentY;
 				if(l1 != 0 || i2 != 0)
-				entity.turnDirection = (int)(Math.atan2(l1, i2) * 325.94900000000001D) & 0x7ff;
+				mobile.turnDirection = (int)(Math.atan2(l1, i2) * 325.94900000000001D) & 0x7ff;
 			}
 		}
-		if((entity.anInt1538 != 0 || entity.anInt1539 != 0) && (entity.pathLength == 0 || entity.anInt1503 > 0))
+		if((mobile.anInt1538 != 0 || mobile.anInt1539 != 0) && (mobile.pathLength == 0 || mobile.anInt1503 > 0))
 		{
-			int k = entity.boundExtentX - (entity.anInt1538 - baseX - baseX) * 64;
-			int j1 = entity.boundExtentY - (entity.anInt1539 - baseY - baseY) * 64;
+			int k = mobile.boundExtentX - (mobile.anInt1538 - baseX - baseX) * 64;
+			int j1 = mobile.boundExtentY - (mobile.anInt1539 - baseY - baseY) * 64;
 			if(k != 0 || j1 != 0)
-			entity.turnDirection = (int)(Math.atan2(k, j1) * 325.94900000000001D) & 0x7ff;
-			entity.anInt1538 = 0;
-			entity.anInt1539 = 0;
+			mobile.turnDirection = (int)(Math.atan2(k, j1) * 325.94900000000001D) & 0x7ff;
+			mobile.anInt1538 = 0;
+			mobile.anInt1539 = 0;
 		}
-		int l = entity.turnDirection - entity.anInt1552 & 0x7ff;
+		int l = mobile.turnDirection - mobile.anInt1552 & 0x7ff;
 		if(l != 0)
 		{
-			if(l < entity.anInt1504 || l > 2048 - entity.anInt1504)
-			entity.anInt1552 = entity.turnDirection;
+			if(l < mobile.anInt1504 || l > 2048 - mobile.anInt1504)
+			mobile.anInt1552 = mobile.turnDirection;
 			else
 			if(l > 1024)
-			entity.anInt1552 -= entity.anInt1504;
+			mobile.anInt1552 -= mobile.anInt1504;
 			else
-			entity.anInt1552 += entity.anInt1504;
-			entity.anInt1552 &= 0x7ff;
-			if(entity.anInt1517 == entity.anInt1511 && entity.anInt1552 != entity.turnDirection)
+			mobile.anInt1552 += mobile.anInt1504;
+			mobile.anInt1552 &= 0x7ff;
+			if(mobile.anInt1517 == mobile.anInt1511 && mobile.anInt1552 != mobile.turnDirection)
 			{
-				if(entity.anInt1512 != -1)
+				if(mobile.anInt1512 != -1)
 				{
-					entity.anInt1517 = entity.anInt1512;
+					mobile.anInt1517 = mobile.anInt1512;
 					return;
 				}
-				entity.anInt1517 = entity.anInt1554;
+				mobile.anInt1517 = mobile.anInt1554;
 			}
 		}
 	}
 
-	private void appendAnimation(Entity entity)
+	private void appendAnimation(Mobile mobile)
 	{
-		entity.aBoolean1541 = false;
-		if(entity.anInt1517 != -1)
+		mobile.aBoolean1541 = false;
+		if(mobile.anInt1517 != -1)
 		{
-			Animation animation = Animation.anims[entity.anInt1517];
-			entity.anInt1519++;
-			if(entity.anInt1518 < animation.frameCount && entity.anInt1519 > animation.getFrameLength(entity.anInt1518))
+			Sequence sequence = Sequence.anims[mobile.anInt1517];
+			mobile.anInt1519++;
+			if(mobile.anInt1518 < sequence.frameCount && mobile.anInt1519 > sequence.getFrameLength(mobile.anInt1518))
 			{
-				entity.anInt1519 = 0;
-				entity.anInt1518++;
+				mobile.anInt1519 = 0;
+				mobile.anInt1518++;
 			}
-			if(entity.anInt1518 >= animation.frameCount)
+			if(mobile.anInt1518 >= sequence.frameCount)
 			{
-				entity.anInt1519 = 0;
-				entity.anInt1518 = 0;
+				mobile.anInt1519 = 0;
+				mobile.anInt1518 = 0;
 			}
 		}
-		if(entity.anInt1520 != -1 && currentTime >= entity.anInt1523)
+		if(mobile.anInt1520 != -1 && currentTime >= mobile.anInt1523)
 		{
-			if(entity.anInt1521 < 0)
-			entity.anInt1521 = 0;
-			Animation animation_1 = SpotAnim.cache[entity.anInt1520].aAnimation_407;
-			for(entity.anInt1522++; entity.anInt1521 < animation_1.frameCount && entity.anInt1522 > animation_1.getFrameLength(entity.anInt1521); entity.anInt1521++)
-			entity.anInt1522 -= animation_1.getFrameLength(entity.anInt1521);
+			if(mobile.anInt1521 < 0)
+			mobile.anInt1521 = 0;
+			Sequence sequence_1 = SpotAnim.cache[mobile.anInt1520].aSequence_407;
+			for(mobile.anInt1522++; mobile.anInt1521 < sequence_1.frameCount && mobile.anInt1522 > sequence_1.getFrameLength(mobile.anInt1521); mobile.anInt1521++)
+			mobile.anInt1522 -= sequence_1.getFrameLength(mobile.anInt1521);
 
-			if(entity.anInt1521 >= animation_1.frameCount && (entity.anInt1521 < 0 || entity.anInt1521 >= animation_1.frameCount))
-			entity.anInt1520 = -1;
+			if(mobile.anInt1521 >= sequence_1.frameCount && (mobile.anInt1521 < 0 || mobile.anInt1521 >= sequence_1.frameCount))
+			mobile.anInt1520 = -1;
 		}
-		if(entity.animation != -1 && entity.anInt1529 <= 1)
+		if(mobile.animation != -1 && mobile.anInt1529 <= 1)
 		{
-			Animation animation_2 = Animation.anims[entity.animation];
-			if(animation_2.anInt363 == 1 && entity.anInt1542 > 0 && entity.anInt1547 <= currentTime && entity.anInt1548 < currentTime)
+			Sequence sequence_2 = Sequence.anims[mobile.animation];
+			if(sequence_2.anInt363 == 1 && mobile.anInt1542 > 0 && mobile.anInt1547 <= currentTime && mobile.anInt1548 < currentTime)
 			{
-				entity.anInt1529 = 1;
+				mobile.anInt1529 = 1;
 				return;
 			}
 		}
-		if(entity.animation != -1 && entity.anInt1529 == 0)
+		if(mobile.animation != -1 && mobile.anInt1529 == 0)
 		{
-			Animation animation_3 = Animation.anims[entity.animation];
-			for(entity.anInt1528++; entity.anInt1527 < animation_3.frameCount && entity.anInt1528 > animation_3.getFrameLength(entity.anInt1527); entity.anInt1527++)
-			entity.anInt1528 -= animation_3.getFrameLength(entity.anInt1527);
+			Sequence sequence_3 = Sequence.anims[mobile.animation];
+			for(mobile.anInt1528++; mobile.anInt1527 < sequence_3.frameCount && mobile.anInt1528 > sequence_3.getFrameLength(mobile.anInt1527); mobile.anInt1527++)
+			mobile.anInt1528 -= sequence_3.getFrameLength(mobile.anInt1527);
 
-			if(entity.anInt1527 >= animation_3.frameCount)
+			if(mobile.anInt1527 >= sequence_3.frameCount)
 			{
-				entity.anInt1527 -= animation_3.frameStep;
-				entity.anInt1530++;
-				if(entity.anInt1530 >= animation_3.anInt362)
-				entity.animation = -1;
-				if(entity.anInt1527 < 0 || entity.anInt1527 >= animation_3.frameCount)
-				entity.animation = -1;
+				mobile.anInt1527 -= sequence_3.frameStep;
+				mobile.anInt1530++;
+				if(mobile.anInt1530 >= sequence_3.anInt362)
+				mobile.animation = -1;
+				if(mobile.anInt1527 < 0 || mobile.anInt1527 >= sequence_3.frameCount)
+				mobile.animation = -1;
 			}
-			entity.aBoolean1541 = animation_3.aBoolean358;
+			mobile.aBoolean1541 = sequence_3.aBoolean358;
 		}
-		if(entity.anInt1529 > 0)
-		entity.anInt1529--;
+		if(mobile.anInt1529 > 0)
+		mobile.anInt1529--;
 	}
 
 	private void drawGameScreen()
@@ -8176,8 +8176,8 @@ public class client extends RSApplet {
 					model = class9_1.method209(-1, -1, flag2);
 				} else
 				{
-					Animation animation = Animation.anims[i7];
-					model = class9_1.method209(animation.frame1IDS[class9_1.anim_frame], animation.frame2IDS[class9_1.anim_frame], flag2);
+					Sequence sequence = Sequence.anims[i7];
+					model = class9_1.method209(sequence.frame1IDS[class9_1.anim_frame], sequence.frame2IDS[class9_1.anim_frame], flag2);
 				}
 				if(model != null)
 				model.rendersingle(class9_1.anInt271, 0, class9_1.anInt270, 0, i5, l5);
@@ -8298,7 +8298,7 @@ public class client extends RSApplet {
 			int i2 = stream.ng1b();
 			if(l == player.animation && l != -1)
 			{
-				int i3 = Animation.anims[l].anInt365;
+				int i3 = Sequence.anims[l].anInt365;
 				if(i3 == 1)
 				{
 					player.anInt1527 = 0;
@@ -8309,7 +8309,7 @@ public class client extends RSApplet {
 				if(i3 == 2)
 				player.anInt1530 = 0;
 			} else
-			if(l == -1 || player.animation == -1 || Animation.anims[l].anInt359 >= Animation.anims[player.animation].anInt359)
+			if(l == -1 || player.animation == -1 || Sequence.anims[l].anInt359 >= Sequence.anims[player.animation].anInt359)
 			{
 				player.animation = l;
 				player.anInt1527 = 0;
@@ -8908,15 +8908,15 @@ public class client extends RSApplet {
 				l = class9_1.animation_conditionfalse;
 				if(l != -1)
 				{
-					Animation animation = Animation.anims[l];
-					for(class9_1.anInt208 += i; class9_1.anInt208 > animation.getFrameLength(class9_1.anim_frame);)
+					Sequence sequence = Sequence.anims[l];
+					for(class9_1.anInt208 += i; class9_1.anInt208 > sequence.getFrameLength(class9_1.anim_frame);)
 					{
-						class9_1.anInt208 -= animation.getFrameLength(class9_1.anim_frame) + 1;
+						class9_1.anInt208 -= sequence.getFrameLength(class9_1.anim_frame) + 1;
 						class9_1.anim_frame++;
-						if(class9_1.anim_frame >= animation.frameCount)
+						if(class9_1.anim_frame >= sequence.frameCount)
 						{
-							class9_1.anim_frame -= animation.frameStep;
-							if(class9_1.anim_frame < 0 || class9_1.anim_frame >= animation.frameCount)
+							class9_1.anim_frame -= sequence.frameStep;
+							if(class9_1.anim_frame < 0 || class9_1.anim_frame >= sequence.frameCount)
 							class9_1.anim_frame = 0;
 						}
 						flag1 = true;
@@ -9248,10 +9248,10 @@ public class client extends RSApplet {
 			NPC npc = sessionNpcs[sessionNpcList[i6]];
 			if(npc != null && npc.isVisible())
 			{
-				EntityDef entityDef = npc.desc;
-				if(entityDef.childrenIDs != null)
-				entityDef = entityDef.method161();
-				if(entityDef != null && entityDef.aBoolean87 && entityDef.aBoolean84)
+				NpcDef npcDef = npc.desc;
+				if(npcDef.childrenIDs != null)
+				npcDef = npcDef.method161();
+				if(npcDef != null && npcDef.aBoolean87 && npcDef.aBoolean84)
 				{
 					int i1 = npc.boundExtentX / 32 - session_player.boundExtentX / 32;
 					int k3 = npc.boundExtentY / 32 - session_player.boundExtentY / 32;
@@ -9329,11 +9329,11 @@ public class client extends RSApplet {
 		gameDrawingTarget.initDrawingArea();
 	}
 
-	private void npcScreenPos(Entity entity, int i)
+	private void npcScreenPos(Mobile mobile, int i)
 	{
-		calcEntityScreenPos(entity.boundExtentX, i, entity.boundExtentY);
+		calcEntityScreenPos(mobile.boundExtentX, i, mobile.boundExtentY);
 
-		//aryan	entity.entScreenX = spriteDrawX; entity.entScreenY = spriteDrawY;
+		//aryan	mobile.entScreenX = spriteDrawX; mobile.entScreenY = spriteDrawY;
 	}
 
 	private void calcEntityScreenPos(int i, int j, int l)

@@ -245,7 +245,7 @@ public class ObjectDef
         flag = modelSizeX != 128 || modelSizeH != 128 || modelSizeY != 128;
         boolean flag2;
         flag2 = offsetX != 0 || offsetH != 0 || offsetY != 0;
-        Model model_3 = new Model(modifiedModelColors == null, AnimationFrame.method532(k), l == 0 && k == -1 && !flag && !flag2, model);
+        Model model_3 = new Model(modifiedModelColors == null, Animation.method532(k), l == 0 && k == -1 && !flag && !flag2, model);
         if(k != -1)
         {
             model_3.calcSkinning();

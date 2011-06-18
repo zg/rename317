@@ -1,7 +1,7 @@
 package rs2;
 
 
-public class Player extends Entity
+public class Player extends Mobile
 {
 
     public Model getRotatedModel()
@@ -21,10 +21,10 @@ public class Player extends Entity
             Model model_2 = spotAnim.getModel();
             if(model_2 != null)
             {
-                Model model_3 = new Model(true, AnimationFrame.method532(super.anInt1521), false, model_2);
+                Model model_3 = new Model(true, Animation.method532(super.anInt1521), false, model_2);
                 model_3.translate(0, -super.anInt1524, 0);
                 model_3.calcSkinning();
-                model_3.applyTransform(spotAnim.aAnimation_407.frame2IDS[super.anInt1521]);
+                model_3.applyTransform(spotAnim.aSequence_407.frame2IDS[super.anInt1521]);
                 model_3.triangleSkin = null;
                 model_3.vertexSkin = null;
                 if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
@@ -101,7 +101,7 @@ public class Player extends Entity
             appearanceModels[j] = (k << 8) + i1;
             if(j == 0 && appearanceModels[0] == 65535)
             {
-                desc = EntityDef.forID(stream.g2());
+                desc = NpcDef.forID(stream.g2());
                 break;
             }
             if(appearanceModels[j] >= 512 && appearanceModels[j] - 512 < ItemDef.totalItems)
@@ -173,10 +173,10 @@ public class Player extends Entity
         {
             int j = -1;
             if(super.animation >= 0 && super.anInt1529 == 0)
-                j = Animation.anims[super.animation].frame2IDS[super.anInt1527];
+                j = Sequence.anims[super.animation].frame2IDS[super.anInt1527];
             else
             if(super.anInt1517 >= 0)
-                j = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
+                j = Sequence.anims[super.anInt1517].frame2IDS[super.anInt1518];
             Model model = desc.method164(-1, j, null);
             return model;
         }
@@ -187,23 +187,23 @@ public class Player extends Entity
         int k1 = -1;
         if(super.animation >= 0 && super.anInt1529 == 0)
         {
-            Animation animation = Animation.anims[super.animation];
-            k = animation.frame2IDS[super.anInt1527];
+            Sequence sequence = Sequence.anims[super.animation];
+            k = sequence.frame2IDS[super.anInt1527];
             if(super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511)
-                i1 = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
-            if(animation.anInt360 >= 0)
+                i1 = Sequence.anims[super.anInt1517].frame2IDS[super.anInt1518];
+            if(sequence.anInt360 >= 0)
             {
-                j1 = animation.anInt360;
+                j1 = sequence.anInt360;
                 l += j1 - appearanceModels[5] << 40;
             }
-            if(animation.anInt361 >= 0)
+            if(sequence.anInt361 >= 0)
             {
-                k1 = animation.anInt361;
+                k1 = sequence.anInt361;
                 l += k1 - appearanceModels[3] << 48;
             }
         } else
         if(super.anInt1517 >= 0)
-            k = Animation.anims[super.anInt1517].frame2IDS[super.anInt1518];
+            k = Sequence.anims[super.anInt1517].frame2IDS[super.anInt1518];
         Model model_1 = (Model) mruNodes.get(l);
         if(model_1 == null)
         {
@@ -271,9 +271,9 @@ public class Player extends Entity
         if(aBoolean1699)
             return model_1;
         Model model_2 = Model.aModel_1621;
-        model_2.method464(model_1, AnimationFrame.method532(k) & AnimationFrame.method532(i1));
+        model_2.method464(model_1, Animation.method532(k) & Animation.method532(i1));
         if(k != -1 && i1 != -1)
-            model_2.mixAnimationFrames(Animation.anims[super.animation].animationFlowControl, i1, k);
+            model_2.mixAnimationFrames(Sequence.anims[super.animation].animationFlowControl, i1, k);
         else
         if(k != -1)
             model_2.applyTransform(k);
@@ -349,7 +349,7 @@ public class Player extends Entity
     }
 
     private long aLong1697;
-    public EntityDef desc;
+    public NpcDef desc;
     boolean aBoolean1699;
     final int[] appearanceColours;
     public int team;

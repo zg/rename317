@@ -1,184 +1,208 @@
 package rs2;
 
-public class Animation {
+public class Animation
+{
 
-    public static void unpackConfig(JagexArchive jagexArchive)
-    {
-//        rs2.Packet stream = new rs2.Packet(jagexArchive.getDataForName("seq.dat"));
-Packet stream = new Packet(FileOperations.ReadFile("extras/seq.dat"));
-        int length = stream.g2();
-System.out.println("Reading new animations... "+length+" new animations");
-        if(anims == null)
-            anims = new Animation[length];
-        for(int j = 0; j < length; j++)
-        {
-            if(anims[j] == null)
-                anims[j] = new Animation();
-            anims[j].readValues(stream);
-        }
-    }
+	public static byte[] getData(int i1, int i2) {
+		if(frameData == null)
+		loadFrames();
+		
+		if(skinData == null)
+		loadSkins();
 
-    public int getFrameLength(int i)
-    {
-        int j = frameLengths[i];
-        if(j == 0)
-        {
-            AnimationFrame animationFrame = AnimationFrame.forID(frame2IDS[i]);
-            if(animationFrame != null)
-                j = frameLengths[i] = animationFrame.displayLength;
-        }
-        if(j == 0)
-            j = 1;
-        return j;
-    }
-
-    private void readValues(Packet stream)
-    {
-        	do {
-			anInt360 = stream.g2();
-			if(anInt360 == 65535)
-			   anInt360 = -1;
-			anInt361 = stream.g2();
-			if(anInt361 == 65535)
-			   anInt361 = -1;
-			anInt359 = stream.g1();
-			anInt362 = stream.g1();
-			anInt363 = stream.g1();
-			priority = stream.g1();
-		  	frameCount = stream.g2();
-			frame2IDS = new int[frameCount];
-			frame1IDS = new int[frameCount];
-			frameLengths = new int[frameCount];
-			for(int i=0; i < frameCount; i++)
-			  frame2IDS[i] = stream.g4();
-			for(int i=0; i < frameCount; i++)
-			  frame1IDS[i] = -1;
-			for(int i=0; i < frameCount; i++)
-			  frameLengths[i] = stream.g1();
-			break;
-		} while(true);
-    }
-
+		if (i1 == 0)
+		{
+			//return rs2.FileOperations.ReadFile("./extras/frames/" + i2 + ".dat");
+			return frameData[i2];
+		}
+		else
+		{
+			//return rs2.FileOperations.ReadFile("./extras/skinlist/" + i2 + ".dat");
+			return skinData[i2];
+		}
+	}
+	public static void loadSkins()
+	{
+		System.out.println("Preloading Skins...");
+		Packet stream = new Packet(FileOperations.ReadFile("extras/Skins.dat"));
 
 /*
-    private void readValues(rs2.Packet stream)
-    {
-        do
-        {
-            int i = stream.g1();
-            if(i == 0)
-                break;
-            if(i == 1)
-            {
-                frameCount = stream.g1();
-                frame2IDS = new int[frameCount];
-                frame1IDS = new int[frameCount];
-                frameLengths = new int[frameCount];
-                for(int j = 0; j < frameCount; j++)
-                {
-                    frame2IDS[j] = stream.g2();
-                    frame1IDS[j] = stream.g2();
-                    if(frame1IDS[j] == 65535)
-                        frame1IDS[j] = -1;
-                    frameLengths[j] = stream.g2();
-                }
-
-            } else
-            if(i == 2)
-                frameStep = stream.g2();
-            else
-            if(i == 3)
-            {
-                int k = stream.g1();
-                animationFlowControl = new int[k + 1];
-                for(int l = 0; l < k; l++)
-                    animationFlowControl[l] = stream.g1();
-
-                animationFlowControl[k] = 0x98967f;
-            } else
-            if(i == 4)
-                aBoolean358 = true;
-            else
-            if(i == 5)
-                anInt359 = stream.g1();
-            else
-            if(i == 6)
-                anInt360 = stream.g2();
-            else
-            if(i == 7)
-                anInt361 = stream.g2();
-            else
-            if(i == 8)
-                anInt362 = stream.g1();
-            else
-            if(i == 9)
-                anInt363 = stream.g1();
-            else
-            if(i == 10)
-                priority = stream.g1();
-            else
-            if(i == 11)
-                anInt365 = stream.g1();
-            else
-            if(i == 12)
-                stream.g4();
-            else
-                System.out.println("Error unrecognised seq config code: " + i);
-        } while(true);
-        if(frameCount == 0)
-        {
-            frameCount = 1;
-            frame2IDS = new int[1];
-            frame2IDS[0] = -1;
-            frame1IDS = new int[1];
-            frame1IDS[0] = -1;
-            frameLengths = new int[1];
-            frameLengths[0] = -1;
-        }
-        if(anInt363 == -1)
-            if(animationFlowControl != null)
-                anInt363 = 2;
-            else
-                anInt363 = 0;
-        if(priority == -1)
-        {
-            if(animationFlowControl != null)
-            {
-                priority = 2;
-                return;
-            }
-            priority = 0;
-        }
-    }
+Format
+2byte numData
+loop
+2byte - fileID - could be removed realy
+4byte - fileSize
+ByteArray of fileSize -- gziped
+repeat
 */
+
+		int numSkins = stream.g2();
+		skinData = new byte[numSkins][];
+
+		for(int i = 0; i < numSkins; i++)
+		{
+			int fileID = stream.g2();
+			int compressedSize = stream.g4();
+			byte[] compressedData = stream.getData(new byte[compressedSize]);
+			byte[] decompressedData = JavaUncompress.decompress(compressedData);
+			skinData[fileID] = decompressedData;
+		}
+		System.out.println("preloaded "+numSkins+" skins");
+	}
+
+	public static void loadFrames()
+	{
+		System.out.println("Preloading Frames...");
+		Packet stream = new Packet(FileOperations.ReadFile("extras/Frames.dat"));
+
+/*
+Format
+2byte - fileID - could be removed realy
+4byte - fileSize
+ByteArray of fileSize -- gziped
+repeat
+*/
+
+		int numFrames = stream.g2();
+		frameData = new byte[numFrames][];
+
+		for(int i = 0; i < numFrames; i++)
+		{
+			int fileID = stream.g2();
+			int compressedSize = stream.g4();
+			byte[] compressedData = stream.getData(new byte[compressedSize]);
+			byte[] decompressedData = JavaUncompress.decompress(compressedData);
+			frameData[fileID] = decompressedData;
+		}
+		System.out.println("preloaded "+numFrames+" frames");
+
+	}
+
+    public static void method528(int i)
+    {
+//        aAnimationArray635 = new rs2.Animation[i + 1];
+//        aBooleanArray643 = new boolean[i + 1];
+//        for(int j = 0; j < i + 1; j++)
+//            aBooleanArray643[j] = true;
+	aAnimationArray635 = new Animation[3000][0];
+    }
+
+   public static void load(int file){
+    try {
+	    Packet stream = new Packet(getData(0, file));
+        Packet stream1 = new Packet(getData(1, file));
+		ModelTransform class18 = new ModelTransform(stream1);
+        int k1 = stream.g2();
+		aAnimationArray635[file] = new Animation[k1];
+	    int ai[] = new int[500];
+        int ai1[] = new int[500];
+        int ai2[] = new int[500];
+        int ai3[] = new int[500];
+        for(int l1 = 0; l1 < k1; l1++)
+        {
+            int i2 = stream.g2();
+            Animation class36 = aAnimationArray635[file][i2] = new Animation();
+            class36.myModelTransform = class18;
+            int j2 = stream.g1();
+            int l2 = 0;
+			int k2 = -1;
+            for(int i3 = 0; i3 < j2; i3++)
+            {
+                int j3 = stream.g1();
+	
+                if(j3 > 0)
+                {
+                    if(class18.opcodes[i3] != 0)
+                    {
+                        for(int l3 = i3 - 1; l3 > k2; l3--)
+                        {
+                            if(class18.opcodes[l3] != 0)
+                                continue;
+                            ai[l2] = l3;
+                            ai1[l2] = 0;
+                            ai2[l2] = 0;
+                            ai3[l2] = 0;
+                            l2++;
+                            break;
+                        }
+
+                    }
+                    ai[l2] = i3;
+                    short c = 0;
+                    if(class18.opcodes[i3] == 3)
+                        c = (short)128;
+
+                    if((j3 & 1) != 0)
+                        ai1[l2] = (short)stream.readShort2();
+                    else
+                        ai1[l2] = c;
+                    if((j3 & 2) != 0)
+                        ai2[l2] = stream.readShort2();
+                    else
+                        ai2[l2] = c;
+                    if((j3 & 4) != 0)
+                        ai3[l2] = stream.readShort2();
+                    else
+                        ai3[l2] = c;
+                    k2 = i3;
+                    l2++;
+            	}
+	}
+
+            class36.anInt638 = l2;
+            class36.opcodeLinkTable = new int[l2];
+            class36.modifier1 = new int[l2];
+            class36.modifier2 = new int[l2];
+            class36.modifier3 = new int[l2];
+            for(int k3 = 0; k3 < l2; k3++)
+            {
+                class36.opcodeLinkTable[k3] = ai[k3];
+                class36.modifier1[k3] = ai1[k3];
+                class36.modifier2[k3] = ai2[k3];
+                class36.modifier3[k3] = ai3[k3];
+            }
+
+        }
+      }catch(Exception exception) { }
+    }
+
+    public static void nullLoader()
+    {
+        aAnimationArray635 = null;
+    }
+
+    public static Animation forID(int j)
+    {
+		if(aAnimationArray635 == null)
+		return null;
+		String hex = Integer.toHexString(j);
+		int file = Integer.parseInt(hex.substring(0,(hex.length()-4)), 16);
+		int frame = Integer.parseInt(hex.substring((hex.length()-4)), 16);
+		if(aAnimationArray635[file].length == 0)
+			load(file);
+		return aAnimationArray635[file][frame];
+
+    }
+
+    public static boolean method532(int i)
+    {
+        return i == -1;
+    }
 
     private Animation()
     {
-        frameStep = -1;
-        aBoolean358 = false;
-        anInt359 = 5;
-        anInt360 = -1;
-        anInt361 = -1;
-        anInt362 = 99;
-        anInt363 = -1;
-        priority = -1;
-        anInt365 = 2;
-    }
 
-    public static Animation anims[];
-    public int frameCount;
-    public int frame2IDS[];
-    public int frame1IDS[];
-    private int[] frameLengths;
-    public int frameStep;
-    public int animationFlowControl[];
-    public boolean aBoolean358;
-    public int anInt359;
-    public int anInt360;
-    public int anInt361;
-    public int anInt362;
-    public int anInt363;
-    public int priority;
-    public int anInt365;
-    public static int anInt367;
+    }
+	public static byte[][] frameData = null;
+	public static byte[][] skinData = null;
+    private static Animation[][] aAnimationArray635;
+    public int displayLength;
+    public ModelTransform myModelTransform;
+    public int anInt638;
+    public int opcodeLinkTable[];
+    public int modifier1[];
+    public int modifier2[];
+    public int modifier3[];
+    //private static boolean[] aBooleanArray643;//never used
+
 }

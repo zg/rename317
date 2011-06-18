@@ -1,7 +1,7 @@
 package rs2;
 
 
-public class StillGraphics extends Animable {
+public class StillGraphics extends Entity {
 
     public StillGraphics(int i, int j, int l, int i1, int j1, int k1,
                          int l1)
@@ -21,8 +21,8 @@ public class StillGraphics extends Animable {
         Model model = aSpotAnim_1568.getModel();
         if(model == null)
             return null;
-        int j = aSpotAnim_1568.aAnimation_407.frame2IDS[anInt1569];
-        Model model_1 = new Model(true, AnimationFrame.method532(j), false, model);
+        int j = aSpotAnim_1568.aSequence_407.frame2IDS[anInt1569];
+        Model model_1 = new Model(true, Animation.method532(j), false, model);
         if(!aBoolean1567)
         {
             model_1.calcSkinning();
@@ -54,11 +54,11 @@ public class StillGraphics extends Animable {
 
     public void method454(int i)
     {
-        for(anInt1570 += i; anInt1570 > aSpotAnim_1568.aAnimation_407.getFrameLength(anInt1569);)
+        for(anInt1570 += i; anInt1570 > aSpotAnim_1568.aSequence_407.getFrameLength(anInt1569);)
         {
-            anInt1570 -= aSpotAnim_1568.aAnimation_407.getFrameLength(anInt1569) + 1;
+            anInt1570 -= aSpotAnim_1568.aSequence_407.getFrameLength(anInt1569) + 1;
             anInt1569++;
-            if(anInt1569 >= aSpotAnim_1568.aAnimation_407.frameCount && (anInt1569 < 0 || anInt1569 >= aSpotAnim_1568.aAnimation_407.frameCount))
+            if(anInt1569 >= aSpotAnim_1568.aSequence_407.frameCount && (anInt1569 < 0 || anInt1569 >= aSpotAnim_1568.aSequence_407.frameCount))
             {
                 anInt1569 = 0;
                 aBoolean1567 = true;

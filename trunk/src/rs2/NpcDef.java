@@ -1,32 +1,32 @@
 package rs2;
 
 
-public class EntityDef
+public class NpcDef
 {
 
-    public static EntityDef forID(int i)
+    public static NpcDef forID(int i)
     {
         for(int j = 0; j < 20; j++)
             if(cache[j].type == (long)i)
                 return cache[j];
 
         anInt56 = (anInt56 + 1) % 20;
-        EntityDef entityDef = cache[anInt56] = new EntityDef();
+        NpcDef npcDef = cache[anInt56] = new NpcDef();
         stream.pos = streamIndices[i];
-        entityDef.type = i;
-        entityDef.readValues(stream);
-        return entityDef;
+        npcDef.type = i;
+        npcDef.readValues(stream);
+        return npcDef;
     }
 
     public Model getHeadModel()
     {
         if(childrenIDs != null)
         {
-            EntityDef entityDef = method161();
-            if(entityDef == null)
+            NpcDef npcDef = method161();
+            if(npcDef == null)
                 return null;
             else
-                return entityDef.getHeadModel();
+                return npcDef.getHeadModel();
         }
         if(anIntArray73 == null)
             return null;
@@ -55,7 +55,7 @@ public class EntityDef
         return model;
     }
 
-    public EntityDef method161()
+    public NpcDef method161()
     {
         int j = -1;
         if(anInt57 != -1)
@@ -88,9 +88,9 @@ public class EntityDef
             i += stream2.g2();
         }
 
-        cache = new EntityDef[20];
+        cache = new NpcDef[20];
         for(int k = 0; k < 20; k++)
-            cache[k] = new EntityDef();
+            cache[k] = new NpcDef();
 
     }
 
@@ -106,11 +106,11 @@ public class EntityDef
     {
         if(childrenIDs != null)
         {
-            EntityDef entityDef = method161();
-            if(entityDef == null)
+            NpcDef npcDef = method161();
+            if(npcDef == null)
                 return null;
             else
-                return entityDef.method164(j, frameId, ai);
+                return npcDef.method164(j, frameId, ai);
         }
         Model model = (Model) mruNodes.get(type);
         if(model == null)
@@ -141,7 +141,7 @@ public class EntityDef
             mruNodes.put(model, type);
         }
         Model model_1 = Model.aModel_1621;
-        model_1.method464(model, AnimationFrame.method532(frameId) & AnimationFrame.method532(j));
+        model_1.method464(model, Animation.method532(frameId) & Animation.method532(j));
         if(frameId != -1 && j != -1)
             model_1.mixAnimationFrames(ai, j, frameId);
         else
@@ -281,7 +281,7 @@ public class EntityDef
         } while(true);
     }
 
-    private EntityDef()
+    private NpcDef()
     {
         anInt55 = -1;
         anInt57 = -1;
@@ -323,7 +323,7 @@ public class EntityDef
     public int idleAnimation;
     public long type;
     public int anInt79;
-    private static EntityDef[] cache;
+    private static NpcDef[] cache;
     public static client clientInstance;
     public int anInt83;
     public boolean aBoolean84;
