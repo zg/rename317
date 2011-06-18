@@ -3,9 +3,9 @@ package rs2;
 
 import sign.signlink;
 
-public class NodeCache {
+public class HashTable {
 
-    public NodeCache()
+    public HashTable()
     {
         int i = 1024;//was parameter
         size = i;
@@ -13,8 +13,8 @@ public class NodeCache {
         for(int k = 0; k < i; k++)
         {
             Node node = cache[k] = new Node();
-            node.prev = node;
             node.next = node;
+            node.previous = node;
         }
 
     }
@@ -22,8 +22,8 @@ public class NodeCache {
     public Node findNodeByID(long l)
     {
         Node node = cache[(int)(l & (long)(size - 1))];
-        for(Node node_1 = node.prev; node_1 != node; node_1 = node_1.prev)
-            if(node_1.id == l)
+        for(Node node_1 = node.next; node_1 != node; node_1 = node_1.next)
+            if(node_1.hash == l)
                 return node_1;
 
         return null;
@@ -33,14 +33,14 @@ public class NodeCache {
     {
         try
         {
-            if(node.next != null)
+            if(node.previous != null)
                 node.unlink();
             Node node_1 = cache[(int)(l & (long)(size - 1))];
-                node.next = node_1.next;
-                node.prev = node_1;
-                node.next.prev = node;
-                node.prev.next = node;
-                node.id = l;
+                node.previous = node_1.previous;
+                node.next = node_1;
+                node.previous.next = node;
+                node.next.previous = node;
+                node.hash = l;
                 return;
         }
         catch(RuntimeException runtimeexception)

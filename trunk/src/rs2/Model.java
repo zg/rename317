@@ -3,7 +3,7 @@ package rs2;
 
 public class Model extends Entity {
 
-    public VertexNormal[] vns;
+    public Vertex[] vns;
 
     public static void nullLoader() {
         modelHeaderCache = null;
@@ -1067,17 +1067,17 @@ public class Model extends Entity {
                 System.arraycopy(model.triangleDrawType, 0, triangleDrawType, 0, triangleCount);
 
             }
-            super.vertexNormal = new VertexNormal[verticeCount];
+            super.vertex = new Vertex[verticeCount];
             for (int j1 = 0; j1 < verticeCount; j1++) {
-                VertexNormal vertexNormal = super.vertexNormal[j1] = new VertexNormal();
-                VertexNormal vertexNormal_1 = model.vertexNormal[j1];
-                vertexNormal.x = vertexNormal_1.x;
-                vertexNormal.y = vertexNormal_1.y;
-                vertexNormal.z = vertexNormal_1.z;
-                vertexNormal.magnitude = vertexNormal_1.magnitude;
+                Vertex vertex = super.vertex[j1] = new Vertex();
+                Vertex vertex_1 = model.vertex[j1];
+                vertex.x = vertex_1.x;
+                vertex.y = vertex_1.y;
+                vertex.z = vertex_1.z;
+                vertex.magnitude = vertex_1.magnitude;
             }
 
-            vertexNormalOffset = model.vertexNormalOffset;
+            vertexOffset = model.vertexOffset;
         } else {
             triangleHslA = model.triangleHslA;
             triangleHslB = model.triangleHslB;
@@ -1558,11 +1558,11 @@ public class Model extends Entity {
     }
 
      public void calculateNormals() {
-         vns = super.vertexNormal;
-         if (super.vertexNormal == null) {
-            super.vertexNormal = new VertexNormal[verticeCount];
+         vns = super.vertex;
+         if (super.vertex == null) {
+            super.vertex = new Vertex[verticeCount];
             for (int l1 = 0; l1 < verticeCount; l1++)
-                super.vertexNormal[l1] = new VertexNormal();
+                super.vertex[l1] = new Vertex();
 
         }
         for (int triID = 0; triID < triangleCount; triID++) {//todo - rename this to camelcode in future (peter plz do this, looks fucking complicated >:)
@@ -1590,21 +1590,21 @@ public class Model extends Entity {
             normalY = (normalY * 256) / normal_length;
             normalZ = (normalZ * 256) / normal_length;
             if (triangleDrawType == null || (triangleDrawType[triID] & 1) == 0) {
-                VertexNormal vertexNormal_2 = super.vertexNormal[t_a];
-                vertexNormal_2.x += normalX;
-                vertexNormal_2.y += normalY;
-                vertexNormal_2.z += normalZ;
-                vertexNormal_2.magnitude++;
-                vertexNormal_2 = super.vertexNormal[t_b];
-                vertexNormal_2.x += normalX;
-                vertexNormal_2.y += normalY;
-                vertexNormal_2.z += normalZ;
-                vertexNormal_2.magnitude++;
-                vertexNormal_2 = super.vertexNormal[t_c];
-                vertexNormal_2.x += normalX;
-                vertexNormal_2.y += normalY;
-                vertexNormal_2.z += normalZ;
-                vertexNormal_2.magnitude++;
+                Vertex vertex_2 = super.vertex[t_a];
+                vertex_2.x += normalX;
+                vertex_2.y += normalY;
+                vertex_2.z += normalZ;
+                vertex_2.magnitude++;
+                vertex_2 = super.vertex[t_b];
+                vertex_2.x += normalX;
+                vertex_2.y += normalY;
+                vertex_2.z += normalZ;
+                vertex_2.magnitude++;
+                vertex_2 = super.vertex[t_c];
+                vertex_2.x += normalX;
+                vertex_2.y += normalY;
+                vertex_2.z += normalZ;
+                vertex_2.magnitude++;
             }
         }
     }
@@ -1619,10 +1619,10 @@ public class Model extends Entity {
             triangleHslB = new int[triangleCount];
             triangleHslC = new int[triangleCount];
         }
-        if (super.vertexNormal == null) {
-            super.vertexNormal = new VertexNormal[verticeCount];
+        if (super.vertex == null) {
+            super.vertex = new Vertex[verticeCount];
             for (int l1 = 0; l1 < verticeCount; l1++)
-                super.vertexNormal[l1] = new VertexNormal();
+                super.vertex[l1] = new Vertex();
 
         }
         for (int triID = 0; triID < triangleCount; triID++) {//todo - rename this to camelcode in future (peter plz do this, looks fucking complicated >:)
@@ -1650,21 +1650,21 @@ public class Model extends Entity {
             normalY = (normalY * 256) / normal_length;
             normalZ = (normalZ * 256) / normal_length;
             if (triangleDrawType == null || (triangleDrawType[triID] & 1) == 0) {
-                VertexNormal vertexNormal_2 = super.vertexNormal[t_a];
-                vertexNormal_2.x += normalX;
-                vertexNormal_2.y += normalY;
-                vertexNormal_2.z += normalZ;
-                vertexNormal_2.magnitude++;
-                vertexNormal_2 = super.vertexNormal[t_b];
-                vertexNormal_2.x += normalX;
-                vertexNormal_2.y += normalY;
-                vertexNormal_2.z += normalZ;
-                vertexNormal_2.magnitude++;
-                vertexNormal_2 = super.vertexNormal[t_c];
-                vertexNormal_2.x += normalX;
-                vertexNormal_2.y += normalY;
-                vertexNormal_2.z += normalZ;
-                vertexNormal_2.magnitude++;
+                Vertex vertex_2 = super.vertex[t_a];
+                vertex_2.x += normalX;
+                vertex_2.y += normalY;
+                vertex_2.z += normalZ;
+                vertex_2.magnitude++;
+                vertex_2 = super.vertex[t_b];
+                vertex_2.x += normalX;
+                vertex_2.y += normalY;
+                vertex_2.z += normalZ;
+                vertex_2.magnitude++;
+                vertex_2 = super.vertex[t_c];
+                vertex_2.x += normalX;
+                vertex_2.y += normalY;
+                vertex_2.z += normalZ;
+                vertex_2.magnitude++;
             } else {
                 int lightness = lightMod + (l_x * normalX + l_y * normalY + l_z * normalZ) / (mag + mag / 2);
                 triangleHslA[triID] = mixLightness(triangleColours[triID], lightness, triangleDrawType[triID]);
@@ -1676,14 +1676,14 @@ public class Model extends Entity {
             doShading(lightMod, mag, l_x, l_y, l_z);
             calculateDiagonals();
         } else {
-            vertexNormalOffset = new VertexNormal[verticeCount];
+            vertexOffset = new Vertex[verticeCount];
             for (int vertexPointer = 0; vertexPointer < verticeCount; vertexPointer++) {
-                VertexNormal vertexNormal = super.vertexNormal[vertexPointer];
-                VertexNormal vertexNormal_1 = vertexNormalOffset[vertexPointer] = new VertexNormal();
-                vertexNormal_1.x = vertexNormal.x;
-                vertexNormal_1.y = vertexNormal.y;
-                vertexNormal_1.z = vertexNormal.z;
-                vertexNormal_1.magnitude = vertexNormal.magnitude;
+                Vertex vertex = super.vertex[vertexPointer];
+                Vertex vertex_1 = vertexOffset[vertexPointer] = new Vertex();
+                vertex_1.x = vertex.x;
+                vertex_1.y = vertex.y;
+                vertex_1.z = vertex.z;
+                vertex_1.magnitude = vertex.magnitude;
             }
             calculateDiagonalsAndStats();
         }
@@ -1696,34 +1696,34 @@ public class Model extends Entity {
             int triC = triangleC[triID];
             if (triangleDrawType == null) {
                 int t_hsl = triangleColours[triID];
-                VertexNormal vertexNormal = super.vertexNormal[triA];
-                int l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
+                Vertex vertex = super.vertex[triA];
+                int l = intensity + (l_x * vertex.x + l_y * vertex.y + l_z * vertex.z) / (falloff * vertex.magnitude);
                 triangleHslA[triID] = mixLightness(t_hsl, l, 0);
-                vertexNormal = super.vertexNormal[triB];
-                l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
+                vertex = super.vertex[triB];
+                l = intensity + (l_x * vertex.x + l_y * vertex.y + l_z * vertex.z) / (falloff * vertex.magnitude);
                 triangleHslB[triID] = mixLightness(t_hsl, l, 0);
-                vertexNormal = super.vertexNormal[triC];
-                l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
+                vertex = super.vertex[triC];
+                l = intensity + (l_x * vertex.x + l_y * vertex.y + l_z * vertex.z) / (falloff * vertex.magnitude);
                 triangleHslC[triID] = mixLightness(t_hsl, l, 0);
             } else if ((triangleDrawType[triID] & 1) == 0) {
                 //Bit 1 of triangle_draw_type ON means mix_lightness returns just lightness
                 //instead of mixed hsl
                 int t_hsl = triangleColours[triID];
                 int t_flags = triangleDrawType[triID];
-                VertexNormal vertexNormal_1 = super.vertexNormal[triA];
-                int l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
+                Vertex vertex_1 = super.vertex[triA];
+                int l = intensity + (l_x * vertex_1.x + l_y * vertex_1.y + l_z * vertex_1.z) / (falloff * vertex_1.magnitude);
                 triangleHslA[triID] = mixLightness(t_hsl, l, t_flags);
-                vertexNormal_1 = super.vertexNormal[triB];
-                l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
+                vertex_1 = super.vertex[triB];
+                l = intensity + (l_x * vertex_1.x + l_y * vertex_1.y + l_z * vertex_1.z) / (falloff * vertex_1.magnitude);
                 triangleHslB[triID] = mixLightness(t_hsl, l, t_flags);
-                vertexNormal_1 = super.vertexNormal[triC];
-                l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
+                vertex_1 = super.vertex[triC];
+                l = intensity + (l_x * vertex_1.x + l_y * vertex_1.y + l_z * vertex_1.z) / (falloff * vertex_1.magnitude);
                 triangleHslC[triID] = mixLightness(t_hsl, l, t_flags);
             }
         }
 
-        super.vertexNormal = null;
-        vertexNormalOffset = null;
+        super.vertex = null;
+        vertexOffset = null;
         vertexVSkin = null;
         triangleTSkin = null;
         if (triangleDrawType != null) {
@@ -2301,7 +2301,7 @@ public class Model extends Entity {
     public int vertexSkin[][];
     public int triangleSkin[][];
     public boolean aBoolean1659;
-    VertexNormal vertexNormalOffset[];
+    Vertex vertexOffset[];
     private static ModelHeader[] modelHeaderCache;
     private static OnDemandFetcherParent aOnDemandFetcherParent_1662;
     private static boolean[] aBooleanArray1663 = new boolean[4096];

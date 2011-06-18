@@ -83,7 +83,7 @@ public class SpotAnim {
 
     public Model getModel()
     {
-        Model model = (Model) aMRUNodes_415.get(id);
+        Model model = (Model) memCache.get(id);
         if(model != null)
             return model;
         model = Model.getModel(modelID);
@@ -93,7 +93,7 @@ public class SpotAnim {
             if(originalModelColours[0] != 0)
                 model.recolour(originalModelColours[i], modifiedModelColours[i]);
 
-        aMRUNodes_415.put(model, id);
+        memCache.put(model, id);
         return model;
     }
 
@@ -118,6 +118,6 @@ public class SpotAnim {
     public int rotation;
     public int modelBrightness;
     public int modelShadow;
-    public static MRUNodes aMRUNodes_415 = new MRUNodes(30);
+    public static MemCache memCache = new MemCache(30);
 
 }

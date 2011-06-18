@@ -1,9 +1,9 @@
 package rs2;
 
-public class VertexNormal
+public class Vertex
 {
 
-    public VertexNormal()
+    public Vertex()
     {
     }
 

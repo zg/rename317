@@ -16,7 +16,7 @@ public class RSInterface
 
     public static void unpack(JagexArchive jagexArchive, RSFont RSFonts[], JagexArchive jagexArchive_1)
     {
-        aMRUNodes_238 = new MRUNodes(50000);
+        spriteCache = new MemCache(50000);
         Packet stream = new Packet(jagexArchive.getDataForName("data"));
         int i = -1;
         int j = stream.g2();
@@ -241,15 +241,15 @@ public class RSInterface
                         rsInterface.tooltip = "Continue";
                 }
             }
-        
+
 //aryan	Bot.notifyInterface(rsInterface);
 	}
-        aMRUNodes_238 = null;
+        spriteCache = null;
     }
 
     private Model get_model(int type, int j)
     {
-        Model model = (Model) model_cache.get((type << 16) + j);
+        Model model = (Model) modelCache.get((type << 16) + j);
         if(model != null)
             return model;
         if(type == 1)
@@ -263,20 +263,20 @@ public class RSInterface
         if(type == 5)
             model = null;
         if(model != null)
-            model_cache.put(model, (type << 16) + j);
+            modelCache.put(model, (type << 16) + j);
         return model;
     }
 
     private static RgbImage method207(int i, JagexArchive jagexArchive, String s)
     {
         long l = (TextClass.method585(s) << 8) + (long)i;
-        RgbImage rgbImage = (RgbImage) aMRUNodes_238.get(l);
+        RgbImage rgbImage = (RgbImage) spriteCache.get(l);
         if(rgbImage != null)
             return rgbImage;
         try
         {
             rgbImage = new RgbImage(jagexArchive, s, i);
-            aMRUNodes_238.put(rgbImage, l);
+            spriteCache.put(rgbImage, l);
         }
         catch(Exception _ex)
         {
@@ -291,9 +291,9 @@ public class RSInterface
         int j = 5;//was parameter
         if(flag)
             return;
-        model_cache.unlinkAll();
+        modelCache.unlinkAll();
         if(model != null && j != 4)
-            model_cache.put(model, (j << 16) + i);
+            modelCache.put(model, (j << 16) + i);
     }
 
     public Model method209(int j, int k, boolean flag)
@@ -350,7 +350,7 @@ public class RSInterface
     public boolean aBoolean235;
     public int parentID;
     public int spellUsableOn;
-    private static MRUNodes aMRUNodes_238;
+    private static MemCache spriteCache;
     public int colour_conditiontrue_mouseover;
     public int children[];
     public int childX[];
@@ -375,7 +375,7 @@ public class RSInterface
     public int scrollMax;
     public int type;
     public int x_offset;
-    private static final MRUNodes model_cache = new MRUNodes(30);
+    private static final MemCache modelCache = new MemCache(30);
     public int y_offset;
     public boolean hidden_until_mouseover;
     public int height;

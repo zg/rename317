@@ -5,14 +5,14 @@ public class Node {
 
     public final void unlink()
     {
-        if(next == null)
+        if(previous == null)
         {
         } else
         {
-            next.prev = prev;
-            prev.next = next;
-            prev = null;
+            previous.next = next;
+            next.previous = previous;
             next = null;
+            previous = null;
         }
     }
 
@@ -20,7 +20,7 @@ public class Node {
     {
     }
 
-    public long id;
-    public Node prev;
+    public long hash;
     public Node next;
+    public Node previous;
 }
