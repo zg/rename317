@@ -1,6 +1,5 @@
 package rs2;
 
-
 public class InteractableObject
 {
 
@@ -8,18 +7,19 @@ public class InteractableObject
     {
     }
 
-    int zPos;
-    int worldZ;
-    int worldX;
-    int worldY;
-    public Entity aClass30_Sub2_Sub4_521;
+    public int zPos;
+    public int worldZ;
+    public int worldX;
+    public int worldY;
+    public Entity jagexNode;
     public int anInt522;
-    int xPos;
-    int anInt524;
-    int yPos;
-    int anInt526;
-    int anInt527;
-    int anInt528;
+    public org.peterbjornx.pgl2.model.Node pgleNode;
+    public int tileLeft;
+    public int tileRight;
+    public int tileTop;
+    public int tileBottom;
+    public int anInt527;
+    public int anInt528;
     public int uid;
-    byte aByte530;
+    public byte aByte530;
 }

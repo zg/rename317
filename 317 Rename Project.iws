@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="Another try at packaging everything&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/DrawingArea.java" afterPath="$PROJECT_DIR$/src/rs2/DrawingArea.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Model.java" afterPath="$PROJECT_DIR$/src/rs2/Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Rasterizer.java" afterPath="$PROJECT_DIR$/src/rs2/Rasterizer.java" />
+    <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/InteractableObject.java" afterPath="$PROJECT_DIR$/src/rs2/InteractableObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/NPC.java" afterPath="$PROJECT_DIR$/src/rs2/NPC.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/client.java" afterPath="$PROJECT_DIR$/src/rs2/client.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
@@ -69,46 +70,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BZ2Block.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/BZ2Block.java">
+      <file leaf-file-name="SceneGraph.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="1" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.0">
+            <state line="376" column="17" selection-start="13825" selection-end="13825" vertical-scroll-proportion="0.33206108">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BZ2InputStream.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/BZ2InputStream.java">
+      <file leaf-file-name="InteractableObject.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/InteractableObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="42" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Rasterizer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/Rasterizer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="652" column="0" selection-start="22808" selection-end="22808" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Npc.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/Npc.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="20" selection-start="173" selection-end="173" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DrawingArea.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/rs2/DrawingArea.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="95" selection-start="2924" selection-end="2924" vertical-scroll-proportion="0.23119777">
+            <state line="23" column="11" selection-start="474" selection-end="474" vertical-scroll-proportion="-15.64">
               <folding />
             </state>
           </provider>
@@ -124,8 +98,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/run.bat" />
-        <option value="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" />
         <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
         <option value="$PROJECT_DIR$/src/rs2/Flo.java" />
         <option value="$PROJECT_DIR$/src/pgle/PglCubeStub.java" />
@@ -133,13 +105,15 @@
         <option value="$PROJECT_DIR$/src/rs2/client.java" />
         <option value="$PROJECT_DIR$/src/pgle/RsTileManager.java" />
         <option value="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
-        <option value="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
         <option value="$PROJECT_DIR$/src/rs2/Bzip2Block.java" />
         <option value="$PROJECT_DIR$/src/rs2/BZIP2Decompressor.java" />
         <option value="$PROJECT_DIR$/src/rs2/BZ2InputStream.java" />
         <option value="$PROJECT_DIR$/src/rs2/Model.java" />
         <option value="$PROJECT_DIR$/src/rs2/Rasterizer.java" />
         <option value="$PROJECT_DIR$/src/rs2/DrawingArea.java" />
+        <option value="$PROJECT_DIR$/src/rs2/NPC.java" />
+        <option value="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
+        <option value="$PROJECT_DIR$/src/rs2/InteractableObject.java" />
       </list>
     </option>
   </component>
@@ -158,7 +132,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="2" />
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
@@ -326,9 +300,9 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -475,7 +449,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">C:\Users\Tony\AppData\Roaming\Subversion</configuration>
+    <configuration useDefault="true">C:\Users\Peter\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -483,16 +457,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\Users\Tony\Desktop\rename317" />
-          <option name="myCopyRoot" value="C:\Users\Tony\Desktop\rename317" />
+          <option name="myVcsRoot" value="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317" />
+          <option name="myCopyRoot" value="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\Users\Tony\Desktop\rename317" />
-          <option name="myCopyRoot" value="C:\Users\Tony\Desktop\rename317" />
+          <option name="myVcsRoot" value="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317" />
+          <option name="myCopyRoot" value="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -526,26 +500,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39898133" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3238255" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32258064" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.2498096" sideWeight="0.2156197" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3998477" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32978722" sideWeight="0.6728188" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977912" sideWeight="0.67741936" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32718122" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32569557" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -575,7 +549,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Another try at packaging everything&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Renamed some stuff in scenegraph" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -593,6 +567,7 @@
     <MESSAGE value="- Fixed dir tree&#10;" />
     <MESSAGE value="- Fixed dir tree&#10;-Prepared batches for packaging" />
     <MESSAGE value="Another try at packaging everything&#10;" />
+    <MESSAGE value="- Renamed some stuff in scenegraph" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -602,11 +577,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rs2/FileOperations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Flo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="64" selection-start="535" selection-end="535" vertical-scroll-proportion="0.0" />
@@ -647,18 +617,6 @@
         <state line="66" column="57" selection-start="2119" selection-end="2119" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="336" column="39" selection-start="12299" selection-end="12299" vertical-scroll-proportion="0.82371795" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/BZ2Block.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="1" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Model.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -666,30 +624,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/BZ2InputStream.java">
+    <entry file="file://$PROJECT_DIR$/src/rs2/DrawingArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="42" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0">
+        <state line="111" column="95" selection-start="2924" selection-end="2924" vertical-scroll-proportion="0.030965392">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Rasterizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="652" column="0" selection-start="22808" selection-end="22808" vertical-scroll-proportion="0.0">
+        <state line="652" column="0" selection-start="22808" selection-end="22808" vertical-scroll-proportion="0.030965392">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Npc.java">
+    <entry file="file://$PROJECT_DIR$/src/rs2/BZ2InputStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="20" selection-start="173" selection-end="173" vertical-scroll-proportion="0.0">
+        <state line="24" column="42" selection-start="977" selection-end="977" vertical-scroll-proportion="0.030965392">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/DrawingArea.java">
+    <entry file="file://$PROJECT_DIR$/src/rs2/BZ2Block.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="95" selection-start="2924" selection-end="2924" vertical-scroll-proportion="0.23119777">
+        <state line="57" column="1" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.81850535">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/NPC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="14" selection-start="29" selection-end="29" vertical-scroll-proportion="0.14697406">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/InteractableObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="11" selection-start="474" selection-end="474" vertical-scroll-proportion="-15.64">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="376" column="17" selection-start="13825" selection-end="13825" vertical-scroll-proportion="0.33206108">
           <folding />
         </state>
       </provider>
