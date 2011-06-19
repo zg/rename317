@@ -1,15 +1,15 @@
 package rs2;
 
-public class Flo {
+public class Floor {
 
     public static void unpackConfig(JagexArchive jagexArchive) {
         Packet stream = new Packet(jagexArchive.getDataForName("flo.dat"));
         int cacheSize = stream.g2();
         if (cache == null)
-            cache = new Flo[cacheSize];
+            cache = new Floor[cacheSize];
         for (int j = 0; j < cacheSize; j++) {
             if (cache[j] == null)
-                cache[j] = new Flo();
+                cache[j] = new Floor();
             cache[j].readValues(stream);
         }
         if (Config.LOAD_HD_FLO)  {
@@ -214,12 +214,12 @@ public class Flo {
         return (hue / 4 << 10) + (saturation / 32 << 7) + lightness / 2;
     }
 
-    private Flo() {
+    private Floor() {
         texture = -1;
         occlude = true;
     }
 
-    public static Flo cache[];
+    public static Floor cache[];
     public int colour2;
     public int texture;
     public int textureC;

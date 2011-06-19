@@ -1,8 +1,8 @@
 package rs2;
 
-public class ISAACRandomGen {
+public class IsaacCipher {
 
-    public ISAACRandomGen(int seed[])
+    public IsaacCipher(int seed[])
     {
         memory = new int[256];
         results = new int[256];

@@ -2,10 +2,10 @@ package extras;
 
 
 
-// Decompiler options: packimporsts(3) 
+// Decompiler options: packimporsts(3)
 
 import java.math.BigInteger;
-//import sign.signlink;
+//import rs2.Signlink;
 
 public class Packet {
 
@@ -85,7 +85,7 @@ public class Packet {
         }
         catch(RuntimeException runtimeexception)
         {
-//            signlink.reporterror("14395, " + 5 + ", " + l + ", " + runtimeexception.toString());
+//            Signlink.reporterror("14395, " + 5 + ", " + l + ", " + runtimeexception.toString());
             throw new RuntimeException();
         }
     }
@@ -363,9 +363,9 @@ this.data[pos++] = data[i];
     public int pos;
     public int bit_pos;
     private static final int[] bitmasks = {
-        0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 
-        1023, 2047, 4095, 8191, 16383, 32767, 65535, 0x1ffff, 0x3ffff, 0x7ffff, 
-        0xfffff, 0x1fffff, 0x3fffff, 0x7fffff, 0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff, 
+        0, 1, 3, 7, 15, 31, 63, 127, 255, 511,
+        1023, 2047, 4095, 8191, 16383, 32767, 65535, 0x1ffff, 0x3ffff, 0x7ffff,
+        0xfffff, 0x1fffff, 0x3fffff, 0x7fffff, 0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff,
         0x3fffffff, 0x7fffffff, -1
     };
     @SuppressWarnings("unused")

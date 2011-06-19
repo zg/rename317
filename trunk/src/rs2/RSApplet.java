@@ -16,7 +16,7 @@ public class RSApplet extends Applet
         myHeight = i;
             gameFrame = new RSFrame(this, myWidth, myHeight);
             graphics = getGameComponent().getGraphics();
-            fullGameScreen = new RSImageProducer(myWidth, myHeight, getGameComponent());
+            fullGameScreen = new GraphicsBuffer(myWidth, myHeight, getGameComponent());
             startRunnable(this, 1);
     }
 
@@ -25,7 +25,7 @@ public class RSApplet extends Applet
         myWidth = j;
         myHeight = i;
         graphics = getGameComponent().getGraphics();
-        fullGameScreen = new RSImageProducer(myWidth, myHeight, getGameComponent());
+        fullGameScreen = new GraphicsBuffer(myWidth, myHeight, getGameComponent());
         startRunnable(this, 1);
     }
 
@@ -48,7 +48,7 @@ public class RSApplet extends Applet
             otim[k1] = System.currentTimeMillis();
 
         //long l = System.currentTimeMillis();//never used
-        while(anInt4 >= 0) 
+        while(anInt4 >= 0)
         {
             if(anInt4 > 0)
             {
@@ -501,7 +501,7 @@ public class RSApplet extends Applet
     int myWidth;
     int myHeight;
     Graphics graphics;
-    RSImageProducer fullGameScreen;
+    GraphicsBuffer fullGameScreen;
     RSFrame gameFrame;
     private boolean shouldClearScreen;
     boolean awtFocus;

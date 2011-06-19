@@ -5,7 +5,6 @@ import java.io.*;
 import java.net.Socket;
 import java.util.zip.CRC32;
 import java.util.zip.GZIPInputStream;
-import sign.signlink;
 
 public class OnDemandFetcher extends OnDemandFetcherParent
         implements Runnable
@@ -50,7 +49,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
                     loopCycle = 0;
                     if(fileLength == 0)
                     {
-                        signlink.reporterror("Rej: " + dataType + "," + dataIndex);
+                        Signlink.reporterror("Rej: " + dataType + "," + dataIndex);
                         current.buffer = null;
                         if(current.incomplete)
                             synchronized(zippedNodes)
@@ -118,7 +117,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         }
     }
 
-    public void start(JagexArchive jagexArchive, client client1)
+    public void start(JagexArchive jagexArchive, Client client1)
     {
         String as[] = {
             "model_version", "anim_version", "midi_version", "map_version"
@@ -232,7 +231,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
                 if(l - openSocketTime < 4000L)
                     return;
                 openSocketTime = l;
-                socket = clientInstance.openSocket(43594 + client.portOff);
+                socket = clientInstance.openSocket(43594 + Client.portOff);
                 inputStream = socket.getInputStream();
                 outputStream = socket.getOutputStream();
                 outputStream.write(15);
@@ -404,7 +403,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         }
         catch(Exception exception)
         {
-            signlink.reporterror("od_ex " + exception.getMessage());
+            Signlink.reporterror("od_ex " + exception.getMessage());
         }
     }
 
@@ -668,7 +667,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
     private final byte[] ioBuffer;
     public int onDemandCycle;
     private final byte[][] fileStatus;
-    private client clientInstance;
+    private Client clientInstance;
     private final Deque aClass19_1344;
     private int completedSize;
     private int expectedSize;

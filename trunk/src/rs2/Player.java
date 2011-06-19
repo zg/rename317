@@ -38,9 +38,9 @@ public class Player extends Mobile
         }
         if(aModel_1714 != null)
         {
-            if(client.currentTime >= anInt1708)
+            if(Client.currentTime >= anInt1708)
                 aModel_1714 = null;
-            if(client.currentTime >= anInt1707 && client.currentTime < anInt1708)
+            if(Client.currentTime >= anInt1707 && Client.currentTime < anInt1708)
             {
                 Model model_1 = aModel_1714;
                 model_1.translate(anInt1711 - super.boundExtentX, anInt1712 - anInt1709, anInt1713 - super.boundExtentY);
@@ -115,7 +115,7 @@ public class Player extends Mobile
         for(int l = 0; l < 5; l++)
         {
             int j1 = stream.g1();
-            if(j1 < 0 || j1 >= client.playerBodyRecolours[l].length)
+            if(j1 < 0 || j1 >= Client.playerBodyRecolours[l].length)
                 j1 = 0;
             appearanceColours[l] = j1;
         }
@@ -258,9 +258,9 @@ public class Player extends Mobile
             for(int j3 = 0; j3 < 5; j3++)
                 if(appearanceColours[j3] != 0)
                 {
-                    model_1.recolour(client.playerBodyRecolours[j3][0], client.playerBodyRecolours[j3][appearanceColours[j3]]);
+                    model_1.recolour(Client.playerBodyRecolours[j3][0], Client.playerBodyRecolours[j3][appearanceColours[j3]]);
                     if(j3 == 1)
-                        model_1.recolour(client.skinColours[0], client.skinColours[appearanceColours[j3]]);
+                        model_1.recolour(Client.skinColours[0], Client.skinColours[appearanceColours[j3]]);
                 }
 
             model_1.calcSkinning();
@@ -330,9 +330,9 @@ public class Player extends Mobile
         for(int colourPointer = 0; colourPointer < 5; colourPointer++)
             if(appearanceColours[colourPointer] != 0)
             {
-                model.recolour(client.playerBodyRecolours[colourPointer][0], client.playerBodyRecolours[colourPointer][appearanceColours[colourPointer]]);
+                model.recolour(Client.playerBodyRecolours[colourPointer][0], Client.playerBodyRecolours[colourPointer][appearanceColours[colourPointer]]);
                 if(colourPointer == 1)
-                    model.recolour(client.skinColours[0], client.skinColours[appearanceColours[colourPointer]]);
+                    model.recolour(Client.skinColours[0], Client.skinColours[appearanceColours[colourPointer]]);
             }
 
         return model;

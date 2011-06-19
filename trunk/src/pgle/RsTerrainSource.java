@@ -1,13 +1,10 @@
 package pgle;
 
-import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
 import org.lwjgl.util.Color;
-import org.peterbjornx.pgl2.terrain.Terrain;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
 import org.peterbjornx.pgl2.texture.Texture2D;
-import rs2.Flo;
+import rs2.Floor;
 import rs2.MapRegion;
-import sun.text.normalizer.IntTrie;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,7 +32,7 @@ public class RsTerrainSource implements TerrainSource {
             for (int z = 0;z < 104;z++){
                 if (underlays[x][z] == 0)
                     underlays[x][z] = 1;
-                Flo underlay = Flo.cache[underlays[x][z] - 1];
+                Floor underlay = Floor.cache[underlays[x][z] - 1];
                 int underlayRgb = underlaysRgb[x][z];
                 colourMap[x][z] = new Color(underlayRgb >> 16,underlayRgb >> 8,underlayRgb & 0xFF);
                 textureMap[x][z] = underlay.hdUlTexture;

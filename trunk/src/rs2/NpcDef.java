@@ -64,7 +64,7 @@ public class NpcDef
             int k = varBit.configId;
             int l = varBit.leastSignificantBit;
             int i1 = varBit.mostSignificantBit;
-            int j1 = client.BITFIELD_MAX_VALUE[i1 - l];
+            int j1 = Client.BITFIELD_MAX_VALUE[i1 - l];
             j = clientInstance.sessionSettings[k] >> l & j1;
         } else
         if(anInt59 != -1)
@@ -94,7 +94,7 @@ public class NpcDef
 
     }
 
-    public static void nullLoader()
+    public static void clearCache()
     {
         memCache = null;
         streamIndices = null;
@@ -324,7 +324,7 @@ public class NpcDef
     public long type;
     public int anInt79;
     private static NpcDef[] cache;
-    public static client clientInstance;
+    public static Client clientInstance;
     public int anInt83;
     public boolean aBoolean84;
     private int anInt85;

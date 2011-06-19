@@ -1,9 +1,9 @@
 package rs2;
 
 
-public class Sounds {
+public class Sound {
 
-    private Sounds()
+    private Sound()
     {
         aSoundTrackArray329 = new SoundTrack[10];
     }
@@ -18,7 +18,7 @@ public class Sounds {
             int j = stream.g2();
             if(j == 65535)
                 return;
-            sound_gererator_list[j] = new Sounds();
+            sound_gererator_list[j] = new Sound();
             sound_gererator_list[j].load(stream);
             anIntArray326[j] = sound_gererator_list[j].method243();
         } while(true);
@@ -28,8 +28,8 @@ public class Sounds {
     {
         if(sound_gererator_list[j] != null)
         {
-            Sounds sounds = sound_gererator_list[j];
-            return sounds.writeWaveHeader(i);
+            Sound sound = sound_gererator_list[j];
+            return sound.writeWaveHeader(i);
         } else
         {
             return null;
@@ -149,7 +149,7 @@ public class Sounds {
         return k1;
     }
 
-    private static final Sounds[] sound_gererator_list = new Sounds[5000];
+    private static final Sound[] sound_gererator_list = new Sound[5000];
     public static final int[] anIntArray326 = new int[5000];
     private static byte[] waveGenerationBuffer;
     private static Packet waveGenerationStream;

@@ -24,7 +24,7 @@ public class SceneGraph {
             initToNull();
     }
 
-    public static void nullLoader()
+    public static void clearCache()
     {
         interactableObjects = null;
         cullingClusterPointer = null;
@@ -1662,7 +1662,7 @@ label0:
         Rasterizer.alpha = 0;
         if((screenXD - screenXC) * (screenYB - screenYC) - (screenYD - screenYC) * (screenXB - screenXC) > 0)
         {
-            Rasterizer.aBoolean1462 = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > DrawingArea.viewportRx || screenXC > DrawingArea.viewportRx || screenXB > DrawingArea.viewportRx;
+            Rasterizer.restrict_edges = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > Graphics2D.viewportRx || screenXC > Graphics2D.viewportRx || screenXB > Graphics2D.viewportRx;
             if(isClicked && isTriangleClicked(clickX, clickY, screenYD, screenYC, screenYB, screenXD, screenXC, screenXB))
             {
                 clickedTileX = tX;
@@ -1671,7 +1671,7 @@ label0:
             if(plainTile.texture == -1)
             {
                 if(plainTile.colourD != 0xbc614e)
-                    Rasterizer.drawTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB);
+                    Rasterizer.drawShadedTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, plainTile.colourD, plainTile.colourC, plainTile.colourB);
             } else
             if(!lowMem)
             {
@@ -1682,12 +1682,12 @@ label0:
             } else
             {
                 int i7 = textureRGBColour[plainTile.texture];
-                Rasterizer.drawTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, mixColour(i7, plainTile.colourD), mixColour(i7, plainTile.colourC), mixColour(i7, plainTile.colourB));
+                Rasterizer.drawShadedTriangle(screenYD, screenYC, screenYB, screenXD, screenXC, screenXB, mixColour(i7, plainTile.colourD), mixColour(i7, plainTile.colourC), mixColour(i7, plainTile.colourB));
             }
         }
         if((screenXA - screenXB) * (screenYC - screenYB) - (screenYA - screenYB) * (screenXC - screenXB) > 0)
         {
-            Rasterizer.aBoolean1462 = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > DrawingArea.viewportRx || screenXB > DrawingArea.viewportRx || screenXC > DrawingArea.viewportRx;
+            Rasterizer.restrict_edges = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > Graphics2D.viewportRx || screenXB > Graphics2D.viewportRx || screenXC > Graphics2D.viewportRx;
             if(isClicked && isTriangleClicked(clickX, clickY, screenYA, screenYB, screenYC, screenXA, screenXB, screenXC))
             {
                 clickedTileX = tX;
@@ -1697,7 +1697,7 @@ label0:
             {
                 if(plainTile.colourA != 0xbc614e)
                 {
-                    Rasterizer.drawTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC);
+                    Rasterizer.drawShadedTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC);
                 }
             } else
             {
@@ -1707,7 +1707,7 @@ label0:
                     return;
                 }
                 int j7 = textureRGBColour[plainTile.texture];
-                Rasterizer.drawTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, mixColour(j7, plainTile.colourA), mixColour(j7, plainTile.colourB), mixColour(j7, plainTile.colourC));
+                Rasterizer.drawShadedTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, mixColour(j7, plainTile.colourA), mixColour(j7, plainTile.colourB), mixColour(j7, plainTile.colourC));
             }
         }
     }
@@ -1754,7 +1754,7 @@ label0:
             int sYC = ShapedTile.screenY[indexC];
             if((sXA - sXB) * (sYC - sYB) - (sYA - sYB) * (sXC - sXB) > 0)
             {
-                Rasterizer.aBoolean1462 = sXA < 0 || sXB < 0 || sXC < 0 || sXA > DrawingArea.viewportRx || sXB > DrawingArea.viewportRx || sXC > DrawingArea.viewportRx;
+                Rasterizer.restrict_edges = sXA < 0 || sXB < 0 || sXC < 0 || sXA > Graphics2D.viewportRx || sXB > Graphics2D.viewportRx || sXC > Graphics2D.viewportRx;
                 if(isClicked && isTriangleClicked(clickX, clickY, sYA, sYB, sYC, sXA, sXB, sXC))
                 {
                     clickedTileX = i;
@@ -1763,7 +1763,7 @@ label0:
                 if(shapedTile.triTex == null || shapedTile.triTex[j2] == -1)
                 {
                     if(shapedTile.verticeColourA[j2] != 0xbc614e)
-                        Rasterizer.drawTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2]);
+                        Rasterizer.drawShadedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2]);
                 } else
                 if(!lowMem)
                 {
@@ -1774,7 +1774,7 @@ label0:
                 } else
                 {
                     int k5 = textureRGBColour[shapedTile.triTex[j2]];
-                    Rasterizer.drawTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.verticeColourA[j2]), mixColour(k5, shapedTile.verticeColourB[j2]), mixColour(k5, shapedTile.verticeColourC[j2]));
+                    Rasterizer.drawShadedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.verticeColourA[j2]), mixColour(k5, shapedTile.verticeColourB[j2]), mixColour(k5, shapedTile.verticeColourC[j2]));
                 }
             }
         }
@@ -2325,7 +2325,7 @@ for_outer:
     private static int right;
     private static int bottom;
 
-    public static client clientInstance;
+    public static Client clientInstance;
     static
     {
         anInt472 = 4;
