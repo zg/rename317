@@ -1,16 +1,16 @@
 package rs2;
 
-public class Vertex
+public class VertexNormal
 {
 
-    public Vertex()
+    public VertexNormal()
     {
     }
 
     public int x;
-    int y;
-    int z;
-    int magnitude;
+    public int y;
+    public int z;
+    public int magnitude;
 
     public float getX() {
         if (magnitude == 0)

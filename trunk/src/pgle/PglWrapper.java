@@ -45,8 +45,8 @@ public class PglWrapper {
         lightManager = new OpenGLLightManager();
         rsTileManager.setOpenGLLightManager(lightManager);
         sun = new PglSun();
-        sun.setSunColor(new Color(0xFF,0xFF,0xFF,0xff),0.69921875F,1.2F,1.1523438F);
-        sun.setSunPosition(new Vector3f(0, 0, 0));
+        sun.setSunColor(new Color(0xFF,0xFF,0xFF,0xff),0.69921875F,1.0F,0.4F);
+        sun.setSunPosition(new Vector3f(-30, -50, -30));
     }
 
     /**
@@ -130,13 +130,12 @@ public class PglWrapper {
     }
 
     public void clearRegion() {
-
-        scene.remove(rsTerrain);
-        rsTerrain = null;
-        rsTerrainSource = null;
-        scene.remove(rsTileManager);
-        rsTileManager = new RsTileManager();
-        scene.add(rsTileManager);
+        if (rsTerrain != null){
+            scene.remove(rsTerrain);
+            rsTerrain = null;
+            rsTerrainSource = null;
+        }
+        rsTileManager.clear();
         System.gc();
     }
 }

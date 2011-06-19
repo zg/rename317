@@ -295,8 +295,8 @@ public class ItemDef
             k3 = (int)((double)k3 * 1.5D);
         if(k > 0)
             k3 = (int)((double)k3 * 1.04D);
-        int l3 = Rasterizer.sineTable[definition.sprite_rotation_scale] * k3 >> 16;
-        int i4 = Rasterizer.cosineTable[definition.sprite_rotation_scale] * k3 >> 16;
+        int l3 = Rasterizer.SINE[definition.sprite_rotation_scale] * k3 >> 16;
+        int i4 = Rasterizer.COSINE[definition.sprite_rotation_scale] * k3 >> 16;
         model.rendersingle(definition.modelRotation2, definition.anInt204, definition.sprite_rotation_scale, definition.modelOffset1, l3 + model.modelHeight / 2 + definition.modelOffset2, i4 + definition.modelOffset2);
         for(int i5 = 31; i5 >= 0; i5--)
         {

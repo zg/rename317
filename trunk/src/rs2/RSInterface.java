@@ -305,7 +305,7 @@ public class RSInterface
             model = get_model(anInt233, mediaID);
         if(model == null)
             return null;
-        if(k == -1 && j == -1 && model.triangleColours == null)
+        if(k == -1 && j == -1 && model.triangleColour == null)
             return model;
         Model model_1 = new Model(true, Animation.method532(k) & Animation.method532(j), false, model);
         if(k != -1 || j != -1)
