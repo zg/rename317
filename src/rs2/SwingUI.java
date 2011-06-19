@@ -11,10 +11,10 @@ import javax.swing.*;
 //import javax.imageio.ImageIO;
 //import java.awt.image.BufferedImage;
 
-public class SwingUI extends client implements ActionListener {
+public class SwingUI extends Client implements ActionListener {
 
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -6669540533506671428L;
 	//private static JMenuItem menuItem;
@@ -23,7 +23,7 @@ public class SwingUI extends client implements ActionListener {
 	public SwingUI(String args[]) {
 		super();
 		try {
-			sign.signlink.startpriv(InetAddress.getByName(server));
+			Signlink.startpriv(InetAddress.getByName(server));
 			initUI();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -35,7 +35,7 @@ public class SwingUI extends client implements ActionListener {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			JFrame.setDefaultLookAndFeelDecorated(true);
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
-			frame = new JFrame("Clienthax 317 rs2.client haxerownsmopar@hotmail.co.uk");
+			frame = new JFrame("Clienthax 317 rs2.Client haxerownsmopar@hotmail.co.uk");
 			frame.setLayout(new BorderLayout());
 			frame.setResizable(false);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,7 +49,7 @@ public class SwingUI extends client implements ActionListener {
 			frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
 			frame.pack();
 
-			frame.setVisible(true); // can see the rs2.client
+			frame.setVisible(true); // can see the rs2.Client
 			frame.setResizable(false); // resizeable frame
 
 			init();

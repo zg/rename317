@@ -68,7 +68,7 @@ public class ObjectDef
             class42_sub1.method560(objectModelIDs[j] & 0xffff, 0);
     }
 
-    public static void nullLoader()
+    public static void clearCache()
     {
         memCache1 = null;
         memCache2 = null;
@@ -161,7 +161,7 @@ public class ObjectDef
             int j = varBit.configId;
             int k = varBit.leastSignificantBit;
             int l = varBit.mostSignificantBit;
-            int i1 = client.BITFIELD_MAX_VALUE[l - k];
+            int i1 = Client.BITFIELD_MAX_VALUE[l - k];
             i = clientInstance.sessionSettings[j] >> k & i1;
         } else
         if(configID != -1)
@@ -495,7 +495,7 @@ label0:
     public int sizeY;
     public boolean isSolid;
     public boolean aBoolean764;
-    public static client clientInstance;
+    public static Client clientInstance;
     private boolean aBoolean766;
     public boolean isUnwalkable;
     public int anInt768;

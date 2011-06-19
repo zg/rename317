@@ -4,7 +4,7 @@ package rs2;
 public class ItemDef
 {
 
-    public static void nullLoader()
+    public static void clearCache()
     {
         memCache2 = null;
         memCache1 = null;
@@ -279,24 +279,24 @@ public class ItemDef
         int k1 = Rasterizer.centerX;
         int l1 = Rasterizer.centerY;
         int ai[] = Rasterizer.lineOffsets;
-        int ai1[] = DrawingArea.pixels;
-        int i2 = DrawingArea.width;
-        int j2 = DrawingArea.height;
-        int k2 = DrawingArea.topX;
-        int l2 = DrawingArea.viewport_w;
-        int i3 = DrawingArea.topY;
-        int j3 = DrawingArea.viewport_h;
+        int ai1[] = Graphics2D.pixels;
+        int i2 = Graphics2D.width;
+        int j2 = Graphics2D.height;
+        int k2 = Graphics2D.topX;
+        int l2 = Graphics2D.viewport_w;
+        int i3 = Graphics2D.topY;
+        int j3 = Graphics2D.viewport_h;
         Rasterizer.aBoolean1464 = false;
-        DrawingArea.initDrawingArea(32, 32, sprite2.myPixels);
-        DrawingArea.fillRect(0, 0, 32, 32, 0);
-        Rasterizer.initToActiveDrawingArea();
+        Graphics2D.init(32, 32, sprite2.myPixels);
+        Graphics2D.fillRect(0, 0, 32, 32, 0);
+        Rasterizer.setDefaultBounds();
         int k3 = definition.modelZoom;
         if(k == -1)
             k3 = (int)((double)k3 * 1.5D);
         if(k > 0)
             k3 = (int)((double)k3 * 1.04D);
-        int l3 = Rasterizer.SINE[definition.sprite_rotation_scale] * k3 >> 16;
-        int i4 = Rasterizer.COSINE[definition.sprite_rotation_scale] * k3 >> 16;
+        int l3 = Rasterizer.sineTable[definition.sprite_rotation_scale] * k3 >> 16;
+        int i4 = Rasterizer.cosineTable[definition.sprite_rotation_scale] * k3 >> 16;
         model.rendersingle(definition.modelRotation2, definition.anInt204, definition.sprite_rotation_scale, definition.modelOffset1, l3 + model.modelHeight / 2 + definition.modelOffset2, i4 + definition.modelOffset2);
         for(int i5 = 31; i5 >= 0; i5--)
         {
@@ -360,8 +360,8 @@ public class ItemDef
         }
         if(k == 0)
             memCache1.put(sprite2, i);
-        DrawingArea.initDrawingArea(j2, i2, ai1);
-        DrawingArea.setDrawingArea(j3, k2, l2, i3);
+        Graphics2D.init(j2, i2, ai1);
+        Graphics2D.setBounds(j3, k2, l2, i3);
         Rasterizer.centerX = k1;
         Rasterizer.centerY = l1;
         Rasterizer.lineOffsets = ai;

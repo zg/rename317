@@ -3,7 +3,6 @@ package rs2;
 // Decompiler options: packimporsts(3)
 
 import java.math.BigInteger;
-import sign.signlink;
 
 public class Packet extends NodeSub {
 
@@ -107,7 +106,7 @@ public class Packet extends NodeSub {
         }
         catch(RuntimeException runtimeexception)
         {
-            signlink.reporterror("14395, " + 5 + ", " + l + ", " + runtimeexception.toString());
+            Signlink.reporterror("14395, " + 5 + ", " + l + ", " + runtimeexception.toString());
             throw new RuntimeException();
         }
     }
@@ -390,7 +389,7 @@ return buffer;
         0xfffff, 0x1fffff, 0x3fffff, 0x7fffff, 0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff, 0x1fffffff,
         0x3fffffff, 0x7fffffff, -1
     };
-    public ISAACRandomGen encryption;
+    public IsaacCipher encryption;
     private static int stream_pool_ptr;
     private static final Deque stream_pool = new Deque();
 

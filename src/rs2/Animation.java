@@ -6,7 +6,7 @@ public class Animation
 	public static byte[] getData(int i1, int i2) {
 		if(frameData == null)
 		loadFrames();
-		
+
 		if(skinData == null)
 		loadSkins();
 
@@ -109,7 +109,7 @@ repeat
             for(int i3 = 0; i3 < j2; i3++)
             {
                 int j3 = stream.g1();
-	
+
                 if(j3 > 0)
                 {
                     if(class18.opcodes[i3] != 0)
@@ -166,7 +166,7 @@ repeat
       }catch(Exception exception) { }
     }
 
-    public static void nullLoader()
+    public static void clearCache()
     {
         aAnimationArray635 = null;
     }

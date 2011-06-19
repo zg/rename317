@@ -1,8 +1,6 @@
 package rs2;
 
 
-import sign.signlink;
-
 public class MemCache {
 
     public MemCache(int i)
@@ -49,7 +47,7 @@ public class MemCache {
         }
         catch(RuntimeException runtimeexception)
         {
-            signlink.reporterror("47547, " + nodeSub + ", " + l + ", " + (byte)2 + ", " + runtimeexception.toString());
+            Signlink.reporterror("47547, " + nodeSub + ", " + l + ", " + (byte) 2 + ", " + runtimeexception.toString());
         }
         throw new RuntimeException();
     }

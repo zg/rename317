@@ -5,7 +5,7 @@ public class Model extends Entity {
 
     public Vertex[] vns;
 
-    public static void nullLoader() {
+    public static void clearCache() {
         modelHeaderCache = null;
         aBooleanArray1663 = null;
         aBooleanArray1664 = null;
@@ -1816,19 +1816,19 @@ public class Model extends Entity {
             return;
         int j3 = l1 * l + j1 * i1 >> 16;
         int k3 = j3 - diagonal2DAboveorigin << 9;
-        if (k3 / i3 >= DrawingArea.viewportCx)
+        if (k3 / i3 >= Graphics2D.viewportCx)
             return;
         int l3 = j3 + diagonal2DAboveorigin << 9;
-        if (l3 / i3 <= -DrawingArea.viewportCx)
+        if (l3 / i3 <= -Graphics2D.viewportCx)
             return;
         int i4 = k1 * k - j2 * j >> 16;
         int j4 = diagonal2DAboveorigin * j >> 16;
         int k4 = i4 + j4 << 9;
-        if (k4 / i3 <= -DrawingArea.viewportCy)
+        if (k4 / i3 <= -Graphics2D.viewportCy)
             return;
         int l4 = j4 + (super.modelHeight * k >> 16);
         int i5 = i4 - l4 << 9;
-        if (i5 / i3 >= DrawingArea.viewportCy)
+        if (i5 / i3 >= Graphics2D.viewportCy)
             return;
         int j5 = l2 + (super.modelHeight * j >> 16);
         boolean flag = false;
@@ -1931,7 +1931,7 @@ public class Model extends Entity {
                     }
                     if ((i3 - l3) * (anIntArray1666[j2] - anIntArray1666[k1]) - (anIntArray1666[l] - anIntArray1666[k1]) * (k4 - l3) > 0) {
                         aBooleanArray1664[k] = false;
-                        aBooleanArray1663[k] = i3 < 0 || l3 < 0 || k4 < 0 || i3 > DrawingArea.viewportRx || l3 > DrawingArea.viewportRx || k4 > DrawingArea.viewportRx;
+                        aBooleanArray1663[k] = i3 < 0 || l3 < 0 || k4 < 0 || i3 > Graphics2D.viewportRx || l3 > Graphics2D.viewportRx || k4 > Graphics2D.viewportRx;
                         int k5 = (cameraDepth[l] + cameraDepth[k1] + cameraDepth[j2]) / 3 + diagonal3DAboveorigin;
                         faceLists[k5][depthListIndices[k5]++] = k;
                     }
@@ -2070,7 +2070,7 @@ public class Model extends Entity {
         int j = triangleA[i];
         int k = triangleB[i];
         int l = triangleC[i];
-        Rasterizer.aBoolean1462 = aBooleanArray1663[i];
+        Rasterizer.restrict_edges = aBooleanArray1663[i];
         if (triangleAlpha == null)
             Rasterizer.alpha = 0;
         else
@@ -2081,11 +2081,11 @@ public class Model extends Entity {
         else
             i1 = triangleDrawType[i] & 3;
         if (i1 == 0) {
-            Rasterizer.drawTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i]);
+            Rasterizer.drawShadedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i]);
             return;
         }
         if (i1 == 1) {
-            Rasterizer.method376(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], HSL2RGB[triangleHslA[i]]);
+            Rasterizer.drawFlatTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], HSL2RGB[triangleHslA[i]]);
             return;
         }
         if (i1 == 2) {
@@ -2185,19 +2185,19 @@ public class Model extends Entity {
         int j7 = anIntArray1679[1];
         int k7 = anIntArray1679[2];
         if ((j3 - j4) * (k7 - j7) - (i7 - j7) * (j5 - j4) > 0) {
-            Rasterizer.aBoolean1462 = false;
+            Rasterizer.restrict_edges = false;
             if (l == 3) {
-                if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewportRx || j4 > DrawingArea.viewportRx || j5 > DrawingArea.viewportRx)
-                    Rasterizer.aBoolean1462 = true;
+                if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > Graphics2D.viewportRx || j4 > Graphics2D.viewportRx || j5 > Graphics2D.viewportRx)
+                    Rasterizer.restrict_edges = true;
                 int l7;
                 if (triangleDrawType == null)
                     l7 = 0;
                 else
                     l7 = triangleDrawType[i] & 3;
                 if (l7 == 0)
-                    Rasterizer.drawTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
+                    Rasterizer.drawShadedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
                 else if (l7 == 1)
-                    Rasterizer.method376(i7, j7, k7, j3, j4, j5, HSL2RGB[triangleHslA[i]]);
+                    Rasterizer.drawFlatTriangle(i7, j7, k7, j3, j4, j5, HSL2RGB[triangleHslA[i]]);
                 else if (l7 == 2) {
                     int j8 = triangleDrawType[i] >> 2;
                     int k9 = triPIndex[j8];
@@ -2213,22 +2213,22 @@ public class Model extends Entity {
                 }
             }
             if (l == 4) {
-                if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewportRx || j4 > DrawingArea.viewportRx || j5 > DrawingArea.viewportRx || anIntArray1678[3] < 0 || anIntArray1678[3] > DrawingArea.viewportRx)
-                    Rasterizer.aBoolean1462 = true;
+                if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > Graphics2D.viewportRx || j4 > Graphics2D.viewportRx || j5 > Graphics2D.viewportRx || anIntArray1678[3] < 0 || anIntArray1678[3] > Graphics2D.viewportRx)
+                    Rasterizer.restrict_edges = true;
                 int i8;
                 if (triangleDrawType == null)
                     i8 = 0;
                 else
                     i8 = triangleDrawType[i] & 3;
                 if (i8 == 0) {
-                    Rasterizer.drawTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
-                    Rasterizer.drawTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3]);
+                    Rasterizer.drawShadedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2]);
+                    Rasterizer.drawShadedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3]);
                     return;
                 }
                 if (i8 == 1) {
                     int l8 = HSL2RGB[triangleHslA[i]];
-                    Rasterizer.method376(i7, j7, k7, j3, j4, j5, l8);
-                    Rasterizer.method376(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8);
+                    Rasterizer.drawFlatTriangle(i7, j7, k7, j3, j4, j5, l8);
+                    Rasterizer.drawFlatTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8);
                     return;
                 }
                 if (i8 == 2) {
@@ -2336,9 +2336,9 @@ public class Model extends Entity {
     private static int[] modelIntArray4;
 
     static {
-        SINE = Rasterizer.SINE;
-        COSINE = Rasterizer.COSINE;
-        HSL2RGB = Rasterizer.HSL2RGB;
+        SINE = Rasterizer.sineTable;
+        COSINE = Rasterizer.cosineTable;
+        HSL2RGB = Rasterizer.hsl2rgb;
         modelIntArray4 = Rasterizer.anIntArray1469;
     }
 }

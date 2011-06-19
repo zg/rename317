@@ -49,7 +49,7 @@ public class PglModel {
     public void updateColours() {
         triangleColours = new Color[rsModel.triangleCount];
         for (int triIdx = 0; triIdx < rsModel.triangleCount; triIdx++) {
-            int rgb = Rasterizer.HSL2RGB[rsModel.triangleColours[triIdx]];
+            int rgb = Rasterizer.hsl2rgb[rsModel.triangleColours[triIdx]];
             triangleColours[triIdx] = new Color(rgb >> 16, rgb >> 8, rgb & 0xFF);
         }
     }

@@ -8,7 +8,7 @@ public class ObjectOnTile extends Entity {
         int j = -1;
         if(sequence != null)
         {
-            int k = client.currentTime - delay;
+            int k = Client.currentTime - delay;
             if(k > 100 && sequence.frameStep > 0)
                 k = 100;
             while(k > sequence.getFrameLength(frame))
@@ -23,7 +23,7 @@ public class ObjectOnTile extends Entity {
                 sequence = null;
                 break;
             }
-            delay = client.currentTime - k;
+            delay = Client.currentTime - k;
             if(sequence != null)
                 j = sequence.frame2IDS[frame];
         }
@@ -50,7 +50,7 @@ public class ObjectOnTile extends Entity {
             int k = varBit.configId;
             int l = varBit.leastSignificantBit;
             int i1 = varBit.mostSignificantBit;
-            int j1 = client.BITFIELD_MAX_VALUE[i1 - l];
+            int j1 = Client.BITFIELD_MAX_VALUE[i1 - l];
             i = clientInstance.sessionSettings[k] >> l & j1;
         } else
         if(anInt1602 != -1)
@@ -75,7 +75,7 @@ public class ObjectOnTile extends Entity {
         {
             sequence = Sequence.anims[l1];
             frame = 0;
-            delay = client.currentTime;
+            delay = Client.currentTime;
             if(randomize && sequence.frameStep != -1)
             {
                 frame = (int)(Math.random() * (double) sequence.frameCount);
@@ -98,7 +98,7 @@ public class ObjectOnTile extends Entity {
     private final int anInt1606;
     private Sequence sequence;
     private int delay;
-    public static client clientInstance;
+    public static Client clientInstance;
     private final int anInt1610;
     private final int anInt1611;
     private final int anInt1612;

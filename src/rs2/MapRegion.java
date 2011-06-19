@@ -110,11 +110,11 @@ public class MapRegion {
                         int floID = underLay[z][xPlus5][Y] & 0xff;
                         if(floID > 0)
                         {
-                            Flo flo = Flo.cache[floID - 1];
-                            hue[Y] += flo.hue2;
-                            saturation[Y] += flo.saturation;
-                            lightness[Y] += flo.lightness;
-                            huedivider[Y] += flo.pCDivider;
+                            Floor floor = Floor.cache[floID - 1];
+                            hue[Y] += floor.hue2;
+                            saturation[Y] += floor.saturation;
+                            lightness[Y] += floor.lightness;
+                            huedivider[Y] += floor.pCDivider;
                             colourCount[Y]++;
                         }
                     }
@@ -124,11 +124,11 @@ public class MapRegion {
                         int floID = underLay[z][yMin5][Y] & 0xff;
                         if(floID > 0)
                         {
-                            Flo flo_1 = Flo.cache[floID - 1];
-                            hue[Y] -= flo_1.hue2;
-                            saturation[Y] -= flo_1.saturation;
-                            lightness[Y] -= flo_1.lightness;
-                            huedivider[Y] -= flo_1.pCDivider;
+                            Floor floor_1 = Floor.cache[floID - 1];
+                            hue[Y] -= floor_1.hue2;
+                            saturation[Y] -= floor_1.saturation;
+                            lightness[Y] -= floor_1.lightness;
+                            huedivider[Y] -= floor_1.pCDivider;
                             colourCount[Y]--;
                         }
                     }
@@ -199,14 +199,14 @@ public class MapRegion {
                                     boolean underlay_hidden = true;
                                     if(underlayID == 0 && shapeA[z][X][Y] != 0)
                                         underlay_hidden = false;
-                                    if(overlay_id > 0 && !Flo.cache[overlay_id - 1].occlude)
+                                    if(overlay_id > 0 && !Floor.cache[overlay_id - 1].occlude)
                                         underlay_hidden = false;
                                     if(underlay_hidden && zA == zB && zA == zD && zA == zC)
                                         tile_culling_bitmap[z][X][Y] |= 0x924;
                                 }
                                 int underlay_rgb = 0;
                                 if(underlay_hsl_real != -1)
-                                    underlay_rgb = Rasterizer.HSL2RGB[mix_lightness(underlay_hsl, 96)];
+                                    underlay_rgb = Rasterizer.hsl2rgb[mix_lightness(underlay_hsl, 96)];
                                 underlayRgb[z][X][Y] = underlay_rgb;
                                 if(overlay_id == 0)
                                 {
@@ -215,13 +215,13 @@ public class MapRegion {
                                 {
                                     int shapea = shapeA[z][X][Y] + 1;
                                     byte shapeb = shapeB[z][X][Y];
-                                    Flo overlay = Flo.cache[overlay_id - 1];
+                                    Floor overlay = Floor.cache[overlay_id - 1];
                                     int overlay_texture = overlay.texture;
                                     int overlay_hsl;
                                     int overlay_rgb;
                                     if(overlay_texture >= 0)
                                     {
-                                        overlay_rgb = Rasterizer.calculateTextureColour(overlay_texture);
+                                        overlay_rgb = Rasterizer.getAverageTextureColour(overlay_texture);
                                         overlay_hsl = -1;//Grayscale
                                     } else if(overlay.colour2 == 0xff00ff) {
                                         overlay_rgb = 0;
@@ -229,7 +229,7 @@ public class MapRegion {
                                         overlay_texture = -1;
                                     } else {
                                         overlay_hsl = overlay.hslColour;//pack_hsl(overlay.hue, overlay.saturation, overlay.lightness);
-                                        overlay_rgb = Rasterizer.HSL2RGB[mix_lightness_gt(overlay.hslColour, 96)];
+                                        overlay_rgb = Rasterizer.hsl2rgb[mix_lightness_gt(overlay.hslColour, 96)];
                                     }
                                     sceneGraph.addTile(z, X, Y, shapea, shapeb, overlay_texture, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), mix_lightness_gt(overlay_hsl, shadow_a), mix_lightness_gt(overlay_hsl, shadow_b), mix_lightness_gt(overlay_hsl, shadow_d), mix_lightness_gt(overlay_hsl, shadow_c), underlay_rgb, overlay_rgb);
                                 }
@@ -1016,7 +1016,7 @@ label0:
 
     private static int method184(int i, int j, int k, int l)
     {
-        int i1 = 0x10000 - Rasterizer.COSINE[(k * 1024) / l] >> 1;
+        int i1 = 0x10000 - Rasterizer.cosineTable[(k * 1024) / l] >> 1;
         return (i * (0x10000 - i1) >> 16) + (j * i1 >> 16);
     }
 

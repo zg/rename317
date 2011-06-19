@@ -4,7 +4,7 @@ package rs2;
 import java.awt.*;
 import java.awt.image.PixelGrabber;
 
-public class RgbImage extends DrawingArea {
+public class RgbImage extends Graphics2D {
 
     public RgbImage(int i, int j)
     {
@@ -116,7 +116,7 @@ public class RgbImage extends DrawingArea {
 
     public void initDrawingArea()
     {
-        initDrawingArea(myHeight, myWidth, myPixels);
+        init(myHeight, myWidth, myPixels);
     }
 
     public void shiftColours(int i, int j, int k)
@@ -408,7 +408,7 @@ public class RgbImage extends DrawingArea {
             __pxoffset = __pxoffset * hingesize >> 8;
             int j3 = (center_x << 16) + (k2 * __pyoffset + j2 * __pxoffset);
             int k3 = (center_y << 16) + (k2 * __pxoffset - j2 * __pyoffset);
-            int l3 = k1 + j1 * DrawingArea.width;
+            int l3 = k1 + j1 * Graphics2D.width;
             for(j1 = 0; j1 < height; j1++)
             {
                 int i4 = ai1[j1];
@@ -424,7 +424,7 @@ public class RgbImage extends DrawingArea {
 
                 j3 += __pyoffset;
                 k3 += __pxoffset;
-                l3 += DrawingArea.width;
+                l3 += Graphics2D.width;
             }
 
         }
@@ -453,7 +453,7 @@ public class RgbImage extends DrawingArea {
             __pxoffset = __pxoffset * hingesize >> 8;
             int i3 = (center_x << 16) + (j2 * __pyoffset + i2 * __pxoffset);
             int j3 = (center_y << 16) + (j2 * __pxoffset - i2 * __pyoffset);
-            int off = x + y * DrawingArea.width;
+            int off = x + y * Graphics2D.width;
             for(y = 0; y < height; y++)
             {
                 int l3 = off;
@@ -472,7 +472,7 @@ public class RgbImage extends DrawingArea {
 
                 i3 += __pyoffset;
                 j3 += __pxoffset;
-                off += DrawingArea.width;
+                off += Graphics2D.width;
             }
 
         }

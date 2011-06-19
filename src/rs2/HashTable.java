@@ -1,8 +1,6 @@
 package rs2;
 
 
-import sign.signlink;
-
 public class HashTable {
 
     public HashTable()
@@ -45,7 +43,7 @@ public class HashTable {
         }
         catch(RuntimeException runtimeexception)
         {
-            signlink.reporterror("91499, " + node + ", " + l + ", " + (byte)7 + ", " + runtimeexception.toString());
+            Signlink.reporterror("91499, " + node + ", " + l + ", " + (byte) 7 + ", " + runtimeexception.toString());
         }
         throw new RuntimeException();
     }
