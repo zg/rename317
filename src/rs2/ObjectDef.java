@@ -127,7 +127,7 @@ public class ObjectDef
         if(isSolid)
         {
             int l1 = (k + l + i1 + j1) / 4;
-            for(int i2 = 0; i2 < model.verticeCount; i2++)
+            for(int i2 = 0; i2 < model.vertexCount; i2++)
             {
                 int j2 = model.vertexX[i2];
                 int k2 = model.vertexZ[i2];

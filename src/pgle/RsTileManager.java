@@ -29,8 +29,9 @@ public class RsTileManager extends TileManagerNode {
         perRegion.clear();
     }
 
-    public void add(Node child,int y,int x,int z){
+    public void add(Node child,int y,int x,int z,boolean isDynamic){
         getTile(y,x,z).add(child);
-        perRegion.add(child);
+        if (isDynamic)
+            perRegion.add(child);
     }
 }

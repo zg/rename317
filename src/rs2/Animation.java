@@ -149,7 +149,7 @@ repeat
             	}
 	}
 
-            class36.anInt638 = l2;
+            class36.stepCount = l2;
             class36.opcodeLinkTable = new int[l2];
             class36.modifier1 = new int[l2];
             class36.modifier2 = new int[l2];
@@ -198,7 +198,7 @@ repeat
     private static Animation[][] aAnimationArray635;
     public int displayLength;
     public ModelTransform myModelTransform;
-    public int anInt638;
+    public int stepCount;
     public int opcodeLinkTable[];
     public int modifier1[];
     public int modifier2[];

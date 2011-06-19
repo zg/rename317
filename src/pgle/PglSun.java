@@ -26,7 +26,7 @@ public class PglSun {
     private float light0Intensity;
     private float light1Intensity;
     private Vector3f position;
-
+    public static  int[] light0Position = new int[3];
     public PglSun(){
         sunGLLight0 = new OpenGLLight();
         sunGLLight1 = new OpenGLLight();
@@ -44,9 +44,10 @@ public class PglSun {
             float r = color.getRed();
             float g = color.getGreen();
             float b = color.getBlue();
-            Color light0Colour = new Color((int)(r * light0Intensity*256f),(int)(g * light0Intensity*256f),(int)(b * light0Intensity*256f));
-            Color light1Colour = new Color((int)(r * light1Intensity*256f),(int)(g * light1Intensity*256f),(int)(b * light1Intensity*256f));
-            Color ambientColour = new Color((int)(r * ambientIntensity*256f),(int)(g * ambientIntensity*256f),(int)(b * ambientIntensity*256f));
+            Color lololol =new Color(0,0,0,255);
+            Color light0Colour = new Color((int)(r * light0Intensity),(int)(g * light0Intensity),(int)(b * light0Intensity));
+            Color light1Colour = new Color((int)(r * light1Intensity),(int)(g * light1Intensity),(int)(b * light1Intensity));
+            Color ambientColour = new Color((int)(r * ambientIntensity),(int)(g * ambientIntensity),(int)(b * ambientIntensity));
             sunGLLight0.setDiffuse(light0Colour);
             sunGLLight0.setSpecular(light0Colour);
             sunGLLight0.setAmbient(light0Colour);
@@ -62,6 +63,9 @@ public class PglSun {
             sunGLLight0.setPosition(position);
             sunGLLight1.setPosition((Vector3f)position.negate());
             this.position = position;
+            light0Position[0] = (int) position.getX();
+            light0Position[1] = (int) position.getX();
+            light0Position[2] = (int) position.getX();
         }
     }
 
@@ -69,13 +73,13 @@ public class PglSun {
         directionalLight0 = new PglSunLight(sunGLLight0);
         directionalLight1 = new PglSunLight(sunGLLight1);
         manager.activateVirtualLight(directionalLight0);
-        manager.activateVirtualLight(directionalLight1);
+       // manager.activateVirtualLight(directionalLight1);
     }
 
 
     public void deactivate(OpenGLLightManager manager){
         manager.deactivateVirtualLight(directionalLight0);
-        manager.deactivateVirtualLight(directionalLight1);
+      //  manager.deactivateVirtualLight(directionalLight1);
     }
 
     private class PglSunLight implements VirtualLight {

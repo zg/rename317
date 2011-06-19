@@ -336,7 +336,7 @@ public class SceneGraph {
         else
             node = new PglCubeStub();
         //System.out.println("addentity");
-        clientInstance.getPglWrapper().getRsTileManager().add(node,z,x,y);
+        clientInstance.getPglWrapper().getRsTileManager().add(node,z,x,y,isDynamic);
         interactableObject.pgleNode = node;
         node.setPosition(new Vector3f(j1-128*x,(-l1)-240*z,k1-128*y));
         node.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(-(rotation * 0.17578125f),0,0)));
@@ -604,10 +604,10 @@ public class SceneGraph {
                     if(tile != null)
                     {
                         WallObject class10 = tile.wallObject;
-                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertex != null)
+                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormals != null)
                         {
                             method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_278);
-                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertex != null)
+                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormals != null)
                             {
                                 method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_279);
                                 method308((Model)class10.aClass30_Sub2_Sub4_278, (Model)class10.aClass30_Sub2_Sub4_279, 0, 0, 0, false);
@@ -618,7 +618,7 @@ public class SceneGraph {
                         for(int k2 = 0; k2 < tile.entityCount; k2++)
                         {
                             InteractableObject class28 = tile.interactableObjects[k2];
-                            if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertex != null)
+                            if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertexNormals != null)
                             {
                                 method307(_z, (class28.tileRight - class28.tileLeft) + 1, (class28.tileBottom - class28.tileTop) + 1, _x, _y, (Model)class28.jagexNode);
                                 ((Model)class28.jagexNode).doShading(lightness, l_magnitude, l_x, l_y, l_z);
@@ -626,7 +626,7 @@ public class SceneGraph {
                         }
 
                         GroundDecoration class49 = tile.groundDecoration;
-                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.vertex != null)
+                        if(class49 != null && class49.aClass30_Sub2_Sub4_814.vertexNormals != null)
                         {
                             method306(_x, _z, (Model)class49.aClass30_Sub2_Sub4_814, _y);
                             ((Model)class49.aClass30_Sub2_Sub4_814).doShading(lightness, l_magnitude, l_x, l_y, l_z);
@@ -645,25 +645,25 @@ public class SceneGraph {
         if(x < xMapSize)
         {
             Tile tile = tileArray[z][x + 1][y];
-            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertex != null)
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormals != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
         }
         if(y < xMapSize)
         {
             Tile tile = tileArray[z][x][y + 1];
-            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertex != null)
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormals != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
         }
         if(x < xMapSize && y < yMapSize)
         {
             Tile tile = tileArray[z][x + 1][y + 1];
-            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertex != null)
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormals != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
         }
         if(x < xMapSize && y > 0)
         {
             Tile tile = tileArray[z][x + 1][y - 1];
-            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertex != null)
+            if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormals != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, -128, true);
         }
     }
@@ -689,14 +689,14 @@ public class SceneGraph {
                                 {
                                     int i3 = (heightmap[z][x][y] + heightmap[z][x + 1][y] + heightmap[z][x][y + 1] + heightmap[z][x + 1][y + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
                                     WallObject class10 = class30_sub3.wallObject;
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertex != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormals != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertex != null)
+                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormals != null)
                                         method308(model, (Model)class10.aClass30_Sub2_Sub4_279, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
                                     for(int j3 = 0; j3 < class30_sub3.entityCount; j3++)
                                     {
                                         InteractableObject class28 = class30_sub3.interactableObjects[j3];
-                                        if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertex != null)
+                                        if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertexNormals != null)
                                         {
                                             int k3 = (class28.tileRight - class28.tileLeft) + 1;
                                             int l3 = (class28.tileBottom - class28.tileTop) + 1;
@@ -720,12 +720,12 @@ public class SceneGraph {
         anInt488++;
         int l = 0;
         int ai[] = model_1.vertexX;
-        int i1 = model_1.verticeCount;
-        for(int j1 = 0; j1 < model.verticeCount; j1++)
+        int i1 = model_1.vertexCount;
+        for(int j1 = 0; j1 < model.vertexCount; j1++)
         {
-            Vertex vertex = model.vertex[j1];
-            Vertex vertex_1 = model.vertexOffset[j1];
-            if(vertex_1.magnitude != 0)
+            VertexNormal vertexNormal = model.vertexNormals[j1];
+            VertexNormal vertexNormal_1 = model.vertexNormalOffset[j1];
+            if(vertexNormal_1.magnitude != 0)
             {
                 int i2 = model.vertexY[j1] - t_Y;
                 if(i2 <= model_1.maxY)
@@ -738,18 +738,18 @@ public class SceneGraph {
                         {
                             for(int l2 = 0; l2 < i1; l2++)
                             {
-                                Vertex normal = model_1.vertex[l2];
-                                Vertex _offset = model_1.vertexOffset[l2];
-                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && _offset.magnitude != 0)
+                                VertexNormal normal = model_1.vertexNormals[l2];
+                                VertexNormal normal_offset = model_1.vertexNormalOffset[l2];
+                                if(j2 == ai[l2] && k2 == model_1.vertexZ[l2] && i2 == model_1.vertexY[l2] && normal_offset.magnitude != 0)
                                 {
-                                    vertex.x += _offset.x;
-                                    vertex.y += _offset.y;
-                                    vertex.z += _offset.z;
-                                    vertex.magnitude += _offset.magnitude;
-                                    normal.x += vertex_1.x;
-                                    normal.y += vertex_1.y;
-                                    normal.z += vertex_1.z;
-                                    normal.magnitude += vertex_1.magnitude;
+                                    vertexNormal.x += normal_offset.x;
+                                    vertexNormal.y += normal_offset.y;
+                                    vertexNormal.z += normal_offset.z;
+                                    vertexNormal.magnitude += normal_offset.magnitude;
+                                    normal.x += vertexNormal_1.x;
+                                    normal.y += vertexNormal_1.y;
+                                    normal.z += vertexNormal_1.z;
+                                    normal.magnitude += vertexNormal_1.magnitude;
                                     l++;
                                     anIntArray486[j1] = anInt488;
                                     anIntArray487[l2] = anInt488;

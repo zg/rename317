@@ -7130,7 +7130,7 @@ public class Client extends RSApplet {
 			{
 				int k8 = 128 + i8 * 32 + 15;
 				int l8 = 600 + k8 * 3;
-				int i9 = Rasterizer.sineTable[k8];
+				int i9 = Rasterizer.SINE[k8];
 				ai[i8] = l8 * i9 >> 16;
 			}
 
@@ -7196,8 +7196,8 @@ public class Client extends RSApplet {
 				i -= 73;
 				j -= 75;
 				int k = minimapInt1 + minimapInt2 & 0x7ff;
-				int i1 = Rasterizer.sineTable[k];
-				int j1 = Rasterizer.cosineTable[k];
+				int i1 = Rasterizer.SINE[k];
+				int j1 = Rasterizer.COSINE[k];
 				i1 = i1 * (minimapInt3 + 256) >> 8;
 				j1 = j1 * (minimapInt3 + 256) >> 8;
 				int k1 = j * i1 + i * j1 >> 11;
@@ -8160,8 +8160,8 @@ public class Client extends RSApplet {
 				int j4 = Rasterizer.centerY;
 				Rasterizer.centerX = k2 + class9_1.width / 2;
 				Rasterizer.centerY = l2 + class9_1.height / 2;
-				int i5 = Rasterizer.sineTable[class9_1.anInt270] * class9_1.anInt269 >> 16;
-				int l5 = Rasterizer.cosineTable[class9_1.anInt270] * class9_1.anInt269 >> 16;
+				int i5 = Rasterizer.SINE[class9_1.anInt270] * class9_1.anInt269 >> 16;
+				int l5 = Rasterizer.COSINE[class9_1.anInt270] * class9_1.anInt269 >> 16;
 				boolean flag2 = interface_test_condition(class9_1);
 				int i7;
 				if(flag2)

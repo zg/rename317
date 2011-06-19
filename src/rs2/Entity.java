@@ -23,6 +23,6 @@ public class Entity extends NodeSub {
         modelHeight = 1000;
     }
 
-    public Vertex[] vertex;
+    public VertexNormal[] vertexNormals;
     public int modelHeight;
 }

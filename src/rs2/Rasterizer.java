@@ -5,8 +5,8 @@ public class Rasterizer extends Graphics2D {
 	public static void clearCache() {
 		anIntArray1468 = null;
 		anIntArray1468 = null;
-		sineTable = null;
-		cosineTable = null;
+		SINE = null;
+		COSINE = null;
 		lineOffsets = null;
 		textureImages = null;
 		textureIsTransparent = null;
@@ -2136,8 +2136,8 @@ public class Rasterizer extends Graphics2D {
 	public static int centerY;
 	private static int[] anIntArray1468;
 	public static final int[] anIntArray1469;
-	public static int sineTable[];
-	public static int cosineTable[];
+	public static int SINE[];
+	public static int COSINE[];
 	public static int lineOffsets[];
 	private static int loadedTextureCount;
 	public static IndexedImage textureImages[] = new IndexedImage[50];
@@ -2154,8 +2154,8 @@ public class Rasterizer extends Graphics2D {
 	static {
 		anIntArray1468 = new int[512];
 		anIntArray1469 = new int[2048];
-		sineTable = new int[2048];
-		cosineTable = new int[2048];
+		SINE = new int[2048];
+		COSINE = new int[2048];
 		for (int i = 1; i < 512; i++) {
 			anIntArray1468[i] = 32768 / i;
 		}
@@ -2165,8 +2165,9 @@ public class Rasterizer extends Graphics2D {
 		}
 
 		for (int i = 0; i < 2048; i++) {
-			sineTable[i] = (int) (65536D * Math.sin((double) i * 0.0030679614999999999D));
-			cosineTable[i] = (int) (65536D * Math.cos((double) i * 0.0030679614999999999D));
+			SINE[i] = (int) (65536D * Math.sin((double) i * 0.0030679614999999999D));
+			COSINE[i] = (int) (65536D * Math.cos((double) i * 0.0030679614999999999D));
+			COSINE[i] = (int) (65536D * Math.cos((double) i * 0.0030679614999999999D));
 		}
 
 	}
