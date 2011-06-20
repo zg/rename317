@@ -6,6 +6,7 @@ import org.lwjgl.opengl.ARBBufferObject;
 import org.lwjgl.opengl.GL11;
 import pgle.PglSun;
 import rs2.*;
+import sun.plugin.com.Utils;
 
 import java.nio.ByteBuffer;
 
@@ -25,7 +26,7 @@ public class ModelRendererGL {
     public short[] triangleA;
     public int[] vertexY;
     public byte dirtyBuffers;
-    public short lightMagnitudeOffset;
+    public short falloff;
     public short[] triangleB;
     public byte aByte5026;
     public int[] vertexX;
@@ -33,7 +34,7 @@ public class ModelRendererGL {
     public VertexBufferPointer vertexTexCoords;
     public VertexBufferPointer vertexColours;
     public int[] vertexUsageCount;
-    public short somethingWithShading;
+    public short intensity;
     public int realVertexCount;
     public int[] vertexVSkin;
     public int[] textureTriangles;
@@ -141,11 +142,11 @@ public class ModelRendererGL {
                 }
                 if (vertexColours.vertexBuffer == null) {
                     vertexColours.array.position(vertexColours.offset);
-                    GL11.glColorPointer(4, vertexColours.stride, vertexColours.array.asFloatBuffer());
+                    GL11.glColorPointer(4, true,vertexColours.stride, vertexColours.array);
                 }
                 if (Class7_Sub1.useLighting && vertexNormals.vertexBuffer == null) {
                     vertexNormals.array.position(vertexNormals.offset);
-                    GL11.glNormalPointer(vertexNormals.stride, vertexNormals.array);
+                    GL11.glNormalPointer(vertexNormals.stride, vertexNormals.array.asFloatBuffer());
                 }
                 if (vertexTexCoords.vertexBuffer == null) {
                     vertexTexCoords.array.position(vertexTexCoords.offset);
@@ -160,17 +161,17 @@ public class ModelRendererGL {
                 int nextTriangleId = textureTriangles[textureInstancePtr + 1];
                 int textureId = triangleTexture[triangleId];
                 if (textureId == -1) {
-                    GL11.glEnable(GL11.GL_TEXTURE_2D);
+                    //GL11.glDisable(GL11.GL_TEXTURE_2D);
                 } else
                     TextureSource.bindtexture(textureId & 0xffff);
                 if (triangleIndices.vertexBuffer != null)
                     GL11.glDrawElements(4, (nextTriangleId - triangleId) * 3, 5125, (long) (triangleId * 12));
                 else {
-                    triangleIndices.array.position(triangleId * 12);
+                    //triangleIndices.array.position(triangleId * 12);
                     int limit = triangleIndices.array.limit();
-                    triangleIndices.array.limit((triangleId * 12)+(nextTriangleId - triangleId));
-                    GL11.glDrawElements(4,triangleIndices.array);//todo: 4
-                    triangleIndices.array.limit(limit);
+                   // triangleIndices.array.limit((triangleId * 12)+(nextTriangleId - triangleId));
+                    GL11.glDrawElements(GL11.GL_TRIANGLES,triangleIndices.array.asIntBuffer());//todo: 4
+                   // triangleIndices.array.limit(limit);
                 }
             }
         }
@@ -372,7 +373,7 @@ public class ModelRendererGL {
     }
 
     public void method1892(int arg0) {
-        somethingWithShading = (short) arg0;
+        intensity = (short) arg0;
         vertexColours.upToDate = false;
     }
 
@@ -585,7 +586,7 @@ public class ModelRendererGL {
     }
 
     public int returnAShort5032() {
-        return somethingWithShading;
+        return intensity;
     }
 
     public void method1858(int arg0) {
@@ -730,7 +731,7 @@ public class ModelRendererGL {
     }
 
     public void method1900(int arg0) {
-        lightMagnitudeOffset = (short) arg0;
+        falloff = (short) arg0;
         if (vertexNormals != null)
             vertexNormals.upToDate = false;
     }
@@ -779,7 +780,9 @@ public class ModelRendererGL {
         }
         if (OpenGLManager.has_vbo) {
             VertexBuffer vertexBuffer = new VertexBuffer();
-            ByteBuffer bytebuffer = ByteBuffer.wrap(ModelRendererGL.vertexBuffer.data, 0, ModelRendererGL.vertexBuffer.pos);
+           ByteBuffer bytebuffer = ByteBuffer.allocateDirect(ModelRendererGL.vertexBuffer.pos);
+                bytebuffer.put(ModelRendererGL.vertexBuffer.data, 0, ModelRendererGL.vertexBuffer.pos);
+                bytebuffer.flip();
             vertexBuffer._setArrayData(bytebuffer);
             triangleIndices.upToDate = true;
             triangleIndices.array = null;
@@ -921,8 +924,8 @@ public class ModelRendererGL {
         modelRendererGL.textureTriangles = textureTriangles;
         modelRendererGL.vertexIndexes = vertexIndexes;
         modelRendererGL.vertexUsageCount = vertexUsageCount;
-        modelRendererGL.somethingWithShading = somethingWithShading;
-        modelRendererGL.lightMagnitudeOffset = lightMagnitudeOffset;
+        modelRendererGL.intensity = intensity;
+        modelRendererGL.falloff = falloff;
         return modelRendererGL;
     }
 
@@ -1045,8 +1048,8 @@ public class ModelRendererGL {
                     int lightY = (int) PglSun.light0Position[1];
                     int lightZ = (int) PglSun.light0Position[2];
                     int lightMag = (int) Math.sqrt((double) (lightX * lightX + lightY * lightY + lightZ * lightZ));
-                    int ndlOffset = (int) ((float) somethingWithShading * 1.3F);
-                    int lightMagR = lightMagnitudeOffset * lightMag >> 8;
+                    int intensity = (int) ((float) this.intensity * 1.3F);
+                    int falloff = this.falloff * lightMag >> 8;
                     for (int triangleId = 0; triangleId < triangleCount; triangleId++) {
                         int triA = triangleA[triangleId];
                         int normalMagA = normalMagnitude[triA];
@@ -1055,9 +1058,9 @@ public class ModelRendererGL {
                             NdotLA = -1 - normalMagA;
                         else {
                             if (normalMagA != 0)
-                                NdotLA = (ndlOffset + ((lightX * normalX[triA] + lightY * normalY[triA] + lightZ * normalZ[triA]) / (lightMagR * normalMagA)));
+                                NdotLA = (intensity + ((lightX * normalX[triA] + lightY * normalY[triA] + lightZ * normalZ[triA]) / (falloff * normalMagA)));
                             else
-                                NdotLA = (ndlOffset + ((lightX * normalX[triA] + lightY * normalY[triA] + lightZ * normalZ[triA]) / (lightMagR + lightMagR / 2)));
+                                NdotLA = (intensity + ((lightX * normalX[triA] + lightY * normalY[triA] + lightZ * normalZ[triA]) / (falloff + falloff / 2)));
                             if (NdotLA < 0)
                                 NdotLA = 0;
                             else if (NdotLA > 16384)
@@ -1071,9 +1074,9 @@ public class ModelRendererGL {
                             NdotLB = -1 - normalMagB;
                         else {
                             if (normalMagB != 0)
-                                NdotLB = (ndlOffset + ((lightX * normalX[triB] + lightY * normalY[triB] + lightZ * normalZ[triB]) / (lightMagR * normalMagB)));
+                                NdotLB = (intensity + ((lightX * normalX[triB] + lightY * normalY[triB] + lightZ * normalZ[triB]) / (falloff * normalMagB)));
                             else
-                                NdotLB = (ndlOffset + ((lightX * normalX[triB] + lightY * normalY[triB] + lightZ * normalZ[triB]) / (lightMagR + lightMagR / 2)));
+                                NdotLB = (intensity + ((lightX * normalX[triB] + lightY * normalY[triB] + lightZ * normalZ[triB]) / (falloff + falloff / 2)));
                             if (NdotLB < 0)
                                 NdotLB = 0;
                             else if (NdotLB > 16384)
@@ -1087,9 +1090,9 @@ public class ModelRendererGL {
                             NdotLC = -1 - normalMagC;
                         else {
                             if (normalMagC != 0)
-                                NdotLC = (ndlOffset + ((lightX * normalX[triC] + lightY * normalY[triC] + lightZ * normalZ[triC]) / (lightMagR * normalMagC)));
+                                NdotLC = (intensity + ((lightX * normalX[triC] + lightY * normalY[triC] + lightZ * normalZ[triC]) / (falloff * normalMagC)));
                             else
-                                NdotLC = (ndlOffset + ((lightX * normalX[triC] + lightY * normalY[triC] + lightZ * normalZ[triC]) / (lightMagR + lightMagR / 2)));
+                                NdotLC = (intensity + ((lightX * normalX[triC] + lightY * normalY[triC] + lightZ * normalZ[triC]) / (falloff + falloff / 2)));
                             if (NdotLC < 0)
                                 NdotLC = 0;
                             else if (NdotLC > 16384)
@@ -1111,7 +1114,7 @@ public class ModelRendererGL {
                     normalZ = null;
                 } else {
                     for (int i_170_ = 0; i_170_ < triangleCount; i_170_++) {
-                        int rgbColour = getColourRGB(triangleColour[i_170_], triangleTexture[i_170_], somethingWithShading, triangleAlpha[i_170_]);
+                        int rgbColour = getColourRGB(triangleColour[i_170_], triangleTexture[i_170_], intensity, triangleAlpha[i_170_]);
                         vertexBuffer.pos = (vertexColours.offset + triangleA[i_170_] * stride);
                         vertexBuffer.p4(rgbColour);
                         vertexBuffer.pos = (vertexColours.offset + triangleB[i_170_] * stride);
@@ -1122,8 +1125,8 @@ public class ModelRendererGL {
                 }
             }
             if (useNormals) {
-                float f = 3.0F / (float) lightMagnitudeOffset;
-                float normalMultiplier = 3.0F / (float) (lightMagnitudeOffset + lightMagnitudeOffset / 2);
+                float f = 3.0F / (float) falloff;
+                float normalMultiplier = 3.0F / (float) (falloff + falloff / 2);
                 vertexBuffer.pos = vertexNormals.offset;
                 if (OpenGLManager.byte_order_bigendian) {
                     for (int i_173_ = 0; i_173_ < vertexCount; i_173_++) {
@@ -1240,7 +1243,9 @@ public class ModelRendererGL {
                 }
             } else if (OpenGLManager.has_vbo) {
                 VertexBuffer vertexBuffer = new VertexBuffer();
-                ByteBuffer bytebuffer = ByteBuffer.wrap(ModelRendererGL.vertexBuffer.data, 0, ModelRendererGL.vertexBuffer.pos);
+                ByteBuffer bytebuffer = ByteBuffer.allocateDirect(ModelRendererGL.vertexBuffer.pos);
+                bytebuffer.put(ModelRendererGL.vertexBuffer.data, 0, ModelRendererGL.vertexBuffer.pos);
+                bytebuffer.flip();
                 vertexBuffer._setArrayData(bytebuffer);
                 if (usePositions) {
                     vertexPositions.upToDate = true;
@@ -1329,8 +1334,8 @@ public class ModelRendererGL {
         destination.realVertexCount = realVertexCount;
         destination.vertexCount = vertexCount;
         destination.triangleCount = triangleCount;
-        destination.somethingWithShading = somethingWithShading;
-        destination.lightMagnitudeOffset = lightMagnitudeOffset;
+        destination.intensity = intensity;
+        destination.falloff = falloff;
         destination.aByte5026 = (byte) (0x1 | (arg0 ? 0 : 2) | (arg1 ? 0 : 4));
         if (destination.vertexX == null || destination.vertexX.length < realVertexCount) {
             destination.vertexX = new int[realVertexCount + 100];
@@ -1492,8 +1497,8 @@ public class ModelRendererGL {
         }
     }
 
-    public int getLightMagnitudeOffset() {
-        return lightMagnitudeOffset;
+    public int getFalloff() {
+        return falloff;
     }
     /*
     public void method1792(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, long arg8) {
@@ -2035,7 +2040,7 @@ public class ModelRendererGL {
         vertexPositions.upToDate = false;
     }
 
-    public ModelRendererGL(Model model, int arg1, int arg2, boolean arg3) {
+    public ModelRendererGL(Model model, int intensity, int falloff, boolean arg3) {
         aBoolean5009 = false;
         dirtyBuffers = (byte) 0;
         vertexCount = 0;
@@ -2105,8 +2110,8 @@ public class ModelRendererGL {
             vertexNormals = new VertexBufferPointer();
         vertexTexCoords = new VertexBufferPointer();
         triangleIndices = new VertexBufferPointer();
-        somethingWithShading = (short) arg1;
-        lightMagnitudeOffset = (short) arg2;
+        this.intensity = (short) intensity;
+        this.falloff = (short) falloff;
         vertexIndexes = new short[vertexCount];
         aLongArray5048 = new long[vertexCount];
         int totalVertexUsageCount = 0;
@@ -2120,7 +2125,7 @@ public class ModelRendererGL {
         int[] is_313_ = null;
         int[] is_314_ = null;
         float[][] fs = null;
-        if (model.triangleDrawType != null) {
+        if (model.triangleDrawType != null && model.textureTriangleCount!= 0 ) {
             int i_315_ = model.textureTriangleCount;
             int[] is_316_ = new int[i_315_];
             int[] is_317_ = new int[i_315_];
@@ -2249,27 +2254,27 @@ public class ModelRendererGL {
                         int i_351_ = model.triangleA[sourceTriangleIndex];
                         int i_352_ = model.triangleB[sourceTriangleIndex];
                         int i_353_ = model.triangleC[sourceTriangleIndex];
-                        int i_354_ = model.triPIndex[i_340_];
-                        int i_355_ = model.triMIndex[i_340_];
-                        int i_356_ = model.triNIndex[i_340_];
-                        float f_357_ = (float) model.vertexX[i_354_];
-                        float f_358_ = (float) model.vertexY[i_354_];
-                        float f_359_ = (float) model.vertexZ[i_354_];
-                        float f_360_ = (float) model.vertexX[i_355_] - f_357_;
-                        float f_361_ = (float) model.vertexY[i_355_] - f_358_;
-                        float f_362_ = (float) model.vertexZ[i_355_] - f_359_;
-                        float f_363_ = (float) model.vertexX[i_356_] - f_357_;
-                        float f_364_ = (float) model.vertexY[i_356_] - f_358_;
-                        float f_365_ = (float) model.vertexZ[i_356_] - f_359_;
-                        float f_366_ = (float) model.vertexX[i_351_] - f_357_;
-                        float f_367_ = (float) model.vertexY[i_351_] - f_358_;
-                        float f_368_ = (float) model.vertexZ[i_351_] - f_359_;
-                        float f_369_ = (float) model.vertexX[i_352_] - f_357_;
-                        float f_370_ = (float) model.vertexY[i_352_] - f_358_;
-                        float f_371_ = (float) model.vertexZ[i_352_] - f_359_;
-                        float f_372_ = (float) model.vertexX[i_353_] - f_357_;
-                        float f_373_ = (float) model.vertexY[i_353_] - f_358_;
-                        float f_374_ = (float) model.vertexZ[i_353_] - f_359_;
+                        int pI = model.triPIndex[i_340_];
+                        int mI = model.triMIndex[i_340_];
+                        int nI = model.triNIndex[i_340_];
+                        float Px = (float) model.vertexX[pI];
+                        float Py = (float) model.vertexY[pI];
+                        float Pz = (float) model.vertexZ[pI];
+                        float f_360_ = (float) model.vertexX[mI] - Px;
+                        float f_361_ = (float) model.vertexY[mI] - Py;
+                        float f_362_ = (float) model.vertexZ[mI] - Pz;
+                        float f_363_ = (float) model.vertexX[nI] - Px;
+                        float f_364_ = (float) model.vertexY[nI] - Py;
+                        float f_365_ = (float) model.vertexZ[nI] - Pz;
+                        float f_366_ = (float) model.vertexX[i_351_] - Px;
+                        float f_367_ = (float) model.vertexY[i_351_] - Py;
+                        float f_368_ = (float) model.vertexZ[i_351_] - Pz;
+                        float f_369_ = (float) model.vertexX[i_352_] - Px;
+                        float f_370_ = (float) model.vertexY[i_352_] - Py;
+                        float f_371_ = (float) model.vertexZ[i_352_] - Pz;
+                        float f_372_ = (float) model.vertexX[i_353_] - Px;
+                        float f_373_ = (float) model.vertexY[i_353_] - Py;
+                        float f_374_ = (float) model.vertexZ[i_353_] - Pz;
                         float f_375_ = f_361_ * f_365_ - f_362_ * f_364_;
                         float f_376_ = f_362_ * f_363_ - f_360_ * f_365_;
                         float f_377_ = f_360_ * f_364_ - f_361_ * f_363_;
@@ -2413,7 +2418,7 @@ public class ModelRendererGL {
                     }     */
                 }
             }
-            model.calculateNormals();
+            model.calculateNormals508();
             byte i_410_;
             if (model.triangleDrawType == null)
                 i_410_ = (byte) 0;

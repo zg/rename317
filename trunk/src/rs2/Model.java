@@ -16,12 +16,12 @@ public class Model extends Entity {
         modelHeaderCache = null;
         aBooleanArray1663 = null;
         aBooleanArray1664 = null;
-        anIntArray1665 = null;
-        anIntArray1666 = null;
-        cameraDepth = null;
-        anIntArray1668 = null;
-        vertexBY = null;
-        anIntArray1670 = null;
+        vertexSX = null;
+        vertexSY = null;
+        depthBuffer = null;
+        vertexMvX = null;
+        vertexMvY = null;
+        vertexMvZ = null;
         depthListIndices = null;
         faceLists = null;
         anIntArray1673 = null;
@@ -1622,7 +1622,72 @@ public class Model extends Entity {
         }
     }
 
-
+     public void calculateNormals508() {
+         vertexNormals = null;
+	if (vertexNormals == null) {
+	    vertexNormals = new VertexNormal[vertexCount];
+	    for (int i = 0; i < vertexCount; i++)
+		vertexNormals[i] = new VertexNormal();
+	    for (int i = 0; i < triangleCount; i++) {
+		int i_157_ = triangleA[i];
+		int i_158_ = triangleB[i];
+		int i_159_ = triangleC[i];
+		int i_160_ = vertexX[i_158_] - vertexX[i_157_];
+		int i_161_ = vertexY[i_158_] - vertexY[i_157_];
+		int i_162_ = vertexZ[i_158_] - vertexZ[i_157_];
+		int i_163_ = vertexX[i_159_] - vertexX[i_157_];
+		int i_164_ = vertexY[i_159_] - vertexY[i_157_];
+		int i_165_ = vertexZ[i_159_] - vertexZ[i_157_];
+		int i_166_ = i_161_ * i_165_ - i_164_ * i_162_;
+		int i_167_ = i_162_ * i_163_ - i_165_ * i_160_;
+		int i_168_;
+		for (i_168_ = i_160_ * i_164_ - i_163_ * i_161_;
+		     (i_166_ > 8192 || i_167_ > 8192 || i_168_ > 8192
+		      || i_166_ < -8192 || i_167_ < -8192 || i_168_ < -8192);
+		     i_168_ >>= 1) {
+		    i_166_ >>= 1;
+		    i_167_ >>= 1;
+		}
+		int i_169_ = (int) Math.sqrt((double) (i_166_ * i_166_
+						       + i_167_ * i_167_
+						       + i_168_ * i_168_));
+		if (i_169_ <= 0)
+		    i_169_ = 1;
+		i_166_ = i_166_ * 256 / i_169_;
+		i_167_ = i_167_ * 256 / i_169_;
+		i_168_ = i_168_ * 256 / i_169_;
+		int i_170_;
+		if (triangleDrawType == null)
+		    i_170_ = (byte) 0;
+		else
+		    i_170_ = triangleDrawType[i] & 1;
+		if (i_170_ == 0) {
+		    VertexNormal vertexNormal = vertexNormals[i_157_];
+		    vertexNormal.x += i_166_;
+		    vertexNormal.y += i_167_;
+		    vertexNormal.z += i_168_;
+		    vertexNormal.magnitude++;
+		    vertexNormal = vertexNormals[i_158_];
+		    vertexNormal.x += i_166_;
+		    vertexNormal.y += i_167_;
+		    vertexNormal.z += i_168_;
+		    vertexNormal.magnitude++;
+		    vertexNormal = vertexNormals[i_159_];
+		    vertexNormal.x += i_166_;
+		    vertexNormal.y += i_167_;
+		    vertexNormal.z += i_168_;
+		    vertexNormal.magnitude++;
+		} else if (i_170_ == 1) {
+		    if (triangleNormals == null)
+			triangleNormals = new TriangleNormal[triangleCount];
+		    TriangleNormal triangleNormal = triangleNormals[i] = new TriangleNormal();
+		    triangleNormal.x = i_166_;
+		    triangleNormal.y = i_167_;
+		    triangleNormal.z = i_168_;
+		}
+	    }
+	}
+    }
 
     public void light(int lightMod, int magMultiplyer, int l_x, int l_y, int l_z, boolean flatShading) {
         int _mag_pre = (int) Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
@@ -1699,6 +1764,82 @@ public class Model extends Entity {
                 vertexNormal_1.magnitude = vertexNormal.magnitude;
             }
             calculateDiagonalsAndStats();
+        }
+    }
+
+    public void lightHD(int lightMod, int magMultiplyer, int l_x, int l_y, int l_z, boolean flatShading) {
+            int _mag_pre = (int) Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
+            int mag = magMultiplyer * _mag_pre >> 8;
+            if (triangleHslA == null) {
+                triangleHslA = new int[triangleCount];
+                triangleHslB = new int[triangleCount];
+                triangleHslC = new int[triangleCount];
+            }
+            for (int triID = 0; triID < triangleCount; triID++) {//todo - rename this to camelcode in future (peter plz do this, looks fucking complicated >:)
+                if (triangleDrawType == null || (triangleDrawType[triID] & 1) == 0) {
+                } else {
+                    int lightness = lightMod + (l_x * triangleNormals[triID].x +
+                                                l_y * triangleNormals[triID].y +
+                                                l_z * triangleNormals[triID].z) / (mag + mag / 2);
+                    triangleHslA[triID] = mixLightness(triangleColour[triID], lightness, triangleDrawType[triID]);
+                }
+            }
+    //todo - this can be condensed - DONE
+
+            if (flatShading) {
+                doShadingHD(lightMod, mag, l_x, l_y, l_z);
+                calculateDiagonals();
+            }  else {
+                vertexNormalOffset = new VertexNormal[vertexCount];
+                for (int vertexPointer = 0; vertexPointer < vertexCount; vertexPointer++) {
+                    VertexNormal vertexNormal = super.vertexNormals[vertexPointer];
+                    VertexNormal vertexNormal_1 = vertexNormalOffset[vertexPointer] = new VertexNormal();
+                    vertexNormal_1.x = vertexNormal.x;
+                    vertexNormal_1.y = vertexNormal.y;
+                    vertexNormal_1.z = vertexNormal.z;
+                    vertexNormal_1.magnitude = vertexNormal.magnitude;
+                }
+                calculateDiagonalsAndStats();
+            }
+        }
+
+    public void doShadingHD(int intensity, int falloff, int l_x, int l_y, int l_z) {
+        for (int triID = 0; triID < triangleCount; triID++) {
+            int triA = triangleA[triID];
+            int triB = triangleB[triID];
+            int triC = triangleC[triID];
+            if (triangleDrawType == null) {
+                int t_hsl = triangleColour[triID];
+                VertexNormal vertexNormal = super.vertexNormals[triA];
+                int l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
+                triangleHslA[triID] = mixLightness(t_hsl, l, 0);
+                vertexNormal = super.vertexNormals[triB];
+                l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
+                triangleHslB[triID] = mixLightness(t_hsl, l, 0);
+                vertexNormal = super.vertexNormals[triC];
+                l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
+                triangleHslC[triID] = mixLightness(t_hsl, l, 0);
+            } else if ((triangleDrawType[triID] & 1) == 0) {
+                //Bit 1 of triangle_draw_type ON means mix_lightness returns just lightness
+                //instead of mixed hsl
+                int t_hsl = triangleColour[triID];
+                int t_flags = triangleDrawType[triID];
+                VertexNormal vertexNormal_1 = super.vertexNormals[triA];
+                int l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
+                triangleHslA[triID] = mixLightness(t_hsl, l, t_flags);
+                vertexNormal_1 = super.vertexNormals[triB];
+                l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
+                triangleHslB[triID] = mixLightness(t_hsl, l, t_flags);
+                vertexNormal_1 = super.vertexNormals[triC];
+                l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
+                triangleHslC[triID] = mixLightness(t_hsl, l, t_flags);
+            }
+        }
+        if (triangleDrawType != null) {
+            for (int l1 = 0; l1 < triangleCount; l1++)
+                if ((triangleDrawType[l1] & 2) == 2)
+                    return;
+
         }
     }
 
@@ -1803,13 +1944,13 @@ public class Model extends Entity {
             int j6 = i5 * i4 - j5 * l3 >> 16;
             j5 = i5 * l3 + j5 * i4 >> 16;
             i5 = j6;
-            cameraDepth[k4] = j5 - j4;
-            anIntArray1665[k4] = l1 + (l4 << 9) / j5;
-            anIntArray1666[k4] = i2 + (i5 << 9) / j5;
+            depthBuffer[k4] = j5 - j4;
+            vertexSX[k4] = l1 + (l4 << 9) / j5;
+            vertexSY[k4] = i2 + (i5 << 9) / j5;
             if (textureTriangleCount > 0) {
-                anIntArray1668[k4] = l4;
-                vertexBY[k4] = i5;
-                anIntArray1670[k4] = j5;
+                vertexMvX[k4] = l4;
+                vertexMvY[k4] = i5;
+                vertexMvZ[k4] = j5;
             }
         }
 
@@ -1819,31 +1960,31 @@ public class Model extends Entity {
         }
     }
 
-    public void renderAtPoint(int i, int j, int k, int l, int i1, int j1, int k1,
-                              int l1, int i2) {
-        int j2 = l1 * i1 - j1 * l >> 16;
-        int k2 = k1 * j + j2 * k >> 16;
-        int l2 = diagonal2DAboveorigin * k >> 16;
+    public void renderAtPoint(int i, int yCameraSine, int yCameraCosine, int xCurveSine, int xCurveCosine, int x, int y,
+                              int z, int i2) {
+        int j2 = z * xCurveCosine - x * xCurveSine >> 16;
+        int k2 = y * yCameraSine + j2 * yCameraCosine >> 16;
+        int l2 = diagonal2DAboveorigin * yCameraCosine >> 16;
         int i3 = k2 + l2;
         if (i3 <= 50 || k2 >= 3500)
             return;
-        int j3 = l1 * l + j1 * i1 >> 16;
+        int j3 = z * xCurveSine + x * xCurveCosine >> 16;
         int k3 = j3 - diagonal2DAboveorigin << 9;
         if (k3 / i3 >= Graphics2D.viewportCx)
             return;
         int l3 = j3 + diagonal2DAboveorigin << 9;
         if (l3 / i3 <= -Graphics2D.viewportCx)
             return;
-        int i4 = k1 * k - j2 * j >> 16;
-        int j4 = diagonal2DAboveorigin * j >> 16;
+        int i4 = y * yCameraCosine - j2 * yCameraSine >> 16;
+        int j4 = diagonal2DAboveorigin * yCameraSine >> 16;
         int k4 = i4 + j4 << 9;
         if (k4 / i3 <= -Graphics2D.viewportCy)
             return;
-        int l4 = j4 + (super.modelHeight * k >> 16);
+        int l4 = j4 + (super.modelHeight * yCameraCosine >> 16);
         int i5 = i4 - l4 << 9;
         if (i5 / i3 >= Graphics2D.viewportCy)
             return;
-        int j5 = l2 + (super.modelHeight * j >> 16);
+        int j5 = l2 + (super.modelHeight * yCameraSine >> 16);
         boolean flag = false;
         if (k2 - j5 <= 50)
             flag = true;
@@ -1882,36 +2023,36 @@ public class Model extends Entity {
             l6 = SINE[i];
             i7 = COSINE[i];
         }
-        for (int j7 = 0; j7 < vertexCount; j7++) {
-            int k7 = vertexX[j7];
-            int l7 = vertexY[j7];
-            int i8 = vertexZ[j7];
+        for (int vetexIdx = 0; vetexIdx < vertexCount; vetexIdx++) {
+            int vX = vertexX[vetexIdx];
+            int vY = vertexY[vetexIdx];
+            int vZ = vertexZ[vetexIdx];
             if (i != 0) {
-                int j8 = i8 * l6 + k7 * i7 >> 16;
-                i8 = i8 * i7 - k7 * l6 >> 16;
-                k7 = j8;
+                int j8 = vZ * l6 + vX * i7 >> 16;
+                vZ = vZ * i7 - vX * l6 >> 16;
+                vX = j8;
             }
-            k7 += j1;
-            l7 += k1;
-            i8 += l1;
-            int k8 = i8 * l + k7 * i1 >> 16;
-            i8 = i8 * i1 - k7 * l >> 16;
-            k7 = k8;
-            k8 = l7 * k - i8 * j >> 16;
-            i8 = l7 * j + i8 * k >> 16;
-            l7 = k8;
-            cameraDepth[j7] = i8 - k2;
-            if (i8 >= 50) {
-                anIntArray1665[j7] = l5 + (k7 << 9) / i8;
-                anIntArray1666[j7] = j6 + (l7 << 9) / i8;
+            vX += x;
+            vY += y;
+            vZ += z;
+            int k8 = vZ * xCurveSine + vX * xCurveCosine >> 16;
+            vZ = vZ * xCurveCosine - vX * xCurveSine >> 16;
+            vX = k8;
+            k8 = vY * yCameraCosine - vZ * yCameraSine >> 16;
+            vZ = vY * yCameraSine + vZ * yCameraCosine >> 16;
+            vY = k8;
+            depthBuffer[vetexIdx] = vZ - k2;
+            if (vZ >= 50) {
+                vertexSX[vetexIdx] = l5 + (vX << 9) / vZ;
+                vertexSY[vetexIdx] = j6 + (vY << 9) / vZ;
             } else {
-                anIntArray1665[j7] = -5000;
+                vertexSX[vetexIdx] = -5000;
                 flag = true;
             }
             if (flag || textureTriangleCount > 0) {
-                anIntArray1668[j7] = k7;
-                vertexBY[j7] = l7;
-                anIntArray1670[j7] = i8;
+                vertexMvX[vetexIdx] = vX;
+                vertexMvY[vetexIdx] = vY;
+                vertexMvZ[vetexIdx] = vZ;
             }
         }
 
@@ -1930,22 +2071,22 @@ public class Model extends Entity {
                 int l = triangleA[k];
                 int k1 = triangleB[k];
                 int j2 = triangleC[k];
-                int i3 = anIntArray1665[l];
-                int l3 = anIntArray1665[k1];
-                int k4 = anIntArray1665[j2];
+                int i3 = vertexSX[l];
+                int l3 = vertexSX[k1];
+                int k4 = vertexSX[j2];
                 if (flag && (i3 == -5000 || l3 == -5000 || k4 == -5000)) {
                     aBooleanArray1664[k] = true;
-                    int j5 = (cameraDepth[l] + cameraDepth[k1] + cameraDepth[j2]) / 3 + diagonal3DAboveorigin;
+                    int j5 = (depthBuffer[l] + depthBuffer[k1] + depthBuffer[j2]) / 3 + diagonal3DAboveorigin;
                     faceLists[j5][depthListIndices[j5]++] = k;
                 } else {
-                    if (flag1 && method486(cursorXPos, cursorYPos, anIntArray1666[l], anIntArray1666[k1], anIntArray1666[j2], i3, l3, k4)) {
+                    if (flag1 && method486(cursorXPos, cursorYPos, vertexSY[l], vertexSY[k1], vertexSY[j2], i3, l3, k4)) {
                         resourceIDTAG[resourceCount++] = i;
                         flag1 = false;
                     }
-                    if ((i3 - l3) * (anIntArray1666[j2] - anIntArray1666[k1]) - (anIntArray1666[l] - anIntArray1666[k1]) * (k4 - l3) > 0) {
+                    if ((i3 - l3) * (vertexSY[j2] - vertexSY[k1]) - (vertexSY[l] - vertexSY[k1]) * (k4 - l3) > 0) {
                         aBooleanArray1664[k] = false;
                         aBooleanArray1663[k] = i3 < 0 || l3 < 0 || k4 < 0 || i3 > Graphics2D.viewportRx || l3 > Graphics2D.viewportRx || k4 > Graphics2D.viewportRx;
-                        int k5 = (cameraDepth[l] + cameraDepth[k1] + cameraDepth[j2]) / 3 + diagonal3DAboveorigin;
+                        int k5 = (depthBuffer[l] + depthBuffer[k1] + depthBuffer[j2]) / 3 + diagonal3DAboveorigin;
                         faceLists[k5][depthListIndices[k5]++] = k;
                     }
                 }
@@ -2075,46 +2216,46 @@ public class Model extends Entity {
         }
     }
 
-    private void rasterize(int i) {
-        if (aBooleanArray1664[i]) {
-            method485(i);
+    private void rasterize(int triPtr) {
+        if (aBooleanArray1664[triPtr]) {
+            method485(triPtr);
             return;
         }
-        int j = triangleA[i];
-        int k = triangleB[i];
-        int l = triangleC[i];
-        Rasterizer.restrict_edges = aBooleanArray1663[i];
+        int tA = triangleA[triPtr];
+        int tB = triangleB[triPtr];
+        int tC = triangleC[triPtr];
+        Rasterizer.restrict_edges = aBooleanArray1663[triPtr];
         if (triangleAlpha == null)
             Rasterizer.alpha = 0;
         else
-            Rasterizer.alpha = triangleAlpha[i];
-        int i1;
-        if (triangleDrawType == null)
-            i1 = 0;
+            Rasterizer.alpha = triangleAlpha[triPtr];
+        int triangleDrawType;
+        if (this.triangleDrawType == null)
+            triangleDrawType = 0;
         else
-            i1 = triangleDrawType[i] & 3;
-        if (i1 == 0) {
-            Rasterizer.drawShadedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i]);
+            triangleDrawType = this.triangleDrawType[triPtr] & 3;
+        if (triangleDrawType == 0) {
+            Rasterizer.drawShadedTriangle(vertexSY[tA], vertexSY[tB], vertexSY[tC], vertexSX[tA], vertexSX[tB], vertexSX[tC], triangleHslA[triPtr], triangleHslB[triPtr], triangleHslC[triPtr]);
             return;
         }
-        if (i1 == 1) {
-            Rasterizer.drawFlatTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], HSL2RGB[triangleHslA[i]]);
+        if (triangleDrawType == 1) {
+            Rasterizer.drawFlatTriangle(vertexSY[tA], vertexSY[tB], vertexSY[tC], vertexSX[tA], vertexSX[tB], vertexSX[tC], HSL2RGB[triangleHslA[triPtr]]);
             return;
         }
-        if (i1 == 2) {
-            int j1 = triangleDrawType[i] >> 2;
-            int l1 = triPIndex[j1];
-            int j2 = triMIndex[j1];
-            int l2 = triNIndex[j1];
-            Rasterizer.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslB[i], triangleHslC[i], anIntArray1668[l1], anIntArray1668[j2], anIntArray1668[l2], vertexBY[l1], vertexBY[j2], vertexBY[l2], anIntArray1670[l1], anIntArray1670[j2], anIntArray1670[l2], triangleColour[i]);
+        if (triangleDrawType == 2) {
+            int textriPtr = this.triangleDrawType[triPtr] >> 2;
+            int tP = triPIndex[textriPtr];
+            int tM = triMIndex[textriPtr];
+            int tN = triNIndex[textriPtr];
+            Rasterizer.drawTexturedTriangle(vertexSY[tA], vertexSY[tB], vertexSY[tC], vertexSX[tA], vertexSX[tB], vertexSX[tC], triangleHslA[triPtr], triangleHslB[triPtr], triangleHslC[triPtr], vertexMvX[tP], vertexMvX[tM], vertexMvX[tN], vertexMvY[tP], vertexMvY[tM], vertexMvY[tN], vertexMvZ[tP], vertexMvZ[tM], vertexMvZ[tN], triangleColour[triPtr]);
             return;
         }
-        if (i1 == 3) {
-            int k1 = triangleDrawType[i] >> 2;
+        if (triangleDrawType == 3) {
+            int k1 = this.triangleDrawType[triPtr] >> 2;
             int i2 = triPIndex[k1];
             int k2 = triMIndex[k1];
             int i3 = triNIndex[k1];
-            Rasterizer.drawTexturedTriangle(anIntArray1666[j], anIntArray1666[k], anIntArray1666[l], anIntArray1665[j], anIntArray1665[k], anIntArray1665[l], triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[i2], anIntArray1668[k2], anIntArray1668[i3], vertexBY[i2], vertexBY[k2], vertexBY[i3], anIntArray1670[i2], anIntArray1670[k2], anIntArray1670[i3], triangleColour[i]);
+            Rasterizer.drawTexturedTriangle(vertexSY[tA], vertexSY[tB], vertexSY[tC], vertexSX[tA], vertexSX[tB], vertexSX[tC], triangleHslA[triPtr], triangleHslA[triPtr], triangleHslA[triPtr], vertexMvX[i2], vertexMvX[k2], vertexMvX[i3], vertexMvY[i2], vertexMvY[k2], vertexMvY[i3], vertexMvZ[i2], vertexMvZ[k2], vertexMvZ[i3], triangleColour[triPtr]);
         }
     }
 
@@ -2125,69 +2266,69 @@ public class Model extends Entity {
         int i1 = triangleA[i];
         int j1 = triangleB[i];
         int k1 = triangleC[i];
-        int l1 = anIntArray1670[i1];
-        int i2 = anIntArray1670[j1];
-        int j2 = anIntArray1670[k1];
+        int l1 = vertexMvZ[i1];
+        int i2 = vertexMvZ[j1];
+        int j2 = vertexMvZ[k1];
         if (l1 >= 50) {
-            anIntArray1678[l] = anIntArray1665[i1];
-            anIntArray1679[l] = anIntArray1666[i1];
+            anIntArray1678[l] = vertexSX[i1];
+            anIntArray1679[l] = vertexSY[i1];
             anIntArray1680[l++] = triangleHslA[i];
         } else {
-            int k2 = anIntArray1668[i1];
-            int k3 = vertexBY[i1];
+            int k2 = vertexMvX[i1];
+            int k3 = vertexMvY[i1];
             int k4 = triangleHslA[i];
             if (j2 >= 50) {
                 int k5 = (50 - l1) * modelIntArray4[j2 - l1];
-                anIntArray1678[l] = j + (k2 + ((anIntArray1668[k1] - k2) * k5 >> 16) << 9) / 50;
-                anIntArray1679[l] = k + (k3 + ((vertexBY[k1] - k3) * k5 >> 16) << 9) / 50;
+                anIntArray1678[l] = j + (k2 + ((vertexMvX[k1] - k2) * k5 >> 16) << 9) / 50;
+                anIntArray1679[l] = k + (k3 + ((vertexMvY[k1] - k3) * k5 >> 16) << 9) / 50;
                 anIntArray1680[l++] = k4 + ((triangleHslC[i] - k4) * k5 >> 16);
             }
             if (i2 >= 50) {
                 int l5 = (50 - l1) * modelIntArray4[i2 - l1];
-                anIntArray1678[l] = j + (k2 + ((anIntArray1668[j1] - k2) * l5 >> 16) << 9) / 50;
-                anIntArray1679[l] = k + (k3 + ((vertexBY[j1] - k3) * l5 >> 16) << 9) / 50;
+                anIntArray1678[l] = j + (k2 + ((vertexMvX[j1] - k2) * l5 >> 16) << 9) / 50;
+                anIntArray1679[l] = k + (k3 + ((vertexMvY[j1] - k3) * l5 >> 16) << 9) / 50;
                 anIntArray1680[l++] = k4 + ((triangleHslB[i] - k4) * l5 >> 16);
             }
         }
         if (i2 >= 50) {
-            anIntArray1678[l] = anIntArray1665[j1];
-            anIntArray1679[l] = anIntArray1666[j1];
+            anIntArray1678[l] = vertexSX[j1];
+            anIntArray1679[l] = vertexSY[j1];
             anIntArray1680[l++] = triangleHslB[i];
         } else {
-            int l2 = anIntArray1668[j1];
-            int l3 = vertexBY[j1];
+            int l2 = vertexMvX[j1];
+            int l3 = vertexMvY[j1];
             int l4 = triangleHslB[i];
             if (l1 >= 50) {
                 int i6 = (50 - i2) * modelIntArray4[l1 - i2];
-                anIntArray1678[l] = j + (l2 + ((anIntArray1668[i1] - l2) * i6 >> 16) << 9) / 50;
-                anIntArray1679[l] = k + (l3 + ((vertexBY[i1] - l3) * i6 >> 16) << 9) / 50;
+                anIntArray1678[l] = j + (l2 + ((vertexMvX[i1] - l2) * i6 >> 16) << 9) / 50;
+                anIntArray1679[l] = k + (l3 + ((vertexMvY[i1] - l3) * i6 >> 16) << 9) / 50;
                 anIntArray1680[l++] = l4 + ((triangleHslA[i] - l4) * i6 >> 16);
             }
             if (j2 >= 50) {
                 int j6 = (50 - i2) * modelIntArray4[j2 - i2];
-                anIntArray1678[l] = j + (l2 + ((anIntArray1668[k1] - l2) * j6 >> 16) << 9) / 50;
-                anIntArray1679[l] = k + (l3 + ((vertexBY[k1] - l3) * j6 >> 16) << 9) / 50;
+                anIntArray1678[l] = j + (l2 + ((vertexMvX[k1] - l2) * j6 >> 16) << 9) / 50;
+                anIntArray1679[l] = k + (l3 + ((vertexMvY[k1] - l3) * j6 >> 16) << 9) / 50;
                 anIntArray1680[l++] = l4 + ((triangleHslC[i] - l4) * j6 >> 16);
             }
         }
         if (j2 >= 50) {
-            anIntArray1678[l] = anIntArray1665[k1];
-            anIntArray1679[l] = anIntArray1666[k1];
+            anIntArray1678[l] = vertexSX[k1];
+            anIntArray1679[l] = vertexSY[k1];
             anIntArray1680[l++] = triangleHslC[i];
         } else {
-            int i3 = anIntArray1668[k1];
-            int i4 = vertexBY[k1];
+            int i3 = vertexMvX[k1];
+            int i4 = vertexMvY[k1];
             int i5 = triangleHslC[i];
             if (i2 >= 50) {
                 int k6 = (50 - j2) * modelIntArray4[i2 - j2];
-                anIntArray1678[l] = j + (i3 + ((anIntArray1668[j1] - i3) * k6 >> 16) << 9) / 50;
-                anIntArray1679[l] = k + (i4 + ((vertexBY[j1] - i4) * k6 >> 16) << 9) / 50;
+                anIntArray1678[l] = j + (i3 + ((vertexMvX[j1] - i3) * k6 >> 16) << 9) / 50;
+                anIntArray1679[l] = k + (i4 + ((vertexMvY[j1] - i4) * k6 >> 16) << 9) / 50;
                 anIntArray1680[l++] = i5 + ((triangleHslB[i] - i5) * k6 >> 16);
             }
             if (l1 >= 50) {
                 int l6 = (50 - j2) * modelIntArray4[l1 - j2];
-                anIntArray1678[l] = j + (i3 + ((anIntArray1668[i1] - i3) * l6 >> 16) << 9) / 50;
-                anIntArray1679[l] = k + (i4 + ((vertexBY[i1] - i4) * l6 >> 16) << 9) / 50;
+                anIntArray1678[l] = j + (i3 + ((vertexMvX[i1] - i3) * l6 >> 16) << 9) / 50;
+                anIntArray1679[l] = k + (i4 + ((vertexMvY[i1] - i4) * l6 >> 16) << 9) / 50;
                 anIntArray1680[l++] = i5 + ((triangleHslA[i] - i5) * l6 >> 16);
             }
         }
@@ -2216,13 +2357,13 @@ public class Model extends Entity {
                     int k9 = triPIndex[j8];
                     int k10 = triMIndex[j8];
                     int k11 = triNIndex[j8];
-                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[k9], anIntArray1668[k10], anIntArray1668[k11], vertexBY[k9], vertexBY[k10], vertexBY[k11], anIntArray1670[k9], anIntArray1670[k10], anIntArray1670[k11], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], vertexMvX[k9], vertexMvX[k10], vertexMvX[k11], vertexMvY[k9], vertexMvY[k10], vertexMvY[k11], vertexMvZ[k9], vertexMvZ[k10], vertexMvZ[k11], triangleColour[i]);
                 } else if (l7 == 3) {
                     int k8 = triangleDrawType[i] >> 2;
                     int l9 = triPIndex[k8];
                     int l10 = triMIndex[k8];
                     int l11 = triNIndex[k8];
-                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[l9], anIntArray1668[l10], anIntArray1668[l11], vertexBY[l9], vertexBY[l10], vertexBY[l11], anIntArray1670[l9], anIntArray1670[l10], anIntArray1670[l11], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[l9], vertexMvX[l10], vertexMvX[l11], vertexMvY[l9], vertexMvY[l10], vertexMvY[l11], vertexMvZ[l9], vertexMvZ[l10], vertexMvZ[l11], triangleColour[i]);
                 }
             }
             if (l == 4) {
@@ -2249,8 +2390,8 @@ public class Model extends Entity {
                     int i10 = triPIndex[i9];
                     int i11 = triMIndex[i9];
                     int i12 = triNIndex[i9];
-                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColour[i]);
-                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], anIntArray1668[i10], anIntArray1668[i11], anIntArray1668[i12], vertexBY[i10], vertexBY[i11], vertexBY[i12], anIntArray1670[i10], anIntArray1670[i11], anIntArray1670[i12], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], vertexMvX[i10], vertexMvX[i11], vertexMvX[i12], vertexMvY[i10], vertexMvY[i11], vertexMvY[i12], vertexMvZ[i10], vertexMvZ[i11], vertexMvZ[i12], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], vertexMvX[i10], vertexMvX[i11], vertexMvX[i12], vertexMvY[i10], vertexMvY[i11], vertexMvY[i12], vertexMvZ[i10], vertexMvZ[i11], vertexMvZ[i12], triangleColour[i]);
                     return;
                 }
                 if (i8 == 3) {
@@ -2258,8 +2399,8 @@ public class Model extends Entity {
                     int j10 = triPIndex[j9];
                     int j11 = triMIndex[j9];
                     int j12 = triNIndex[j9];
-                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColour[i]);
-                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangleHslA[i], triangleHslA[i], triangleHslA[i], anIntArray1668[j10], anIntArray1668[j11], anIntArray1668[j12], vertexBY[j10], vertexBY[j11], vertexBY[j12], anIntArray1670[j10], anIntArray1670[j11], anIntArray1670[j12], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[j10], vertexMvX[j11], vertexMvX[j12], vertexMvY[j10], vertexMvY[j11], vertexMvY[j12], vertexMvZ[j10], vertexMvZ[j11], vertexMvZ[j12], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[j10], vertexMvX[j11], vertexMvX[j12], vertexMvY[j10], vertexMvY[j11], vertexMvY[j12], vertexMvZ[j10], vertexMvZ[j11], vertexMvZ[j12], triangleColour[i]);
                 }
             }
         }
@@ -2287,9 +2428,9 @@ public class Model extends Entity {
     public int triangleA[];
     public int triangleB[];
     public int triangleC[];
-    private int[] triangleHslA;
-    private int[] triangleHslB;
-    private int[] triangleHslC;
+    public int[] triangleHslA;
+    public int[] triangleHslB;
+    public int[] triangleHslC;
     public int triangleDrawType[];
     public int[] facePriority;
     public int[] triangleAlpha;
@@ -2318,13 +2459,13 @@ public class Model extends Entity {
     private static ModelHeader[] modelHeaderCache;
     private static OnDemandFetcherParent aOnDemandFetcherParent_1662;
     private static boolean[] aBooleanArray1663 = new boolean[4096];
-    private static boolean[] aBooleanArray1664 = new boolean[4096];
-    private static int[] anIntArray1665 = new int[4096];
-    private static int[] anIntArray1666 = new int[4096];
-    private static int[] cameraDepth = new int[4096];
-    private static int[] anIntArray1668 = new int[4096];
-    private static int[] vertexBY = new int[4096];
-    private static int[] anIntArray1670 = new int[4096];
+    public static boolean[] aBooleanArray1664 = new boolean[4096];
+    private static int[] vertexSX = new int[4096];
+    private static int[] vertexSY = new int[4096];
+    private static int[] depthBuffer = new int[4096];
+    private static int[] vertexMvX = new int[4096];
+    private static int[] vertexMvY = new int[4096];
+    private static int[] vertexMvZ = new int[4096];
     private static int[] depthListIndices = new int[1500];
     private static int[][] faceLists = new int[1500][512];
     private static int[] anIntArray1673 = new int[12];

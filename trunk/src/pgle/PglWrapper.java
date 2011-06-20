@@ -69,7 +69,7 @@ public class PglWrapper {
             scene.add(rsTileManager);
             firstPersonCamera = new FirstPersonCamera();
             glEnable(GL_DEPTH_TEST);
-            initLighting();
+        //    initLighting();
             running = true;
         } catch (LWJGLException e) {
 
@@ -104,9 +104,9 @@ public class PglWrapper {
             return;
         if (!Display.isCloseRequested()) {
             preRender();
-            lightManager.startLighting(new Camera());
+           // lightManager.startLighting(new Camera());
             scene.render(null);
-            lightManager.stopLighting();
+           // lightManager.stopLighting();
             try {
                 Display.swapBuffers();
             } catch (LWJGLException e) {

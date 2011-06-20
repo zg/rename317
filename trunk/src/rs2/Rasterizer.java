@@ -1,5 +1,7 @@
 package rs2;
 
+import javax.management.MXBean;
+
 public class Rasterizer extends Graphics2D {
 
 	public static void clearCache() {
@@ -1237,25 +1239,25 @@ public class Rasterizer extends Graphics2D {
 	}
 
 	public static void drawTexturedTriangle(int y_a, int y_b, int y_c, int x_a, int x_b, int x_c, int grad_a, int grad_b,
-	                                        int grad_c, int t_x_a, int t_x_b, int t_x_c, int t_y_a, int t_y_b, int t_y_c,
-	                                        int t_z_a, int t_z_b, int t_z_c, int t_id) {
+	                                        int grad_c, int Px, int Mx, int Nx, int Pz, int Mz, int Nz,
+	                                        int Py, int My, int Ny, int t_id) {
 		int texture[] = getTexturePixels(t_id);
 		Rasterizer.opaque = !textureIsTransparent[t_id];
-		t_x_b = t_x_a - t_x_b;
-		t_y_b = t_y_a - t_y_b;
-		t_z_b = t_z_a - t_z_b;
-		t_x_c -= t_x_a;
-		t_y_c -= t_y_a;
-		t_z_c -= t_z_a;
-		int l4 = t_x_c * t_y_a - t_y_c * t_x_a << 14;
-		int i5 = t_y_c * t_z_a - t_z_c * t_y_a << 8;
-		int j5 = t_z_c * t_x_a - t_x_c * t_z_a << 5;
-		int k5 = t_x_b * t_y_a - t_y_b * t_x_a << 14;
-		int l5 = t_y_b * t_z_a - t_z_b * t_y_a << 8;
-		int i6 = t_z_b * t_x_a - t_x_b * t_z_a << 5;
-		int j6 = t_y_b * t_x_c - t_x_b * t_y_c << 14;
-		int k6 = t_z_b * t_y_c - t_y_b * t_z_c << 8;
-		int l6 = t_x_b * t_z_c - t_z_b * t_x_c << 5;
+		Mx = Px - Mx;
+		Mz = Pz - Mz;
+		My = Py - My;
+		Nx -= Px;
+		Nz -= Pz;
+		Ny -= Py;
+		int Oa = Nx * Pz - Nz * Px << 14;
+		int Ha = Nz * Py - Ny * Pz << 8;
+		int Va = Ny * Px - Nx * Py << 5;
+		int Ob = Mx * Pz - Mz * Px << 14;
+		int Hb = Mz * Py - My * Pz << 8;
+		int Vb = My * Px - Mx * Py << 5;
+		int Oc = Mz * Nx - Mx * Nz << 14;
+		int Hc = My * Nz - Mz * Ny << 8;
+		int Vc = Mx * Ny - My * Nx << 5;
 		int x_a_off = 0;
 		int grad_a_off = 0;
 		if (y_b != y_a) {
@@ -1301,35 +1303,35 @@ public class Rasterizer extends Graphics2D {
 					grad_b -= grad_b_off * y_b;
 					y_b = 0;
 				}
-				int k8 = y_a - centerY;
-				l4 += j5 * k8;
-				k5 += i6 * k8;
-				j6 += l6 * k8;
+				int jA = y_a - centerY;
+				Oa += Va * jA;
+				Ob += Vb * jA;
+				Oc += Vc * jA;
 				if (y_a != y_b && x_c_off < x_a_off || y_a == y_b && x_c_off > x_b_off) {
 					y_c -= y_b;
 					y_b -= y_a;
 					y_a = lineOffsets[y_a];
 					while (--y_b >= 0) {
-						drawTexturedLine(pixels, texture, y_a, x_c >> 16, x_a >> 16, grad_c >> 8, grad_a >> 8, l4, k5, j6, i5, l5, k6);
+						drawTexturedLine(pixels, texture, y_a, x_c >> 16, x_a >> 16, grad_c >> 8, grad_a >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 						x_c += x_c_off;
 						x_a += x_a_off;
 						grad_c += grad_c_off;
 						grad_a += grad_a_off;
 						y_a += width;
-						l4 += j5;
-						k5 += i6;
-						j6 += l6;
+						Oa += Va;
+						Ob += Vb;
+						Oc += Vc;
 					}
 					while (--y_c >= 0) {
-						drawTexturedLine(pixels, texture, y_a, x_c >> 16, x_b >> 16, grad_c >> 8, grad_b >> 8, l4, k5, j6, i5, l5, k6);
+						drawTexturedLine(pixels, texture, y_a, x_c >> 16, x_b >> 16, grad_c >> 8, grad_b >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 						x_c += x_c_off;
 						x_b += x_b_off;
 						grad_c += grad_c_off;
 						grad_b += grad_b_off;
 						y_a += width;
-						l4 += j5;
-						k5 += i6;
-						j6 += l6;
+						Oa += Va;
+						Ob += Vb;
+						Oc += Vc;
 					}
 					return;
 				}
@@ -1337,26 +1339,26 @@ public class Rasterizer extends Graphics2D {
 				y_b -= y_a;
 				y_a = lineOffsets[y_a];
 				while (--y_b >= 0) {
-					drawTexturedLine(pixels, texture, y_a, x_a >> 16, x_c >> 16, grad_a >> 8, grad_c >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_a, x_a >> 16, x_c >> 16, grad_a >> 8, grad_c >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_c += x_c_off;
 					x_a += x_a_off;
 					grad_c += grad_c_off;
 					grad_a += grad_a_off;
 					y_a += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				while (--y_c >= 0) {
-					drawTexturedLine(pixels, texture, y_a, x_b >> 16, x_c >> 16, grad_b >> 8, grad_c >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_a, x_b >> 16, x_c >> 16, grad_b >> 8, grad_c >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_c += x_c_off;
 					x_b += x_b_off;
 					grad_c += grad_c_off;
 					grad_b += grad_b_off;
 					y_a += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				return;
 			}
@@ -1377,34 +1379,34 @@ public class Rasterizer extends Graphics2D {
 				y_c = 0;
 			}
 			int l8 = y_a - centerY;
-			l4 += j5 * l8;
-			k5 += i6 * l8;
-			j6 += l6 * l8;
+			Oa += Va * l8;
+			Ob += Vb * l8;
+			Oc += Vc * l8;
 			if (y_a != y_c && x_c_off < x_a_off || y_a == y_c && x_b_off > x_a_off) {
 				y_b -= y_c;
 				y_c -= y_a;
 				y_a = lineOffsets[y_a];
 				while (--y_c >= 0) {
-					drawTexturedLine(pixels, texture, y_a, x_b >> 16, x_a >> 16, grad_b >> 8, grad_a >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_a, x_b >> 16, x_a >> 16, grad_b >> 8, grad_a >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_b += x_c_off;
 					x_a += x_a_off;
 					grad_b += grad_c_off;
 					grad_a += grad_a_off;
 					y_a += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				while (--y_b >= 0) {
-					drawTexturedLine(pixels, texture, y_a, x_c >> 16, x_a >> 16, grad_c >> 8, grad_a >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_a, x_c >> 16, x_a >> 16, grad_c >> 8, grad_a >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_c += x_b_off;
 					x_a += x_a_off;
 					grad_c += grad_b_off;
 					grad_a += grad_a_off;
 					y_a += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				return;
 			}
@@ -1412,26 +1414,26 @@ public class Rasterizer extends Graphics2D {
 			y_c -= y_a;
 			y_a = lineOffsets[y_a];
 			while (--y_c >= 0) {
-				drawTexturedLine(pixels, texture, y_a, x_a >> 16, x_b >> 16, grad_a >> 8, grad_b >> 8, l4, k5, j6, i5, l5, k6);
+				drawTexturedLine(pixels, texture, y_a, x_a >> 16, x_b >> 16, grad_a >> 8, grad_b >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 				x_b += x_c_off;
 				x_a += x_a_off;
 				grad_b += grad_c_off;
 				grad_a += grad_a_off;
 				y_a += width;
-				l4 += j5;
-				k5 += i6;
-				j6 += l6;
+				Oa += Va;
+				Ob += Vb;
+				Oc += Vc;
 			}
 			while (--y_b >= 0) {
-				drawTexturedLine(pixels, texture, y_a, x_a >> 16, x_c >> 16, grad_a >> 8, grad_c >> 8, l4, k5, j6, i5, l5, k6);
+				drawTexturedLine(pixels, texture, y_a, x_a >> 16, x_c >> 16, grad_a >> 8, grad_c >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 				x_c += x_b_off;
 				x_a += x_a_off;
 				grad_c += grad_b_off;
 				grad_a += grad_a_off;
 				y_a += width;
-				l4 += j5;
-				k5 += i6;
-				j6 += l6;
+				Oa += Va;
+				Ob += Vb;
+				Oc += Vc;
 			}
 			return;
 		}
@@ -1463,34 +1465,34 @@ public class Rasterizer extends Graphics2D {
 					y_c = 0;
 				}
 				int i9 = y_b - centerY;
-				l4 += j5 * i9;
-				k5 += i6 * i9;
-				j6 += l6 * i9;
+				Oa += Va * i9;
+				Ob += Vb * i9;
+				Oc += Vc * i9;
 				if (y_b != y_c && x_a_off < x_b_off || y_b == y_c && x_a_off > x_c_off) {
 					y_a -= y_c;
 					y_c -= y_b;
 					y_b = lineOffsets[y_b];
 					while (--y_c >= 0) {
-						drawTexturedLine(pixels, texture, y_b, x_a >> 16, x_b >> 16, grad_a >> 8, grad_b >> 8, l4, k5, j6, i5, l5, k6);
+						drawTexturedLine(pixels, texture, y_b, x_a >> 16, x_b >> 16, grad_a >> 8, grad_b >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 						x_a += x_a_off;
 						x_b += x_b_off;
 						grad_a += grad_a_off;
 						grad_b += grad_b_off;
 						y_b += width;
-						l4 += j5;
-						k5 += i6;
-						j6 += l6;
+						Oa += Va;
+						Ob += Vb;
+						Oc += Vc;
 					}
 					while (--y_a >= 0) {
-						drawTexturedLine(pixels, texture, y_b, x_a >> 16, x_c >> 16, grad_a >> 8, grad_c >> 8, l4, k5, j6, i5, l5, k6);
+						drawTexturedLine(pixels, texture, y_b, x_a >> 16, x_c >> 16, grad_a >> 8, grad_c >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 						x_a += x_a_off;
 						x_c += x_c_off;
 						grad_a += grad_a_off;
 						grad_c += grad_c_off;
 						y_b += width;
-						l4 += j5;
-						k5 += i6;
-						j6 += l6;
+						Oa += Va;
+						Ob += Vb;
+						Oc += Vc;
 					}
 					return;
 				}
@@ -1498,26 +1500,26 @@ public class Rasterizer extends Graphics2D {
 				y_c -= y_b;
 				y_b = lineOffsets[y_b];
 				while (--y_c >= 0) {
-					drawTexturedLine(pixels, texture, y_b, x_b >> 16, x_a >> 16, grad_b >> 8, grad_a >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_b, x_b >> 16, x_a >> 16, grad_b >> 8, grad_a >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_a += x_a_off;
 					x_b += x_b_off;
 					grad_a += grad_a_off;
 					grad_b += grad_b_off;
 					y_b += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				while (--y_a >= 0) {
-					drawTexturedLine(pixels, texture, y_b, x_c >> 16, x_a >> 16, grad_c >> 8, grad_a >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_b, x_c >> 16, x_a >> 16, grad_c >> 8, grad_a >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_a += x_a_off;
 					x_c += x_c_off;
 					grad_a += grad_a_off;
 					grad_c += grad_c_off;
 					y_b += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				return;
 			}
@@ -1538,34 +1540,34 @@ public class Rasterizer extends Graphics2D {
 				y_a = 0;
 			}
 			int j9 = y_b - centerY;
-			l4 += j5 * j9;
-			k5 += i6 * j9;
-			j6 += l6 * j9;
+			Oa += Va * j9;
+			Ob += Vb * j9;
+			Oc += Vc * j9;
 			if (x_a_off < x_b_off) {
 				y_c -= y_a;
 				y_a -= y_b;
 				y_b = lineOffsets[y_b];
 				while (--y_a >= 0) {
-					drawTexturedLine(pixels, texture, y_b, x_c >> 16, x_b >> 16, grad_c >> 8, grad_b >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_b, x_c >> 16, x_b >> 16, grad_c >> 8, grad_b >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_c += x_a_off;
 					x_b += x_b_off;
 					grad_c += grad_a_off;
 					grad_b += grad_b_off;
 					y_b += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				while (--y_c >= 0) {
-					drawTexturedLine(pixels, texture, y_b, x_a >> 16, x_b >> 16, grad_a >> 8, grad_b >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_b, x_a >> 16, x_b >> 16, grad_a >> 8, grad_b >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_a += x_c_off;
 					x_b += x_b_off;
 					grad_a += grad_c_off;
 					grad_b += grad_b_off;
 					y_b += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				return;
 			}
@@ -1573,26 +1575,26 @@ public class Rasterizer extends Graphics2D {
 			y_a -= y_b;
 			y_b = lineOffsets[y_b];
 			while (--y_a >= 0) {
-				drawTexturedLine(pixels, texture, y_b, x_b >> 16, x_c >> 16, grad_b >> 8, grad_c >> 8, l4, k5, j6, i5, l5, k6);
+				drawTexturedLine(pixels, texture, y_b, x_b >> 16, x_c >> 16, grad_b >> 8, grad_c >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 				x_c += x_a_off;
 				x_b += x_b_off;
 				grad_c += grad_a_off;
 				grad_b += grad_b_off;
 				y_b += width;
-				l4 += j5;
-				k5 += i6;
-				j6 += l6;
+				Oa += Va;
+				Ob += Vb;
+				Oc += Vc;
 			}
 			while (--y_c >= 0) {
-				drawTexturedLine(pixels, texture, y_b, x_b >> 16, x_a >> 16, grad_b >> 8, grad_a >> 8, l4, k5, j6, i5, l5, k6);
+				drawTexturedLine(pixels, texture, y_b, x_b >> 16, x_a >> 16, grad_b >> 8, grad_a >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 				x_a += x_c_off;
 				x_b += x_b_off;
 				grad_a += grad_c_off;
 				grad_b += grad_b_off;
 				y_b += width;
-				l4 += j5;
-				k5 += i6;
-				j6 += l6;
+				Oa += Va;
+				Ob += Vb;
+				Oc += Vc;
 			}
 			return;
 		}
@@ -1623,34 +1625,34 @@ public class Rasterizer extends Graphics2D {
 				y_a = 0;
 			}
 			int k9 = y_c - centerY;
-			l4 += j5 * k9;
-			k5 += i6 * k9;
-			j6 += l6 * k9;
+			Oa += Va * k9;
+			Ob += Vb * k9;
+			Oc += Vc * k9;
 			if (x_b_off < x_c_off) {
 				y_b -= y_a;
 				y_a -= y_c;
 				y_c = lineOffsets[y_c];
 				while (--y_a >= 0) {
-					drawTexturedLine(pixels, texture, y_c, x_b >> 16, x_c >> 16, grad_b >> 8, grad_c >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_c, x_b >> 16, x_c >> 16, grad_b >> 8, grad_c >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_b += x_b_off;
 					x_c += x_c_off;
 					grad_b += grad_b_off;
 					grad_c += grad_c_off;
 					y_c += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				while (--y_b >= 0) {
-					drawTexturedLine(pixels, texture, y_c, x_b >> 16, x_a >> 16, grad_b >> 8, grad_a >> 8, l4, k5, j6, i5, l5, k6);
+					drawTexturedLine(pixels, texture, y_c, x_b >> 16, x_a >> 16, grad_b >> 8, grad_a >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 					x_b += x_b_off;
 					x_a += x_a_off;
 					grad_b += grad_b_off;
 					grad_a += grad_a_off;
 					y_c += width;
-					l4 += j5;
-					k5 += i6;
-					j6 += l6;
+					Oa += Va;
+					Ob += Vb;
+					Oc += Vc;
 				}
 				return;
 			}
@@ -1658,26 +1660,26 @@ public class Rasterizer extends Graphics2D {
 			y_a -= y_c;
 			y_c = lineOffsets[y_c];
 			while (--y_a >= 0) {
-				drawTexturedLine(pixels, texture, y_c, x_c >> 16, x_b >> 16, grad_c >> 8, grad_b >> 8, l4, k5, j6, i5, l5, k6);
+				drawTexturedLine(pixels, texture, y_c, x_c >> 16, x_b >> 16, grad_c >> 8, grad_b >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 				x_b += x_b_off;
 				x_c += x_c_off;
 				grad_b += grad_b_off;
 				grad_c += grad_c_off;
 				y_c += width;
-				l4 += j5;
-				k5 += i6;
-				j6 += l6;
+				Oa += Va;
+				Ob += Vb;
+				Oc += Vc;
 			}
 			while (--y_b >= 0) {
-				drawTexturedLine(pixels, texture, y_c, x_a >> 16, x_b >> 16, grad_a >> 8, grad_b >> 8, l4, k5, j6, i5, l5, k6);
+				drawTexturedLine(pixels, texture, y_c, x_a >> 16, x_b >> 16, grad_a >> 8, grad_b >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 				x_b += x_b_off;
 				x_a += x_a_off;
 				grad_b += grad_b_off;
 				grad_a += grad_a_off;
 				y_c += width;
-				l4 += j5;
-				k5 += i6;
-				j6 += l6;
+				Oa += Va;
+				Ob += Vb;
+				Oc += Vc;
 			}
 			return;
 		}
@@ -1698,34 +1700,34 @@ public class Rasterizer extends Graphics2D {
 			y_b = 0;
 		}
 		int l9 = y_c - centerY;
-		l4 += j5 * l9;
-		k5 += i6 * l9;
-		j6 += l6 * l9;
+		Oa += Va * l9;
+		Ob += Vb * l9;
+		Oc += Vc * l9;
 		if (x_b_off < x_c_off) {
 			y_a -= y_b;
 			y_b -= y_c;
 			y_c = lineOffsets[y_c];
 			while (--y_b >= 0) {
-				drawTexturedLine(pixels, texture, y_c, x_a >> 16, x_c >> 16, grad_a >> 8, grad_c >> 8, l4, k5, j6, i5, l5, k6);
+				drawTexturedLine(pixels, texture, y_c, x_a >> 16, x_c >> 16, grad_a >> 8, grad_c >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 				x_a += x_b_off;
 				x_c += x_c_off;
 				grad_a += grad_b_off;
 				grad_c += grad_c_off;
 				y_c += width;
-				l4 += j5;
-				k5 += i6;
-				j6 += l6;
+				Oa += Va;
+				Ob += Vb;
+				Oc += Vc;
 			}
 			while (--y_a >= 0) {
-				drawTexturedLine(pixels, texture, y_c, x_b >> 16, x_c >> 16, grad_b >> 8, grad_c >> 8, l4, k5, j6, i5, l5, k6);
+				drawTexturedLine(pixels, texture, y_c, x_b >> 16, x_c >> 16, grad_b >> 8, grad_c >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 				x_b += x_a_off;
 				x_c += x_c_off;
 				grad_b += grad_a_off;
 				grad_c += grad_c_off;
 				y_c += width;
-				l4 += j5;
-				k5 += i6;
-				j6 += l6;
+				Oa += Va;
+				Ob += Vb;
+				Oc += Vc;
 			}
 			return;
 		}
@@ -1733,26 +1735,26 @@ public class Rasterizer extends Graphics2D {
 		y_b -= y_c;
 		y_c = lineOffsets[y_c];
 		while (--y_b >= 0) {
-			drawTexturedLine(pixels, texture, y_c, x_c >> 16, x_a >> 16, grad_c >> 8, grad_a >> 8, l4, k5, j6, i5, l5, k6);
+			drawTexturedLine(pixels, texture, y_c, x_c >> 16, x_a >> 16, grad_c >> 8, grad_a >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 			x_a += x_b_off;
 			x_c += x_c_off;
 			grad_a += grad_b_off;
 			grad_c += grad_c_off;
 			y_c += width;
-			l4 += j5;
-			k5 += i6;
-			j6 += l6;
+			Oa += Va;
+			Ob += Vb;
+			Oc += Vc;
 		}
 		while (--y_a >= 0) {
-			drawTexturedLine(pixels, texture, y_c, x_c >> 16, x_b >> 16, grad_c >> 8, grad_b >> 8, l4, k5, j6, i5, l5, k6);
+			drawTexturedLine(pixels, texture, y_c, x_c >> 16, x_b >> 16, grad_c >> 8, grad_b >> 8, Oa, Ob, Oc, Ha, Hb, Hc);
 			x_b += x_a_off;
 			x_c += x_c_off;
 			grad_b += grad_a_off;
 			grad_c += grad_c_off;
 			y_c += width;
-			l4 += j5;
-			k5 += i6;
-			j6 += l6;
+			Oa += Va;
+			Ob += Vb;
+			Oc += Vc;
 		}
 	}
 
