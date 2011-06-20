@@ -629,7 +629,7 @@ public class Client extends RSApplet {
 
 			}
 			stream.p1isaac(0);
-			mapRegion.addTiles(tileSettings, sceneGraph);
+			try{mapRegion.addTiles(tileSettings, sceneGraph);}catch(Exception e){e.printStackTrace();}
             pglWrapper.loadNewRegion(mapRegion);
 			gameScreenCanvas.initDrawingArea();
 			stream.p1isaac(0);

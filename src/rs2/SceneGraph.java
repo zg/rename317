@@ -163,18 +163,27 @@ public class SceneGraph {
         tileArray[zz][x][y].shapedTile = shapedTile;
     }
 
-    public void addGroundDecoration(int Z, int z3d, int Y, Entity class30_sub2_sub4, byte byte0, int uid,
+    public void addGroundDecoration(int Z, int z3d, int Y, Entity jagexNode, byte byte0, int uid,
                           int X)
     {
-        if(class30_sub2_sub4 == null)
+        if(jagexNode == null)
             return;
         GroundDecoration class49 = new GroundDecoration();
-        class49.aClass30_Sub2_Sub4_814 = class30_sub2_sub4;
+        class49.aClass30_Sub2_Sub4_814 = jagexNode;
         class49.xPos = X * 128 + 64;
         class49.yPos = Y * 128 + 64;
         class49.zPos = z3d;
         class49.uid = uid;
         class49.objConf = byte0;
+        Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
+        org.peterbjornx.pgl2.model.Node node;
+        if (m != null)
+            node = new PglModelNode(m,false); //for now
+        else
+            node = new PglCubeStub();
+        //System.out.println("addentity");
+        clientInstance.getPglWrapper().getRsTileManager().add(node, Z, X, Y, false);
+        node.setPosition(new Vector3f(64,(-z3d)-(Z*240),64));
         if(tileArray[Z][X][Y] == null)
             tileArray[Z][X][Y] = new Tile(Z, X, Y);
         tileArray[Z][X][Y].groundDecoration = class49;
@@ -210,10 +219,9 @@ public class SceneGraph {
         tileArray[z][x][y].groundItemTile = itemTile;
     }
 
-    public void addWallObject(int i, Entity class30_sub2_sub4, int uid, int y, byte byte0, int x,
-                          Entity class30_sub2_sub4_1, int i1, int j1, int k1)
+    public void addWallObject(int i, Entity jagexNode, int uid, int y, byte byte0, int x, Entity jagexNode2, int i1, int j1, int k1, int i2)
     {
-        if(class30_sub2_sub4 == null && class30_sub2_sub4_1 == null)
+        if(jagexNode == null && jagexNode2 == null)
             return;
         WallObject wallObject = new WallObject();
         wallObject.uid = uid;
@@ -221,9 +229,19 @@ public class SceneGraph {
         wallObject.xPos = x * 128 + 64;
         wallObject.yPos = y * 128 + 64;
         wallObject.zPos = i1;
-        wallObject.aClass30_Sub2_Sub4_278 = class30_sub2_sub4;
-        wallObject.aClass30_Sub2_Sub4_279 = class30_sub2_sub4_1;
+        wallObject.aClass30_Sub2_Sub4_278 = jagexNode;
+        wallObject.aClass30_Sub2_Sub4_279 = jagexNode2;
         wallObject.orientation = i;
+        Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
+        org.peterbjornx.pgl2.model.Node node;
+        if (m != null)
+            node = new PglModelNode(m,false); //for now
+        else
+            node = new PglCubeStub();
+        //System.out.println("addentity");
+        clientInstance.getPglWrapper().getRsTileManager().add(node, k1, x, y, false);
+        node.setPosition(new Vector3f(64,(-i1)-(k1*240),64));
+        node.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(-(90*i2),0,0)));
         wallObject.orientation1 = j1;
         for(int z = k1; z >= 0; z--)
             if(tileArray[z][x][y] == null)
@@ -233,9 +251,9 @@ public class SceneGraph {
     }
 
     public void addWallDecoration(int i, int tileY, int face, int tileZ, int x3dOff, int z3d,
-                          Entity entity, int tileX, byte obConfig, int y3dOff, int facebits)
+                          Entity jagexNode, int tileX, byte obConfig, int y3dOff, int facebits)
     {
-        if(entity == null)
+        if(jagexNode == null)
             return;
         WallDecoration wallDecoration = new WallDecoration();
         wallDecoration.uid = i;
@@ -243,9 +261,19 @@ public class SceneGraph {
         wallDecoration.xPos = tileX * 128 + 64 + x3dOff;
         wallDecoration.yPos = tileY * 128 + 64 + y3dOff;
         wallDecoration.zPos = z3d;
-        wallDecoration.myMob = entity;
+        wallDecoration.myMob = jagexNode;
         wallDecoration.configBits = facebits;
         wallDecoration.face = face;
+        Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
+        org.peterbjornx.pgl2.model.Node node;
+        if (m != null)
+            node = new PglModelNode(m,false); //for now
+        else
+            node = new PglCubeStub();
+        //System.out.println("addentity");
+        clientInstance.getPglWrapper().getRsTileManager().add(node, tileZ, tileX,tileY, false);
+        node.setPosition(new Vector3f(64+x3dOff,(-z3d)-(tileZ*240),64+y3dOff));
+        node.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(-face*90,0,0)));
         for(int k2 = tileZ; k2 >= 0; k2--)
             if(tileArray[k2][tileX][tileY] == null)
                 tileArray[k2][tileX][tileY] = new Tile(k2, tileX, tileY);
