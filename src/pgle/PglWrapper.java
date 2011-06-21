@@ -28,7 +28,7 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class PglWrapper {
 
-    protected Node scene;
+    public Node scene;
     protected Camera camera;
     private FirstPersonCamera firstPersonCamera;
     private Terrain rsTerrain;
@@ -120,7 +120,6 @@ public class PglWrapper {
             running = false;
         }
     }
-
     public void preRender() {
         firstPersonCamera.handleInput(camera);
     }
@@ -137,5 +136,9 @@ public class PglWrapper {
         }
         rsTileManager.clear();
         System.gc();
+    }
+
+    public void doCamTransform() {
+        camera.loadViewMatrix();
     }
 }

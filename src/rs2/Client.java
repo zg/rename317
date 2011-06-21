@@ -5,6 +5,8 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 
+import org.peterbjornx.pgl2.util.ServerMemoryManager;
+import pgle.PglCallClientNode;
 import pgle.PglWrapper;
 
 
@@ -12,6 +14,8 @@ import pgle.PglWrapper;
 public class Client extends RSApplet {
 
     private PglWrapper pglWrapper;
+    private int fieldJ;
+    private PglCallClientNode renderNode;
 
     private static String logicGetAmountString(int i)
 	{
@@ -8619,11 +8623,13 @@ public class Client extends RSApplet {
 			plainFont.method380("Fps:" + super.fps, c, i1, k);
 			k += 15;
 			Runtime runtime = Runtime.getRuntime();
-			int j1 = (int)((runtime.totalMemory() - runtime.freeMemory()) / 1024L);
+			int j1 = (int)((runtime.totalMemory() - runtime.freeMemory()) / (1024*1024L));
 			i1 = 0xffff00;
 			if(j1 > 0x2000000 && lowMem)
 			i1 = 0xff0000;
-			plainFont.method380("Mem:" + j1 + "k", c, 0xffff00, k);
+			plainFont.method380("Heap usage:" + j1 + "m", c, 0xffff00, k);
+			k += 15;
+			plainFont.method380("Card usage :" + ((ServerMemoryManager.arbBufferMemory+ServerMemoryManager.textureMemory)/(1024*1024L)) +"m", c, i1, k);
 			k += 15;
 		}
 		if(anInt1104 != 0)
@@ -9883,11 +9889,11 @@ public class Client extends RSApplet {
 						int k21 = wallObject.uid >> 14 & 0x7fff;
 						if(j12 == 2)
 						{
-							wallObject.aClass30_Sub2_Sub4_278 = new ObjectOnTile(k21, 4 + k14, 2, i19, l19, j18, k20, j17, false);
-							wallObject.aClass30_Sub2_Sub4_279 = new ObjectOnTile(k21, k14 + 1 & 3, 2, i19, l19, j18, k20, j17, false);
+							wallObject.node1 = new ObjectOnTile(k21, 4 + k14, 2, i19, l19, j18, k20, j17, false);
+							wallObject.node2 = new ObjectOnTile(k21, k14 + 1 & 3, 2, i19, l19, j18, k20, j17, false);
 						} else
 						{
-							wallObject.aClass30_Sub2_Sub4_278 = new ObjectOnTile(k21, k14, j12, i19, l19, j18, k20, j17, false);
+							wallObject.node1 = new ObjectOnTile(k21, k14, j12, i19, l19, j18, k20, j17, false);
 						}
 					}
 				}
@@ -11604,6 +11610,10 @@ public class Client extends RSApplet {
 		return true;
 	}
 
+    public void renderscene(){
+		sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, fieldJ, yCameraCurve);
+    }
+
 	private void method146()
 	{
 		anInt1265++;
@@ -11662,8 +11672,13 @@ public class Client extends RSApplet {
 		Model.cursorYPos = super.mouseY - 4;
 		Graphics2D.resetImage();
 		//xxx disables graphics            if(graphicsEnabled){
-		sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
-        pglWrapper.setCameraPosition(xCameraPos,yCameraPos,zCameraPos);
+        pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);
+        fieldJ = j;
+        //sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
+        if (renderNode == null){
+            renderNode =  new PglCallClientNode();
+            pglWrapper.scene.add(renderNode);
+        }
         pglWrapper.process();
 		sceneGraph.clearInteractableObjectCache();
 		updateEntities();

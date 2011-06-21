@@ -167,11 +167,11 @@ public class ModelRendererGL {
                 if (triangleIndices.vertexBuffer != null)
                     GL11.glDrawElements(4, (nextTriangleId - triangleId) * 3, 5125, (long) (triangleId * 12));
                 else {
-                    //triangleIndices.array.position(triangleId * 12);
+                    triangleIndices.array.position(triangleId * 12);
                     int limit = triangleIndices.array.limit();
-                   // triangleIndices.array.limit((triangleId * 12)+(nextTriangleId - triangleId));
+                    triangleIndices.array.limit((triangleId * 12)+(nextTriangleId - triangleId));
                     GL11.glDrawElements(GL11.GL_TRIANGLES,triangleIndices.array.asIntBuffer());//todo: 4
-                   // triangleIndices.array.limit(limit);
+                    triangleIndices.array.limit(limit);
                 }
             }
         }
