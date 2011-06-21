@@ -1,8 +1,15 @@
 package rs2;
 
+import org.peterbjornx.pgl2.model.*;
+import org.peterbjornx.pgl2.model.Node;
+
 //Object4
 //rs2.GroundItemTile: a tile with a groundItem on it.
 public class GroundItemTile {
+
+    public Node secondNode;
+    public Node firstNode;
+    public Node thirdNode;
 
     GroundItemTile()
     {

@@ -1,11 +1,13 @@
 package rs2;
 
-import org.lwjgl.util.vector.Vector3f;
-import org.peterbjornx.pgl2.math.VectorMath;
+import org.peterbjornx.pgl2.model.*;
 import pgle.PglCubeStub;
 import pgle.PglModelNode;
 
 public class SceneGraph {
+
+    private int xCameraAngle;
+    private int yCameraAngle;
 
     public SceneGraph(int heightmap[][][])
     {
@@ -32,6 +34,10 @@ public class SceneGraph {
         aClass19_477 = null;
         TILE_VISIBILITY_MAPS = null;
         TILE_VISIBILITY_MAP = null;
+    }
+
+    private void renderAtPoint(GeometryNode root,int xRotLocal,int x,int y,int z){
+        root.renderAtPoint(-(xRotLocal * 0.17578125f),0,0,0,x,-y,z);
     }
 
     public void initToNull()
@@ -163,30 +169,35 @@ public class SceneGraph {
         tileArray[zz][x][y].shapedTile = shapedTile;
     }
 
-    public void addGroundDecoration(int Z, int z3d, int Y, Entity jagexNode, byte byte0, int uid,
-                          int X)
-    {
-        if(jagexNode == null)
-            return;
-        GroundDecoration class49 = new GroundDecoration();
-        class49.aClass30_Sub2_Sub4_814 = jagexNode;
-        class49.xPos = X * 128 + 64;
-        class49.yPos = Y * 128 + 64;
-        class49.zPos = z3d;
-        class49.uid = uid;
-        class49.objConf = byte0;
+    private org.peterbjornx.pgl2.model.Node getPglNode(Entity jagexNode){
+        if (jagexNode == null)
+            return null;
         Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
         org.peterbjornx.pgl2.model.Node node;
         if (m != null)
             node = new PglModelNode(m,false); //for now
         else
             node = new PglCubeStub();
-        //System.out.println("addentity");
-        clientInstance.getPglWrapper().getRsTileManager().add(node, Z, X, Y, false);
-        node.setPosition(new Vector3f(64,(-z3d)-(Z*240),64));
+        return node;
+
+    }
+
+    public void addGroundDecoration(int Z, int z3d, int Y, Entity jagexNode, byte byte0, int uid,
+                          int X)
+    {
+        if(jagexNode == null)
+            return;
+        GroundDecoration groundDecoration = new GroundDecoration();
+        groundDecoration.aClass30_Sub2_Sub4_814 = jagexNode;
+        groundDecoration.xPos = X * 128 + 64;
+        groundDecoration.yPos = Y * 128 + 64;
+        groundDecoration.zPos = z3d;
+        groundDecoration.uid = uid;
+        groundDecoration.objConf = byte0;
+        groundDecoration.pgleNode = getPglNode(jagexNode);
         if(tileArray[Z][X][Y] == null)
             tileArray[Z][X][Y] = new Tile(Z, X, Y);
-        tileArray[Z][X][Y].groundDecoration = class49;
+        tileArray[Z][X][Y].groundDecoration = groundDecoration;
     }
 
     public void addGroundItemTile(int x, int uid, Entity secondGroundItem, int k, Entity thirdGroundItem, Entity firstGroundItem,
@@ -214,6 +225,9 @@ public class SceneGraph {
 
         }
         itemTile.anInt52 = j1;
+        itemTile.firstNode = getPglNode(firstGroundItem);
+        itemTile.secondNode = getPglNode(secondGroundItem);
+        itemTile.thirdNode = getPglNode(thirdGroundItem);
         if(tileArray[z][x][y] == null)
             tileArray[z][x][y] = new Tile(z, x, y);
         tileArray[z][x][y].groundItemTile = itemTile;
@@ -229,19 +243,11 @@ public class SceneGraph {
         wallObject.xPos = x * 128 + 64;
         wallObject.yPos = y * 128 + 64;
         wallObject.zPos = i1;
-        wallObject.aClass30_Sub2_Sub4_278 = jagexNode;
-        wallObject.aClass30_Sub2_Sub4_279 = jagexNode2;
+        wallObject.node1 = jagexNode;
+        wallObject.node2 = jagexNode2;
+        wallObject.pgleNode1 = getPglNode(jagexNode);
+        wallObject.pgleNode2 = getPglNode(jagexNode);
         wallObject.orientation = i;
-        Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
-        org.peterbjornx.pgl2.model.Node node;
-        if (m != null)
-            node = new PglModelNode(m,false); //for now
-        else
-            node = new PglCubeStub();
-        //System.out.println("addentity");
-        clientInstance.getPglWrapper().getRsTileManager().add(node, k1, x, y, false);
-        node.setPosition(new Vector3f(64,(-i1)-(k1*240),64));
-        node.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(-(90*i2),0,0)));
         wallObject.orientation1 = j1;
         for(int z = k1; z >= 0; z--)
             if(tileArray[z][x][y] == null)
@@ -264,16 +270,7 @@ public class SceneGraph {
         wallDecoration.myMob = jagexNode;
         wallDecoration.configBits = facebits;
         wallDecoration.face = face;
-        Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
-        org.peterbjornx.pgl2.model.Node node;
-        if (m != null)
-            node = new PglModelNode(m,false); //for now
-        else
-            node = new PglCubeStub();
-        //System.out.println("addentity");
-        clientInstance.getPglWrapper().getRsTileManager().add(node, tileZ, tileX,tileY, false);
-        node.setPosition(new Vector3f(64+x3dOff,(-z3d)-(tileZ*240),64+y3dOff));
-        node.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(-face*90,0,0)));
+        wallDecoration.pgleNode = getPglNode(jagexNode);
         for(int k2 = tileZ; k2 >= 0; k2--)
             if(tileArray[k2][tileX][tileY] == null)
                 tileArray[k2][tileX][tileY] = new Tile(k2, tileX, tileY);
@@ -363,11 +360,7 @@ public class SceneGraph {
             node = new PglModelNode(m,isDynamic); //for now
         else
             node = new PglCubeStub();
-        //System.out.println("addentity");
-        clientInstance.getPglWrapper().getRsTileManager().add(node,z,x,y,isDynamic);
         interactableObject.pgleNode = node;
-        node.setPosition(new Vector3f(j1-128*x,(-l1)-240*z,k1-128*y));
-        node.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(-(rotation * 0.17578125f),0,0)));
         for(int _x = x; _x < x + tileHeight; _x++)
         {
             for(int _y = y; _y < y + tileWidth; _y++)
@@ -413,10 +406,10 @@ public class SceneGraph {
 
     private void remove(InteractableObject interactableObject)
     {
-        if (interactableObject.pgleNode != null){
-            interactableObject.pgleNode.getParent().remove(interactableObject.pgleNode);
+      //  if (interactableObject.pgleNode != null){
+          //  interactableObject.pgleNode.getParent().remove(interactableObject.pgleNode);
             interactableObject.pgleNode = null;
-        }
+     //  }
         for(int x = interactableObject.tileLeft; x <= interactableObject.tileRight; x++)
         {
             for(int y = interactableObject.tileTop; y <= interactableObject.tileBottom; y++)
@@ -632,16 +625,16 @@ public class SceneGraph {
                     if(tile != null)
                     {
                         WallObject class10 = tile.wallObject;
-                        if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormals != null)
+                        if(class10 != null && class10.node1 != null && class10.node1.vertexNormals != null)
                         {
-                            method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_278);
-                            if(class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormals != null)
+                            method307(_z, 1, 1, _x, _y, (Model)class10.node1);
+                            if(class10.node2 != null && class10.node2.vertexNormals != null)
                             {
-                                method307(_z, 1, 1, _x, _y, (Model)class10.aClass30_Sub2_Sub4_279);
-                                method308((Model)class10.aClass30_Sub2_Sub4_278, (Model)class10.aClass30_Sub2_Sub4_279, 0, 0, 0, false);
-                                ((Model)class10.aClass30_Sub2_Sub4_279).doShading(lightness, l_magnitude, l_x, l_y, l_z);
+                                method307(_z, 1, 1, _x, _y, (Model)class10.node2);
+                                method308((Model)class10.node1, (Model)class10.node2, 0, 0, 0, false);
+                                ((Model)class10.node2).doShading(lightness, l_magnitude, l_x, l_y, l_z);
                             }
-                            ((Model)class10.aClass30_Sub2_Sub4_278).doShading(lightness, l_magnitude, l_x, l_y, l_z);
+                            ((Model)class10.node1).doShading(lightness, l_magnitude, l_x, l_y, l_z);
                         }
                         for(int k2 = 0; k2 < tile.entityCount; k2++)
                         {
@@ -717,10 +710,10 @@ public class SceneGraph {
                                 {
                                     int i3 = (heightmap[z][x][y] + heightmap[z][x + 1][y] + heightmap[z][x][y + 1] + heightmap[z][x + 1][y + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
                                     WallObject class10 = class30_sub3.wallObject;
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_278 != null && class10.aClass30_Sub2_Sub4_278.vertexNormals != null)
-                                        method308(model, (Model)class10.aClass30_Sub2_Sub4_278, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
-                                    if(class10 != null && class10.aClass30_Sub2_Sub4_279 != null && class10.aClass30_Sub2_Sub4_279.vertexNormals != null)
-                                        method308(model, (Model)class10.aClass30_Sub2_Sub4_279, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
+                                    if(class10 != null && class10.node1 != null && class10.node1.vertexNormals != null)
+                                        method308(model, (Model)class10.node1, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
+                                    if(class10 != null && class10.node2 != null && class10.node2.vertexNormals != null)
+                                        method308(model, (Model)class10.node2, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
                                     for(int j3 = 0; j3 < class30_sub3.entityCount; j3++)
                                     {
                                         InteractableObject class28 = class30_sub3.interactableObjects[j3];
@@ -994,6 +987,8 @@ label0:
         xCameraPosition = xCampos;
         zCameraPosition = zCampos;
         yCameraPosition = yCampos;
+        xCameraAngle = xCurve;
+        yCameraAngle = yCurve;
         xCameraPositionTile = xCampos / 128;
         yCameraPositionTile = yCampos / 128;
         SceneGraph.plane = plane;
@@ -1217,14 +1212,19 @@ label0:
                     } else
                     if(tile.shapedTile != null && !method320(0, X, Y))
                         drawShapedTile(X, yCurveSine, xCurveSine, tile.shapedTile, yCurveCosine, Y, xCurveCosine);
-                    WallObject class10 = tile.wallObject;
-                    if(class10 != null)
-                        class10.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10.xPos - xCameraPosition, class10.zPos - zCameraPosition, class10.yPos - yCameraPosition, class10.uid);
+                    WallObject wallObject = tile.wallObject;
+                    if(wallObject != null){
+                        wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
+                        if (wallObject.pgleNode1 != null)
+                             renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
+                    }
                     for(int i2 = 0; i2 < tile.entityCount; i2++)
                     {
-                        InteractableObject class28 = tile.interactableObjects[i2];
-                        if(class28 != null)
-                            class28.jagexNode.renderAtPoint(class28.rotation, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28.worldX - xCameraPosition, class28.worldZ - zCameraPosition, class28.worldY - yCameraPosition, class28.uid);
+                        InteractableObject interactableObject = tile.interactableObjects[i2];
+                        if(interactableObject != null)
+                            interactableObject.jagexNode.renderAtPoint(interactableObject.rotation, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, interactableObject.worldX - xCameraPosition, interactableObject.worldZ - zCameraPosition, interactableObject.worldY - yCameraPosition, interactableObject.uid);
+                        if(interactableObject.pgleNode != null)
+                            renderAtPoint((GeometryNode) interactableObject.pgleNode,interactableObject.rotation, interactableObject.worldX, interactableObject.worldZ, interactableObject.worldY);
                     }
 
                 }
@@ -1293,14 +1293,20 @@ label0:
                         TILE.anInt1325 = 0;
                     }
                     if((wallObject.orientation & j2) != 0 && !method321(l, X, Y, wallObject.orientation))
-                        wallObject.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
+                        wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
+                    if (wallObject.pgleNode1 != null && (wallObject.orientation & j2) != 0 && !method321(l, X, Y, wallObject.orientation))
+                        renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
                     if((wallObject.orientation1 & j2) != 0 && !method321(l, X, Y, wallObject.orientation1))
-                        wallObject.aClass30_Sub2_Sub4_279.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
+                        wallObject.node2.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
+                    if (wallObject.pgleNode1 != null && (wallObject.orientation & j2) != 0 && !method321(l, X, Y, wallObject.orientation))
+                             renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
                 }
                 if(wallDecoration != null && !method322(l, X, Y, wallDecoration.myMob.modelHeight))
-                    if((wallDecoration.configBits & j2) != 0)
+                    if((wallDecoration.configBits & j2) != 0){
                         wallDecoration.myMob.renderAtPoint(wallDecoration.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallDecoration.xPos - xCameraPosition, wallDecoration.zPos - zCameraPosition, wallDecoration.yPos - yCameraPosition, wallDecoration.uid);
-                    else
+                        if (wallDecoration.pgleNode != null)
+                             renderAtPoint((GeometryNode) wallDecoration.pgleNode, wallDecoration.face, wallDecoration.xPos, wallDecoration.zPos, wallDecoration.yPos);
+                    } else
                     if((wallDecoration.configBits & 0x300) != 0)
                     {
                         int j4 = wallDecoration.xPos - xCameraPosition;
@@ -1322,12 +1328,16 @@ label0:
                             int i11 = j4 + faceXOffset2[i8];
                             int k11 = k6 + faceYOffset2[i8];
                             wallDecoration.myMob.renderAtPoint(i8 * 512 + 256, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, i11, l5, k11, wallDecoration.uid);
+                            if (wallDecoration.pgleNode != null)
+                                renderAtPoint((GeometryNode) wallDecoration.pgleNode, i8 * 512 + 256, i11, l5, k11);
                         }
                         if((wallDecoration.configBits & 0x200) != 0 && k10 > k9)
                         {
                             int j11 = j4 + faceXOffset3[i8];
                             int l11 = k6 + faceYOffset3[i8];
                             wallDecoration.myMob.renderAtPoint(i8 * 512 + 1280 & 0x7ff, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, j11, l5, l11, wallDecoration.uid);
+                            if (wallDecoration.pgleNode != null)
+                                renderAtPoint((GeometryNode) wallDecoration.pgleNode, i8 * 512 + 1280 & 0x7ff, j11, l5, l11);
                         }
                     }
                 if(flag1)
@@ -1335,15 +1345,23 @@ label0:
                     GroundDecoration groundDecoration = TILE.groundDecoration;
                     if(groundDecoration != null)
                         groundDecoration.aClass30_Sub2_Sub4_814.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundDecoration.xPos - xCameraPosition, groundDecoration.zPos - zCameraPosition, groundDecoration.yPos - yCameraPosition, groundDecoration.uid);
-                    GroundItemTile object4_1 = TILE.groundItemTile;
-                    if(object4_1 != null && object4_1.anInt52 == 0)
+                    if (groundDecoration != null && groundDecoration.pgleNode != null)
+                        renderAtPoint((GeometryNode) groundDecoration.pgleNode, 0, groundDecoration.xPos, groundDecoration.zPos, groundDecoration.yPos);
+                    GroundItemTile groundItemTile = TILE.groundItemTile;
+                    if(groundItemTile != null && groundItemTile.anInt52 == 0)
                     {
-                        if(object4_1.secondGroundItem != null)
-                            object4_1.secondGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.xPos - xCameraPosition, object4_1.zPos - zCameraPosition, object4_1.yPos - yCameraPosition, object4_1.uid);
-                        if(object4_1.thirdGroundItem != null)
-                            object4_1.thirdGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.xPos - xCameraPosition, object4_1.zPos - zCameraPosition, object4_1.yPos - yCameraPosition, object4_1.uid);
-                        if(object4_1.firstGroundItem != null)
-                            object4_1.firstGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4_1.xPos - xCameraPosition, object4_1.zPos - zCameraPosition, object4_1.yPos - yCameraPosition, object4_1.uid);
+                        if(groundItemTile.secondGroundItem != null)
+                            groundItemTile.secondGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundItemTile.xPos - xCameraPosition, groundItemTile.zPos - zCameraPosition, groundItemTile.yPos - yCameraPosition, groundItemTile.uid);
+                        if(groundItemTile.thirdGroundItem != null)
+                            groundItemTile.thirdGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundItemTile.xPos - xCameraPosition, groundItemTile.zPos - zCameraPosition, groundItemTile.yPos - yCameraPosition, groundItemTile.uid);
+                        if(groundItemTile.firstGroundItem != null)
+                            groundItemTile.firstGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundItemTile.xPos - xCameraPosition, groundItemTile.zPos - zCameraPosition, groundItemTile.yPos - yCameraPosition, groundItemTile.uid);
+                        if (groundItemTile.firstNode != null)
+                            renderAtPoint((GeometryNode) groundItemTile.firstNode, 0, groundItemTile.xPos, groundItemTile.zPos, groundItemTile.yPos);                                               groundItemTile.firstGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundItemTile.xPos - xCameraPosition, groundItemTile.zPos - zCameraPosition, groundItemTile.yPos - yCameraPosition, groundItemTile.uid);
+                        if (groundItemTile.secondNode != null)
+                            renderAtPoint((GeometryNode) groundItemTile.secondNode, 0, groundItemTile.xPos, groundItemTile.zPos, groundItemTile.yPos);
+                        if (groundItemTile.thirdNode != null)
+                            renderAtPoint((GeometryNode) groundItemTile.thirdNode, 0, groundItemTile.xPos, groundItemTile.zPos, groundItemTile.yPos);
                     }
                 }
                 int k4 = TILE.anInt1320;
@@ -1388,9 +1406,11 @@ label0:
 
                 if(flag2)
                 {
-                    WallObject class10_1 = TILE.wallObject;
-                    if(!method321(l, X, Y, class10_1.orientation))
-                        class10_1.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_1.xPos - xCameraPosition, class10_1.zPos - zCameraPosition, class10_1.yPos - yCameraPosition, class10_1.uid);
+                    WallObject wallObject = TILE.wallObject;
+                    if(!method321(l, X, Y, wallObject.orientation))
+                        wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
+                    if (wallObject.node1 != null && !method321(l, X, Y, wallObject.orientation))
+                        renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
                     TILE.anInt1325 = 0;
                 }
             }
@@ -1475,13 +1495,15 @@ label0:
 
                         if(l3 == -1)
                             break;
-                        InteractableObject class28_3 = interactableObjects[l3];
-                        class28_3.anInt528 = anInt448;
-                        if(!method323(l, class28_3.tileLeft, class28_3.tileRight, class28_3.tileTop, class28_3.tileBottom, class28_3.jagexNode.modelHeight))
-                            class28_3.jagexNode.renderAtPoint(class28_3.rotation, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class28_3.worldX - xCameraPosition, class28_3.worldZ - zCameraPosition, class28_3.worldY - yCameraPosition, class28_3.uid);
-                        for(int k7 = class28_3.tileLeft; k7 <= class28_3.tileRight; k7++)
+                        InteractableObject interactableObject = interactableObjects[l3];
+                        interactableObject.anInt528 = anInt448;
+                        if(interactableObject.pgleNode != null && !method323(l, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
+                            renderAtPoint((GeometryNode) interactableObject.pgleNode,interactableObject.rotation, interactableObject.worldX, interactableObject.worldZ, interactableObject.worldY);
+                        if(!method323(l, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
+                            interactableObject.jagexNode.renderAtPoint(interactableObject.rotation, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, interactableObject.worldX - xCameraPosition, interactableObject.worldZ - zCameraPosition, interactableObject.worldY - yCameraPosition, interactableObject.uid);
+                        for(int k7 = interactableObject.tileLeft; k7 <= interactableObject.tileRight; k7++)
                         {
-                            for(int l8 = class28_3.tileTop; l8 <= class28_3.tileBottom; l8++)
+                            for(int l8 = interactableObject.tileTop; l8 <= interactableObject.tileBottom; l8++)
                             {
                                 Tile class30_sub3_22 = aclass30_sub3[k7][l8];
                                 if(class30_sub3_22.anInt1325 != 0)
@@ -1529,23 +1551,32 @@ label0:
             }
             TILE.aBoolean1323 = false;
             anInt446--;
-            GroundItemTile object4 = TILE.groundItemTile;
-            if(object4 != null && object4.anInt52 != 0)
+            GroundItemTile groundItemTile = TILE.groundItemTile;
+            if(groundItemTile != null && groundItemTile.anInt52 != 0)
             {
-                if(object4.secondGroundItem != null)
-                    object4.secondGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.xPos - xCameraPosition, object4.zPos - zCameraPosition - object4.anInt52, object4.yPos - yCameraPosition, object4.uid);
-                if(object4.thirdGroundItem != null)
-                    object4.thirdGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.xPos - xCameraPosition, object4.zPos - zCameraPosition - object4.anInt52, object4.yPos - yCameraPosition, object4.uid);
-                if(object4.firstGroundItem != null)
-                    object4.firstGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, object4.xPos - xCameraPosition, object4.zPos - zCameraPosition - object4.anInt52, object4.yPos - yCameraPosition, object4.uid);
+                if(groundItemTile.secondGroundItem != null)
+                    groundItemTile.secondGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundItemTile.xPos - xCameraPosition, groundItemTile.zPos - zCameraPosition - groundItemTile.anInt52, groundItemTile.yPos - yCameraPosition, groundItemTile.uid);
+                if(groundItemTile.thirdGroundItem != null)
+                    groundItemTile.thirdGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundItemTile.xPos - xCameraPosition, groundItemTile.zPos - zCameraPosition - groundItemTile.anInt52, groundItemTile.yPos - yCameraPosition, groundItemTile.uid);
+                if(groundItemTile.firstGroundItem != null)
+                    groundItemTile.firstGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundItemTile.xPos - xCameraPosition, groundItemTile.zPos - zCameraPosition - groundItemTile.anInt52, groundItemTile.yPos - yCameraPosition, groundItemTile.uid);
+                if (groundItemTile.firstNode != null)
+                    renderAtPoint((GeometryNode) groundItemTile.firstNode, 0, groundItemTile.xPos, groundItemTile.zPos, groundItemTile.yPos);                                               groundItemTile.firstGroundItem.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, groundItemTile.xPos - xCameraPosition, groundItemTile.zPos - zCameraPosition, groundItemTile.yPos - yCameraPosition, groundItemTile.uid);
+                if (groundItemTile.secondNode != null)
+                    renderAtPoint((GeometryNode) groundItemTile.secondNode, 0, groundItemTile.xPos, groundItemTile.zPos, groundItemTile.yPos);
+                if (groundItemTile.thirdNode != null)
+                    renderAtPoint((GeometryNode) groundItemTile.thirdNode, 0, groundItemTile.xPos, groundItemTile.zPos, groundItemTile.yPos);
+
             }
             if(TILE.anInt1328 != 0)
             {
                 WallDecoration wallDecoration = TILE.wallDecoration;
                 if(wallDecoration != null && !method322(l, X, Y, wallDecoration.myMob.modelHeight))
-                    if((wallDecoration.configBits & TILE.anInt1328) != 0)
+                    if((wallDecoration.configBits & TILE.anInt1328) != 0){
                         wallDecoration.myMob.renderAtPoint(wallDecoration.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallDecoration.xPos - xCameraPosition, wallDecoration.zPos - zCameraPosition, wallDecoration.yPos - yCameraPosition, wallDecoration.uid);
-                    else
+                        if (wallDecoration.pgleNode != null)
+                            renderAtPoint((GeometryNode) wallDecoration.pgleNode, wallDecoration.face, wallDecoration.xPos, wallDecoration.zPos, wallDecoration.yPos);
+                    }else
                     if((wallDecoration.configBits & 0x300) != 0)
                     {
                         int l2 = wallDecoration.xPos - xCameraPosition;
@@ -1567,22 +1598,29 @@ label0:
                             int i9 = l2 + faceXOffset2[k5];
                             int i10 = i4 + faceYOffset2[k5];
                             wallDecoration.myMob.renderAtPoint(k5 * 512 + 256, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, i9, j3, i10, wallDecoration.uid);
+                            if (wallDecoration.pgleNode != null)
+                                renderAtPoint((GeometryNode) wallDecoration.pgleNode, k5 * 512 + 256, i9, j3, i10);
                         }
                         if((wallDecoration.configBits & 0x200) != 0 && l7 <= j6)
                         {
                             int j9 = l2 + faceXOffset3[k5];
                             int j10 = i4 + faceYOffset3[k5];
                             wallDecoration.myMob.renderAtPoint(k5 * 512 + 1280 & 0x7ff, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, j9, j3, j10, wallDecoration.uid);
+                            if (wallDecoration.pgleNode != null)
+                                renderAtPoint((GeometryNode) wallDecoration.pgleNode, k5 * 512 + 1280 & 0x7ff, j9, j3, j10);
                         }
                     }
-                WallObject class10_2 = TILE.wallObject;
-                if(class10_2 != null)
+                WallObject wallObject = TILE.wallObject;
+                if(wallObject != null)
                 {
-                    if((class10_2.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, class10_2.orientation1))
-                        class10_2.aClass30_Sub2_Sub4_279.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_2.xPos - xCameraPosition, class10_2.zPos - zCameraPosition, class10_2.yPos - yCameraPosition, class10_2.uid);
-                    if((class10_2.orientation & TILE.anInt1328) != 0 && !method321(l, X, Y, class10_2.orientation))
-                        class10_2.aClass30_Sub2_Sub4_278.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, class10_2.xPos - xCameraPosition, class10_2.zPos - zCameraPosition, class10_2.yPos - yCameraPosition, class10_2.uid);
-                }
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1))
+                        wallObject.node2.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1) && wallObject.pgleNode2 != null)
+                             renderAtPoint((GeometryNode) wallObject.pgleNode2, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
+                    if((wallObject.orientation & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation))
+                        wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1) && wallObject.pgleNode1 != null)
+                             renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);}
             }
             if(k < zMapSize - 1)
             {

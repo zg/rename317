@@ -40,6 +40,7 @@ public class PglModel {
     private GeometryBuffer geometry;
     private ElementBuffer element;
     private static HashMap<Model,PglModel> modelCache = new HashMap<Model, PglModel>();
+  //  private ModelRendererGL modelRendererGL;
 
     private PglModel(Model rsModel){
         this.rsModel = rsModel;
@@ -54,6 +55,8 @@ public class PglModel {
         }
         model = new PglModel(rsModel);
         model.addTriangles();
+   //     model.modelRendererGL =new ModelRendererGL(rsModel,64,850,true);
+
         if (!animated)
             modelCache.put(rsModel, model);
         return model;
@@ -318,6 +321,8 @@ public class PglModel {
     }
 
     public void render(){
+       // modelRendererGL.render();
+       // if (1==1)return;
         textures[0].bind();
         geometry.bind();
         element.bind();

@@ -1,7 +1,11 @@
 package rs2;
 
+import org.peterbjornx.pgl2.model.*;
+
 public class WallDecoration
 {
+
+    public org.peterbjornx.pgl2.model.Node pgleNode;
 
     public WallDecoration()
     {
