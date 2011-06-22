@@ -334,6 +334,8 @@ public class PglModel {
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
             else {
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
+                if(texture > 50)
+                    texture = 0;
                 textures[texture].bind();
             }
             if (tID == textureTriangleCount - 1)

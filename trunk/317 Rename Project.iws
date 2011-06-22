@@ -5,20 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pgle/PglCallClientNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/PGLEngine2_Library.jar" afterPath="$PROJECT_DIR$/lib/PGLEngine2_Library.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/PglModel.java" afterPath="$PROJECT_DIR$/src/pgle/PglModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/PglWrapper.java" afterPath="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Client.java" afterPath="$PROJECT_DIR$/src/rs2/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GroundDecoration.java" afterPath="$PROJECT_DIR$/src/rs2/GroundDecoration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GroundItemTile.java" afterPath="$PROJECT_DIR$/src/rs2/GroundItemTile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Entity.java" afterPath="$PROJECT_DIR$/src/rs2/Entity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Model.java" afterPath="$PROJECT_DIR$/src/rs2/Model.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/WallDecoration.java" afterPath="$PROJECT_DIR$/src/rs2/WallDecoration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/WallObject.java" afterPath="$PROJECT_DIR$/src/rs2/WallObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rt4/ModelRendererGL.java" afterPath="$PROJECT_DIR$/src/rt4/ModelRendererGL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rt4/OpenGLManager.java" afterPath="$PROJECT_DIR$/src/rt4/OpenGLManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rt4/TextureSource.java" afterPath="$PROJECT_DIR$/src/rt4/TextureSource.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,30 +75,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+      <file leaf-file-name="PglCallClientNode.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pgle/PglCallClientNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11676" column="131" selection-start="316029" selection-end="316029" vertical-scroll-proportion="0.0">
+            <state line="17" column="40" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PglCallClientNode.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pgle/PglCallClientNode.java">
+      <file leaf-file-name="SceneGraph.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="40" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="139" column="20" selection-start="4388" selection-end="4392" vertical-scroll-proportion="-3.7142856">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SceneGraph.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+      <file leaf-file-name="MapRegion.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="173" column="24" selection-start="5984" selection-end="5984" vertical-scroll-proportion="0.45801526">
+            <state line="43" column="20" selection-start="1353" selection-end="1353" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -114,17 +105,46 @@
       <file leaf-file-name="Entity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/Entity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="26" selection-start="317" selection-end="317" vertical-scroll-proportion="0.0">
+            <state line="38" column="23" selection-start="1265" selection-end="1265" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObjectOnTile.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/ObjectOnTile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="39" column="32" selection-start="1165" selection-end="1165" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Object.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/lang/Object.java">
+      <file leaf-file-name="Model.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="364" column="29" selection-start="17894" selection-end="17894" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="1697" column="64" selection-start="62442" selection-end="62442" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="method#readOldModel#0;class#Model#0" expanded="false" />
+                <element signature="method#readNewModel#0;class#Model#0" expanded="false" />
+                <element signature="method#method460#0;class#Model#0" expanded="false" />
+                <element signature="method#method461#0;class#Model#0" expanded="false" />
+                <element signature="method#getModel#0;class#Model#0" expanded="false" />
+                <element signature="method#isCached#0;class#Model#0" expanded="false" />
+                <element signature="method#Model#1;class#Model#0" expanded="false" />
+                <element signature="method#calculateNormals#0;class#Model#0" expanded="false" />
+                <element signature="method#light#0;class#Model#0" expanded="false" />
+                <element signature="method#lightHD#0;class#Model#0" expanded="false" />
+                <element signature="method#doShadingHD#0;class#Model#0" expanded="false" />
+                <element signature="method#doShading#0;class#Model#0" expanded="false" />
+                <element signature="method#mixLightness#0;class#Model#0" expanded="false" />
+                <element signature="method#rendersingle#0;class#Model#0" expanded="false" />
+                <element signature="method#renderAtPoint2#0;class#Model#0" expanded="false" />
+                <element signature="method#rasterize#0;class#Model#0" expanded="false" />
+                <element signature="method#method485#0;class#Model#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -132,7 +152,7 @@
       <file leaf-file-name="PglModel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pgle/PglModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="326" column="0" selection-start="16530" selection-end="16530" vertical-scroll-proportion="0.0">
+            <state line="331" column="122" selection-start="16773" selection-end="16773" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -150,7 +170,16 @@
       <file leaf-file-name="PglWrapper.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pgle/PglWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="87" selection-start="3083" selection-end="3199" vertical-scroll-proportion="0.0">
+            <state line="114" column="68" selection-start="3765" selection-end="3765" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Client.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11609" column="40" selection-start="314132" selection-end="314132" vertical-scroll-proportion="0.6602564">
               <folding />
             </state>
           </provider>
@@ -170,24 +199,27 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/rs2/Model.java" />
-        <option value="$PROJECT_DIR$/src/rt4/Class7_Sub1.java" />
         <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
         <option value="$PROJECT_DIR$/src/rt4/TextureSource.java" />
         <option value="$PROJECT_DIR$/src/rt4/ModelRendererGL.java" />
         <option value="$PROJECT_DIR$/src/rt4/OpenGLManager.java" />
-        <option value="$PROJECT_DIR$/src/pgle/PglModel.java" />
         <option value="$PROJECT_DIR$/src/memmgmt/DirectBufferPool.java" />
         <option value="$PROJECT_DIR$/src/rs2/GroundDecoration.java" />
         <option value="$PROJECT_DIR$/src/rs2/GroundItemTile.java" />
         <option value="$PROJECT_DIR$/src/rs2/WallDecoration.java" />
         <option value="$PROJECT_DIR$/src/rs2/WallObject.java" />
         <option value="$PROJECT_DIR$/src/pgle/PglCallClientNode.java" />
-        <option value="$PROJECT_DIR$/src/rs2/Client.java" />
-        <option value="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
         <option value="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
+        <option value="$PROJECT_DIR$/src/pgle/PglModel.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Entity.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Model.java" />
+        <option value="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Client.java" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
   </component>
   <component name="ModuleEditorState">
     <option name="LAST_EDITED_MODULE_NAME" />
@@ -219,7 +251,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -320,24 +351,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="extras" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rename317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -372,6 +385,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Favorites" />
     </panes>
@@ -390,9 +404,9 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -597,27 +611,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31849316" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29109588" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39726028" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29109588" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39726028" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3219178" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24961832" sideWeight="0.6815069" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3998477" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20229007" sideWeight="0.60273975" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20229007" sideWeight="0.68835616" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989726" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31335616" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31164384" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989726" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
@@ -676,27 +690,17 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/rs2/GroundItemTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="27" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="7" column="27" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/WallDecoration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="51" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="7" column="51" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/WallObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="25" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="9" column="25" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rt4/TextureSource.java">
@@ -704,67 +708,100 @@
         <state line="2" column="29" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgle/PglCallClientNode.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="40" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="364" column="29" selection-start="17894" selection-end="17894" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/ObjectDef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="174" column="18" selection-start="4808" selection-end="4808" vertical-scroll-proportion="-0.23925234">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+    <entry file="file://$PROJECT_DIR$/src/rs2/ObjectOnTile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11676" column="131" selection-start="316029" selection-end="316029" vertical-scroll-proportion="0.0">
+        <state line="39" column="32" selection-start="1165" selection-end="1165" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pgle/PglCallClientNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="40" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pgle/PglModelNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="544" selection-end="544" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="364" column="29" selection-start="17894" selection-end="17894" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="22" column="0" selection-start="544" selection-end="544" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pgle/PglModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="326" column="0" selection-start="16530" selection-end="16530" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgle/PglWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="87" selection-start="3083" selection-end="3199" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1962" column="16" selection-start="75384" selection-end="75384" vertical-scroll-proportion="0.33238637">
+        <state line="331" column="122" selection-start="16773" selection-end="16773" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Entity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="26" selection-start="317" selection-end="317" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="38" column="23" selection-start="1265" selection-end="1265" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="24" selection-start="5984" selection-end="5984" vertical-scroll-proportion="0.45801526">
+        <state line="139" column="20" selection-start="4388" selection-end="4392" vertical-scroll-proportion="-3.7142856">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="20" selection-start="1353" selection-end="1353" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1697" column="64" selection-start="62442" selection-end="62442" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#readOldModel#0;class#Model#0" expanded="false" />
+            <element signature="method#readNewModel#0;class#Model#0" expanded="false" />
+            <element signature="method#method460#0;class#Model#0" expanded="false" />
+            <element signature="method#method461#0;class#Model#0" expanded="false" />
+            <element signature="method#getModel#0;class#Model#0" expanded="false" />
+            <element signature="method#isCached#0;class#Model#0" expanded="false" />
+            <element signature="method#Model#1;class#Model#0" expanded="false" />
+            <element signature="method#calculateNormals#0;class#Model#0" expanded="false" />
+            <element signature="method#light#0;class#Model#0" expanded="false" />
+            <element signature="method#lightHD#0;class#Model#0" expanded="false" />
+            <element signature="method#doShadingHD#0;class#Model#0" expanded="false" />
+            <element signature="method#doShading#0;class#Model#0" expanded="false" />
+            <element signature="method#mixLightness#0;class#Model#0" expanded="false" />
+            <element signature="method#rendersingle#0;class#Model#0" expanded="false" />
+            <element signature="method#renderAtPoint2#0;class#Model#0" expanded="false" />
+            <element signature="method#rasterize#0;class#Model#0" expanded="false" />
+            <element signature="method#method485#0;class#Model#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pgle/PglWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="68" selection-start="3765" selection-end="3765" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11609" column="40" selection-start="314132" selection-end="314132" vertical-scroll-proportion="0.6602564">
           <folding />
         </state>
       </provider>

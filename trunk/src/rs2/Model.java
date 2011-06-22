@@ -11,7 +11,7 @@ public class Model extends Entity {
     public int[] triangleNormalZ;
     public short[] triangleTexture;
     public TriangleNormal[] triangleNormals;
-
+    public long hash;
     public static void clearCache() {
         modelHeaderCache = null;
         aBooleanArray1663 = null;
@@ -58,6 +58,7 @@ public class Model extends Entity {
         //aBoolean1618 = true;
         aBoolean1659 = false;
         //anInt1620++;
+        hash = i;
         ModelHeader class21 = modelHeaderCache[i];
         vertexCount = class21.modelVerticeCount;
         triangleCount = class21.modelTriangleCount;
@@ -195,6 +196,7 @@ public class Model extends Entity {
 
     @SuppressWarnings("unused")
     public void readNewModel(byte abyte0[], int modelID) {
+        hash = modelID;
         System.out.println("reading new model " + modelID);
         Packet nc1 = new Packet(abyte0);
         Packet nc2 = new Packet(abyte0);
@@ -808,6 +810,7 @@ public class Model extends Entity {
                 }
                 flag2 |= model.triangleAlpha != null;
                 flag3 |= model.triangleTSkin != null;
+                hash += model.hash * Math.pow(10,k*3);
             }
         }
 
@@ -907,6 +910,7 @@ public class Model extends Entity {
                 }
                 flag3 |= model.triangleAlpha != null;
                 flag4 |= model.triangleColour != null;
+                hash += model.hash * Math.pow(10,k*3);
             }
         }
 
@@ -994,6 +998,7 @@ public class Model extends Entity {
         aBoolean1659 = false;
         vertexCount = model.vertexCount;
         triangleCount = model.triangleCount;
+        this.hash = model.hash*2+1;
         textureTriangleCount = model.textureTriangleCount;
         if (flag2) {
             vertexX = model.vertexX;
@@ -1044,6 +1049,7 @@ public class Model extends Entity {
     }
 
     public Model(boolean flag, boolean flag1, Model model) {
+        this.hash = model.hash*3+1;
         aBoolean1659 = false;
         vertexCount = model.vertexCount;
         triangleCount = model.triangleCount;
@@ -1115,6 +1121,7 @@ public class Model extends Entity {
     }
 
     public void method464(Model model, boolean flag) {
+        this.hash = model.hash*4+1;
         vertexCount = model.vertexCount;
         triangleCount = model.triangleCount;
         textureTriangleCount = model.textureTriangleCount;
@@ -1311,6 +1318,7 @@ public class Model extends Entity {
             return;
         if (frameID == -1)
             return;
+        hash+=frameID*1000000;
         Animation animation = Animation.forID(frameID);
         if (animation == null)
             return;
@@ -1340,6 +1348,8 @@ public class Model extends Entity {
             applyTransform(frameId1);
             return;
         }
+        hash+=frameId2*100000000;
+        hash+=frameId1*1000000;
         ModelTransform modelTransform = animation.myModelTransform;
         vertexXModifier = 0;
         vertexYModifier = 0;
@@ -1510,6 +1520,7 @@ public class Model extends Entity {
     }
 
     public void method473() {
+        hash += 9000000000L;
         for (int j = 0; j < vertexCount; j++) {
             int k = vertexX[j];
             vertexX[j] = vertexZ[j];
@@ -1519,6 +1530,8 @@ public class Model extends Entity {
     }
 
     public void method474(int i) {
+        hash += i*100000000L;
+
         int k = SINE[i];
         int l = COSINE[i];
         for (int i1 = 0; i1 < vertexCount; i1++) {
@@ -1529,6 +1542,7 @@ public class Model extends Entity {
     }
 
     public void translate(int i, int j, int l) {
+        hash += (i*j*l)*362345L;
         for (int i1 = 0; i1 < vertexCount; i1++) {
             vertexX[i1] += i;
             vertexY[i1] += j;
@@ -1538,6 +1552,7 @@ public class Model extends Entity {
     }
 
     public void recolour(int i, int j) {
+        hash += (i*100000000L)+(j*10000000000L);
         for (int k = 0; k < triangleCount; k++)
             if (triangleColour[k] == i)
                 triangleColour[k] = j;
@@ -1556,6 +1571,7 @@ public class Model extends Entity {
     }
 
     public void scaleT(int i, int j, int l) {
+        hash *= i*j*l;
         for (int i1 = 0; i1 < vertexCount; i1++) {
             vertexX[i1] = (vertexX[i1] * i) / 128;
             vertexY[i1] = (vertexY[i1] * l) / 128;
@@ -1678,7 +1694,7 @@ public class Model extends Entity {
 		    vertexNormal.z += i_168_;
 		    vertexNormal.magnitude++;
 		} else if (i_170_ == 1) {
-		    if (triangleNormals == null)
+		    if (triangleNormals == null || triangleNormals.length != triangleCount)
 			triangleNormals = new TriangleNormal[triangleCount];
 		    TriangleNormal triangleNormal = triangleNormals[i] = new TriangleNormal();
 		    triangleNormal.x = i_166_;
@@ -1960,7 +1976,7 @@ public class Model extends Entity {
         }
     }
 
-    public void renderAtPoint(int i, int yCameraSine, int yCameraCosine, int xCurveSine, int xCurveCosine, int x, int y,
+    public void renderAtPoint2(int i, int yCameraSine, int yCameraCosine, int xCurveSine, int xCurveCosine, int x, int y,
                               int z, int i2) {
         int j2 = z * xCurveCosine - x * xCurveSine >> 16;
         int k2 = y * yCameraSine + j2 * yCameraCosine >> 16;
@@ -2413,6 +2429,66 @@ public class Model extends Entity {
         if (j > k && j > l && j > i1)
             return false;
         return !(i < j1 && i < k1 && i < l1) && (i <= j1 || i <= k1 || i <= l1);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Model model = (Model) o;
+
+        if (aBoolean1659 != model.aBoolean1659)
+            return false;
+        if (anInt1641 != model.anInt1641)
+            return false;
+        if (anInt1654 != model.anInt1654)
+            return false;
+        if (diagonal3D != model.diagonal3D)
+            return false;
+        if (diagonal3DAboveorigin != model.diagonal3DAboveorigin)
+            return false;
+        if (hash != model.hash)
+            return false;
+        if (maxX != model.maxX)
+            return false;
+        if (maxY != model.maxY)
+            return false;
+        if (maxZ != model.maxZ)
+            return false;
+        if (minX != model.minX)
+            return false;
+        if (minZ != model.minZ)
+            return false;
+        if (textureTriangleCount != model.textureTriangleCount)
+            return false;
+        if (triangleCount != model.triangleCount)
+            return false;
+        if (vertexCount != model.vertexCount)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (hash ^ (hash >>> 32));
+        result = 31 * result + vertexCount;
+        result = 31 * result + triangleCount;
+        result = 31 * result + anInt1641;
+        result = 31 * result + textureTriangleCount;
+        result = 31 * result + minX;
+        result = 31 * result + maxX;
+        result = 31 * result + maxZ;
+        result = 31 * result + minZ;
+        result = 31 * result + maxY;
+        result = 31 * result + diagonal3D;
+        result = 31 * result + diagonal3DAboveorigin;
+        result = 31 * result + anInt1654;
+        result = 31 * result + (aBoolean1659 ? 1 : 0);
+        return result;
     }
 
     public static final Model aModel_1621 = new Model();
