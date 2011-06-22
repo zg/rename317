@@ -9,6 +9,7 @@ import com.sun.jndi.cosnaming.ExceptionMapper;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import pgle.PglCallClientNode;
 import pgle.PglWrapper;
+import rt4.Class7_Sub1;
 
 
 @SuppressWarnings("serial")
@@ -4941,6 +4942,8 @@ public class Client extends RSApplet {
 						dropClient();
 						if(inputString.equals("::lag"))
 						printDebug();
+						if(inputString.equals("::lighting"))
+                            Class7_Sub1.useLighting = !Class7_Sub1.useLighting;
 						if(inputString.equals("::prefetchmusic"))
 						{
 							for(int j1 = 0; j1 < onDemandFetcher.getVersionCount(2); j1++)
