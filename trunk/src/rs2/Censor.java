@@ -140,7 +140,7 @@ public class Censor {
         method498(s1.toCharArray(), ac);
         method499(ac);
         //long l1 = System.currentTimeMillis();//never used
-        return (new String(ac)).trim(); //xxx chat filter, return s to avoid
+        return s;//return (new String(ac)).trim(); //xxx chat filter, return s to avoid
     }
 
     private static void method498(char ac[], char ac1[])

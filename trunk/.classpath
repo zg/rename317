@@ -2,7 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PGLEngine"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PGLEngine">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="317 Rename Project/lib/native/windows"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/PGLEngine2_Library.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
