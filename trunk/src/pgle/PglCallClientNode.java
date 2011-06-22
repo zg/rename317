@@ -2,6 +2,7 @@ package pgle;
 
 import org.peterbjornx.pgl2.camera.Camera;
 import org.peterbjornx.pgl2.model.GeometryNode;
+import rs2.Entity;
 import rs2.SceneGraph;
 
 /**
@@ -15,6 +16,9 @@ public class PglCallClientNode extends GeometryNode{
 
     @Override
     protected void renderGeometry(Camera camera) {
+        SceneGraph.clientInstance.getPglWrapper().doLighting();
+        if (Entity.effectLight != null)
+            Entity.effectLight.disable();
         SceneGraph.clientInstance.renderscene();
     }
 }

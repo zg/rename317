@@ -38,16 +38,21 @@ public class PglWrapper {
     private RsTileManager rsTileManager;
     private OpenGLLightManager lightManager;
     private PglSun sun;
+    private PglOverlayNode[] overlayNodes = new PglOverlayNode[4];
 
     public void initLighting(){
         glEnable(GL_COLOR_MATERIAL);
         glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
         glEnable(GL_LIGHTING);
-        lightManager = new OpenGLLightManager();
-        rsTileManager.setOpenGLLightManager(lightManager);
+        //lightManager = new OpenGLLightManager();
+       // rsTileManager.setOpenGLLightManager(lightManager);
+
         sun = new PglSun();
-        sun.setSunColor(new Color(0xFF,0xFF,0xFF,0xff),0.69921875F,1.0F,0.4F);
+        sun.setSunColor(new Color(0xFF, 0xFF, 0xFF, 0xff), 1.0F, 1.0F, 0.6F);
         sun.setSunPosition(new Vector3f(-30, -50, -30));
+        glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 1.0f);
+        glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.0015625f/5f);
+       glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0);//.000625f);
     }
 
     /**
@@ -70,7 +75,7 @@ public class PglWrapper {
             scene.add(rsTileManager);
             firstPersonCamera = new FirstPersonCamera();
             glEnable(GL_DEPTH_TEST);
-        //    initLighting();
+            initLighting();
             running = true;
         } catch (LWJGLException e) {
 
@@ -87,6 +92,10 @@ public class PglWrapper {
         rsTerrainSource.updateMap();
         rsTerrain = new Terrain(rsTerrainSource);
         scene.add(rsTerrain);
+        for (int i = 0;i < 4;i++){
+            overlayNodes[i] = new PglOverlayNode(mapRegion,i);
+            scene.add(overlayNodes[i]);
+        }
     }
 
     public void setCameraPosition(int x,int z,int y){
@@ -100,6 +109,11 @@ public class PglWrapper {
         if (!running)
             return;
         if (!Display.isCloseRequested()) {
+            try {
+                Display.makeCurrent();
+            } catch (LWJGLException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
             preRender();
            // lightManager.startLighting(new Camera());
             scene.render(null);
@@ -120,7 +134,13 @@ public class PglWrapper {
             System.err.println("Closing window");
             running = false;
         }
+
     }
+
+    public void doLighting(){
+        sun.activateNoManager();
+    }
+
     public void preRender() {
         firstPersonCamera.handleInput(camera);
     }
@@ -134,6 +154,8 @@ public class PglWrapper {
             scene.remove(rsTerrain);
             rsTerrain = null;
             rsTerrainSource = null;
+            for (int i = 0;i < 4;i++)
+                scene.remove(overlayNodes[i]);
         }
         System.gc();
     }

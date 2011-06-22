@@ -720,6 +720,7 @@ public class Client extends RSApplet {
 		ItemDef.memCache1.unlinkAll();
 		Player.memCache.unlinkAll();
 		SpotAnim.memCache.unlinkAll();
+        Entity.cleanPglPool();
 	}
 
 	private void rendedMapScene(int i)

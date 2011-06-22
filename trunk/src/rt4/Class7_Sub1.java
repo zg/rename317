@@ -8,5 +8,5 @@ package rt4;
  * Computer: Peterbjornx-PC.rootdomain.asn.local (192.168.178.27)
  */
 public class Class7_Sub1 {
-    public static boolean useLighting = false;
+    public static boolean useLighting = true;
 }
