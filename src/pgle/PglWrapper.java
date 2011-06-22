@@ -9,6 +9,7 @@ import org.lwjgl.util.Color;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.peterbjornx.pgl2.camera.Camera;
+import org.peterbjornx.pgl2.camera.controls.FogRenderControl;
 import org.peterbjornx.pgl2.input.cameracontrol.FirstPersonCamera;
 import org.peterbjornx.pgl2.light.OpenGLLightManager;
 import org.peterbjornx.pgl2.math.VectorMath;
@@ -71,6 +72,19 @@ public class PglWrapper {
             camera.setNearClip(1f);
             camera.setFarClip(128 * 30.0f);
             camera.setActive(true);
+            camera.setClearColor(new Color(0xC8,0xA8,0xC0,0xff));
+            FogRenderControl fog = new FogRenderControl();
+            fog.setColour(new Color(0xC8,0xC0,0xA8));
+            fog.setDensity(0.95F);
+            int fogEnd = 3584;
+            int fogStart = fogEnd - 512;
+            if (fogStart < 50)
+                fogStart = 50;
+            fog.setStart((float) fogStart);
+            fog.setMode(9729);     //linear
+            fog.setHint(4353);     //fastest
+            fog.setEnd((float) (fogEnd - 256));
+            camera.addRenderControl(fog);
             scene.add(camera);
             rsTileManager = new RsTileManager();
             scene.add(rsTileManager);
