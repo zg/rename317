@@ -177,7 +177,7 @@ public class SceneGraph {
         if (m != null)
             node = new PglModelNode(m,false); //for now
         else
-            node = new PglCubeStub();
+            node = new PglCubeStub();//grrr
         return node;*/
         return null;
 
@@ -356,11 +356,16 @@ public class SceneGraph {
         interactableObject.tileRight = (x + tileHeight) - 1;
         interactableObject.tileBottom = (y + tileWidth) - 1;
         Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
+        //Model m = ((Model) jagexNode);
         org.peterbjornx.pgl2.model.Node node;
-        if (m != null)
+        if (m != null){
             node = new PglModelNode(m,isDynamic); //for now
-        else
-            node = new PglCubeStub();
+           // System.out.println("m z:"+z+" x:"+x+" y:"+y+" tileHeight:"+tileHeight+" tileWidth:"+tileWidth+" j1:"+j1+" k1:"+k1+" l1:"+l1+" rotation:"+rotation+" isDynamic:"+isDynamic+" j2:"+j2+" byte0:"+byte0);
+        	}else{
+        	//System.out.println("ocrap m is null z:"+z+" x:"+x+" y:"+y+" tileHeight:"+tileHeight+" tileWidth:"+tileWidth+" j1:"+j1+" k1:"+k1+" l1:"+l1+" rotation:"+rotation+" isDynamic:"+isDynamic+" j2:"+j2+" byte0:"+byte0);
+        	      node = new PglCubeStub();
+        
+        }//todo - fix those non displaying objects
         interactableObject.pgleNode = node;
         for(int _x = x; _x < x + tileHeight; _x++)
         {

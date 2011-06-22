@@ -4934,8 +4934,8 @@ public class Client extends RSApplet {
 						}
 
 					}
-					if(myPrivilege == 2)
-					{
+					//if(myPrivilege == 2)
+					//{
 						if(inputString.equals("::clientdrop"))
 						dropClient();
 						if(inputString.equals("::lag"))
@@ -4951,7 +4951,7 @@ public class Client extends RSApplet {
 						if(inputString.equals("::fpsoff"))
 						fpsOn = false;
 
-					}
+					//}
 					if(inputString.startsWith("::") && !inputString.startsWith("::nocl"))
 					{
 						stream.p1isaac(103);

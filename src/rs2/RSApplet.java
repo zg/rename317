@@ -482,8 +482,8 @@ public class RSApplet extends Applet
 
     RSApplet()
     {
-        delayTime = 20;
-        minDelay = 1;
+        delayTime = 20;//20;
+        minDelay = 1;//1
         otim = new long[10];
         shouldDebug = false;
         shouldClearScreen = true;

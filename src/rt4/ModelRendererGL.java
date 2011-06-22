@@ -6,7 +6,7 @@ import org.lwjgl.opengl.ARBBufferObject;
 import org.lwjgl.opengl.GL11;
 import pgle.PglSun;
 import rs2.*;
-import sun.plugin.com.Utils;
+//import sun.plugin.com.Utils;
 
 import java.nio.ByteBuffer;
 

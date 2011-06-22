@@ -222,7 +222,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
     }
 
     private void closeRequest(OnDemandData onDemandData)
-    {
+    {System.out.println("close request");
         try
         {
             if(socket == null)
@@ -338,7 +338,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
                     {
                         flag = true;
                         onDemandData.loopCycle++;
-                        if(onDemandData.loopCycle > 50)
+                        if(onDemandData.loopCycle > 50)//50)
                         {
                             onDemandData.loopCycle = 0;
                             closeRequest(onDemandData);
@@ -572,7 +572,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         }
     }
 
-    private void method568()
+    private void method568()//used in client startup
     {
         while(uncompletedCount == 0 && completedCount < 10)
         {
