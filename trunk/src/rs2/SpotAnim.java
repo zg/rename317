@@ -4,9 +4,8 @@ package rs2;
 public class SpotAnim {
 
     public static void unpackConfig(JagexArchive jagexArchive)
-    {
-//        rs2.Packet stream = new rs2.Packet(jagexArchive.getDataForName("spotanim.dat"));
-    	Packet stream = new Packet(FileOperations.ReadFile("extras/spotanim.dat"));
+    {//spotanim restored to 317
+        rs2.Packet stream = new rs2.Packet(jagexArchive.getDataForName("spotanim.dat"));
         int length = stream.g2();
         if(cache == null)
             cache = new SpotAnim[length];
@@ -19,7 +18,7 @@ public class SpotAnim {
         }
 
     }
-/*
+
     private void readValues(rs2.Packet stream)
     {
         do
@@ -60,8 +59,8 @@ public class SpotAnim {
                 System.out.println("Error unrecognised spotanim config code: " + i);
         } while(true);
     }
-*/
 
+/*
 	private void readValues(Packet stream) {//new format type
 	do {
 		modelID = stream.g2();
@@ -80,7 +79,7 @@ public class SpotAnim {
 			break;
 		}while(true);
 	}
-
+*/
     public Model getModel()
     {
         Model model = (Model) memCache.get(id);
