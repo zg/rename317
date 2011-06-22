@@ -80,16 +80,12 @@ public class PglWrapper {
     }
 
     public void loadNewRegion(MapRegion mapRegion){
-        if (rsTerrain == null){
-            rsTerrainSource = new RsTerrainSource(mapRegion);
-            rsTerrainSource.updateMap();
-            rsTerrain = new Terrain(rsTerrainSource);
-            scene.add(rsTerrain);
-        } else {
-            rsTerrainSource.updateMap();
-            rsTerrain.update();
-
-        }
+        if (rsTerrain != null)
+            clearRegion();
+        rsTerrainSource = new RsTerrainSource(mapRegion);
+        rsTerrainSource.updateMap();
+        rsTerrain = new Terrain(rsTerrainSource);
+        scene.add(rsTerrain);
     }
 
     public void setCameraPosition(int x,int z,int y){
@@ -113,7 +109,11 @@ public class PglWrapper {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
             Display.processMessages();
-            ServerMemoryManager.processQueues();
+            try {
+                ServerMemoryManager.processQueues();
+            } catch (Exception e){
+                System.out.println("ServerMemoryManager exception :O");
+            }
         } else {
             Display.destroy();
             System.err.println("Closing window");
@@ -134,7 +134,6 @@ public class PglWrapper {
             rsTerrain = null;
             rsTerrainSource = null;
         }
-        rsTileManager.clear();
         System.gc();
     }
 

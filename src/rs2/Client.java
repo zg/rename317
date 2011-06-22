@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 
+import com.sun.jndi.cosnaming.ExceptionMapper;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import pgle.PglCallClientNode;
 import pgle.PglWrapper;
@@ -11606,6 +11607,7 @@ public class Client extends RSApplet {
 
 			Signlink.reporterror(s2);
 			network_disconnect();
+            exception.printStackTrace();
 		}
 		return true;
 	}

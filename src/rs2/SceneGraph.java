@@ -37,7 +37,7 @@ public class SceneGraph {
     }
 
     private void renderAtPoint(GeometryNode root,int xRotLocal,int x,int y,int z){
-        root.renderAtPoint(-(xRotLocal * 0.17578125f),0,0,0,x,-y,z);
+       // root.renderAtPoint(-(xRotLocal * 0.17578125f),0,0,0,x,-y,z);
     }
 
     public void initToNull()
@@ -170,7 +170,7 @@ public class SceneGraph {
     }
 
     private org.peterbjornx.pgl2.model.Node getPglNode(Entity jagexNode){
-        if (jagexNode == null)
+        /*if (jagexNode == null)
             return null;
         Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
         org.peterbjornx.pgl2.model.Node node;
@@ -178,7 +178,8 @@ public class SceneGraph {
             node = new PglModelNode(m,false); //for now
         else
             node = new PglCubeStub();
-        return node;
+        return node;*/
+        return null;
 
     }
 
@@ -2263,11 +2264,11 @@ for_outer:
     private static int anInt450;
     private static int anInt451;
     private static int anInt452;
-    private static int xCameraPositionTile;
-    private static int yCameraPositionTile;
-    private static int xCameraPosition;
-    private static int zCameraPosition;
-    private static int yCameraPosition;
+    public static int xCameraPositionTile;
+    public static int yCameraPositionTile;
+    public static int xCameraPosition;
+    public static int zCameraPosition;
+    public static int yCameraPosition;
     private static int yCurveSine;
     private static int yCurveCosine;
     private static int xCurveSine;
