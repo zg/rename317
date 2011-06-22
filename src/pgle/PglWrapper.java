@@ -11,6 +11,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.peterbjornx.pgl2.camera.Camera;
 import org.peterbjornx.pgl2.input.cameracontrol.FirstPersonCamera;
 import org.peterbjornx.pgl2.light.OpenGLLightManager;
+import org.peterbjornx.pgl2.math.VectorMath;
 import org.peterbjornx.pgl2.model.Node;
 import org.peterbjornx.pgl2.terrain.Terrain;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
@@ -139,5 +140,9 @@ public class PglWrapper {
 
     public void doCamTransform() {
         camera.loadViewMatrix();
+    }
+
+    public void setCameraRotation(int xCameraCurve, int yCameraCurve, int i) {
+        camera.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(xCameraCurve * 0.17578125f,yCameraCurve * 0.17578125f,i * 0.17578125f)));
     }
 }

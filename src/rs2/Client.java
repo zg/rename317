@@ -11675,6 +11675,7 @@ public class Client extends RSApplet {
 		Graphics2D.resetImage();
 		//xxx disables graphics            if(graphicsEnabled){
         pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);
+        pglWrapper.setCameraRotation(-xCameraCurve,0,yCameraCurve);
         fieldJ = j;
         //sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
         if (renderNode == null){
