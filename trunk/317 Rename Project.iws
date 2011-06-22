@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/PglWrapper.java" afterPath="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Client.java" afterPath="$PROJECT_DIR$/src/rs2/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Floor.java" afterPath="$PROJECT_DIR$/src/rs2/Floor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rt4/Class7_Sub1.java" afterPath="$PROJECT_DIR$/src/rt4/Class7_Sub1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java" afterPath="$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,19 +78,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4940" column="32" selection-start="133501" selection-end="133501" vertical-scroll-proportion="1.1904762">
+            <state line="4940" column="32" selection-start="133501" selection-end="133501" vertical-scroll-proportion="-13.392858">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapRegion.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MapRegion.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="233" column="48" selection-start="11191" selection-end="11191" vertical-scroll-proportion="0.0">
+            <state line="233" column="48" selection-start="11191" selection-end="11191" vertical-scroll-proportion="4.6530614">
               <folding />
             </state>
           </provider>
@@ -102,10 +99,19 @@
       <file leaf-file-name="PglTerrainOverlay.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="82" selection-start="2909" selection-end="2909" vertical-scroll-proportion="0.0">
+            <state line="85" column="175" selection-start="3512" selection-end="3512" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="method#fromRgb#0;class#PglTerrainOverlay#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RsTerrainSource.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pgle/RsTerrainSource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="13" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -123,15 +129,6 @@
         <entry file="file://$PROJECT_DIR$/src/pgle/PglSun.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="57" column="42" selection-start="2428" selection-end="2428" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PglModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pgle/PglModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="331" column="122" selection-start="16773" selection-end="16773" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -190,12 +187,12 @@
         <option value="$PROJECT_DIR$/src/rs2/ShapedTile.java" />
         <option value="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
         <option value="$PROJECT_DIR$/src/pgle/PglOverlayNode.java" />
-        <option value="$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java" />
         <option value="$PROJECT_DIR$/src/pgle/PglSun.java" />
         <option value="$PROJECT_DIR$/src/rs2/Floor.java" />
         <option value="$PROJECT_DIR$/src/rt4/Class7_Sub1.java" />
         <option value="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
         <option value="$PROJECT_DIR$/src/rs2/Client.java" />
+        <option value="$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java" />
       </list>
     </option>
   </component>
@@ -595,7 +592,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31849316" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -608,9 +605,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19847329" sideWeight="0.7089041" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3998477" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20229007" sideWeight="0.60273975" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20229007" sideWeight="0.6934931" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30650684" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30650684" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -672,11 +669,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rs2/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="50" selection-start="2842" selection-end="2842" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="364" column="29" selection-start="17894" selection-end="17894" vertical-scroll-proportion="0.0" />
@@ -709,13 +701,6 @@
         <state line="331" column="122" selection-start="16773" selection-end="16773" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="233" column="48" selection-start="11191" selection-end="11191" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pgle/PglSun.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="57" column="42" selection-start="2428" selection-end="2428" vertical-scroll-proportion="0.0">
@@ -746,15 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="82" selection-start="2909" selection-end="2909" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#fromRgb#0;class#PglTerrainOverlay#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pgle/PglWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="143" column="12" selection-start="4758" selection-end="4758" vertical-scroll-proportion="0.0">
@@ -771,7 +747,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4940" column="32" selection-start="133501" selection-end="133501" vertical-scroll-proportion="1.1904762">
+        <state line="4940" column="32" selection-start="133501" selection-end="133501" vertical-scroll-proportion="-13.392858">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="175" selection-start="3512" selection-end="3512" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#fromRgb#0;class#PglTerrainOverlay#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pgle/RsTerrainSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="233" column="48" selection-start="11191" selection-end="11191" vertical-scroll-proportion="4.6530614">
           <folding />
         </state>
       </provider>

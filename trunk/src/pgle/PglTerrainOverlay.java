@@ -83,7 +83,7 @@ public class PglTerrainOverlay {
                     int yC = -mapRegion.getHeightMap()[heightLevel][x][z + 1];
                     if (overlay != 0){
                         Floor overlayFloor = Floor.cache[overlay - 1];
-                        generateDataForTile(x,z,yA+1,yB+1,yC+1,yD+1,overlayFloor.hslColour,overlayFloor.hslColour,overlayFloor.hslColour,overlayFloor.hslColour,overlayFloor.hdTexture,shapeA,shapeB);
+                        generateDataForTile(x,z,yA+1,yB+1,yC+1,yD+1,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdTexture,shapeA,shapeB);
                     }
                 }
             for (int triPtr = 0;triPtr < triangleCount;triPtr++)
