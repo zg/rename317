@@ -1,11 +1,18 @@
 package rs2;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Color;
+import org.lwjgl.util.vector.Vector3f;
+import org.peterbjornx.pgl2.gl.GLQM;
+import org.peterbjornx.pgl2.light.OpenGLLight;
 import org.peterbjornx.pgl2.model.GeometryNode;
 import pgle.PglModel;
 import pgle.PglModelNode;
 
 import java.awt.color.ICC_ColorSpace;
 import java.util.HashMap;
+
+import static org.lwjgl.opengl.GL11.glLightModel;
 
 public class Entity extends NodeSub {
 
@@ -28,6 +35,11 @@ public class Entity extends NodeSub {
             }
             if (pgleNode != null)
                 renderAtPoint(pgleNode,i,j1,k1,l1);
+            if (pgleNode != null && this instanceof Projectile){
+                setEffectLight(Rasterizer.hsl2rgb[model.triangleColour[0]]);
+                effectLight.enable();
+                effectLight.loadValues();
+            }
             modelHeight = model.modelHeight;
             model.renderAtPoint2(i, j, k, l, i1, j1, k1, l1, i2);
         }
@@ -37,6 +49,7 @@ public class Entity extends NodeSub {
         x+=SceneGraph.xCameraPosition;
         y+=SceneGraph.zCameraPosition;
         z+=SceneGraph.yCameraPosition;
+
         root.renderAtPoint(-(xRotLocal * 0.17578125f),0,0,0,x,-y,z);
     }
 
@@ -49,8 +62,30 @@ public class Entity extends NodeSub {
     {
         modelHeight = 1000;
     }
+
+    public static void cleanPglPool(){
+        modelPool.clear();
+    }
+
+    public static void setEffectLight(int rgb){
+            float r = (float)((rgb >> 16) & 0xff);
+            float g = (float)((rgb >> 8)  & 0xff);
+            float b = (float)( rgb        & 0xff);
+            Color light0Colour = new Color((int)r,(int)g,(int)b);
+            effectLight.setDiffuse(light0Colour);
+            effectLight.setSpecular(light0Colour);
+            effectLight.setAmbient(light0Colour);
+    }
+
+    public static OpenGLLight effectLight = new OpenGLLight();
     private int mismatchCounter = 0;
     private static HashMap<Model,PglModelNode> modelPool = new HashMap<Model, PglModelNode>();
     public VertexNormal[] vertexNormals;
     public int modelHeight;
+
+    static {
+        effectLight.setId(2);
+        effectLight.setDirectional(false);
+        effectLight.setPosition(new Vector3f(0,0,0));
+    }
 }

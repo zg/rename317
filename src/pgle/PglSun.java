@@ -32,6 +32,8 @@ public class PglSun {
         sunGLLight1 = new OpenGLLight();
         sunGLLight0.setDirectional(true);
         sunGLLight1.setDirectional(true);
+        sunGLLight0.setId(0);
+        sunGLLight1.setId(1);
         directionalLight0 = new PglSunLight(sunGLLight0);
         directionalLight1 = new PglSunLight(sunGLLight1);
     }
@@ -50,10 +52,10 @@ public class PglSun {
             Color ambientColour = new Color((int)(r * ambientIntensity),(int)(g * ambientIntensity),(int)(b * ambientIntensity));
             sunGLLight0.setDiffuse(light0Colour);
             sunGLLight0.setSpecular(light0Colour);
-            sunGLLight0.setAmbient(light0Colour);
+            sunGLLight0.setAmbient(lololol);
             sunGLLight1.setDiffuse(light1Colour);
             sunGLLight1.setSpecular(light1Colour);
-            sunGLLight1.setAmbient(light1Colour);
+            sunGLLight1.setAmbient(lololol);
             glLightModel(GL11.GL_LIGHT_MODEL_AMBIENT, GLQM.getColour4fBuffer(ambientColour));
         }
     }
@@ -73,13 +75,20 @@ public class PglSun {
         directionalLight0 = new PglSunLight(sunGLLight0);
         directionalLight1 = new PglSunLight(sunGLLight1);
         manager.activateVirtualLight(directionalLight0);
-       // manager.activateVirtualLight(directionalLight1);
+        manager.activateVirtualLight(directionalLight1);
+
     }
 
+    public void activateNoManager(){
+        sunGLLight0.enable();
+        sunGLLight1.enable();
+        sunGLLight0.loadValues();
+        sunGLLight1.loadValues();
+    }
 
     public void deactivate(OpenGLLightManager manager){
         manager.deactivateVirtualLight(directionalLight0);
-      //  manager.deactivateVirtualLight(directionalLight1);
+        manager.deactivateVirtualLight(directionalLight1);
     }
 
     private class PglSunLight implements VirtualLight {

@@ -161,7 +161,7 @@ public class SceneGraph {
             tileArray[zz][x][y].myPlainTile = plainTile_1;
             return;
         }
-        ShapedTile shapedTile = new ShapedTile(y, colourAA, colourC, zD, j1, colourDA, shapeB, colourA, cRGB2, colourD, zC, zB, zA, shapeA, colourCA, colourBA, colourB, x, RGBA);
+        ShapedTile shapedTile = new ShapedTile(x, y, zA, zB, zC, zD, colourAA, colourBA, colourCA, colourDA, RGBA, colourA, colourB, colourC, colourD, cRGB2, j1, shapeA, shapeB);
         for(int z = zz; z >= 0; z--)
             if(tileArray[z][x][y] == null)
                 tileArray[z][x][y] = new Tile(z, x, y);
@@ -1787,43 +1787,43 @@ label0:
     private void drawShapedTile(int i, int j, int k, ShapedTile shapedTile, int l, int i1,
                            int j1)
     {
-        int k1 = shapedTile.origVertexX.length;
-        for(int vID = 0; vID < k1; vID++)
+        int triangleCount = shapedTile.origVertexX.length;
+        for(int vID = 0; vID < triangleCount; vID++)
         {
-            int i2 = shapedTile.origVertexX[vID] - xCameraPosition;
-            int k2 = shapedTile.origVertexY[vID] - zCameraPosition;
-            int i3 = shapedTile.origVertexZ[vID] - yCameraPosition;
-            int k3 = i3 * k + i2 * j1 >> 16;
-            i3 = i3 * j1 - i2 * k >> 16;
-            i2 = k3;
-            k3 = k2 * l - i3 * j >> 16;
-            i3 = k2 * j + i3 * l >> 16;
-            k2 = k3;
-            if(i3 < 50)
+            int viewspaceX = shapedTile.origVertexX[vID] - xCameraPosition;
+            int viewspaceY = shapedTile.origVertexY[vID] - zCameraPosition;
+            int viewspaceZ = shapedTile.origVertexZ[vID] - yCameraPosition;
+            int k3 = viewspaceZ * k + viewspaceX * j1 >> 16;
+            viewspaceZ = viewspaceZ * j1 - viewspaceX * k >> 16;
+            viewspaceX = k3;
+            k3 = viewspaceY * l - viewspaceZ * j >> 16;
+            viewspaceZ = viewspaceY * j + viewspaceZ * l >> 16;
+            viewspaceY = k3;
+            if(viewspaceZ < 50)
                 return;
-            if(shapedTile.triTex != null)
+            if(shapedTile.triangleTexture != null)
             {
-                ShapedTile.veritceX[vID] = i2;
-                ShapedTile.veritceZ[vID] = k2;
-                ShapedTile.veritceY[vID] = i3;
+                rs2.ShapedTile.viewSpaceX[vID] = viewspaceX;
+                rs2.ShapedTile.viewSpaceY[vID] = viewspaceY;
+                rs2.ShapedTile.viewSpaceZ[vID] = viewspaceZ;
             }
-            ShapedTile.screenX[vID] = Rasterizer.centerX + (i2 << 9) / i3;
-            ShapedTile.screenY[vID] = Rasterizer.centerY + (k2 << 9) / i3;
+            rs2.ShapedTile.screenX[vID] = Rasterizer.centerX + (viewspaceX << 9) / viewspaceZ;
+            rs2.ShapedTile.screenY[vID] = Rasterizer.centerY + (viewspaceY << 9) / viewspaceZ;
         }
 
         Rasterizer.alpha = 0;
-        k1 = shapedTile.indexA.length;
-        for(int j2 = 0; j2 < k1; j2++)
+        triangleCount = shapedTile.triangleA.length;
+        for(int triIdx = 0; triIdx < triangleCount; triIdx++)
         {
-            int indexA = shapedTile.indexA[j2];
-            int indexB = shapedTile.indexB[j2];
-            int indexC = shapedTile.indexC[j2];
-            int sXA = ShapedTile.screenX[indexA];
-            int sXB = ShapedTile.screenX[indexB];
-            int sXC = ShapedTile.screenX[indexC];
-            int sYA = ShapedTile.screenY[indexA];
-            int sYB = ShapedTile.screenY[indexB];
-            int sYC = ShapedTile.screenY[indexC];
+            int indexA = shapedTile.triangleA[triIdx];
+            int indexB = shapedTile.triangleB[triIdx];
+            int indexC = shapedTile.triangleC[triIdx];
+            int sXA = rs2.ShapedTile.screenX[indexA];
+            int sXB = rs2.ShapedTile.screenX[indexB];
+            int sXC = rs2.ShapedTile.screenX[indexC];
+            int sYA = rs2.ShapedTile.screenY[indexA];
+            int sYB = rs2.ShapedTile.screenY[indexB];
+            int sYC = rs2.ShapedTile.screenY[indexC];
             if((sXA - sXB) * (sYC - sYB) - (sYA - sYB) * (sXC - sXB) > 0)
             {
                 Rasterizer.restrict_edges = sXA < 0 || sXB < 0 || sXC < 0 || sXA > Graphics2D.viewportRx || sXB > Graphics2D.viewportRx || sXC > Graphics2D.viewportRx;
@@ -1832,21 +1832,21 @@ label0:
                     clickedTileX = i;
                     clickedTileY = i1;
                 }
-                if(shapedTile.triTex == null || shapedTile.triTex[j2] == -1)
+                if(shapedTile.triangleTexture == null || shapedTile.triangleTexture[triIdx] == -1)
                 {
-                    if(shapedTile.verticeColourA[j2] != 0xbc614e)
-                        Rasterizer.drawShadedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2]);
+                    if(shapedTile.triangleHslA[triIdx] != 0xbc614e)
+                        Rasterizer.drawShadedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.triangleHslA[triIdx], shapedTile.triangleHslB[triIdx], shapedTile.triangleHslC[triIdx]);
                 } else
                 if(!lowMem)
                 {
                     if(shapedTile.flat)
-                        Rasterizer.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2], ShapedTile.veritceX[0], ShapedTile.veritceX[1], ShapedTile.veritceX[3], ShapedTile.veritceZ[0], ShapedTile.veritceZ[1], ShapedTile.veritceZ[3], ShapedTile.veritceY[0], ShapedTile.veritceY[1], ShapedTile.veritceY[3], shapedTile.triTex[j2]);
+                        Rasterizer.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.triangleHslA[triIdx], shapedTile.triangleHslB[triIdx], shapedTile.triangleHslC[triIdx], rs2.ShapedTile.viewSpaceX[0], rs2.ShapedTile.viewSpaceX[1], rs2.ShapedTile.viewSpaceX[3], rs2.ShapedTile.viewSpaceY[0], rs2.ShapedTile.viewSpaceY[1], rs2.ShapedTile.viewSpaceY[3], rs2.ShapedTile.viewSpaceZ[0], rs2.ShapedTile.viewSpaceZ[1], rs2.ShapedTile.viewSpaceZ[3], shapedTile.triangleTexture[triIdx]);
                     else
-                        Rasterizer.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.verticeColourA[j2], shapedTile.verticeColourB[j2], shapedTile.verticeColourC[j2], ShapedTile.veritceX[indexA], ShapedTile.veritceX[indexB], ShapedTile.veritceX[indexC], ShapedTile.veritceZ[indexA], ShapedTile.veritceZ[indexB], ShapedTile.veritceZ[indexC], ShapedTile.veritceY[indexA], ShapedTile.veritceY[indexB], ShapedTile.veritceY[indexC], shapedTile.triTex[j2]);
+                        Rasterizer.drawTexturedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, shapedTile.triangleHslA[triIdx], shapedTile.triangleHslB[triIdx], shapedTile.triangleHslC[triIdx], rs2.ShapedTile.viewSpaceX[indexA], rs2.ShapedTile.viewSpaceX[indexB], rs2.ShapedTile.viewSpaceX[indexC], rs2.ShapedTile.viewSpaceY[indexA], rs2.ShapedTile.viewSpaceY[indexB], rs2.ShapedTile.viewSpaceY[indexC], rs2.ShapedTile.viewSpaceZ[indexA], rs2.ShapedTile.viewSpaceZ[indexB], rs2.ShapedTile.viewSpaceZ[indexC], shapedTile.triangleTexture[triIdx]);
                 } else
                 {
-                    int k5 = textureRGBColour[shapedTile.triTex[j2]];
-                    Rasterizer.drawShadedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.verticeColourA[j2]), mixColour(k5, shapedTile.verticeColourB[j2]), mixColour(k5, shapedTile.verticeColourC[j2]));
+                    int k5 = textureRGBColour[shapedTile.triangleTexture[triIdx]];
+                    Rasterizer.drawShadedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.triangleHslA[triIdx]), mixColour(k5, shapedTile.triangleHslB[triIdx]), mixColour(k5, shapedTile.triangleHslC[triIdx]));
                 }
             }
         }

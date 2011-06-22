@@ -644,7 +644,7 @@ public class Model extends Entity {
         vertexCount = modelHeader.modelVerticeCount;
         triangleCount = modelHeader.modelTriangleCount;
         textureTriangleCount = modelHeader.modelTextureTriangleCount;
-        vertexX = new int[vertexCount];
+        viewSpaceX = new int[vertexCount];
         vertexY = new int[vertexCount];
         vertexZ = new int[vertexCount];
         triangleA = new int[triangleCount];
@@ -691,10 +691,10 @@ public class Model extends Entity {
             int vertexz = 0;
             if((readValModifier & 4) != 0)
                 vertexz = vZStream.gsmart();
-            vertexX[vID] = oldVX + vertexx;
+            viewSpaceX[vID] = oldVX + vertexx;
             vertexY[vID] = oldVY + vertexy;
             vertexZ[vID] = oldVZ + vertexz;
-            oldVX = vertexX[vID];
+            oldVX = viewSpaceX[vID];
             oldVY = vertexY[vID];
             oldVZ = vertexZ[vID];
             if(vertexVSkin != null)

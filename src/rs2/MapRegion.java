@@ -628,7 +628,7 @@ label0:
                 obj4 = class46.method578(1, j1, zA, zB, zD, zC, -1);
             else
                 obj4 = new ObjectOnTile(i1, j1, 1, zB, zD, zA, zC, class46.animationID, true);
-            sceneGraph.addWallObject(anIntArray140[j1], ((Entity) (obj4)), idTag, i, objConf, l, null, zMix, 0, k,j1);
+            sceneGraph.addWallObject(highNybbleBitValues[j1], ((Entity) (obj4)), idTag, i, objConf, l, null, zMix, 0, k,j1);
             if(class46.aBoolean779)
                 if(j1 == 0)
                     object_shadow_data[k][l][i + 1] = 50;
@@ -694,7 +694,7 @@ label0:
                 obj5 = class46.method578(3, j1, zA, zB, zD, zC, -1);
             else
                 obj5 = new ObjectOnTile(i1, j1, 3, zB, zD, zA, zC, class46.animationID, true);
-            sceneGraph.addWallObject(anIntArray140[j1], ((Entity) (obj5)), idTag, i, objConf, l, null, zMix, 0, k,j1);
+            sceneGraph.addWallObject(highNybbleBitValues[j1], ((Entity) (obj5)), idTag, i, objConf, l, null, zMix, 0, k,j1);
             if(class46.aBoolean779)
                 if(j1 == 0)
                     object_shadow_data[k][l][i + 1] = 50;
@@ -1148,7 +1148,7 @@ label0:
                 obj4 = class46.method578(1, i, l1, i2, j2, k2, -1);
             else
                 obj4 = new ObjectOnTile(j1, i, 1, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallObject(anIntArray140[i], ((Entity) (obj4)), i3, j, byte1, i1, null, l2, 0, k1,i);
+            sceneGraph.addWallObject(highNybbleBitValues[i], ((Entity) (obj4)), i3, j, byte1, i1, null, l2, 0, k1,i);
             if(class46.isUnwalkable)
                 tileSetting.method211(j, i, i1, k, class46.aBoolean757);
             return;
@@ -1179,7 +1179,7 @@ label0:
                 obj5 = class46.method578(3, i, l1, i2, j2, k2, -1);
             else
                 obj5 = new ObjectOnTile(j1, i, 3, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallObject(anIntArray140[i], ((Entity) (obj5)), i3, j, byte1, i1, null, l2, 0, k1,i);
+            sceneGraph.addWallObject(highNybbleBitValues[i], ((Entity) (obj5)), i3, j, byte1, i1, null, l2, 0, k1,i);
             if(class46.isUnwalkable)
                 tileSetting.method211(j, i, i1, k, class46.aBoolean757);
             return;
@@ -1415,7 +1415,7 @@ label0:
     };
     //private static final int anInt138 = 323;//never used
     private final int[][] tile_shadow;
-    private static final int anIntArray140[] = {
+    private static final int highNybbleBitValues[] = {
         16, 32, 64, 128
     };
     private final byte[][][] underLay;
