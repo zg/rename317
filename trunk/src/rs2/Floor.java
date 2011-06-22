@@ -37,7 +37,10 @@ public class Floor {
                 return;
             else if (opcode == 1) {
                 hdUlColour = arg0.g3();  //r3
+                int i2 = hslColour;
                 rgb2hls(hdUlColour);
+                hdHslColour = hslColour;
+                hslColour = i2;
             } else if (opcode == 2) {
                 hdUlTexture = arg0.g2();    //2
                 if ((hdUlTexture ^ 0xffffffff) == -65536)
@@ -63,7 +66,10 @@ public class Floor {
                 int l = lightness;
                 int i1 = hue2;
                 hdColour = stream.g3();
+                int i2 = hslColour;
                 rgb2hls(hdColour);
+                hdOlHslColour = hslColour;
+                hslColour = i2;
                 hue = j;
                 saturation = k;
                 lightness = l;
@@ -234,5 +240,7 @@ public class Floor {
     public int hslColour;
     public int hdColour = 0xff00ff;
     public int hdUlColour = 0xff00ff;
+    public int hdHslColour = 0;
+    public int hdOlHslColour = 0;
     public String name;
 }

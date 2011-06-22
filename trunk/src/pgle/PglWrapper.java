@@ -17,6 +17,7 @@ import org.peterbjornx.pgl2.terrain.Terrain;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import rs2.MapRegion;
+import rt4.Class7_Sub1;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -75,7 +76,8 @@ public class PglWrapper {
             scene.add(rsTileManager);
             firstPersonCamera = new FirstPersonCamera();
             glEnable(GL_DEPTH_TEST);
-            initLighting();
+            if (Class7_Sub1.useLighting)
+                initLighting();
             running = true;
         } catch (LWJGLException e) {
 
@@ -138,7 +140,8 @@ public class PglWrapper {
     }
 
     public void doLighting(){
-        sun.activateNoManager();
+        if (Class7_Sub1.useLighting)
+            sun.activateNoManager();
     }
 
     public void preRender() {
