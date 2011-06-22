@@ -3,167 +3,109 @@ package rs2;
 public class Animation
 {
 
-	public static byte[] getData(int i1, int i2) {
-		if(frameData == null)
-		loadFrames();
-
-		if(skinData == null)
-		loadSkins();
-
-		if (i1 == 0)
-		{
-			//return rs2.FileOperations.ReadFile("./extras/frames/" + i2 + ".dat");
-			return frameData[i2];
-		}
-		else
-		{
-			//return rs2.FileOperations.ReadFile("./extras/skinlist/" + i2 + ".dat");
-			return skinData[i2];
-		}
-	}
-	public static void loadSkins()
-	{
-		System.out.println("Preloading Skins...");
-		Packet stream = new Packet(FileOperations.ReadFile("extras/Skins.dat"));
-
-/*
-Format
-2byte numData
-loop
-2byte - fileID - could be removed realy
-4byte - fileSize
-ByteArray of fileSize -- gziped
-repeat
-*/
-
-		int numSkins = stream.g2();
-		skinData = new byte[numSkins][];
-
-		for(int i = 0; i < numSkins; i++)
-		{
-			int fileID = stream.g2();
-			int compressedSize = stream.g4();
-			byte[] compressedData = stream.getData(new byte[compressedSize]);
-			byte[] decompressedData = JavaUncompress.decompress(compressedData);
-			skinData[fileID] = decompressedData;
-		}
-		System.out.println("preloaded "+numSkins+" skins");
-	}
-
-	public static void loadFrames()
-	{
-		System.out.println("Preloading Frames...");
-		Packet stream = new Packet(FileOperations.ReadFile("extras/Frames.dat"));
-
-/*
-Format
-2byte - fileID - could be removed realy
-4byte - fileSize
-ByteArray of fileSize -- gziped
-repeat
-*/
-
-		int numFrames = stream.g2();
-		frameData = new byte[numFrames][];
-
-		for(int i = 0; i < numFrames; i++)
-		{
-			int fileID = stream.g2();
-			int compressedSize = stream.g4();
-			byte[] compressedData = stream.getData(new byte[compressedSize]);
-			byte[] decompressedData = JavaUncompress.decompress(compressedData);
-			frameData[fileID] = decompressedData;
-		}
-		System.out.println("preloaded "+numFrames+" frames");
-
-	}
-
     public static void method528(int i)
     {
-//        aAnimationArray635 = new rs2.Animation[i + 1];
-//        aBooleanArray643 = new boolean[i + 1];
-//        for(int j = 0; j < i + 1; j++)
-//            aBooleanArray643[j] = true;
-	aAnimationArray635 = new Animation[3000][0];
+    	aAnimationArray635 = new rs2.Animation[i + 1];
+        aBooleanArray643 = new boolean[i + 1];
+        for(int j = 0; j < i + 1; j++)
+            aBooleanArray643[j] = true;
     }
 
-   public static void load(int file){
-    try {
-	    Packet stream = new Packet(getData(0, file));
-        Packet stream1 = new Packet(getData(1, file));
-		ModelTransform class18 = new ModelTransform(stream1);
-        int k1 = stream.g2();
-		aAnimationArray635[file] = new Animation[k1];
-	    int ai[] = new int[500];
-        int ai1[] = new int[500];
-        int ai2[] = new int[500];
-        int ai3[] = new int[500];
-        for(int l1 = 0; l1 < k1; l1++)
-        {
-            int i2 = stream.g2();
-            Animation class36 = aAnimationArray635[file][i2] = new Animation();
-            class36.myModelTransform = class18;
-            int j2 = stream.g1();
-            int l2 = 0;
-			int k2 = -1;
-            for(int i3 = 0; i3 < j2; i3++)
-            {
-                int j3 = stream.g1();
+   public static void load(byte[] abyte0){
+       Packet stream = new Packet(abyte0);
+       stream.pos = abyte0.length - 8;
+       int i = stream.g2();
+       int j = stream.g2();
+       int k = stream.g2();
+       int l = stream.g2();
+       int i1 = 0;
+       Packet stream_1 = new Packet(abyte0);
+       stream_1.pos = i1;
+       i1 += i + 2;
+       Packet stream_2 = new Packet(abyte0);
+       stream_2.pos = i1;
+       i1 += j;
+       Packet stream_3 = new Packet(abyte0);
+       stream_3.pos = i1;
+       i1 += k;
+       Packet stream_4 = new Packet(abyte0);
+       stream_4.pos = i1;
+       i1 += l;
+       Packet stream_5 = new Packet(abyte0);
+       stream_5.pos = i1;
+       ModelTransform modelTransform = new ModelTransform(stream_5);
+       int k1 = stream_1.g2();
+       int ai[] = new int[500];
+       int ai1[] = new int[500];
+       int ai2[] = new int[500];
+       int ai3[] = new int[500];
+       for(int l1 = 0; l1 < k1; l1++)
+       {
+           int i2 = stream_1.g2();
+           Animation animationFrame = aAnimationArray635[i2] = new Animation();
+           animationFrame.displayLength = stream_4.g1();
+           animationFrame.myModelTransform = modelTransform;
+           int j2 = stream_1.g1();
+           int k2 = -1;
+           int l2 = 0;
+           for(int i3 = 0; i3 < j2; i3++)
+           {
+               int j3 = stream_2.g1();
+               if(j3 > 0)
+               {
+                   if(modelTransform.opcodes[i3] != 0)
+                   {
+                       for(int l3 = i3 - 1; l3 > k2; l3--)
+                       {
+                           if(modelTransform.opcodes[l3] != 0)
+                               continue;
+                           ai[l2] = l3;
+                           ai1[l2] = 0;
+                           ai2[l2] = 0;
+                           ai3[l2] = 0;
+                           l2++;
+                           break;
+                       }
 
-                if(j3 > 0)
-                {
-                    if(class18.opcodes[i3] != 0)
-                    {
-                        for(int l3 = i3 - 1; l3 > k2; l3--)
-                        {
-                            if(class18.opcodes[l3] != 0)
-                                continue;
-                            ai[l2] = l3;
-                            ai1[l2] = 0;
-                            ai2[l2] = 0;
-                            ai3[l2] = 0;
-                            l2++;
-                            break;
-                        }
+                   }
+                   ai[l2] = i3;
+                   char c = '\0';
+                   if(modelTransform.opcodes[i3] == 3)
+                       c = '\200';
+                   if((j3 & 1) != 0)
+                       ai1[l2] = stream_3.gsmart();
+                   else
+                       ai1[l2] = c;
+                   if((j3 & 2) != 0)
+                       ai2[l2] = stream_3.gsmart();
+                   else
+                       ai2[l2] = c;
+                   if((j3 & 4) != 0)
+                       ai3[l2] = stream_3.gsmart();
+                   else
+                       ai3[l2] = c;
+                   k2 = i3;
+                   l2++;
+                   if(modelTransform.opcodes[i3] == 5)
+                       aBooleanArray643[i2] = false;
+               }
+           }
 
-                    }
-                    ai[l2] = i3;
-                    short c = 0;
-                    if(class18.opcodes[i3] == 3)
-                        c = (short)128;
+           animationFrame.stepCount = l2;
+           animationFrame.opcodeLinkTable = new int[l2];
+           animationFrame.modifier1 = new int[l2];
+           animationFrame.modifier2 = new int[l2];
+           animationFrame.modifier3 = new int[l2];
+           for(int k3 = 0; k3 < l2; k3++)
+           {
+               animationFrame.opcodeLinkTable[k3] = ai[k3];
+               animationFrame.modifier1[k3] = ai1[k3];
+               animationFrame.modifier2[k3] = ai2[k3];
+               animationFrame.modifier3[k3] = ai3[k3];
+           }
 
-                    if((j3 & 1) != 0)
-                        ai1[l2] = (short)stream.readShort2();
-                    else
-                        ai1[l2] = c;
-                    if((j3 & 2) != 0)
-                        ai2[l2] = stream.readShort2();
-                    else
-                        ai2[l2] = c;
-                    if((j3 & 4) != 0)
-                        ai3[l2] = stream.readShort2();
-                    else
-                        ai3[l2] = c;
-                    k2 = i3;
-                    l2++;
-            	}
-	}
+       }
 
-            class36.stepCount = l2;
-            class36.opcodeLinkTable = new int[l2];
-            class36.modifier1 = new int[l2];
-            class36.modifier2 = new int[l2];
-            class36.modifier3 = new int[l2];
-            for(int k3 = 0; k3 < l2; k3++)
-            {
-                class36.opcodeLinkTable[k3] = ai[k3];
-                class36.modifier1[k3] = ai1[k3];
-                class36.modifier2[k3] = ai2[k3];
-                class36.modifier3[k3] = ai3[k3];
-            }
-
-        }
-      }catch(Exception exception) { }
     }
 
     public static void clearCache()
@@ -175,12 +117,8 @@ repeat
     {
 		if(aAnimationArray635 == null)
 		return null;
-		String hex = Integer.toHexString(j);
-		int file = Integer.parseInt(hex.substring(0,(hex.length()-4)), 16);
-		int frame = Integer.parseInt(hex.substring((hex.length()-4)), 16);
-		if(aAnimationArray635[file].length == 0)
-			load(file);
-		return aAnimationArray635[file][frame];
+		else
+		return aAnimationArray635[j];
 
     }
 
@@ -195,7 +133,7 @@ repeat
     }
 	public static byte[][] frameData = null;
 	public static byte[][] skinData = null;
-    private static Animation[][] aAnimationArray635;
+    private static Animation[] aAnimationArray635;
     public int displayLength;
     public ModelTransform myModelTransform;
     public int stepCount;
@@ -203,6 +141,6 @@ repeat
     public int modifier1[];
     public int modifier2[];
     public int modifier3[];
-    //private static boolean[] aBooleanArray643;//never used
+    private static boolean[] aBooleanArray643;//never used
 
 }
