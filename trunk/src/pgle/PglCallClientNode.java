@@ -1,5 +1,6 @@
 package pgle;
 
+import org.lwjgl.opengl.GL11;
 import org.peterbjornx.pgl2.camera.Camera;
 import org.peterbjornx.pgl2.model.GeometryNode;
 import rs2.Entity;
@@ -19,6 +20,12 @@ public class PglCallClientNode extends GeometryNode{
         SceneGraph.clientInstance.getPglWrapper().doLighting();
         if (Entity.effectLight != null)
             Entity.effectLight.disable();
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glAlphaFunc(GL11.GL_GREATER, 0.1f);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
         SceneGraph.clientInstance.renderscene();
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
     }
 }

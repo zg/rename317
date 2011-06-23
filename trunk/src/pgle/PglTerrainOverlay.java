@@ -308,11 +308,12 @@ public class PglTerrainOverlay {
     }
 
      public static Texture2D getTexture(int id) {
-        return new Texture2D("./hddata/texture/" + id + ".png");
+        return new Texture2D("./hddata/texture/" + id + ".png",false,GL11.GL_LINEAR,new int[]{255,0,255});
     }
 
     public void render(){
         textures[0].bind();
+        geometry.enable();
         geometry.bind();
         element.bind();
         for (int tID = 0; tID < textureTriangleCount; tID++){
