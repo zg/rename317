@@ -1,5 +1,6 @@
 package pgle;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
 import org.peterbjornx.pgl2.texture.Texture2D;
@@ -53,7 +54,8 @@ public class RsTerrainSource implements TerrainSource {
     }
 
     public Texture2D getTexture(int id) {
-        return new Texture2D("./hddata/texture/" + id + ".png");
+        Texture2D t = new Texture2D("./hddata/texture/" + id + ".png",false, GL11.GL_LINEAR,new int[]{255,0,255});
+        return t;
     }
 
     public int getTileSize() {

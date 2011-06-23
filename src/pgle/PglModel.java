@@ -192,8 +192,8 @@ public class PglModel {
         int verBIdx = rsModel.triangleB[triIdx];
         int verCIdx = rsModel.triangleC[triIdx];
         int texture = rsModel.triangleColour[triIdx];
-        int alpha = rsModel.triangleAlpha==null ? 255 : rsModel.triangleAlpha[triIdx];
-        Vector3f normalT = new Vector3f(rsModel.triangleNormals[triIdx].x / 256.0f,-(rsModel.triangleNormals[triIdx].y / 256.0f),rsModel.triangleNormals[triIdx].z / 256.0f);
+        int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
+        Vector3f normalT = new Vector3f(rsModel.triangleNormals[triIdx].x / 255.0f,-(rsModel.triangleNormals[triIdx].y / 255.0f),rsModel.triangleNormals[triIdx].z / 255.0f);
         Color colorT = Class7_Sub1.useLighting ? fromRgb(0x808080,alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
         int bufAIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
@@ -221,7 +221,7 @@ public class PglModel {
         int verAIdx = rsModel.triangleA[triIdx];
         int verBIdx = rsModel.triangleB[triIdx];
         int verCIdx = rsModel.triangleC[triIdx];
-        int alpha = rsModel.triangleAlpha==null ? 255 : rsModel.triangleAlpha[triIdx];
+        int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
         Vector3f normalA = new Vector3f(rsModel.vertexNormals[verAIdx].getX(), -rsModel.vertexNormals[verAIdx].getY(), rsModel.vertexNormals[verAIdx].getZ());
         Vector3f normalB = new Vector3f(rsModel.vertexNormals[verBIdx].getX(), -rsModel.vertexNormals[verBIdx].getY(), rsModel.vertexNormals[verBIdx].getZ());
         Vector3f normalC = new Vector3f(rsModel.vertexNormals[verCIdx].getX(), -rsModel.vertexNormals[verCIdx].getY(), rsModel.vertexNormals[verCIdx].getZ());
@@ -257,8 +257,8 @@ public class PglModel {
         int verAIdx = rsModel.triangleA[triIdx];
         int verBIdx = rsModel.triangleB[triIdx];
         int verCIdx = rsModel.triangleC[triIdx];
-        int alpha = rsModel.triangleAlpha==null ? 255 : rsModel.triangleAlpha[triIdx];
-        Vector3f normalT = new Vector3f(rsModel.triangleNormals[triIdx].x / 256.0f,-(rsModel.triangleNormals[triIdx].y / 256.0f),rsModel.triangleNormals[triIdx].z / 256.0f);
+        int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
+        Vector3f normalT = new Vector3f(rsModel.triangleNormals[triIdx].x / 255.0f,-(rsModel.triangleNormals[triIdx].y / 255.0f),rsModel.triangleNormals[triIdx].z / 255.0f);
         Color colorT = Class7_Sub1.useLighting ? fromRgb(Rasterizer.hsl2rgb[rsModel.triangleColour[triIdx]],alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
         int bufAIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
@@ -286,7 +286,7 @@ public class PglModel {
         int verAIdx = rsModel.triangleA[triIdx];
         int verBIdx = rsModel.triangleB[triIdx];
         int verCIdx = rsModel.triangleC[triIdx];
-        int alpha = rsModel.triangleAlpha==null ? 255 : rsModel.triangleAlpha[triIdx];
+        int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
         Vector3f normalA = new Vector3f(rsModel.vertexNormals[verAIdx].getX(), -rsModel.vertexNormals[verAIdx].getY(), rsModel.vertexNormals[verAIdx].getZ());
         Vector3f normalB = new Vector3f(rsModel.vertexNormals[verBIdx].getX(), -rsModel.vertexNormals[verBIdx].getY(), rsModel.vertexNormals[verBIdx].getZ());
         Vector3f normalC = new Vector3f(rsModel.vertexNormals[verCIdx].getX(), -rsModel.vertexNormals[verCIdx].getY(), rsModel.vertexNormals[verCIdx].getZ());
@@ -317,7 +317,7 @@ public class PglModel {
     }
 
      public static Texture2D getTexture(int id) {
-        return new Texture2D("./hddata/texture/" + id + ".png");
+        return new Texture2D("./hddata/texture/" + id + ".png",false,GL11.GL_LINEAR,new int[]{255,0,255});
     }
 
     public void render(){

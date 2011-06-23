@@ -15,7 +15,7 @@ public class TextureSource {
     private static Texture2D[] textures = new Texture2D[50];
 
     public static Texture2D getTexture(int id) {
-        return new Texture2D("./hddata/texture/" + id + ".png");
+        return new Texture2D("./hddata/texture/" + id + ".png",false,GL11.GL_LINEAR,new int[]{255,0,255});
     }
     public static void bindtexture(int texture) {
             if (texture == -1)
