@@ -141,6 +141,6 @@ public class Animation
     public int modifier1[];
     public int modifier2[];
     public int modifier3[];
-    private static boolean[] aBooleanArray643;//never used
+    private static boolean[] aBooleanArray643;
 
 }
