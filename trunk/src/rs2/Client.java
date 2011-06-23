@@ -3507,7 +3507,7 @@ public class Client extends RSApplet {
 		plainFont.drawText(0, "Please wait - attempting to reestablish", 159, 257);
 		plainFont.drawText(0xffffff, "Please wait - attempting to reestablish", 158, 256);
 		gameScreenCanvas.drawGraphics(4, super.graphics, 4);
-		anInt1021 = 0;
+		miniMapLock = 0;
 		destX = 0;
 		RSSocket rsSocket = socketStream;
 		loggedIn = false;
@@ -5913,7 +5913,7 @@ public class Client extends RSApplet {
 				minimapInt2 = (int)(Math.random() * 120D) - 60;
 				minimapInt3 = (int)(Math.random() * 30D) - 20;
 				minimapInt1 = (int)(Math.random() * 20D) - 10 & 0x7ff;
-				anInt1021 = 0;
+				miniMapLock = 0;
 				anInt985 = -1;
 				destX = 0;
 				destY = 0;
@@ -7194,7 +7194,7 @@ public class Client extends RSApplet {
 
 	private void processMainScreenClick()//minimap walking
 	{
-		if(anInt1021 != 0)
+		if(miniMapLock != 0)
 		return;
 		if(super.clickMode3 == 1)
 		{
@@ -9211,7 +9211,7 @@ public class Client extends RSApplet {
 	{
 		aRSImageProducer_1164.initDrawingArea();
 		//drawStatusGlobes();
-		if(anInt1021 == 2)
+		if(miniMapLock == 2)
 		{
 			byte abyte0[] = mapBack.imgPixels;
 			int ai[] = Graphics2D.pixels;
@@ -10853,9 +10853,9 @@ public class Client extends RSApplet {
 				pktType = -1;
 				return true;
 			}
-			if(pktType == 99)
+			if(pktType == 99)//minimap lock toggle
 			{
-				anInt1021 = inStream.g1();
+				miniMapLock = inStream.g1();
 				pktType = -1;
 				return true;
 			}
@@ -12153,7 +12153,7 @@ public class Client extends RSApplet {
 	private boolean aBoolean1017;
 	private int anInt1018;
 	private static final int[] XP_FOR_LEVEL;
-	private int anInt1021;
+	private int miniMapLock;
 	private int anInt1022;
 	private int loadingStage;
 	private IndexedImage scrollBar1;
