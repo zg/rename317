@@ -39,6 +39,9 @@ public class PglTerrainOverlay {
     private int[] triangleHslA;
     private int[] triangleHslB;
     private int[] triangleHslC;
+    private boolean [] triangleAlphaA;
+    private boolean [] triangleAlphaB;
+    private boolean [] triangleAlphaC;
     private int vertexCount = 0;
     private int triangleCount = 0;
     private int[] textureTriangles;
@@ -69,6 +72,9 @@ public class PglTerrainOverlay {
         triangleHslA = new int[triangleCount];
         triangleHslB = new int[triangleCount];
         triangleHslC = new int[triangleCount];
+        triangleAlphaA = new boolean[triangleCount];
+        triangleAlphaB = new boolean[triangleCount];
+        triangleAlphaC = new boolean[triangleCount];
         triangleCount = 0;
         vertexCount = 0;
         try{
@@ -83,7 +89,8 @@ public class PglTerrainOverlay {
                     int yC = -mapRegion.getHeightMap()[heightLevel][x][z + 1];
                     if (overlay != 0){
                         Floor overlayFloor = Floor.cache[overlay - 1];
-                        generateDataForTile(x,z,yA+1,yB+1,yC+1,yD+1,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdTexture,shapeA,shapeB);
+                        if (overlayFloor.colour2 != 0xFF00FF)
+                            generateDataForTile(x,z,yA+1,yB+1,yC+1,yD+1,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdOlHslColour,overlayFloor.hdTexture,shapeA,shapeB);
                     }
                 }
             for (int triPtr = 0;triPtr < triangleCount;triPtr++)
@@ -105,6 +112,7 @@ public class PglTerrainOverlay {
         int x512 = tileX * const512;
         int z512 = tileZ * const512;
         int vertexBasePtr = vertexCount;
+        boolean[] isInOverlay = new boolean[meshLength];
         for(int vertexPtr = 0; vertexPtr < meshLength; vertexPtr++)
         {
             int vertexType = shapedTileMesh[vertexPtr];
@@ -273,13 +281,43 @@ public class PglTerrainOverlay {
                 idxB = idxB - shapeB & 3;
             if(idxC < 4)
                 idxC = idxC - shapeB & 3;
+            if(overlayOrUnderlay != 0){
+                isInOverlay[idxA] = true;
+                isInOverlay[idxB] = true;
+                isInOverlay[idxC] = true;
+            }
+        }
+        offset = 0;
+        for(int tID = 0; tID < triangleCount2; tID++)
+        {
+            int overlayOrUnderlay = shapedTileElements[offset];
+            int idxA = shapedTileElements[offset + 1];
+            int idxB = shapedTileElements[offset + 2];
+            int idxC = shapedTileElements[offset + 3];
+            offset += 4;
+            if(idxA < 4)
+                idxA = idxA - shapeB & 3;
+            if(idxB < 4)
+                idxB = idxB - shapeB & 3;
+            if(idxC < 4)
+                idxC = idxC - shapeB & 3;
+            triangleA[triangleCount] = vertexBasePtr + idxA;
+            triangleB[triangleCount] = vertexBasePtr + idxB;
+            triangleC[triangleCount] = vertexBasePtr + idxC;
             if(overlayOrUnderlay != 0)
             {
-                triangleA[triangleCount] = vertexBasePtr + idxA;
-                triangleB[triangleCount] = vertexBasePtr + idxB;
-                triangleC[triangleCount] = vertexBasePtr + idxC;
-                triangleHslA[triangleCount] = vertexColourUnderlay[idxA];
-                triangleHslB[triangleCount] = vertexColourUnderlay[idxB];
+                triangleAlphaA[triangleCount] = true;
+                triangleAlphaB[triangleCount] = true;
+                triangleAlphaC[triangleCount] = true;
+                triangleHslA[triangleCount]   = vertexColourUnderlay[idxA];
+                triangleHslB[triangleCount]   = vertexColourUnderlay[idxB];
+                triangleHslC[triangleCount++] = vertexColourUnderlay[idxC];
+            } else {
+                triangleAlphaA[triangleCount] = isInOverlay[idxA];
+                triangleAlphaB[triangleCount] = isInOverlay[idxB];
+                triangleAlphaC[triangleCount] = isInOverlay[idxC];
+                triangleHslA[triangleCount]   = vertexColourUnderlay[idxA];
+                triangleHslB[triangleCount]   = vertexColourUnderlay[idxB];
                 triangleHslC[triangleCount++] = vertexColourUnderlay[idxC];
             }
         }
@@ -294,9 +332,9 @@ public class PglTerrainOverlay {
         int verBIdx = triangleB[triIdx];
         int verCIdx = triangleC[triIdx];
         Vector3f upNormal = new Vector3f(0,1,0);
-        Color colorA = fromRgb(Rasterizer.hsl2rgb[triangleHslA[triIdx]],255);
-        Color colorB = fromRgb(Rasterizer.hsl2rgb[triangleHslB[triIdx]],255);
-        Color colorC = fromRgb(Rasterizer.hsl2rgb[triangleHslC[triIdx]],255);
+        Color colorA = fromRgb(Rasterizer.hsl2rgb[triangleHslA[triIdx]],triangleAlphaA[triIdx] ? 255 : 0);
+        Color colorB = fromRgb(Rasterizer.hsl2rgb[triangleHslB[triIdx]],triangleAlphaB[triIdx] ? 255 : 0);
+        Color colorC = fromRgb(Rasterizer.hsl2rgb[triangleHslC[triIdx]],triangleAlphaC[triIdx] ? 255 : 0);
         int bufAIdx = geometry.addVertex(vertexes[verAIdx], upNormal, texcoord[verAIdx], colorA);
         int bufBIdx = geometry.addVertex(vertexes[verBIdx], upNormal, texcoord[verBIdx], colorB);
         int bufCIdx = geometry.addVertex(vertexes[verCIdx], upNormal, texcoord[verCIdx], colorC);
@@ -316,6 +354,10 @@ public class PglTerrainOverlay {
         geometry.enable();
         geometry.bind();
         element.bind();
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glAlphaFunc(GL11.GL_GREATER, 0.5f);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
         for (int tID = 0; tID < textureTriangleCount; tID++){
             int startTriangle = textureTriangles[tID];
             int endTriangle = 0;
@@ -338,6 +380,8 @@ public class PglTerrainOverlay {
                 ;
             }
         }
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        GL11.glDisable(GL11.GL_BLEND);
     }
     static {
         for (int i = 0;i < 677;i++){
