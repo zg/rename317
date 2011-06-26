@@ -6,22 +6,20 @@ import java.awt.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
-public class RSApplet extends Applet
-    implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener
-{
+public class
 
-    final void createClientFrame(int i, int j)
-    {
+        RSApplet extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
+
+    final void createClientFrame(int i, int j) {
         myWidth = j;
         myHeight = i;
-            gameFrame = new RSFrame(this, myWidth, myHeight);
-            graphics = getGameComponent().getGraphics();
-            fullGameScreen = new GraphicsBuffer(myWidth, myHeight, getGameComponent());
-            startRunnable(this, 1);
+        gameFrame = new RSFrame(this, myWidth, myHeight);
+        graphics = getGameComponent().getGraphics();
+        fullGameScreen = new GraphicsBuffer(myWidth, myHeight, getGameComponent());
+        startRunnable(this, 1);
     }
 
-    final void initClientFrame(int i, int j)
-    {
+    final void initClientFrame(int i, int j) {
         myWidth = j;
         myHeight = i;
         graphics = getGameComponent().getGraphics();
@@ -29,13 +27,12 @@ public class RSApplet extends Applet
         startRunnable(this, 1);
     }
 
-    public void run()
-    {
+    public void run() {
         getGameComponent().addMouseListener(this);
         getGameComponent().addMouseMotionListener(this);
         getGameComponent().addKeyListener(this);
         getGameComponent().addFocusListener(this);
-        if(gameFrame != null)
+        if (gameFrame != null)
             gameFrame.addWindowListener(this);
         drawLoadingText(0, "Loading...");
         startUp();
@@ -44,17 +41,14 @@ public class RSApplet extends Applet
         int del = 1;
         int count = 0;
         int intex = 0;
-        for(int k1 = 0; k1 < 10; k1++)
-            otim[k1] = System.currentTimeMillis();
+        for (int otimPtr = 0; otimPtr < 10; otimPtr++)
+            otim[otimPtr] = System.currentTimeMillis();
 
         //long l = System.currentTimeMillis();//never used
-        while(anInt4 >= 0)
-        {
-            if(anInt4 > 0)
-            {
-                anInt4--;
-                if(anInt4 == 0)
-                {
+        while (gameState >= 0) {// 0 == Running, >0 - Stop timer, -2 - Exit, -1 Destroyed
+            if (gameState > 0) {
+                gameState--;
+                if (gameState == 0) {
                     exit();
                     return;
                 }
@@ -63,407 +57,343 @@ public class RSApplet extends Applet
             int j2 = del;
             ratio = 300;
             del = 1;
-            long l1 = System.currentTimeMillis();
-            if(otim[opos] == 0L)
-            {
+            long ntime = System.currentTimeMillis();
+            if (otim[opos] == 0L) {
                 ratio = i2;
                 del = j2;
-            } else
-            if(l1 > otim[opos])
-                ratio = (int)((long)(2560 * delayTime) / (l1 - otim[opos]));
-            if(ratio < 25)
+            } else if (ntime > otim[opos])
+                ratio = (int) ((long) (2560 * delayTime) / (ntime - otim[opos]));
+            if (ratio < 25)
                 ratio = 25;
-            if(ratio > 256)
-            {
+            if (ratio > 256) {
                 ratio = 256;
-                del = (int)((long) delayTime - (l1 - otim[opos]) / 10L);
+                del = (int) ((long) delayTime - (ntime - otim[opos]) / 10L);
             }
-            if(del > delayTime)
+            if (del > delayTime)
                 del = delayTime;
-            otim[opos] = l1;
+            otim[opos] = ntime;
             opos = (opos + 1) % 10;
-            if(del > 1)
-            {
-                for(int k2 = 0; k2 < 10; k2++)
-                    if(otim[k2] != 0L)
+            if (del > 1) {
+                for (int k2 = 0; k2 < 10; k2++)
+                    if (otim[k2] != 0L)
                         otim[k2] += del;
 
             }
-            if(del < minDelay)
+            if (del < minDelay)
                 del = minDelay;
-            try
-            {
+            try {
                 Thread.sleep(del);
-            }
-            catch(InterruptedException _ex)
-            {
+            } catch (InterruptedException _ex) {
                 intex++;
             }
-            for(; count < 256; count += ratio)
-            {
-                clickMode3 = clickMode1;
+            for (; count < 256; count += ratio) {
+                clickMode3 = mouseButtonPressed;
                 saveClickX = clickX;
                 saveClickY = clickY;
                 aLong29 = clickTime;
-                clickMode1 = 0;
-                client_main_loop();
+                mouseButtonPressed = 0;
+                doLogic();
                 readIndex = writeIndex;
             }
 
             count &= 0xff;
-            if(delayTime > 0)
+            if (delayTime > 0)
                 fps = (1000 * ratio) / (delayTime * 256);
-            processDrawing();
-            if(shouldDebug)
-            {
-                System.out.println("ntime:" + l1);
-                for(int l2 = 0; l2 < 10; l2++)
-                {
-                    int i3 = ((opos - l2 - 1) + 20) % 10;
-                    System.out.println("otim" + i3 + ":" + otim[i3]);
+            drawGame();
+            if (gameShellDumpRequested) {
+                System.out.println("ntime:" + ntime);
+                for (int l2 = 0; l2 < 10; l2++) {
+                    int otimPtr = ((opos - l2 - 1) + 20) % 10;
+                    System.out.println("otim" + otimPtr + ":" + otim[otimPtr]);
                 }
 
                 System.out.println("fps:" + fps + " ratio:" + ratio + " count:" + count);
                 System.out.println("del:" + del + " deltime:" + delayTime + " mindel:" + minDelay);
                 System.out.println("intex:" + intex + " opos:" + opos);
-                shouldDebug = false;
+                gameShellDumpRequested = false;
                 intex = 0;
             }
         }
-        if(anInt4 == -1)
+        if (gameState == -1)
             exit();
     }
 
-    private void exit()
-    {
-        anInt4 = -2;
-        cleanUpForQuit();
-        if(gameFrame != null)
-        {
-            try
-            {
+    private void exit() {
+        gameState = -2;
+        shutdown();
+        if (gameFrame != null) {
+            try {
                 Thread.sleep(1000L);
+            } catch (Exception ignored) {
             }
-            catch(Exception _ex) { }
-            try
-            {
+            try {
                 System.exit(0);
+            } catch (Throwable ignored) {
             }
-            catch(Throwable _ex) { }
         }
     }
 
-    final void method4(int i)
-    {
-            delayTime = 1000 / i;
+    final void setTargetFramerate(int i) {
+        delayTime = 1000 / i;
     }
 
-    public final void start()
-    {
-        if(anInt4 >= 0)
-            anInt4 = 0;
+    public final void start() {
+        if (gameState >= 0)
+            gameState = 0;
     }
 
-    public final void stop()
-    {
-        if(anInt4 >= 0)
-            anInt4 = 4000 / delayTime;
+    public final void stop() {
+        if (gameState >= 0)
+            gameState = 4000 / delayTime;
     }
 
-    public final void destroy()
-    {
-        anInt4 = -1;
-        try
-        {
+    public final void destroy() {
+        gameState = -1;
+        try {
             Thread.sleep(5000L);
+        } catch (Exception ignored) {
         }
-        catch(Exception _ex) { }
-        if(anInt4 == -1)
+        if (gameState == -1)
             exit();
     }
 
-    public final void update(Graphics g)
-    {
-        if(graphics == null)
+    public final void update(Graphics g) {
+        if (graphics == null)
             graphics = g;
         shouldClearScreen = true;
-        raiseWelcomeScreen();
+        repaintGame();
     }
 
-    public final void paint(Graphics g)
-    {
-        if(graphics == null)
+    public final void paint(Graphics g) {
+        if (graphics == null)
             graphics = g;
         shouldClearScreen = true;
-        raiseWelcomeScreen();
+        repaintGame();
     }
 
-    public final void mousePressed(MouseEvent mouseevent)
-    {
-        int i = mouseevent.getX();
-        int j = mouseevent.getY();
-        if(gameFrame != null)
-        {
-            i -= 4;
-            j -= 22;
+    public final void mousePressed(MouseEvent mouseevent) {
+        int x = mouseevent.getX();
+        int y = mouseevent.getY();
+        if (gameFrame != null) {
+            x -= 4;
+            y -= 22;
         }
         idleTime = 0;
-        clickX = i;
-        clickY = j;
+        clickX = x;
+        clickY = y;
         clickTime = System.currentTimeMillis();
-        if(mouseevent.isMetaDown())
-        {
-            clickMode1 = 2;
-            clickMode2 = 2;
-        } else
-        {
-            clickMode1 = 1;
-            clickMode2 = 1;
+        if (mouseevent.isMetaDown()) {
+            mouseButtonPressed = 2;
+            mouseButtonDown = 2;
+        } else {
+            mouseButtonPressed = 1;
+            mouseButtonDown = 1;
         }
     }
 
-    public final void mouseReleased(MouseEvent mouseevent)
-    {
+    public final void mouseReleased(MouseEvent mouseevent) {
         idleTime = 0;
-        clickMode2 = 0;
+        mouseButtonDown = 0;
     }
 
-    public final void mouseClicked(MouseEvent mouseevent)
-    {
+    public final void mouseClicked(MouseEvent mouseevent) {
     }
 
-    public final void mouseEntered(MouseEvent mouseevent)
-    {
+    public final void mouseEntered(MouseEvent mouseevent) {
     }
 
-    public final void mouseExited(MouseEvent mouseevent)
-    {
+    public final void mouseExited(MouseEvent mouseevent) {
         idleTime = 0;
-        mouseX = -1;
-        mouseY = -1;
+        mouseEventX = -1;
+        mouseEventY = -1;
     }
 
-    public final void mouseDragged(MouseEvent mouseevent)
-    {
+    public final void mouseDragged(MouseEvent mouseevent) {
         int i = mouseevent.getX();
         int j = mouseevent.getY();
-        if(gameFrame != null)
-        {
+        if (gameFrame != null) {
             i -= 4;
             j -= 22;
         }
         idleTime = 0;
-        mouseX = i;
-        mouseY = j;
+        mouseEventX = i;
+        mouseEventY = j;
     }
 
-    public final void mouseMoved(MouseEvent mouseevent)
-    {
+    public final void mouseMoved(MouseEvent mouseevent) {
         int i = mouseevent.getX();
         int j = mouseevent.getY();
-        if(gameFrame != null)
-        {
+        if (gameFrame != null) {
             i -= 4;
             j -= 22;
         }
         idleTime = 0;
-        mouseX = i;
-        mouseY = j;
+        mouseEventX = i;
+        mouseEventY = j;
     }
 
-    public final void keyPressed(KeyEvent keyevent)
-    {
+    public final void keyPressed(KeyEvent keyevent) {
         idleTime = 0;
-        int i = keyevent.getKeyCode();
-        int j = keyevent.getKeyChar();
-        if(j < 30)
-            j = 0;
-        if(i == 37)
-            j = 1;
-        if(i == 39)
-            j = 2;
-        if(i == 38)
-            j = 3;
-        if(i == 40)
-            j = 4;
-        if(i == 17)
-            j = 5;
-        if(i == 8)
-            j = 8;
-        if(i == 127)
-            j = 8;
-        if(i == 9)
-            j = 9;
-        if(i == 10)
-            j = 10;
-        if(i >= 112 && i <= 123)
-            j = (1008 + i) - 112;
-        if(i == 36)
-            j = 1000;
-        if(i == 35)
-            j = 1001;
-        if(i == 33)
-            j = 1002;
-        if(i == 34)
-            j = 1003;
-        if(j > 0 && j < 128)
-            keyArray[j] = 1;
-        if(j > 4)
-        {
-            charQueue[writeIndex] = j;
+        int keyCode = keyevent.getKeyCode();
+        int keyChar = keyevent.getKeyChar();
+        if (keyChar < 30)
+            keyChar = 0;
+        if (keyCode == 37)
+            keyChar = 1;
+        if (keyCode == 39)
+            keyChar = 2;
+        if (keyCode == 38)
+            keyChar = 3;
+        if (keyCode == 40)
+            keyChar = 4;
+        if (keyCode == 17)
+            keyChar = 5;
+        if (keyCode == 8)
+            keyChar = 8;
+        if (keyCode == 127)
+            keyChar = 8;
+        if (keyCode == 9)
+            keyChar = 9;
+        if (keyCode == 10)
+            keyChar = 10;
+        if (keyCode >= 112 && keyCode <= 123)
+            keyChar = (1008 + keyCode) - 112;
+        if (keyCode == 36)
+            keyChar = 1000;
+        if (keyCode == 35)
+            keyChar = 1001;
+        if (keyCode == 33)
+            keyChar = 1002;
+        if (keyCode == 34)
+            keyChar = 1003;
+        if (keyChar > 0 && keyChar < 128)
+            keyStatus[keyChar] = 1;
+        if (keyChar > 4) {
+            inputBuffer[writeIndex] = keyChar;
             writeIndex = writeIndex + 1 & 0x7f;
         }
     }
 
-    public final void keyReleased(KeyEvent keyevent)
-    {
+    public final void keyReleased(KeyEvent keyevent) {
         idleTime = 0;
         int i = keyevent.getKeyCode();
         char c = keyevent.getKeyChar();
-        if(c < '\036')
+        if (c < '\036')
             c = '\0';
-        if(i == 37)
+        if (i == 37)
             c = '\001';
-        if(i == 39)
+        if (i == 39)
             c = '\002';
-        if(i == 38)
+        if (i == 38)
             c = '\003';
-        if(i == 40)
+        if (i == 40)
             c = '\004';
-        if(i == 17)
+        if (i == 17)
             c = '\005';
-        if(i == 8)
+        if (i == 8)
             c = '\b';
-        if(i == 127)
+        if (i == 127)
             c = '\b';
-        if(i == 9)
+        if (i == 9)
             c = '\t';
-        if(i == 10)
+        if (i == 10)
             c = '\n';
-        if(c > 0 && c < '\200')
-            keyArray[c] = 0;
+        if (c > 0 && c < '\200')
+            keyStatus[c] = 0;
     }
 
-    public final void keyTyped(KeyEvent keyevent)
-    {
+    public final void keyTyped(KeyEvent keyevent) {
     }
 
-    final int readChar(int dummy)
-    {
-        while(dummy >= 0)
-        {
-            for(int j = 1; j > 0; j++);
-        }
+    final int readChar() {
         int k = -1;
-        if(writeIndex != readIndex)
-        {
-            k = charQueue[readIndex];
+        if (writeIndex != readIndex) {
+            k = inputBuffer[readIndex];
             readIndex = readIndex + 1 & 0x7f;
         }
         return k;
     }
 
-    public final void focusGained(FocusEvent focusevent)
-    {
+    public final void focusGained(FocusEvent focusevent) {
         awtFocus = true;
         shouldClearScreen = true;
-        raiseWelcomeScreen();
+        repaintGame();
     }
 
-    public final void focusLost(FocusEvent focusevent)
-    {
+    public final void focusLost(FocusEvent focusevent) {
         awtFocus = false;
-        for(int i = 0; i < 128; i++)
-            keyArray[i] = 0;
+        for (int i = 0; i < 128; i++)
+            keyStatus[i] = 0;
 
     }
 
-    public final void windowActivated(WindowEvent windowevent)
-    {
+    public final void windowActivated(WindowEvent windowevent) {
     }
 
-    public final void windowClosed(WindowEvent windowevent)
-    {
+    public final void windowClosed(WindowEvent windowevent) {
     }
 
-    public final void windowClosing(WindowEvent windowevent)
-    {
+    public final void windowClosing(WindowEvent windowevent) {
         destroy();
     }
 
-    public final void windowDeactivated(WindowEvent windowevent)
-    {
+    public final void windowDeactivated(WindowEvent windowevent) {
     }
 
-    public final void windowDeiconified(WindowEvent windowevent)
-    {
+    public final void windowDeiconified(WindowEvent windowevent) {
     }
 
-    public final void windowIconified(WindowEvent windowevent)
-    {
+    public final void windowIconified(WindowEvent windowevent) {
     }
 
-    public final void windowOpened(WindowEvent windowevent)
-    {
+    public final void windowOpened(WindowEvent windowevent) {
     }
 
-    void startUp()
-    {
+    protected void startUp() {
     }
 
-    void client_main_loop()
-    {
+    protected void doLogic() {
     }
 
-    void cleanUpForQuit()
-    {
+    protected void shutdown() {
     }
 
-    void processDrawing()
-    {
+    protected void drawGame() {
     }
 
-    void raiseWelcomeScreen()
-    {
+    protected void repaintGame() {
     }
 
-    Component getGameComponent()
-    {
-        if(gameFrame != null)
+    protected Component getGameComponent() {
+        if (gameFrame != null)
             return gameFrame;
         else
             return this;
     }
 
-    public void startRunnable(Runnable runnable, int priority)
-    {
+    public void startRunnable(Runnable runnable, int priority) {
         Thread thread = new Thread(runnable);
         thread.start();
         thread.setPriority(priority);
     }
 
-    void drawLoadingText(int i, String s)
-    {
-        while(graphics == null)
-        {
+    protected void drawLoadingText(int i, String s) {
+        while (graphics == null) {
             graphics = getGameComponent().getGraphics();
-            try
-            {
+            try {
                 getGameComponent().repaint();
+            } catch (Exception ignored) {
             }
-            catch(Exception _ex) { }
-            try
-            {
+            try {
                 Thread.sleep(1000L);
+            } catch (Exception ignored) {
             }
-            catch(Exception _ex) { }
         }
         Font font = new Font("Helvetica", 1, 13);
         FontMetrics fontmetrics = getGameComponent().getFontMetrics(font);
         Font font1 = new Font("Helvetica", 0, 13);
         getGameComponent().getFontMetrics(font1);
-        if(shouldClearScreen)
-        {
+        if (shouldClearScreen) {
             graphics.setColor(Color.black);
             graphics.fillRect(0, 0, myWidth, myHeight);
             shouldClearScreen = false;
@@ -474,52 +404,50 @@ public class RSApplet extends Applet
         graphics.drawRect(myWidth / 2 - 152, j, 304, 34);
         graphics.fillRect(myWidth / 2 - 150, j + 2, i * 3, 30);
         graphics.setColor(Color.black);
-            graphics.fillRect((myWidth / 2 - 150) + i * 3, j + 2, 300 - i * 3, 30);
-            graphics.setFont(font);
-            graphics.setColor(Color.white);
-            graphics.drawString(s, (myWidth - fontmetrics.stringWidth(s)) / 2, j + 22);
+        graphics.fillRect((myWidth / 2 - 150) + i * 3, j + 2, 300 - i * 3, 30);
+        graphics.setFont(font);
+        graphics.setColor(Color.white);
+        graphics.drawString(s, (myWidth - fontmetrics.stringWidth(s)) / 2, j + 22);
     }
 
-    RSApplet()
-    {
+    public RSApplet() {
         delayTime = 20;//20;
         minDelay = 1;//1
         otim = new long[10];
-        shouldDebug = false;
+        gameShellDumpRequested = false;
         shouldClearScreen = true;
         awtFocus = true;
-        keyArray = new int[128];
-        charQueue = new int[128];
+        keyStatus = new int[128];
+        inputBuffer = new int[128];
     }
 
-    private int anInt4;
+    private int gameState;
     private int delayTime;
-    int minDelay;
+    protected int minDelay;
     private final long[] otim;
-    int fps;
-    boolean shouldDebug;
-    int myWidth;
-    int myHeight;
-    Graphics graphics;
-    GraphicsBuffer fullGameScreen;
-    RSFrame gameFrame;
+    protected int fps;
+    protected boolean gameShellDumpRequested;
+    protected int myWidth;
+    protected int myHeight;
+    protected Graphics graphics;
+    protected GraphicsBuffer fullGameScreen;
+    protected RSFrame gameFrame;
     private boolean shouldClearScreen;
-    boolean awtFocus;
-    int idleTime;
-    int clickMode2;
-    public int mouseX;
-    public int mouseY;
-    private int clickMode1;
+    protected boolean awtFocus;
+    protected int idleTime;
+    protected int mouseButtonDown;
+    public int mouseEventX;
+    public int mouseEventY;
+    private int mouseButtonPressed;
     private int clickX;
     private int clickY;
     private long clickTime;
-    int clickMode3;
-    int saveClickX;
-    int saveClickY;
-    long aLong29;
-    final int[] keyArray;
-    private final int[] charQueue;
+    protected int clickMode3;
+    protected int saveClickX;
+    protected int saveClickY;
+    protected long aLong29;
+    protected final int[] keyStatus;
+    private final int[] inputBuffer;
     private int readIndex;
     private int writeIndex;
-    public static int anInt34;
 }

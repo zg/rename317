@@ -64,11 +64,17 @@ public class NpcDef
             int k = varBit.configId;
             int l = varBit.leastSignificantBit;
             int i1 = varBit.mostSignificantBit;
-            int j1 = Client.BITFIELD_MAX_VALUE[i1 - l];
-            j = clientInstance.sessionSettings[k] >> l & j1;
+            int j1 = StaticLogic.BITFIELD_MAX_VALUE[i1 - l];
+            if (clientInstance == null)
+                j = 0;
+            else
+                j = clientInstance.sessionSettings[k] >> l & j1;
         } else
         if(anInt59 != -1)
-            j = clientInstance.sessionSettings[anInt59];
+            if (clientInstance == null)
+                j = 0;
+            else
+                j = clientInstance.sessionSettings[anInt59];
         if(j < 0 || j >= childrenIDs.length || childrenIDs[j] == -1)
             return null;
         else
