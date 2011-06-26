@@ -665,25 +665,25 @@ public class SceneGraph {
 
     private void method306(int x, int z, Model model, int y)
     {
-        if(x < xMapSize)
+        if(x < xMapSize - 1)
         {
             Tile tile = tileArray[z][x + 1][y];
             if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormals != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 0, true);
         }
-        if(y < xMapSize)
+        if(y < xMapSize - 1)
         {
             Tile tile = tileArray[z][x][y + 1];
             if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormals != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 0, 0, 128, true);
         }
-        if(x < xMapSize && y < yMapSize)
+        if(x < xMapSize - 1 && y < yMapSize - 1)
         {
             Tile tile = tileArray[z][x + 1][y + 1];
             if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormals != null)
                 method308(model, (Model)tile.groundDecoration.aClass30_Sub2_Sub4_814, 128, 0, 128, true);
         }
-        if(x < xMapSize && y > 0)
+        if(x < xMapSize - 1 && y > 0)
         {
             Tile tile = tileArray[z][x + 1][y - 1];
             if(tile != null && tile.groundDecoration != null && tile.groundDecoration.aClass30_Sub2_Sub4_814.vertexNormals != null)
