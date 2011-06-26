@@ -8,8 +8,8 @@ public class SceneGraph {
 
     private int xCameraAngle;
     private int yCameraAngle;
-    private int visibleAreaWidth = 25;
-    private int visibleAreaHeight = 25;
+    private static int visibleAreaWidth = 53;
+    private static int visibleAreaHeight = 53;
 
     public SceneGraph(int height, int width, int length, int heightmap[][][])
     {
@@ -860,7 +860,10 @@ public class SceneGraph {
         bottom = viewportHeight;
         midX = viewportWidth / 2;
         midY = viewportHeight / 2;
-        boolean isTileOnScreen[][][][] = new boolean[9][32][53][53];
+        int vanishingDistX = (visibleAreaWidth - 1) / 2;
+        int vanishingDistY = (visibleAreaHeight - 1) / 2;
+        boolean isTileOnScreen[][][][] = new boolean[9][32][visibleAreaWidth][visibleAreaHeight];
+        TILE_VISIBILITY_MAPS = new boolean[8][32][visibleAreaWidth - 2][visibleAreaHeight - 2];
         for(int yAngle = 128; yAngle <= 384; yAngle += 32)
         {
             for(int xAngle = 0; xAngle < 2048; xAngle += 64)
@@ -871,9 +874,9 @@ public class SceneGraph {
                 xCurveCosine = Model.COSINE[xAngle];
                 int yAnglePointer = (yAngle - 128) / 32;
                 int xAnglePointer = xAngle / 64;
-                for(int x = -26; x <= 26; x++)
+                for(int x = -vanishingDistX; x <= vanishingDistX; x++)
                 {
-                    for(int y = -26; y <= 26; y++)
+                    for(int y = -vanishingDistY; y <= vanishingDistY; y++)
                     {
                         int worldX = x * 128;
                         int worldY = y * 128;
@@ -886,7 +889,8 @@ public class SceneGraph {
                             break;
                         }
 
-                        isTileOnScreen[yAnglePointer][xAnglePointer][x + 25 + 1][y + 25 + 1] = isVisible;
+                        isTileOnScreen[yAnglePointer][xAnglePointer][x + vanishingDistX][y + vanishingDistY]
+                                = isVisible;
                     }
 
                 }
@@ -899,9 +903,9 @@ public class SceneGraph {
         {
             for(int xAnglePointer = 0; xAnglePointer < 32; xAnglePointer++)
             {
-                for(int relativeX = -25; relativeX < 25; relativeX++)
+                for(int relativeX = -(vanishingDistX - 1); relativeX < vanishingDistX - 1; relativeX++)
                 {
-                    for(int relativeZ = -25; relativeZ < 25; relativeZ++)
+                    for(int relativeZ = -(vanishingDistY - 1); relativeZ < vanishingDistY - 1; relativeZ++)
                     {
                         boolean flag1 = false;
 label0:
@@ -909,18 +913,18 @@ label0:
                         {
                             for(int j4 = -1; j4 <= 1; j4++)
                             {
-                                if(isTileOnScreen[yAnglePointer][xAnglePointer][relativeX + l3 + 25 + 1][relativeZ + j4 + 25 + 1])
+                                if(isTileOnScreen[yAnglePointer][xAnglePointer][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
                                     flag1 = true;
                                 else
-                                if(isTileOnScreen[yAnglePointer][(xAnglePointer + 1) % 31][relativeX + l3 + 25 + 1][relativeZ + j4 + 25 + 1])
+                                if(isTileOnScreen[yAnglePointer][(xAnglePointer + 1) % 31][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
                                     flag1 = true;
                                 else
-                                if(isTileOnScreen[yAnglePointer + 1][xAnglePointer][relativeX + l3 + 25 + 1][relativeZ + j4 + 25 + 1])
+                                if(isTileOnScreen[yAnglePointer + 1][xAnglePointer][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
                                 {
                                     flag1 = true;
                                 } else
                                 {
-                                    if(!isTileOnScreen[yAnglePointer + 1][(xAnglePointer + 1) % 31][relativeX + l3 + 25 + 1][relativeZ + j4 + 25 + 1])
+                                    if(!isTileOnScreen[yAnglePointer + 1][(xAnglePointer + 1) % 31][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
                                         continue;
                                     flag1 = true;
                                 }
@@ -928,7 +932,7 @@ label0:
                             }
 
                         }
-                        TILE_VISIBILITY_MAPS[yAnglePointer][xAnglePointer][relativeX + 25][relativeZ + 25] = flag1;
+                        TILE_VISIBILITY_MAPS[yAnglePointer][xAnglePointer][relativeX + (vanishingDistX - 1)][relativeZ + (vanishingDistY - 1)] = flag1;
                     }
 
                 }
@@ -1010,7 +1014,7 @@ label0:
                 {
                     Tile singleTile = floorTiles[x][y];
                     if(singleTile != null)
-                        if(singleTile.logicHeight > plane || !TILE_VISIBILITY_MAP[(x - xCameraPositionTile) + 25][(y - yCameraPositionTile) + 25] && heightmap[z][x][y] - zCampos < 2000)
+                        if(singleTile.logicHeight > plane || !TILE_VISIBILITY_MAP[(x - xCameraPositionTile) + (((visibleAreaWidth - 1) / 2) - 1)][(y - yCameraPositionTile) + (((visibleAreaHeight - 1) / 2) - 1)] && heightmap[z][x][y] - zCampos < 2000)
                         {
                             singleTile.aBoolean1322 = false;
                             singleTile.aBoolean1323 = false;
@@ -1881,15 +1885,15 @@ label0:
             CullingCluster cluster = clusters[ptr];
             if(cluster.searchMask == 1)
             {
-                int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + 25;
-                if(x_dist_from_camera_start < 0 || x_dist_from_camera_start > 50)
+                int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + (((visibleAreaWidth - 1) / 2) - 1);
+                if(x_dist_from_camera_start < 0 || x_dist_from_camera_start > visibleAreaWidth - 3)
                     continue;
-                int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + 25;
+                int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + (((visibleAreaHeight - 1) / 2) - 1);
                 if(y_dist_from_camera_start < 0)
                     y_dist_from_camera_start = 0;
-                int y_dist_from_camera_end = (cluster.tileEndY - yCameraPositionTile) + 25;
-                if(y_dist_from_camera_end > 50)
-                    y_dist_from_camera_end = 50;
+                int y_dist_from_camera_end = (cluster.tileEndY - yCameraPositionTile) + (((visibleAreaHeight - 1) / 2) - 1);
+                if(y_dist_from_camera_end > visibleAreaHeight - 3)
+                    y_dist_from_camera_end = visibleAreaHeight - 3;
                 boolean is_visible = false;
                 while(y_dist_from_camera_start <= y_dist_from_camera_end)
                     if(TILE_VISIBILITY_MAP[x_dist_from_camera_start][y_dist_from_camera_start++])
@@ -1919,15 +1923,15 @@ label0:
             }
             if(cluster.searchMask == 2)
             {
-                int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + 25;
-                if(y_dist_from_camera_start < 0 || y_dist_from_camera_start > 50)
+                int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + (((visibleAreaHeight - 1) / 2) - 1);
+                if(y_dist_from_camera_start < 0 || y_dist_from_camera_start > visibleAreaHeight - 3)
                     continue;
-                int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + 25;
+                int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + (((visibleAreaWidth - 1) / 2) - 1);
                 if(x_dist_from_camera_start < 0)
                     x_dist_from_camera_start = 0;
-                int x_dist_from_camera_end = (cluster.tileEndX - xCameraPositionTile) + 25;
-                if(x_dist_from_camera_end > 50)
-                    x_dist_from_camera_end = 50;
+                int x_dist_from_camera_end = (cluster.tileEndX - xCameraPositionTile) + (((visibleAreaWidth - 1) / 2) - 1);
+                if(x_dist_from_camera_end > visibleAreaWidth - 3)
+                    x_dist_from_camera_end = visibleAreaWidth - 3;
                 boolean is_visible = false;
                 while(x_dist_from_camera_start <= x_dist_from_camera_end)
                     if(TILE_VISIBILITY_MAP[x_dist_from_camera_start++][y_dist_from_camera_start])
@@ -1959,20 +1963,20 @@ label0:
                 int z_dist_from_camera_start_real = cluster.worldStartZ - zCameraPosition;
                 if(z_dist_from_camera_start_real > 128)
                 {
-                    int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + 25;
+                    int y_dist_from_camera_start = (cluster.tileStartY - yCameraPositionTile) + (((visibleAreaHeight - 1) / 2) - 1);
                     if(y_dist_from_camera_start < 0)
                         y_dist_from_camera_start = 0;
-                    int y_dist_from_camera_end = (cluster.tileEndY - yCameraPositionTile) + 25;
-                    if(y_dist_from_camera_end > 50)
-                        y_dist_from_camera_end = 50;
+                    int y_dist_from_camera_end = (cluster.tileEndY - yCameraPositionTile) + (((visibleAreaHeight - 1) / 2) - 1);
+                    if(y_dist_from_camera_end > visibleAreaHeight - 3)
+                        y_dist_from_camera_end = visibleAreaHeight - 3;
                     if(y_dist_from_camera_start <= y_dist_from_camera_end)
                     {
-                        int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + 25;
+                        int x_dist_from_camera_start = (cluster.tileStartX - xCameraPositionTile) + (((visibleAreaWidth - 1) / 2) - 1);
                         if(x_dist_from_camera_start < 0)
                             x_dist_from_camera_start = 0;
-                        int x_dist_from_camera_end = (cluster.tileEndX - xCameraPositionTile) + 25;
-                        if(x_dist_from_camera_end > 50)
-                            x_dist_from_camera_end = 50;
+                        int x_dist_from_camera_end = (cluster.tileEndX - xCameraPositionTile) + (((visibleAreaWidth - 1) / 2) - 1);
+                        if(x_dist_from_camera_end > visibleAreaWidth - 3)
+                            x_dist_from_camera_end = visibleAreaWidth - 3;
                         boolean is_visible = false;
 for_outer:
                         for(int __x = x_dist_from_camera_start; __x <= x_dist_from_camera_end; __x++)
@@ -2377,7 +2381,7 @@ for_outer:
             9, 13, 0, 4, 8, 12
         }
     };
-    private static boolean[][][][] TILE_VISIBILITY_MAPS = new boolean[8][32][51][51];
+    private static boolean[][][][] TILE_VISIBILITY_MAPS;
     private static boolean[][] TILE_VISIBILITY_MAP;
     private static int midX;
     private static int midY;
