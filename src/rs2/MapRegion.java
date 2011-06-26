@@ -1395,7 +1395,7 @@ label0:
                     int face = objByte & 3;
                     int X = rX + xOff;
                     int Y = rY + yOff;
-                    if(X > 0 && Y > 0 && X < xMapSize && Y < yMapSize)
+                    if(X > 0 && Y > 0 && X < xMapSize - 1&& Y < yMapSize - 1)
                     {
                         int l3 = Z;
                         if((tileSettings[1][X][Y] & 2) == 2)
