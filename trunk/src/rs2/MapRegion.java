@@ -4,15 +4,17 @@ package rs2;
 
 public class MapRegion {
 
-    private int[][][] underlayRgb = new int[4][104][104];
+    private int[][][] underlayRgb;
+    private boolean[][][] automaticHeight;
+    private boolean isMapEditor = false;
 
-    public MapRegion(byte tsettings[][][], int hmap[][][])
+    public MapRegion(int width, int height, byte tileSettings[][][], int heightMap[][][])
     {
         setZ = 99;
-        xMapSize = 104;
-        yMapSize = 104;
-        heightMap = hmap;
-        tileSettings = tsettings;
+        xMapSize = width;
+        yMapSize = height;
+        this.heightMap = heightMap;
+        this.tileSettings = tileSettings;
         underLay = new byte[4][xMapSize][yMapSize];
         overLay = new byte[4][xMapSize][yMapSize];
         shapeA = new byte[4][xMapSize][yMapSize];
@@ -20,6 +22,8 @@ public class MapRegion {
         tile_culling_bitmap = new int[4][xMapSize + 1][yMapSize + 1];
         object_shadow_data = new byte[4][xMapSize + 1][yMapSize + 1];
         tile_shadow = new int[xMapSize + 1][yMapSize + 1];
+        underlayRgb = new int[4][xMapSize][yMapSize];
+        automaticHeight = new boolean[4][xMapSize][yMapSize];//Used only by the editor utility
         hue = new int[yMapSize];
         saturation = new int[yMapSize];
         lightness = new int[yMapSize];
@@ -39,9 +43,9 @@ public class MapRegion {
     {
         for(int j = 0; j < 4; j++)
         {
-            for(int k = 0; k < 104; k++)
+            for(int k = 0; k < xMapSize; k++)
             {
-                for(int i1 = 0; i1 < 104; i1++)
+                for(int i1 = 0; i1 < yMapSize; i1++)
                     if((tileSettings[j][k][i1] & 1) == 1)
                     {
                         int k1 = j;
@@ -72,12 +76,12 @@ public class MapRegion {
             byte l_x = -50;
             byte l_y = -10;
             byte l_z = -50;
-            int sqrt = (int)Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
-            int sqrtA = mag_mult * sqrt >> 8;
+            int l_mag = (int)Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
+            int sqrtA = mag_mult * l_mag >> 8;
             for(int Y = 1; Y < yMapSize - 1; Y++)
             {
                 for(int X = 1; X < xMapSize - 1; X++)
-                {	//This is object shadows
+                {	//This renders the object shadows
                     int hDX = heightMap[z][X + 1][Y] - heightMap[z][X - 1][Y];
                     int hDY = heightMap[z][X][Y + 1] - heightMap[z][X][Y - 1];
                     int square = (int)Math.sqrt(hDX * hDX + 0x10000 + hDY * hDY);
@@ -408,7 +412,7 @@ label5:
 
     }
 
-    private static int method172(int i, int j)
+    private static int generateMapHeight(int i, int j)
     {
         int k = (method176(i + 45365, j + 0x16713, 4) - 128) + (method176(i + 10294, j + 37821, 2) - 128 >> 1) + (method176(i, j, 1) - 128 >> 2);
         k = (int)((double)k * 0.29999999999999999D) + 35;
@@ -842,13 +846,12 @@ label0:
         return class46.method577(j);
     }
 
-    public final void method179(int i, int j, TileSetting aclass11[], int l, int i1, byte abyte0[],
-                                int j1, int k1, int l1)
+    public final void loadMapChunk(int i, int j, TileSetting aclass11[], int l, int i1, byte abyte0[], int j1, int k1, int l1)
     {
         for(int i2 = 0; i2 < 8; i2++)
         {
             for(int j2 = 0; j2 < 8; j2++)
-                if(l + i2 > 0 && l + i2 < 103 && l1 + j2 > 0 && l1 + j2 < 103)
+                if(l + i2 > 0 && l + i2 < xMapSize - 1 && l1 + j2 > 0 && l1 + j2 < yMapSize - 1)
                     aclass11[k1].clipData[l + i2][l1 + j2] &= 0xfeffffff;
 
         }
@@ -859,9 +862,9 @@ label0:
             {
                 for(int j3 = 0; j3 < 64; j3++)
                     if(l2 == i && i3 >= i1 && i3 < i1 + 8 && j3 >= j1 && j3 < j1 + 8)
-                        readTile(l1 + MapUtility.getRotatedMapChunkY(j3 & 7, j, i3 & 7), 0, stream, l + MapUtility.getRotatedMapChunkX(j, j3 & 7, i3 & 7), k1, j, 0);
+                        readTile(k1, l + MapUtility.getRotatedMapChunkX(j, j3 & 7, i3 & 7), l1 + MapUtility.getRotatedMapChunkY(j3 & 7, j, i3 & 7), 0, 0, j, stream);
                     else
-                        readTile(-1, 0, stream, -1, 0, 0, 0);
+                        readTile(0, -1, -1, 0, 0, 0, stream);
 
             }
 
@@ -869,14 +872,14 @@ label0:
 
     }
 
-    public final void readMapzor(byte abyte0[], int i, int j, int k, int l, TileSetting aclass11[])
+    public final void loadTerrain(byte abyte0[], int i, int j, int k, int l, TileSetting aclass11[])
     {
         for(int i1 = 0; i1 < 4; i1++)
         {
             for(int j1 = 0; j1 < 64; j1++)
             {
                 for(int k1 = 0; k1 < 64; k1++)
-                    if(j + j1 > 0 && j + j1 < 103 && i + k1 > 0 && i + k1 < 103)
+                    if(j + j1 > 0 && j + j1 < xMapSize - 1 && i + k1 > 0 && i + k1 < yMapSize - 1)
                         aclass11[i1].clipData[j + j1][i + k1] &= 0xfeffffff;
 
             }
@@ -889,61 +892,65 @@ label0:
             for(int i2 = 0; i2 < 64; i2++)
             {
                 for(int j2 = 0; j2 < 64; j2++)
-                    readTile(j2 + i, l, stream, i2 + j, l1, 0, k);
+                    readTile(l1, i2 + j, j2 + i, k, l, 0, stream);
 
             }
 
         }
     }
 
-    private void readTile(int i, int j, Packet stream, int k, int l, int i1,
-                                 int k1)
+    private void readTile(int y, int x, int z, int xOffset, int zOffset, int shapeBOffset, Packet stream)
     {
-        if(k >= 0 && k < 104 && i >= 0 && i < 104)
+        if(x >= 0 && x < xMapSize && z >= 0 && z < yMapSize)
         {
-            tileSettings[l][k][i] = 0;
+            tileSettings[y][x][z] = 0;
             do
             {
-                int l1 = stream.g1();
-                if(l1 == 0)
-                    if(l == 0)
+                int value = stream.g1();
+                if(value == 0){
+                    automaticHeight[y][x][z] = true;
+                    if(y == 0)
                     {
-                        heightMap[0][k][i] = -method172(0xe3b7b + k + k1, 0x87cce + i + j) * 8;
+                        heightMap[0][x][z] = -generateMapHeight(0xe3b7b + x + xOffset, 0x87cce + z + zOffset) * 8;
                         return;
                     } else
                     {
-                        heightMap[l][k][i] = heightMap[l - 1][k][i] - 240;
-                        return;
-                    }
-                if(l1 == 1)
-                {
-                    int j2 = stream.g1();
-                    if(j2 == 1)
-                        j2 = 0;
-                    if(l == 0)
-                    {
-                        heightMap[0][k][i] = -j2 * 8;
-                        return;
-                    } else
-                    {
-                        heightMap[l][k][i] = heightMap[l - 1][k][i] - j2 * 8;
+                        heightMap[y][x][z] = heightMap[y - 1][x][z] - 240;
                         return;
                     }
                 }
-                if(l1 <= 49)
+                if(value == 1)
                 {
-                    overLay[l][k][i] = stream.g1b();
-                    shapeA[l][k][i] = (byte)((l1 - 2) / 4);
-                    shapeB[l][k][i] = (byte)((l1 - 2) + i1 & 3);
+                    automaticHeight[y][x][z] = false;
+                    int height = stream.g1();
+                    if(height == 1)
+                        height = 0;
+                    if(y == 0)
+                    {
+                        heightMap[0][x][z] = -height * 8;
+                        return;
+                    } else
+                    {
+                        heightMap[y][x][z] = heightMap[y - 1][x][z] - height * 8;
+                        return;
+                    }
+                }
+                if(value <= 49)
+                {
+                    overLay[y][x][z] = stream.g1b();
+                    shapeA[y][x][z] = (byte)((value - 2) / 4);
+                    shapeB[y][x][z] = (byte) (((value - 2) + shapeBOffset) & 3);
                 } else
-                if(l1 <= 81)
-                    tileSettings[l][k][i] = (byte)(l1 - 49);
+                if(value <= 81)
+                    tileSettings[y][x][z] = (byte)(value - 49);
                 else
-                    underLay[l][k][i] = (byte)(l1 - 81);
+                    underLay[y][x][z] = (byte)(value - 81);     //255-81 = Only 174 possible underlays
             } while(true);
         }
         do
         {
+            if (isMapEditor)
+                System.err.println("Warning: tiles are being discarded, are you sure mapSize is a multiple of 64?");
             int i2 = stream.g1();
             if(i2 == 0)
                 break;
@@ -955,6 +962,40 @@ label0:
             if(i2 <= 49)
                 stream.g1();
         } while(true);
+    }
+
+    public void writeMapRegion(int xOffset, int zOffset, Packet packet) {
+        if (xOffset < 0 ||  zOffset < 0 || (xOffset + 64) > xMapSize || (zOffset + 64) > yMapSize)
+            throw new RuntimeException("Trying to write tiles not in memory!");
+        for(int y = 0; y < 4; y++)
+        {
+            for(int x = 0; x < 64; x++)
+            {
+                for(int z = 0; z < 64; z++)
+                    writeTile(y, x + xOffset, z + zOffset, packet);
+
+            }
+
+        }
+    }
+
+    private void writeTile(int y,int x,int z, Packet packet) {
+        if(overLay[y][x][z] != 0){
+            packet.p1((shapeA[y][x][z] * 4) + (shapeB[y][x][z] & 3) + 2);
+            packet.p1(overLay[y][x][z]);
+        }
+        if(tileSettings[y][x][z] != 0)
+            packet.p1(tileSettings[y][x][z] + 49);
+        if(underLay[y][x][z] != 0)
+            packet.p1(underLay[y][x][z] + 81);
+        if(!automaticHeight[y][x][z]){
+            packet.p1(1);
+            if (z == 0)
+                packet.p1((-heightMap[y][x][z]) / 8);
+            else
+                packet.p1((heightMap[y][x][z-1]-heightMap[y][x][z]) / 8);
+        } else
+            packet.p1(0);
     }
 
     private int get_logic_height(int z, int x, int y)
@@ -998,7 +1039,7 @@ label0:
                         ObjectDef class46 = ObjectDef.forID(l1);
                         int j4 = j + MapUtility.getRotatedLandscapeChunkX(j1, class46.sizeY, i3 & 7, l2 & 7, class46.sizeX);
                         int k4 = k1 + MapUtility.getRotatedLandscapeChunkY(l2 & 7, class46.sizeY, j1, class46.sizeX, i3 & 7);
-                        if(j4 > 0 && k4 > 0 && j4 < 103 && k4 < 103)
+                        if(j4 > 0 && k4 > 0 && j4 < xMapSize - 1 && k4 < yMapSize - 1)
                         {
                             int l4 = j3;
                             if((tileSettings[1][j4][k4] & 2) == 2)
@@ -1311,7 +1352,7 @@ label0:
 		int i_260_ = stream.g1() >> 2;
 		int i_261_ = i_259_ + i;
 		int i_262_ = i_258_ + i_250_;
-		if (i_261_ > 0 && i_262_ > 0 && i_261_ < 103 && i_262_ < 103)
+		if (i_261_ > 0 && i_262_ > 0 && i_261_ < 103 && i_262_ < 103)  //TODO:Make not static or modify mapSize to static
 		  {
 		    ObjectDef class46 = ObjectDef.forID (i_252_);
 		    if (i_260_ != 22 || !lowMem || class46.hasActions
@@ -1354,7 +1395,7 @@ label0:
                     int face = objByte & 3;
                     int X = rX + xOff;
                     int Y = rY + yOff;
-                    if(X > 0 && Y > 0 && X < 103 && Y < 103)
+                    if(X > 0 && Y > 0 && X < xMapSize && Y < yMapSize)
                     {
                         int l3 = Z;
                         if((tileSettings[1][X][Y] & 2) == 2)
@@ -1366,6 +1407,28 @@ label0:
                     }
                 } while(true);
             } while(true);
+        }
+    }
+
+    public int getHeight(int y, int x, int z){
+        if (z == 0)
+            return (-heightMap[y][x][z]) / 8;
+        else
+            return (heightMap[y][x][z-1]-heightMap[y][x][z]) / 8;
+    }
+
+    public void setHeight(int y,int x, int z, int height){
+        automaticHeight[y][x][z] = false;
+        if(height == 1)
+            height = 0;
+        if(y == 0)
+        {
+            heightMap[0][x][z] = -height * 8;
+            return;
+        } else
+        {
+            heightMap[y][x][z] = heightMap[y - 1][x][z] - height * 8;
+            return;
         }
     }
 

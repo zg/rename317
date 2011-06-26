@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 
-import com.sun.jndi.cosnaming.ExceptionMapper;
+import editor.EditorMain;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import pgle.PglCallClientNode;
 import pgle.PglWrapper;
@@ -518,7 +518,7 @@ public class Client extends RSApplet {
 
 			}
 
-			MapRegion mapRegion = new MapRegion(byteGroundArray, intGroundArray);
+			MapRegion mapRegion = new MapRegion(104, 104, byteGroundArray, intGroundArray);
 			int k2 = aByteArrayArray1183.length;
 			stream.p1isaac(0);
 			if(!aBoolean1159)
@@ -529,7 +529,7 @@ public class Client extends RSApplet {
 					int k5 = (anIntArray1234[i3] & 0xff) * 64 - baseY;
 					byte abyte0[] = aByteArrayArray1183[i3];
 					if(abyte0 != null)
-					mapRegion.readMapzor(abyte0, k5, i4, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, tileSettings);
+					mapRegion.loadTerrain(abyte0, k5, i4, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, tileSettings);
 				}
 
 				for(int j4 = 0; j4 < k2; j4++)
@@ -581,7 +581,7 @@ public class Client extends RSApplet {
 								{
 									if(anIntArray1234[l11] != j11 || aByteArrayArray1183[l11] == null)
 									continue;
-									mapRegion.method179(i9, l9, tileSettings, k4 * 8, (j10 & 7) * 8, aByteArrayArray1183[l11], (l10 & 7) * 8, j3, j6 * 8);
+									mapRegion.loadMapChunk(i9, l9, tileSettings, k4 * 8, (j10 & 7) * 8, aByteArrayArray1183[l11], (l10 & 7) * 8, j3, j6 * 8);
 									break;
 								}
 
@@ -645,9 +645,9 @@ public class Client extends RSApplet {
 			if(k3 < plane - 1)
 			k3 = plane - 1;
 			if(lowMem)
-			sceneGraph.resetTilesHL(MapRegion.setZ);
+			sceneGraph.setHeightLevel(MapRegion.setZ);
 			else
-			sceneGraph.resetTilesHL(0);
+			sceneGraph.setHeightLevel(0);
 			for(int i5 = 0; i5 < 104; i5++)
 			{
 				for(int i7 = 0; i7 < 104; i7++)
@@ -737,9 +737,9 @@ public class Client extends RSApplet {
 			for(int k1 = 1; k1 < 103; k1++)
 			{
 				if((byteGroundArray[i][k1][l] & 0x18) == 0)
-				sceneGraph.drawMinimapTile(ai, i1, i, k1, l);
+				    sceneGraph.drawMinimapTile(i, k1, l, ai, i1, 512);
 				if(i < 3 && (byteGroundArray[i + 1][k1][l] & 8) != 0)
-				sceneGraph.drawMinimapTile(ai, i1, i + 1, k1, l);
+				    sceneGraph.drawMinimapTile(i + 1, k1, l, ai, i1, 512);
 				i1 += 4;
 			}
 
@@ -6788,7 +6788,7 @@ public class Client extends RSApplet {
 			JagexArchive jagexArchive_5 = streamLoaderForName(8, "sound effects", "sounds", expectedCRCs[8], 55);
 			byteGroundArray = new byte[4][104][104];
 			intGroundArray = new int[4][105][105];
-			sceneGraph = new SceneGraph(intGroundArray);
+			sceneGraph = new SceneGraph(4, 104, 104, intGroundArray);
 			for(int j = 0; j < 4; j++)
 			tileSettings[j] = new TileSetting();
 
@@ -7143,7 +7143,7 @@ public class Client extends RSApplet {
 				ai[i8] = l8 * i9 >> 16;
 			}
 
-			SceneGraph.initialize(500, 800, 512, 334, ai);
+			SceneGraph.setupViewport(500, 800, 512, 334, ai);
 			Censor.loadConfig(jagexArchive_4);
 			mouseDetection = new MouseDetection(this);
 			startRunnable(mouseDetection, 10);
@@ -7152,6 +7152,7 @@ public class Client extends RSApplet {
 			ObjectDef.clientInstance = this;
 			NpcDef.clientInstance = this;
             pglWrapper.initJgle();
+            EditorMain.main(null);
 			return;
 		}
 		catch(Exception exception)
