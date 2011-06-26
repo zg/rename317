@@ -2,6 +2,7 @@ package editor;
 
 import com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel;
 import editor.gui.EditorMainWindow;
+import rs2.JagexFileStore;
 
 import javax.swing.*;
 
@@ -13,6 +14,8 @@ import javax.swing.*;
  * Computer: Peterbjornx-PC.rootdomain.asn.local (192.168.178.27)
  */
 public class EditorMain {
+    private JagexFileStore[] fileStores = new JagexFileStore[5];
+
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new WindowsClassicLookAndFeel());

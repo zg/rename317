@@ -50,11 +50,17 @@ public class ObjectOnTile extends Entity {
             int k = varBit.configId;
             int l = varBit.leastSignificantBit;
             int i1 = varBit.mostSignificantBit;
-            int j1 = Client.BITFIELD_MAX_VALUE[i1 - l];
-            i = clientInstance.sessionSettings[k] >> l & j1;
+            int j1 = StaticLogic.BITFIELD_MAX_VALUE[i1 - l];
+            if (clientInstance == null)
+                i = 0;
+            else
+                i = clientInstance.sessionSettings[k] >> l & j1;
         } else
         if(anInt1602 != -1)
-            i = clientInstance.sessionSettings[anInt1602];
+            if (clientInstance == null)
+                i = 0;
+            else
+                i = clientInstance.sessionSettings[anInt1602];
         if(i < 0 || i >= anIntArray1600.length || anIntArray1600[i] == -1)
             return null;
         else

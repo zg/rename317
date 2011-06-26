@@ -956,7 +956,7 @@ label0:
         return l1 >= left && l1 <= right && i2 >= top && i2 <= bottom;
     }
 
-    public void setClick(int i, int j)
+    public void request2DTrace(int i, int j)
     {
         isClicked = true;
         clickX = j;
@@ -1051,13 +1051,13 @@ label0:
                             {
                                 Tile class30_sub3_1 = floorTiles[x][y];
                                 if(class30_sub3_1 != null && class30_sub3_1.aBoolean1322)
-                                    renderTileF(class30_sub3_1, true);
+                                    renderTile(class30_sub3_1, true);
                             }
                             if(y2 < anInt452)
                             {
                                 Tile class30_sub3_2 = floorTiles[x][y2];
                                 if(class30_sub3_2 != null && class30_sub3_2.aBoolean1322)
-                                    renderTileF(class30_sub3_2, true);
+                                    renderTile(class30_sub3_2, true);
                             }
                         }
                         if(x2 < anInt450)
@@ -1066,13 +1066,13 @@ label0:
                             {
                                 Tile class30_sub3_3 = floorTiles[x2][y];
                                 if(class30_sub3_3 != null && class30_sub3_3.aBoolean1322)
-                                    renderTileF(class30_sub3_3, true);
+                                    renderTile(class30_sub3_3, true);
                             }
                             if(y2 < anInt452)
                             {
                                 Tile class30_sub3_4 = floorTiles[x2][y2];
                                 if(class30_sub3_4 != null && class30_sub3_4.aBoolean1322)
-                                    renderTileF(class30_sub3_4, true);
+                                    renderTile(class30_sub3_4, true);
                             }
                         }
                         if(anInt446 == 0)
@@ -1106,13 +1106,13 @@ label0:
                             {
                                 Tile class30_sub3_5 = aclass30_sub3_2[l3][j5];
                                 if(class30_sub3_5 != null && class30_sub3_5.aBoolean1322)
-                                    renderTileF(class30_sub3_5, false);
+                                    renderTile(class30_sub3_5, false);
                             }
                             if(k5 < anInt452)
                             {
                                 Tile class30_sub3_6 = aclass30_sub3_2[l3][k5];
                                 if(class30_sub3_6 != null && class30_sub3_6.aBoolean1322)
-                                    renderTileF(class30_sub3_6, false);
+                                    renderTile(class30_sub3_6, false);
                             }
                         }
                         if(j4 < anInt450)
@@ -1121,13 +1121,13 @@ label0:
                             {
                                 Tile class30_sub3_7 = aclass30_sub3_2[j4][j5];
                                 if(class30_sub3_7 != null && class30_sub3_7.aBoolean1322)
-                                    renderTileF(class30_sub3_7, false);
+                                    renderTile(class30_sub3_7, false);
                             }
                             if(k5 < anInt452)
                             {
                                 Tile class30_sub3_8 = aclass30_sub3_2[j4][k5];
                                 if(class30_sub3_8 != null && class30_sub3_8.aBoolean1322)
-                                    renderTileF(class30_sub3_8, false);
+                                    renderTile(class30_sub3_8, false);
                             }
                         }
                         if(anInt446 == 0)
@@ -1145,7 +1145,7 @@ label0:
         isClicked = false;
     }
 
-    private void renderTileF(Tile class30_sub3, boolean flag)
+    private void renderTile(Tile class30_sub3, boolean flag)
     {
         aClass19_477.insertBack(class30_sub3);
         do
@@ -1207,10 +1207,10 @@ label0:
                     if(tile.myPlainTile != null)
                     {
                         if(!method320(0, X, Y))
-                            renderTile(tile.myPlainTile, 0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
+                            renderPlainTile(tile.myPlainTile, 0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
                     } else
                     if(tile.shapedTile != null && !method320(0, X, Y))
-                        drawShapedTile(X, yCurveSine, xCurveSine, tile.shapedTile, yCurveCosine, Y, xCurveCosine);
+                        renderShapedTile(X, yCurveSine, xCurveSine, tile.shapedTile, yCurveCosine, Y, xCurveCosine);
                     WallObject wallObject = tile.wallObject;
                     if(wallObject != null){
                         wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
@@ -1233,13 +1233,13 @@ label0:
                     if(!method320(l, X, Y))
                     {
                         flag1 = true;
-                        renderTile(TILE.myPlainTile, l, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
+                        renderPlainTile(TILE.myPlainTile, l, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
                     }
                 } else
                 if(TILE.shapedTile != null && !method320(l, X, Y))
                 {
                     flag1 = true;
-                    drawShapedTile(X, yCurveSine, xCurveSine, TILE.shapedTile, yCurveCosine, Y, xCurveCosine);
+                    renderShapedTile(X, yCurveSine, xCurveSine, TILE.shapedTile, yCurveCosine, Y, xCurveCosine);
                 }
                 int j1 = 0;
                 int j2 = 0;
@@ -1654,8 +1654,7 @@ label0:
         } while(true);
     }
 
-    private void renderTile(PlainTile plainTile, int tZ, int j, int k, int l, int i1, int tX,
-            int tY)
+    private void renderPlainTile(PlainTile plainTile, int tZ, int j, int k, int l, int i1, int tX, int tY)
     {
         int xC;
         int xA = xC = (tX << 7) - xCameraPosition;
@@ -1728,7 +1727,7 @@ label0:
         if((screenXD - screenXC) * (screenYB - screenYC) - (screenYD - screenYC) * (screenXB - screenXC) > 0)
         {
             Rasterizer.restrict_edges = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > Graphics2D.viewportRx || screenXC > Graphics2D.viewportRx || screenXB > Graphics2D.viewportRx;
-            if(isClicked && isTriangleClicked(clickX, clickY, screenYD, screenYC, screenYB, screenXD, screenXC, screenXB))
+            if(isClicked && isMouseWithinTriangle(clickX, clickY, screenYD, screenYC, screenYB, screenXD, screenXC, screenXB))
             {
                 clickedTileX = tX;
                 clickedTileY = tY;
@@ -1753,7 +1752,7 @@ label0:
         if((screenXA - screenXB) * (screenYC - screenYB) - (screenYA - screenYB) * (screenXC - screenXB) > 0)
         {
             Rasterizer.restrict_edges = screenXA < 0 || screenXB < 0 || screenXC < 0 || screenXA > Graphics2D.viewportRx || screenXB > Graphics2D.viewportRx || screenXC > Graphics2D.viewportRx;
-            if(isClicked && isTriangleClicked(clickX, clickY, screenYA, screenYB, screenYC, screenXA, screenXB, screenXC))
+            if(isClicked && isMouseWithinTriangle(clickX, clickY, screenYA, screenYB, screenYC, screenXA, screenXB, screenXC))
             {
                 clickedTileX = tX;
                 clickedTileY = tY;
@@ -1777,8 +1776,7 @@ label0:
         }
     }
 
-    private void drawShapedTile(int i, int j, int k, ShapedTile shapedTile, int l, int i1,
-                           int j1)
+    private void renderShapedTile(int i, int j, int k, ShapedTile shapedTile, int l, int i1, int j1)
     {
         int triangleCount = shapedTile.origVertexX.length;
         for(int vID = 0; vID < triangleCount; vID++)
@@ -1820,7 +1818,7 @@ label0:
             if((sXA - sXB) * (sYC - sYB) - (sYA - sYB) * (sXC - sXB) > 0)
             {
                 Rasterizer.restrict_edges = sXA < 0 || sXB < 0 || sXC < 0 || sXA > Graphics2D.viewportRx || sXB > Graphics2D.viewportRx || sXC > Graphics2D.viewportRx;
-                if(isClicked && isTriangleClicked(clickX, clickY, sYA, sYB, sYC, sXA, sXB, sXC))
+                if(isClicked && isMouseWithinTriangle(clickX, clickY, sYA, sYB, sYC, sXA, sXB, sXC))
                 {
                     clickedTileX = i;
                     clickedTileY = i1;
@@ -1858,20 +1856,19 @@ label0:
         return (j & 0xff80) + k;
     }
 
-    private boolean isTriangleClicked(int i, int j, int k, int l, int i1, int j1, int k1,
-            int l1)
+    private boolean isMouseWithinTriangle(int mouseX, int mouseY, int k, int l, int i1, int j1, int k1, int l1)
     {
-        if(j < k && j < l && j < i1)
+        if(mouseY < k && mouseY < l && mouseY < i1)
             return false;
-        if(j > k && j > l && j > i1)
+        if(mouseY > k && mouseY > l && mouseY > i1)
             return false;
-        if(i < j1 && i < k1 && i < l1)
+        if(mouseX < j1 && mouseX < k1 && mouseX < l1)
             return false;
-        if(i > j1 && i > k1 && i > l1)
+        if(mouseX > j1 && mouseX > k1 && mouseX > l1)
             return false;
-        int i2 = (j - k) * (k1 - j1) - (i - j1) * (l - k);
-        int j2 = (j - i1) * (j1 - l1) - (i - l1) * (k - i1);
-        int k2 = (j - l) * (l1 - k1) - (i - k1) * (i1 - l);
+        int i2 = (mouseY - k) * (k1 - j1) - (mouseX - j1) * (l - k);
+        int j2 = (mouseY - i1) * (j1 - l1) - (mouseX - l1) * (k - i1);
+        int k2 = (mouseY - l) * (l1 - k1) - (mouseX - k1) * (i1 - l);
         return i2 * k2 > 0 && k2 * j2 > 0;
     }
 
@@ -2007,22 +2004,22 @@ for_outer:
 
     }
 
-    private boolean method320(int i, int j, int k)
+    private boolean method320(int y, int x, int z)
     {
-        int l = anIntArrayArrayArray445[i][j][k];
+        int l = anIntArrayArrayArray445[y][x][z];
         if(l == -anInt448)
             return false;
         if(l == anInt448)
             return true;
-        int i1 = j << 7;
-        int j1 = k << 7;
-        if(method324(i1 + 1, heightmap[i][j][k], j1 + 1) && method324((i1 + 128) - 1, heightmap[i][j + 1][k], j1 + 1) && method324((i1 + 128) - 1, heightmap[i][j + 1][k + 1], (j1 + 128) - 1) && method324(i1 + 1, heightmap[i][j][k + 1], (j1 + 128) - 1))
+        int worldX = x << 7;
+        int worldZ = z << 7;
+        if(method324(worldX + 1, heightmap[y][x][z], worldZ + 1) && method324((worldX + 128) - 1, heightmap[y][x + 1][z], worldZ + 1) && method324((worldX + 128) - 1, heightmap[y][x + 1][z + 1], (worldZ + 128) - 1) && method324(worldX + 1, heightmap[y][x][z + 1], (worldZ + 128) - 1))
         {
-            anIntArrayArrayArray445[i][j][k] = anInt448;
+            anIntArrayArrayArray445[y][x][z] = anInt448;
             return true;
         } else
         {
-            anIntArrayArrayArray445[i][j][k] = -anInt448;
+            anIntArrayArrayArray445[y][x][z] = -anInt448;
             return false;
         }
     }
@@ -2169,73 +2166,73 @@ for_outer:
         return method324(k2, i3, k3) && method324(j3, i3, k3);
     }
 
-    private boolean method324(int i, int j, int k)
+    private boolean method324(int x, int y, int z)
     {
         for(int l = 0; l < processed_culling_clusters_ptr; l++)
         {
             CullingCluster class47 = processed_culling_clusters[l];
             if(class47.tileDistanceEnum == 1)
             {
-                int i1 = class47.worldStartX - i;
+                int i1 = class47.worldStartX - x;
                 if(i1 > 0)
                 {
                     int j2 = class47.worldStartY + (class47.worldDistanceFromCameraStartY * i1 >> 8);
                     int k3 = class47.worldEndY + (class47.worldDistanceFromCameraEndY * i1 >> 8);
                     int l4 = class47.worldStartZ + (class47.worldDistanceFromCameraStartZ * i1 >> 8);
                     int i6 = class47.worldEndZ + (class47.worldDistanceFromCameraEndZ * i1 >> 8);
-                    if(k >= j2 && k <= k3 && j >= l4 && j <= i6)
+                    if(z >= j2 && z <= k3 && y >= l4 && y <= i6)
                         return true;
                 }
             } else
             if(class47.tileDistanceEnum == 2)
             {
-                int j1 = i - class47.worldStartX;
+                int j1 = x - class47.worldStartX;
                 if(j1 > 0)
                 {
                     int k2 = class47.worldStartY + (class47.worldDistanceFromCameraStartY * j1 >> 8);
                     int l3 = class47.worldEndY + (class47.worldDistanceFromCameraEndY * j1 >> 8);
                     int i5 = class47.worldStartZ + (class47.worldDistanceFromCameraStartZ * j1 >> 8);
                     int j6 = class47.worldEndZ + (class47.worldDistanceFromCameraEndZ * j1 >> 8);
-                    if(k >= k2 && k <= l3 && j >= i5 && j <= j6)
+                    if(z >= k2 && z <= l3 && y >= i5 && y <= j6)
                         return true;
                 }
             } else
             if(class47.tileDistanceEnum == 3)
             {
-                int k1 = class47.worldStartY - k;
+                int k1 = class47.worldStartY - z;
                 if(k1 > 0)
                 {
                     int l2 = class47.worldStartX + (class47.worldDistanceFromCameraStartX * k1 >> 8);
                     int i4 = class47.worldEndX + (class47.worldDistanceFromCameraEndX * k1 >> 8);
                     int j5 = class47.worldStartZ + (class47.worldDistanceFromCameraStartZ * k1 >> 8);
                     int k6 = class47.worldEndZ + (class47.worldDistanceFromCameraEndZ * k1 >> 8);
-                    if(i >= l2 && i <= i4 && j >= j5 && j <= k6)
+                    if(x >= l2 && x <= i4 && y >= j5 && y <= k6)
                         return true;
                 }
             } else
             if(class47.tileDistanceEnum == 4)
             {
-                int l1 = k - class47.worldStartY;
+                int l1 = z - class47.worldStartY;
                 if(l1 > 0)
                 {
                     int i3 = class47.worldStartX + (class47.worldDistanceFromCameraStartX * l1 >> 8);
                     int j4 = class47.worldEndX + (class47.worldDistanceFromCameraEndX * l1 >> 8);
                     int k5 = class47.worldStartZ + (class47.worldDistanceFromCameraStartZ * l1 >> 8);
                     int l6 = class47.worldEndZ + (class47.worldDistanceFromCameraEndZ * l1 >> 8);
-                    if(i >= i3 && i <= j4 && j >= k5 && j <= l6)
+                    if(x >= i3 && x <= j4 && y >= k5 && y <= l6)
                         return true;
                 }
             } else
             if(class47.tileDistanceEnum == 5)
             {
-                int i2 = j - class47.worldStartZ;
+                int i2 = y - class47.worldStartZ;
                 if(i2 > 0)
                 {
                     int j3 = class47.worldStartX + (class47.worldDistanceFromCameraStartX * i2 >> 8);
                     int k4 = class47.worldEndX + (class47.worldDistanceFromCameraEndX * i2 >> 8);
                     int l5 = class47.worldStartY + (class47.worldDistanceFromCameraStartY * i2 >> 8);
                     int i7 = class47.worldEndY + (class47.worldDistanceFromCameraEndY * i2 >> 8);
-                    if(i >= j3 && i <= k4 && k >= l5 && k <= i7)
+                    if(x >= j3 && x <= k4 && z >= l5 && z <= i7)
                         return true;
                 }
             }
