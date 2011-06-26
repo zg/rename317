@@ -8,20 +8,20 @@ import java.awt.event.*;
 @SuppressWarnings("serial")
 public class
 
-        RSApplet extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
+        GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
 
-    final void createClientFrame(int i, int j) {
-        myWidth = j;
-        myHeight = i;
+    final void initializeApp(int width, int height) {
+        myWidth = width;
+        myHeight = height;
         gameFrame = new RSFrame(this, myWidth, myHeight);
         graphics = getGameComponent().getGraphics();
         fullGameScreen = new GraphicsBuffer(myWidth, myHeight, getGameComponent());
         startRunnable(this, 1);
     }
 
-    final void initClientFrame(int i, int j) {
-        myWidth = j;
-        myHeight = i;
+    final void initialize(int width, int height) {
+        myWidth = width;
+        myHeight = height;
         graphics = getGameComponent().getGraphics();
         fullGameScreen = new GraphicsBuffer(myWidth, myHeight, getGameComponent());
         startRunnable(this, 1);
@@ -87,11 +87,11 @@ public class
                 intex++;
             }
             for (; count < 256; count += ratio) {
-                clickMode3 = mouseButtonPressed;
-                saveClickX = clickX;
-                saveClickY = clickY;
-                aLong29 = clickTime;
-                mouseButtonPressed = 0;
+                mouseButtonPressed = eventMouseButtonPressed;
+                clickX = eventClickX;
+                clickY = eventClickY;
+                clickTime = eventTime;
+                eventMouseButtonPressed = 0;
                 doLogic();
                 readIndex = writeIndex;
             }
@@ -179,14 +179,14 @@ public class
             y -= 22;
         }
         idleTime = 0;
-        clickX = x;
-        clickY = y;
-        clickTime = System.currentTimeMillis();
+        eventClickX = x;
+        eventClickY = y;
+        eventTime = System.currentTimeMillis();
         if (mouseevent.isMetaDown()) {
-            mouseButtonPressed = 2;
+            eventMouseButtonPressed = 2;
             mouseButtonDown = 2;
         } else {
-            mouseButtonPressed = 1;
+            eventMouseButtonPressed = 1;
             mouseButtonDown = 1;
         }
     }
@@ -410,7 +410,7 @@ public class
         graphics.drawString(s, (myWidth - fontmetrics.stringWidth(s)) / 2, j + 22);
     }
 
-    public RSApplet() {
+    public GameShell() {
         delayTime = 20;//20;
         minDelay = 1;//1
         otim = new long[10];
@@ -438,14 +438,14 @@ public class
     protected int mouseButtonDown;
     public int mouseEventX;
     public int mouseEventY;
-    private int mouseButtonPressed;
-    private int clickX;
-    private int clickY;
-    private long clickTime;
-    protected int clickMode3;
-    protected int saveClickX;
-    protected int saveClickY;
-    protected long aLong29;
+    private int eventMouseButtonPressed;
+    private int eventClickX;
+    private int eventClickY;
+    private long eventTime;
+    protected int mouseButtonPressed;
+    protected int clickX;
+    protected int clickY;
+    protected long clickTime;
     protected final int[] keyStatus;
     private final int[] inputBuffer;
     private int readIndex;

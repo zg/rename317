@@ -8,13 +8,13 @@ public class RSSocket
         implements Runnable
 {
 
-    public RSSocket(RSApplet RSApplet_, Socket socket1)
+    public RSSocket(GameShell gameShell, Socket socket1)
         throws IOException
     {
         closed = false;
         isWriter = false;
         hasIOError = false;
-        rsApplet = RSApplet_;
+        this.gameShell = gameShell;
         socket = socket1;
         socket.setSoTimeout(30000);
         socket.setTcpNoDelay(true);
@@ -106,7 +106,7 @@ public class RSSocket
             if(!isWriter)
             {
                 isWriter = true;
-                rsApplet.startRunnable(this, 3);
+                gameShell.startRunnable(this, 3);
             }
             notify();
         }
@@ -178,7 +178,7 @@ public class RSSocket
     private OutputStream outputStream;
     private final Socket socket;
     private boolean closed;
-    private final RSApplet rsApplet;
+    private final GameShell gameShell;
     private byte[] buffer;
     private int writeIndex;
     private int buffIndex;

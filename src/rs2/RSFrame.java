@@ -6,9 +6,9 @@ import java.awt.*;
 public class RSFrame extends Frame
 {
 
-    public RSFrame(RSApplet RSApplet_, int i, int j)
+    public RSFrame(GameShell gameShell, int i, int j)
     {
-        rsApplet = RSApplet_;
+        this.gameShell = gameShell;
         setTitle("Jagex");
         setResizable(false);
         setVisible(true);
@@ -25,13 +25,13 @@ public class RSFrame extends Frame
 
     public void update(Graphics g)
     {
-        rsApplet.update(g);
+        gameShell.update(g);
     }
 
     public void paint(Graphics g)
     {
-        rsApplet.paint(g);
+        gameShell.paint(g);
     }
 
-    private final RSApplet rsApplet;
+    private final GameShell gameShell;
 }
