@@ -8,12 +8,14 @@ public class SceneGraph {
 
     private int xCameraAngle;
     private int yCameraAngle;
+    private int visibleAreaWidth = 25;
+    private int visibleAreaHeight = 25;
 
-    public SceneGraph(int heightmap[][][])
+    public SceneGraph(int height, int width, int length, int heightmap[][][])
     {
-        int length = 104;//was parameter
-        int width = 104;//was parameter
-        int height = 4;//was parameter
+        //int length = 104;//was parameter
+        //int width = 104;//was parameter
+        //int height = 4;//was parameter
         interactableObjectCache = new InteractableObject[5000];
         anIntArray486 = new int[10000];
         anIntArray487 = new int[10000];
@@ -67,15 +69,12 @@ public class SceneGraph {
         interactableObjectCacheCurrPos = 0;
         for(int l1 = 0; l1 < interactableObjects.length; l1++)
             interactableObjects[l1] = null;
-       // if (clientInstance != null)
-       // if (clientInstance.getPglWrapper() != null)
-       //     clientInstance.getPglWrapper().clearRegion();
 
     }
 
-    public void resetTilesHL(int z)
+    public void setHeightLevel(int z)
     {
-        anInt442 = z;
+        currentHL = z;
         for(int x = 0; x < xMapSize; x++)
         {
             for(int y = 0; y < yMapSize; y++)
@@ -202,7 +201,7 @@ public class SceneGraph {
     }
 
     public void addGroundItemTile(int x, int uid, Entity secondGroundItem, int k, Entity thirdGroundItem, Entity firstGroundItem,
-                          int z, int y)//todo - addGroundItemTile
+                          int z, int y)
     {
         GroundItemTile itemTile = new GroundItemTile();
         itemTile.firstGroundItem = firstGroundItem;
@@ -365,7 +364,7 @@ public class SceneGraph {
         	//System.out.println("ocrap m is null z:"+z+" x:"+x+" y:"+y+" tileHeight:"+tileHeight+" tileWidth:"+tileWidth+" j1:"+j1+" k1:"+k1+" l1:"+l1+" rotation:"+rotation+" isDynamic:"+isDynamic+" j2:"+j2+" byte0:"+byte0);
         	      node = new PglCubeStub();
         
-        }//todo - fix those non displaying objects
+        }
         interactableObject.pgleNode = node;
         for(int _x = x; _x < x + tileHeight; _x++)
         {
@@ -412,10 +411,7 @@ public class SceneGraph {
 
     private void remove(InteractableObject interactableObject)
     {
-      //  if (interactableObject.pgleNode != null){
-          //  interactableObject.pgleNode.getParent().remove(interactableObject.pgleNode);
-            interactableObject.pgleNode = null;
-     //  }
+        interactableObject.pgleNode = null;
         for(int x = interactableObject.tileLeft; x <= interactableObject.tileRight; x++)
         {
             for(int y = interactableObject.tileTop; y <= interactableObject.tileBottom; y++)
@@ -499,7 +495,7 @@ public class SceneGraph {
 
     }
 
-    public void removeGroundDecoration(int z, int y, int x)//todo - removeGroundDecoration?
+    public void removeGroundDecoration(int z, int y, int x)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -507,7 +503,7 @@ public class SceneGraph {
         tile.groundDecoration = null;
     }
 
-    public void removeGroundItemTile(int z, int x, int y)//todo - removeGroundItemTile
+    public void removeGroundItemTile(int z, int x, int y)
     {
         Tile tile = tileArray[z][x][y];
         if(tile != null)
@@ -516,7 +512,7 @@ public class SceneGraph {
         }
     }
 
-    public WallObject getWallObject(int z, int x, int y)//todo - getWallObject
+    public WallObject getWallObject(int z, int x, int y)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -525,7 +521,7 @@ public class SceneGraph {
             return tile.wallObject;
     }
 
-    public WallDecoration getWallDecoration(int x, int y, int z)//todo - getWallDecoration
+    public WallDecoration getWallDecoration(int x, int y, int z)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -534,7 +530,7 @@ public class SceneGraph {
             return tile.wallDecoration;
     }
 
-    public InteractableObject getInteractableObject(int x, int y, int z)//todo - getInteractableObject
+    public InteractableObject getInteractableObject(int x, int y, int z)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -548,7 +544,7 @@ public class SceneGraph {
         return null;
     }
 
-    public GroundDecoration getGroundDecoration(int y, int x, int z)//todo - getGroundDecoration
+    public GroundDecoration getGroundDecoration(int y, int x, int z)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.groundDecoration == null)
@@ -557,7 +553,7 @@ public class SceneGraph {
             return tile.groundDecoration;
     }
 
-    public int getWallObjectUID(int z, int x, int y)//todo - getWallObjectUID
+    public int getWallObjectUID(int z, int x, int y)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.wallObject == null)
@@ -566,7 +562,7 @@ public class SceneGraph {
             return tile.wallObject.uid;
     }
 
-    public int getWallDecorationUID(int z, int x, int y)//todo - getWallDecorationUID
+    public int getWallDecorationUID(int z, int x, int y)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.wallDecoration == null)
@@ -575,7 +571,7 @@ public class SceneGraph {
             return tile.wallDecoration.uid;
     }
 
-    public int getInteractableObjectUID(int z, int x, int y)//todo - getInteractableObjectUID
+    public int getInteractableObjectUID(int z, int x, int y)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null)
@@ -590,7 +586,7 @@ public class SceneGraph {
         return 0;
     }
 
-    public int getGroundDecorationUID(int z, int x, int y)//TODO getGroundDecorationUID
+    public int getGroundDecorationUID(int z, int x, int y)
     {
         Tile tile = tileArray[z][x][y];
         if(tile == null || tile.groundDecoration == null)
@@ -801,76 +797,70 @@ public class SceneGraph {
 
     }
 
-    public void drawMinimapTile(int pixels[], int drawOffset, int heightLevel, int x, int y)
+    public void drawMinimapTile(int y, int x, int z, int pixels[], int pixelPointer, int scanLength)
     {
-        int j = 512;//was parameter
-        Tile class30_sub3 = tileArray[heightLevel][x][y];
-        if(class30_sub3 == null)
+        Tile currentTile = tileArray[y][x][z];
+        if(currentTile == null)
             return;
-        PlainTile plainTile = class30_sub3.myPlainTile;
-        if(plainTile != null)
-        {
-            int j1 = plainTile.colourRGB;
-            if(j1 == 0)
+        PlainTile plainTile = currentTile.myPlainTile;
+        if(plainTile != null){
+            int tileRGB = plainTile.colourRGB;
+            if(tileRGB == 0)
                 return;
-            for(int k1 = 0; k1 < 4; k1++)
+            for(int linePtr = 0; linePtr < 4; linePtr++)//Draw a 4x4 square
             {
-                pixels[drawOffset] = j1;
-                pixels[drawOffset + 1] = j1;
-                pixels[drawOffset + 2] = j1;
-                pixels[drawOffset + 3] = j1;
-                drawOffset += j;
+                pixels[pixelPointer] = tileRGB;
+                pixels[pixelPointer + 1] = tileRGB;
+                pixels[pixelPointer + 2] = tileRGB;
+                pixels[pixelPointer + 3] = tileRGB;
+                pixelPointer += scanLength;
             }
 
             return;
         }
-        ShapedTile shapedTile = class30_sub3.shapedTile;
+        ShapedTile shapedTile = currentTile.shapedTile;
         if(shapedTile == null)
             return;
-        int l1 = shapedTile.shapeA;
-        int i2 = shapedTile.shapeB;
-        int j2 = shapedTile.colourRGB;
-        int k2 = shapedTile.colourRGBA;
-        int ai1[] = anIntArrayArray489[l1];
-        int ai2[] = anIntArrayArray490[i2];
-        int l2 = 0;
-        if(j2 != 0)
-        {
-            for(int i3 = 0; i3 < 4; i3++)
-            {
-                pixels[drawOffset] = ai1[ai2[l2++]] != 0 ? k2 : j2;
-                pixels[drawOffset + 1] = ai1[ai2[l2++]] != 0 ? k2 : j2;
-                pixels[drawOffset + 2] = ai1[ai2[l2++]] != 0 ? k2 : j2;
-                pixels[drawOffset + 3] = ai1[ai2[l2++]] != 0 ? k2 : j2;
-                drawOffset += j;
+        int shapeA = shapedTile.shapeA;
+        int shapeB = shapedTile.shapeB;
+        int underlayRGB = shapedTile.colourRGB;
+        int overlayRGB = shapedTile.colourRGBA;
+        int shapePoints[] = tileShapePoints[shapeA];
+        int shapeIndices[] = this.tileShapeIndices[shapeB];
+        int shapePtr = 0;
+        if(underlayRGB != 0){
+            for(int linePtr = 0; linePtr < 4; linePtr++){
+                pixels[pixelPointer]     = shapePoints[shapeIndices[shapePtr++]] != 0 ? overlayRGB : underlayRGB;
+                pixels[pixelPointer + 1] = shapePoints[shapeIndices[shapePtr++]] != 0 ? overlayRGB : underlayRGB;
+                pixels[pixelPointer + 2] = shapePoints[shapeIndices[shapePtr++]] != 0 ? overlayRGB : underlayRGB;
+                pixels[pixelPointer + 3] = shapePoints[shapeIndices[shapePtr++]] != 0 ? overlayRGB : underlayRGB;
+                pixelPointer += scanLength;
             }
-
             return;
         }
-        for(int j3 = 0; j3 < 4; j3++)
-        {
-            if(ai1[ai2[l2++]] != 0)
-                pixels[drawOffset] = k2;
-            if(ai1[ai2[l2++]] != 0)
-                pixels[drawOffset + 1] = k2;
-            if(ai1[ai2[l2++]] != 0)
-                pixels[drawOffset + 2] = k2;
-            if(ai1[ai2[l2++]] != 0)
-                pixels[drawOffset + 3] = k2;
-            drawOffset += j;
+        for(int linePtr = 0; linePtr < 4; linePtr++){
+            if(shapePoints[shapeIndices[shapePtr++]] != 0)
+                pixels[pixelPointer] = overlayRGB;
+            if(shapePoints[shapeIndices[shapePtr++]] != 0)
+                pixels[pixelPointer + 1] = overlayRGB;
+            if(shapePoints[shapeIndices[shapePtr++]] != 0)
+                pixels[pixelPointer + 2] = overlayRGB;
+            if(shapePoints[shapeIndices[shapePtr++]] != 0)
+                pixels[pixelPointer + 3] = overlayRGB;
+            pixelPointer += scanLength;
         }
 
     }
 
-    public static void initialize(int min_z, int max_z, int daW, int daH, int ai[])
+    public static void setupViewport(int min_z, int max_z, int viewportWidth, int viewportHeight, int ai[])
     {
         left = 0;
         top = 0;
-        right = daW;
-        bottom = daH;
-        midX = daW / 2;
-        midY = daH / 2;
-        boolean aflag[][][][] = new boolean[9][32][53][53];
+        right = viewportWidth;
+        bottom = viewportHeight;
+        midX = viewportWidth / 2;
+        midY = viewportHeight / 2;
+        boolean isTileOnScreen[][][][] = new boolean[9][32][53][53];
         for(int yAngle = 128; yAngle <= 384; yAngle += 32)
         {
             for(int xAngle = 0; xAngle < 2048; xAngle += 64)
@@ -896,7 +886,7 @@ public class SceneGraph {
                             break;
                         }
 
-                        aflag[yAnglePointer][xAnglePointer][x + 25 + 1][y + 25 + 1] = isVisible;
+                        isTileOnScreen[yAnglePointer][xAnglePointer][x + 25 + 1][y + 25 + 1] = isVisible;
                     }
 
                 }
@@ -905,13 +895,13 @@ public class SceneGraph {
 
         }
 
-        for(int k1 = 0; k1 < 8; k1++)
+        for(int yAnglePointer = 0; yAnglePointer < 8; yAnglePointer++)
         {
-            for(int i2 = 0; i2 < 32; i2++)
+            for(int xAnglePointer = 0; xAnglePointer < 32; xAnglePointer++)
             {
-                for(int k2 = -25; k2 < 25; k2++)
+                for(int relativeX = -25; relativeX < 25; relativeX++)
                 {
-                    for(int i3 = -25; i3 < 25; i3++)
+                    for(int relativeZ = -25; relativeZ < 25; relativeZ++)
                     {
                         boolean flag1 = false;
 label0:
@@ -919,18 +909,18 @@ label0:
                         {
                             for(int j4 = -1; j4 <= 1; j4++)
                             {
-                                if(aflag[k1][i2][k2 + l3 + 25 + 1][i3 + j4 + 25 + 1])
+                                if(isTileOnScreen[yAnglePointer][xAnglePointer][relativeX + l3 + 25 + 1][relativeZ + j4 + 25 + 1])
                                     flag1 = true;
                                 else
-                                if(aflag[k1][(i2 + 1) % 31][k2 + l3 + 25 + 1][i3 + j4 + 25 + 1])
+                                if(isTileOnScreen[yAnglePointer][(xAnglePointer + 1) % 31][relativeX + l3 + 25 + 1][relativeZ + j4 + 25 + 1])
                                     flag1 = true;
                                 else
-                                if(aflag[k1 + 1][i2][k2 + l3 + 25 + 1][i3 + j4 + 25 + 1])
+                                if(isTileOnScreen[yAnglePointer + 1][xAnglePointer][relativeX + l3 + 25 + 1][relativeZ + j4 + 25 + 1])
                                 {
                                     flag1 = true;
                                 } else
                                 {
-                                    if(!aflag[k1 + 1][(i2 + 1) % 31][k2 + l3 + 25 + 1][i3 + j4 + 25 + 1])
+                                    if(!isTileOnScreen[yAnglePointer + 1][(xAnglePointer + 1) % 31][relativeX + l3 + 25 + 1][relativeZ + j4 + 25 + 1])
                                         continue;
                                     flag1 = true;
                                 }
@@ -938,8 +928,7 @@ label0:
                             }
 
                         }
-
-                        TILE_VISIBILITY_MAPS[k1][i2][k2 + 25][i3 + 25] = flag1;
+                        TILE_VISIBILITY_MAPS[yAnglePointer][xAnglePointer][relativeX + 25][relativeZ + 25] = flag1;
                     }
 
                 }
@@ -1012,7 +1001,7 @@ label0:
             anInt452 = yMapSize;
         process_culling();
         anInt446 = 0;
-        for(int z = anInt442; z < zMapSize; z++)
+        for(int z = currentHL; z < zMapSize; z++)
         {
             Tile floorTiles[][] = tileArray[z];
             for(int x = anInt449; x < anInt450; x++)
@@ -1039,7 +1028,7 @@ label0:
 
         }
 
-        for(int z = anInt442; z < zMapSize; z++)
+        for(int z = currentHL; z < zMapSize; z++)
         {
             Tile floorTiles[][] = tileArray[z];
             for(int l2 = -25; l2 <= 0; l2++)
@@ -1094,7 +1083,7 @@ label0:
 
         }
 
-        for(int j2 = anInt442; j2 < zMapSize; j2++)
+        for(int j2 = currentHL; j2 < zMapSize; j2++)
         {
             Tile aclass30_sub3_2[][] = tileArray[j2];
             for(int j3 = -25; j3 <= 0; j3++)
@@ -2258,7 +2247,7 @@ for_outer:
     private final int yMapSize;
     private final int[][][] heightmap;
     private final Tile[][][] tileArray;
-    private int anInt442;
+    private int currentHL;
     private int interactableObjectCacheCurrPos;
     private final InteractableObject[] interactableObjectCache;
     private final int[][][] anIntArrayArrayArray445;
@@ -2333,7 +2322,7 @@ for_outer:
     private final int[] anIntArray486;
     private final int[] anIntArray487;
     private int anInt488;
-    private final int[][] anIntArrayArray489 = {
+    private final int[][] tileShapePoints = {
         new int[16], {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 1, 1, 1, 1, 1
@@ -2373,7 +2362,7 @@ for_outer:
             1, 0, 1, 1, 1, 1
         }
     };
-    private final int[][] anIntArrayArray490 = {
+    private final int[][] tileShapeIndices = {
         {
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
             10, 11, 12, 13, 14, 15

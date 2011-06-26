@@ -4,7 +4,9 @@ import javax.management.MXBean;
 
 public class Rasterizer extends Graphics2D {
 
-	public static void clearCache() {
+    public static RgbImage[] textureImagesHD = new RgbImage[670];
+
+    public static void clearCache() {
 		anIntArray1468 = null;
 		anIntArray1468 = null;
 		SINE = null;
@@ -75,7 +77,12 @@ public class Rasterizer extends Graphics2D {
 			} catch (Exception exception) {
 			}
 		}
-
+        for (int k = 0;k < textureImagesHD.length;k++)
+            try{
+                textureImagesHD[k] = new RgbImage("./hddata/texture/"+k+".png");
+            } catch (Exception ignored){
+                textureImagesHD[k] = textureImagesHD[k - 1];
+            }
 	}
 
 	public static int getAverageTextureColour(int textureId) {

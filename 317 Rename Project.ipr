@@ -167,6 +167,16 @@
         <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
       </item>
     </group>
+    <group name="RuneScape Components">
+      <item class="editor.gui.dockables.flooreditor.FloorPreviewPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="1" hsize-policy="1" anchor="0" fill="0" />
+      </item>
+    </group>
+    <group name="Peterbjornx Components">
+      <item class="editor.gui.controls.ColourEditor" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+    </group>
   </component>
   <component name="ProjectDictionaryState">
     <dictionary name="Peter">
@@ -230,6 +240,19 @@
     <mapping directory="" vcs="svn" />
   </component>
   <component name="libraryTable">
+    <library name="Docking System">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/mydoggy-plaf-1.5.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/mydoggy-res-1.5.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/swingx-0.9.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/TableLayout-20050920.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/filters-2.0.235.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/mydoggy-api-1.5.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/mydoggy-examples-1.5.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="PGLEngine">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/PGLEngine2_Library.jar!/" />
@@ -237,6 +260,9 @@
       <JAVADOC />
       <SOURCES />
     </library>
+  </component>
+  <component name="uidesigner-configuration">
+    <option name="INSTRUMENT_CLASSES" value="false" />
   </component>
 </project>
 

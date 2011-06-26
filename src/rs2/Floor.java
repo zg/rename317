@@ -2,6 +2,9 @@ package rs2;
 
 public class Floor {
 
+    public int minimapColour;
+    public int id;
+
     public static void unpackConfig(JagexArchive jagexArchive) {
         Packet stream = new Packet(jagexArchive.getDataForName("flo.dat"));
         int cacheSize = stream.g2();
@@ -10,6 +13,7 @@ public class Floor {
         for (int j = 0; j < cacheSize; j++) {
             if (cache[j] == null)
                 cache[j] = new Floor();
+            cache[j].id = j;
             cache[j].readValues(stream);
         }
         if (Config.LOAD_HD_FLO)  {
@@ -38,7 +42,7 @@ public class Floor {
             else if (opcode == 1) {
                 hdUlColour = arg0.g3();  //r3
                 int i2 = hslColour;
-                rgb2hls(hdUlColour);
+                rgb2hls(hdUlColour, true);
                 hdHslColour = hslColour;
                 hslColour = i2;
             } else if (opcode == 2) {
@@ -67,7 +71,7 @@ public class Floor {
                 int i1 = hue2;
                 hdColour = stream.g3();
                 int i2 = hslColour;
-                rgb2hls(hdColour);
+                rgb2hls(hdColour, true);
                 hdOlHslColour = hslColour;
                 hslColour = i2;
                 hue = j;
@@ -116,7 +120,7 @@ public class Floor {
                 return;
             else if (i == 1) {
                 colour2 = stream.g3();
-                rgb2hls(colour2);
+                rgb2hls(colour2, true);
             } else if (i == 2)
                 texture = stream.g1();
             else if (i == 3) {
@@ -130,7 +134,8 @@ public class Floor {
                 int l = lightness;
                 int i1 = hue2;
                 int j1 = stream.g3();
-                rgb2hls(j1);
+                minimapColour = j1;
+                rgb2hls(j1, true);
                 hue = j;
                 saturation = k;
                 lightness = l;
@@ -142,10 +147,14 @@ public class Floor {
         } while (true);
     }
 
-    private void rgb2hls(int i) {
+    public void rgb2hls(int i, boolean b2) {
         double r = (double) (i >> 16 & 0xff) / 256D;
         double g = (double) (i >> 8 & 0xff) / 256D;
         double b = (double) (i & 0xff) / 256D;
+        int j = hue;
+        int k = saturation;
+        int l = lightness;
+        int i1 = hue2;
         double cmin = r;
         if (g < cmin)
             cmin = g;
@@ -205,6 +214,13 @@ public class Floor {
             lightrand = 0;
         else if (lightrand > 255)
             lightrand = 255;
+        if (!b2){
+            this.hue = j;
+            this.saturation = k;
+            this.lightness = l;
+            this.hue2 = i1;
+            this.pCDivider = i1;
+        }
         hslColour = packHSL(huerand, satrand, lightrand);
     }
 
@@ -225,6 +241,8 @@ public class Floor {
         occlude = true;
     }
 
+
+
     public static Floor cache[];
     public int colour2;
     public int texture;
@@ -243,4 +261,45 @@ public class Floor {
     public int hdHslColour = 0;
     public int hdOlHslColour = 0;
     public String name;
+
+    public Floor cloneFLO() {
+        Floor flo2 = new Floor();
+        flo2.colour2 = colour2;
+        flo2.texture = texture;
+        flo2.occlude = occlude;
+        flo2.hdTexture = hdTexture;
+        flo2.hdColour = hdColour;
+        flo2.textureC  =textureC;
+        flo2.hdUlColour = hdUlColour;
+        flo2.hdUlTexture = hdUlTexture;
+        flo2.minimapColour = minimapColour;
+        flo2.name = name;
+        flo2.id = id;
+        return  flo2;
+    }
+
+    public void replace(Floor flo2){
+        colour2 = flo2.colour2;
+        texture = flo2.texture;
+        occlude = flo2.occlude;
+        hdTexture = flo2.hdTexture;
+        hdColour = flo2.hdColour;
+        textureC = flo2.textureC;
+        hdUlColour = flo2.hdUlColour;
+        hdUlTexture = flo2.hdUlTexture;
+        minimapColour = flo2.minimapColour;
+        name = flo2.name;
+
+    }
+
+    public static int addNew(Floor floor){
+        Floor floors[] = new Floor[cache.length + 1];
+        System.arraycopy(cache,0,floors,0,cache.length);
+        floors[cache.length] = new Floor();
+        floors[cache.length].replace(floor);
+        floors[cache.length].id = cache.length;
+        cache = floors;
+        return cache.length - 1;
+    }
+
 }
