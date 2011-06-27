@@ -1,8 +1,7 @@
 package editor.renderer;
 
-import rs2.GameShell;
+import editor.EditorMain;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -13,12 +12,12 @@ import java.awt.*;
  * Computer: Peterbjornx-PC.rootdomain.asn.local (192.168.178.27)
  * Our swing component version of RSFrame
  */
-public class GameViewPanel extends Canvas {
+public class MapViewPanel extends Canvas {
 
-    public GameViewPanel() {
+    public MapViewPanel() {
     }
 
-    public void setGameShell(GameShell shell){
+    public void setGameShell(EditorMain shell){
         gameShell = shell;
         repaint();
     }
@@ -54,43 +53,8 @@ public class GameViewPanel extends Canvas {
             g.setColor(Color.red);
             g.fillRect(0,0,getWidth(),getHeight());
         } else
-            gameShell.paint(g);
+            gameShell.paintMinimap(g);
     }
 
-    /**
-     * Calls <code>paint</code>.  Doesn't clear the background but see
-     * <code>ComponentUI.update</code>, which is called by
-     * <code>paintComponent</code>.
-     *
-     * @param g the <code>Graphics</code> context in which to paint
-     * @see #paint
-     * @see #paintComponent
-     * @see javax.swing.plaf.ComponentUI
-     */
-    @Override
-    public void update(Graphics g) {
-        if (gameShell == null){
-            g.setColor(Color.red);
-            g.fillRect(0,0,getWidth(),getHeight());
-        } else
-            gameShell.update(g);
-    }
-
-    private GameShell gameShell = null;
-
-    /**
-     * Creates a graphics context for this component. This method will
-     * return <code>null</code> if this component is currently not
-     * displayable.
-     *
-     * @return a graphics context for this component, or <code>null</code>
-     *         if it has none
-     * @see #paint
-     * @since JDK1.0
-     */
-    @Override
-    public Graphics getGraphics() {
-        Graphics g = super.getGraphics();
-        return g;
-    }
+    private EditorMain gameShell = null;
 }

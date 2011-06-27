@@ -4,12 +4,15 @@ import org.peterbjornx.pgl2.model.*;
 import pgle.PglCubeStub;
 import pgle.PglModelNode;
 
+import java.util.IllegalFormatFlagsException;
+
 public class SceneGraph {
 
     private int xCameraAngle;
     private int yCameraAngle;
     private static int visibleAreaWidth = 53;
     private static int visibleAreaHeight = 53;
+    public static final boolean USE_HD = false;
 
     public SceneGraph(int height, int width, int length, int heightmap[][][])
     {
@@ -356,6 +359,8 @@ public class SceneGraph {
         interactableObject.tileBottom = (y + tileWidth) - 1;
         Model m = (jagexNode instanceof Model) ? ((Model) jagexNode) : jagexNode.getRotatedModel();
         //Model m = ((Model) jagexNode);
+
+        if (USE_HD){
         org.peterbjornx.pgl2.model.Node node;
         if (m != null){
             node = new PglModelNode(m,isDynamic); //for now
@@ -366,6 +371,7 @@ public class SceneGraph {
         
         }
         interactableObject.pgleNode = node;
+        }
         for(int _x = x; _x < x + tileHeight; _x++)
         {
             for(int _y = y; _y < y + tileWidth; _y++)
@@ -862,9 +868,9 @@ public class SceneGraph {
         midY = viewportHeight / 2;
         int vanishingDistX = (visibleAreaWidth - 1) / 2;
         int vanishingDistY = (visibleAreaHeight - 1) / 2;
-        boolean isTileOnScreen[][][][] = new boolean[9][32][visibleAreaWidth][visibleAreaHeight];
-        TILE_VISIBILITY_MAPS = new boolean[8][32][visibleAreaWidth - 2][visibleAreaHeight - 2];
-        for(int yAngle = 128; yAngle <= 384; yAngle += 32)
+        boolean isTileOnScreen[][][][] = new boolean[64][32][visibleAreaWidth][visibleAreaHeight];
+        TILE_VISIBILITY_MAPS = new boolean[64][32][visibleAreaWidth - 2][visibleAreaHeight - 2];
+        for(int yAngle = 0; yAngle < 2048; yAngle += 32)
         {
             for(int xAngle = 0; xAngle < 2048; xAngle += 64)
             {
@@ -872,7 +878,7 @@ public class SceneGraph {
                 yCurveCosine = Model.COSINE[yAngle];
                 xCurveSine = Model.SINE[xAngle];
                 xCurveCosine = Model.COSINE[xAngle];
-                int yAnglePointer = (yAngle - 128) / 32;
+                int yAnglePointer = yAngle / 32;
                 int xAnglePointer = xAngle / 64;
                 for(int x = -vanishingDistX; x <= vanishingDistX; x++)
                 {
@@ -899,7 +905,7 @@ public class SceneGraph {
 
         }
 
-        for(int yAnglePointer = 0; yAnglePointer < 8; yAnglePointer++)
+        for(int yAnglePointer = 0; yAnglePointer < 64; yAnglePointer++)
         {
             for(int xAnglePointer = 0; xAnglePointer < 32; xAnglePointer++)
             {
@@ -919,12 +925,12 @@ label0:
                                 if(isTileOnScreen[yAnglePointer][(xAnglePointer + 1) % 31][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
                                     flag1 = true;
                                 else
-                                if(isTileOnScreen[yAnglePointer + 1][xAnglePointer][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
+                                if(isTileOnScreen[(yAnglePointer + 1) % 64][xAnglePointer][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
                                 {
                                     flag1 = true;
                                 } else
                                 {
-                                    if(!isTileOnScreen[yAnglePointer + 1][(xAnglePointer + 1) % 31][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
+                                    if(!isTileOnScreen[(yAnglePointer + 1) % 64][(xAnglePointer + 1) % 31][relativeX + l3 + vanishingDistX][relativeZ + j4 + vanishingDistY])
                                         continue;
                                     flag1 = true;
                                 }
@@ -982,7 +988,7 @@ label0:
         yCurveCosine = Model.COSINE[yCurve];
         xCurveSine = Model.SINE[xCurve];
         xCurveCosine = Model.COSINE[xCurve];
-        TILE_VISIBILITY_MAP = TILE_VISIBILITY_MAPS[(yCurve - 128) / 32][xCurve / 64];
+        TILE_VISIBILITY_MAP = TILE_VISIBILITY_MAPS[yCurve / 32][xCurve / 64];
         xCameraPosition = xCampos;
         zCameraPosition = zCampos;
         yCameraPosition = yCampos;

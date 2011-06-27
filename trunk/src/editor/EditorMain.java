@@ -3,7 +3,6 @@ package editor;
 import editor.gui.EditorMainWindow;
 import editor.renderer.GameViewPanel;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
-import pgle.PglCallClientNode;
 import rs2.*;
 import rs2.Graphics2D;
 
@@ -22,12 +21,12 @@ import java.net.InetAddress;
  */
 public class EditorMain extends GameShell implements ComponentListener {
     private EditorMainWindow editorMainWindow;
-
     public JagexFileStore[] jagexFileStores = new JagexFileStore[5];
     private JagexArchive titleJagexArchive;
     private byte[][][] tileSettingBits;
     private int[][][] heightMap;
     private SceneGraph sceneGraph;
+    private MapRegion mapRegion;
     private TileSetting[] tileSettings;
     private RSFont smallFont;
     private RSFont plainFont;
@@ -44,18 +43,28 @@ public class EditorMain extends GameShell implements ComponentListener {
     private int[] minimapShape2;
     private int fieldJ;
     private GraphicsBuffer gameScreenCanvas;
+    private int mapWidth = 2;//- Settings
+    private int mapHeight = 2;//- Settings
     private int heightLevel = 0;
-    private int xCameraPos;
-    private int yCameraPos;
-    private int xCameraCurve;
-    private int zCameraPos;
-    private int yCameraCurve;
+    private int xCameraPos=mapWidth*32*128;;
+    private int yCameraPos=mapHeight*32*128;
+    private int xCameraCurve = (int) (Math.random() * 20D) - 10 & 0x7ff;;
+    private int zCameraPos = -540;
+    private int yCameraCurve = 128;
     private GraphicsBuffer minimapIP;
     private int numOfMapMarkers = 0;
     private RgbImage[] markGraphic;
     private int[] markPosX;
     private int[] markPosY;
     private boolean mapLoaded = false;
+    private int resizeWidth = -1;
+    private int resizeHeight = -1;
+    private int currentMapX;
+    private int currentMapZ;
+    private Graphics minimapGraphics;
+    private int lastMouseX = -1;
+    private int lastMouseY = -1;
+    private int[] isOnScreen;
 
     private JagexArchive getJagexArchive(int i) {
         byte abyte0[] = null;
@@ -63,13 +72,13 @@ public class EditorMain extends GameShell implements ComponentListener {
             if (jagexFileStores[0] != null)
                 abyte0 = jagexFileStores[0].decompress(i);
         } catch (Exception _ex) {
-            JOptionPane.showMessageDialog(null,"Failed to load the cache","RuneScape Map Editor",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to load the cache", "RuneScape Map Editor", JOptionPane.ERROR_MESSAGE);
             System.exit(-1);
         }
         if (abyte0 != null) {
             return new JagexArchive(abyte0);
         }
-        JOptionPane.showMessageDialog(null,"Failed to load the cache","RuneScape Map Editor",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Failed to load the cache", "RuneScape Map Editor", JOptionPane.ERROR_MESSAGE);
         System.exit(-1);
         return null;
     }
@@ -92,7 +101,7 @@ public class EditorMain extends GameShell implements ComponentListener {
 
     @Override
     protected void startUp() {
-        drawLoadingText(20,"Starting up");
+        drawLoadingText(20, "Starting up");
         if (Signlink.sunjava)
             super.minDelay = 5;
         if (Signlink.cache_dat != null) {
@@ -107,11 +116,11 @@ public class EditorMain extends GameShell implements ComponentListener {
             JagexArchive configArchive = getJagexArchive(2);
             JagexArchive mediaArchive = getJagexArchive(4);
             JagexArchive textureArchive = getJagexArchive(6);
-            tileSettingBits = new byte[4][104][104];
-            heightMap = new int[4][105][105];
-            sceneGraph = new SceneGraph(4, 104, 104, heightMap);
+            tileSettingBits = new byte[4][64 * mapWidth][64 * mapHeight];
+            heightMap = new int[4][64 * mapWidth + 1][64 * mapHeight + 1];
+            sceneGraph = new SceneGraph(4, 64 * mapWidth, 64 * mapHeight, heightMap);
             for (int j = 0; j < 4; j++)
-                tileSettings[j] = new TileSetting();
+                tileSettings[j] = new TileSetting(64 * mapWidth, 64 * mapHeight);
 
             minimapImage = new RgbImage(512, 512);
             JagexArchive crcArchive = getJagexArchive(5);
@@ -134,7 +143,7 @@ public class EditorMain extends GameShell implements ComponentListener {
                 } catch (Exception ignored) {
                 }
                 if (onDemandFetcher.anInt1349 > 3) {
-                    JOptionPane.showMessageDialog(null,"Failed to load animations","RuneScape Map Editor",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Failed to load animations", "RuneScape Map Editor", JOptionPane.ERROR_MESSAGE);
                     System.exit(-1);
                     return;
                 }
@@ -197,7 +206,7 @@ public class EditorMain extends GameShell implements ComponentListener {
             } catch (Exception ignored) {
             }
             mapMarker = new RgbImage(mediaArchive, "mapmarker", 1);
-                        drawLoadingText(83, "Unpacking textures");
+            drawLoadingText(83, "Unpacking textures");
             Rasterizer.unpackTextures(textureArchive);
             Rasterizer.calculatePalette(0.80000000000000004D);
             Rasterizer.resetTextures(20);
@@ -213,69 +222,60 @@ public class EditorMain extends GameShell implements ComponentListener {
             VarBit.unpackConfig(configArchive);
             ItemDef.isMembers = true;
             drawLoadingText(100, "Preparing game engine");
-            for (int j6 = 0; j6 < 33; j6++) {
-                int k6 = 999;
-                int i7 = 0;
-                for (int k7 = 0; k7 < 34; k7++) {
-                    if (k6 == 999)
-                        k6 = k7;
-                }
 
-                compassShape1[j6] = k6;
-                compassShape2[j6] = i7 - k6;
-            }
+			for (int x = 0; x < compassShape2.length; x++) {
+				compassShape2[x] = 170;
+				compassShape1[x] = -23;
+			}
+			for (int x = 0; x < minimapShape2.length; x++) {
+				minimapShape2[x] = 170;
+				minimapShape1[x] = -23;
+			}
 
-            for (int l6 = 5; l6 < 156; l6++) {
-                int j7 = 999;
-                int l7 = 0;
-                for (int j8 = 25; j8 < 172; j8++) {
-                    if (j7 == 999)
-                        j7 = j8;
-                }
-
-                minimapShape1[l6 - 5] = j7 - 25;
-                minimapShape2[l6 - 5] = l7 - j7;
-            }
             int vpW = editorMainWindow.getGameViewPanel().getWidth();
             int vpH = editorMainWindow.getGameViewPanel().getHeight();
-            minimapIP = new GraphicsBuffer(vpW,vpH,getGameComponent());
-            gameScreenCanvas = new GraphicsBuffer(vpW,vpH,getGameComponent());
+            minimapIP = new GraphicsBuffer(vpW, vpH, getGameComponent());
+            gameScreenCanvas = new GraphicsBuffer(vpW, vpH, getGameComponent());
             Rasterizer.setBounds(vpW, vpH);
-            int ai[] = new int[9];
-            for (int i8 = 0; i8 < 9; i8++) {
-                int k8 = 128 + i8 * 32 + 15;
+            isOnScreen = new int[64];
+            for (int i8 = 0; i8 < 64; i8++) {
+                int k8 = i8 * 32 + 15;
                 int l8 = 600 + k8 * 3;
                 int i9 = Rasterizer.SINE[k8];
-                ai[i8] = l8 * i9 >> 16;
+                isOnScreen[i8] = l8 * i9 >> 16;
             }
-            SceneGraph.setupViewport(500, 800, vpW, vpH, ai);
+            SceneGraph.setupViewport(500, 800, vpW, vpH, isOnScreen);
             editorMainWindow.getGameViewPanel().addComponentListener(this);
+            editorMainWindow.getMapViewPanel().setGameShell(this);
+            editorMainWindow.editorStarted();
+            loadMap(3136,3136);
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null,"Failed to start up","RuneScape Map Editor",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to start up", "RuneScape Map Editor", JOptionPane.ERROR_MESSAGE);
+            exception.printStackTrace();
             System.exit(-1);
         }
     }
 
-    public void resize3D(){
-            int vpW = editorMainWindow.getGameViewPanel().getWidth();
-            int vpH = editorMainWindow.getGameViewPanel().getHeight();
-            gameScreenCanvas = new GraphicsBuffer(vpW,vpH,getGameComponent());
-            int ai[] = new int[9];
-            for (int i8 = 0; i8 < 9; i8++) {
-                int k8 = 128 + i8 * 32 + 15;
-                int l8 = 600 + k8 * 3;
-                int i9 = Rasterizer.SINE[k8];
-                ai[i8] = l8 * i9 >> 16;
-            }
-            Rasterizer.setBounds(vpW, vpH);
-            SceneGraph.setupViewport(500, 800, vpW, vpH, ai);
-
+    public void processResize() {
+        startGraphicsBlock();
+        gameScreenCanvas = new GraphicsBuffer(resizeWidth, resizeHeight, getGameComponent());
+        Graphics2D.fillRect(0, 0, resizeWidth, resizeHeight, 0);
+        Rasterizer.setBounds(resizeWidth, resizeHeight);
+        SceneGraph.setupViewport(500, 800, resizeWidth, resizeHeight, isOnScreen);
+        resizeWidth = -1;
+        resizeHeight = -1;
+        endGraphicsBlock();
+        repaint();
     }
 
     @Override
     protected void doLogic() {
         if (onDemandFetcher != null)
             on_demand_process();
+        if (mapLoaded)
+            processInput();
+        if (resizeWidth != -1)
+            processResize();
     }
 
     @Override
@@ -284,32 +284,38 @@ public class EditorMain extends GameShell implements ComponentListener {
 
     @Override
     protected void repaintGame() {
+        gameScreenCanvas.drawGraphics(0, graphics, 0);
     }
 
     @Override
     protected void drawGame() {
-        if (mapLoaded){
-            drawScene();
-            drawMinimap();
+        try {
+            if (mapLoaded) {
+                drawScene();
+                drawMinimap();
+            }
+            gameScreenCanvas.drawGraphics(0, graphics, 0);
+        } catch (Exception e){
+
         }
 
     }
 
-    private void startEditor(){
+    private void startEditor() {
         try {
             GameViewPanel gameViewPanel;
             editorMainWindow = new EditorMainWindow();
             editorMainWindow.show();
             gameViewPanel = editorMainWindow.getGameViewPanel();
             Signlink.startpriv(InetAddress.getLocalHost());
-            initialize(gameViewPanel.getWidth(),gameViewPanel.getHeight());
+            initialize(gameViewPanel.getWidth(), gameViewPanel.getHeight());
             gameViewPanel.setGameShell(this);
             SceneGraph.lowMem = false;
             Rasterizer.lowMem = false;
             MapRegion.lowMem = false;
             ObjectDef.lowMem = false;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Failed to start the application!","RuneScape Map Editor",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to start the application!", "RuneScape Map Editor", JOptionPane.ERROR_MESSAGE);
             System.exit(-1);
         }
     }
@@ -320,6 +326,8 @@ public class EditorMain extends GameShell implements ComponentListener {
 
     private void drawMapScenes(int y, int k, int x, int i1, int z) {
         int interactableObjectUID = sceneGraph.getWallObjectUID(z, x, y);
+            int mhTile = mapHeight*64;
+            int mwTile = mapWidth*64;
         if (interactableObjectUID != 0) {
             int l1 = sceneGraph.getIDTAGForXYZ(z, x, y, interactableObjectUID);
             int k2 = l1 >> 6 & 3;
@@ -328,7 +336,7 @@ public class EditorMain extends GameShell implements ComponentListener {
             if (interactableObjectUID > 0)
                 k3 = i1;
             int ai[] = minimapImage.myPixels;
-            int k4 = 24624 + x * 4 + (103 - y) * 512 * 4;
+            int k4 = x * 4 + ((mhTile - 1) - y) * 512 * 4;
             int i5 = interactableObjectUID >> 14 & 0x7fff;
             ObjectDef class46_2 = ObjectDef.forID(i5);
             if (class46_2.mapSceneID != -1) {
@@ -336,7 +344,7 @@ public class EditorMain extends GameShell implements ComponentListener {
                 if (indexedImage_2 != null) {
                     int i6 = (class46_2.sizeX * 4 - indexedImage_2.imgWidth) / 2;
                     int j6 = (class46_2.sizeY * 4 - indexedImage_2.imgHeight) / 2;
-                    indexedImage_2.drawImage(48 + x * 4 + i6, 48 + (104 - y - class46_2.sizeY) * 4 + j6);
+                    indexedImage_2.drawImage(x * 4 + i6, (mhTile - y - class46_2.sizeY) * 4 + j6);
                 }
             } else {
                 if (i3 == 0 || i3 == 2)
@@ -406,14 +414,14 @@ public class EditorMain extends GameShell implements ComponentListener {
                 if (indexedImage_1 != null) {
                     int j5 = (class46_1.sizeX * 4 - indexedImage_1.imgWidth) / 2;
                     int k5 = (class46_1.sizeY * 4 - indexedImage_1.imgHeight) / 2;
-                    indexedImage_1.drawImage(48 + x * 4 + j5, 48 + (104 - y - class46_1.sizeY) * 4 + k5);
+                    indexedImage_1.drawImage(x * 4 + j5,(mhTile - y - class46_1.sizeY) * 4 + k5);
                 }
             } else if (j3 == 9) {
                 int l4 = 0xeeeeee;
                 if (interactableObjectUID > 0)
                     l4 = 0xee0000;
                 int ai1[] = minimapImage.myPixels;
-                int l5 = 24624 + x * 4 + (103 - y) * 512 * 4;
+                int l5 = x * 4 + ((mhTile - 1) - y) * 512 * 4;
                 if (l2 == 0 || l2 == 2) {
                     ai1[l5 + 1536] = l4;
                     ai1[l5 + 1024 + 1] = l4;
@@ -436,36 +444,86 @@ public class EditorMain extends GameShell implements ComponentListener {
                 if (indexedImage != null) {
                     int i4 = (class46.sizeX * 4 - indexedImage.imgWidth) / 2;
                     int j4 = (class46.sizeY * 4 - indexedImage.imgHeight) / 2;
-                    indexedImage.drawImage(48 + x * 4 + i4, 48 + (104 - y - class46.sizeY) * 4 + j4);
+                    indexedImage.drawImage(x * 4 + i4, (mhTile - y - class46.sizeY) * 4 + j4);
                 }
             }
         }
     }
 
-    public void loadMap(int x,int z){
+    public void loadMap(int x, int z) {
+        x /= 64;
+        z /= 64;
+        currentMapX = x;
+        currentMapZ = z;
+        //Clean region-local caches
+        Rasterizer.clearTextureCache();
+        sceneGraph.initToNull();
+        ObjectDef.memCache1.unlinkAll();
+        ObjectDef.memCache2.unlinkAll();
+        System.gc();
+        for (int i = 0; i < 4; i++)
+            tileSettings[i].init();
+        for (int l = 0; l < 4; l++) {
+            for (int k1 = 0; k1 < mapWidth*64; k1++) {
+                for (int j2 = 0; j2 < mapHeight*64; j2++)
+                    tileSettingBits[l][k1][j2] = 0;
+            }
+        }
+
         //TODO: Actually load the map
+        mapRegion = new MapRegion(mapWidth*64,mapHeight*64,tileSettingBits,heightMap);
+        for (int _x = 0;_x < mapWidth;_x++)
+            for (int _z = 0;_z < mapHeight;_z++){
+                int terrainIdx = onDemandFetcher.getMapIndex(0,z+_z,x+_x);
+                if (terrainIdx == -1){
+                    mapRegion.initMapTables(_z*64,64,64,_x*64);
+                    continue;
+                }
+                byte[] terrainData = JavaUncompress.decompress(jagexFileStores[4].decompress(terrainIdx));
+                if (terrainData == null){
+                    mapRegion.initMapTables(_z*64,64,64,_x*64);
+                    continue;
+                }
+                mapRegion.loadTerrain(terrainData,_z*64,_x*64,x*64,z*64,tileSettings);
+            }
+        for (int _x = 0;_x < mapWidth;_x++)
+            for (int _z = 0;_z < mapHeight;_z++){
+                int objectIdx = onDemandFetcher.getMapIndex(1,z+_z,x+_x);
+                if (objectIdx == -1)
+                    continue;
+                byte[] objectData = JavaUncompress.decompress(jagexFileStores[4].decompress(objectIdx));
+                if (objectData == null)
+                    continue;
+                mapRegion.loadObjects(_x*64,tileSettings,_z*64,sceneGraph,objectData);
+            }
+        mapRegion.addTiles(tileSettings,sceneGraph);
+        System.gc();
+        Rasterizer.resetTextures(20);
+        onDemandFetcher.method566();
         mapLoaded = true;
         setHeightLevel(0);
     }
 
-    public void setHeightLevel(int hL){
+    public void setHeightLevel(int hL) {
         heightLevel = hL;
-        rendedMapScene(hL);
+        renderMinimap(hL);
+        repaint();
     }
 
-    private void rendedMapScene(int i) {
+    private void renderMinimap(int _y) {
         int ai[] = minimapImage.myPixels;
         int j = ai.length;
         for (int k = 0; k < j; k++)
             ai[k] = 0;
-
-        for (int l = 1; l < 103; l++) {
-            int i1 = 24628 + (103 - l) * 512 * 4;
-            for (int k1 = 1; k1 < 103; k1++) {
-                if ((tileSettingBits[i][k1][l] & 0x18) == 0)
-                    sceneGraph.drawMinimapTile(i, k1, l, ai, i1, 512);
-                if (i < 3 && (tileSettingBits[i + 1][k1][l] & 8) != 0)
-                    sceneGraph.drawMinimapTile(i + 1, k1, l, ai, i1, 512);
+        int mwTile = mapWidth*64;
+        int mhTile = mapHeight*64;
+        for (int _z = 1; _z < mhTile - 1; _z++) {
+            int i1 = ((mhTile - 1) - _z) * 512 * 4;
+            for (int _x = 1; _x < mwTile - 1; _x++) {
+                if ((tileSettingBits[_y][_x][_z] & 0x18) == 0)
+                    sceneGraph.drawMinimapTile(_y, _x, _z, ai, i1, 512);
+                if (_y < 3 && (tileSettingBits[_y + 1][_x][_z] & 8) != 0)
+                    sceneGraph.drawMinimapTile(_y + 1, _x, _z, ai, i1, 512);
                 i1 += 4;
             }
 
@@ -474,12 +532,12 @@ public class EditorMain extends GameShell implements ComponentListener {
         int j1 = ((238 + (int) (Math.random() * 20D)) - 10 << 16) + ((238 + (int) (Math.random() * 20D)) - 10 << 8) + ((238 + (int) (Math.random() * 20D)) - 10);
         int l1 = (238 + (int) (Math.random() * 20D)) - 10 << 16;
         minimapImage.initDrawingArea();
-        for (int i2 = 1; i2 < 103; i2++) {
-            for (int j2 = 1; j2 < 103; j2++) {
-                if ((tileSettingBits[i][j2][i2] & 0x18) == 0)
-                    drawMapScenes(i2, j1, j2, l1, i);
-                if (i < 3 && (tileSettingBits[i + 1][j2][i2] & 8) != 0)
-                    drawMapScenes(i2, j1, j2, l1, i + 1);
+        for (int _z = 1; _z < mhTile-1; _z++) {
+            for (int _x = 1; _x < mwTile-1; _x++) {
+                if ((tileSettingBits[_y][_x][_z] & 0x18) == 0)
+                    drawMapScenes(_z, j1, _x, l1, _y);
+                if (_y < 3 && (tileSettingBits[_y + 1][_x][_z] & 8) != 0)
+                    drawMapScenes(_z, j1, _x, l1, _y + 1);
             }
 
         }
@@ -540,17 +598,20 @@ public class EditorMain extends GameShell implements ComponentListener {
 
     private void drawMinimap() {
         minimapIP.initDrawingArea();
+        Graphics2D.resetImage();
         int i = xCameraCurve & 0x7ff;
         int j = 48 + xCameraPos / 32;
         int l2 = 464 - zCameraPos / 32;
-        minimapImage.rotate(151, i, minimapShape2, 256, minimapShape1, l2, 5, 25, 146, j);
-        compass.rotate(33, xCameraCurve, compassShape2, 256, compassShape1, 25, 0, 0, 33, 25);
+        minimapImage.rotate(j, l2, 146, 151, i, minimapShape2, 256, minimapShape1, 5, 25);
+        compass.rotate(25, 25, 33, 33, xCameraCurve, compassShape2, 256, compassShape1, 0, 0);
         for (int j5 = 0; j5 < numOfMapMarkers; j5++) {
             int mapX = (markPosX[j5] * 4 + 2) - xCameraPos / 32;
             int mapY = (markPosY[j5] * 4 + 2) - zCameraPos / 32;
             markMinimap(markGraphic[j5], mapX, mapY);
         }
         Graphics2D.fillRect(97, 78, 3, 3, 0xffffff);
+        if (minimapGraphics != null && editorMainWindow.getMapViewPanel().getGraphics() != null)
+            minimapIP.drawGraphics(0,editorMainWindow.getMapViewPanel().getGraphics(),0);
         gameScreenCanvas.initDrawingArea();
     }
 
@@ -565,6 +626,7 @@ public class EditorMain extends GameShell implements ComponentListener {
         Model.resourceCount = 0;
         Model.cursorXPos = super.mouseEventX - 4;
         Model.cursorYPos = super.mouseEventY - 4;
+        gameScreenCanvas.initDrawingArea();
         Graphics2D.resetImage();
         //xxx disables graphics            if(graphicsEnabled){
         //pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);
@@ -575,7 +637,6 @@ public class EditorMain extends GameShell implements ComponentListener {
         //    renderNode = new PglCallClientNode();
         //    pglWrapper.scene.add(renderNode);
         // }
-        gameScreenCanvas.initDrawingArea();
         renderscene();
         //pglWrapper.process();
         sceneGraph.clearInteractableObjectCache();
@@ -590,24 +651,77 @@ public class EditorMain extends GameShell implements ComponentListener {
     }
 
     private void draw3dScreen() {
-            char x = 20;
-            int y = 20;
-            int colour = 0xffff00;
-            if (super.fps < 15)
-                colour = 0xff0000;
-            plainFont.method380("Fps:" + super.fps, x, colour, y);
-            y += 15;
-            Runtime runtime = Runtime.getRuntime();
-            int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024L));
-            colour = 0xffff00;
-            plainFont.method380("Heap usage:" + j1 + "m", x, 0xffff00, y);
-            y += 15;
-            plainFont.method380("Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", x, colour, y);
-            y += 15;
+        char x = 20;
+        int y = 20;
+        int colour = 0xffff00;
+        if (super.fps < 15)
+            colour = 0xff0000;
+        plainFont.drawTextHLeftVMid(colour,"Fps:" + super.fps, y, x);
+        y += 15;
+        Runtime runtime = Runtime.getRuntime();
+        int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024L));
+        plainFont.drawTextHLeftVMid(0xffff00,"Heap usage:" + j1 + "m",y, x);
+        y += 15;
+        plainFont.drawTextHLeftVMid(0xffff00,"Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", y, x);
+        y += 15;
     }
 
-    public void drawMinimap(Graphics g){
-        minimapIP.drawGraphics(0,g,0);
+    public void paintMinimap(Graphics g) {
+        minimapGraphics = g;
+        minimapIP.drawGraphics(0, g, 0);
+    }
+
+    private void processInput() {
+        if (mouseButtonDown == 2 && lastMouseX != -1){
+            int mouseDeltaX = mouseEventX - lastMouseX;
+            int mouseDeltaY = mouseEventY - lastMouseY;
+            lastMouseX = mouseEventX;
+            lastMouseY = mouseEventY;
+            xCameraCurve += mouseDeltaX;
+            yCameraCurve += mouseDeltaY;
+        }
+        if (mouseButtonDown == 0 && lastMouseX != -1 ){
+            lastMouseX = -1;
+            lastMouseY = -1;
+        }
+        if (mouseButtonPressed == 2 && lastMouseX == -1){
+            lastMouseX = clickX;
+            lastMouseY = clickY;
+        }
+        if (xCameraPos < 0)
+        {
+            xCameraPos = 0;
+        }
+        if (yCameraPos <=-1)
+        {
+            yCameraPos = 0;
+        }
+        if (xCameraCurve < 0)
+        {
+            xCameraCurve = 2047;
+        }
+        if (yCameraCurve < 0)
+        {
+            yCameraCurve = 2047;
+        }
+        if (xCameraCurve / 64 >= 32)
+        {
+            xCameraCurve = 0;
+        }
+        if (yCameraCurve > 2047)
+        {
+            yCameraCurve = 0;
+        }
+        if (keyStatus['w'] == 1){
+            xCameraPos -= Rasterizer.SINE[xCameraCurve] >> 10;
+            yCameraPos += Rasterizer.COSINE[xCameraCurve] >> 10;
+            zCameraPos += Rasterizer.SINE[yCameraCurve] >> 10;
+        }
+        if (keyStatus['s'] == 1){
+            xCameraPos += Rasterizer.SINE[xCameraCurve] >> 10;
+            yCameraPos -= Rasterizer.COSINE[xCameraCurve] >> 10;
+            zCameraPos -= Rasterizer.SINE[yCameraCurve] >> 10;
+        }
     }
 
     @Override
@@ -623,7 +737,8 @@ public class EditorMain extends GameShell implements ComponentListener {
      * Invoked when the component's size changes.
      */
     public void componentResized(ComponentEvent e) {
-        resize3D();
+        resizeWidth = editorMainWindow.getGameViewPanel().getWidth();
+        resizeHeight = editorMainWindow.getGameViewPanel().getHeight();
     }
 
     /**

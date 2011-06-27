@@ -587,7 +587,7 @@ public class ItemDef
     public int value;
     private int[] originalModelColours;
     public int id;
-    static MemCache memCache1 = new MemCache(100);
+    public static MemCache memCache1 = new MemCache(100);
     public static MemCache memCache2 = new MemCache(50);
     private int[] modifiedModelColours;
     public boolean membersObject;

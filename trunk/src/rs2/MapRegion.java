@@ -872,15 +872,15 @@ label0:
 
     }
 
-    public final void loadTerrain(byte abyte0[], int i, int j, int k, int l, TileSetting aclass11[])
+    public final void loadTerrain(byte abyte0[], int zOffset, int xOffset, int k, int l, TileSetting aclass11[])
     {
-        for(int i1 = 0; i1 < 4; i1++)
+        for(int _y = 0; _y < 4; _y++)
         {
-            for(int j1 = 0; j1 < 64; j1++)
+            for(int _x = 0; _x < 64; _x++)
             {
-                for(int k1 = 0; k1 < 64; k1++)
-                    if(j + j1 > 0 && j + j1 < xMapSize - 1 && i + k1 > 0 && i + k1 < yMapSize - 1)
-                        aclass11[i1].clipData[j + j1][i + k1] &= 0xfeffffff;
+                for(int _z = 0; _z < 64; _z++)
+                    if(xOffset + _x > 0 && xOffset + _x < xMapSize - 1 && zOffset + _z > 0 && zOffset + _z < yMapSize - 1)
+                        aclass11[_y].clipData[xOffset + _x][zOffset + _z] &= 0xfeffffff;
 
             }
 
@@ -892,7 +892,7 @@ label0:
             for(int i2 = 0; i2 < 64; i2++)
             {
                 for(int j2 = 0; j2 < 64; j2++)
-                    readTile(l1, i2 + j, j2 + i, k, l, 0, stream);
+                    readTile(l1, i2 + xOffset, j2 + zOffset, k, l, 0, stream);
 
             }
 
@@ -1368,7 +1368,7 @@ label0:
     return bool;
   }
 
-    public final void method190(int xOff, TileSetting aclass11[], int yOff, SceneGraph sceneGraph, byte abyte0[])
+    public final void loadObjects(int xOff, TileSetting aclass11[], int yOff, SceneGraph sceneGraph, byte abyte0[])
     {
 label0:
         {

@@ -4,13 +4,13 @@ package rs2;
 public class TileSetting
 {
 
-    public TileSetting()
+    public TileSetting(int sizeX, int sizeY)
     {
         anInt290 = 0;
         anInt291 = 0;
-        sizeX = 104;
-        sizeY = 104;
-        clipData = new int[sizeX][sizeY];
+        this.sizeX = sizeX;//104;
+        this.sizeY = sizeY;//104;
+        clipData = new int[this.sizeX][this.sizeY];
         init();
     }
 

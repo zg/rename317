@@ -11,6 +11,7 @@ import pgle.PglModelNode;
 
 import java.awt.color.ICC_ColorSpace;
 import java.util.HashMap;
+import java.util.UnknownFormatConversionException;
 
 import static org.lwjgl.opengl.GL11.glLightModel;
 
@@ -23,22 +24,24 @@ public class Entity extends NodeSub {
         Model model = this instanceof Model ? (Model) this : getRotatedModel();
         if(model != null)
         {
-            PglModelNode pgleNode = modelPool.get(model);
-            if (pgleNode == null){
-                mismatchCounter++;
-                if (mismatchCounter == 5000 && modelPool.size() >= 10000){
-                    mismatchCounter = 0;
-                    modelPool.clear();
+            if (SceneGraph.USE_HD){
+                PglModelNode pgleNode = modelPool.get(model);
+                if (pgleNode == null){
+                    mismatchCounter++;
+                    if (mismatchCounter == 5000 && modelPool.size() >= 10000){
+                        mismatchCounter = 0;
+                        modelPool.clear();
+                    }
+                    pgleNode = new PglModelNode(model,true);
+                    modelPool.put(model,pgleNode);
                 }
-                pgleNode = new PglModelNode(model,true);
-                modelPool.put(model,pgleNode);
-            }
-            if (pgleNode != null)
-                renderAtPoint(pgleNode,i,j1,k1,l1);
-            if (pgleNode != null && this instanceof Projectile){
-                setEffectLight(Rasterizer.hsl2rgb[model.triangleColour[0]]);
-                effectLight.enable();
-                effectLight.loadValues();
+                if (pgleNode != null)
+                    renderAtPoint(pgleNode,i,j1,k1,l1);
+                if (pgleNode != null && this instanceof Projectile){
+                    setEffectLight(Rasterizer.hsl2rgb[model.triangleColour[0]]);
+                    effectLight.enable();
+                    effectLight.loadValues();
+                }
             }
             modelHeight = model.modelHeight;
             model.renderAtPoint2(i, j, k, l, i1, j1, k1, l1, i2);

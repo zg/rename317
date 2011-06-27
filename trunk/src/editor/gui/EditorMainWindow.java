@@ -5,6 +5,7 @@ import editor.gui.dockables.SettingsBrushEditor;
 import editor.gui.dockables.ToolSelectionBar;
 import editor.gui.dockables.flooreditor.FloorEditorWindow;
 import editor.renderer.GameViewPanel;
+import editor.renderer.MapViewPanel;
 import info.clearthought.layout.TableLayout;
 import org.noos.xing.mydoggy.*;
 import org.noos.xing.mydoggy.plaf.MyDoggyToolWindowManager;
@@ -12,6 +13,7 @@ import org.noos.xing.mydoggy.plaf.MyDoggyToolWindowManager;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,6 +44,7 @@ public class EditorMainWindow {
     private GameViewPanel gameViewPanel;
     private FloorEditorWindow floorEditorWindow;
     private SettingsBrushEditor settingsBrushEditorWindow;
+    private MapViewPanel mapViewPanel;
 
 
     public EditorMainWindow(){
@@ -66,7 +69,7 @@ public class EditorMainWindow {
         MyDoggyToolWindowManager myDoggyToolWindowManager = new MyDoggyToolWindowManager();
         toolWindowManager = myDoggyToolWindowManager;
         toolSelectionBar = new ToolSelectionBar();
-        toolWindowManager.registerToolWindow("Tools",null,null,toolSelectionBar.getMainPane(), ToolWindowAnchor.TOP);
+        toolWindowManager.registerToolWindow("Tools", null, null, toolSelectionBar.getMainPane(), ToolWindowAnchor.TOP);
         floorTypeSelectionWindow = new FloorTypeSelection();
         floorTypeSelectionWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
@@ -83,7 +86,9 @@ public class EditorMainWindow {
                 floorTypeSelectionWindow.refresh();
             }
         });
-        toolWindowManager.registerToolWindow("Floor Editor","Floor editor",null,floorEditorWindow.getMainPane(), ToolWindowAnchor.RIGHT);
+        toolWindowManager.registerToolWindow("Floor Editor", "Floor editor", null, floorEditorWindow.getMainPane(), ToolWindowAnchor.RIGHT);
+        mapViewPanel = new MapViewPanel();
+        toolWindowManager.registerToolWindow("Minimap", null, null, mapViewPanel, ToolWindowAnchor.RIGHT);
         settingsBrushEditorWindow = new SettingsBrushEditor();
         toolWindowManager.registerToolWindow("Settings Editor","Settings brush editor",null,settingsBrushEditorWindow.getMainPane(), ToolWindowAnchor.RIGHT);
         for (ToolWindow window : toolWindowManager.getToolWindows())
@@ -130,5 +135,13 @@ public class EditorMainWindow {
 
     public GameViewPanel getGameViewPanel() {
         return gameViewPanel;
+    }
+
+    public MapViewPanel getMapViewPanel() {
+        return mapViewPanel;
+    }
+
+    public void editorStarted() {
+        floorTypeSelectionWindow.loadFloors();
     }
 }
