@@ -6116,23 +6116,23 @@ public class Client extends GameShell {
             RSInterface.unpack(jagexArchive_1, aclass30_sub2_sub1_sub4s, jagexArchive_2);
             drawLoadingText(100, "Preparing game engine");
             drawLogo();
-            for (int j6 = 0; j6 < 33; j6++) {
-                int k6 = 999;
-                int i7 = 0;
-                for (int k7 = 0; k7 < 34; k7++) {
-                    if (mapBack.imgPixels[k7 + j6 * mapBack.imgWidth] == 0) {
-                        if (k6 == 999)
-                            k6 = k7;
+            for (int _y = 0; _y < 33; _y++) {
+                int firstXOfLine = 999;
+                int lastXOfLine = 0;
+                for (int _x = 0; _x < 34; _x++) {
+                    if (mapBack.imgPixels[_x + _y * mapBack.imgWidth] == 0) {
+                        if (firstXOfLine == 999)
+                            firstXOfLine = _x;
                         continue;
-                    }
-                    if (k6 == 999)
+                    }//IF we are here pixel is not part of compass
+                    if (firstXOfLine == 999)
                         continue;
-                    i7 = k7;
+                    lastXOfLine = _x;
                     break;
                 }
 
-                compassShape1[j6] = k6;
-                compassShape2[j6] = i7 - k6;
+                compassShape1[_y] = firstXOfLine;
+                compassShape2[_y] = lastXOfLine - firstXOfLine;
             }
 
             for (int l6 = 5; l6 < 156; l6++) {

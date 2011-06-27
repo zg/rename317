@@ -6,22 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/editor/renderer/MapViewPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/EditorMain.java" afterPath="$PROJECT_DIR$/src/editor/EditorMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java" afterPath="$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorPreviewPanel.java" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorPreviewPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/renderer/GameViewPanel.java" afterPath="$PROJECT_DIR$/src/editor/renderer/GameViewPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Client.java" afterPath="$PROJECT_DIR$/src/rs2/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Entity.java" afterPath="$PROJECT_DIR$/src/rs2/Entity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GameShell.java" afterPath="$PROJECT_DIR$/src/rs2/GameShell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ItemDef.java" afterPath="$PROJECT_DIR$/src/rs2/ItemDef.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/JavaUncompress.java" afterPath="$PROJECT_DIR$/src/rs2/JavaUncompress.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MapRegion.java" afterPath="$PROJECT_DIR$/src/rs2/MapRegion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSFont.java" afterPath="$PROJECT_DIR$/src/rs2/RSFont.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GraphicsBuffer.java" afterPath="$PROJECT_DIR$/src/rs2/GraphicsBuffer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RgbImage.java" afterPath="$PROJECT_DIR$/src/rs2/RgbImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/TileSetting.java" afterPath="$PROJECT_DIR$/src/rs2/TileSetting.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -117,20 +105,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EditorMain.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="EditorMain.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="604" column="22" selection-start="24545" selection-end="24545" vertical-scroll-proportion="-8.76">
+            <state line="595" column="121" selection-start="24612" selection-end="24612" vertical-scroll-proportion="0.5862069">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#on_demand_process#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#shutdown#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#startEditor#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#drawMapScenes#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#loadMap#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#setHeightLevel#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#renderMinimap#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#markMinimap#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#draw3dScreen#0;class#EditorMain#0" expanded="false" />
               </folding>
             </state>
@@ -149,7 +134,7 @@
       <file leaf-file-name="GraphicsBuffer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/GraphicsBuffer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="0" selection-start="778" selection-end="778" vertical-scroll-proportion="0.0">
+            <state line="10" column="8" selection-start="204" selection-end="210" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -164,11 +149,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RgbImage.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RgbImage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/RgbImage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="397" column="21" selection-start="10298" selection-end="10298" vertical-scroll-proportion="0.18313953">
-              <folding />
+            <state line="433" column="91" selection-start="11981" selection-end="11981" vertical-scroll-proportion="-3.88">
+              <folding>
+                <element signature="method#rotate#2;class#RgbImage#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,7 +174,7 @@
       <file leaf-file-name="SceneGraph.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="891" column="0" selection-start="35428" selection-end="35428" vertical-scroll-proportion="0.0">
+            <state line="817" column="0" selection-start="32044" selection-end="32044" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -205,10 +192,8 @@
       <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10038" column="29" selection-start="423815" selection-end="423815" vertical-scroll-proportion="-43.56">
-              <folding>
-                <element signature="method#method146#0;class#Client#0" expanded="false" />
-              </folding>
+            <state line="8823" column="17" selection-start="374950" selection-end="374950" vertical-scroll-proportion="5.28">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -232,7 +217,6 @@
         <option value="$PROJECT_DIR$/src/rs2/GameShell.java" />
         <option value="$PROJECT_DIR$/src/editor/renderer/MapViewPanel.java" />
         <option value="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" />
-        <option value="$PROJECT_DIR$/src/rs2/Client.java" />
         <option value="$PROJECT_DIR$/src/rs2/JavaUncompress.java" />
         <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
         <option value="$PROJECT_DIR$/src/rs2/TileSetting.java" />
@@ -241,8 +225,9 @@
         <option value="$PROJECT_DIR$/src/rs2/RSFont.java" />
         <option value="$PROJECT_DIR$/src/rs2/Entity.java" />
         <option value="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
-        <option value="$PROJECT_DIR$/src/editor/EditorMain.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Client.java" />
         <option value="$PROJECT_DIR$/src/rs2/RgbImage.java" />
+        <option value="$PROJECT_DIR$/src/editor/EditorMain.java" />
       </list>
     </option>
   </component>
@@ -768,7 +753,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31658292" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22044241" sideWeight="0.74451756" order="3" side_tool="false" content_ui="tabs" />
@@ -779,11 +764,11 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32160804" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283082" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19450802" sideWeight="0.61337686" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951945" sideWeight="0.61337686" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951945" sideWeight="0.69983685" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3998477" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3318078" sideWeight="0.69983685" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3318078" sideWeight="0.7063621" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30016312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29363784" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20289855" sideWeight="0.74451756" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -881,22 +866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="29" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10038" column="29" selection-start="423815" selection-end="423815" vertical-scroll-proportion="-43.56">
-          <folding>
-            <element signature="method#method146#0;class#Client#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="139" column="24" selection-start="5691" selection-end="5691" vertical-scroll-proportion="0.3322785">
@@ -911,13 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/GraphicsBuffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="778" selection-end="778" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/GameShell.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="293" column="0" selection-start="8635" selection-end="8635" vertical-scroll-proportion="-3.88">
@@ -927,9 +889,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+    <entry file="file://$PROJECT_DIR$/src/editor/renderer/MapViewPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="891" column="0" selection-start="35428" selection-end="35428" vertical-scroll-proportion="0.0">
+        <state line="55" column="31" selection-start="1777" selection-end="1777" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/GraphicsBuffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="8" selection-start="204" selection-end="210" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="29" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -941,35 +917,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/renderer/MapViewPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/rs2/RgbImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="31" selection-start="1777" selection-end="1777" vertical-scroll-proportion="0.0">
+        <state line="433" column="91" selection-start="11981" selection-end="11981" vertical-scroll-proportion="-3.88">
+          <folding>
+            <element signature="method#rotate#2;class#RgbImage#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="817" column="0" selection-start="32044" selection-end="32044" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8823" column="17" selection-start="374950" selection-end="374950" vertical-scroll-proportion="5.28">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="604" column="22" selection-start="24545" selection-end="24545" vertical-scroll-proportion="-8.76">
+        <state line="595" column="121" selection-start="24612" selection-end="24612" vertical-scroll-proportion="0.5862069">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#on_demand_process#0;class#EditorMain#0" expanded="false" />
             <element signature="method#shutdown#0;class#EditorMain#0" expanded="false" />
             <element signature="method#startEditor#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#drawMapScenes#0;class#EditorMain#0" expanded="false" />
             <element signature="method#loadMap#0;class#EditorMain#0" expanded="false" />
             <element signature="method#setHeightLevel#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#renderMinimap#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#markMinimap#0;class#EditorMain#0" expanded="false" />
             <element signature="method#draw3dScreen#0;class#EditorMain#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/RgbImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="397" column="21" selection-start="10298" selection-end="10298" vertical-scroll-proportion="0.18313953">
-          <folding />
         </state>
       </provider>
     </entry>

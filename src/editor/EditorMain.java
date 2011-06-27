@@ -122,7 +122,7 @@ public class EditorMain extends GameShell implements ComponentListener {
             for (int j = 0; j < 4; j++)
                 tileSettings[j] = new TileSetting(64 * mapWidth, 64 * mapHeight);
 
-            minimapImage = new RgbImage(512, 512);
+            minimapImage = new RgbImage(786, 786);
             JagexArchive crcArchive = getJagexArchive(5);
             drawLoadingText(60, "Loading update data");
             onDemandFetcher = new OnDemandFetcher();
@@ -224,17 +224,17 @@ public class EditorMain extends GameShell implements ComponentListener {
             drawLoadingText(100, "Preparing game engine");
 
 			for (int x = 0; x < compassShape2.length; x++) {
-				compassShape2[x] = 170;
-				compassShape1[x] = -23;
+				compassShape2[x] = compass.myWidth;
+				compassShape1[x] = 1;
 			}
 			for (int x = 0; x < minimapShape2.length; x++) {
-				minimapShape2[x] = 170;
-				minimapShape1[x] = -23;
+				minimapShape2[x] = 256;
+				minimapShape1[x] = 1;
 			}
 
             int vpW = editorMainWindow.getGameViewPanel().getWidth();
             int vpH = editorMainWindow.getGameViewPanel().getHeight();
-            minimapIP = new GraphicsBuffer(vpW, vpH, getGameComponent());
+            minimapIP = new GraphicsBuffer(256, 256, getGameComponent());
             gameScreenCanvas = new GraphicsBuffer(vpW, vpH, getGameComponent());
             Rasterizer.setBounds(vpW, vpH);
             isOnScreen = new int[64];
@@ -336,7 +336,7 @@ public class EditorMain extends GameShell implements ComponentListener {
             if (interactableObjectUID > 0)
                 k3 = i1;
             int ai[] = minimapImage.myPixels;
-            int k4 = x * 4 + ((mhTile - 1) - y) * 512 * 4;
+            int k4 = (128 + 128 * 786) +  x * 4 + ((mhTile - 1) - y) * 786 * 4;
             int i5 = interactableObjectUID >> 14 & 0x7fff;
             ObjectDef class46_2 = ObjectDef.forID(i5);
             if (class46_2.mapSceneID != -1) {
@@ -344,15 +344,15 @@ public class EditorMain extends GameShell implements ComponentListener {
                 if (indexedImage_2 != null) {
                     int i6 = (class46_2.sizeX * 4 - indexedImage_2.imgWidth) / 2;
                     int j6 = (class46_2.sizeY * 4 - indexedImage_2.imgHeight) / 2;
-                    indexedImage_2.drawImage(x * 4 + i6, (mhTile - y - class46_2.sizeY) * 4 + j6);
+                    indexedImage_2.drawImage(128 + x * 4 + i6, 128 + (mhTile - y - class46_2.sizeY) * 4 + j6);
                 }
             } else {
                 if (i3 == 0 || i3 == 2)
                     if (k2 == 0) {
                         ai[k4] = k3;
-                        ai[k4 + 512] = k3;
-                        ai[k4 + 1024] = k3;
-                        ai[k4 + 1536] = k3;
+                        ai[k4 + 786] = k3;
+                        ai[k4 + 786*2] = k3;
+                        ai[k4 + 786*3] = k3;
                     } else if (k2 == 1) {
                         ai[k4] = k3;
                         ai[k4 + 1] = k3;
@@ -360,14 +360,14 @@ public class EditorMain extends GameShell implements ComponentListener {
                         ai[k4 + 3] = k3;
                     } else if (k2 == 2) {
                         ai[k4 + 3] = k3;
-                        ai[k4 + 3 + 512] = k3;
-                        ai[k4 + 3 + 1024] = k3;
-                        ai[k4 + 3 + 1536] = k3;
+                        ai[k4 + 3 + 786] = k3;
+                        ai[k4 + 3 + 786*2] = k3;
+                        ai[k4 + 3 + 786*3] = k3;
                     } else if (k2 == 3) {
-                        ai[k4 + 1536] = k3;
-                        ai[k4 + 1536 + 1] = k3;
-                        ai[k4 + 1536 + 2] = k3;
-                        ai[k4 + 1536 + 3] = k3;
+                        ai[k4 + 786*3] = k3;
+                        ai[k4 + 786*3 + 1] = k3;
+                        ai[k4 + 786*3 + 2] = k3;
+                        ai[k4 + 786*3 + 3] = k3;
                     }
                 if (i3 == 3)
                     if (k2 == 0)
@@ -375,15 +375,15 @@ public class EditorMain extends GameShell implements ComponentListener {
                     else if (k2 == 1)
                         ai[k4 + 3] = k3;
                     else if (k2 == 2)
-                        ai[k4 + 3 + 1536] = k3;
+                        ai[k4 + 3 + 786*3] = k3;
                     else if (k2 == 3)
-                        ai[k4 + 1536] = k3;
+                        ai[k4 + 786*3] = k3;
                 if (i3 == 2)
                     if (k2 == 3) {
                         ai[k4] = k3;
-                        ai[k4 + 512] = k3;
-                        ai[k4 + 1024] = k3;
-                        ai[k4 + 1536] = k3;
+                        ai[k4 + 786] = k3;
+                        ai[k4 + 786*2] = k3;
+                        ai[k4 + 786*3] = k3;
                     } else if (k2 == 0) {
                         ai[k4] = k3;
                         ai[k4 + 1] = k3;
@@ -391,14 +391,14 @@ public class EditorMain extends GameShell implements ComponentListener {
                         ai[k4 + 3] = k3;
                     } else if (k2 == 1) {
                         ai[k4 + 3] = k3;
-                        ai[k4 + 3 + 512] = k3;
-                        ai[k4 + 3 + 1024] = k3;
-                        ai[k4 + 3 + 1536] = k3;
+                        ai[k4 + 3 + 786] = k3;
+                        ai[k4 + 3 + 786*2] = k3;
+                        ai[k4 + 3 + 786*3] = k3;
                     } else if (k2 == 2) {
-                        ai[k4 + 1536] = k3;
-                        ai[k4 + 1536 + 1] = k3;
-                        ai[k4 + 1536 + 2] = k3;
-                        ai[k4 + 1536 + 3] = k3;
+                        ai[k4 + 786*3] = k3;
+                        ai[k4 + 786*3 + 1] = k3;
+                        ai[k4 + 786*3 + 2] = k3;
+                        ai[k4 + 786*3 + 3] = k3;
                     }
             }
         }
@@ -414,24 +414,24 @@ public class EditorMain extends GameShell implements ComponentListener {
                 if (indexedImage_1 != null) {
                     int j5 = (class46_1.sizeX * 4 - indexedImage_1.imgWidth) / 2;
                     int k5 = (class46_1.sizeY * 4 - indexedImage_1.imgHeight) / 2;
-                    indexedImage_1.drawImage(x * 4 + j5,(mhTile - y - class46_1.sizeY) * 4 + k5);
+                    indexedImage_1.drawImage(128 + x * 4 + j5,128 + (mhTile - y - class46_1.sizeY) * 4 + k5);
                 }
             } else if (j3 == 9) {
                 int l4 = 0xeeeeee;
                 if (interactableObjectUID > 0)
                     l4 = 0xee0000;
                 int ai1[] = minimapImage.myPixels;
-                int l5 = x * 4 + ((mhTile - 1) - y) * 512 * 4;
+                int l5 = (128 + 128 * 786) + x * 4 + ((mhTile - 1) - y) * 786 * 4;
                 if (l2 == 0 || l2 == 2) {
-                    ai1[l5 + 1536] = l4;
-                    ai1[l5 + 1024 + 1] = l4;
-                    ai1[l5 + 512 + 2] = l4;
+                    ai1[l5 + 786*3] = l4;
+                    ai1[l5 + 786*2 + 1] = l4;
+                    ai1[l5 + 786 + 2] = l4;
                     ai1[l5 + 3] = l4;
                 } else {
                     ai1[l5] = l4;
-                    ai1[l5 + 512 + 1] = l4;
-                    ai1[l5 + 1024 + 2] = l4;
-                    ai1[l5 + 1536 + 3] = l4;
+                    ai1[l5 + 786 + 1] = l4;
+                    ai1[l5 + 786*2 + 2] = l4;
+                    ai1[l5 + 786*3 + 3] = l4;
                 }
             }
         }
@@ -444,7 +444,7 @@ public class EditorMain extends GameShell implements ComponentListener {
                 if (indexedImage != null) {
                     int i4 = (class46.sizeX * 4 - indexedImage.imgWidth) / 2;
                     int j4 = (class46.sizeY * 4 - indexedImage.imgHeight) / 2;
-                    indexedImage.drawImage(x * 4 + i4, (mhTile - y - class46.sizeY) * 4 + j4);
+                    indexedImage.drawImage(128 + x * 4 + i4,128 +  (mhTile - y - class46.sizeY) * 4 + j4);
                 }
             }
         }
@@ -518,12 +518,12 @@ public class EditorMain extends GameShell implements ComponentListener {
         int mwTile = mapWidth*64;
         int mhTile = mapHeight*64;
         for (int _z = 1; _z < mhTile - 1; _z++) {
-            int i1 = ((mhTile - 1) - _z) * 512 * 4;
+            int i1 = (128 + 128 * 786) + ((mhTile - 1) - _z) * 786 * 4;
             for (int _x = 1; _x < mwTile - 1; _x++) {
                 if ((tileSettingBits[_y][_x][_z] & 0x18) == 0)
-                    sceneGraph.drawMinimapTile(_y, _x, _z, ai, i1, 512);
+                    sceneGraph.drawMinimapTile(_y, _x, _z, ai, i1, 786);
                 if (_y < 3 && (tileSettingBits[_y + 1][_x][_z] & 8) != 0)
-                    sceneGraph.drawMinimapTile(_y + 1, _x, _z, ai, i1, 512);
+                    sceneGraph.drawMinimapTile(_y + 1, _x, _z, ai, i1, 786);
                 i1 += 4;
             }
 
@@ -544,35 +544,35 @@ public class EditorMain extends GameShell implements ComponentListener {
 
         gameScreenCanvas.initDrawingArea();
         numOfMapMarkers = 0;
-        for (int x = 0; x < 104; x++) {
-            for (int y = 0; y < 104; y++) {
+        for (int x = 0; x < mwTile; x++) {
+            for (int y = 0; y < mhTile; y++) {
                 int i3 = sceneGraph.getGroundDecorationUID(heightLevel, x, y);
                 if (i3 != 0) {
                     i3 = i3 >> 14 & 0x7fff;
                     int j3 = ObjectDef.forID(i3).mapFunctionID;
                     if (j3 >= 0) {
-                        int k3 = x;
-                        int l3 = y;
+                        int smth_X = x;
+                        int smth_Y = y;
                         if (j3 != 22 && j3 != 29 && j3 != 34 && j3 != 36 && j3 != 46 && j3 != 47 && j3 != 48) {
-                            byte byte0 = 104;
-                            byte byte1 = 104;
+                            byte byte0 = (byte) mwTile;
+                            byte byte1 = (byte) mhTile;
                             int ai1[][] = tileSettings[heightLevel].clipData;
                             for (int i4 = 0; i4 < 10; i4++) {
                                 int j4 = (int) (Math.random() * 4D);
-                                if (j4 == 0 && k3 > 0 && k3 > x - 3 && (ai1[k3 - 1][l3] & 0x1280108) == 0)
-                                    k3--;
-                                if (j4 == 1 && k3 < byte0 - 1 && k3 < x + 3 && (ai1[k3 + 1][l3] & 0x1280180) == 0)
-                                    k3++;
-                                if (j4 == 2 && l3 > 0 && l3 > y - 3 && (ai1[k3][l3 - 1] & 0x1280102) == 0)
-                                    l3--;
-                                if (j4 == 3 && l3 < byte1 - 1 && l3 < y + 3 && (ai1[k3][l3 + 1] & 0x1280120) == 0)
-                                    l3++;
+                                if (j4 == 0 && smth_X > 0 && smth_X > x - 3 && (ai1[smth_X - 1][smth_Y] & 0x1280108) == 0)
+                                    smth_X--;
+                                if (j4 == 1 && smth_X < byte0 - 1 && smth_X < x + 3 && (ai1[smth_X + 1][smth_Y] & 0x1280180) == 0)
+                                    smth_X++;
+                                if (j4 == 2 && smth_Y > 0 && smth_Y > y - 3 && (ai1[smth_X][smth_Y - 1] & 0x1280102) == 0)
+                                    smth_Y--;
+                                if (j4 == 3 && smth_Y < byte1 - 1 && smth_Y < y + 3 && (ai1[smth_X][smth_Y + 1] & 0x1280120) == 0)
+                                    smth_Y++;
                             }
 
                         }
                         markGraphic[numOfMapMarkers] = mapFunctions[j3];
-                        markPosX[numOfMapMarkers] = k3;
-                        markPosY[numOfMapMarkers] = l3;
+                        markPosX[numOfMapMarkers] = smth_X;
+                        markPosY[numOfMapMarkers] = smth_Y;
                         numOfMapMarkers++;
                     }
                 }
@@ -582,34 +582,34 @@ public class EditorMain extends GameShell implements ComponentListener {
 
     }
 
-    private void markMinimap(RgbImage rgbImage, int i, int j) {
+    private void markMinimap(RgbImage rgbImage, int x, int y) {
         int k = xCameraCurve & 0x7ff;
-        int l = i * i + j * j;
-        if (l > 6400)
+        int c = x * x + y * y;
+        if (c > 6400)
             return;
-        int i1 = Model.SINE[k];
-        int j1 = Model.COSINE[k];
-        i1 = (i1 * 256) / (256);
-        j1 = (j1 * 256) / (256);
-        int k1 = j * i1 + i * j1 >> 16;
-        int l1 = j * j1 - i * i1 >> 16;
-        rgbImage.drawSprite(((94 + k1) - rgbImage.w2 / 2) + 4, 83 - l1 - rgbImage.h2 / 2 - 4);
+        int sine = Model.SINE[k];
+        int cosine = Model.COSINE[k];
+         sine = ( sine * 256) / (256);
+        cosine = (cosine * 256) / (256);
+        int xthing = y * sine + x * cosine >> 16;
+        int ything = y * cosine - x * sine >> 16;
+        rgbImage.drawSprite((((minimapIP.canvasWidth/2 - 5) + xthing) - rgbImage.w2 / 2) + 4, (minimapIP.canvasHeight/2-3) - ything - rgbImage.h2 / 2 - 4);
     }
 
     private void drawMinimap() {
         minimapIP.initDrawingArea();
         Graphics2D.resetImage();
         int i = xCameraCurve & 0x7ff;
-        int j = 48 + xCameraPos / 32;
-        int l2 = 464 - zCameraPos / 32;
-        minimapImage.rotate(j, l2, 146, 151, i, minimapShape2, 256, minimapShape1, 5, 25);
-        compass.rotate(25, 25, 33, 33, xCameraCurve, compassShape2, 256, compassShape1, 0, 0);
+        int j = 128+xCameraPos / 32;
+        int l2 = (786-128) - yCameraPos / 32;
+        minimapImage.rotate(j, l2, minimapIP.canvasWidth, minimapIP.canvasHeight, xCameraCurve, 0, 0);
+        compass.rotate(25, 25, 33, 33, xCameraCurve, 0, 0);
         for (int j5 = 0; j5 < numOfMapMarkers; j5++) {
             int mapX = (markPosX[j5] * 4 + 2) - xCameraPos / 32;
-            int mapY = (markPosY[j5] * 4 + 2) - zCameraPos / 32;
+            int mapY = (markPosY[j5] * 4 + 2) - yCameraPos / 32;
             markMinimap(markGraphic[j5], mapX, mapY);
         }
-        Graphics2D.fillRect(97, 78, 3, 3, 0xffffff);
+        Graphics2D.fillRect(minimapIP.canvasWidth/2, minimapIP.canvasHeight/2, 3, 3, 0xffffff);
         if (minimapGraphics != null && editorMainWindow.getMapViewPanel().getGraphics() != null)
             minimapIP.drawGraphics(0,editorMainWindow.getMapViewPanel().getGraphics(),0);
         gameScreenCanvas.initDrawingArea();
