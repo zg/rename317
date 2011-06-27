@@ -1,5 +1,7 @@
 package editor.renderer;
 
+import rs2.GameShell;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,8 +11,17 @@ import java.awt.*;
  * Date: 6/24/11
  * Time: 7:15 PM
  * Computer: Peterbjornx-PC.rootdomain.asn.local (192.168.178.27)
+ * Our swing component version of RSFrame
  */
 public class GameViewPanel extends JPanel {
+
+    public GameViewPanel() {
+    }
+
+    public void setGameShell(GameShell shell){
+        gameShell = shell;
+        repaint();
+    }
 
     /**
      * Invoked by Swing to draw components.
@@ -39,9 +50,11 @@ public class GameViewPanel extends JPanel {
      */
     @Override
     public void paint(Graphics g) {
-        //super.paint(g);    //To change body of overridden methods use File | Settings | File Templates.
-        g.setColor(Color.red);
-        g.fillRect(0,0,getWidth(),getHeight());
+        if (gameShell == null){
+            g.setColor(Color.red);
+            g.fillRect(0,0,getWidth(),getHeight());
+        } else
+            gameShell.paint(g);
     }
 
     /**
@@ -56,6 +69,12 @@ public class GameViewPanel extends JPanel {
      */
     @Override
     public void update(Graphics g) {
-        paint(g);    //To change body of overridden methods use File | Settings | File Templates.
+        if (gameShell == null){
+            g.setColor(Color.red);
+            g.fillRect(0,0,getWidth(),getHeight());
+        } else
+            gameShell.update(g);
     }
+
+    private GameShell gameShell = null;
 }

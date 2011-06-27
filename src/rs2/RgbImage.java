@@ -116,7 +116,7 @@ public class RgbImage extends Graphics2D {
 
     public void initDrawingArea()
     {
-        init(myHeight, myWidth, myPixels);
+        setTarget(myHeight, myWidth, myPixels);
     }
 
     public void shiftColours(int i, int j, int k)

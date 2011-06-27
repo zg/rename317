@@ -3,7 +3,7 @@ package rs2;
 public class Animation
 {
 
-    public static void method528(int i)
+    public static void initialize(int i)
     {
     	aAnimationArray635 = new rs2.Animation[i + 1];
         aBooleanArray643 = new boolean[i + 1];

@@ -27,7 +27,9 @@ public class FloorTypeSelection extends JPanel {
         loadFloors();
     }
 
-    private void loadFloors() {
+    public void loadFloors() {
+        if (Floor.cache == null)
+            return;
         floorButtons = new JButton[Floor.cache.length];
         for (int i = 0;i < Floor.cache.length;i++)
             addFloorJButton(i);

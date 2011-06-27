@@ -3,7 +3,7 @@ package rs2;
 
 public class Graphics2D extends NodeSub {
 
-	public static void init(int height, int width, int pixels[]) {
+	public static void setTarget(int height, int width, int pixels[]) {
 		Graphics2D.pixels = pixels;
 		Graphics2D.width = width;
 		Graphics2D.height = height;
