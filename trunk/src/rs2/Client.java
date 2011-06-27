@@ -6181,6 +6181,7 @@ public class Client extends GameShell {
             return;
         } catch (Exception exception) {
             Signlink.reporterror("loaderror " + aString1049 + " " + anInt1079);
+            exception.printStackTrace();
         }
         loadingError = true;
     }
