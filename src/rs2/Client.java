@@ -472,7 +472,7 @@ public class Client extends GameShell {
                     if (abyte1 != null) {
                         int l8 = (mapCoordinates[i6] >> 8) * 64 - baseX;
                         int k9 = (mapCoordinates[i6] & 0xff) * 64 - baseY;
-                        mapRegion.method190(l8, tileSettings, k9, sceneGraph, abyte1);
+                        mapRegion.loadObjects(l8, tileSettings, k9, sceneGraph, abyte1);
                     }
                 }
 
@@ -599,10 +599,10 @@ public class Client extends GameShell {
         for (int l3 = k; l3 <= j1; l3++) {
             for (int j5 = i2; j5 <= l2; j5++)
                 if (l3 == k || l3 == j1 || j5 == i2 || j5 == l2) {
-                    int j7 = onDemandFetcher.method562(0, j5, l3);
+                    int j7 = onDemandFetcher.getMapIndex(0, j5, l3);
                     if (j7 != -1)
                         onDemandFetcher.method560(j7, 3);
-                    int k8 = onDemandFetcher.method562(1, j5, l3);
+                    int k8 = onDemandFetcher.getMapIndex(1, j5, l3);
                     if (k8 != -1)
                         onDemandFetcher.method560(k8, 3);
                 }
@@ -2194,7 +2194,7 @@ public class Client extends GameShell {
 
     private int method54() {
         for (int i = 0; i < terrainData.length; i++) {
-            if (terrainData[i] == null && anIntArray1235[i] != -1)
+            if (terrainData[i] == null && terrainIndices[i] != -1)
                 return -1;
             if (aByteArrayArray1247[i] == null && anIntArray1236[i] != -1)
                 return -2;
@@ -2344,10 +2344,10 @@ public class Client extends GameShell {
                     saveMidi(songChanging, onDemandData.buffer);
                 if (onDemandData.dataType == 3 && loadingStage == 1) {
                     for (int i = 0; i < terrainData.length; i++) {
-                        if (anIntArray1235[i] == onDemandData.ID) {
+                        if (terrainIndices[i] == onDemandData.ID) {
                             terrainData[i] = onDemandData.buffer;
                             if (onDemandData.buffer == null)
-                                anIntArray1235[i] = -1;
+                                terrainIndices[i] = -1;
                             break;
                         }
                         if (anIntArray1236[i] != onDemandData.ID)
@@ -4018,7 +4018,7 @@ public class Client extends GameShell {
         mapCoordinates = null;
         terrainData = null;
         aByteArrayArray1247 = null;
-        anIntArray1235 = null;
+        terrainIndices = null;
         anIntArray1236 = null;
         intGroundArray = null;
         tileSettingBits = null;
@@ -5852,7 +5852,7 @@ public class Client extends GameShell {
             intGroundArray = new int[4][105][105];
             sceneGraph = new SceneGraph(4, 104, 104, intGroundArray);
             for (int j = 0; j < 4; j++)
-                tileSettings[j] = new TileSetting();
+                tileSettings[j] = new TileSetting(104, 104);
 
             minimapImage = new RgbImage(512, 512);
             JagexArchive jagexArchive_6 = streamLoaderForName(5, "update list", "versionlist", expectedCRCs[5], 60);
@@ -5923,18 +5923,18 @@ public class Client extends GameShell {
             }
             if (jagexFileStores[0] != null) {
                 drawLoadingText(75, "Requesting maps");
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 48, 47));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 48, 47));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 48, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 48, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 48, 49));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 48, 49));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 47, 47));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 47, 47));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 47, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 47, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(0, 148, 48));
-                onDemandFetcher.method558(3, onDemandFetcher.method562(1, 148, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(0, 48, 47));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(1, 48, 47));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(0, 48, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(1, 48, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(0, 48, 49));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(1, 48, 49));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(0, 47, 47));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(1, 47, 47));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(0, 47, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(1, 47, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(0, 148, 48));
+                onDemandFetcher.method558(3, onDemandFetcher.getMapIndex(1, 148, 48));
                 k = onDemandFetcher.getNodeCount();
                 while (onDemandFetcher.getNodeCount() > 0) {
                     int j2 = k - onDemandFetcher.getNodeCount();
@@ -7966,7 +7966,7 @@ public class Client extends GameShell {
                 if (abyte0[i5] == 0)
                     ai[i5] = 0;
 
-            compass.rotate(33, minimapInt1, compassShape2, 256, compassShape1, 25, 0, 0, 33, 25);
+            compass.rotate(25, 25, 33, 33, minimapInt1, compassShape2, 256, compassShape1, 0, 0);
 
             gameScreenCanvas.initDrawingArea();
             return;
@@ -7974,8 +7974,8 @@ public class Client extends GameShell {
         int i = minimapInt1 + minimapInt2 & 0x7ff;
         int j = 48 + session_player.boundExtentX / 32;
         int l2 = 464 - session_player.boundExtentY / 32;
-        minimapImage.rotate(151, i, minimapShape2, 256 + minimapInt3, minimapShape1, l2, 5, 25, 146, j);
-        compass.rotate(33, minimapInt1, compassShape2, 256, compassShape1, 25, 0, 0, 33, 25);
+        minimapImage.rotate(j, l2, 146, 151, i, minimapShape2, 256 + minimapInt3, minimapShape1, 5, 25);
+        compass.rotate(25, 25, 33, 33, minimapInt1, compassShape2, 256, compassShape1, 0, 0);
         for (int j5 = 0; j5 < numOfMapMarkers; j5++) {
             int mapX = (markPosX[j5] * 4 + 2) - session_player.boundExtentX / 32;
             int mapY = (markPosY[j5] * 4 + 2) - session_player.boundExtentY / 32;
@@ -9220,21 +9220,21 @@ public class Client extends GameShell {
                     terrainData = new byte[k16][];
                     aByteArrayArray1247 = new byte[k16][];
                     mapCoordinates = new int[k16];
-                    anIntArray1235 = new int[k16];
+                    terrainIndices = new int[k16];
                     anIntArray1236 = new int[k16];
                     k16 = 0;
-                    for (int l23 = (anInt1069 - 6) / 8; l23 <= (anInt1069 + 6) / 8; l23++) {
+                    for (int mapx = (anInt1069 - 6) / 8; mapx <= (anInt1069 + 6) / 8; mapx++) {
                         for (int j26 = (anInt1070 - 6) / 8; j26 <= (anInt1070 + 6) / 8; j26++) {
-                            mapCoordinates[k16] = (l23 << 8) + j26;
-                            if (aBoolean1141 && (j26 == 49 || j26 == 149 || j26 == 147 || l23 == 50 || l23 == 49 && j26 == 47)) {
-                                anIntArray1235[k16] = -1;
+                            mapCoordinates[k16] = (mapx << 8) + j26;
+                            if (aBoolean1141 && (j26 == 49 || j26 == 149 || j26 == 147 || mapx == 50 || mapx == 49 && j26 == 47)) {
+                                terrainIndices[k16] = -1;
                                 anIntArray1236[k16] = -1;
                                 k16++;
                             } else {
-                                int k28 = anIntArray1235[k16] = onDemandFetcher.method562(0, j26, l23);
+                                int k28 = terrainIndices[k16] = onDemandFetcher.getMapIndex(0, j26, mapx);
                                 if (k28 != -1)
                                     onDemandFetcher.method558(3, k28);
-                                int j30 = anIntArray1236[k16] = onDemandFetcher.method562(1, j26, l23);
+                                int j30 = anIntArray1236[k16] = onDemandFetcher.getMapIndex(1, j26, mapx);
                                 if (j30 != -1)
                                     onDemandFetcher.method558(3, j30);
                                 k16++;
@@ -9274,16 +9274,16 @@ public class Client extends GameShell {
                     terrainData = new byte[l16][];
                     aByteArrayArray1247 = new byte[l16][];
                     mapCoordinates = new int[l16];
-                    anIntArray1235 = new int[l16];
+                    terrainIndices = new int[l16];
                     anIntArray1236 = new int[l16];
                     for (int l26 = 0; l26 < l16; l26++) {
                         int i29 = mapCoordinates[l26] = ai[l26];
                         int l30 = i29 >> 8 & 0xff;
                         int l31 = i29 & 0xff;
-                        int j32 = anIntArray1235[l26] = onDemandFetcher.method562(0, l31, l30);
+                        int j32 = terrainIndices[l26] = onDemandFetcher.getMapIndex(0, l31, l30);
                         if (j32 != -1)
                             onDemandFetcher.method558(3, j32);
-                        int i33 = anIntArray1236[l26] = onDemandFetcher.method562(1, l31, l30);
+                        int i33 = anIntArray1236[l26] = onDemandFetcher.getMapIndex(1, l31, l30);
                         if (i33 != -1)
                             onDemandFetcher.method558(3, i33);
                     }
@@ -10729,7 +10729,7 @@ public class Client extends GameShell {
     private TileSetting[] tileSettings;
     private boolean aBoolean1233;
     private int[] mapCoordinates;
-    private int[] anIntArray1235;
+    private int[] terrainIndices;
     private int[] anIntArray1236;
     private int anInt1237;
     private int anInt1238;

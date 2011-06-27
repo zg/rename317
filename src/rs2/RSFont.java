@@ -76,9 +76,9 @@ public class RSFont extends Graphics2D {
         }
     }
 
-    public void method380(String s, int i, int j, int k)
+    public void method380(String s, int x, int c, int y)
     {
-        drawTextHLeftVMid(j, s, k, i - method384(s));
+        drawTextHLeftVMid(c, s, y, x - method384(s));
     }
 
     public void drawText(int i, String s, int k, int l)

@@ -1,9 +1,6 @@
 package editor.gui.dockables.flooreditor;
 
-import rs2.Floor;
-import rs2.Graphics2D;
-import rs2.GraphicsBuffer;
-import rs2.Rasterizer;
+import rs2.*;
 
 import javax.swing.*;
 import javax.swing.text.ZoneView;
@@ -56,6 +53,7 @@ public class FloorPreviewPanel extends JPanel{
      */
     @Override
     public void paint(Graphics g) {    //TODO: Add texture colour blending
+        GameShell.startGraphicsBlock();
         graphicsBuffer.initDrawingArea();
         Graphics2D.resetImage();
         if (myFloor != null)
@@ -93,6 +91,7 @@ public class FloorPreviewPanel extends JPanel{
             }
         else
             Graphics2D.fillRect(0, 0, 128, 128, 0xFF0000);
+        GameShell.endGraphicsBlock();
         graphicsBuffer.drawGraphics(0,g,0);
     }
 

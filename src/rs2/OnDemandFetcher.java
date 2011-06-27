@@ -558,7 +558,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         return onDemandData;
     }
 
-    public int method562(int i, int k, int l)
+    public int getMapIndex(int i, int k, int l)
     {
         int i1 = (l << 8) + k;
         for(int j1 = 0; j1 < mapIndices1.length; j1++)

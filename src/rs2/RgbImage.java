@@ -395,8 +395,7 @@ public class RgbImage extends Graphics2D {
         }
     }
 
-    public void rotate(int height, int angle, int widthmap[], int hingesize, int ai1[], int center_y,
-                          int j1, int k1, int width, int center_x)
+    public void rotate(int center_x, int center_y, int width, int height, int angle, int widthmap[], int hingesize, int ai1[], int j1, int k1)
     {
         try
         {

@@ -1,6 +1,7 @@
 package rs2;
 
 
+import javax.swing.text.MutableAttributeSet;
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,6 +10,9 @@ import java.awt.event.*;
 public class
 
         GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
+
+    private static final Object graphicsMutex = new Object();
+    private static boolean inGraphicsBlock = false;
 
     protected final void initializeApp(int width, int height) {
         myWidth = width;
@@ -99,7 +103,9 @@ public class
             count &= 0xff;
             if (delayTime > 0)
                 fps = (1000 * ratio) / (delayTime * 256);
+            startGraphicsBlock();
             drawGame();
+            endGraphicsBlock();
             if (gameShellDumpRequested) {
                 System.out.println("ntime:" + ntime);
                 for (int l2 = 0; l2 < 10; l2++) {
@@ -116,6 +122,23 @@ public class
         }
         if (gameState == -1)
             exit();
+    }
+
+    public static void startGraphicsBlock(){  //Synchronized to prevent race conditions
+        synchronized (graphicsMutex){
+            while(inGraphicsBlock)
+                try {
+                    graphicsMutex.wait();
+                } catch (InterruptedException ignored) {}
+            inGraphicsBlock = true;
+        }
+    }
+
+    public static void endGraphicsBlock(){
+        synchronized (graphicsMutex){
+            inGraphicsBlock = false;
+            graphicsMutex.notify();
+        }
     }
 
     private void exit() {
