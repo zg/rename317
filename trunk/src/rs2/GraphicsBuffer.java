@@ -69,8 +69,8 @@ public class GraphicsBuffer
 	}
 
 	public final int[] componentPixels;
-	private final int canvasWidth;
-	private final int canvasHeight;
+	public final int canvasWidth;
+	public final int canvasHeight;
 	private final ColorModel colorModel;
 	private ImageConsumer myImageConsumer;
 	private final Image image;

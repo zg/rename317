@@ -395,35 +395,35 @@ public class RgbImage extends Graphics2D {
         }
     }
 
-    public void rotate(int center_x, int center_y, int width, int height, int angle, int widthmap[], int hingesize, int ai1[], int j1, int k1)
+    public void rotate(int center_x, int center_y, int width, int height, int angle, int widthmap[], int hingesize, int ai1[], int some_y, int some_x)
     {
         try
         {
-            int j2 = -width / 2;
-            int k2 = -height / 2;
+            int negCenterX = -width / 2;
+            int negCenterY = -height / 2;
             int __pyoffset = (int)(Math.sin((double)angle / 326.11000000000001D) * 65536D);
             int __pxoffset = (int)(Math.cos((double)angle / 326.11000000000001D) * 65536D);
             __pyoffset = __pyoffset * hingesize >> 8;
             __pxoffset = __pxoffset * hingesize >> 8;
-            int j3 = (center_x << 16) + (k2 * __pyoffset + j2 * __pxoffset);
-            int k3 = (center_y << 16) + (k2 * __pxoffset - j2 * __pyoffset);
-            int l3 = k1 + j1 * Graphics2D.width;
-            for(j1 = 0; j1 < height; j1++)
+            int xSomething = (center_x << 16) + (negCenterY * __pyoffset + negCenterX * __pxoffset);
+            int k3 = (center_y << 16) + (negCenterY * __pxoffset - negCenterX * __pyoffset);
+            int baseOffset = some_x + some_y * Graphics2D.width;
+            for(some_y = 0; some_y < height; some_y++)
             {
-                int i4 = ai1[j1];
-                int j4 = l3 + i4;
-                int __x = j3 + __pxoffset * i4;
-                int __y = k3 - __pyoffset * i4;
-                for(k1 = -widthmap[j1]; k1 < 0; k1++)
+                int targetLineOffset = ai1[some_y];
+                int targetOffset = baseOffset + targetLineOffset;
+                int __x = xSomething + __pxoffset * targetLineOffset;
+                int __y = k3 - __pyoffset * targetLineOffset;
+                for(some_x = -widthmap[some_y]; some_x < 0; some_x++)
                 {
-                    pixels[j4++] = myPixels[(__x >> 16) + (__y >> 16) * myWidth];
+                    pixels[targetOffset++] = myPixels[(__x >> 16) + (__y >> 16) * myWidth];
                     __x += __pxoffset;
                     __y -= __pyoffset;
                 }
 
-                j3 += __pyoffset;
+                xSomething += __pyoffset;
                 k3 += __pxoffset;
-                l3 += Graphics2D.width;
+                baseOffset += Graphics2D.width;
             }
 
         }
@@ -431,7 +431,48 @@ public class RgbImage extends Graphics2D {
         {
         }
     }
+    public void rotate(int center_x, int center_y, int width, int height, int angle, int y, int x)
+    {
+        //all of the following were parameters
+        int hingesize = 256;
+        //all of the previous were parameters
+        try
+        {
+            int i2 = -width / 2;
+            int j2 = -height / 2;
+            int __pyoffset = (int)(Math.sin((double)angle / 326.11000000000001D) * 65536D);
+            int __pxoffset = (int)(Math.cos((double)angle / 326.11000000000001D) * 65536D);
+            __pyoffset = __pyoffset * hingesize >> 8;
+            __pxoffset = __pxoffset * hingesize >> 8;
+            int i3 = (center_x << 16) + (j2 * __pyoffset + i2 * __pxoffset);
+            int j3 = (center_y << 16) + (j2 * __pxoffset - i2 * __pyoffset);
+            int off = x + y * Graphics2D.width;
+            for(y = 0; y < height; y++)
+            {
+                int l3 = off;
+                int __x = i3;
+                int __y = j3;
+                for(x = -width; x < 0; x++)
+                {
+                    int k4 = myPixels[(__x >> 16) + (__y >> 16) * myWidth];
+                    if(k4 != 0)
+                        pixels[l3++] = k4;
+                    else
+                        l3++;
+                    __x += __pxoffset;
+                    __y -= __pyoffset;
+                }
 
+                i3 += __pyoffset;
+                j3 += __pxoffset;
+                off += Graphics2D.width;
+            }
+
+        }
+        catch(Exception _ex)
+        {
+        }
+    }
     public void rotate(int y,
                           double d, int x)
     {
