@@ -35,7 +35,7 @@ public class Model extends Entity {
         modelIntArray4 = null;
     }
 
-    public static void method459(int i, OnDemandFetcherParent onDemandFetcherParent) {
+    public static void initialize(int i, OnDemandFetcherParent onDemandFetcherParent) {
         modelHeaderCache = new ModelHeader[i + 30000];//wtf PETER!!!
         aOnDemandFetcherParent_1662 = onDemandFetcherParent;
     }

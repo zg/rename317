@@ -13,26 +13,26 @@ public class GraphicsBuffer
 		componentPixels = new int[width * height];
 		colorModel = new DirectColorModel(32, 0xff0000, 65280, 255);
 		image = component.createImage(this);
-		method239();
+		sendToConsumer();
 		component.prepareImage(image, this);
-		method239();
+		sendToConsumer();
 		component.prepareImage(image, this);
-		method239();
+		sendToConsumer();
 		component.prepareImage(image, this);
 		initDrawingArea();
 	}
 
 	public void initDrawingArea() {
-		Graphics2D.init(canvasHeight, canvasWidth, componentPixels);
+		Graphics2D.setTarget(canvasHeight, canvasWidth, componentPixels);
 	}
 
 	public void drawGraphics(int y, Graphics g, int x) {
-		method239();
+		sendToConsumer();
 		g.drawImage(image, x, y, this);
 	}
 
 	public synchronized void addConsumer(ImageConsumer imageconsumer) {
-		anImageConsumer319 = imageconsumer;
+		myImageConsumer = imageconsumer;
 		imageconsumer.setDimensions(canvasWidth, canvasHeight);
 		imageconsumer.setProperties(null);
 		imageconsumer.setColorModel(colorModel);
@@ -40,12 +40,12 @@ public class GraphicsBuffer
 	}
 
 	public synchronized boolean isConsumer(ImageConsumer imageconsumer) {
-		return anImageConsumer319 == imageconsumer;
+		return myImageConsumer == imageconsumer;
 	}
 
 	public synchronized void removeConsumer(ImageConsumer imageconsumer) {
-		if (anImageConsumer319 == imageconsumer) {
-			anImageConsumer319 = null;
+		if (myImageConsumer == imageconsumer) {
+			myImageConsumer = null;
 		}
 	}
 
@@ -57,10 +57,10 @@ public class GraphicsBuffer
 		System.out.println("TDLR");
 	}
 
-	private synchronized void method239() {
-		if (anImageConsumer319 != null) {
-			anImageConsumer319.setPixels(0, 0, canvasWidth, canvasHeight, colorModel, componentPixels, 0, canvasWidth);
-			anImageConsumer319.imageComplete(2);
+	private synchronized void sendToConsumer() {
+		if (myImageConsumer != null) {
+			myImageConsumer.setPixels(0, 0, canvasWidth, canvasHeight, colorModel, componentPixels, 0, canvasWidth);
+			myImageConsumer.imageComplete(2);
 		}
 	}
 
@@ -72,6 +72,6 @@ public class GraphicsBuffer
 	private final int canvasWidth;
 	private final int canvasHeight;
 	private final ColorModel colorModel;
-	private ImageConsumer anImageConsumer319;
+	private ImageConsumer myImageConsumer;
 	private final Image image;
 }

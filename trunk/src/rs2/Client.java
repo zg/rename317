@@ -434,28 +434,28 @@ public class Client extends GameShell {
             for (int l = 0; l < 4; l++) {
                 for (int k1 = 0; k1 < 104; k1++) {
                     for (int j2 = 0; j2 < 104; j2++)
-                        byteGroundArray[l][k1][j2] = 0;
+                        tileSettingBits[l][k1][j2] = 0;
 
                 }
 
             }
 
-            MapRegion mapRegion = new MapRegion(104, 104, byteGroundArray, intGroundArray);
-            int k2 = aByteArrayArray1183.length;
+            MapRegion mapRegion = new MapRegion(104, 104, tileSettingBits, intGroundArray);
+            int k2 = terrainData.length;
             stream.p1isaac(0);
             if (!aBoolean1159) {
                 for (int i3 = 0; i3 < k2; i3++) {
-                    int i4 = (anIntArray1234[i3] >> 8) * 64 - baseX;
-                    int k5 = (anIntArray1234[i3] & 0xff) * 64 - baseY;
-                    byte abyte0[] = aByteArrayArray1183[i3];
+                    int i4 = (mapCoordinates[i3] >> 8) * 64 - baseX;
+                    int k5 = (mapCoordinates[i3] & 0xff) * 64 - baseY;
+                    byte abyte0[] = terrainData[i3];
                     if (abyte0 != null)
                         mapRegion.loadTerrain(abyte0, k5, i4, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, tileSettings);
                 }
 
                 for (int j4 = 0; j4 < k2; j4++) {
-                    int l5 = (anIntArray1234[j4] >> 8) * 64 - baseX;
-                    int k7 = (anIntArray1234[j4] & 0xff) * 64 - baseY;
-                    byte abyte2[] = aByteArrayArray1183[j4];
+                    int l5 = (mapCoordinates[j4] >> 8) * 64 - baseX;
+                    int k7 = (mapCoordinates[j4] & 0xff) * 64 - baseY;
+                    byte abyte2[] = terrainData[j4];
                     if (abyte2 == null && anInt1070 < 800)
                         mapRegion.initMapTables(k7, 64, 64, l5);
                 }
@@ -470,8 +470,8 @@ public class Client extends GameShell {
                 for (int i6 = 0; i6 < k2; i6++) {
                     byte abyte1[] = aByteArrayArray1247[i6];
                     if (abyte1 != null) {
-                        int l8 = (anIntArray1234[i6] >> 8) * 64 - baseX;
-                        int k9 = (anIntArray1234[i6] & 0xff) * 64 - baseY;
+                        int l8 = (mapCoordinates[i6] >> 8) * 64 - baseX;
+                        int k9 = (mapCoordinates[i6] & 0xff) * 64 - baseY;
                         mapRegion.method190(l8, tileSettings, k9, sceneGraph, abyte1);
                     }
                 }
@@ -488,10 +488,10 @@ public class Client extends GameShell {
                                 int j10 = l7 >> 14 & 0x3ff;
                                 int l10 = l7 >> 3 & 0x7ff;
                                 int j11 = (j10 / 8 << 8) + l10 / 8;
-                                for (int l11 = 0; l11 < anIntArray1234.length; l11++) {
-                                    if (anIntArray1234[l11] != j11 || aByteArrayArray1183[l11] == null)
+                                for (int l11 = 0; l11 < mapCoordinates.length; l11++) {
+                                    if (mapCoordinates[l11] != j11 || terrainData[l11] == null)
                                         continue;
-                                    mapRegion.loadMapChunk(i9, l9, tileSettings, k4 * 8, (j10 & 7) * 8, aByteArrayArray1183[l11], (l10 & 7) * 8, j3, j6 * 8);
+                                    mapRegion.loadMapChunk(i9, l9, tileSettings, k4 * 8, (j10 & 7) * 8, terrainData[l11], (l10 & 7) * 8, j3, j6 * 8);
                                     break;
                                 }
 
@@ -522,8 +522,8 @@ public class Client extends GameShell {
                                 int k11 = i10 >> 14 & 0x3ff;
                                 int i12 = i10 >> 3 & 0x7ff;
                                 int j12 = (k11 / 8 << 8) + i12 / 8;
-                                for (int k12 = 0; k12 < anIntArray1234.length; k12++) {
-                                    if (anIntArray1234[k12] != j12 || aByteArrayArray1247[k12] == null)
+                                for (int k12 = 0; k12 < mapCoordinates.length; k12++) {
+                                    if (mapCoordinates[k12] != j12 || aByteArrayArray1247[k12] == null)
                                         continue;
                                     mapRegion.method183(tileSettings, sceneGraph, k10, j8 * 8, (i12 & 7) * 8, l6, aByteArrayArray1247[k12], (k11 & 7) * 8, i11, j9 * 8);
                                     break;
@@ -623,7 +623,7 @@ public class Client extends GameShell {
     }
 
     private void rendedMapScene(int i) {
-        int ai[] = aClass30_Sub2_Sub1_Sub1_1263.myPixels;
+        int ai[] = minimapImage.myPixels;
         int j = ai.length;
         for (int k = 0; k < j; k++)
             ai[k] = 0;
@@ -631,9 +631,9 @@ public class Client extends GameShell {
         for (int l = 1; l < 103; l++) {
             int i1 = 24628 + (103 - l) * 512 * 4;
             for (int k1 = 1; k1 < 103; k1++) {
-                if ((byteGroundArray[i][k1][l] & 0x18) == 0)
+                if ((tileSettingBits[i][k1][l] & 0x18) == 0)
                     sceneGraph.drawMinimapTile(i, k1, l, ai, i1, 512);
-                if (i < 3 && (byteGroundArray[i + 1][k1][l] & 8) != 0)
+                if (i < 3 && (tileSettingBits[i + 1][k1][l] & 8) != 0)
                     sceneGraph.drawMinimapTile(i + 1, k1, l, ai, i1, 512);
                 i1 += 4;
             }
@@ -642,12 +642,12 @@ public class Client extends GameShell {
 
         int j1 = ((238 + (int) (Math.random() * 20D)) - 10 << 16) + ((238 + (int) (Math.random() * 20D)) - 10 << 8) + ((238 + (int) (Math.random() * 20D)) - 10);
         int l1 = (238 + (int) (Math.random() * 20D)) - 10 << 16;
-        aClass30_Sub2_Sub1_Sub1_1263.initDrawingArea();
+        minimapImage.initDrawingArea();
         for (int i2 = 1; i2 < 103; i2++) {
             for (int j2 = 1; j2 < 103; j2++) {
-                if ((byteGroundArray[i][j2][i2] & 0x18) == 0)
+                if ((tileSettingBits[i][j2][i2] & 0x18) == 0)
                     drawMapScenes(i2, j1, j2, l1, i);
-                if (i < 3 && (byteGroundArray[i + 1][j2][i2] & 8) != 0)
+                if (i < 3 && (tileSettingBits[i + 1][j2][i2] & 8) != 0)
                     drawMapScenes(i2, j1, j2, l1, i + 1);
             }
 
@@ -1652,7 +1652,7 @@ public class Client extends GameShell {
         if (l < 0 || i1 < 0 || l > 103 || i1 > 103)
             return 0;
         int j1 = i;
-        if (j1 < 3 && (byteGroundArray[1][l][i1] & 2) == 2)
+        if (j1 < 3 && (tileSettingBits[1][l][i1] & 2) == 2)
             j1++;
         int k1 = k & 0x7f;
         int l1 = j & 0x7f;
@@ -1913,7 +1913,7 @@ public class Client extends GameShell {
             int k3 = k;
             if (interactableObjectUID > 0)
                 k3 = i1;
-            int ai[] = aClass30_Sub2_Sub1_Sub1_1263.myPixels;
+            int ai[] = minimapImage.myPixels;
             int k4 = 24624 + x * 4 + (103 - y) * 512 * 4;
             int i5 = interactableObjectUID >> 14 & 0x7fff;
             ObjectDef class46_2 = ObjectDef.forID(i5);
@@ -1998,7 +1998,7 @@ public class Client extends GameShell {
                 int l4 = 0xeeeeee;
                 if (interactableObjectUID > 0)
                     l4 = 0xee0000;
-                int ai1[] = aClass30_Sub2_Sub1_Sub1_1263.myPixels;
+                int ai1[] = minimapImage.myPixels;
                 int l5 = 24624 + x * 4 + (103 - y) * 512 * 4;
                 if (l2 == 0 || l2 == 2) {
                     ai1[l5 + 1536] = l4;
@@ -2193,19 +2193,19 @@ public class Client extends GameShell {
     }
 
     private int method54() {
-        for (int i = 0; i < aByteArrayArray1183.length; i++) {
-            if (aByteArrayArray1183[i] == null && anIntArray1235[i] != -1)
+        for (int i = 0; i < terrainData.length; i++) {
+            if (terrainData[i] == null && anIntArray1235[i] != -1)
                 return -1;
             if (aByteArrayArray1247[i] == null && anIntArray1236[i] != -1)
                 return -2;
         }
 
         boolean flag = true;
-        for (int j = 0; j < aByteArrayArray1183.length; j++) {
+        for (int j = 0; j < terrainData.length; j++) {
             byte abyte0[] = aByteArrayArray1247[j];
             if (abyte0 != null) {
-                int k = (anIntArray1234[j] >> 8) * 64 - baseX;
-                int l = (anIntArray1234[j] & 0xff) * 64 - baseY;
+                int k = (mapCoordinates[j] >> 8) * 64 - baseX;
+                int l = (mapCoordinates[j] & 0xff) * 64 - baseY;
                 if (aBoolean1159) {
                     k = 10;
                     l = 10;
@@ -2343,9 +2343,9 @@ public class Client extends GameShell {
                 if (onDemandData.dataType == 2 && onDemandData.ID == nextSong && onDemandData.buffer != null)
                     saveMidi(songChanging, onDemandData.buffer);
                 if (onDemandData.dataType == 3 && loadingStage == 1) {
-                    for (int i = 0; i < aByteArrayArray1183.length; i++) {
+                    for (int i = 0; i < terrainData.length; i++) {
                         if (anIntArray1235[i] == onDemandData.ID) {
-                            aByteArrayArray1183[i] = onDemandData.buffer;
+                            terrainData[i] = onDemandData.buffer;
                             if (onDemandData.buffer == null)
                                 anIntArray1235[i] = -1;
                             break;
@@ -2756,7 +2756,7 @@ public class Client extends GameShell {
             return;
         super.fullGameScreen = null;
         aRSImageProducer_1166 = null;
-        aRSImageProducer_1164 = null;
+        minimapIP = null;
         tabAreaDrawingTarget = null;
         gameScreenCanvas = null;
         aRSImageProducer_1123 = null;
@@ -4015,13 +4015,13 @@ public class Client extends GameShell {
         stream = null;
         aStream_847 = null;
         inStream = null;
-        anIntArray1234 = null;
-        aByteArrayArray1183 = null;
+        mapCoordinates = null;
+        terrainData = null;
         aByteArrayArray1247 = null;
         anIntArray1235 = null;
         anIntArray1236 = null;
         intGroundArray = null;
-        byteGroundArray = null;
+        tileSettingBits = null;
         sceneGraph = null;
         tileSettings = null;
         anIntArrayArray901 = null;
@@ -4030,7 +4030,7 @@ public class Client extends GameShell {
         bigY = null;
         aByteArray912 = null;
         tabAreaDrawingTarget = null;
-        aRSImageProducer_1164 = null;
+        minimapIP = null;
         gameScreenCanvas = null;
         aRSImageProducer_1166 = null;
         aRSImageProducer_1123 = null;
@@ -4094,7 +4094,7 @@ public class Client extends GameShell {
         markPosX = null;
         markPosY = null;
         markGraphic = null;
-        aClass30_Sub2_Sub1_Sub1_1263 = null;
+        minimapImage = null;
         user_friends_name_string = null;
         friendsListAsLongs = null;
         user_friends_worldid = null;
@@ -4879,7 +4879,7 @@ public class Client extends GameShell {
         aRSImageProducer_1114 = null;
         aRSImageProducer_1115 = null;
         aRSImageProducer_1166 = new GraphicsBuffer(479, 96, getGameComponent());
-        aRSImageProducer_1164 = new GraphicsBuffer(172, 156, getGameComponent());
+        minimapIP = new GraphicsBuffer(172, 156, getGameComponent());
         Graphics2D.resetImage();
         mapBack.drawImage(0, 0);
         tabAreaDrawingTarget = new GraphicsBuffer(190, 261, getGameComponent());
@@ -5848,20 +5848,20 @@ public class Client extends GameShell {
             JagexArchive jagexArchive_3 = streamLoaderForName(6, "textures", "textures", expectedCRCs[6], 45);
             JagexArchive jagexArchive_4 = streamLoaderForName(7, "chat system", "wordenc", expectedCRCs[7], 50);
             JagexArchive jagexArchive_5 = streamLoaderForName(8, "sound effects", "sounds", expectedCRCs[8], 55);
-            byteGroundArray = new byte[4][104][104];
+            tileSettingBits = new byte[4][104][104];
             intGroundArray = new int[4][105][105];
             sceneGraph = new SceneGraph(4, 104, 104, intGroundArray);
             for (int j = 0; j < 4; j++)
                 tileSettings[j] = new TileSetting();
 
-            aClass30_Sub2_Sub1_Sub1_1263 = new RgbImage(512, 512);
+            minimapImage = new RgbImage(512, 512);
             JagexArchive jagexArchive_6 = streamLoaderForName(5, "update list", "versionlist", expectedCRCs[5], 60);
             drawLoadingText(60, "Connecting to update server");
             drawLogo();
             onDemandFetcher = new OnDemandFetcher();
             onDemandFetcher.start(jagexArchive_6, this);
-            Animation.method528(onDemandFetcher.getAnimCount());
-            Model.method459(onDemandFetcher.getVersionCount(0), onDemandFetcher);
+            Animation.initialize(onDemandFetcher.getAnimCount());
+            Model.initialize(onDemandFetcher.getVersionCount(0), onDemandFetcher);
             //preloadModels();
             if (!lowMem) {
                 nextSong = 0;
@@ -6131,8 +6131,8 @@ public class Client extends GameShell {
                     break;
                 }
 
-                anIntArray968[j6] = k6;
-                anIntArray1057[j6] = i7 - k6;
+                compassShape1[j6] = k6;
+                compassShape2[j6] = i7 - k6;
             }
 
             for (int l6 = 5; l6 < 156; l6++) {
@@ -6150,8 +6150,8 @@ public class Client extends GameShell {
                     break;
                 }
 
-                anIntArray1052[l6 - 5] = j7 - 25;
-                anIntArray1229[l6 - 5] = l7 - j7;
+                minimapShape1[l6 - 5] = j7 - 25;
+                minimapShape2[l6 - 5] = l7 - j7;
             }
 
             Rasterizer.setBounds(479, 96);
@@ -6637,7 +6637,7 @@ public class Client extends GameShell {
             aBoolean1233 = true;
             if (loadingStage != 2) {
                 gameScreenCanvas.drawGraphics(4, super.graphics, 4);
-                aRSImageProducer_1164.drawGraphics(4, super.graphics, 550);
+                minimapIP.drawGraphics(4, super.graphics, 550);
             }
         }
         if (loadingStage == 2)
@@ -6690,7 +6690,7 @@ public class Client extends GameShell {
         }
         if (loadingStage == 2) {
             drawMinimap();
-            aRSImageProducer_1164.drawGraphics(4, super.graphics, 550);
+            minimapIP.drawGraphics(4, super.graphics, 550);
         }
         if (anInt1054 != -1)
             tabAreaAltered = true;
@@ -7322,7 +7322,7 @@ public class Client extends GameShell {
                 for (int l1 = l - 4; l1 <= l + 4; l1++) {
                     for (int k2 = i1 - 4; k2 <= i1 + 4; k2++) {
                         int l2 = plane;
-                        if (l2 < 3 && (byteGroundArray[1][l1][k2] & 2) == 2)
+                        if (l2 < 3 && (tileSettingBits[1][l1][k2] & 2) == 2)
                             l2++;
                         int i3 = j1 - intGroundArray[l2][l1][k2];
                         if (i3 > k1)
@@ -7729,7 +7729,7 @@ public class Client extends GameShell {
             int l = yCameraPos >> 7;
             int i1 = session_player.boundExtentX >> 7;
             int j1 = session_player.boundExtentY >> 7;
-            if ((byteGroundArray[plane][k][l] & 4) != 0)
+            if ((tileSettingBits[plane][k][l] & 4) != 0)
                 j = plane;
             int k1;
             if (i1 > k)
@@ -7749,7 +7749,7 @@ public class Client extends GameShell {
                         k++;
                     else if (k > i1)
                         k--;
-                    if ((byteGroundArray[plane][k][l] & 4) != 0)
+                    if ((tileSettingBits[plane][k][l] & 4) != 0)
                         j = plane;
                     k2 += i2;
                     if (k2 >= 0x10000) {
@@ -7758,7 +7758,7 @@ public class Client extends GameShell {
                             l++;
                         else if (l > j1)
                             l--;
-                        if ((byteGroundArray[plane][k][l] & 4) != 0)
+                        if ((tileSettingBits[plane][k][l] & 4) != 0)
                             j = plane;
                     }
                 }
@@ -7770,7 +7770,7 @@ public class Client extends GameShell {
                         l++;
                     else if (l > j1)
                         l--;
-                    if ((byteGroundArray[plane][k][l] & 4) != 0)
+                    if ((tileSettingBits[plane][k][l] & 4) != 0)
                         j = plane;
                     l2 += j2;
                     if (l2 >= 0x10000) {
@@ -7779,20 +7779,20 @@ public class Client extends GameShell {
                             k++;
                         else if (k > i1)
                             k--;
-                        if ((byteGroundArray[plane][k][l] & 4) != 0)
+                        if ((tileSettingBits[plane][k][l] & 4) != 0)
                             j = plane;
                     }
                 }
             }
         }
-        if ((byteGroundArray[plane][session_player.boundExtentX >> 7][session_player.boundExtentY >> 7] & 4) != 0)
+        if ((tileSettingBits[plane][session_player.boundExtentX >> 7][session_player.boundExtentY >> 7] & 4) != 0)
             j = plane;
         return j;
     }
 
     private int resetCameraHeight() {
         int j = method42(plane, yCameraPos, xCameraPos);
-        if (j - zCameraPos < 800 && (byteGroundArray[plane][xCameraPos >> 7][yCameraPos >> 7] & 4) != 0)
+        if (j - zCameraPos < 800 && (tileSettingBits[plane][xCameraPos >> 7][yCameraPos >> 7] & 4) != 0)
             return plane;
         else
             return 3;
@@ -7955,7 +7955,7 @@ public class Client extends GameShell {
     }
 
     private void drawMinimap() {
-        aRSImageProducer_1164.initDrawingArea();
+        minimapIP.initDrawingArea();
         //drawStatusGlobes();
         if (miniMapLock == 2) {
             byte abyte0[] = mapBack.imgPixels;
@@ -7965,7 +7965,7 @@ public class Client extends GameShell {
                 if (abyte0[i5] == 0)
                     ai[i5] = 0;
 
-            compass.rotate(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
+            compass.rotate(33, minimapInt1, compassShape2, 256, compassShape1, 25, 0, 0, 33, 25);
 
             gameScreenCanvas.initDrawingArea();
             return;
@@ -7973,8 +7973,8 @@ public class Client extends GameShell {
         int i = minimapInt1 + minimapInt2 & 0x7ff;
         int j = 48 + session_player.boundExtentX / 32;
         int l2 = 464 - session_player.boundExtentY / 32;
-        aClass30_Sub2_Sub1_Sub1_1263.rotate(151, i, anIntArray1229, 256 + minimapInt3, anIntArray1052, l2, 5, 25, 146, j);
-        compass.rotate(33, minimapInt1, anIntArray1057, 256, anIntArray968, 25, 0, 0, 33, 25);
+        minimapImage.rotate(151, i, minimapShape2, 256 + minimapInt3, minimapShape1, l2, 5, 25, 146, j);
+        compass.rotate(33, minimapInt1, compassShape2, 256, compassShape1, 25, 0, 0, 33, 25);
         for (int j5 = 0; j5 < numOfMapMarkers; j5++) {
             int mapX = (markPosX[j5] * 4 + 2) - session_player.boundExtentX / 32;
             int mapY = (markPosY[j5] * 4 + 2) - session_player.boundExtentY / 32;
@@ -8881,7 +8881,7 @@ public class Client extends GameShell {
             }
             if (k1 >= 0) {
                 int j3 = z;
-                if (j3 < 3 && (byteGroundArray[1][x][y] & 2) == 2)
+                if (j3 < 3 && (tileSettingBits[1][x][y] & 2) == 2)
                     j3++;
                 MapRegion.method188(sceneGraph, k, y, l, j3, tileSettings[z], intGroundArray, x, k1, z);
             }
@@ -9216,15 +9216,15 @@ public class Client extends GameShell {
 
                     }
 
-                    aByteArrayArray1183 = new byte[k16][];
+                    terrainData = new byte[k16][];
                     aByteArrayArray1247 = new byte[k16][];
-                    anIntArray1234 = new int[k16];
+                    mapCoordinates = new int[k16];
                     anIntArray1235 = new int[k16];
                     anIntArray1236 = new int[k16];
                     k16 = 0;
                     for (int l23 = (anInt1069 - 6) / 8; l23 <= (anInt1069 + 6) / 8; l23++) {
                         for (int j26 = (anInt1070 - 6) / 8; j26 <= (anInt1070 + 6) / 8; j26++) {
-                            anIntArray1234[k16] = (l23 << 8) + j26;
+                            mapCoordinates[k16] = (l23 << 8) + j26;
                             if (aBoolean1141 && (j26 == 49 || j26 == 149 || j26 == 147 || l23 == 50 || l23 == 49 && j26 == 47)) {
                                 anIntArray1235[k16] = -1;
                                 anIntArray1236[k16] = -1;
@@ -9270,13 +9270,13 @@ public class Client extends GameShell {
 
                     }
 
-                    aByteArrayArray1183 = new byte[l16][];
+                    terrainData = new byte[l16][];
                     aByteArrayArray1247 = new byte[l16][];
-                    anIntArray1234 = new int[l16];
+                    mapCoordinates = new int[l16];
                     anIntArray1235 = new int[l16];
                     anIntArray1236 = new int[l16];
                     for (int l26 = 0; l26 < l16; l26++) {
-                        int i29 = anIntArray1234[l26] = ai[l26];
+                        int i29 = mapCoordinates[l26] = ai[l26];
                         int l30 = i29 >> 8 & 0xff;
                         int l31 = i29 & 0xff;
                         int j32 = anIntArray1235[l26] = onDemandFetcher.method562(0, l31, l30);
@@ -10176,7 +10176,7 @@ public class Client extends GameShell {
         drawingFlames = false;
         spriteDrawX = -1;
         spriteDrawY = -1;
-        anIntArray968 = new int[33];
+        compassShape1 = new int[33];
         anIntArray969 = new int[256];
         jagexFileStores = new JagexFileStore[5];
         sessionSettings = new int[2000];
@@ -10206,10 +10206,10 @@ public class Client extends GameShell {
         user_stats = new int[Skills.COUNT];
         anIntArray1045 = new int[2000];
         char_edit_gender = true;
-        anIntArray1052 = new int[151];
+        minimapShape1 = new int[151];
         anInt1054 = -1;
         aClass19_1056 = new Deque();
-        anIntArray1057 = new int[33];
+        compassShape2 = new int[33];
         aClass9_1059 = new RSInterface();
         mapScenes = new IndexedImage[100];
         anInt1063 = 0x4d4233;
@@ -10260,7 +10260,7 @@ public class Client extends GameShell {
         tabID = 3;
         inputTaken = false;
         songChanging = true;
-        anIntArray1229 = new int[151];
+        minimapShape2 = new int[151];
         tileSettings = new TileSetting[4];
         aBoolean1233 = false;
         anIntArray1240 = new int[100];
@@ -10482,7 +10482,7 @@ public class Client extends GameShell {
     //private rs2.IndexedImage aIndexedImage_999;//never used
     //private rs2.IndexedImage aIndexedImage_967;//never used
 
-    private final int[] anIntArray968;
+    private final int[] compassShape1;
     private final int[] anIntArray969;
     final JagexFileStore[] jagexFileStores;
     public int sessionSettings[];
@@ -10562,12 +10562,12 @@ public class Client extends GameShell {
     private int anInt1048;
     private String aString1049;
     private static int anInt1051;
-    private final int[] anIntArray1052;
+    private final int[] minimapShape1;
     private JagexArchive titleJagexArchive;
     private int anInt1054;
     private int anInt1055;
     private Deque aClass19_1056;
-    private final int[] anIntArray1057;
+    private final int[] compassShape2;
     private final RSInterface aClass9_1059;
     private IndexedImage[] mapScenes;
     private static int anInt1061;
@@ -10665,7 +10665,7 @@ public class Client extends GameShell {
     static int currentTime;
     private static final String validUserPassChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"\243$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
     private GraphicsBuffer tabAreaDrawingTarget;
-    private GraphicsBuffer aRSImageProducer_1164;
+    private GraphicsBuffer minimapIP;
     private GraphicsBuffer gameScreenCanvas;
     private GraphicsBuffer aRSImageProducer_1166;
     private int welcome_screen_last_recovery_change_or_member_warning;
@@ -10684,7 +10684,7 @@ public class Client extends GameShell {
     private int[] anIntArray1180;
     private int[] anIntArray1181;
     private int[] anIntArray1182;
-    private byte[][] aByteArrayArray1183;
+    private byte[][] terrainData;
     private int anInt1184;
     private int minimapInt1;
     private int anInt1186;
@@ -10724,10 +10724,10 @@ public class Client extends GameShell {
     private static int anInt1226;
     private int nextSong;
     private boolean songChanging;
-    private final int[] anIntArray1229;
+    private final int[] minimapShape2;
     private TileSetting[] tileSettings;
     private boolean aBoolean1233;
-    private int[] anIntArray1234;
+    private int[] mapCoordinates;
     private int[] anIntArray1235;
     private int[] anIntArray1236;
     private int anInt1237;
@@ -10751,11 +10751,11 @@ public class Client extends GameShell {
     private boolean repaintRequested;
     private boolean messagePromptRaised;
     private int anInt1257;
-    private byte[][][] byteGroundArray;
+    private byte[][][] tileSettingBits;
     private int prevSong;
     private int destX;
     private int destY;
-    private RgbImage aClass30_Sub2_Sub1_Sub1_1263;
+    private RgbImage minimapImage;
     private int anInt1264;
     private int anInt1265;
     private String loginMessage1;

@@ -1,6 +1,8 @@
 package rs2;
 
 
+import editor.EditorMain;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.zip.CRC32;
@@ -10,10 +12,14 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         implements Runnable
 {
 
+    private EditorMain editorInstance;
+
     private boolean crcMatches(int i, int j, byte abyte0[])
     {
         if(abyte0 == null || abyte0.length < 2)
             return false;
+        if (clientInstance == null)
+            return true;
         int k = abyte0.length - 2;
         int footer = ((abyte0[k] & 0xff) << 8) + (abyte0[k + 1] & 0xff);
         crc32.reset();
@@ -119,76 +125,150 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 
     public void start(JagexArchive jagexArchive, Client client1)
     {
-        String as[] = {
+        String versionFileNames[] = {
             "model_version", "anim_version", "midi_version", "map_version"
         };
-        for(int i = 0; i < 4; i++)
+        for(int cachePtr = 0; cachePtr < 4; cachePtr++)
         {
-            byte abyte0[] = jagexArchive.getDataForName(as[i]);
+            byte abyte0[] = jagexArchive.getDataForName(versionFileNames[cachePtr]);
             int j = abyte0.length / 2;
             Packet stream = new Packet(abyte0);
-            versions[i] = new int[j];
-            fileStatus[i] = new byte[j];
+            versions[cachePtr] = new int[j];
+            fileStatus[cachePtr] = new byte[j];
             for(int l = 0; l < j; l++)
-                versions[i][l] = stream.g2();
+                versions[cachePtr][l] = stream.g2();
 
         }
 
-        String as1[] = {
+        String crcFileNames[] = {
             "model_crc", "anim_crc", "midi_crc", "map_crc"
         };
-        for(int k = 0; k < 4; k++)
+        for(int cachePtr = 0; cachePtr < 4; cachePtr++)
         {
-            byte abyte1[] = jagexArchive.getDataForName(as1[k]);
-            int i1 = abyte1.length / 4;
+            byte abyte1[] = jagexArchive.getDataForName(crcFileNames[cachePtr]);
+            int size = abyte1.length / 4;
             Packet stream_1 = new Packet(abyte1);
-            crcs[k] = new int[i1];
-            for(int l1 = 0; l1 < i1; l1++)
-                crcs[k][l1] = stream_1.g4();
+            crcs[cachePtr] = new int[size];
+            for(int l1 = 0; l1 < size; l1++)
+                crcs[cachePtr][l1] = stream_1.g4();
 
         }
 
-        byte abyte2[] = jagexArchive.getDataForName("model_index");
-        int j1 = versions[0].length;
-        modelIndices = new byte[j1];
-        for(int k1 = 0; k1 < j1; k1++)
-            if(k1 < abyte2.length)
-                modelIndices[k1] = abyte2[k1];
+        byte model_indexes[] = jagexArchive.getDataForName("model_index");
+        int modelCount = versions[0].length;
+        modelIndices = new byte[modelCount];
+        for(int dataPtr = 0; dataPtr < modelCount; dataPtr++)
+            if(dataPtr < model_indexes.length)
+                modelIndices[dataPtr] = model_indexes[dataPtr];
             else
-                modelIndices[k1] = 0;
+                modelIndices[dataPtr] = 0;
 
-        abyte2 = jagexArchive.getDataForName("map_index");
-        Packet stream2 = new Packet(abyte2);
-        j1 = abyte2.length / 7;
-        mapIndices1 = new int[j1];
-        mapIndices2 = new int[j1];
-        mapIndices3 = new int[j1];
-        mapIndices4 = new int[j1];
-        for(int i2 = 0; i2 < j1; i2++)
+        model_indexes = jagexArchive.getDataForName("map_index");
+        Packet indexStream = new Packet(model_indexes);
+        modelCount = model_indexes.length / 7;
+        mapIndices1 = new int[modelCount];
+        mapIndices2 = new int[modelCount];
+        mapIndices3 = new int[modelCount];
+        mapIndices4 = new int[modelCount];
+        for(int i2 = 0; i2 < modelCount; i2++)
         {
-            mapIndices1[i2] = stream2.g2();
-            mapIndices2[i2] = stream2.g2();
-            mapIndices3[i2] = stream2.g2();
-            mapIndices4[i2] = stream2.g1();
+            mapIndices1[i2] = indexStream.g2();
+            mapIndices2[i2] = indexStream.g2();
+            mapIndices3[i2] = indexStream.g2();
+            mapIndices4[i2] = indexStream.g1();
         }
 
-        abyte2 = jagexArchive.getDataForName("anim_index");
-        stream2 = new Packet(abyte2);
-        j1 = abyte2.length / 2;
-        anIntArray1360 = new int[j1];
-        for(int j2 = 0; j2 < j1; j2++)
-            anIntArray1360[j2] = stream2.g2();
+        model_indexes = jagexArchive.getDataForName("anim_index");
+        indexStream = new Packet(model_indexes);
+        modelCount = model_indexes.length / 2;
+        animIndices = new int[modelCount];
+        for(int j2 = 0; j2 < modelCount; j2++)
+            animIndices[j2] = indexStream.g2();
 
-        abyte2 = jagexArchive.getDataForName("midi_index");
-        stream2 = new Packet(abyte2);
-        j1 = abyte2.length;
-        anIntArray1348 = new int[j1];
-        for(int k2 = 0; k2 < j1; k2++)
-            anIntArray1348[k2] = stream2.g1();
+        model_indexes = jagexArchive.getDataForName("midi_index");
+        indexStream = new Packet(model_indexes);
+        modelCount = model_indexes.length;
+        midiIndices = new int[modelCount];
+        for(int k2 = 0; k2 < modelCount; k2++)
+            midiIndices[k2] = indexStream.g1();
 
         clientInstance = client1;
         running = true;
         clientInstance.startRunnable(this, 2);
+    }
+
+    public void start(JagexArchive jagexArchive, EditorMain client1)
+    {
+        String versionFileNames[] = {
+            "model_version", "anim_version", "midi_version", "map_version"
+        };
+        for(int cachePtr = 0; cachePtr < 4; cachePtr++)
+        {
+            byte abyte0[] = jagexArchive.getDataForName(versionFileNames[cachePtr]);
+            int j = abyte0.length / 2;
+            Packet stream = new Packet(abyte0);
+            versions[cachePtr] = new int[j];
+            fileStatus[cachePtr] = new byte[j];
+            for(int l = 0; l < j; l++)
+                versions[cachePtr][l] = stream.g2();
+
+        }
+
+        String crcFileNames[] = {
+            "model_crc", "anim_crc", "midi_crc", "map_crc"
+        };
+        for(int cachePtr = 0; cachePtr < 4; cachePtr++)
+        {
+            byte abyte1[] = jagexArchive.getDataForName(crcFileNames[cachePtr]);
+            int size = abyte1.length / 4;
+            Packet stream_1 = new Packet(abyte1);
+            crcs[cachePtr] = new int[size];
+            for(int l1 = 0; l1 < size; l1++)
+                crcs[cachePtr][l1] = stream_1.g4();
+
+        }
+
+        byte model_indexes[] = jagexArchive.getDataForName("model_index");
+        int modelCount = versions[0].length;
+        modelIndices = new byte[modelCount];
+        for(int dataPtr = 0; dataPtr < modelCount; dataPtr++)
+            if(dataPtr < model_indexes.length)
+                modelIndices[dataPtr] = model_indexes[dataPtr];
+            else
+                modelIndices[dataPtr] = 0;
+
+        model_indexes = jagexArchive.getDataForName("map_index");
+        Packet indexStream = new Packet(model_indexes);
+        modelCount = model_indexes.length / 7;
+        mapIndices1 = new int[modelCount];
+        mapIndices2 = new int[modelCount];
+        mapIndices3 = new int[modelCount];
+        mapIndices4 = new int[modelCount];
+        for(int i2 = 0; i2 < modelCount; i2++)
+        {
+            mapIndices1[i2] = indexStream.g2();
+            mapIndices2[i2] = indexStream.g2();
+            mapIndices3[i2] = indexStream.g2();
+            mapIndices4[i2] = indexStream.g1();
+        }
+
+        model_indexes = jagexArchive.getDataForName("anim_index");
+        indexStream = new Packet(model_indexes);
+        modelCount = model_indexes.length / 2;
+        animIndices = new int[modelCount];
+        for(int j2 = 0; j2 < modelCount; j2++)
+            animIndices[j2] = indexStream.g2();
+
+        model_indexes = jagexArchive.getDataForName("midi_index");
+        indexStream = new Packet(model_indexes);
+        modelCount = model_indexes.length;
+        midiIndices = new int[modelCount];
+        for(int k2 = 0; k2 < modelCount; k2++)
+            midiIndices[k2] = indexStream.g1();
+
+        editorInstance = client1;
+        running = true;
+        editorInstance.startRunnable(this, 2);
     }
 
     public int getNodeCount()
@@ -270,7 +350,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 
     public int getAnimCount()
     {
-        return anIntArray1360.length;
+        return animIndices.length;
     }
 
     public void method558(int i, int j)
@@ -311,6 +391,8 @@ public class OnDemandFetcher extends OnDemandFetcherParent
                 onDemandCycle++;
                 int i = 20;
                 if(anInt1332 == 0 && clientInstance.jagexFileStores[0] != null)
+                    i = 50;
+                if(anInt1332 == 0 && editorInstance.jagexFileStores[0] != null)
                     i = 50;
                 try
                 {
@@ -379,7 +461,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
                     loopCycle = 0;
                     statusString = "";
                 }
-                if(clientInstance.loggedIn && socket != null && outputStream != null && (anInt1332 > 0 || clientInstance.jagexFileStores[0] == null))
+                if((clientInstance != null && clientInstance.loggedIn) && socket != null && outputStream != null && (anInt1332 > 0 || clientInstance == null || clientInstance.jagexFileStores[0] == null))
                 {
                     writeLoopCycle++;
                     if(writeLoopCycle > 500)
@@ -409,8 +491,12 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 
     public void method560(int i, int j)
     {
-        if(clientInstance.jagexFileStores[0] == null)
-            return;
+        if(clientInstance != null)
+            if(clientInstance.jagexFileStores[0] == null)
+                return;
+        else
+            if(editorInstance.jagexFileStores[0] == null)
+                return;
         if(versions[j][i] == 0)
             return;
         if(fileStatus[j][i] == 0)
@@ -485,11 +571,19 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 
     public void method563(byte byte0, int i, int j)
     {
-        if(clientInstance.jagexFileStores[0] == null)
-            return;
+        if(clientInstance != null)
+            if(clientInstance.jagexFileStores[0] == null)
+                return;
+        else
+            if(editorInstance.jagexFileStores[0] == null)
+                return;
         if(versions[i][j] == 0)
             return;
-        byte abyte0[] = clientInstance.jagexFileStores[i + 1].decompress(j);
+        byte abyte0[];
+        if(clientInstance != null)
+            abyte0 = clientInstance.jagexFileStores[i + 1].decompress(j);
+        else
+            abyte0 = editorInstance.jagexFileStores[i + 1].decompress(j);
         if(crcMatches(versions[i][j], crcs[i][j], abyte0))
             return;
         fileStatus[i][j] = byte0;
@@ -550,8 +644,12 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         {
             waiting = true;
             byte abyte0[] = null;
-            if(clientInstance.jagexFileStores[0] != null)
-                abyte0 = clientInstance.jagexFileStores[onDemandData.dataType + 1].decompress(onDemandData.ID);
+            if (clientInstance != null)
+                if(clientInstance.jagexFileStores[0] != null)
+                    abyte0 = clientInstance.jagexFileStores[onDemandData.dataType + 1].decompress(onDemandData.ID);
+            else
+                if(editorInstance.jagexFileStores[0] != null)
+                    abyte0 = editorInstance.jagexFileStores[onDemandData.dataType + 1].decompress(onDemandData.ID);
             if(!crcMatches(versions[onDemandData.dataType][onDemandData.ID], crcs[onDemandData.dataType][onDemandData.ID], abyte0))
                 abyte0 = null;
             synchronized(aClass19_1370)
@@ -634,7 +732,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 
     public boolean method569(int i)
     {
-        return anIntArray1348[i] == 1;
+        return midiIndices[i] == 1;
     }
 
     public OnDemandFetcher()
@@ -671,7 +769,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
     private final Deque aClass19_1344;
     private int completedSize;
     private int expectedSize;
-    private int[] anIntArray1348;
+    private int[] midiIndices;
     public int anInt1349;
     private int[] mapIndices2;
     private int filesLoaded;
@@ -681,7 +779,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
     private boolean waiting;
     private final Deque zippedNodes;
     private final byte[] gzipInputBuffer;
-    private int[] anIntArray1360;
+    private int[] animIndices;
     private final Queue queue;
     private InputStream inputStream;
     private Socket socket;

@@ -1490,7 +1490,7 @@ label0:
     private final int yMapSize;
     private final byte[][][] shapeB;
     private final byte[][][] tileSettings;
-    static boolean lowMem = true;
+    public static boolean lowMem = true;
     private static final int bitValues[] = {
         1, 2, 4, 8
     };

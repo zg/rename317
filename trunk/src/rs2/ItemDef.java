@@ -287,7 +287,7 @@ public class ItemDef
         int i3 = Graphics2D.topY;
         int j3 = Graphics2D.viewport_h;
         Rasterizer.aBoolean1464 = false;
-        Graphics2D.init(32, 32, sprite2.myPixels);
+        Graphics2D.setTarget(32, 32, sprite2.myPixels);
         Graphics2D.fillRect(0, 0, 32, 32, 0);
         Rasterizer.setDefaultBounds();
         int k3 = definition.modelZoom;
@@ -360,7 +360,7 @@ public class ItemDef
         }
         if(k == 0)
             memCache1.put(sprite2, i);
-        Graphics2D.init(j2, i2, ai1);
+        Graphics2D.setTarget(j2, i2, ai1);
         Graphics2D.setBounds(j3, k2, l2, i3);
         Rasterizer.centerX = k1;
         Rasterizer.centerY = l1;

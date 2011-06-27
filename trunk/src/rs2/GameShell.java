@@ -10,7 +10,7 @@ public class
 
         GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
 
-    final void initializeApp(int width, int height) {
+    protected final void initializeApp(int width, int height) {
         myWidth = width;
         myHeight = height;
         gameFrame = new RSFrame(this, myWidth, myHeight);
@@ -19,7 +19,7 @@ public class
         startRunnable(this, 1);
     }
 
-    final void initialize(int width, int height) {
+    protected final void initialize(int width, int height) {
         myWidth = width;
         myHeight = height;
         graphics = getGameComponent().getGraphics();

@@ -1,6 +1,5 @@
 package editor.gui;
 
-import editor.EditorMain;
 import editor.gui.dockables.FloorTypeSelection;
 import editor.gui.dockables.SettingsBrushEditor;
 import editor.gui.dockables.ToolSelectionBar;
@@ -13,7 +12,6 @@ import org.noos.xing.mydoggy.plaf.MyDoggyToolWindowManager;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -128,5 +126,9 @@ public class EditorMainWindow {
 
     public void show() {
         rootFrame.setVisible(true);
+    }
+
+    public GameViewPanel getGameViewPanel() {
+        return gameViewPanel;
     }
 }
