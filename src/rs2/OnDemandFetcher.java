@@ -303,6 +303,8 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 
     private void closeRequest(OnDemandData onDemandData)
     {System.out.println("close request");
+        if(clientInstance == null)
+            return;
         try
         {
             if(socket == null)
@@ -390,10 +392,13 @@ public class OnDemandFetcher extends OnDemandFetcherParent
             {
                 onDemandCycle++;
                 int i = 20;
-                if(anInt1332 == 0 && clientInstance.jagexFileStores[0] != null)
-                    i = 50;
-                if(anInt1332 == 0 && editorInstance.jagexFileStores[0] != null)
-                    i = 50;
+                if (clientInstance != null){
+                    if(anInt1332 == 0 && clientInstance.jagexFileStores[0] != null)
+                        i = 50;
+                } else {
+                    if(anInt1332 == 0 && editorInstance.jagexFileStores[0] != null)
+                        i = 50;
+                }
                 try
                 {
                     Thread.sleep(i);
@@ -491,12 +496,13 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 
     public void method560(int i, int j)
     {
-        if(clientInstance != null)
+        if(clientInstance != null)  {
             if(clientInstance.jagexFileStores[0] == null)
                 return;
-        else
+        } else {
             if(editorInstance.jagexFileStores[0] == null)
                 return;
+        }
         if(versions[j][i] == 0)
             return;
         if(fileStatus[j][i] == 0)
@@ -572,11 +578,13 @@ public class OnDemandFetcher extends OnDemandFetcherParent
     public void method563(byte byte0, int i, int j)
     {
         if(clientInstance != null)
+        {
             if(clientInstance.jagexFileStores[0] == null)
                 return;
-        else
+        } else {
             if(editorInstance.jagexFileStores[0] == null)
                 return;
+        }
         if(versions[i][j] == 0)
             return;
         byte abyte0[];
@@ -644,12 +652,13 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         {
             waiting = true;
             byte abyte0[] = null;
-            if (clientInstance != null)
+            if (clientInstance != null) {
                 if(clientInstance.jagexFileStores[0] != null)
                     abyte0 = clientInstance.jagexFileStores[onDemandData.dataType + 1].decompress(onDemandData.ID);
-            else
+            } else {
                 if(editorInstance.jagexFileStores[0] != null)
                     abyte0 = editorInstance.jagexFileStores[onDemandData.dataType + 1].decompress(onDemandData.ID);
+            }
             if(!crcMatches(versions[onDemandData.dataType][onDemandData.ID], crcs[onDemandData.dataType][onDemandData.ID], abyte0))
                 abyte0 = null;
             synchronized(aClass19_1370)
