@@ -298,7 +298,7 @@ public class Client extends GameShell {
         setHighMem();
         isMembers = true;
         initialize(765, 503);
-        pglWrapper = new PglWrapper();
+        //pglWrapper = new PglWrapper();
     }
 
     public void startRunnable(Runnable runnable, int i) {
@@ -543,7 +543,9 @@ public class Client extends GameShell {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            pglWrapper.loadNewRegion(mapRegion);
+
+            if (pglWrapper != null)
+                pglWrapper.loadNewRegion(mapRegion);
             gameScreenCanvas.initDrawingArea();
             stream.p1isaac(0);
             int k3 = MapRegion.setZ;
@@ -10090,15 +10092,19 @@ public class Client extends GameShell {
         Model.cursorYPos = super.mouseEventY - 4;
         Graphics2D.resetImage();
         //xxx disables graphics            if(graphicsEnabled){
-        pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);
-        pglWrapper.setCameraRotation(-xCameraCurve, 0, yCameraCurve);
+        if (pglWrapper != null) {
+            pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);
+            pglWrapper.setCameraRotation(-xCameraCurve, 0, yCameraCurve);
+        }
         fieldJ = j;
         //sceneGraph.render(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
-        if (renderNode == null) {
+        if (pglWrapper != null && renderNode == null) {
             renderNode = new PglCallClientNode();
             pglWrapper.scene.add(renderNode);
-        }
-        pglWrapper.process();
+        }  else
+            renderscene();
+        if (pglWrapper != null)
+            pglWrapper.process();
         sceneGraph.clearInteractableObjectCache();
         updateEntities();
         drawHeadIcon();
