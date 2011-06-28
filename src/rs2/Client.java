@@ -1012,7 +1012,7 @@ public class Client extends GameShell {
         if (super.mouseButtonPressed == 1) {
             if (super.clickX >= 6 && super.clickX <= 106 && super.clickY >= 467 && super.clickY <= 499) {
                 publicChatMode = (publicChatMode + 1) % 4;
-                aBoolean1233 = true;
+                chatOptionsNeedUpdating = true;
                 inputTaken = true;
                 stream.p1isaac(95);
                 stream.p1(publicChatMode);
@@ -1021,7 +1021,7 @@ public class Client extends GameShell {
             }
             if (super.clickX >= 135 && super.clickX <= 235 && super.clickY >= 467 && super.clickY <= 499) {
                 privateChatMode = (privateChatMode + 1) % 3;
-                aBoolean1233 = true;
+                chatOptionsNeedUpdating = true;
                 inputTaken = true;
                 stream.p1isaac(95);
                 stream.p1(publicChatMode);
@@ -1030,7 +1030,7 @@ public class Client extends GameShell {
             }
             if (super.clickX >= 273 && super.clickX <= 373 && super.clickY >= 467 && super.clickY <= 499) {
                 tradeMode = (tradeMode + 1) % 3;
-                aBoolean1233 = true;
+                chatOptionsNeedUpdating = true;
                 inputTaken = true;
                 stream.p1isaac(95);
                 stream.p1(publicChatMode);
@@ -1610,7 +1610,7 @@ public class Client extends GameShell {
         try {
             if (l == 0L)
                 return;
-            if (user_friends_count >= 100 && anInt1046 != 1) {
+            if (user_friends_count >= 100 && isMember != 1) {
                 pushMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", 0, "");
                 return;
             }
@@ -2243,7 +2243,7 @@ public class Client extends GameShell {
                 if (class30_sub2_sub4_sub4.anInt1590 < 0) {
                     int j = -class30_sub2_sub4_sub4.anInt1590 - 1;
                     Player player;
-                    if (j == unknownInt10)
+                    if (j == playerID)
                         player = session_player;
                     else
                         player = session_players[j];
@@ -2448,8 +2448,8 @@ public class Client extends GameShell {
     }
 
     private void client_process() {
-        if (anInt1104 > 1)
-            anInt1104--;
+        if (systemUpdateTime > 1)
+            systemUpdateTime--;
         if (anInt1011 > 0)
             anInt1011--;
         for (int j = 0; j < 5; j++)
@@ -4194,7 +4194,7 @@ public class Client extends GameShell {
                         pushMessage(promptInput, 6, TextClass.fixName(TextClass.nameForLong(aLong953)));
                         if (privateChatMode == 2) {
                             privateChatMode = 1;
-                            aBoolean1233 = true;
+                            chatOptionsNeedUpdating = true;
                             stream.p1isaac(95);
                             stream.p1(publicChatMode);
                             stream.p1(privateChatMode);
@@ -4375,7 +4375,7 @@ public class Client extends GameShell {
                             pushMessage(session_player.textSpoken, 2, session_player.name);
                         if (publicChatMode == 2) {
                             publicChatMode = 3;
-                            aBoolean1233 = true;
+                            chatOptionsNeedUpdating = true;
                             stream.p1isaac(95);
                             stream.p1(publicChatMode);
                             stream.p1(privateChatMode);
@@ -4721,7 +4721,7 @@ public class Client extends GameShell {
             return;
         RSFont RSFont = plainFont;
         int i = 0;
-        if (anInt1104 != 0)
+        if (systemUpdateTime != 0)
             i = 1;
         for (int j = 0; j < 100; j++)
             if (chatMessages[j] != null) {
@@ -5076,7 +5076,7 @@ public class Client extends GameShell {
                 anInt843 = -1;
                 pktSize = 0;
                 anInt1009 = 0;
-                anInt1104 = 0;
+                systemUpdateTime = 0;
                 anInt1011 = 0;
                 anInt855 = 0;
                 menuActionRow = 0;
@@ -5230,7 +5230,7 @@ public class Client extends GameShell {
                 anInt843 = -1;
                 pktSize = 0;
                 anInt1009 = 0;
-                anInt1104 = 0;
+                systemUpdateTime = 0;
                 menuActionRow = 0;
                 menuOpen = false;
                 aLong824 = System.currentTimeMillis();
@@ -6535,7 +6535,7 @@ public class Client extends GameShell {
         }
         if (mobile.interactingEntity >= 32768) {
             int j = mobile.interactingEntity - 32768;
-            if (j == unknownInt10)
+            if (j == playerID)
                 j = session_player_idx;
             Player player = session_players[j];
             if (player != null) {
@@ -6637,7 +6637,7 @@ public class Client extends GameShell {
             needDrawTabArea = true;
             inputTaken = true;
             tabAreaAltered = true;
-            aBoolean1233 = true;
+            chatOptionsNeedUpdating = true;
             if (loadingStage != 2) {
                 gameScreenCanvas.drawGraphics(4, super.graphics, 4);
                 minimapIP.drawGraphics(4, super.graphics, 550);
@@ -6774,8 +6774,8 @@ public class Client extends GameShell {
             aRSImageProducer_1124.drawGraphics(466, super.graphics, 496);
             gameScreenCanvas.initDrawingArea();
         }
-        if (aBoolean1233) {
-            aBoolean1233 = false;
+        if (chatOptionsNeedUpdating) {//chat interface needs updating?
+            chatOptionsNeedUpdating = false;
             aRSImageProducer_1123.initDrawingArea();
             backBase1.drawImage(0, 0);
             plainFont.method382(0xffffff, 55, "Public chat", 28, true);
@@ -7466,8 +7466,8 @@ public class Client extends GameShell {
             plainFont.method380("Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", c, i1, k);
             k += 15;
         }
-        if (anInt1104 != 0) {
-            int j = anInt1104 / 50;
+        if (systemUpdateTime != 0) {
+            int j = systemUpdateTime / 50;
             int l = j / 60;
             j %= 60;
             if (j < 10)
@@ -8107,7 +8107,7 @@ public class Client extends GameShell {
         if (ui_split_private_chat == 0)
             return;
         int i = 0;
-        if (anInt1104 != 0)
+        if (systemUpdateTime != 0)
             i = 1;
         for (int j = 0; j < 100; j++)
             if (chatMessages[j] != null) {
@@ -8483,7 +8483,7 @@ public class Client extends GameShell {
             int j9 = anInt1269 + (l3 & 7);
             int i12 = stream.sg2();
             int j14 = stream.g2();
-            if (k6 >= 0 && j9 >= 0 && k6 < 104 && j9 < 104 && i12 != unknownInt10) {
+            if (k6 >= 0 && j9 >= 0 && k6 < 104 && j9 < 104 && i12 != playerID) {
                 Item class30_sub2_sub4_sub2_2 = new Item();
                 class30_sub2_sub4_sub2_2.ID = i1;
                 class30_sub2_sub4_sub2_2.anInt1559 = j14;
@@ -8579,7 +8579,7 @@ public class Client extends GameShell {
             int l21 = stream.g2();
             byte byte3 = stream.ng1();
             Player player;
-            if (i10 == unknownInt10)
+            if (i10 == playerID)
                 player = session_player;
             else
                 player = session_players[i10];
@@ -9156,8 +9156,8 @@ public class Client extends GameShell {
             if (pktType == 70) {
                 int k2 = inStream.g2b();
                 int l10 = inStream.ig2b();
-                int i16 = inStream.ig2();
-                RSInterface class9_5 = RSInterface.interfaceCache[i16];
+                int interfaceID = inStream.ig2();
+                RSInterface class9_5 = RSInterface.interfaceCache[interfaceID];
                 class9_5.x_offset = k2;
                 class9_5.y_offset = l10;
                 pktType = -1;
@@ -9166,15 +9166,15 @@ public class Client extends GameShell {
             if (pktType == 73 || pktType == 241) {
 
                 //mapReset();
-                int l2 = anInt1069;
-                int i11 = anInt1070;
+                int mapRegionX = anInt1069;
+                int mapRegionY = anInt1070;
                 if (pktType == 73) {
-                    l2 = inStream.sg2();
-                    i11 = inStream.g2();
+                    mapRegionX = inStream.sg2();
+                    mapRegionY = inStream.g2();
                     aBoolean1159 = false;
                 }
                 if (pktType == 241) {
-                    i11 = inStream.sg2();
+                    mapRegionY = inStream.sg2();
                     inStream.begin_bit_block();
                     for (int j16 = 0; j16 < 4; j16++) {
                         for (int l20 = 0; l20 < 13; l20++) {
@@ -9191,15 +9191,15 @@ public class Client extends GameShell {
                     }
 
                     inStream.end_bit_block();
-                    l2 = inStream.g2();
+                    mapRegionX = inStream.g2();
                     aBoolean1159 = true;
                 }
-                if (anInt1069 == l2 && anInt1070 == i11 && loadingStage == 2) {
+                if (anInt1069 == mapRegionX && anInt1070 == mapRegionY && loadingStage == 2) {
                     pktType = -1;
                     return true;
                 }
-                anInt1069 = l2;
-                anInt1070 = i11;
+                anInt1069 = mapRegionX;
+                anInt1070 = mapRegionY;
                 baseX = (anInt1069 - 6) * 8;
                 baseY = (anInt1070 - 6) * 8;
                 aBoolean1141 = (anInt1069 / 8 == 48 || anInt1069 / 8 == 49) && anInt1070 / 8 == 48;
@@ -9390,7 +9390,7 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 114) {
-                anInt1104 = inStream.ig2() * 30;
+                systemUpdateTime = inStream.ig2() * 30;
                 pktType = -1;
                 return true;
             }
@@ -9646,20 +9646,20 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 196) {
-                long l5 = inStream.g8();
-                int j18 = inStream.g4();
-                int l21 = inStream.g1();
+                long fromPlayer = inStream.g8();
+                int chatID = inStream.g4();
+                int fromPlayerRights = inStream.g1();
                 boolean flag5 = false;
                 for (int i28 = 0; i28 < 100; i28++) {
-                    if (anIntArray1240[i28] != j18)
+                    if (anIntArray1240[i28] != chatID)
                         continue;
                     flag5 = true;
                     break;
                 }
 
-                if (l21 <= 1) {
+                if (fromPlayerRights <= 1) {//means that if a player is a mod the pm is always displayed
                     for (int l29 = 0; l29 < user_ignore_count; l29++) {
-                        if (user_ignore_names[l29] != l5)
+                        if (user_ignore_names[l29] != fromPlayer)
                             continue;
                         flag5 = true;
                         break;
@@ -9668,17 +9668,17 @@ public class Client extends GameShell {
                 }
                 if (!flag5 && anInt1251 == 0)
                     try {
-                        anIntArray1240[anInt1169] = j18;
+                        anIntArray1240[anInt1169] = chatID;
                         anInt1169 = (anInt1169 + 1) % 100;
                         String s9 = TextInput.method525(pktSize - 13, inStream);
-                        if (l21 != 3)
+                        if (fromPlayerRights != 3)
                             s9 = Censor.doCensor(s9);
-                        if (l21 == 2 || l21 == 3)
-                            pushMessage(s9, 7, "@cr2@" + TextClass.fixName(TextClass.nameForLong(l5)));
-                        else if (l21 == 1)
-                            pushMessage(s9, 7, "@cr1@" + TextClass.fixName(TextClass.nameForLong(l5)));
+                        if (fromPlayerRights == 2 || fromPlayerRights == 3)
+                            pushMessage(s9, 7, "@cr2@" + TextClass.fixName(TextClass.nameForLong(fromPlayer)));
+                        else if (fromPlayerRights == 1)
+                            pushMessage(s9, 7, "@cr1@" + TextClass.fixName(TextClass.nameForLong(fromPlayer)));
                         else
-                            pushMessage(s9, 3, TextClass.fixName(TextClass.nameForLong(l5)));
+                            pushMessage(s9, 3, TextClass.fixName(TextClass.nameForLong(fromPlayer)));
                     } catch (Exception exception1) {
                         Signlink.reporterror("cde1");
                     }
@@ -9704,28 +9704,28 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 246) {
-                int i6 = inStream.ig2();
-                int i13 = inStream.g2();
-                int k18 = inStream.g2();
-                if (k18 == 65535) {
-                    RSInterface.interfaceCache[i6].anInt233 = 0;
+                int interfaceID = inStream.ig2();
+                int itemScale = inStream.g2();
+                int itemID = inStream.g2();
+                if (itemID == 65535) {
+                    RSInterface.interfaceCache[interfaceID].anInt233 = 0;
                     pktType = -1;
                     return true;
                 } else {
-                    ItemDef itemDef = ItemDef.forID(k18);
-                    RSInterface.interfaceCache[i6].anInt233 = 4;
-                    RSInterface.interfaceCache[i6].mediaID = k18;
-                    RSInterface.interfaceCache[i6].anInt270 = itemDef.sprite_rotation_scale;
-                    RSInterface.interfaceCache[i6].anInt271 = itemDef.modelRotation2;
-                    RSInterface.interfaceCache[i6].anInt269 = (itemDef.modelZoom * 100) / i13;
+                    ItemDef itemDef = ItemDef.forID(itemID);
+                    RSInterface.interfaceCache[interfaceID].anInt233 = 4;
+                    RSInterface.interfaceCache[interfaceID].mediaID = itemID;
+                    RSInterface.interfaceCache[interfaceID].anInt270 = itemDef.sprite_rotation_scale;
+                    RSInterface.interfaceCache[interfaceID].anInt271 = itemDef.modelRotation2;
+                    RSInterface.interfaceCache[interfaceID].anInt269 = (itemDef.modelZoom * 100) / itemScale;
                     pktType = -1;
                     return true;
                 }
             }
             if (pktType == 171) {
-                boolean flag1 = inStream.g1() == 1;
-                int j13 = inStream.g2();
-                RSInterface.interfaceCache[j13].hidden_until_mouseover = flag1;
+                boolean hidden = inStream.g1() == 1;
+                int interfaceID = inStream.g2();
+                RSInterface.interfaceCache[interfaceID].hidden_until_mouseover = hidden;
                 pktType = -1;
                 return true;
             }
@@ -9761,7 +9761,7 @@ public class Client extends GameShell {
                 publicChatMode = inStream.g1();
                 privateChatMode = inStream.g1();
                 tradeMode = inStream.g1();
-                aBoolean1233 = true;
+                chatOptionsNeedUpdating = true;
                 inputTaken = true;
                 pktType = -1;
                 return true;
@@ -9774,10 +9774,10 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 8) {
-                int k6 = inStream.isg2();
-                int l13 = inStream.g2();
-                RSInterface.interfaceCache[k6].anInt233 = 1;
-                RSInterface.interfaceCache[k6].mediaID = l13;
+                int interfaceID = inStream.isg2();
+                int mediaID = inStream.g2();
+                RSInterface.interfaceCache[interfaceID].anInt233 = 1;
+                RSInterface.interfaceCache[interfaceID].mediaID = mediaID;
                 pktType = -1;
                 return true;
             }
@@ -9793,8 +9793,8 @@ public class Client extends GameShell {
             }
             if (pktType == 53) {
                 needDrawTabArea = true;
-                int i7 = inStream.g2();
-                RSInterface class9_1 = RSInterface.interfaceCache[i7];
+                int interfaceID = inStream.g2();
+                RSInterface class9_1 = RSInterface.interfaceCache[interfaceID];
                 int j19 = inStream.g2();
                 for (int j22 = 0; j22 < j19; j22++) {
                     int i25 = inStream.g1();
@@ -9855,8 +9855,8 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 249) {
-                anInt1046 = inStream.nsp1();
-                unknownInt10 = inStream.isg2();
+                isMember = inStream.nsp1();
+                playerID = inStream.isg2();
                 pktType = -1;
                 return true;
             }
@@ -9975,17 +9975,17 @@ public class Client extends GameShell {
             }
             if (pktType == 34) {
                 needDrawTabArea = true;
-                int i9 = inStream.g2();
-                RSInterface class9_2 = RSInterface.interfaceCache[i9];
+                int interfaceID = inStream.g2();
+                RSInterface rsInterface = RSInterface.interfaceCache[interfaceID];
                 while (inStream.pos < pktSize) {
                     int j20 = inStream.gsmarts();
                     int i23 = inStream.g2();
                     int l25 = inStream.g1();
                     if (l25 == 255)
                         l25 = inStream.g4();
-                    if (j20 >= 0 && j20 < class9_2.inv.length) {
-                        class9_2.inv[j20] = i23;
-                        class9_2.invStackSizes[j20] = l25;
+                    if (j20 >= 0 && j20 < rsInterface.inv.length) {
+                        rsInterface.inv[j20] = i23;
+                        rsInterface.invStackSizes[j20] = l25;
                     }
                 }
                 pktType = -1;
@@ -10046,6 +10046,7 @@ public class Client extends GameShell {
         renderNPCs(false);
         renderProjectiles();
         renderStationaryGraphics();
+        
         if (!aBoolean1160) {
             int i = anInt1184;
             if (anInt984 / 256 > i)
@@ -10154,7 +10155,7 @@ public class Client extends GameShell {
         aBooleanArray876 = new boolean[5];
         drawFlames = false;
         reportAbuseInput = "";
-        unknownInt10 = -1;
+        playerID = -1;
         menuOpen = false;
         inputString = "";
         maxPlayers = 2048;
@@ -10269,7 +10270,7 @@ public class Client extends GameShell {
         songChanging = true;
         minimapShape2 = new int[151];
         tileSettings = new TileSetting[4];
-        aBoolean1233 = false;
+        chatOptionsNeedUpdating = false;
         anIntArray1240 = new int[100];
         anIntArray1241 = new int[50];
         aBoolean1242 = false;
@@ -10412,7 +10413,7 @@ public class Client extends GameShell {
     private MouseDetection mouseDetection;
     private volatile boolean drawFlames;
     private String reportAbuseInput;
-    private int unknownInt10;
+    private int playerID;
     private boolean menuOpen;
     private int anInt886;
     private String inputString;
@@ -10564,7 +10565,7 @@ public class Client extends GameShell {
     private int dialogID;
     private final int[] user_stats;
     private final int[] anIntArray1045;
-    private int anInt1046;
+    private int isMember;
     private boolean char_edit_gender;
     private int anInt1048;
     private String aString1049;
@@ -10618,7 +10619,7 @@ public class Client extends GameShell {
     private int anInt1101;
     private int anInt1102;
     private boolean tabAreaAltered;
-    private int anInt1104;
+    private int systemUpdateTime;
     private GraphicsBuffer aRSImageProducer_1107;
     private GraphicsBuffer aRSImageProducer_1108;
     private GraphicsBuffer aRSImageProducer_1109;
@@ -10733,7 +10734,7 @@ public class Client extends GameShell {
     private boolean songChanging;
     private final int[] minimapShape2;
     private TileSetting[] tileSettings;
-    private boolean aBoolean1233;
+    private boolean chatOptionsNeedUpdating;
     private int[] mapCoordinates;
     private int[] terrainIndices;
     private int[] anIntArray1236;
