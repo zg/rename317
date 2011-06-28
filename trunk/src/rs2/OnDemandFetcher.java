@@ -774,7 +774,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
     private final byte[] ioBuffer;
     public int onDemandCycle;
     private final byte[][] fileStatus;
-    private Client clientInstance;
+    public Client clientInstance;
     private final Deque aClass19_1344;
     private int completedSize;
     private int expectedSize;
@@ -802,4 +802,11 @@ public class OnDemandFetcher extends OnDemandFetcherParent
     private int[] mapIndices1;
     private byte[] modelIndices;
     private int loopCycle;
+
+    public byte[] getDataFromCache(int id, int c) {
+        if (clientInstance != null)
+            return JavaUncompress.decompress(clientInstance.jagexFileStores[c+1].decompress(id));
+        else
+            return JavaUncompress.decompress(editorInstance.jagexFileStores[c+1].decompress(id));
+    }
 }

@@ -46,6 +46,8 @@ public class EditorMain extends GameShell implements ComponentListener {
     private int mapWidth = 2;//- Settings
     private int mapHeight = 2;//- Settings
     private int heightLevel = 0;
+    private int mapTileW = mapWidth * 64;
+    private int mapTileH = mapHeight * 64;
     private int xCameraPos=mapWidth*32*128;;
     private int yCameraPos=mapHeight*32*128;
     private int xCameraCurve = (int) (Math.random() * 20D) - 10 & 0x7ff;;
@@ -65,6 +67,8 @@ public class EditorMain extends GameShell implements ComponentListener {
     private int lastMouseX = -1;
     private int lastMouseY = -1;
     private int[] isOnScreen;
+    private int lastResizeHeight = -1;
+    private int lastResizeWidth = -1;
 
     private JagexArchive getJagexArchive(int i) {
         byte abyte0[] = null;
@@ -116,11 +120,11 @@ public class EditorMain extends GameShell implements ComponentListener {
             JagexArchive configArchive = getJagexArchive(2);
             JagexArchive mediaArchive = getJagexArchive(4);
             JagexArchive textureArchive = getJagexArchive(6);
-            tileSettingBits = new byte[4][64 * mapWidth][64 * mapHeight];
-            heightMap = new int[4][64 * mapWidth + 1][64 * mapHeight + 1];
-            sceneGraph = new SceneGraph(4, 64 * mapWidth, 64 * mapHeight, heightMap);
+            tileSettingBits = new byte[4][mapTileW][mapTileH];
+            heightMap = new int[4][mapTileW + 1][mapTileH + 1];
+            sceneGraph = new SceneGraph(4,mapTileW, mapTileH, heightMap);
             for (int j = 0; j < 4; j++)
-                tileSettings[j] = new TileSetting(64 * mapWidth, 64 * mapHeight);
+                tileSettings[j] = new TileSetting(mapTileW, mapTileH);
 
             minimapImage = new RgbImage(786, 786);
             JagexArchive crcArchive = getJagexArchive(5);
@@ -257,13 +261,21 @@ public class EditorMain extends GameShell implements ComponentListener {
     }
 
     public void processResize() {
+        int resizeWidth = this.resizeWidth;     //to prevent resize glitch
+        int resizeHeight = this.resizeHeight;
+        //noinspection ConstantConditions
+        if (resizeWidth != this.resizeWidth
+            || resizeHeight != this.resizeHeight
+            || resizeWidth != lastResizeWidth
+            || resizeHeight != lastResizeHeight)
+            return;
         startGraphicsBlock();
         gameScreenCanvas = new GraphicsBuffer(resizeWidth, resizeHeight, getGameComponent());
         Graphics2D.fillRect(0, 0, resizeWidth, resizeHeight, 0);
         Rasterizer.setBounds(resizeWidth, resizeHeight);
         SceneGraph.setupViewport(500, 800, resizeWidth, resizeHeight, isOnScreen);
-        resizeWidth = -1;
-        resizeHeight = -1;
+        this.resizeWidth = -1;
+        this.resizeHeight = -1;
         endGraphicsBlock();
         repaint();
     }
@@ -326,79 +338,79 @@ public class EditorMain extends GameShell implements ComponentListener {
 
     private void drawMapScenes(int y, int k, int x, int i1, int z) {
         int interactableObjectUID = sceneGraph.getWallObjectUID(z, x, y);
-            int mhTile = mapHeight*64;
-            int mwTile = mapWidth*64;
+            int mhTile = mapTileH;// mapHeight*64;
+            int mwTile = mapTileW;//mapWidth*64;
         if (interactableObjectUID != 0) {
-            int l1 = sceneGraph.getIDTAGForXYZ(z, x, y, interactableObjectUID);
-            int k2 = l1 >> 6 & 3;
-            int i3 = l1 & 0x1f;
-            int k3 = k;
+            int uid = sceneGraph.getIDTAGForXYZ(z, x, y, interactableObjectUID);
+            int lineDirection = uid >> 6 & 3;
+            int lineRenderType = uid & 0x1f;
+            int lineColour = k;
             if (interactableObjectUID > 0)
-                k3 = i1;
-            int ai[] = minimapImage.myPixels;
-            int k4 = (128 + 128 * 786) +  x * 4 + ((mhTile - 1) - y) * 786 * 4;
-            int i5 = interactableObjectUID >> 14 & 0x7fff;
-            ObjectDef class46_2 = ObjectDef.forID(i5);
-            if (class46_2.mapSceneID != -1) {
-                IndexedImage indexedImage_2 = mapScenes[class46_2.mapSceneID];
-                if (indexedImage_2 != null) {
-                    int i6 = (class46_2.sizeX * 4 - indexedImage_2.imgWidth) / 2;
-                    int j6 = (class46_2.sizeY * 4 - indexedImage_2.imgHeight) / 2;
-                    indexedImage_2.drawImage(128 + x * 4 + i6, 128 + (mhTile - y - class46_2.sizeY) * 4 + j6);
+                lineColour = i1;
+            int minimapPixels[] = minimapImage.myPixels;
+            int pixelOffset = (128 + 128 * 786) +  x * 4 + ((mhTile - 1) - y) * 786 * 4;
+            int objectID = interactableObjectUID >> 14 & 0x7fff;
+            ObjectDef object = ObjectDef.forID(objectID);
+            if (object.mapSceneID != -1) {
+                IndexedImage mapScene = mapScenes[object.mapSceneID];
+                if (mapScene != null) {
+                    int i6 = (object.sizeX * 4 - mapScene.imgWidth) / 2;
+                    int j6 = (object.sizeY * 4 - mapScene.imgHeight) / 2;
+                    mapScene.drawImage(128 + x * 4 + i6, 128 + (mhTile - y - object.sizeY) * 4 + j6);
                 }
             } else {
-                if (i3 == 0 || i3 == 2)
-                    if (k2 == 0) {
-                        ai[k4] = k3;
-                        ai[k4 + 786] = k3;
-                        ai[k4 + 786*2] = k3;
-                        ai[k4 + 786*3] = k3;
-                    } else if (k2 == 1) {
-                        ai[k4] = k3;
-                        ai[k4 + 1] = k3;
-                        ai[k4 + 2] = k3;
-                        ai[k4 + 3] = k3;
-                    } else if (k2 == 2) {
-                        ai[k4 + 3] = k3;
-                        ai[k4 + 3 + 786] = k3;
-                        ai[k4 + 3 + 786*2] = k3;
-                        ai[k4 + 3 + 786*3] = k3;
-                    } else if (k2 == 3) {
-                        ai[k4 + 786*3] = k3;
-                        ai[k4 + 786*3 + 1] = k3;
-                        ai[k4 + 786*3 + 2] = k3;
-                        ai[k4 + 786*3 + 3] = k3;
+                if (lineRenderType == 0 || lineRenderType == 2)
+                    if (lineDirection == 0) {   //West
+                        minimapPixels[pixelOffset] = lineColour;
+                        minimapPixels[pixelOffset + 786] = lineColour;
+                        minimapPixels[pixelOffset + 786*2] = lineColour;
+                        minimapPixels[pixelOffset + 786*3] = lineColour;
+                    } else if (lineDirection == 1) {   //North
+                        minimapPixels[pixelOffset] = lineColour;
+                        minimapPixels[pixelOffset + 1] = lineColour;
+                        minimapPixels[pixelOffset + 2] = lineColour;
+                        minimapPixels[pixelOffset + 3] = lineColour;
+                    } else if (lineDirection == 2) {         //East
+                        minimapPixels[pixelOffset + 3] = lineColour;
+                        minimapPixels[pixelOffset + 3 + 786] = lineColour;
+                        minimapPixels[pixelOffset + 3 + 786*2] = lineColour;
+                        minimapPixels[pixelOffset + 3 + 786*3] = lineColour;
+                    } else if (lineDirection == 3) {          //South
+                        minimapPixels[pixelOffset + 786*3] = lineColour;
+                        minimapPixels[pixelOffset + 786*3 + 1] = lineColour;
+                        minimapPixels[pixelOffset + 786*3 + 2] = lineColour;
+                        minimapPixels[pixelOffset + 786*3 + 3] = lineColour;
                     }
-                if (i3 == 3)
-                    if (k2 == 0)
-                        ai[k4] = k3;
-                    else if (k2 == 1)
-                        ai[k4 + 3] = k3;
-                    else if (k2 == 2)
-                        ai[k4 + 3 + 786*3] = k3;
-                    else if (k2 == 3)
-                        ai[k4 + 786*3] = k3;
-                if (i3 == 2)
-                    if (k2 == 3) {
-                        ai[k4] = k3;
-                        ai[k4 + 786] = k3;
-                        ai[k4 + 786*2] = k3;
-                        ai[k4 + 786*3] = k3;
-                    } else if (k2 == 0) {
-                        ai[k4] = k3;
-                        ai[k4 + 1] = k3;
-                        ai[k4 + 2] = k3;
-                        ai[k4 + 3] = k3;
-                    } else if (k2 == 1) {
-                        ai[k4 + 3] = k3;
-                        ai[k4 + 3 + 786] = k3;
-                        ai[k4 + 3 + 786*2] = k3;
-                        ai[k4 + 3 + 786*3] = k3;
-                    } else if (k2 == 2) {
-                        ai[k4 + 786*3] = k3;
-                        ai[k4 + 786*3 + 1] = k3;
-                        ai[k4 + 786*3 + 2] = k3;
-                        ai[k4 + 786*3 + 3] = k3;
+                if (lineRenderType == 3)
+                    if (lineDirection == 0)
+                        minimapPixels[pixelOffset] = lineColour;
+                    else if (lineDirection == 1)
+                        minimapPixels[pixelOffset + 3] = lineColour;
+                    else if (lineDirection == 2)
+                        minimapPixels[pixelOffset + 3 + 786*3] = lineColour;
+                    else if (lineDirection == 3)
+                        minimapPixels[pixelOffset + 786*3] = lineColour;
+                if (lineRenderType == 2)
+                    if (lineDirection == 3) {
+                        minimapPixels[pixelOffset] = lineColour;
+                        minimapPixels[pixelOffset + 786] = lineColour;
+                        minimapPixels[pixelOffset + 786*2] = lineColour;
+                        minimapPixels[pixelOffset + 786*3] = lineColour;
+                    } else if (lineDirection == 0) {
+                        minimapPixels[pixelOffset] = lineColour;
+                        minimapPixels[pixelOffset + 1] = lineColour;
+                        minimapPixels[pixelOffset + 2] = lineColour;
+                        minimapPixels[pixelOffset + 3] = lineColour;
+                    } else if (lineDirection == 1) {
+                        minimapPixels[pixelOffset + 3] = lineColour;
+                        minimapPixels[pixelOffset + 3 + 786] = lineColour;
+                        minimapPixels[pixelOffset + 3 + 786*2] = lineColour;
+                        minimapPixels[pixelOffset + 3 + 786*3] = lineColour;
+                    } else if (lineDirection == 2) {
+                        minimapPixels[pixelOffset + 786*3] = lineColour;
+                        minimapPixels[pixelOffset + 786*3 + 1] = lineColour;
+                        minimapPixels[pixelOffset + 786*3 + 2] = lineColour;
+                        minimapPixels[pixelOffset + 786*3 + 3] = lineColour;
                     }
             }
         }
@@ -464,14 +476,14 @@ public class EditorMain extends GameShell implements ComponentListener {
         for (int i = 0; i < 4; i++)
             tileSettings[i].init();
         for (int l = 0; l < 4; l++) {
-            for (int k1 = 0; k1 < mapWidth*64; k1++) {
-                for (int j2 = 0; j2 < mapHeight*64; j2++)
+            for (int k1 = 0; k1 < mapTileW; k1++) {
+                for (int j2 = 0; j2 <mapTileH; j2++)
                     tileSettingBits[l][k1][j2] = 0;
             }
         }
 
         //TODO: Actually load the map
-        mapRegion = new MapRegion(mapWidth*64,mapHeight*64,tileSettingBits,heightMap);
+        mapRegion = new MapRegion(mapTileW,mapTileH,tileSettingBits,heightMap);
         for (int _x = 0;_x < mapWidth;_x++)
             for (int _z = 0;_z < mapHeight;_z++){
                 int terrainIdx = onDemandFetcher.getMapIndex(0,z+_z,x+_x);
@@ -497,6 +509,7 @@ public class EditorMain extends GameShell implements ComponentListener {
                 mapRegion.loadObjects(_x*64,tileSettings,_z*64,sceneGraph,objectData);
             }
         mapRegion.addTiles(tileSettings,sceneGraph);
+        sceneGraph.setHeightLevel(0);
         System.gc();
         Rasterizer.resetTextures(20);
         onDemandFetcher.method566();
@@ -515,8 +528,8 @@ public class EditorMain extends GameShell implements ComponentListener {
         int j = ai.length;
         for (int k = 0; k < j; k++)
             ai[k] = 0;
-        int mwTile = mapWidth*64;
-        int mhTile = mapHeight*64;
+        int mwTile = mapTileW;
+        int mhTile = mapTileH;
         for (int _z = 1; _z < mhTile - 1; _z++) {
             int i1 = (128 + 128 * 786) + ((mhTile - 1) - _z) * 786 * 4;
             for (int _x = 1; _x < mwTile - 1; _x++) {
@@ -677,7 +690,7 @@ public class EditorMain extends GameShell implements ComponentListener {
             int mouseDeltaY = mouseEventY - lastMouseY;
             lastMouseX = mouseEventX;
             lastMouseY = mouseEventY;
-            xCameraCurve += mouseDeltaX;
+            xCameraCurve -= mouseDeltaX;
             yCameraCurve += mouseDeltaY;
         }
         if (mouseButtonDown == 0 && lastMouseX != -1 ){
@@ -713,14 +726,14 @@ public class EditorMain extends GameShell implements ComponentListener {
             yCameraCurve = 0;
         }
         if (keyStatus['w'] == 1){
-            xCameraPos -= Rasterizer.SINE[xCameraCurve] >> 10;
-            yCameraPos += Rasterizer.COSINE[xCameraCurve] >> 10;
-            zCameraPos += Rasterizer.SINE[yCameraCurve] >> 10;
+            xCameraPos -= Rasterizer.SINE[xCameraCurve] >> 11;
+            yCameraPos += Rasterizer.COSINE[xCameraCurve] >> 11;
+            zCameraPos += Rasterizer.SINE[yCameraCurve] >> 11;
         }
         if (keyStatus['s'] == 1){
-            xCameraPos += Rasterizer.SINE[xCameraCurve] >> 10;
-            yCameraPos -= Rasterizer.COSINE[xCameraCurve] >> 10;
-            zCameraPos -= Rasterizer.SINE[yCameraCurve] >> 10;
+            xCameraPos += Rasterizer.SINE[xCameraCurve] >> 11;
+            yCameraPos -= Rasterizer.COSINE[xCameraCurve] >> 11;
+            zCameraPos -= Rasterizer.SINE[yCameraCurve] >> 11;
         }
     }
 
@@ -737,6 +750,8 @@ public class EditorMain extends GameShell implements ComponentListener {
      * Invoked when the component's size changes.
      */
     public void componentResized(ComponentEvent e) {
+        lastResizeWidth = resizeWidth;
+        lastResizeHeight = resizeHeight;
         resizeWidth = editorMainWindow.getGameViewPanel().getWidth();
         resizeHeight = editorMainWindow.getGameViewPanel().getHeight();
     }

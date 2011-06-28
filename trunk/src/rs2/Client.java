@@ -6160,9 +6160,9 @@ public class Client extends GameShell {
             anIntArray1181 = Rasterizer.lineOffsets;
             Rasterizer.setBounds(512, 334);
             anIntArray1182 = Rasterizer.lineOffsets;
-            int ai[] = new int[9];
-            for (int i8 = 0; i8 < 9; i8++) {
-                int k8 = 128 + i8 * 32 + 15;
+            int ai[] = new int[64];
+            for (int i8 = 0; i8 < 64; i8++) {
+                int k8 = i8 * 32 + 15;
                 int l8 = 600 + k8 * 3;
                 int i9 = Rasterizer.SINE[k8];
                 ai[i8] = l8 * i9 >> 16;
@@ -6176,8 +6176,8 @@ public class Client extends GameShell {
             SceneGraph.clientInstance = this;
             ObjectDef.clientInstance = this;
             NpcDef.clientInstance = this;
-            pglWrapper.initJgle();
-            EditorMain.main(null);
+         //   pglWrapper.initJgle();
+           // EditorMain.main(null);
             return;
         } catch (Exception exception) {
             Signlink.reporterror("loaderror " + aString1049 + " " + anInt1079);
