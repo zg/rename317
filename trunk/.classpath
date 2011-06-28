@@ -8,5 +8,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/PGLEngine2_Library.jar"/>
+	<classpathentry kind="lib" path="lib/TableLayout-20050920.jar"/>
+	<classpathentry kind="lib" path="lib/mydoggy-res-1.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/swingx-0.9.1.jar"/>
+	<classpathentry kind="lib" path="lib/mydoggy-plaf-1.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/mydoggy-api-1.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/filters-2.0.235.jar"/>
+	<classpathentry kind="lib" path="lib/mydoggy-examples-1.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/forms_rt-6.0.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

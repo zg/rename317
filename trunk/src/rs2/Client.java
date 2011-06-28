@@ -5128,7 +5128,7 @@ public class Client extends GameShell {
                 backDialogID = -1;
                 openInterfaceID = -1;
                 invOverlayInterfaceID = -1;
-                anInt1018 = -1;
+                currentStatusInterface = -1;
                 aBoolean1149 = false;
                 tabID = 3;
                 inputDialogState = 0;
@@ -7432,9 +7432,9 @@ public class Client extends GameShell {
         }
         if (crossType == 2)
             crosses[4 + crossIndex / 100].drawSprite(crossX - 8 - 4, crossY - 8 - 4);
-        if (anInt1018 != -1) {
-            animateRSInterface(anInt945, anInt1018);
-            interface_render(0, 0, 0, RSInterface.interfaceCache[anInt1018]);
+        if (currentStatusInterface != -1) {
+            animateRSInterface(anInt945, currentStatusInterface);
+            interface_render(0, 0, 0, RSInterface.interfaceCache[currentStatusInterface]);
         }
         if (openInterfaceID != -1) {
             animateRSInterface(anInt945, openInterfaceID);
@@ -9368,10 +9368,10 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 208) {
-                int i3 = inStream.ig2b();
-                if (i3 >= 0)
-                    method60(i3);
-                anInt1018 = i3;
+                int statusInterface = inStream.ig2b();
+                if (statusInterface >= 0)
+                    method60(statusInterface);
+                currentStatusInterface = statusInterface;
                 pktType = -1;
                 return true;
             }
@@ -9417,28 +9417,28 @@ public class Client extends GameShell {
                 pktType = -1;
                 return true;
             }
-            if (pktType == 174) {
-                int i4 = inStream.g2();
-                int l11 = inStream.g1();
-                int k17 = inStream.g2();
+            if (pktType == 174) {//sound
+                int songID = inStream.g2();
+                int volume = inStream.g1();
+                int delay = inStream.g2();
                 if (wave_on && !lowMem && anInt1062 < 50) {
-                    anIntArray1207[anInt1062] = i4;
-                    anIntArray1241[anInt1062] = l11;
-                    anIntArray1250[anInt1062] = k17 + Sound.anIntArray326[i4];
+                    anIntArray1207[anInt1062] = songID;
+                    anIntArray1241[anInt1062] = volume;
+                    anIntArray1250[anInt1062] = delay + Sound.anIntArray326[songID];
                     anInt1062++;
                 }
                 pktType = -1;
                 return true;
             }
             if (pktType == 104) {
-                int j4 = inStream.ng1b();
-                int i12 = inStream.nsp1();
-                String s6 = inStream.gstr();
-                if (j4 >= 1 && j4 <= 5) {
-                    if (s6.equalsIgnoreCase("null"))
-                        s6 = null;
-                    atPlayerActions[j4 - 1] = s6;
-                    atPlayerArray[j4 - 1] = i12 == 0;
+                int slotPos = inStream.ng1b();
+                int i12 = inStream.nsp1();//server sends 0 O_o? clears it or something O_o
+                String actionString = inStream.gstr();
+                if (slotPos >= 1 && slotPos <= 5) {
+                    if (actionString.equalsIgnoreCase("null"))
+                        actionString = null;
+                    atPlayerActions[slotPos - 1] = actionString;
+                    atPlayerArray[slotPos - 1] = i12 == 0;
                 }
                 pktType = -1;
                 return true;
@@ -9749,10 +9749,10 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 126) {
-                String s1 = inStream.gstr();
-                int k13 = inStream.sg2();
-                RSInterface.interfaceCache[k13].text_conditionfalse = s1;
-                if (RSInterface.interfaceCache[k13].parentID == tabInterfaceIDs[tabID])
+                String interfaceText = inStream.gstr();
+                int interfaceID = inStream.sg2();
+                RSInterface.interfaceCache[interfaceID].text_conditionfalse = interfaceText;
+                if (RSInterface.interfaceCache[interfaceID].parentID == tabInterfaceIDs[tabID])
                     needDrawTabArea = true;
                 pktType = -1;
                 return true;
@@ -9910,12 +9910,12 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 87) {
-                int j8 = inStream.ig2();
-                int l14 = inStream.big4();
-                anIntArray1045[j8] = l14;
-                if (sessionSettings[j8] != l14) {
-                    sessionSettings[j8] = l14;
-                    applyConfigChange(j8);
+                int settingID = inStream.ig2();
+                int settingState = inStream.big4();
+                anIntArray1045[settingID] = settingState;
+                if (sessionSettings[settingID] != settingState) {
+                    sessionSettings[settingID] = settingState;
+                    applyConfigChange(settingID);
                     needDrawTabArea = true;
                     if (dialogID != -1)
                         inputTaken = true;
@@ -9924,12 +9924,12 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 36) {
-                int k8 = inStream.ig2();
-                byte byte0 = inStream.g1b();
-                anIntArray1045[k8] = byte0;
-                if (sessionSettings[k8] != byte0) {
-                    sessionSettings[k8] = byte0;
-                    applyConfigChange(k8);
+                int settingID = inStream.ig2();
+                byte settingState = inStream.g1b();
+                anIntArray1045[settingID] = settingState;
+                if (sessionSettings[settingID] != settingState) {
+                    sessionSettings[settingID] = settingState;
+                    applyConfigChange(settingID);
                     needDrawTabArea = true;
                     if (dialogID != -1)
                         inputTaken = true;
@@ -9937,7 +9937,7 @@ public class Client extends GameShell {
                 pktType = -1;
                 return true;
             }
-            if (pktType == 61) {
+            if (pktType == 61) {//multi zone combat? (crossbones?)
                 anInt1055 = inStream.g1();
                 pktType = -1;
                 return true;
@@ -10205,7 +10205,7 @@ public class Client extends GameShell {
         amountOrNameInput = "";
         aClass19_1013 = new Deque();
         aBoolean1017 = false;
-        anInt1018 = -1;
+        currentStatusInterface = -1;
         anIntArray1030 = new int[5];
         char_edit_model_changed = false;
         mapFunctions = new RgbImage[100];
@@ -10539,7 +10539,7 @@ public class Client extends GameShell {
     private int anInt1015;
     private int anInt1016;
     private boolean aBoolean1017;
-    private int anInt1018;
+    private int currentStatusInterface;
     private static final int[] XP_FOR_LEVEL;
     private int miniMapLock;
     private int anInt1022;

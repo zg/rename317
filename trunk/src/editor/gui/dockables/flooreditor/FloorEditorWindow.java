@@ -2,7 +2,7 @@ package editor.gui.dockables.flooreditor;
 
 import editor.gui.controls.ColourEditor;
 import rs2.Floor;
-import sun.plugin.dom.core.Text;
+//import sun.plugin.dom.core.Text;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
