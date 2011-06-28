@@ -37,7 +37,7 @@ public class Model extends Entity {
 
     public static void initialize(int i, OnDemandFetcherParent onDemandFetcherParent) {
         modelHeaderCache = new ModelHeader[i + 30000];//wtf PETER!!!
-        aOnDemandFetcherParent_1662 = onDemandFetcherParent;
+        abstractODFetcher = onDemandFetcherParent;
     }
 
 
@@ -614,8 +614,13 @@ public class Model extends Entity {
             return null;
         ModelHeader modelHeader = modelHeaderCache[j];
         if (modelHeader == null) {
-            aOnDemandFetcherParent_1662.method548(j);
-            return null;
+            if (((OnDemandFetcher)abstractODFetcher).clientInstance == null){
+                method460(((OnDemandFetcher)abstractODFetcher).getDataFromCache(j,0), j);
+                return new Model(j, 0);//edited for new engine
+            } else {
+                abstractODFetcher.method548(j);
+                return null;
+            }
         } else {
             return new Model(j, 0);//edited for new engine
         }
@@ -626,7 +631,7 @@ public class Model extends Entity {
             return false;
         ModelHeader modelHeader = modelHeaderCache[i];
         if (modelHeader == null) {
-            aOnDemandFetcherParent_1662.method548(i);
+            abstractODFetcher.method548(i);
             return false;
         } else {
             return true;
@@ -2533,7 +2538,7 @@ public class Model extends Entity {
     public boolean aBoolean1659;
     VertexNormal vertexNormalOffset[];
     private static ModelHeader[] modelHeaderCache;
-    private static OnDemandFetcherParent aOnDemandFetcherParent_1662;
+    private static OnDemandFetcherParent abstractODFetcher;
     private static boolean[] aBooleanArray1663 = new boolean[4096];
     public static boolean[] aBooleanArray1664 = new boolean[4096];
     private static int[] vertexSX = new int[4096];
