@@ -9432,13 +9432,13 @@ public class Client extends GameShell {
             }
             if (pktType == 104) {
                 int slotPos = inStream.ng1b();
-                int i12 = inStream.nsp1();//server sends 0 O_o? clears it or something O_o
+                int putAtTop = inStream.nsp1();//most servers dont even use this
                 String actionString = inStream.gstr();
                 if (slotPos >= 1 && slotPos <= 5) {
                     if (actionString.equalsIgnoreCase("null"))
                         actionString = null;
                     atPlayerActions[slotPos - 1] = actionString;
-                    atPlayerArray[slotPos - 1] = i12 == 0;
+                    atPlayerArray[slotPos - 1] = putAtTop == 0;
                 }
                 pktType = -1;
                 return true;
