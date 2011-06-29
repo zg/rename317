@@ -1677,12 +1677,12 @@ public class Client extends GameShell {
     }
 
     private static String logic_get_amount_string(int j) {
-        if (j < 0x186a0)
+        if (j < 100000)
             return String.valueOf(j);
-        if (j < 0x989680)
+        if (j < 10000000)
             return j / 1000 + "K";
         else
-            return j / 0xf4240 + "M";
+            return j / 1000000 + "M";
     }
 
     private void network_disconnect() {
@@ -10183,7 +10183,7 @@ public class Client extends GameShell {
         aStreamArray895s = new Packet[maxPlayers];
         anInt897 = 1;
         anIntArrayArray901 = new int[104][104];
-        anInt902 = 0x766654;
+        anInt902 = 0x766654;// some colour
         aByteArray912 = new byte[16384];
         user_levels = new int[Skills.COUNT];
         user_ignore_names = new long[100];
@@ -10811,11 +10811,11 @@ public class Client extends GameShell {
     static {
         XP_FOR_LEVEL = new int[99];
         int i = 0;
-        for (int j = 0; j < 99; j++) {
-            int l = j + 1;
-            int i1 = (int) ((double) l + 300D * Math.pow(2D, (double) l / 7D));
+        for (int level = 0; level < 99; level++) {
+            int levelLocal = level + 1;
+            int i1 = (int) ((double) levelLocal + 300D * Math.pow(2D, (double) levelLocal / 7D));
             i += i1;
-            XP_FOR_LEVEL[j] = i / 4;
+            XP_FOR_LEVEL[level] = i / 4;
         }
 
     }

@@ -1534,7 +1534,7 @@ public class Model extends Entity {
 
     }
 
-    public void method474(int i) {
+    public void method474(int i) {//duno
         hash += i*100000000L;
 
         int k = SINE[i];
@@ -1564,14 +1564,14 @@ public class Model extends Entity {
 
     }
 
-    public void method477() {
-        for (int j = 0; j < vertexCount; j++)
-            vertexZ[j] = -vertexZ[j];
+    public void mirrorModel() {//mirrors the model, used on lumbys castle doors, alkarid gates etcetc
+        for (int vertex = 0; vertex < vertexCount; vertex++)
+            vertexZ[vertex] = -vertexZ[vertex];
 
-        for (int k = 0; k < triangleCount; k++) {
-            int l = triangleA[k];
-            triangleA[k] = triangleC[k];
-            triangleC[k] = l;
+        for (int triangle = 0; triangle < triangleCount; triangle++) {
+            int l = triangleA[triangle];
+            triangleA[triangle] = triangleC[triangle];
+            triangleC[triangle] = l;
         }
     }
 
