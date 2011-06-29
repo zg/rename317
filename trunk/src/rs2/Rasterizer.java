@@ -1766,8 +1766,9 @@ public class Rasterizer extends Graphics2D {
 		}
 	}
 
-	private static void drawTexturedLine(int dest[], int texture[], int dest_off, int start_x, int end_x, int color_index,
+	private static void drawTexturedLine(int dest[], int texture[], int dest_off, int start_x, int end_x, int shadeValue,
 	                                     int gradient, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
+		//shadeValue=0;//lol makes textures ultra bright and makes triangles visible - slightly wrong name.. meh
 		int rgb = 0;
 		int loops = 0;
 		if (start_x >= end_x) {
@@ -1776,12 +1777,12 @@ public class Rasterizer extends Graphics2D {
 		int j3;
 		int k3;
 		if (restrict_edges) {
-			j3 = (gradient - color_index) / (end_x - start_x);
+			j3 = (gradient - shadeValue) / (end_x - start_x);
 			if (end_x > viewportRx) {
 				end_x = viewportRx;
 			}
 			if (start_x < 0) {
-				color_index -= start_x * j3;
+				shadeValue -= start_x * j3;
 				start_x = 0;
 			}
 			if (start_x >= end_x) {
@@ -1789,16 +1790,16 @@ public class Rasterizer extends Graphics2D {
 			}
 			k3 = end_x - start_x >> 3;
 			j3 <<= 12;
-			color_index <<= 9;
+			shadeValue <<= 9;
 		} else {
 			if (end_x - start_x > 7) {
 				k3 = end_x - start_x >> 3;
-				j3 = (gradient - color_index) * anIntArray1468[k3] >> 6;
+				j3 = (gradient - shadeValue) * anIntArray1468[k3] >> 6;
 			} else {
 				k3 = 0;
 				j3 = 0;
 			}
-			color_index <<= 9;
+			shadeValue <<= 9;
 		}
 		dest_off += start_x;
 		if (lowMem) {
@@ -1833,8 +1834,8 @@ public class Rasterizer extends Graphics2D {
 			}
 			int i7 = i4 - rgb >> 3;
 			int k7 = k4 - loops >> 3;
-			rgb += (color_index & 0x600000) >> 3;
-			int i8 = color_index >> 23;
+			rgb += (shadeValue & 0x600000) >> 3;
+			int i8 = shadeValue >> 23;
 			if (opaque) {
 				while (k3-- > 0) {
 					dest[dest_off++] = texture[(loops & 0xfc0) + (rgb >> 6)] >>> i8;
@@ -1876,9 +1877,9 @@ public class Rasterizer extends Graphics2D {
 					}
 					i7 = i4 - rgb >> 3;
 					k7 = k4 - loops >> 3;
-					color_index += j3;
-					rgb += (color_index & 0x600000) >> 3;
-					i8 = color_index >> 23;
+					shadeValue += j3;
+					rgb += (shadeValue & 0x600000) >> 3;
+					i8 = shadeValue >> 23;
 				}
 				for (k3 = end_x - start_x & 7; k3-- > 0; ) {
 					dest[dest_off++] = texture[(loops & 0xfc0) + (rgb >> 6)] >>> i8;
@@ -1953,9 +1954,9 @@ public class Rasterizer extends Graphics2D {
 				}
 				i7 = i4 - rgb >> 3;
 				k7 = k4 - loops >> 3;
-				color_index += j3;
-				rgb += (color_index & 0x600000) >> 3;
-				i8 = color_index >> 23;
+				shadeValue += j3;
+				rgb += (shadeValue & 0x600000) >> 3;
+				i8 = shadeValue >> 23;
 			}
 			for (k3 = end_x - start_x & 7; k3-- > 0; ) {
 				int l8;
@@ -2000,8 +2001,8 @@ public class Rasterizer extends Graphics2D {
 		}
 		int j7 = j4 - rgb >> 3;
 		int l7 = l4 - loops >> 3;
-		rgb += color_index & 0x600000;
-		int j8 = color_index >> 23;
+		rgb += shadeValue & 0x600000;
+		int j8 = shadeValue >> 23;
 		if (opaque) {
 			while (k3-- > 0) {
 				dest[dest_off++] = texture[(loops & 0x3f80) + (rgb >> 7)] >>> j8;
@@ -2043,9 +2044,9 @@ public class Rasterizer extends Graphics2D {
 				}
 				j7 = j4 - rgb >> 3;
 				l7 = l4 - loops >> 3;
-				color_index += j3;
-				rgb += color_index & 0x600000;
-				j8 = color_index >> 23;
+				shadeValue += j3;
+				rgb += shadeValue & 0x600000;
+				j8 = shadeValue >> 23;
 			}
 			for (k3 = end_x - start_x & 7; k3-- > 0; ) {
 				dest[dest_off++] = texture[(loops & 0x3f80) + (rgb >> 7)] >>> j8;
@@ -2120,9 +2121,9 @@ public class Rasterizer extends Graphics2D {
 			}
 			j7 = j4 - rgb >> 3;
 			l7 = l4 - loops >> 3;
-			color_index += j3;
-			rgb += color_index & 0x600000;
-			j8 = color_index >> 23;
+			shadeValue += j3;
+			rgb += shadeValue & 0x600000;
+			j8 = shadeValue >> 23;
 		}
 		for (int l3 = end_x - start_x & 7; l3-- > 0; ) {
 			int j9;
