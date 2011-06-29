@@ -46,10 +46,10 @@ public class NpcDef
             model = aclass30_sub2_sub4_sub6s[0];
         else
             model = new Model(aclass30_sub2_sub4_sub6s.length, aclass30_sub2_sub4_sub6s);
-        if(anIntArray76 != null)
+        if(recolourOriginal != null)
         {
-            for(int k = 0; k < anIntArray76.length; k++)
-                model.recolour(anIntArray76[k], anIntArray70[k]);
+            for(int k = 0; k < recolourOriginal.length; k++)
+                model.recolour(recolourOriginal[k], recolourTarget[k]);
 
         }
         return model;
@@ -136,10 +136,10 @@ public class NpcDef
                 model = aclass30_sub2_sub4_sub6s[0];
             else
                 model = new Model(aclass30_sub2_sub4_sub6s.length, aclass30_sub2_sub4_sub6s);
-            if(anIntArray76 != null)
+            if(recolourOriginal != null)
             {
-                for(int k1 = 0; k1 < anIntArray76.length; k1++)
-                    model.recolour(anIntArray76[k1], anIntArray70[k1]);
+                for(int k1 = 0; k1 < recolourOriginal.length; k1++)
+                    model.recolour(recolourOriginal[k1], recolourTarget[k1]);
 
             }
             model.calcSkinning();
@@ -210,13 +210,13 @@ public class NpcDef
             } else
             if(i == 40)
             {
-                int k = stream.g1();
-                anIntArray76 = new int[k];
-                anIntArray70 = new int[k];
-                for(int k1 = 0; k1 < k; k1++)
+                int colours = stream.g1();
+                recolourOriginal = new int[colours];
+                recolourTarget = new int[colours];
+                for(int k1 = 0; k1 < colours; k1++)
                 {
-                    anIntArray76[k1] = stream.g2();
-                    anIntArray70[k1] = stream.g2();
+                    recolourOriginal[k1] = stream.g2();
+                    recolourTarget[k1] = stream.g2();
                 }
 
             } else
@@ -321,11 +321,11 @@ public class NpcDef
     public String actions[];
     public int anInt67;
     public byte aByte68;
-    private int[] anIntArray70;
+    private int[] recolourTarget;
     private static int[] streamIndices;
     private int[] anIntArray73;
     public int anInt75;
-    private int[] anIntArray76;
+    private int[] recolourOriginal;
     public int idleAnimation;
     public long type;
     public int anInt79;

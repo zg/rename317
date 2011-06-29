@@ -207,7 +207,7 @@ public class ObjectDef
                     if(model == null)
                         return null;
                     if(flag1)
-                        model.method477();
+                        model.mirrorModel();
                     memCache1.put(model, l2);
                 }
                 if(k1 > 1)
@@ -244,7 +244,7 @@ public class ObjectDef
                 if(model == null)
                     return null;
                 if(flag3)
-                    model.method477();
+                    model.mirrorModel();
                 memCache1.put(model, j2);
             }
         }
