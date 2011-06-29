@@ -1270,7 +1270,7 @@ public class Model extends Entity {
     }
 
     public void createBones() {//groups bones etc
-        if (vertexVSkin != null) {
+        if (vertexVSkin != null) {//bones
             int ai[] = new int[256];
             int j = 0;
             for (int l = 0; l < vertexCount; l++) {

@@ -62,20 +62,20 @@ public class SoundTrack
 
         for(int k2 = 0; k2 < sampleLength; k2++)
         {
-            int l2 = samp1.readEnvelope(sampleLength);
-            int j4 = samp2.readEnvelope(sampleLength);
+            int l2 = samp1.currentAmplitude(sampleLength);
+            int j4 = samp2.currentAmplitude(sampleLength);
             if(samp3 != null)
             {
-                int j5 = samp3.readEnvelope(sampleLength);
-                int vol = samp4.readEnvelope(sampleLength);
-                l2 += getValue(vol, phase, samp3.anInt540) >> 1;
+                int j5 = samp3.currentAmplitude(sampleLength);
+                int vol = samp4.currentAmplitude(sampleLength);
+                l2 += getValue(vol, phase, samp3.form) >> 1;
                 phase += (j5 * l >> 16) + i1;
             }
             if(samp5 != null)
             {
-                int k5 = samp5.readEnvelope(sampleLength);
-                int vol = samp6.readEnvelope(sampleLength);
-                j4 = j4 * ((getValue(vol, phase2, samp5.anInt540) >> 1) + 32768) >> 15;
+                int k5 = samp5.currentAmplitude(sampleLength);
+                int vol = samp6.currentAmplitude(sampleLength);
+                j4 = j4 * ((getValue(vol, phase2, samp5.form) >> 1) + 32768) >> 15;
                 phase2 += (k5 * k1 >> 16) + l1;
             }
             for(int l5 = 0; l5 < 5; l5++)
@@ -84,7 +84,7 @@ public class SoundTrack
                     int l6 = k2 + anIntArray119[l5];
                     if(l6 < sampleLength)
                     {
-                        sampleBuffer[l6] += getValue(j4 * anIntArray120[l5] >> 15, SoundTrack.phase[l5], samp1.anInt540);
+                        sampleBuffer[l6] += getValue(j4 * anIntArray120[l5] >> 15, SoundTrack.phase[l5], samp1.form);
                         SoundTrack.phase[l5] += (l2 * anIntArray121[l5] >> 16) + anIntArray122[l5];
                     }
                 }
@@ -100,8 +100,8 @@ public class SoundTrack
             boolean flag1 = true;
             for(int i7 = 0; i7 < sampleLength; i7++)
             {
-                int k7 = aClass29_104.readEnvelope(sampleLength);
-                int i8 = aClass29_105.readEnvelope(sampleLength);
+                int k7 = aClass29_104.currentAmplitude(sampleLength);
+                int i8 = aClass29_105.currentAmplitude(sampleLength);
                 int k4;
                 if(flag1)
                     k4 = aClass29_104.anInt538 + ((aClass29_104.anInt539 - aClass29_104.anInt538) * k7 >> 8);
@@ -127,7 +127,7 @@ public class SoundTrack
         if(aClass39_111.anIntArray665[0] > 0 || aClass39_111.anIntArray665[1] > 0)
         {
             aClass29_112.resetValues();
-            int k3 = aClass29_112.readEnvelope(sampleLength + 1);
+            int k3 = aClass29_112.currentAmplitude(sampleLength + 1);
             int i5 = aClass39_111.method544(0, (float)k3 / 65536F);
             int i6 = aClass39_111.method544(1, (float)k3 / 65536F);
             if(sampleLength >= i5 + i6)
@@ -146,7 +146,7 @@ public class SoundTrack
                         j8 -= (int)((long) sampleBuffer[j7 - 1 - j9] * (long)Class39.anIntArrayArray670[1][j9] >> 16);
 
                     sampleBuffer[j7] = j8;
-                    k3 = aClass29_112.readEnvelope(sampleLength + 1);
+                    k3 = aClass29_112.currentAmplitude(sampleLength + 1);
                 }
 
                 char c = '\200';
@@ -165,7 +165,7 @@ public class SoundTrack
                             l8 -= (int)((long) sampleBuffer[j7 - 1 - i10] * (long)Class39.anIntArrayArray670[1][i10] >> 16);
 
                         sampleBuffer[j7] = l8;
-                        k3 = aClass29_112.readEnvelope(sampleLength + 1);
+                        k3 = aClass29_112.currentAmplitude(sampleLength + 1);
                     }
 
                     if(j7 >= sampleLength - i5)
@@ -184,7 +184,8 @@ public class SoundTrack
                         i9 -= (int)((long) sampleBuffer[j7 - 1 - j10] * (long)Class39.anIntArrayArray670[1][j10] >> 16);
 
                     sampleBuffer[j7] = i9;
-                    //int l3 = aClass29_112.readEnvelope(sampleLength + 1);//never used
+                    int l3 = aClass29_112.currentAmplitude(sampleLength + 1);//never used - think its needed tho
+
                 }
 
             }
@@ -219,35 +220,35 @@ public class SoundTrack
 
     public void unpack(Packet stream)
     {
-        samp1 = new Class29();
+        samp1 = new AmplitudeEnvelope();
         samp1.method325(stream);
-        samp2 = new Class29();
+        samp2 = new AmplitudeEnvelope();
         samp2.method325(stream);
         int i = stream.g1();
         if(i != 0)
         {
             stream.pos--;
-            samp3 = new Class29();
+            samp3 = new AmplitudeEnvelope();
             samp3.method325(stream);
-            samp4 = new Class29();
+            samp4 = new AmplitudeEnvelope();
             samp4.method325(stream);
         }
         i = stream.g1();
         if(i != 0)
         {
             stream.pos--;
-            samp5 = new Class29();
+            samp5 = new AmplitudeEnvelope();
             samp5.method325(stream);
-            samp6 = new Class29();
+            samp6 = new AmplitudeEnvelope();
             samp6.method325(stream);
         }
         i = stream.g1();
         if(i != 0)
         {
             stream.pos--;
-            aClass29_104 = new Class29();
+            aClass29_104 = new AmplitudeEnvelope();
             aClass29_104.method325(stream);
-            aClass29_105 = new Class29();
+            aClass29_105 = new AmplitudeEnvelope();
             aClass29_105.method325(stream);
         }
         for(int j = 0; j < 10; j++)
@@ -265,7 +266,7 @@ public class SoundTrack
         msLength = stream.g2();
         anInt114 = stream.g2();
         aClass39_111 = new Class39();
-        aClass29_112 = new Class29();
+        aClass29_112 = new AmplitudeEnvelope();
         aClass39_111.method545(stream, aClass29_112);
     }
 
@@ -278,21 +279,21 @@ public class SoundTrack
         msLength = 500;
     }
 
-    private Class29 samp1;
-    private Class29 samp2;
-    private Class29 samp3;
-    private Class29 samp4;
-    private Class29 samp5;
-    private Class29 samp6;
-    private Class29 aClass29_104;
-    private Class29 aClass29_105;
+    private AmplitudeEnvelope samp1;
+    private AmplitudeEnvelope samp2;
+    private AmplitudeEnvelope samp3;
+    private AmplitudeEnvelope samp4;
+    private AmplitudeEnvelope samp5;
+    private AmplitudeEnvelope samp6;
+    private AmplitudeEnvelope aClass29_104;
+    private AmplitudeEnvelope aClass29_105;
     private final int[] anIntArray106;
     private final int[] anIntArray107;
     private final int[] anIntArray108;
     private int anInt109;
     private int gain;
     private Class39 aClass39_111;
-    private Class29 aClass29_112;
+    private AmplitudeEnvelope aClass29_112;
     int msLength;
     int anInt114;
     private static int[] sampleBuffer;

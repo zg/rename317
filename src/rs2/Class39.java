@@ -63,7 +63,7 @@ public class Class39
         return anIntArray665[i] * 2;
     }
 
-    public void method545(Packet stream, Class29 class29)
+    public void method545(Packet stream, AmplitudeEnvelope class29)
     {
         int i = stream.g1();
         anIntArray665[0] = i >> 4;
@@ -99,7 +99,7 @@ public class Class39
             }
 
             if(j != 0 || anIntArray668[1] != anIntArray668[0])
-                class29.method326(stream);
+                class29.readValues(stream);
         } else
         {
             anIntArray668[0] = anIntArray668[1] = 0;

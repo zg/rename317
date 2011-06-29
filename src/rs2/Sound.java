@@ -98,7 +98,7 @@ public class Sound {
         return waveGenerationStream;
     }
 
-    private int method245(int i)//getSubChunk2Size
+    private int method245(int i)//getSubChunk2Size - packs the pcm
     {
         int j = 0;
         for(int k = 0; k < 10; k++)
