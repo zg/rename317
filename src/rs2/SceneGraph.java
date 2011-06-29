@@ -4,7 +4,7 @@ import org.peterbjornx.pgl2.model.*;
 import pgle.PglCubeStub;
 import pgle.PglModelNode;
 
-import java.util.IllegalFormatFlagsException;
+import java.util.LinkedList;
 
 public class SceneGraph {
 
@@ -13,6 +13,8 @@ public class SceneGraph {
     private static int visibleAreaWidth = 53;
     private static int visibleAreaHeight = 53;
     public static final boolean USE_HD = false;
+    private LinkedList<Tile> highlights = new LinkedList<Tile>();
+    public static int clickedTileZ;
 
     public SceneGraph(int height, int width, int length, int heightmap[][][])
     {
@@ -73,6 +75,16 @@ public class SceneGraph {
         for(int l1 = 0; l1 < interactableObjects.length; l1++)
             interactableObjects[l1] = null;
 
+    }
+
+    public void clearCullingClusters(){
+        for(int l = 0; l < anInt472; l++)
+        {
+            for(int j1 = 0; j1 < cullingClusterPointer[l]; j1++)
+                cullingClusters[l][j1] = null;
+
+            cullingClusterPointer[l] = 0;
+        }
     }
 
     public void setHeightLevel(int z)
@@ -1213,10 +1225,10 @@ label0:
                     if(tile.myPlainTile != null)
                     {
                         if(!method320(0, X, Y))
-                            renderPlainTile(tile.myPlainTile, 0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
+                            renderPlainTile(tile.myPlainTile, 0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y,tile.highlighted);
                     } else
                     if(tile.shapedTile != null && !method320(0, X, Y))
-                        renderShapedTile(X, yCurveSine, xCurveSine, tile.shapedTile, yCurveCosine, Y, xCurveCosine);
+                        renderShapedTile(X, yCurveSine, xCurveSine, tile.shapedTile, yCurveCosine, Y, xCurveCosine, TILE.highlighted,0);
                     WallObject wallObject = tile.wallObject;
                     if(wallObject != null){
                         wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
@@ -1239,13 +1251,13 @@ label0:
                     if(!method320(l, X, Y))
                     {
                         flag1 = true;
-                        renderPlainTile(TILE.myPlainTile, l, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y);
+                        renderPlainTile(TILE.myPlainTile, l, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y, TILE.highlighted);
                     }
                 } else
                 if(TILE.shapedTile != null && !method320(l, X, Y))
                 {
                     flag1 = true;
-                    renderShapedTile(X, yCurveSine, xCurveSine, TILE.shapedTile, yCurveCosine, Y, xCurveCosine);
+                    renderShapedTile(X, yCurveSine, xCurveSine, TILE.shapedTile, yCurveCosine, Y, xCurveCosine,TILE.highlighted, l);
                 }
                 int j1 = 0;
                 int j2 = 0;
@@ -1660,7 +1672,7 @@ label0:
         } while(true);
     }
 
-    private void renderPlainTile(PlainTile plainTile, int tZ, int j, int k, int l, int i1, int tX, int tY)
+    private void renderPlainTile(PlainTile plainTile, int tZ, int ysin, int ycos, int xsin, int xcos, int tX, int tY, boolean highlighted)
     {
         int xC;
         int xA = xC = (tX << 7) - xCameraPosition;
@@ -1674,8 +1686,8 @@ label0:
         int zB = heightmap[tZ][tX + 1][tY] - zCameraPosition;
         int zD = heightmap[tZ][tX + 1][tY + 1] - zCameraPosition;
         int zC = heightmap[tZ][tX][tY + 1] - zCameraPosition;
-        int l4 = yA * l + xA * i1 >> 16;
-        yA = yA * i1 - xA * l >> 16;
+        int l4 = yA * xsin + xA * xcos >> 16;
+        yA = yA * xcos - xA * xsin >> 16;
         xA = l4;
                 /**
          * The Square
@@ -1692,32 +1704,32 @@ label0:
          * |        |
          * D--------C
          */
-        l4 = zA * k - yA * j >> 16;
-        yA = zA * j + yA * k >> 16;
+        l4 = zA * ycos - yA * ysin >> 16;
+        yA = zA * ysin + yA * ycos >> 16;
         zA = l4;
         if(yA < 50)
             return;
-        l4 = yB * l + xB * i1 >> 16;
-        yB = yB * i1 - xB * l >> 16;
+        l4 = yB * xsin + xB * xcos >> 16;
+        yB = yB * xcos - xB * xsin >> 16;
         xB = l4;
-        l4 = zB * k - yB * j >> 16;
-        yB = zB * j + yB * k >> 16;
+        l4 = zB * ycos - yB * ysin >> 16;
+        yB = zB * ysin + yB * ycos >> 16;
         zB = l4;
         if(yB < 50)
             return;
-        l4 = yD * l + xD * i1 >> 16;
-        yD = yD * i1 - xD * l >> 16;
+        l4 = yD * xsin + xD * xcos >> 16;
+        yD = yD * xcos - xD * xsin >> 16;
         xD = l4;
-        l4 = zD * k - yD * j >> 16;
-        yD = zD * j + yD * k >> 16;
+        l4 = zD * ycos - yD * ysin >> 16;
+        yD = zD * ysin + yD * ycos >> 16;
         zD = l4;
         if(yD < 50)
             return;
-        l4 = yC * l + xC * i1 >> 16;
-        yC = yC * i1 - xC * l >> 16;
+        l4 = yC * xsin + xC * xcos >> 16;
+        yC = yC * xcos - xC * xsin >> 16;
         xC = l4;
-        l4 = zC * k - yC * j >> 16;
-        yC = zC * j + yC * k >> 16;
+        l4 = zC * ycos - yC * ysin >> 16;
+        yC = zC * ysin + yC * ycos >> 16;
         zC = l4;
         if(yC < 50)
             return;
@@ -1729,7 +1741,8 @@ label0:
         int screenYD = Rasterizer.centerY + (zD << 9) / yD;
         int screenXC = Rasterizer.centerX + (xC << 9) / yC;
         int screenYC = Rasterizer.centerY + (zC << 9) / yC;
-        Rasterizer.alpha = 0;
+        if (plainTile.colourA != 0xbc614d)
+            Rasterizer.alpha = 0;
         if((screenXD - screenXC) * (screenYB - screenYC) - (screenYD - screenYC) * (screenXB - screenXC) > 0)
         {
             Rasterizer.restrict_edges = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > Graphics2D.viewportRx || screenXC > Graphics2D.viewportRx || screenXB > Graphics2D.viewportRx;
@@ -1737,6 +1750,7 @@ label0:
             {
                 clickedTileX = tX;
                 clickedTileY = tY;
+                clickedTileZ = tZ;
             }
             if(plainTile.texture == -1)
             {
@@ -1762,6 +1776,7 @@ label0:
             {
                 clickedTileX = tX;
                 clickedTileY = tY;
+                clickedTileZ = tZ;
             }
             if(plainTile.texture == -1)
             {
@@ -1774,15 +1789,21 @@ label0:
                 if(!lowMem)
                 {
                     Rasterizer.drawTexturedTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, plainTile.colourA, plainTile.colourB, plainTile.colourC, xA, xB, xC, zA, zB, zC, yA, yB, yC, plainTile.texture);
-                    return;
+                }  else {
+                    int j7 = textureRGBColour[plainTile.texture];
+                    Rasterizer.drawShadedTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, mixColour(j7, plainTile.colourA), mixColour(j7, plainTile.colourB), mixColour(j7, plainTile.colourC));
                 }
-                int j7 = textureRGBColour[plainTile.texture];
-                Rasterizer.drawShadedTriangle(screenYA, screenYB, screenYC, screenXA, screenXB, screenXC, mixColour(j7, plainTile.colourA), mixColour(j7, plainTile.colourB), mixColour(j7, plainTile.colourC));
             }
+        }
+        if (highlighted){
+            Rasterizer.alpha = 180;
+            PlainTile t = new PlainTile(0xbc614d,0xbc614d,0xbc614d,0xbc614d,-1,0xFF00FF,plainTile.flat);
+            renderPlainTile(t,tZ,ysin,ycos,xsin,xcos,tX,tY,false);
+            Rasterizer.alpha = 0;
         }
     }
 
-    private void renderShapedTile(int i, int j, int k, ShapedTile shapedTile, int l, int i1, int j1)
+    private void renderShapedTile(int tileX, int ysin, int xsin, ShapedTile shapedTile, int ycos, int tileZ, int xcos, boolean highlighted, int i)
     {
         int triangleCount = shapedTile.origVertexX.length;
         for(int vID = 0; vID < triangleCount; vID++)
@@ -1790,11 +1811,11 @@ label0:
             int viewspaceX = shapedTile.origVertexX[vID] - xCameraPosition;
             int viewspaceY = shapedTile.origVertexY[vID] - zCameraPosition;
             int viewspaceZ = shapedTile.origVertexZ[vID] - yCameraPosition;
-            int k3 = viewspaceZ * k + viewspaceX * j1 >> 16;
-            viewspaceZ = viewspaceZ * j1 - viewspaceX * k >> 16;
+            int k3 = viewspaceZ * xsin + viewspaceX * xcos >> 16;
+            viewspaceZ = viewspaceZ * xcos - viewspaceX * xsin >> 16;
             viewspaceX = k3;
-            k3 = viewspaceY * l - viewspaceZ * j >> 16;
-            viewspaceZ = viewspaceY * j + viewspaceZ * l >> 16;
+            k3 = viewspaceY * ycos - viewspaceZ * ysin >> 16;
+            viewspaceZ = viewspaceY * ysin + viewspaceZ * ycos >> 16;
             viewspaceY = k3;
             if(viewspaceZ < 50)
                 return;
@@ -1826,8 +1847,9 @@ label0:
                 Rasterizer.restrict_edges = sXA < 0 || sXB < 0 || sXC < 0 || sXA > Graphics2D.viewportRx || sXB > Graphics2D.viewportRx || sXC > Graphics2D.viewportRx;
                 if(isClicked && isMouseWithinTriangle(clickX, clickY, sYA, sYB, sYC, sXA, sXB, sXC))
                 {
-                    clickedTileX = i;
-                    clickedTileY = i1;
+                    clickedTileX = tileX;
+                    clickedTileY = tileZ;
+                    clickedTileZ = i;
                 }
                 if(shapedTile.triangleTexture == null || shapedTile.triangleTexture[triIdx] == -1)
                 {
@@ -1846,6 +1868,12 @@ label0:
                     Rasterizer.drawShadedTriangle(sYA, sYB, sYC, sXA, sXB, sXC, mixColour(k5, shapedTile.triangleHslA[triIdx]), mixColour(k5, shapedTile.triangleHslB[triIdx]), mixColour(k5, shapedTile.triangleHslC[triIdx]));
                 }
             }
+        }
+        if (highlighted){
+            Rasterizer.alpha = 180;
+            PlainTile t = new PlainTile(0xbc614d,0xbc614d,0xbc614d,0xbc614d,-1,0xFF00FF,shapedTile.flat);
+            renderPlainTile(t,i,ysin,ycos,xsin,xcos,tileX,tileZ,false);
+            Rasterizer.alpha = 0;
         }
 
     }
@@ -2399,5 +2427,16 @@ for_outer:
         anInt472 = 4;
         cullingClusterPointer = new int[anInt472];
         cullingClusters = new CullingCluster[anInt472][500];
+    }
+
+    public void setHighlightedTile(int x, int z) {
+        tileArray[currentHL][x][z].highlighted = true;
+        highlights.add(tileArray[currentHL][x][z]);
+    }
+
+    public void clearHightlights() {
+        for (Tile t : highlights)
+            t.highlighted = false;
+        highlights.clear();
     }
 }

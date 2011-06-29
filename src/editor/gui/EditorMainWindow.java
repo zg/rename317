@@ -1,5 +1,7 @@
 package editor.gui;
 
+import editor.EditorMain;
+import editor.gui.dockables.EditorToolbar;
 import editor.gui.dockables.FloorTypeSelection;
 import editor.gui.dockables.SettingsBrushEditor;
 import editor.gui.dockables.ToolSelectionBar;
@@ -16,6 +18,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,6 +48,8 @@ public class EditorMainWindow {
     private FloorEditorWindow floorEditorWindow;
     private SettingsBrushEditor settingsBrushEditorWindow;
     private MapViewPanel mapViewPanel;
+    private EditorToolbar editorToolbar;
+    private EditorMain editor;
 
 
     public EditorMainWindow(){
@@ -70,6 +75,15 @@ public class EditorMainWindow {
         toolWindowManager = myDoggyToolWindowManager;
         toolSelectionBar = new ToolSelectionBar();
         toolWindowManager.registerToolWindow("Tools", null, null, toolSelectionBar.getMainPane(), ToolWindowAnchor.TOP);
+        editorToolbar = new EditorToolbar();
+        toolWindowManager.registerToolWindow("Toolbar", null, null, editorToolbar.getMainPane(), ToolWindowAnchor.TOP);
+        editorToolbar.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                if (editorToolbar.getHeightlevel() != editor.getHeightLevel())
+                    editor.setHeightLevel(editorToolbar.getHeightlevel());
+                editor.setShowAllHLs(editorToolbar.getShowAllHLs());
+            }
+        });
         floorTypeSelectionWindow = new FloorTypeSelection();
         floorTypeSelectionWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
@@ -127,6 +141,17 @@ public class EditorMainWindow {
 
         menuBar.add(editMenu);
         rootFrame.setJMenuBar(menuBar);
+        openMapMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //For now use a JOptionPane
+                try {
+                    String[] s = JOptionPane.showInputDialog(rootFrame,"Coordinates?").split(",");
+                    editor.loadMap(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
+                } catch (Exception e2){
+                    JOptionPane.showMessageDialog(rootFrame,"Invalid coordinates, use format (X,Y)","RuneScape Map Editor",JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
     }
 
     public void show() {
@@ -141,7 +166,24 @@ public class EditorMainWindow {
         return mapViewPanel;
     }
 
-    public void editorStarted() {
+    public void editorStarted(EditorMain editor) {
+        this.editor = editor;
         floorTypeSelectionWindow.loadFloors();
+    }
+
+    public ToolSelectionBar getToolSelectionBar() {
+        return toolSelectionBar;
+    }
+
+    public FloorTypeSelection getFloorTypeSelectionWindow() {
+        return floorTypeSelectionWindow;
+    }
+
+    public SettingsBrushEditor getSettingsBrushEditorWindow() {
+        return settingsBrushEditorWindow;
+    }
+
+    public FloorEditorWindow getFloorEditorWindow() {
+        return floorEditorWindow;
     }
 }
