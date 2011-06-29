@@ -6,14 +6,13 @@ public class StillGraphic extends Entity {
     public StillGraphic(int i, int j, int l, int i1, int j1, int k1,
                         int l1)
     {
-        aBoolean1567 = false;
+        transformCompleted = false;
         aSpotAnim_1568 = SpotAnim.cache[i1];
         anInt1560 = i;
         anInt1561 = l1;
         anInt1562 = k1;
         anInt1563 = j1;
         anInt1564 = j + l;
-            aBoolean1567 = false;
     }
 
     public Model getRotatedModel()
@@ -23,7 +22,7 @@ public class StillGraphic extends Entity {
             return null;
         int j = aSpotAnim_1568.aSequence_407.frame2IDS[anInt1569];
         Model model_1 = new Model(true, Animation.method532(j), false, model);
-        if(!aBoolean1567)
+        if(!transformCompleted)
         {
             model_1.calcSkinning();
             model_1.applyTransform(j);
@@ -35,17 +34,17 @@ public class StillGraphic extends Entity {
         if(aSpotAnim_1568.rotation != 0)
         {
             if(aSpotAnim_1568.rotation == 90)
-                model_1.method473();
+                model_1.rotateBy90();
             if(aSpotAnim_1568.rotation == 180)
             {
-                model_1.method473();
-                model_1.method473();
+                model_1.rotateBy90();
+                model_1.rotateBy90();
             }
             if(aSpotAnim_1568.rotation == 270)
             {
-                model_1.method473();
-                model_1.method473();
-                model_1.method473();
+                model_1.rotateBy90();
+                model_1.rotateBy90();
+                model_1.rotateBy90();
             }
         }
         model_1.light(64 + aSpotAnim_1568.modelBrightness, 850 + aSpotAnim_1568.modelShadow, -30, -50, -30, true);
@@ -61,7 +60,7 @@ public class StillGraphic extends Entity {
             if(anInt1569 >= aSpotAnim_1568.aSequence_407.frameCount && (anInt1569 < 0 || anInt1569 >= aSpotAnim_1568.aSequence_407.frameCount))
             {
                 anInt1569 = 0;
-                aBoolean1567 = true;
+                transformCompleted = true;
             }
         }
 
@@ -72,7 +71,7 @@ public class StillGraphic extends Entity {
     public final int anInt1562;
     public final int anInt1563;
     public final int anInt1564;
-    public boolean aBoolean1567;
+    public boolean transformCompleted;
     private final SpotAnim aSpotAnim_1568;
     private int anInt1569;
     private int anInt1570;

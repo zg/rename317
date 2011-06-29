@@ -286,7 +286,7 @@ public class ItemDef
         int l2 = Graphics2D.viewport_w;
         int i3 = Graphics2D.topY;
         int j3 = Graphics2D.viewport_h;
-        Rasterizer.aBoolean1464 = false;
+        Rasterizer.notTextured = false;
         Graphics2D.setTarget(32, 32, sprite2.myPixels);
         Graphics2D.fillRect(0, 0, 32, 32, 0);
         Rasterizer.setDefaultBounds();
@@ -365,7 +365,7 @@ public class ItemDef
         Rasterizer.centerX = k1;
         Rasterizer.centerY = l1;
         Rasterizer.lineOffsets = ai;
-        Rasterizer.aBoolean1464 = true;
+        Rasterizer.notTextured = true;
         if(definition.stackable)
             sprite2.w2 = 33;
         else
