@@ -255,7 +255,7 @@ public class ObjectDef
         Model model_3 = new Model(modifiedModelColors == null, Animation.method532(k), l == 0 && k == -1 && !flag && !flag2, model);
         if(k != -1)
         {
-            model_3.calcSkinning();
+            model_3.createBones();
             model_3.applyTransform(k);
             model_3.triangleSkin = null;
             model_3.vertexSkin = null;

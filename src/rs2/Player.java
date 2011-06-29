@@ -23,7 +23,7 @@ public class Player extends Mobile
             {
                 Model model_3 = new Model(true, Animation.method532(super.anInt1521), false, model_2);
                 model_3.translate(0, -super.anInt1524, 0);
-                model_3.calcSkinning();
+                model_3.createBones();
                 model_3.applyTransform(spotAnim.animationSequence.frame2IDS[super.anInt1521]);
                 model_3.triangleSkin = null;
                 model_3.vertexSkin = null;
@@ -263,7 +263,7 @@ public class Player extends Mobile
                         model_1.recolour(Client.skinColours[0], Client.skinColours[appearanceColours[j3]]);
                 }
 
-            model_1.calcSkinning();
+            model_1.createBones();
             model_1.light(64, 850, -30, -50, -30, true);
             memCache.put(model_1, l);
             aLong1697 = l;

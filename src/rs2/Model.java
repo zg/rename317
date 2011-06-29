@@ -1269,7 +1269,7 @@ public class Model extends Entity {
         diagonal3D = diagonal3DAboveorigin + (int) Math.sqrt(diagonal2DAboveorigin * diagonal2DAboveorigin + maxY * maxY);
     }
 
-    public void calcSkinning() {
+    public void createBones() {//groups bones etc
         if (vertexVSkin != null) {
             int ai[] = new int[256];
             int j = 0;

@@ -37,7 +37,7 @@ public class Npc extends Mobile
                 int j = spotAnim.animationSequence.frame2IDS[super.anInt1521];
                 Model model_2 = new Model(true, Animation.method532(j), false, model_1);
                 model_2.translate(0, -super.anInt1524, 0);
-                model_2.calcSkinning();
+                model_2.createBones();
                 model_2.applyTransform(j);
                 model_2.triangleSkin = null;
                 model_2.vertexSkin = null;

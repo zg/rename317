@@ -24,7 +24,7 @@ public class StillGraphic extends Entity {
         Model model_1 = new Model(true, Animation.method532(j), false, model);
         if(!transformCompleted)
         {
-            model_1.calcSkinning();
+            model_1.createBones();
             model_1.applyTransform(j);
             model_1.triangleSkin = null;
             model_1.vertexSkin = null;

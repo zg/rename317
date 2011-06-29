@@ -309,7 +309,7 @@ public class RSInterface
             return model;
         Model model_1 = new Model(true, Animation.method532(k) & Animation.method532(j), false, model);
         if(k != -1 || j != -1)
-            model_1.calcSkinning();
+            model_1.createBones();
         if(k != -1)
             model_1.applyTransform(k);
         if(j != -1)
