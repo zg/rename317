@@ -24,7 +24,7 @@ public class Player extends Mobile
                 Model model_3 = new Model(true, Animation.method532(super.anInt1521), false, model_2);
                 model_3.translate(0, -super.anInt1524, 0);
                 model_3.calcSkinning();
-                model_3.applyTransform(spotAnim.aSequence_407.frame2IDS[super.anInt1521]);
+                model_3.applyTransform(spotAnim.animationSequence.frame2IDS[super.anInt1521]);
                 model_3.triangleSkin = null;
                 model_3.vertexSkin = null;
                 if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)

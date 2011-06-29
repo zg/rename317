@@ -29,8 +29,8 @@ public class Projectile extends Entity {
         if(model == null)
             return null;
         int j = -1;
-        if(aSpotAnim_1592.aSequence_407 != null)
-            j = aSpotAnim_1592.aSequence_407.frame2IDS[anInt1593];
+        if(aSpotAnim_1592.animationSequence != null)
+            j = aSpotAnim_1592.animationSequence.frame2IDS[anInt1593];
         Model model_1 = new Model(true, Animation.method532(j), false, model);
         if(j != -1)
         {
@@ -73,12 +73,12 @@ public class Projectile extends Entity {
         aDouble1577 += aDouble1578 * (double)i;
         anInt1595 = (int)(Math.atan2(aDouble1574, aDouble1575) * 325.94900000000001D) + 1024 & 0x7ff;
         anInt1596 = (int)(Math.atan2(aDouble1577, aDouble1576) * 325.94900000000001D) & 0x7ff;
-        if(aSpotAnim_1592.aSequence_407 != null)
-            for(anInt1594 += i; anInt1594 > aSpotAnim_1592.aSequence_407.getFrameLength(anInt1593);)
+        if(aSpotAnim_1592.animationSequence != null)
+            for(anInt1594 += i; anInt1594 > aSpotAnim_1592.animationSequence.getFrameLength(anInt1593);)
             {
-                anInt1594 -= aSpotAnim_1592.aSequence_407.getFrameLength(anInt1593) + 1;
+                anInt1594 -= aSpotAnim_1592.animationSequence.getFrameLength(anInt1593) + 1;
                 anInt1593++;
-                if(anInt1593 >= aSpotAnim_1592.aSequence_407.frameCount)
+                if(anInt1593 >= aSpotAnim_1592.animationSequence.frameCount)
                     anInt1593 = 0;
             }
 

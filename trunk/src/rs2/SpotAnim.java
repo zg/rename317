@@ -33,7 +33,7 @@ public class SpotAnim {
             {
                 animationID = stream.g2();
                 if(rs2.Sequence.anims != null)
-                    aSequence_407 = rs2.Sequence.anims[animationID];
+                    animationSequence = rs2.Sequence.anims[animationID];
             } else
             if(i == 4)
                 resizeXY = stream.g2();
@@ -109,7 +109,7 @@ public class SpotAnim {
     private int id;
     private int modelID;
     private int animationID;
-    public Sequence aSequence_407;
+    public Sequence animationSequence;
     private final int[] originalModelColours;
     private final int[] modifiedModelColours;
     public int resizeXY;

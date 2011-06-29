@@ -6602,7 +6602,7 @@ public class Client extends GameShell {
         if (mobile.anInt1520 != -1 && currentTime >= mobile.anInt1523) {
             if (mobile.anInt1521 < 0)
                 mobile.anInt1521 = 0;
-            Sequence sequence_1 = SpotAnim.cache[mobile.anInt1520].aSequence_407;
+            Sequence sequence_1 = SpotAnim.cache[mobile.anInt1520].animationSequence;
             for (mobile.anInt1522++; mobile.anInt1521 < sequence_1.frameCount && mobile.anInt1522 > sequence_1.getFrameLength(mobile.anInt1521); mobile.anInt1521++)
                 mobile.anInt1522 -= sequence_1.getFrameLength(mobile.anInt1521);
 
@@ -6856,7 +6856,7 @@ public class Client extends GameShell {
             if (class30_sub2_sub4_sub3.anInt1560 != plane || class30_sub2_sub4_sub3.transformCompleted)
                 class30_sub2_sub4_sub3.unlink();
             else if (currentTime >= class30_sub2_sub4_sub3.anInt1564) {
-                class30_sub2_sub4_sub3.method454(anInt945);
+                class30_sub2_sub4_sub3.animationStep(anInt945);
                 if (class30_sub2_sub4_sub3.transformCompleted)
                     class30_sub2_sub4_sub3.unlink();
                 else
