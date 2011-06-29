@@ -69,6 +69,10 @@ public class EditorMain extends GameShell implements ComponentListener {
     private int[] isOnScreen;
     private int lastResizeHeight = -1;
     private int lastResizeWidth = -1;
+    private boolean showAllHLs = false;
+    private int selectedTileY = -1;
+    private int selectedTileX = -1;
+    private int selectedTileZ = -1;
 
     private JagexArchive getJagexArchive(int i) {
         byte abyte0[] = null;
@@ -251,7 +255,7 @@ public class EditorMain extends GameShell implements ComponentListener {
             SceneGraph.setupViewport(500, 800, vpW, vpH, isOnScreen);
             editorMainWindow.getGameViewPanel().addComponentListener(this);
             editorMainWindow.getMapViewPanel().setGameShell(this);
-            editorMainWindow.editorStarted();
+            editorMainWindow.editorStarted(this);
             loadMap(3136,3136);
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(null, "Failed to start up", "RuneScape Map Editor", JOptionPane.ERROR_MESSAGE);
@@ -265,9 +269,7 @@ public class EditorMain extends GameShell implements ComponentListener {
         int resizeHeight = this.resizeHeight;
         //noinspection ConstantConditions
         if (resizeWidth != this.resizeWidth
-            || resizeHeight != this.resizeHeight
-            || resizeWidth != lastResizeWidth
-            || resizeHeight != lastResizeHeight)
+            || resizeHeight != this.resizeHeight)
             return;
         startGraphicsBlock();
         gameScreenCanvas = new GraphicsBuffer(resizeWidth, resizeHeight, getGameComponent());
@@ -284,10 +286,42 @@ public class EditorMain extends GameShell implements ComponentListener {
     protected void doLogic() {
         if (onDemandFetcher != null)
             on_demand_process();
-        if (mapLoaded)
-            processInput();
+        if (mapLoaded){
+            processCameraInput();
+            sceneGraph.clearHightlights();
+            if (SceneGraph.clickedTileX != -1){
+                sceneGraph.setHighlightedTile(SceneGraph.clickedTileX,SceneGraph.clickedTileY);
+                if (mouseButtonDown == 1){
+                    selectTile(SceneGraph.clickedTileZ,SceneGraph.clickedTileX,SceneGraph.clickedTileY);
+                }
+            }
+            if (mouseButtonDown != 2){
+                sceneGraph.request2DTrace(mouseEventY,mouseEventX);
+            }
+        }
         if (resizeWidth != -1)
             processResize();
+    }
+
+    private void selectTile(int z, int x, int y) {
+        selectedTileY = z;
+        selectedTileX = x;
+        selectedTileZ = y;
+        switch (editorMainWindow.getToolSelectionBar().getSelectedTool()){
+            case SELECT:
+                editorMainWindow.getSettingsBrushEditorWindow().setCurrentTileBits(tileSettingBits[z][x][y]);
+                break;
+            case PAINT_OVERLAY:
+                mapRegion.setOverlay(z,x,y,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
+                refreshMap();
+                break;
+        }
+    }
+
+    private void refreshMap() {
+        sceneGraph.clearCullingClusters();
+        mapRegion.addTiles(tileSettings,sceneGraph);
+        sceneGraph.setHeightLevel(heightLevel);
     }
 
     @Override
@@ -519,6 +553,7 @@ public class EditorMain extends GameShell implements ComponentListener {
 
     public void setHeightLevel(int hL) {
         heightLevel = hL;
+        sceneGraph.setHeightLevel(hL);
         renderMinimap(hL);
         repaint();
     }
@@ -531,7 +566,7 @@ public class EditorMain extends GameShell implements ComponentListener {
         int mwTile = mapTileW;
         int mhTile = mapTileH;
         for (int _z = 1; _z < mhTile - 1; _z++) {
-            int i1 = (128 + 128 * 786) + ((mhTile - 1) - _z) * 786 * 4;
+            int i1 = (128 + 128 * 786) + 4 + ((mhTile - 1) - _z) * 786 * 4;
             for (int _x = 1; _x < mwTile - 1; _x++) {
                 if ((tileSettingBits[_y][_x][_z] & 0x18) == 0)
                     sceneGraph.drawMinimapTile(_y, _x, _z, ai, i1, 786);
@@ -615,6 +650,7 @@ public class EditorMain extends GameShell implements ComponentListener {
         int i = xCameraCurve & 0x7ff;
         int j = 128+xCameraPos / 32;
         int l2 = (786-128) - yCameraPos / 32;
+        l2 -= 4*4;
         minimapImage.rotate(j, l2, minimapIP.canvasWidth, minimapIP.canvasHeight, xCameraCurve, 0, 0);
         compass.rotate(25, 25, 33, 33, xCameraCurve, 0, 0);
         for (int j5 = 0; j5 < numOfMapMarkers; j5++) {
@@ -629,7 +665,7 @@ public class EditorMain extends GameShell implements ComponentListener {
     }
 
     private void drawScene() {
-        int j = heightLevel;
+        int j = showAllHLs ? 3 : heightLevel;
         int l = xCameraPos;
         int i1 = zCameraPos;
         int j1 = yCameraPos;
@@ -684,7 +720,7 @@ public class EditorMain extends GameShell implements ComponentListener {
         minimapIP.drawGraphics(0, g, 0);
     }
 
-    private void processInput() {
+    private void processCameraInput() {
         if (mouseButtonDown == 2 && lastMouseX != -1){
             int mouseDeltaX = mouseEventX - lastMouseX;
             int mouseDeltaY = mouseEventY - lastMouseY;
@@ -788,4 +824,11 @@ public class EditorMain extends GameShell implements ComponentListener {
         tileSettings = new TileSetting[4];
     }
 
+    public int getHeightLevel() {
+        return heightLevel;
+    }
+
+    public void setShowAllHLs(boolean showAllHLs) {
+        this.showAllHLs = showAllHLs;
+    }
 }

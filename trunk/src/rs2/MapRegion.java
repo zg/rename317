@@ -1495,4 +1495,7 @@ label0:
         1, 2, 4, 8
     };
 
+    public void setOverlay(int z, int x, int y, int overlay) {
+        overLay[z][x][y] = (byte) overlay;
+    }
 }

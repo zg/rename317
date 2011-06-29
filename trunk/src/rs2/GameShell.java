@@ -1,15 +1,11 @@
 package rs2;
 
-
-import javax.swing.text.MutableAttributeSet;
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
-public class
-
-        GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
+public class GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
 
     private static final Object graphicsMutex = new Object();
     private static boolean inGraphicsBlock = false;

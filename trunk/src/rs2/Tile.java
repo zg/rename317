@@ -3,6 +3,8 @@ package rs2;
 
 public class Tile extends Node {
 
+    public boolean highlighted = false;
+
     public Tile(int i, int j, int k)
     {
         interactableObjects = new InteractableObject[5];
