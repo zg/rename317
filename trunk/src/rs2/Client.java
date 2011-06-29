@@ -791,7 +791,7 @@ public class Client extends GameShell {
             if (class9_1.type == 0) {
                 buildInterfaceMenu(i2, class9_1, k, j2, i1, class9_1.scrollPosition);
                 if (class9_1.scrollMax > class9_1.height)
-                    method65(i2 + class9_1.width, class9_1.height, k, i1, class9_1, j2, true, class9_1.scrollMax);
+                    scrollInterface(i2 + class9_1.width, class9_1.height, k, i1, class9_1, j2, true, class9_1.scrollMax);
             } else {
                 if (class9_1.atActionType == 1 && k >= i2 && i1 >= j2 && k < i2 + class9_1.width && i1 < j2 + class9_1.height) {
                     boolean flag = false;
@@ -1403,7 +1403,7 @@ public class Client extends GameShell {
         Rasterizer.lineOffsets = anIntArray1182;
     }
 
-    private void method37(int j) {
+    private void animateTexture(int j) {
         if (!lowMem) {
             if (Rasterizer.textureLastUsed[17] >= j) {
                 IndexedImage indexedImage = Rasterizer.textureImages[17];
@@ -1462,6 +1462,19 @@ public class Client extends GameShell {
                 indexedImage_2.imgPixels = abyte5;
                 aByteArray912 = abyte2;
                 Rasterizer.resetTexture(34);
+            }
+            if (Rasterizer.textureLastUsed[40] >= j) {
+                IndexedImage indexedImage_2 = Rasterizer.textureImages[40];
+                int i1 = indexedImage_2.imgWidth * indexedImage_2.imgHeight - 1;
+                int l1 = indexedImage_2.imgWidth * anInt945 * 2;
+                byte abyte2[] = indexedImage_2.imgPixels;
+                byte abyte5[] = aByteArray912;
+                for (int k2 = 0; k2 <= i1; k2++)
+                    abyte5[k2] = abyte2[k2 - l1 & i1];
+
+                indexedImage_2.imgPixels = abyte5;
+                aByteArray912 = abyte2;
+                Rasterizer.resetTexture(40);
             }
         }
     }
@@ -2824,7 +2837,7 @@ public class Client extends GameShell {
         }
     }
 
-    private void method65(int i, int j, int k, int l, RSInterface class9, int i1, boolean flag, int j1) {
+    private void scrollInterface(int i, int j, int k, int l, RSInterface class9, int i1, boolean flag, int j1) {
         int anInt992;
         if (aBoolean972)
             anInt992 = 32;
@@ -4902,7 +4915,7 @@ public class Client extends GameShell {
             return "";
     }
 
-    private void method81(RgbImage rgbImage, int j, int k)//todo - is this that white line thing?
+    private void drawTargetIndicator(RgbImage rgbImage, int j, int k)//todo - is this that white line thing?
     {
         int l = k * k + j * j;
         if (l > 4225 && l < 0x15f90) {
@@ -6424,7 +6437,7 @@ public class Client extends GameShell {
         mobile.currentRotation = mobile.turnDirection;
     }
 
-    private void method99(Mobile mobile) {
+    private void method99(Mobile mobile) {//process walking
         mobile.anInt1517 = mobile.anInt1511;
         if (mobile.pathLength == 0) {
             mobile.anInt1503 = 0;
@@ -6663,7 +6676,7 @@ public class Client extends GameShell {
         if (backDialogID == -1) {
             aClass9_1059.scrollPosition = anInt1211 - anInt1089 - 77;
             if (super.mouseEventX > 448 && super.mouseEventX < 560 && super.mouseEventY > 332)
-                method65(463, 77, super.mouseEventX - 17, super.mouseEventY - 357, aClass9_1059, 0, false, anInt1211);
+                scrollInterface(463, 77, super.mouseEventX - 17, super.mouseEventY - 357, aClass9_1059, 0, false, anInt1211);
             int i = anInt1211 - 77 - aClass9_1059.scrollPosition;
             if (i < 0)
                 i = 0;
@@ -8033,7 +8046,8 @@ public class Client extends GameShell {
                     markMinimap(mapDotTeam, j1, l3);
                 else
                     markMinimap(mapDotPlayer, j1, l3);
-            }
+                
+                }
         }
 
         if (anInt855 != 0 && currentTime % 20 < 10) {
@@ -8042,20 +8056,20 @@ public class Client extends GameShell {
                 if (class30_sub2_sub4_sub1_sub1_1 != null) {
                     int k1 = class30_sub2_sub4_sub1_sub1_1.boundExtentX / 32 - session_player.boundExtentX / 32;
                     int i4 = class30_sub2_sub4_sub1_sub1_1.boundExtentY / 32 - session_player.boundExtentY / 32;
-                    method81(mapMarker, i4, k1);
+                    drawTargetIndicator(mapMarker, i4, k1);
                 }
             }
             if (anInt855 == 2) {
                 int l1 = ((anInt934 - baseX) * 4 + 2) - session_player.boundExtentX / 32;
                 int j4 = ((anInt935 - baseY) * 4 + 2) - session_player.boundExtentY / 32;
-                method81(mapMarker, j4, l1);
+                drawTargetIndicator(mapMarker, j4, l1);
             }
             if (anInt855 == 10 && anInt933 >= 0 && anInt933 < session_players.length) {
                 Player class30_sub2_sub4_sub1_sub2_1 = session_players[anInt933];
                 if (class30_sub2_sub4_sub1_sub2_1 != null) {
                     int i2 = class30_sub2_sub4_sub1_sub2_1.boundExtentX / 32 - session_player.boundExtentX / 32;
                     int k4 = class30_sub2_sub4_sub1_sub2_1.boundExtentY / 32 - session_player.boundExtentY / 32;
-                    method81(mapMarker, k4, i2);
+                    drawTargetIndicator(mapMarker, k4, i2);
                 }
             }
         }
@@ -10109,7 +10123,7 @@ public class Client extends GameShell {
         sceneGraph.clearInteractableObjectCache();
         updateEntities();
         drawHeadIcon();
-        method37(k2);
+        animateTexture(k2);
         draw3dScreen();
         gameScreenCanvas.drawGraphics(4, super.graphics, 4);
         xCameraPos = l;
