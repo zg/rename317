@@ -697,7 +697,8 @@ public class Rasterizer extends Graphics2D {
 		if (start_x < end_x) {
 			dest_off += start_x;
 			color_index += off * start_x;
-			if (aBoolean1464) {
+			//if(1 != 1)//if the below code is dead only textured parts of models appear
+			if (notTextured) {//ifNontexturedModel?
 				loops = end_x - start_x >> 2;
 				if (loops > 0) {
 					off = (grad - color_index) * anIntArray1468[loops] >> 15;
@@ -2139,7 +2140,7 @@ public class Rasterizer extends Graphics2D {
 	public static boolean lowMem = true;
 	static boolean restrict_edges;
 	private static boolean opaque;
-	public static boolean aBoolean1464 = true;
+	public static boolean notTextured = true;//true;
 	public static int alpha;
 	public static int centerX;
 	public static int centerY;

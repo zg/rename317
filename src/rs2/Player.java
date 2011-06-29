@@ -46,34 +46,34 @@ public class Player extends Mobile
                 model_1.translate(anInt1711 - super.boundExtentX, anInt1712 - anInt1709, anInt1713 - super.boundExtentY);
                 if(super.turnDirection == 512)
                 {
-                    model_1.method473();
-                    model_1.method473();
-                    model_1.method473();
+                    model_1.rotateBy90();
+                    model_1.rotateBy90();
+                    model_1.rotateBy90();
                 } else
                 if(super.turnDirection == 1024)
                 {
-                    model_1.method473();
-                    model_1.method473();
+                    model_1.rotateBy90();
+                    model_1.rotateBy90();
                 } else
                 if(super.turnDirection == 1536)
-                    model_1.method473();
+                    model_1.rotateBy90();
                 Model aclass30_sub2_sub4_sub6s[] = {
                         model, model_1
                 };
                 model = new Model(aclass30_sub2_sub4_sub6s);
                 if(super.turnDirection == 512)
-                    model_1.method473();
+                    model_1.rotateBy90();
                 else
                 if(super.turnDirection == 1024)
                 {
-                    model_1.method473();
-                    model_1.method473();
+                    model_1.rotateBy90();
+                    model_1.rotateBy90();
                 } else
                 if(super.turnDirection == 1536)
                 {
-                    model_1.method473();
-                    model_1.method473();
-                    model_1.method473();
+                    model_1.rotateBy90();
+                    model_1.rotateBy90();
+                    model_1.rotateBy90();
                 }
                 model_1.translate(super.boundExtentX - anInt1711, anInt1709 - anInt1712, super.boundExtentY - anInt1713);
             }

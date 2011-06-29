@@ -261,7 +261,7 @@ public class ObjectDef
             model_3.vertexSkin = null;
         }
         while(l-- > 0)
-            model_3.method473();
+            model_3.rotateBy90();
         if(modifiedModelColors != null)
         {
             for(int k2 = 0; k2 < modifiedModelColors.length; k2++)

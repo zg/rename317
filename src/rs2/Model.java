@@ -1524,7 +1524,7 @@ public class Model extends Entity {
         }
     }
 
-    public void method473() {
+    public void rotateBy90() {//rotate by 90
         hash += 9000000000L;
         for (int j = 0; j < vertexCount; j++) {
             int k = vertexX[j];
