@@ -142,7 +142,7 @@ public class NpcDef
                     model.recolour(recolourOriginal[k1], recolourTarget[k1]);
 
             }
-            model.calcSkinning();
+            model.createBones();
             model.light(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
             memCache.put(model, type);
         }

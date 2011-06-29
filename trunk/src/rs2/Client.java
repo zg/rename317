@@ -4600,7 +4600,7 @@ public class Client extends GameShell {
                             model.recolour(skinColours[0], skinColours[char_edit_colours[idkit_ptr]]);
                     }
 
-                model.calcSkinning();
+                model.createBones();
                 model.applyTransform(Sequence.anims[session_player.anInt1511].frame2IDS[0]);
                 model.light(64, 850, -30, -50, -30, true);
                 class9.anInt233 = 5;
