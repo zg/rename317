@@ -6392,7 +6392,7 @@ public class Client extends GameShell {
         else if (mobile.anInt1548 >= currentTime)
             refreshEntityFaceDirection(mobile);
         else
-            method99(mobile);
+            processWalkingStep(mobile);
         appendFocusDestination(mobile);
         appendAnimation(mobile);
     }
@@ -6437,7 +6437,7 @@ public class Client extends GameShell {
         mobile.currentRotation = mobile.turnDirection;
     }
 
-    private void method99(Mobile mobile) {//process walking
+    private void processWalkingStep(Mobile mobile) {//process walking
         mobile.anInt1517 = mobile.anInt1511;
         if (mobile.pathLength == 0) {
             mobile.anInt1503 = 0;
@@ -7300,14 +7300,16 @@ public class Client extends GameShell {
         }
     }
 
-    private void method108() {
+    private void method108() {//work out how far from player the camera will be
         try {
             int j = session_player.boundExtentX + anInt1278;
             int k = session_player.boundExtentY + anInt1131;
-            if (anInt1014 - j < -500 || anInt1014 - j > 500 || anInt1015 - k < -500 || anInt1015 - k > 500) {
-                anInt1014 = j;
+             if (anInt1014 - j < -500 || anInt1014 - j > 500 || anInt1015 - k < -500 || anInt1015 - k > 500) {
+                anInt1014 = j;//set to 1000 for lols
                 anInt1015 = k;
             }
+            
+            
             if (anInt1014 != j)
                 anInt1014 += (j - anInt1014) / 16;
             if (anInt1015 != k)
@@ -7330,6 +7332,7 @@ public class Client extends GameShell {
                 anInt1184 = 128;
             if (anInt1184 > 383)
                 anInt1184 = 383;
+            //anInt1184=1000;//lol turns world upside down
             int l = anInt1014 >> 7;
             int i1 = anInt1015 >> 7;
             int j1 = method42(plane, anInt1015, anInt1014);
@@ -7408,22 +7411,22 @@ public class Client extends GameShell {
     }
 
     private static String logic_get_combat_risk_colour(int i, int j) {
-        int k = i - j;
-        if (k < -9)
+        int combatLvlDig = i - j;
+        if (combatLvlDig < -9)
             return "@red@";
-        if (k < -6)
+        if (combatLvlDig < -6)
             return "@or3@";
-        if (k < -3)
+        if (combatLvlDig < -3)
             return "@or2@";
-        if (k < 0)
+        if (combatLvlDig < 0)
             return "@or1@";
-        if (k > 9)
+        if (combatLvlDig > 9)
             return "@gre@";
-        if (k > 6)
+        if (combatLvlDig > 6)
             return "@gr3@";
-        if (k > 3)
+        if (combatLvlDig > 3)
             return "@gr2@";
-        if (k > 0)
+        if (combatLvlDig > 0)
             return "@gr1@";
         else
             return "@yel@";
@@ -8452,7 +8455,7 @@ public class Client extends GameShell {
         repaintRequested = true;
     }
 
-    private void method137(Packet stream, int j) {
+    private void parsePacketGroup(Packet stream, int j) {
         if (j == 84) {
             int k = stream.g1();
             int j3 = anInt1268 + (k >> 4 & 7);
@@ -9413,7 +9416,7 @@ public class Client extends GameShell {
                 anInt1268 = inStream.ng1b();
                 while (inStream.pos < pktSize) {
                     int k3 = inStream.g1();
-                    method137(inStream, k3);
+                    parsePacketGroup(inStream, k3);
                 }
                 pktType = -1;
                 return true;
@@ -10006,7 +10009,7 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 105 || pktType == 84 || pktType == 147 || pktType == 215 || pktType == 4 || pktType == 117 || pktType == 156 || pktType == 44 || pktType == 160 || pktType == 101 || pktType == 151) {
-                method137(inStream, pktType);
+                parsePacketGroup(inStream, pktType);
                 pktType = -1;
                 return true;
             }

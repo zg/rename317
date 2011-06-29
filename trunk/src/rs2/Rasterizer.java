@@ -2166,7 +2166,7 @@ public class Rasterizer extends Graphics2D {
 		SINE = new int[2048];
 		COSINE = new int[2048];
 		for (int i = 1; i < 512; i++) {
-			anIntArray1468[i] = 32768 / i;
+			anIntArray1468[i] = 32768 / i;//decay rate for shadows or some shit - super_
 		}
 
 		for (int i = 1; i < 2048; i++) {
@@ -2175,7 +2175,6 @@ public class Rasterizer extends Graphics2D {
 
 		for (int i = 0; i < 2048; i++) {
 			SINE[i] = (int) (65536D * Math.sin((double) i * 0.0030679614999999999D));
-			COSINE[i] = (int) (65536D * Math.cos((double) i * 0.0030679614999999999D));
 			COSINE[i] = (int) (65536D * Math.cos((double) i * 0.0030679614999999999D));
 		}
 
