@@ -138,12 +138,12 @@ public class SoundTrack
                     l7 = sampleLength - i5;
                 for(; j7 < l7; j7++)
                 {
-                    int j8 = (int)((long) sampleBuffer[j7 + i5] * (long)Class39.anInt672 >> 16);
+                    int j8 = (int)((long) sampleBuffer[j7 + i5] * (long)FrequencyGenerator.anInt672 >> 16);
                     for(int k8 = 0; k8 < i5; k8++)
-                        j8 += (int)((long) sampleBuffer[(j7 + i5) - 1 - k8] * (long)Class39.anIntArrayArray670[0][k8] >> 16);
+                        j8 += (int)((long) sampleBuffer[(j7 + i5) - 1 - k8] * (long)FrequencyGenerator.anIntArrayArray670[0][k8] >> 16);
 
                     for(int j9 = 0; j9 < j7; j9++)
-                        j8 -= (int)((long) sampleBuffer[j7 - 1 - j9] * (long)Class39.anIntArrayArray670[1][j9] >> 16);
+                        j8 -= (int)((long) sampleBuffer[j7 - 1 - j9] * (long)FrequencyGenerator.anIntArrayArray670[1][j9] >> 16);
 
                     sampleBuffer[j7] = j8;
                     k3 = aClass29_112.currentAmplitude(sampleLength + 1);
@@ -157,12 +157,12 @@ public class SoundTrack
                         l7 = sampleLength - i5;
                     for(; j7 < l7; j7++)
                     {
-                        int l8 = (int)((long) sampleBuffer[j7 + i5] * (long)Class39.anInt672 >> 16);
+                        int l8 = (int)((long) sampleBuffer[j7 + i5] * (long)FrequencyGenerator.anInt672 >> 16);
                         for(int k9 = 0; k9 < i5; k9++)
-                            l8 += (int)((long) sampleBuffer[(j7 + i5) - 1 - k9] * (long)Class39.anIntArrayArray670[0][k9] >> 16);
+                            l8 += (int)((long) sampleBuffer[(j7 + i5) - 1 - k9] * (long)FrequencyGenerator.anIntArrayArray670[0][k9] >> 16);
 
                         for(int i10 = 0; i10 < i6; i10++)
-                            l8 -= (int)((long) sampleBuffer[j7 - 1 - i10] * (long)Class39.anIntArrayArray670[1][i10] >> 16);
+                            l8 -= (int)((long) sampleBuffer[j7 - 1 - i10] * (long)FrequencyGenerator.anIntArrayArray670[1][i10] >> 16);
 
                         sampleBuffer[j7] = l8;
                         k3 = aClass29_112.currentAmplitude(sampleLength + 1);
@@ -178,10 +178,10 @@ public class SoundTrack
                 {
                     int i9 = 0;
                     for(int l9 = (j7 + i5) - sampleLength; l9 < i5; l9++)
-                        i9 += (int)((long) sampleBuffer[(j7 + i5) - 1 - l9] * (long)Class39.anIntArrayArray670[0][l9] >> 16);
+                        i9 += (int)((long) sampleBuffer[(j7 + i5) - 1 - l9] * (long)FrequencyGenerator.anIntArrayArray670[0][l9] >> 16);
 
                     for(int j10 = 0; j10 < i6; j10++)
-                        i9 -= (int)((long) sampleBuffer[j7 - 1 - j10] * (long)Class39.anIntArrayArray670[1][j10] >> 16);
+                        i9 -= (int)((long) sampleBuffer[j7 - 1 - j10] * (long)FrequencyGenerator.anIntArrayArray670[1][j10] >> 16);
 
                     sampleBuffer[j7] = i9;
                     int l3 = aClass29_112.currentAmplitude(sampleLength + 1);//never used - think its needed tho
@@ -265,7 +265,7 @@ public class SoundTrack
         gain = stream.gsmarts();
         msLength = stream.g2();
         anInt114 = stream.g2();
-        aClass39_111 = new Class39();
+        aClass39_111 = new FrequencyGenerator();
         aClass29_112 = new AmplitudeEnvelope();
         aClass39_111.method545(stream, aClass29_112);
     }
@@ -292,7 +292,7 @@ public class SoundTrack
     private final int[] anIntArray108;
     private int anInt109;
     private int gain;
-    private Class39 aClass39_111;
+    private FrequencyGenerator aClass39_111;
     private AmplitudeEnvelope aClass29_112;
     int msLength;
     int anInt114;
