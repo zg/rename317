@@ -1,6 +1,6 @@
 package rs2;
 
-public class Class39
+public class FrequencyGenerator//mhm not too sure
 {
 
     private float method541(int i, int j, float f)
@@ -10,17 +10,17 @@ public class Class39
             return 1.0F - (float)Math.pow(10D, -f1 / 20F);
     }
 
-    private float method542(float f)
-    {
-        float f1 = 32.7032F * (float)Math.pow(2D, f);
-        return (f1 * 3.141593F) / 11025F;
+    private float calculateDigitalFrequency(float note)// like angular velocity or some shit
+    {//32.7032f Represents the note C1 on a piano keyboard. 
+        float frequency = 32.7032F * (float)Math.pow(2D, note);
+        return (frequency * 3.141593F) / 11025F;
     }
 
     private float method543(float f, int i, int j)
     {
         float f1 = (float)anIntArrayArrayArray666[j][0][i] + f * (float)(anIntArrayArrayArray666[j][1][i] - anIntArrayArrayArray666[j][0][i]);
         f1 *= 0.0001220703F;
-        return method542(f1);
+        return calculateDigitalFrequency(f1);
     }
 
     public int method544(int i, float f)
@@ -28,7 +28,7 @@ public class Class39
         if(i == 0)
         {
             float f1 = (float)anIntArray668[0] + (float)(anIntArray668[1] - anIntArray668[0]) * f;
-            f1 *= 0.003051758F;
+            f1 *= 0.003051758F;// some kind of transformer?
             aFloat671 = (float)Math.pow(0.10000000000000001D, f1 / 20F);
             anInt672 = (int)(aFloat671 * 65536F);
         }
@@ -106,7 +106,7 @@ public class Class39
         }
     }
 
-    public Class39()
+    public FrequencyGenerator()
     {
         anIntArray665 = new int[2];
         anIntArrayArrayArray666 = new int[2][2][4];
