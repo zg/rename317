@@ -1,6 +1,8 @@
 package editor;
 
+import com.sun.javaws.jnl.XMLFormat;
 import editor.gui.EditorMainWindow;
+import editor.gui.dockables.ToolSelectionBar;
 import editor.renderer.GameViewPanel;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import rs2.*;
@@ -10,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.net.InetAddress;
 
 /**
@@ -19,7 +23,7 @@ import java.net.InetAddress;
  * Time: 5:26 PM
  * Computer: Peterbjornx-PC.rootdomain.asn.local (192.168.178.27)
  */
-public class EditorMain extends GameShell implements ComponentListener {
+public class EditorMain extends GameShell implements ComponentListener, WindowListener {
     private EditorMainWindow editorMainWindow;
     public JagexFileStore[] jagexFileStores = new JagexFileStore[5];
     private JagexArchive titleJagexArchive;
@@ -73,6 +77,8 @@ public class EditorMain extends GameShell implements ComponentListener {
     private int selectedTileY = -1;
     private int selectedTileX = -1;
     private int selectedTileZ = -1;
+    private int heightEditingSpeed = 10;
+    private int setHeight;
 
     private JagexArchive getJagexArchive(int i) {
         byte abyte0[] = null;
@@ -290,7 +296,10 @@ public class EditorMain extends GameShell implements ComponentListener {
             processCameraInput();
             sceneGraph.clearHightlights();
             if (SceneGraph.clickedTileX != -1){
-                sceneGraph.setHighlightedTile(SceneGraph.clickedTileX,SceneGraph.clickedTileY);
+                if (editorMainWindow.getToolSelectionBar().getSelectedTool()
+                        == ToolSelectionBar.EditorTools.HEIGHT_EDIT)
+                    sceneGraph.enableHeightHighlight();
+                highlightTile(SceneGraph.clickedTileZ,SceneGraph.clickedTileX,SceneGraph.clickedTileY);
                 if (mouseButtonDown == 1){
                     selectTile(SceneGraph.clickedTileZ,SceneGraph.clickedTileX,SceneGraph.clickedTileY);
                 }
@@ -307,20 +316,124 @@ public class EditorMain extends GameShell implements ComponentListener {
         selectedTileY = z;
         selectedTileX = x;
         selectedTileZ = y;
+        boolean controlDown = keyStatus[5] == 1;
+        int halfW = editorMainWindow.getToolSelectionBar().getBrushSize()/2;
+        if (editorMainWindow.getToolSelectionBar().getBrushSize() % 2 == 0 || halfW == 0){
+            for (int _x = x;_x < editorMainWindow.getToolSelectionBar().getBrushSize()+x;_x++)
+                for (int _z = y;_z < editorMainWindow.getToolSelectionBar().getBrushSize()+y;_z++)   {
+                    int dx = Math.abs(x-_x);
+                    int dy = Math.abs(y-_z);
+                    float d = (int) Math.sqrt(dx*dx + dy*dy);
+                    modifyTile(z,_x,_z,d);
+                }
+        } else {
+            for (int _x = x-halfW;_x <= halfW+x;_x++)
+                for (int _z = y-halfW;_z <= halfW+y;_z++)   {
+                    int dx = Math.abs(x-_x);
+                    int dy = Math.abs(y-_z);
+                    float d = (int) Math.sqrt(dx*dx + dy*dy);
+                    modifyTile(z,_x,_z,d);
+                }
+        }
+        refreshMap();
+    }
+
+    private void highlightTile(int z, int x, int y) {
+        int halfW = editorMainWindow.getToolSelectionBar().getBrushSize()/2;
+        if (editorMainWindow.getToolSelectionBar().getBrushSize() % 2 == 0 || halfW == 0){
+            for (int _x = x;_x < editorMainWindow.getToolSelectionBar().getBrushSize()+x;_x++)
+                for (int _z = y;_z < editorMainWindow.getToolSelectionBar().getBrushSize()+y;_z++)   {
+                    int dx = Math.abs(x-_x);
+                    int dy = Math.abs(y-_z);
+                    //float d = (int) Math.sqrt(dx*dx + dy*dy);
+                    sceneGraph.setHighlightedTile(_x,_z);
+                }
+        } else {
+            for (int _x = x-halfW;_x <= halfW+x;_x++)
+                for (int _z = y-halfW;_z <= halfW+y;_z++)   {
+                    int dx = Math.abs(x-_x);
+                    int dy = Math.abs(y-_z);
+                    //float d = (int) Math.sqrt(dx*dx + dy*dy);
+                    sceneGraph.setHighlightedTile(_x,_z);
+                }
+        }
+    }
+
+    private void modifyTile(int z,int x,int y,float d){
+        boolean controlDown = keyStatus[5] == 1;
         switch (editorMainWindow.getToolSelectionBar().getSelectedTool()){
             case SELECT:
-                editorMainWindow.getSettingsBrushEditorWindow().setCurrentTileBits(tileSettingBits[z][x][y]);
+                if (d == 0)
+                    editorMainWindow.getSettingsBrushEditorWindow().setCurrentTileBits(tileSettingBits[z][x][y]);
                 break;
             case PAINT_OVERLAY:
-                mapRegion.setOverlay(z,x,y,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
-                refreshMap();
+                if (!controlDown){
+                    mapRegion.setOverlay(z,x,y,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
+                } else if (d == 0)
+                    editorMainWindow.getFloorTypeSelectionWindow().selectFloor(mapRegion.getOverLay()[z][x][y]-1);
+                break;
+            case PAINT_UNDERLAY:
+                if (!controlDown){
+                    mapRegion.setUnderlay(z, x, y, editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId() + 1);
+                } else if (d == 0)
+                    editorMainWindow.getFloorTypeSelectionWindow().selectFloor(mapRegion.getUnderLay()[z][x][y]-1);
+                break;
+            case HEIGHT_EDIT:
+                mapRegion.automaticHeight[z][x][y] = false;
+                if (!controlDown){
+                    heightMap[z][x][y]-=heightEditingSpeed/(d * 0.25f + 1f);
+                } else {
+                    if (heightMap[z][x][y] < 0)
+                        heightMap[z][x][y]+=heightEditingSpeed/(d * 0.25f + 1f);
+                }
+                break;
+            case HEIGHT_SET:
+                mapRegion.automaticHeight[z][x][y] = false;
+                if (!controlDown && setHeight != -1){
+                    heightMap[z][x][y]=setHeight;
+                } else {
+                    setHeight = heightMap[z][x][y];
+                }
+                break;
+            case FLOODFILL_OVERLAY:
+                if (d == 0)
+                    doFloodFill(z,x,y,true,-1);
+                break;
+            case FLOODFILL_UNDERLAY:
+                if (d == 0)
+                    doFloodFill(z,x,y,false,-1);
                 break;
         }
+
+    }
+
+    private void doFloodFill(int y, int x, int z, boolean isOverlay,int curId) {
+        if (y < 0 || x < 0 || z < 0 || y > 3 || x >= mapTileW || z >= mapTileH)
+            return;
+        if (isOverlay){
+            int overlayId = mapRegion.getOverLay()[y][x][z];
+            if (curId == -1){
+                curId = overlayId;
+            } else if (curId != overlayId)
+                return;
+            mapRegion.setOverlay(y,x,z,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
+        } else {
+            int underlayId = mapRegion.getUnderLay()[y][x][z];
+            if (curId == -1){
+                curId = underlayId;
+            } else if (curId != underlayId)
+                return;
+            mapRegion.setUnderlay(y,x,z,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
+        }
+        for (int _x = x-1; _x <= x+1; _x++)
+            doFloodFill(y, _x, z, isOverlay,curId);
+        for (int _z = z-1; _z <= z+1; _z++)
+            doFloodFill(y, x, _z, isOverlay,curId);
     }
 
     private void refreshMap() {
         sceneGraph.clearCullingClusters();
-        mapRegion.addTiles(tileSettings,sceneGraph);
+        mapRegion.addTiles(tileSettings,sceneGraph, editorMainWindow.getEditorToolbar().getSettings());
         sceneGraph.setHeightLevel(heightLevel);
     }
 
@@ -331,7 +444,9 @@ public class EditorMain extends GameShell implements ComponentListener {
     @Override
     protected void repaintGame() {
         gameScreenCanvas.drawGraphics(0, graphics, 0);
-    }
+        if (selectedTileX != -1)
+            ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getShapeA()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeB()[selectedTileY][selectedTileX][selectedTileZ]);
+        }
 
     @Override
     protected void drawGame() {
@@ -339,8 +454,10 @@ public class EditorMain extends GameShell implements ComponentListener {
             if (mapLoaded) {
                 drawScene();
                 drawMinimap();
-            }
-            gameScreenCanvas.drawGraphics(0, graphics, 0);
+            }gameScreenCanvas.drawGraphics(0, graphics, 0);
+            if (selectedTileX != -1)
+                        ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getShapeA()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeB()[selectedTileY][selectedTileX][selectedTileZ]);
+
         } catch (Exception e){
 
         }
@@ -542,7 +659,7 @@ public class EditorMain extends GameShell implements ComponentListener {
                     continue;
                 mapRegion.loadObjects(_x*64,tileSettings,_z*64,sceneGraph,objectData);
             }
-        mapRegion.addTiles(tileSettings,sceneGraph);
+        mapRegion.addTiles(tileSettings,sceneGraph, 0);
         sceneGraph.setHeightLevel(0);
         System.gc();
         Rasterizer.resetTextures(20);
@@ -691,6 +808,8 @@ public class EditorMain extends GameShell implements ComponentListener {
         sceneGraph.clearInteractableObjectCache();
         draw3dScreen();
         gameScreenCanvas.drawGraphics(0, super.graphics, 0);
+        if (selectedTileX != -1)
+               ShapedTile.drawShape(super.graphics,(byte) (mapRegion.getShapeA()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeB()[selectedTileY][selectedTileX][selectedTileZ]);
         xCameraPos = l;
         zCameraPos = i1;
         yCameraPos = j1;
@@ -714,6 +833,8 @@ public class EditorMain extends GameShell implements ComponentListener {
         plainFont.drawTextHLeftVMid(0xffff00,"Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", y, x);
         y += 15;
     }
+
+
 
     public void paintMinimap(Graphics g) {
         minimapGraphics = g;
@@ -810,6 +931,21 @@ public class EditorMain extends GameShell implements ComponentListener {
     public void componentHidden(ComponentEvent e) {
     }
 
+    @Override
+    public void windowClosing(WindowEvent windowevent) {
+        editorMainWindow.storeWorkspace();
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent windowevent) {
+        mouseButtonPressed = 0;
+    }
+
+    @Override
+    public void windowOpened(WindowEvent windowevent) {
+        editorMainWindow.loadWorkspace();
+    }
+
     public EditorMain() {
         compassShape1 = new int[33];
         jagexFileStores = new JagexFileStore[5];
@@ -830,5 +966,25 @@ public class EditorMain extends GameShell implements ComponentListener {
 
     public void setShowAllHLs(boolean showAllHLs) {
         this.showAllHLs = showAllHLs;
+    }
+
+    public void setRenderSettings(int settings) {
+        sceneGraph.initToNull();
+        ObjectDef.memCache1.unlinkAll();
+        ObjectDef.memCache2.unlinkAll();
+        System.gc();
+        for (int i = 0; i < 4; i++)
+            tileSettings[i].init();
+        refreshMap();
+        for (int _x = 0;_x < mapWidth;_x++)
+            for (int _z = 0;_z < mapHeight;_z++){
+                int objectIdx = onDemandFetcher.getMapIndex(1,currentMapZ+_z,currentMapX+_x);
+                if (objectIdx == -1)
+                    continue;
+                byte[] objectData = JavaUncompress.decompress(jagexFileStores[4].decompress(objectIdx));
+                if (objectData == null)
+                    continue;
+                mapRegion.loadObjects(_x*64,tileSettings,_z*64,sceneGraph,objectData);
+            }
     }
 }

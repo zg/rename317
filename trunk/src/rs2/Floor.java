@@ -111,7 +111,6 @@ public class Floor {
         } while (true);
     }
 
-
     private void readValues(Packet stream) {
         do {
             int i = stream.g1();
@@ -240,8 +239,6 @@ public class Floor {
         texture = -1;
         occlude = true;
     }
-
-
 
     public static Floor cache[];
     public int colour2;

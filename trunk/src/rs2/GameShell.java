@@ -352,11 +352,11 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
     public final void windowClosed(WindowEvent windowevent) {
     }
 
-    public final void windowClosing(WindowEvent windowevent) {
+    public void windowClosing(WindowEvent windowevent) {
         destroy();
     }
 
-    public final void windowDeactivated(WindowEvent windowevent) {
+    public void windowDeactivated(WindowEvent windowevent) {
     }
 
     public final void windowDeiconified(WindowEvent windowevent) {
@@ -365,7 +365,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
     public final void windowIconified(WindowEvent windowevent) {
     }
 
-    public final void windowOpened(WindowEvent windowevent) {
+    public void windowOpened(WindowEvent windowevent) {
     }
 
     protected void startUp() {

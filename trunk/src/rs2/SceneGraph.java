@@ -15,6 +15,7 @@ public class SceneGraph {
     public static final boolean USE_HD = false;
     private LinkedList<Tile> highlights = new LinkedList<Tile>();
     public static int clickedTileZ;
+    private boolean heightHighlight;
 
     public SceneGraph(int height, int width, int length, int heightmap[][][])
     {
@@ -78,9 +79,9 @@ public class SceneGraph {
     }
 
     public void clearCullingClusters(){
-        for(int l = 0; l < anInt472; l++)
+        for(int l = 0; l < Math.min(anInt472,cullingClusters.length); l++)
         {
-            for(int j1 = 0; j1 < cullingClusterPointer[l]; j1++)
+            for(int j1 = 0; j1 < Math.min(cullingClusterPointer[l],cullingClusters[l].length); j1++)
                 cullingClusters[l][j1] = null;
 
             cullingClusterPointer[l] = 0;
@@ -139,6 +140,7 @@ public class SceneGraph {
         culling_cluster.worldEndY = highest_y;
         culling_cluster.worldStartZ = highest_z;
         culling_cluster.worldEndZ = lowest_z;
+        if (cullingClusterPointer[z] < cullingClusters[z].length)
         cullingClusters[z][cullingClusterPointer[z]++] = culling_cluster;
     }
 
@@ -1741,8 +1743,10 @@ label0:
         int screenYD = Rasterizer.centerY + (zD << 9) / yD;
         int screenXC = Rasterizer.centerX + (xC << 9) / yC;
         int screenYC = Rasterizer.centerY + (zC << 9) / yC;
-        if (plainTile.colourA != 0xbc614d)
+        if (plainTile.colourA != 0xbc614d) {
             Rasterizer.alpha = 0;
+        } else if (heightHighlight)
+            Graphics2D.fillRect(screenXA,screenYA,2,2,0xFFFFFF);
         if((screenXD - screenXC) * (screenYB - screenYC) - (screenYD - screenYC) * (screenXB - screenXC) > 0)
         {
             Rasterizer.restrict_edges = screenXD < 0 || screenXC < 0 || screenXB < 0 || screenXD > Graphics2D.viewportRx || screenXC > Graphics2D.viewportRx || screenXB > Graphics2D.viewportRx;
@@ -2430,13 +2434,20 @@ for_outer:
     }
 
     public void setHighlightedTile(int x, int z) {
-        tileArray[currentHL][x][z].highlighted = true;
-        highlights.add(tileArray[currentHL][x][z]);
+        if (tileArray[currentHL][x][z] != null){
+            tileArray[currentHL][x][z].highlighted = true;
+            highlights.add(tileArray[currentHL][x][z]);
+        }
     }
 
     public void clearHightlights() {
         for (Tile t : highlights)
             t.highlighted = false;
         highlights.clear();
+        heightHighlight = false;
+    }
+
+    public void enableHeightHighlight() {
+        heightHighlight = true;
     }
 }

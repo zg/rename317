@@ -2,11 +2,23 @@ package rs2;
 
 // Decompiler options: packimports(3)
 
+import java.io.File;
+
 public class MapRegion {
 
     private int[][][] underlayRgb;
-    private boolean[][][] automaticHeight;
+    public boolean[][][] automaticHeight;
     private boolean isMapEditor = false;
+    /**
+     * Constant naming scheme:
+     * *FC - False colour
+     * *RES - Resolution (as in: to look something up)
+     */
+    public static final int NO_BLENDING_BIT   = 1;
+    public static final int NO_OVERLAY_BIT    = 2;
+    public static final int NO_COLOUR_RES_BIT = 4;
+    public static final int RENDER_HIDDEN_BIT = 16;
+    public static final int TILE_SETTINGS_FC = NO_BLENDING_BIT | NO_COLOUR_RES_BIT | NO_OVERLAY_BIT | 8;
 
     public MapRegion(int width, int height, byte tileSettings[][][], int heightMap[][][])
     {
@@ -21,7 +33,7 @@ public class MapRegion {
         shapeB = new byte[4][xMapSize][yMapSize];
         tile_culling_bitmap = new int[4][xMapSize + 1][yMapSize + 1];
         object_shadow_data = new byte[4][xMapSize + 1][yMapSize + 1];
-        tile_shadow = new int[xMapSize + 1][yMapSize + 1];
+        tileLightness = new int[xMapSize + 1][yMapSize + 1];
         underlayRgb = new int[4][xMapSize][yMapSize];
         automaticHeight = new boolean[4][xMapSize][yMapSize];//Used only by the editor utility
         hue = new int[yMapSize];
@@ -39,7 +51,7 @@ public class MapRegion {
         return l >> 19 & 0xff;
     }
 
-    public final void addTiles(TileSetting aclass11[], SceneGraph sceneGraph)
+    public final void addTiles(TileSetting aclass11[], SceneGraph sceneGraph, int renderMode)
     {
         for(int j = 0; j < 4; j++)
         {
@@ -72,12 +84,12 @@ public class MapRegion {
         {
             byte something_with_objects[][] = object_shadow_data[z];
             byte light_off = 96;
-            char mag_mult = '\u0300';
+            char falloff = '\u0300';
             byte l_x = -50;
             byte l_y = -10;
             byte l_z = -50;
             int l_mag = (int)Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
-            int sqrtA = mag_mult * l_mag >> 8;
+            int sqrtA = falloff * l_mag >> 8;
             for(int Y = 1; Y < yMapSize - 1; Y++)
             {
                 for(int X = 1; X < xMapSize - 1; X++)
@@ -90,53 +102,54 @@ public class MapRegion {
                     int normal_z = (hDY << 8) / square;
                     int j16 = light_off + (l_x * normal_x + l_y * normal_y + l_z * normal_z) / sqrtA;
                     int j17 = (something_with_objects[X - 1][Y] >> 2) + (something_with_objects[X + 1][Y] >> 3) + (something_with_objects[X][Y - 1] >> 2) + (something_with_objects[X][Y + 1] >> 3) + (something_with_objects[X][Y] >> 1);
-                    tile_shadow[X][Y] = j16 - j17;
+                    tileLightness[X][Y] = j16 - j17;
                 }
 
             }
-
-            for(int _y = 0; _y < yMapSize; _y++)
-            {
-                hue[_y] = 0;
-                saturation[_y] = 0;
-                lightness[_y] = 0;
-                huedivider[_y] = 0;
-                colourCount[_y] = 0;
-            }
+            if ((renderMode & NO_BLENDING_BIT) == 0)
+                for(int _y = 0; _y < yMapSize; _y++)
+                {
+                    hue[_y] = 0;
+                    saturation[_y] = 0;
+                    lightness[_y] = 0;
+                    huedivider[_y] = 0;
+                    colourCount[_y] = 0;
+                }
 
             for(int X = -5; X < xMapSize + 5; X++)
             {
-                for(int Y = 0; Y < yMapSize; Y++)
-                {
-                    int xPlus5 = X + 5;
-                    if(xPlus5 >= 0 && xPlus5 < xMapSize)
+                if ((renderMode & NO_BLENDING_BIT) == 0)
+                    for(int Y = 0; Y < yMapSize; Y++)
                     {
-                        int floID = underLay[z][xPlus5][Y] & 0xff;
-                        if(floID > 0)
+                        int xPlus5 = X + 5;
+                        if(xPlus5 >= 0 && xPlus5 < xMapSize)
                         {
-                            Floor floor = Floor.cache[floID - 1];
-                            hue[Y] += floor.hue2;
-                            saturation[Y] += floor.saturation;
-                            lightness[Y] += floor.lightness;
-                            huedivider[Y] += floor.pCDivider;
-                            colourCount[Y]++;
+                            int floID = underLay[z][xPlus5][Y] & 0xff;
+                            if(floID > 0)
+                            {
+                                Floor floor = Floor.cache[floID - 1];
+                                hue[Y] += floor.hue2;
+                                saturation[Y] += floor.saturation;
+                                lightness[Y] += floor.lightness;
+                                huedivider[Y] += floor.pCDivider;
+                                colourCount[Y]++;
+                            }
+                        }
+                        int yMin5 = X - 5;
+                        if(yMin5 >= 0 && yMin5 < xMapSize)
+                        {
+                            int floID = underLay[z][yMin5][Y] & 0xff;
+                            if(floID > 0)
+                            {
+                                Floor floor_1 = Floor.cache[floID - 1];
+                                hue[Y] -= floor_1.hue2;
+                                saturation[Y] -= floor_1.saturation;
+                                lightness[Y] -= floor_1.lightness;
+                                huedivider[Y] -= floor_1.pCDivider;
+                                colourCount[Y]--;
+                            }
                         }
                     }
-                    int yMin5 = X - 5;
-                    if(yMin5 >= 0 && yMin5 < xMapSize)
-                    {
-                        int floID = underLay[z][yMin5][Y] & 0xff;
-                        if(floID > 0)
-                        {
-                            Floor floor_1 = Floor.cache[floID - 1];
-                            hue[Y] -= floor_1.hue2;
-                            saturation[Y] -= floor_1.saturation;
-                            lightness[Y] -= floor_1.lightness;
-                            huedivider[Y] -= floor_1.pCDivider;
-                            colourCount[Y]--;
-                        }
-                    }
-                }
 
                 if(X >= 1 && X < xMapSize - 1)
                 {
@@ -147,23 +160,25 @@ public class MapRegion {
                     int colourCount = 0;
                     for(int Y = -5; Y < yMapSize + 5; Y++)
                     {
-                        int yPlus5 = Y + 5;
-                        if(yPlus5 >= 0 && yPlus5 < yMapSize)
-                        {
-                            tile_hue += hue[yPlus5];
-                            tile_sat += saturation[yPlus5];
-                            tile_light += lightness[yPlus5];
-                            tile_hue_shift += huedivider[yPlus5];
-                            colourCount += this.colourCount[yPlus5];
-                        }
-                        int yMin5 = Y - 5;
-                        if(yMin5 >= 0 && yMin5 < yMapSize)
-                        {
-                            tile_hue -= hue[yMin5];
-                            tile_sat -= saturation[yMin5];
-                            tile_light -= lightness[yMin5];
-                            tile_hue_shift -= huedivider[yMin5];
-                            colourCount -= this.colourCount[yMin5];
+                        if ((renderMode & NO_BLENDING_BIT) == 0){
+                            int yPlus5 = Y + 5;
+                            if(yPlus5 >= 0 && yPlus5 < yMapSize)
+                            {
+                                tile_hue += hue[yPlus5];
+                                tile_sat += saturation[yPlus5];
+                                tile_light += lightness[yPlus5];
+                                tile_hue_shift += huedivider[yPlus5];
+                                colourCount += this.colourCount[yPlus5];
+                            }
+                            int yMin5 = Y - 5;
+                            if(yMin5 >= 0 && yMin5 < yMapSize)
+                            {
+                                tile_hue -= hue[yMin5];
+                                tile_sat -= saturation[yMin5];
+                                tile_light -= lightness[yMin5];
+                                tile_hue_shift -= huedivider[yMin5];
+                                colourCount -= this.colourCount[yMin5];
+                            }
                         }
                         if(Y >= 1 && Y < yMapSize - 1 && (!lowMem || (tileSettings[0][X][Y] & 2) != 0 || (tileSettings[z][X][Y] & 0x10) == 0 && get_logic_height(z, X, Y) == anInt131))
                         {
@@ -171,32 +186,58 @@ public class MapRegion {
                                 setZ = z;
                             int underlayID = underLay[z][X][Y] & 0xff;
                             int overlay_id = overLay[z][X][Y] & 0xff;
-                            if(underlayID > 0 || overlay_id > 0)
+                            if(underlayID > 0 || overlay_id > 0 || (renderMode & RENDER_HIDDEN_BIT) != 0)
                             {
                                 int zA = heightMap[z][X][Y];
                                 int zB = heightMap[z][X + 1][Y];
                                 int zD = heightMap[z][X + 1][Y + 1];
                                 int zC = heightMap[z][X][Y + 1];
-                                int shadow_a = tile_shadow[X][Y];
-                                int shadow_b = tile_shadow[X + 1][Y];
-                                int shadow_d = tile_shadow[X + 1][Y + 1];
-                                int shadow_c = tile_shadow[X][Y + 1];
+                                int shadow_a = tileLightness[X][Y];
+                                int shadow_b = tileLightness[X + 1][Y];
+                                int shadow_d = tileLightness[X + 1][Y + 1];
+                                int shadow_c = tileLightness[X][Y + 1];
                                 int underlay_hsl_real = -1;
                                 int underlay_hsl = -1;
-                                if(underlayID > 0)
+                                if(underlayID > 0 || (renderMode & RENDER_HIDDEN_BIT) != 0)
                                 {
-                                    int h = (tile_hue * 256) / tile_hue_shift;
-                                    int s = tile_sat / colourCount;
-                                    int l = tile_light / colourCount;
-                                    underlay_hsl_real = pack_hsl(h, s, l);
-                                    h = h + hue_offset & 0xff;
-                                    l += lightness_offset;
-                                    if(l < 0)
-                                        l = 0;
-                                    else
-                                    if(l > 255)
-                                        l = 255;
-                                    underlay_hsl = pack_hsl(h, s, l);
+                                    int h = -1;
+                                    int s = 0;
+                                    int l = 0;
+                                    if (underlayID == 0 && (renderMode & RENDER_HIDDEN_BIT) != 0){
+                                        h = 120;
+                                        s = 128;
+                                        l = 128;
+                                    } else if ((renderMode & NO_BLENDING_BIT) == 0){     //Not hidden
+                                        h = (tile_hue * 256) / tile_hue_shift;
+                                        s = tile_sat / colourCount;
+                                        l = tile_light / colourCount;
+                                        underlay_hsl_real = pack_hsl(h, s, l);
+                                        h = h + hue_offset & 0xff;
+                                        l += lightness_offset;
+                                        if(l < 0)
+                                            l = 0;
+                                        else
+                                        if(l > 255)
+                                            l = 255;
+                                    } else if ((renderMode & 8) != 0) {      // Not blending
+                                        boolean clipped = (tileSettings[z][X][Y] & 1) == 1;
+                                        boolean bridge = (tileSettings[z][X][Y] & 2) == 2;
+                                        boolean removeroofs = (tileSettings[z][X][Y] & 3) == 3;
+                                        underlay_hsl = rgb2hls((clipped     ? 0xFF0000 : 0) |
+                                                               (bridge      ? 0x00FF00 : 0) |
+                                                               (removeroofs ? 0x0000FF : 0));
+                                    } else if ((renderMode & NO_COLOUR_RES_BIT) == 0){  //Not falsecolour
+                                        Floor underlayF = Floor.cache[underlayID - 1];
+                                        underlay_hsl = underlayF.hslColour;
+                                    } else {
+                                        h = underlayID;
+                                        s = 128;
+                                        l = 128;
+                                    }
+                                    if (h != -1 && underlay_hsl == -1)
+                                        underlay_hsl = pack_hsl(h, s, l);
+                                    if (underlay_hsl_real == -1)
+                                        underlay_hsl_real = underlay_hsl;
                                 }
                                 if(z > 0)
                                 {
@@ -205,18 +246,17 @@ public class MapRegion {
                                         underlay_hidden = false;
                                     if(overlay_id > 0 && !Floor.cache[overlay_id - 1].occlude)
                                         underlay_hidden = false;
-                                    if(underlay_hidden && zA == zB && zA == zD && zA == zC)
+                                    if(((renderMode & RENDER_HIDDEN_BIT) != 0  || ((tileSettings[z][X][Y] & 0x10) == 0 && (underlayID != 0 || overlay_id != 0))) && underlay_hidden && zA == zB && zA == zD && zA == zC)
                                         tile_culling_bitmap[z][X][Y] |= 0x924;
                                 }
                                 int underlay_rgb = 0;
                                 if(underlay_hsl_real != -1)
                                     underlay_rgb = Rasterizer.hsl2rgb[mix_lightness(underlay_hsl, 96)];
                                 underlayRgb[z][X][Y] = underlay_rgb;
-                                if(overlay_id == 0)
+                                if(overlay_id == 0 || (renderMode & NO_OVERLAY_BIT) != 0)
                                 {
                                     sceneGraph.addTile(z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), 0, 0, 0, 0, underlay_rgb, 0);
-                                } else
-                                {
+                                } else {
                                     int shapea = shapeA[z][X][Y] + 1;
                                     byte shapeb = shapeB[z][X][Y];
                                     Floor overlay = Floor.cache[overlay_id - 1];
@@ -410,6 +450,65 @@ label5:
 
         }
 
+    }
+
+    public int rgb2hls(int i) {
+        double r = (double) (i >> 16 & 0xff) / 256D;
+        double g = (double) (i >> 8 & 0xff) / 256D;
+        double b = (double) (i & 0xff) / 256D;
+        double cmin = r;
+        if (g < cmin)
+            cmin = g;
+        if (b < cmin)
+            cmin = b;
+        double cmax = r;
+        if (g > cmax)
+            cmax = g;
+        if (b > cmax)
+            cmax = b;
+        double hue = 0.0D;
+        double saturation = 0.0D;
+        double lightness = (cmin + cmax) / 2D;
+        if (cmin != cmax) {
+            if (lightness < 0.5D)
+                saturation = (cmax - cmin) / (cmax + cmin);
+            if (lightness >= 0.5D)
+                saturation = (cmax - cmin) / (2D - cmax - cmin);
+            if (r == cmax)
+                hue = (g - b) / (cmax - cmin);
+            else if (g == cmax)
+                hue = 2D + (b - r) / (cmax - cmin);
+            else if (b == cmax)
+                hue = 4D + (r - g) / (cmax - cmin);
+        }
+        hue /= 6D;
+        int _hue = (int) (hue * 256D);
+        int _saturation = (int) (saturation * 256D);
+        int _lightness = (int) (lightness * 256D);
+        if (_saturation < 0)
+            _saturation = 0;
+        else if (_saturation > 255)
+            _saturation = 255;
+        if (_lightness < 0)
+            _lightness = 0;
+        else if (_lightness > 255)
+            _lightness = 255;
+        int huerand = (_hue + (int) (Math.random() * 16D)) - 8;
+        if (huerand < 0)
+            huerand = 0;
+        else if (huerand > 255)
+            huerand = 255;
+        int satrand = (_saturation + (int) (Math.random() * 48D)) - 24;
+        if (satrand < 0)
+            satrand = 0;
+        else if (satrand > 255)
+            satrand = 255;
+        int lightrand = (_lightness + (int) (Math.random() * 48D)) - 24;
+        if (lightrand < 0)
+            lightrand = 0;
+        else if (lightrand > 255)
+            lightrand = 255;
+        return pack_hsl(huerand, satrand, lightrand);
     }
 
     private static int generateMapHeight(int i, int j)
@@ -1477,7 +1576,7 @@ label0:
         1, 0, -1, 0
     };
     //private static final int anInt138 = 323;//never used
-    private final int[][] tile_shadow;
+    private final int[][] tileLightness;
     private static final int highNybbleBitValues[] = {
         16, 32, 64, 128
     };
@@ -1497,5 +1596,9 @@ label0:
 
     public void setOverlay(int z, int x, int y, int overlay) {
         overLay[z][x][y] = (byte) overlay;
+    }
+
+    public void setUnderlay(int z, int x, int y, int underlay) {
+        underLay[z][x][y] = (byte) underlay;
     }
 }

@@ -33,7 +33,7 @@
       </component>
       <component id="d08c8" class="javax.swing.JToggleButton" binding="heighChgButton">
         <constraints>
-          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="HM"/>
@@ -41,15 +41,7 @@
       </component>
       <component id="d9e5e" class="javax.swing.JToggleButton" binding="heightSetButton">
         <constraints>
-          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="HS"/>
-        </properties>
-      </component>
-      <component id="72d32" class="javax.swing.JToggleButton" binding="setHeightButton">
-        <constraints>
-          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="HS"/>
@@ -57,18 +49,10 @@
       </component>
       <component id="c3862" class="javax.swing.JToggleButton" binding="applySettingsButton">
         <constraints>
-          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="AS"/>
-        </properties>
-      </component>
-      <component id="5b45c" class="javax.swing.JToggleButton" binding="makeNonWalkableButton">
-        <constraints>
           <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="W0"/>
+          <text value="AS"/>
         </properties>
       </component>
       <component id="ce6e5" class="javax.swing.JToggleButton" binding="selectButton">
@@ -107,6 +91,22 @@
         </constraints>
         <properties>
           <text value="1"/>
+        </properties>
+      </component>
+      <component id="72d32" class="javax.swing.JToggleButton" binding="floodFillOButton">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="FO"/>
+        </properties>
+      </component>
+      <component id="5b45c" class="javax.swing.JToggleButton" binding="floodFillUButton">
+        <constraints>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="FU"/>
         </properties>
       </component>
     </children>

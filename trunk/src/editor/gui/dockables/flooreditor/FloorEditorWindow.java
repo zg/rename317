@@ -184,6 +184,7 @@ public class FloorEditorWindow {
         previewBox.setMyFloor(this.currentFloor);
         previewBox.repaint();
         loadFloor();
+        isDirty = false;
     }
 
     public boolean isDirty() {

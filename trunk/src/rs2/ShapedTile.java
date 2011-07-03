@@ -1,6 +1,8 @@
 package rs2;
 
 
+import java.awt.*;
+
 public class ShapedTile
 {
 
@@ -335,4 +337,128 @@ public class ShapedTile
         }
     };
 
+    public static void drawShape(Graphics graphics, byte shapeA, byte shapeB) {
+        char tileW = '\200';
+        int halfW = tileW / 2;
+        int quarterW = tileW / 4;
+        int tqW = (tileW * 3) / 4;
+        int shapedTileMesh[] = shapedTilePointData[shapeA];
+        int meshLength = shapedTileMesh.length;
+        int[] vx = new int[meshLength];
+        int[] vy = new int[meshLength];
+        int x = 0;
+        int y = 0;
+        for(int vertexPtr = 0; vertexPtr < meshLength; vertexPtr++)
+        {
+            int vertexType = shapedTileMesh[vertexPtr];
+            if((vertexType & 1) == 0 && vertexType <= 8)
+                vertexType = (vertexType - shapeB - shapeB - 1 & 7) + 1;
+            if(vertexType > 8 && vertexType <= 12)
+                vertexType = (vertexType - 9 - shapeB & 3) + 9;
+            if(vertexType > 12 && vertexType <= 16)
+                vertexType = (vertexType - 13 - shapeB & 3) + 13;
+            int vertexX;
+            int vertexY;
+            if(vertexType == 1)
+            {
+                vertexX = x;
+                vertexY = y;
+            } else
+            if(vertexType == 2)
+            {
+                vertexX = x + halfW;
+                vertexY = y;
+            } else
+            if(vertexType == 3)
+            {
+                vertexX = x + tileW;
+                vertexY = y;
+            } else
+            if(vertexType == 4)
+            {
+                vertexX = x + tileW;
+                vertexY = y + halfW;
+            } else
+            if(vertexType == 5)
+            {
+                vertexX = x + tileW;
+                vertexY = y + tileW;
+            } else
+            if(vertexType == 6)
+            {
+                vertexX = x + halfW;
+                vertexY = y + tileW;
+            } else
+            if(vertexType == 7)
+            {
+                vertexX = x;
+                vertexY = y + tileW;
+            } else
+            if(vertexType == 8)
+            {
+                vertexX = x;
+                vertexY = y + halfW;
+            } else
+            if(vertexType == 9)
+            {
+                vertexX = x + halfW;
+                vertexY = y + quarterW;
+            } else
+            if(vertexType == 10)
+            {
+                vertexX = x + tqW;
+                vertexY = y + halfW;
+            } else
+            if(vertexType == 11)
+            {
+                vertexX = x + halfW;
+                vertexY = y + tqW;
+            } else
+            if(vertexType == 12)
+            {
+                vertexX = x + quarterW;
+                vertexY = y + halfW;
+            } else
+            if(vertexType == 13)
+            {
+                vertexX = x + quarterW;
+                vertexY = y + quarterW;
+            } else
+            if(vertexType == 14)
+            {
+                vertexX = x + tqW;
+                vertexY = y + quarterW;
+            } else
+            if(vertexType == 15)
+            {
+                vertexX = x + tqW;
+                vertexY = y + tqW;
+            } else
+            {
+                vertexX = x + quarterW;
+                vertexY = y + tqW;
+            }
+            vx[vertexPtr] = vertexX;
+            vy[vertexPtr] = vertexY;
+        }
+        int shapedTileElements[] = shapedTileElementData[shapeA];
+        int vertexCount = shapedTileElements.length / 4;
+        int offset = 0;
+        for(int vID = 0; vID < vertexCount; vID++)
+        {
+            int overlayOrUnderlay = shapedTileElements[offset];
+            int idxA = shapedTileElements[offset + 1];
+            int idxB = shapedTileElements[offset + 2];
+            int idxC = shapedTileElements[offset + 3];
+            offset += 4;
+            if(idxA < 4)
+                idxA = idxA - shapeB & 3;
+            if(idxB < 4)
+                idxB = idxB - shapeB & 3;
+            if(idxC < 4)
+                idxC = idxC - shapeB & 3;
+            graphics.setColor(overlayOrUnderlay != 0 ? Color.white : Color.black);
+            graphics.fillPolygon(new int[]{vx[idxA],vx[idxB],vx[idxC]},new int[]{vy[idxA],vy[idxB],vy[idxC]},3);
+        }
+    }
 }
