@@ -3,11 +3,10 @@ package editor.gui.dockables;
 import rs2.Floor;
 
 import javax.swing.*;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.LinkedList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,13 +15,13 @@ import java.util.*;
  * Time: 6:39 PM
  * Computer: Peterbjornx-PC.rootdomain.asn.local (192.168.178.27)
  */
-public class FloorTypeSelection extends JPanel implements Scrollable{
-    private JButton[] floorButtons;
+public class TileShapeSelection extends JPanel implements Scrollable{
+    private JButton[] shapeButtons;
     private Floor selectedFloor = null;
     private int selectedFloorId = -2;
     private java.util.List<ActionListener> listenerList2 = new LinkedList<ActionListener>();
 
-    public FloorTypeSelection(){
+    public TileShapeSelection(){
         setLayout(new FlowLayout());
         loadFloors();
     }
@@ -30,7 +29,7 @@ public class FloorTypeSelection extends JPanel implements Scrollable{
     public void loadFloors() {
         if (Floor.cache == null)
             return;
-        floorButtons = new JButton[Floor.cache.length+1];
+        shapeButtons = new JButton[Floor.cache.length+1];
         addFloorJButton(-1);
         for (int i = 0;i < Floor.cache.length;i++)
             addFloorJButton(i);
@@ -45,16 +44,16 @@ public class FloorTypeSelection extends JPanel implements Scrollable{
         floorButton.setAction(new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 if (selectedFloorId != -2)
-                    floorButtons[selectedFloorId+1].setText("");
+                    shapeButtons[selectedFloorId+1].setText("");
                 if(id > -1)
                     selectedFloor = Floor.cache[id];
                 selectedFloorId = id;
-                floorButtons[id+1].setText("O");
+                shapeButtons[id+1].setText("O");
                 for (ActionListener l : listenerList2)
                     l.actionPerformed(null);
             }
         });
-        floorButtons[id+1] = floorButton;
+        shapeButtons[id+1] = floorButton;
         add(floorButton);
         floorButton.setMaximumSize(new Dimension(15, 15));
         floorButton.setMinimumSize(new Dimension(15, 15));
@@ -82,9 +81,9 @@ public class FloorTypeSelection extends JPanel implements Scrollable{
     }
 
     public void refresh() {
-        for (int i = -1;i < floorButtons.length-1;i++)
-            remove(floorButtons[i+1]);
-        floorButtons = new JButton[Floor.cache.length+1];
+        for (int i = -1;i < shapeButtons.length-1;i++)
+            remove(shapeButtons[i+1]);
+        shapeButtons = new JButton[Floor.cache.length+1];
         addFloorJButton(-1);
         for (int i = 0;i < Floor.cache.length;i++)
             addFloorJButton(i);
@@ -94,11 +93,11 @@ public class FloorTypeSelection extends JPanel implements Scrollable{
 
     public void selectFloor(int id) {
         if (selectedFloorId != -2)
-            floorButtons[selectedFloorId+1].setText("");
+            shapeButtons[selectedFloorId+1].setText("");
         if (selectedFloorId >= 0)
             selectedFloor = Floor.cache[id];
         selectedFloorId = id;
-        floorButtons[id+1].setText("O");
+        shapeButtons[id+1].setText("O");
         for (ActionListener l : listenerList2)
              l.actionPerformed(null);
     }

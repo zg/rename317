@@ -18,9 +18,9 @@ public class ToolSelectionBar {
     private JToggleButton paintUnderlayButton;
     private JToggleButton heighChgButton;
     private JToggleButton heightSetButton;
-    private JToggleButton setHeightButton;
+    private JToggleButton floodFillOButton;
     private JToggleButton applySettingsButton;
-    private JToggleButton makeNonWalkableButton;
+    private JToggleButton floodFillUButton;
     private JToggleButton selectButton;
     private JSlider slider1;
     private JLabel brushSizeLabel;
@@ -46,6 +46,10 @@ public class ToolSelectionBar {
                     tool = EditorTools.HEIGHT_SET;
                 if (applySettingsButton.isSelected())
                     tool = EditorTools.APPLY_SETTINGS;
+                if (floodFillOButton.isSelected())
+                    tool = EditorTools.FLOODFILL_OVERLAY;
+                if (floodFillUButton.isSelected())
+                    tool = EditorTools.FLOODFILL_UNDERLAY;
                 brushSizeLabel.setText(Integer.toString(slider1.getValue()));
             }
         };
@@ -55,6 +59,8 @@ public class ToolSelectionBar {
         heighChgButton.addChangeListener(listener);
         heightSetButton.addChangeListener(listener);
         applySettingsButton.addChangeListener(listener);
+        floodFillOButton.addChangeListener(listener);
+        floodFillUButton.addChangeListener(listener);
         slider1.addChangeListener(listener);
     }
 
@@ -101,19 +107,13 @@ public class ToolSelectionBar {
         mainPane.add(paintUnderlayButton, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         heighChgButton = new JToggleButton();
         heighChgButton.setText("HM");
-        mainPane.add(heighChgButton, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPane.add(heighChgButton, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         heightSetButton = new JToggleButton();
         heightSetButton.setText("HS");
-        mainPane.add(heightSetButton, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        setHeightButton = new JToggleButton();
-        setHeightButton.setText("HS");
-        mainPane.add(setHeightButton, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPane.add(heightSetButton, new com.intellij.uiDesigner.core.GridConstraints(0, 6, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         applySettingsButton = new JToggleButton();
         applySettingsButton.setText("AS");
-        mainPane.add(applySettingsButton, new com.intellij.uiDesigner.core.GridConstraints(0, 6, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        makeNonWalkableButton = new JToggleButton();
-        makeNonWalkableButton.setText("W0");
-        mainPane.add(makeNonWalkableButton, new com.intellij.uiDesigner.core.GridConstraints(0, 7, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPane.add(applySettingsButton, new com.intellij.uiDesigner.core.GridConstraints(0, 7, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         selectButton = new JToggleButton();
         selectButton.setSelected(true);
         selectButton.setText("S");
@@ -132,6 +132,12 @@ public class ToolSelectionBar {
         brushSizeLabel = new JLabel();
         brushSizeLabel.setText("1");
         mainPane.add(brushSizeLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 10, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        floodFillOButton = new JToggleButton();
+        floodFillOButton.setText("FO");
+        mainPane.add(floodFillOButton, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        floodFillUButton = new JToggleButton();
+        floodFillUButton.setText("FU");
+        mainPane.add(floodFillUButton, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ButtonGroup buttonGroup;
         buttonGroup = new ButtonGroup();
         buttonGroup.add(selectButton);
@@ -139,9 +145,9 @@ public class ToolSelectionBar {
         buttonGroup.add(paintUnderlayButton);
         buttonGroup.add(heighChgButton);
         buttonGroup.add(heightSetButton);
-        buttonGroup.add(setHeightButton);
+        buttonGroup.add(floodFillOButton);
         buttonGroup.add(applySettingsButton);
-        buttonGroup.add(makeNonWalkableButton);
+        buttonGroup.add(floodFillUButton);
     }
 
     /**
@@ -152,6 +158,6 @@ public class ToolSelectionBar {
     }
 
     public enum EditorTools {
-        PAINT_OVERLAY, PAINT_UNDERLAY, HEIGHT_EDIT, HEIGHT_SET, APPLY_SETTINGS, SELECT
+        PAINT_OVERLAY, PAINT_UNDERLAY, HEIGHT_EDIT, HEIGHT_SET, APPLY_SETTINGS, SELECT, FLOODFILL_OVERLAY, FLOODFILL_UNDERLAY;
     }
 }

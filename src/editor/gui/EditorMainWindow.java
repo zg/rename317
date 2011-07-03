@@ -18,6 +18,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Locale;
 
 /**
@@ -68,6 +70,7 @@ public class EditorMainWindow {
                                                     "3D Viewport",
                                                     null,      // An icon
                                                     gameViewPanel);
+        loadWorkspace();
     }
 
     private void initToolWindows() {
@@ -82,6 +85,8 @@ public class EditorMainWindow {
                 if (editorToolbar.getHeightlevel() != editor.getHeightLevel())
                     editor.setHeightLevel(editorToolbar.getHeightlevel());
                 editor.setShowAllHLs(editorToolbar.getShowAllHLs());
+                if (e != null)
+                    editor.setRenderSettings(editorToolbar.getSettings());
             }
         });
         floorTypeSelectionWindow = new FloorTypeSelection();
@@ -90,7 +95,8 @@ public class EditorMainWindow {
                 if ((!floorEditorWindow.isDirty()) || JOptionPane.showConfirmDialog(rootFrame
                         ,"Are you sure you want to lose all changes to the edited floor?","RuneScape Map Editor",
                         JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION )
-                    floorEditorWindow.setCurrentFloor(floorTypeSelectionWindow.getSelectedFloor());
+                    if (floorTypeSelectionWindow.getSelectedFloorId() != -1)
+                        floorEditorWindow.setCurrentFloor(floorTypeSelectionWindow.getSelectedFloor());
             }
         });
         toolWindowManager.registerToolWindow("Floors","Floor type selection",null,floorTypeSelectionWindow, ToolWindowAnchor.LEFT);
@@ -169,6 +175,7 @@ public class EditorMainWindow {
     public void editorStarted(EditorMain editor) {
         this.editor = editor;
         floorTypeSelectionWindow.loadFloors();
+        rootFrame.addWindowListener(editor);
     }
 
     public ToolSelectionBar getToolSelectionBar() {
@@ -185,5 +192,30 @@ public class EditorMainWindow {
 
     public FloorEditorWindow getFloorEditorWindow() {
         return floorEditorWindow;
+    }
+
+    public void storeWorkspace() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("./workspace.xml");
+            toolWindowManager.getPersistenceDelegate().save(fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(rootFrame,"Error storing workspace","Runescape Map Editor",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void loadWorkspace() {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("./workspace.xml");
+            toolWindowManager.getPersistenceDelegate().apply(fileInputStream);
+            fileInputStream.close();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(rootFrame,"Error loading workspace","Runescape Map Editor",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public EditorToolbar getEditorToolbar() {
+        return editorToolbar;
     }
 }

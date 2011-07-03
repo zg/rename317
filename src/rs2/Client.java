@@ -5,7 +5,6 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 
-import editor.EditorMain;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import pgle.PglCallClientNode;
 import pgle.PglWrapper;
@@ -539,7 +538,7 @@ public class Client extends GameShell {
             }
             stream.p1isaac(0);
             try {
-                mapRegion.addTiles(tileSettings, sceneGraph);
+                mapRegion.addTiles(tileSettings, sceneGraph, 0);
             } catch (Exception e) {
                 e.printStackTrace();
             }

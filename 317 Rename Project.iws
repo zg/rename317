@@ -6,18 +6,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.ipr" afterPath="$PROJECT_DIR$/317 Rename Project.ipr" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/TileShapeSelection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/EditorMain.java" afterPath="$PROJECT_DIR$/src/editor/EditorMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java" afterPath="$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/FloorTypeSelection.java" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/FloorTypeSelection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorEditorWindow.java" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorEditorWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Client.java" afterPath="$PROJECT_DIR$/src/rs2/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Floor.java" afterPath="$PROJECT_DIR$/src/rs2/Floor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GameShell.java" afterPath="$PROJECT_DIR$/src/rs2/GameShell.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MapRegion.java" afterPath="$PROJECT_DIR$/src/rs2/MapRegion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Tile.java" afterPath="$PROJECT_DIR$/src/rs2/Tile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ShapedTile.java" afterPath="$PROJECT_DIR$/src/rs2/ShapedTile.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -142,8 +146,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="exception_breakpoints_groupByClasses" value="true" />
+      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -152,18 +156,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EditorMain.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EditorMain.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="321" column="42" selection-start="13012" selection-end="13012" vertical-scroll-proportion="2.9650147">
+            <state line="365" column="68" selection-start="15213" selection-end="15213" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="docComment;class#EditorMain#0" expanded="false" />
-                <element signature="method#processResize#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#shutdown#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#repaintGame#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#drawGame#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#startEditor#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#renderscene#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#highlightTile#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#drawMapScenes#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#setHeightLevel#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#renderMinimap#0;class#EditorMain#0" expanded="false" />
@@ -171,96 +169,26 @@
                 <element signature="method#drawMinimap#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#drawScene#0;class#EditorMain#0" expanded="false" />
                 <element signature="method#draw3dScreen#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#paintMinimap#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#processCameraInput#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#getGameComponent#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#main#0;class#EditorMain#0" expanded="false" />
-                <element signature="docComment;method#componentResized#0;class#EditorMain#0" expanded="false" />
-                <element signature="method#componentResized#0;class#EditorMain#0" expanded="false" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EditorMainWindow.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="61" selection-start="7339" selection-end="7339" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ToolSelectionBar.form" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="ToolSelectionBar.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="15" selection-start="2215" selection-end="2215" vertical-scroll-proportion="0.0">
+            <state line="60" column="24" selection-start="2382" selection-end="2382" vertical-scroll-proportion="0.0">
               <folding>
-                <marker date="1296263242000" expanded="true" signature="2525:2567" placeholder="{...}" />
                 <element signature="initializer##0;class#ToolSelectionBar#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+      <file leaf-file-name="MemCache.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/MemCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6023" column="12" selection-start="253327" selection-end="253327" vertical-scroll-proportion="-4.68">
-              <folding>
-                <element signature="method#saveMidi#0;class#Client#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SceneGraph.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="39" selection-start="2345" selection-end="2345" vertical-scroll-proportion="-7.32">
-              <folding>
-                <element signature="method#addEntityC#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#clearInteractableObjectCache#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#remove#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#method290#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#removeWallObject#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#removeWallDecoration#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#method293#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#removeGroundDecoration#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#removeGroundItemTile#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getWallObject#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getWallDecoration#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getInteractableObject#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getGroundDecoration#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getWallObjectUID#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getWallDecorationUID#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getInteractableObjectUID#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getGroundDecorationUID#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#getIDTAGForXYZ#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#shadeModels#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#method306#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#method307#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#method308#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#drawMinimapTile#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#setupViewport#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#isOnScreen#0;class#SceneGraph#0" expanded="false" />
-                <element signature="method#render#0;class#SceneGraph#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectDef.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/ObjectDef.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="0" selection-start="5124" selection-end="5124" vertical-scroll-proportion="0.0">
+            <state line="51" column="0" selection-start="1307" selection-end="1307" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -269,7 +197,39 @@
       <file leaf-file-name="MapRegion.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1498" column="42" selection-start="59593" selection-end="59593" vertical-scroll-proportion="-8.96">
+            <state line="236" column="51" selection-start="11382" selection-end="11382" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SceneGraph.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="143" column="8" selection-start="4687" selection-end="4687" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditorToolbar.form" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form">
+          <provider selected="true" editor-type-id="ui-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ToolSelectionBar.form" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form">
+          <provider selected="true" editor-type-id="ui-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Floor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Floor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="223" column="5" selection-start="5060" selection-end="7681" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -278,19 +238,8 @@
       <file leaf-file-name="Rasterizer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/Rasterizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2142" column="22" selection-start="53406" selection-end="53406" vertical-scroll-proportion="0.0">
+            <state line="2143" column="22" selection-start="53547" selection-end="53547" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameShell.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/GameShell.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -309,21 +258,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/rs2/Entity.java" />
-        <option value="$PROJECT_DIR$/src/rs2/RgbImage.java" />
-        <option value="$PROJECT_DIR$/src/rs2/Model.java" />
-        <option value="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" />
-        <option value="$PROJECT_DIR$/src/rs2/Client.java" />
-        <option value="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form" />
-        <option value="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java" />
-        <option value="$PROJECT_DIR$/src/rs2/GameShell.java" />
         <option value="$PROJECT_DIR$/src/rs2/Tile.java" />
         <option value="$PROJECT_DIR$/src/rs2/ObjectDef.java" />
-        <option value="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java" />
+        <option value="$PROJECT_DIR$/src/rs2/ShapedTile.java" />
+        <option value="$PROJECT_DIR$/src/rs2/GameShell.java" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorEditorWindow.java" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/FloorTypeSelection.java" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/TileShapeSelection.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Floor.java" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form" />
         <option value="$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java" />
-        <option value="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form" />
-        <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
         <option value="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
+        <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java" />
         <option value="$PROJECT_DIR$/src/editor/EditorMain.java" />
       </list>
     </option>
@@ -365,8 +314,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Favorites" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -413,47 +360,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rs2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rename317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="editor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rename317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="editor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renderer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -504,8 +411,34 @@
               <option name="myItemId" value="dockables" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ToolSelectionBar" />
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rename317" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dockables" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EditorToolbar" />
               <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -531,118 +464,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dockables" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rename317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="editor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dockables" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flooreditor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FloorEditorWindow" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rename317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="editor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dockables" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flooreditor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rename317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rename317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hddata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rename317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="extras" />
+              <option name="myItemId" value="controls" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Favorites" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -660,9 +489,9 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -683,7 +512,7 @@
       <recent name="rs2" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.EditorMain">
+  <component name="RunManager" selected="Application.SwingUI">
     <configuration default="false" name="EditorMain" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="editor.EditorMain" />
       <option name="VM_PARAMETERS" />
@@ -833,10 +662,10 @@
       <method />
     </configuration>
     <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Applet.SwingUI" />
-      <item index="1" class="java.lang.String" itemvalue="Application.SwingUI" />
-      <item index="2" class="java.lang.String" itemvalue="Application.EditorMain" />
-      <item index="3" class="java.lang.String" itemvalue="Applet.EditorMain" />
+      <item index="0" class="java.lang.String" itemvalue="Application.EditorMain" />
+      <item index="1" class="java.lang.String" itemvalue="Applet.EditorMain" />
+      <item index="2" class="java.lang.String" itemvalue="Applet.SwingUI" />
+      <item index="3" class="java.lang.String" itemvalue="Application.SwingUI" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -913,24 +742,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1360" height="729" extended-state="0" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2023166" sideWeight="0.71571904" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20213577" sideWeight="0.725938" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31658292" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22007722" sideWeight="0.71571904" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2680067" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21967964" sideWeight="0.725938" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2675367" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3846154" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32160804" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3213703" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283082" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1938224" sideWeight="0.7336683" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1938224" sideWeight="0.71859294" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951945" sideWeight="0.69983685" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992278" sideWeight="0.7336683" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33359075" sideWeight="0.71571904" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31045005" sideWeight="0.725938" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28428093" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27406198" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -992,10 +821,94 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorPreviewPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/FloorTypeSelection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="13" selection-start="365" selection-end="365" vertical-scroll-proportion="0.0">
+        <state line="18" column="20" selection-start="398" selection-end="398" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/TileShapeSelection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="23" selection-start="439" selection-end="439" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorEditorWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="180" column="55" selection-start="7179" selection-end="7179" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="782" column="22" selection-start="32885" selection-end="32885" vertical-scroll-proportion="0.33333334" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="0" selection-start="3466" selection-end="3466" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6035" column="12" selection-start="253970" selection-end="253970" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="236" column="51" selection-start="11382" selection-end="11382" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="143" column="8" selection-start="4687" selection-end="4687" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Floor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="223" column="5" selection-start="5060" selection-end="7681" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Rasterizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2143" column="22" selection-start="53547" selection-end="53547" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/MemCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="1307" selection-end="1307" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="60" selection-start="3161" selection-end="3269" vertical-scroll-proportion="0.4755784">
+          <folding>
+            <element signature="initializer##0;class#EditorToolbar#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="24" selection-start="2382" selection-end="2382" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="initializer##0;class#ToolSelectionBar#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="365" column="68" selection-start="15213" selection-end="15213" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#highlightTile#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#drawMapScenes#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#setHeightLevel#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#renderMinimap#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#markMinimap#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#drawMinimap#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#drawScene#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#draw3dScreen#0;class#EditorMain#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1004,160 +917,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="18" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="initializer##0;class#EditorToolbar#0" expanded="true" />
-            <element signature="docComment;method#$$$setupUI$$$#0;class#EditorToolbar#0" expanded="false" />
-            <element signature="method#$$$setupUI$$$#0;class#EditorToolbar#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorEditorWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="35" selection-start="7889" selection-end="7889" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="38" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Rasterizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2142" column="22" selection-start="53406" selection-end="53406" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/PlainTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="11" selection-start="51" selection-end="51" vertical-scroll-proportion="0.2173913">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/ObjectDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="0" selection-start="5124" selection-end="5124" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/GameShell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="15" selection-start="2215" selection-end="2215" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1296263242000" expanded="true" signature="2525:2567" placeholder="{...}" />
-            <element signature="initializer##0;class#ToolSelectionBar#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="61" selection-start="7339" selection-end="7339" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1498" column="42" selection-start="59593" selection-end="59593" vertical-scroll-proportion="-8.96">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6023" column="12" selection-start="253327" selection-end="253327" vertical-scroll-proportion="-4.68">
-          <folding>
-            <element signature="method#saveMidi#0;class#Client#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="39" selection-start="2345" selection-end="2345" vertical-scroll-proportion="-7.32">
-          <folding>
-            <element signature="method#addEntityC#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#clearInteractableObjectCache#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#remove#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#method290#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#removeWallObject#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#removeWallDecoration#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#method293#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#removeGroundDecoration#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#removeGroundItemTile#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getWallObject#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getWallDecoration#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getInteractableObject#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getGroundDecoration#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getWallObjectUID#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getWallDecorationUID#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getInteractableObjectUID#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getGroundDecorationUID#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#getIDTAGForXYZ#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#shadeModels#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#method306#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#method307#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#method308#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#drawMinimapTile#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#setupViewport#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#isOnScreen#0;class#SceneGraph#0" expanded="false" />
-            <element signature="method#render#0;class#SceneGraph#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="321" column="42" selection-start="13012" selection-end="13012" vertical-scroll-proportion="2.9650147">
-          <folding>
-            <element signature="docComment;class#EditorMain#0" expanded="false" />
-            <element signature="method#processResize#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#shutdown#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#repaintGame#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#drawGame#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#startEditor#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#renderscene#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#drawMapScenes#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#setHeightLevel#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#renderMinimap#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#markMinimap#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#drawMinimap#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#drawScene#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#draw3dScreen#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#paintMinimap#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#processCameraInput#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#getGameComponent#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#main#0;class#EditorMain#0" expanded="false" />
-            <element signature="docComment;method#componentResized#0;class#EditorMain#0" expanded="false" />
-            <element signature="method#componentResized#0;class#EditorMain#0" expanded="false" />
-          </folding>
-        </state>
       </provider>
     </entry>
   </component>

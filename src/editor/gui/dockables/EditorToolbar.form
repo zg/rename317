@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="editor.gui.dockables.EditorToolbar">
-  <grid id="27dc6" binding="mainPane" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPane" layout-manager="GridLayoutManager" row-count="1" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="485" height="29"/>
+      <xy x="20" y="20" width="778" height="29"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -26,7 +26,7 @@
       </component>
       <hspacer id="21e98">
         <constraints>
-          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
       <component id="5ffe9" class="javax.swing.JToggleButton" binding="showAllHeightLevelButtons">
@@ -35,6 +35,46 @@
         </constraints>
         <properties>
           <text value="AllHLs"/>
+        </properties>
+      </component>
+      <component id="c2979" class="javax.swing.JToggleButton" binding="disableBlendingButton">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Disable Blending"/>
+        </properties>
+      </component>
+      <component id="9d974" class="javax.swing.JToggleButton" binding="noOverlayBtn">
+        <constraints>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="No Overlays"/>
+        </properties>
+      </component>
+      <component id="ec3a1" class="javax.swing.JToggleButton" binding="floorIdVisBtn">
+        <constraints>
+          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="FC:FloID"/>
+        </properties>
+      </component>
+      <component id="e95ed" class="javax.swing.JToggleButton" binding="settingsButton">
+        <constraints>
+          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="FC:Settings"/>
+        </properties>
+      </component>
+      <component id="e658d" class="javax.swing.JToggleButton" binding="renderHiddenBtn">
+        <constraints>
+          <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Show Hidden"/>
         </properties>
       </component>
     </children>
