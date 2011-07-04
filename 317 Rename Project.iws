@@ -7,15 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.ipr" afterPath="$PROJECT_DIR$/317 Rename Project.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/BZ2InputStream.java" afterPath="$PROJECT_DIR$/src/rs2/BZ2InputStream.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/FrequencyGenerator.java" afterPath="$PROJECT_DIR$/src/rs2/FrequencyGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/JagexArchive.java" afterPath="$PROJECT_DIR$/src/rs2/JagexArchive.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MapRegion.java" afterPath="$PROJECT_DIR$/src/rs2/MapRegion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ObjectDef.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectDef.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSFont.java" afterPath="$PROJECT_DIR$/src/rs2/RSFont.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/workspace.xml" afterPath="$PROJECT_DIR$/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -140,8 +134,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="field_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -150,7 +144,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EditorToolbar.form" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EditorToolbar.form" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form">
           <provider selected="true" editor-type-id="ui-designer">
             <state />
@@ -161,7 +155,9 @@
         <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="63" column="57" selection-start="2194" selection-end="2194" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <element signature="initializer##0;class#EditorToolbar#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -176,16 +172,43 @@
       <file leaf-file-name="EditorMain.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="468" column="42" selection-start="19657" selection-end="19657" vertical-scroll-proportion="0.0">
+            <state line="585" column="31" selection-start="24466" selection-end="24466" vertical-scroll-proportion="22.44">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#getJagexArchive#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#on_demand_process#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#processResize#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#selectTile#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#highlightTile#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#refreshMap#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#shutdown#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#drawGame#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#startEditor#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#renderscene#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#drawMapScenes#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#renderMinimap#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#markMinimap#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#drawMinimap#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#drawScene#0;class#EditorMain#0" expanded="false" />
+                <element signature="method#paintMinimap#0;class#EditorMain#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Animation.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Animation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="24" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RSFont.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/RSFont.java">
+      <file leaf-file-name="Sequence.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Sequence.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="163" column="21" selection-start="5052" selection-end="5052" vertical-scroll-proportion="0.0">
+            <state line="2" column="13" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -209,29 +232,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ToolSelectionBar.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ToolSelectionBar.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="21" selection-start="3473" selection-end="3473" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameShell.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/GameShell.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="189" column="0" selection-start="5943" selection-end="5943" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MapRegion.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1039" column="20" selection-start="44995" selection-end="44995" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="106" column="4" selection-start="4149" selection-end="4149" vertical-scroll-proportion="-0.23650385">
+              <folding>
+                <element signature="initializer##0;class#ToolSelectionBar#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -259,13 +266,13 @@
         <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
         <option value="$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java" />
         <option value="$PROJECT_DIR$/src/rs2/ShapedTile.java" />
-        <option value="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form" />
         <option value="$PROJECT_DIR$/src/rs2/RSFont.java" />
         <option value="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
-        <option value="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java" />
         <option value="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form" />
         <option value="$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java" />
         <option value="$PROJECT_DIR$/src/editor/EditorMain.java" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form" />
+        <option value="$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java" />
       </list>
     </option>
   </component>
@@ -305,7 +312,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Favorites" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -454,15 +463,31 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rename317" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cache" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -475,9 +500,9 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -679,7 +704,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">C:\Users\a\AppData\Roaming\Subversion</configuration>
+    <configuration useDefault="true">C:\Users\Peter\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -687,16 +712,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\rename317" />
-          <option name="myCopyRoot" value="C:\rename317" />
+          <option name="myVcsRoot" value="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317" />
+          <option name="myCopyRoot" value="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\rename317" />
-          <option name="myCopyRoot" value="C:\rename317" />
+          <option name="myVcsRoot" value="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317" />
+          <option name="myCopyRoot" value="I:\Projects\JAGeX\RuneScape 2\Clients\Build 317-Clienthax\rename317" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -730,27 +755,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20184049" sideWeight="0.6797235" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20213577" sideWeight="0.7324633" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31658292" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1398773" sideWeight="0.6797235" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14035088" sideWeight="0.7324633" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2675367" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38336053" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3202765" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3213703" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283082" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19374523" sideWeight="0.72104406" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951945" sideWeight="0.69983685" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992278" sideWeight="0.7336683" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31042945" sideWeight="0.6797235" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31045005" sideWeight="0.7324633" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2788354" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27895597" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2675367" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24942791" sideWeight="0.725938" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989726" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -809,21 +834,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rs2/Packet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="0" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/SettingsBrushEditor.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/MemCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="1407" selection-end="1407" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/editor/gui/EditorMainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="163" column="29" selection-start="7285" selection-end="7285" vertical-scroll-proportion="0.0" />
@@ -839,38 +849,6 @@
         <state line="30" column="0" selection-start="629" selection-end="629" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="57" selection-start="2194" selection-end="2194" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/RSFont.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="21" selection-start="5052" selection-end="5052" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="9" selection-start="2786" selection-end="2786" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/ShapedTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="21" selection-start="3473" selection-end="3473" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/GameShell.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="189" column="0" selection-start="5943" selection-end="5943" vertical-scroll-proportion="0.0" />
@@ -878,21 +856,108 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1039" column="20" selection-start="44995" selection-end="44995" vertical-scroll-proportion="0.0">
+        <state line="1039" column="20" selection-start="44989" selection-end="44989" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
+    <entry file="file://$PROJECT_DIR$/src/rs2/RSFont.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="468" column="42" selection-start="19657" selection-end="19657" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="170" column="21" selection-start="5382" selection-end="5382" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#drawTextHRightVTop#0;class#RSFont#0" expanded="false" />
+            <element signature="method#drawTextHMidVTop#0;class#RSFont#0" expanded="false" />
+            <element signature="method#getFormattedStringWith#0;class#RSFont#0" expanded="false" />
+            <element signature="method#getStringWidth#0;class#RSFont#0" expanded="false" />
+            <element signature="method#drawTextHLeftVTop#0;class#RSFont#0" expanded="false" />
+          </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/ShapedTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/EditorToolbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="57" selection-start="2194" selection-end="2194" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="initializer##0;class#EditorToolbar#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="585" column="31" selection-start="24466" selection-end="24466" vertical-scroll-proportion="22.44">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getJagexArchive#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#on_demand_process#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#processResize#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#selectTile#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#highlightTile#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#refreshMap#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#shutdown#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#drawGame#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#startEditor#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#renderscene#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#drawMapScenes#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#renderMinimap#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#markMinimap#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#drawMinimap#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#drawScene#0;class#EditorMain#0" expanded="false" />
+            <element signature="method#paintMinimap#0;class#EditorMain#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Animation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="24" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Sequence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="9" selection-start="2786" selection-end="2786" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_25/src.zip!/javax/swing/AbstractButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="269" column="18" selection-start="10091" selection-end="10091" vertical-scroll-proportion="0.33161953">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/gui/dockables/ToolSelectionBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="4" selection-start="4149" selection-end="4149" vertical-scroll-proportion="-0.23650385">
+          <folding>
+            <element signature="initializer##0;class#ToolSelectionBar#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
@@ -936,7 +1001,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>1.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -953,6 +1018,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
