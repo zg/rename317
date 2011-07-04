@@ -29,8 +29,8 @@ public class MapRegion {
         this.tileSettings = tileSettings;
         underLay = new byte[4][xMapSize][yMapSize];
         overLay = new byte[4][xMapSize][yMapSize];
-        shapeA = new byte[4][xMapSize][yMapSize];
-        shapeB = new byte[4][xMapSize][yMapSize];
+        tileShape = new byte[4][xMapSize][yMapSize];
+        tileRotation = new byte[4][xMapSize][yMapSize];
         tile_culling_bitmap = new int[4][xMapSize + 1][yMapSize + 1];
         object_shadow_data = new byte[4][xMapSize + 1][yMapSize + 1];
         tileLightness = new int[xMapSize + 1][yMapSize + 1];
@@ -242,7 +242,7 @@ public class MapRegion {
                                 if(z > 0)
                                 {
                                     boolean underlay_hidden = true;
-                                    if(underlayID == 0 && shapeA[z][X][Y] != 0)
+                                    if(underlayID == 0 && tileShape[z][X][Y] != 0)
                                         underlay_hidden = false;
                                     if(overlay_id > 0 && !Floor.cache[overlay_id - 1].occlude)
                                         underlay_hidden = false;
@@ -257,8 +257,8 @@ public class MapRegion {
                                 {
                                     sceneGraph.addTile(z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), 0, 0, 0, 0, underlay_rgb, 0);
                                 } else {
-                                    int shapea = shapeA[z][X][Y] + 1;
-                                    byte shapeb = shapeB[z][X][Y];
+                                    int shape = tileShape[z][X][Y] + 1;
+                                    byte rotation = tileRotation[z][X][Y];
                                     Floor overlay = Floor.cache[overlay_id - 1];
                                     int overlay_texture = overlay.texture;
                                     int overlay_hsl;
@@ -275,7 +275,7 @@ public class MapRegion {
                                         overlay_hsl = overlay.hslColour;//pack_hsl(overlay.hue, overlay.saturation, overlay.lightness);
                                         overlay_rgb = Rasterizer.hsl2rgb[mix_lightness_gt(overlay.hslColour, 96)];
                                     }
-                                    sceneGraph.addTile(z, X, Y, shapea, shapeb, overlay_texture, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), mix_lightness_gt(overlay_hsl, shadow_a), mix_lightness_gt(overlay_hsl, shadow_b), mix_lightness_gt(overlay_hsl, shadow_d), mix_lightness_gt(overlay_hsl, shadow_c), underlay_rgb, overlay_rgb);
+                                    sceneGraph.addTile(z, X, Y, shape, rotation, overlay_texture, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), mix_lightness_gt(overlay_hsl, shadow_a), mix_lightness_gt(overlay_hsl, shadow_b), mix_lightness_gt(overlay_hsl, shadow_d), mix_lightness_gt(overlay_hsl, shadow_c), underlay_rgb, overlay_rgb);
                                 }
                             }
                         }
@@ -971,7 +971,7 @@ label0:
 
     }
 
-    public final void loadTerrain(byte abyte0[], int zOffset, int xOffset, int k, int l, TileSetting aclass11[])
+    public final void loadTerrain(byte abyte0[], int zOffset, int xOffset, int k, int l, TileSetting tileSetting[])
     {
         for(int _y = 0; _y < 4; _y++)
         {
@@ -979,7 +979,7 @@ label0:
             {
                 for(int _z = 0; _z < 64; _z++)
                     if(xOffset + _x > 0 && xOffset + _x < xMapSize - 1 && zOffset + _z > 0 && zOffset + _z < yMapSize - 1)
-                        aclass11[_y].clipData[xOffset + _x][zOffset + _z] &= 0xfeffffff;
+                        tileSetting[_y].clipData[xOffset + _x][zOffset + _z] &= 0xfeffffff;
 
             }
 
@@ -1037,8 +1037,8 @@ label0:
                 if(value <= 49)
                 {
                     overLay[y][x][z] = stream.g1b();
-                    shapeA[y][x][z] = (byte)((value - 2) / 4);
-                    shapeB[y][x][z] = (byte) (((value - 2) + shapeBOffset) & 3);
+                    tileShape[y][x][z] = (byte)((value - 2) / 4);
+                    tileRotation[y][x][z] = (byte) (((value - 2) + shapeBOffset) & 3);
                 } else
                 if(value <= 81)
                     tileSettings[y][x][z] = (byte)(value - 49);
@@ -1080,7 +1080,7 @@ label0:
 
     private void writeTile(int y,int x,int z, Packet packet) {
         if(overLay[y][x][z] != 0){
-            packet.p1((shapeA[y][x][z] * 4) + (shapeB[y][x][z] & 3) + 2);
+            packet.p1((tileShape[y][x][z] * 4) + (tileRotation[y][x][z] & 3) + 2);
             packet.p1(overLay[y][x][z]);
         }
         if(tileSettings[y][x][z] != 0)
@@ -1540,11 +1540,11 @@ label0:
     }
 
     public byte[][][] getShapeA() {
-        return shapeA;
+        return tileShape;
     }
 
     public byte[][][] getShapeB() {
-        return shapeB;
+        return tileRotation;
     }
 
     public byte[][][] getUnderLay() {
@@ -1571,7 +1571,7 @@ label0:
     private static int lightness_offset = (int)(Math.random() * 33D) - 16;
     private final byte[][][] object_shadow_data;
     private final int[][][] tile_culling_bitmap;
-    public final byte[][][] shapeA;
+    public final byte[][][] tileShape;
     private static final int faceXOffset[] = {
         1, 0, -1, 0
     };
@@ -1587,7 +1587,7 @@ label0:
     static int setZ = 99;
     private final int xMapSize;
     private final int yMapSize;
-    public final byte[][][] shapeB;
+    public final byte[][][] tileRotation;
     private final byte[][][] tileSettings;
     public static boolean lowMem = true;
     private static final int bitValues[] = {

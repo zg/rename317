@@ -395,7 +395,7 @@ label0:
 
                 } else
                 if(j == 60)
-                    mapFunctionID = stream.g2();
+                    mapFunctionID = stream.g2();//minimapIconIndex
                 else
                 if(j == 62)
                     aBoolean751 = true;

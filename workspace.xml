@@ -3,37 +3,34 @@
 <mydoggy version="1.5.0" contentManagerEnabled="true">
     <toolWindows>
         <sharedWindows></sharedWindows>
-        <toolWindow id="Tools" available="true" visible="true" active="false" autoHide="false" anchor="TOP" anchorIndex="1" type="DOCKED" aggregateMode="false" maximized="false" index="1" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
+        <toolWindow id="Tools" available="true" visible="true" active="false" autoHide="false" anchor="TOP" anchorIndex="1" type="FLOATING_LIVE" aggregateMode="false" maximized="false" index="1" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
             <descriptors>
-                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="89" minimumDockLength="34" popupMenuEnabled="true"/>
+                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="200" minimumDockLength="100" popupMenuEnabled="true"/>
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
                 <floating animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true"/>
                 <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true">
-                    <location x="396" y="57"/>
-                    <size width="906" height="44"/>
+                    <location x="25" y="46"/>
+                    <size width="1636" height="200"/>
                 </floatingLive>
                 <anchor visible="true" title="Tools" previewEnabled="true" previewDelay="1000" previewTransparentRatio="0.65">
                     <lockingAnchors></lockingAnchors>
                 </anchor>
             </descriptors>
         </toolWindow>
-        <toolWindow id="Toolbar" available="true" visible="true" active="true" autoHide="false" anchor="TOP" anchorIndex="0" type="DOCKED" aggregateMode="false" maximized="false" index="2" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
+        <toolWindow id="Toolbar" available="true" visible="false" active="false" autoHide="false" anchor="TOP" anchorIndex="0" type="DOCKED" aggregateMode="false" maximized="false" index="2" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
             <descriptors>
-                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="89" minimumDockLength="34" popupMenuEnabled="true"/>
+                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="200" minimumDockLength="100" popupMenuEnabled="true"/>
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
                 <floating animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true"/>
-                <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true">
-                    <location x="365" y="22"/>
-                    <size width="906" height="90"/>
-                </floatingLive>
+                <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5" resizable="true"/>
                 <anchor visible="true" title="Toolbar" previewEnabled="true" previewDelay="1000" previewTransparentRatio="0.65">
                     <lockingAnchors></lockingAnchors>
                 </anchor>
             </descriptors>
         </toolWindow>
-        <toolWindow id="Floors" available="true" visible="true" active="false" autoHide="false" anchor="LEFT" anchorIndex="1" type="DOCKED" aggregateMode="false" maximized="false" index="3" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
+        <toolWindow id="Floors" available="true" visible="false" active="false" autoHide="false" anchor="LEFT" anchorIndex="0" type="DOCKED" aggregateMode="false" maximized="false" index="3" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
             <descriptors>
-                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="256" minimumDockLength="44" popupMenuEnabled="true"/>
+                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="200" minimumDockLength="100" popupMenuEnabled="true"/>
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
                 <floating animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true"/>
                 <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5" resizable="true"/>
@@ -42,9 +39,9 @@
                 </anchor>
             </descriptors>
         </toolWindow>
-        <toolWindow id="Floor Editor" available="true" visible="true" active="false" autoHide="false" anchor="RIGHT" anchorIndex="1" type="DOCKED" aggregateMode="false" maximized="false" index="4" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
+        <toolWindow id="Floor Editor" available="true" visible="false" active="false" autoHide="false" anchor="RIGHT" anchorIndex="2" type="DOCKED" aggregateMode="false" maximized="false" index="4" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
             <descriptors>
-                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="265" minimumDockLength="100" popupMenuEnabled="true"/>
+                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="200" minimumDockLength="100" popupMenuEnabled="true"/>
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
                 <floating animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true"/>
                 <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5" resizable="true"/>
@@ -53,9 +50,9 @@
                 </anchor>
             </descriptors>
         </toolWindow>
-        <toolWindow id="Minimap" available="true" visible="true" active="false" autoHide="false" anchor="LEFT" anchorIndex="0" type="DOCKED" aggregateMode="false" maximized="false" index="5" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
+        <toolWindow id="Minimap" available="true" visible="false" active="false" autoHide="false" anchor="RIGHT" anchorIndex="1" type="DOCKED" aggregateMode="false" maximized="false" index="5" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
             <descriptors>
-                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="256" minimumDockLength="44" popupMenuEnabled="true"/>
+                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="200" minimumDockLength="100" popupMenuEnabled="true"/>
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
                 <floating animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true"/>
                 <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5" resizable="true"/>
@@ -64,9 +61,9 @@
                 </anchor>
             </descriptors>
         </toolWindow>
-        <toolWindow id="Settings Editor" available="true" visible="true" active="false" autoHide="false" anchor="RIGHT" anchorIndex="0" type="DOCKED" aggregateMode="false" maximized="false" index="6" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
+        <toolWindow id="Settings Editor" available="true" visible="false" active="false" autoHide="false" anchor="RIGHT" anchorIndex="0" type="DOCKED" aggregateMode="false" maximized="false" index="6" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
             <descriptors>
-                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="265" minimumDockLength="100" popupMenuEnabled="true"/>
+                <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="200" minimumDockLength="100" popupMenuEnabled="true"/>
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
                 <floating animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true"/>
                 <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5" resizable="true"/>
@@ -79,8 +76,8 @@
     <toolWindowManagerDescriptor numberingEnabled="true" previewEnabled="true" showUnavailableTools="false">
         <pushAway pushAwayMode="VERTICAL">
             <mode type="MOST_RECENT">
-                <anchor type="BOTTOM"/>
                 <anchor type="RIGHT"/>
+                <anchor type="BOTTOM"/>
                 <anchor type="LEFT"/>
                 <anchor type="TOP"/>
             </mode>
@@ -99,97 +96,9 @@
         <toolWindowBar anchor="LEFT" dividerSize="3" aggregateMode="false" length="23" visible="true" toolsVisible="true">
             <layout>
                 <![CDATA[
-<java version="1.6.0_25" class="java.beans.XMLDecoder"> 
- <object id="MultiSplitLayout$Split0" class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.MultiSplitLayout$Split"> 
-  <void property="bounds"> 
-   <object class="java.awt.Rectangle"> 
-    <int>0</int> 
-    <int>0</int> 
-    <int>256</int> 
-    <int>566</int> 
-   </object> 
-  </void> 
-  <void id="ArrayList0" property="children"> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.DockableLeaf"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>0</int> 
-       <int>256</int> 
-       <int>249</int> 
-      </object> 
-     </void> 
-     <void property="dockables"> 
-      <object class="java.util.ArrayList"> 
-       <void method="add"> 
-        <string>Minimap</string> 
-       </void> 
-      </object> 
-     </void> 
-     <void property="name"> 
-      <string>1</string> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-     <void property="weight"> 
-      <double>0.5</double> 
-     </void> 
-    </object> 
-   </void> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.MultiSplitLayout$Divider"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>249</int> 
-       <int>256</int> 
-       <int>5</int> 
-      </object> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-    </object> 
-   </void> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.DockableLeaf"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>254</int> 
-       <int>256</int> 
-       <int>312</int> 
-      </object> 
-     </void> 
-     <void property="dockables"> 
-      <object class="java.util.ArrayList"> 
-       <void method="add"> 
-        <string>Floors</string> 
-       </void> 
-      </object> 
-     </void> 
-     <void property="name"> 
-      <string>2</string> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-     <void property="weight"> 
-      <double>0.5</double> 
-     </void> 
-    </object> 
-   </void> 
-  </void> 
-  <void property="children"> 
-   <object idref="ArrayList0"/> 
-  </void> 
-  <void property="rowLayout"> 
-   <boolean>false</boolean> 
-  </void> 
- </object> 
-</java> 
+<java version="1.7.0" class="java.beans.XMLDecoder">
+ <null/>
+</java>
 ]]>
             </layout>
         </toolWindowBar>
@@ -197,194 +106,18 @@
         <toolWindowBar anchor="RIGHT" dividerSize="3" aggregateMode="false" length="23" visible="true" toolsVisible="true">
             <layout>
                 <![CDATA[
-<java version="1.6.0_25" class="java.beans.XMLDecoder"> 
- <object id="MultiSplitLayout$Split0" class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.MultiSplitLayout$Split"> 
-  <void property="bounds"> 
-   <object class="java.awt.Rectangle"> 
-    <int>0</int> 
-    <int>0</int> 
-    <int>262</int> 
-    <int>566</int> 
-   </object> 
-  </void> 
-  <void id="ArrayList0" property="children"> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.DockableLeaf"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>0</int> 
-       <int>262</int> 
-       <int>158</int> 
-      </object> 
-     </void> 
-     <void property="dockables"> 
-      <object class="java.util.ArrayList"> 
-       <void method="add"> 
-        <string>Settings Editor</string> 
-       </void> 
-      </object> 
-     </void> 
-     <void property="name"> 
-      <string>1</string> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-     <void property="weight"> 
-      <double>0.5</double> 
-     </void> 
-    </object> 
-   </void> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.MultiSplitLayout$Divider"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>158</int> 
-       <int>262</int> 
-       <int>5</int> 
-      </object> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-    </object> 
-   </void> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.DockableLeaf"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>163</int> 
-       <int>262</int> 
-       <int>403</int> 
-      </object> 
-     </void> 
-     <void property="dockables"> 
-      <object class="java.util.ArrayList"> 
-       <void method="add"> 
-        <string>Floor Editor</string> 
-       </void> 
-      </object> 
-     </void> 
-     <void property="name"> 
-      <string>2</string> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-     <void property="weight"> 
-      <double>0.5</double> 
-     </void> 
-    </object> 
-   </void> 
-  </void> 
-  <void property="children"> 
-   <object idref="ArrayList0"/> 
-  </void> 
-  <void property="rowLayout"> 
-   <boolean>false</boolean> 
-  </void> 
- </object> 
-</java> 
+<java version="1.7.0" class="java.beans.XMLDecoder">
+ <null/>
+</java>
 ]]>
             </layout>
         </toolWindowBar>
         <toolWindowBar anchor="TOP" dividerSize="3" aggregateMode="false" length="23" visible="true" toolsVisible="true">
             <layout>
                 <![CDATA[
-<java version="1.6.0_25" class="java.beans.XMLDecoder"> 
- <object id="MultiSplitLayout$Split0" class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.MultiSplitLayout$Split"> 
-  <void property="bounds"> 
-   <object class="java.awt.Rectangle"> 
-    <int>0</int> 
-    <int>0</int> 
-    <int>1314</int> 
-    <int>89</int> 
-   </object> 
-  </void> 
-  <void id="ArrayList0" property="children"> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.DockableLeaf"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>0</int> 
-       <int>1314</int> 
-       <int>42</int> 
-      </object> 
-     </void> 
-     <void property="dockables"> 
-      <object class="java.util.ArrayList"> 
-       <void method="add"> 
-        <string>Toolbar</string> 
-       </void> 
-      </object> 
-     </void> 
-     <void property="name"> 
-      <string>1</string> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-     <void property="weight"> 
-      <double>0.5</double> 
-     </void> 
-    </object> 
-   </void> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.MultiSplitLayout$Divider"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>42</int> 
-       <int>1314</int> 
-       <int>5</int> 
-      </object> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-    </object> 
-   </void> 
-   <void method="add"> 
-    <object class="org.noos.xing.mydoggy.plaf.ui.cmp.multisplit.DockableLeaf"> 
-     <void property="bounds"> 
-      <object class="java.awt.Rectangle"> 
-       <int>0</int> 
-       <int>47</int> 
-       <int>1314</int> 
-       <int>42</int> 
-      </object> 
-     </void> 
-     <void property="dockables"> 
-      <object class="java.util.ArrayList"> 
-       <void method="add"> 
-        <string>Tools</string> 
-       </void> 
-      </object> 
-     </void> 
-     <void property="name"> 
-      <string>2</string> 
-     </void> 
-     <void property="parent"> 
-      <object idref="MultiSplitLayout$Split0"/> 
-     </void> 
-     <void property="weight"> 
-      <double>0.5</double> 
-     </void> 
-    </object> 
-   </void> 
-  </void> 
-  <void property="children"> 
-   <object idref="ArrayList0"/> 
-  </void> 
-  <void property="rowLayout"> 
-   <boolean>false</boolean> 
-  </void> 
- </object> 
-</java> 
+<java version="1.7.0" class="java.beans.XMLDecoder">
+ <null/>
+</java>
 ]]>
             </layout>
         </toolWindowBar>

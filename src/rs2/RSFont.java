@@ -33,7 +33,14 @@ public class RSFont extends Graphics2D {
             if(k1 == 0)
             {
                 for(int i2 = 0; i2 < l1; i2++)
-                    glyphPixels[l][i2] = data.g1b();
+                    {
+                	glyphPixels[l][i2] = data.g1b();
+                	}
+                //System.out.println("size "+i1);
+                for(int x = 0; x < l1; x++)
+                {
+                	//System.out.print(glyphPixels[l][x]);
+                }
 
             } else
             if(k1 == 1)

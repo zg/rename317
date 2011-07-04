@@ -546,17 +546,17 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 boolean s = z == 0 || mapRegion.getOverLay()[y][x][z - 1] != 0;
                 boolean w = x == 0 || mapRegion.getOverLay()[y][x-1][z  ] != 0;
                 boolean e = x == mapTileW - 1 || mapRegion.getOverLay()[y][x+1][z  ] != 0;
-                mapRegion.shapeA[y][x][z] = 1;
+                mapRegion.tileShape[y][x][z] = 1;
                 if (n && w && (!s) && (!e))
-                    mapRegion.shapeB[y][x][z] = 1;
+                    mapRegion.tileRotation[y][x][z] = 1;
                 else if (n && e && (!s) && (!w))
-                    mapRegion.shapeB[y][x][z] = 2;
+                    mapRegion.tileRotation[y][x][z] = 2;
                 else if (s && e && (!n) && (!w))
-                    mapRegion.shapeB[y][x][z] = 3;
+                    mapRegion.tileRotation[y][x][z] = 3;
                 else if (s && w && (!n) && (!e))
-                    mapRegion.shapeB[y][x][z] = 0;
+                    mapRegion.tileRotation[y][x][z] = 0;
                 else
-                    mapRegion.shapeA[y][x][z] = 0;
+                    mapRegion.tileShape[y][x][z] = 0;
                 break;
         }
         if (recurseOMeter >= 900){
