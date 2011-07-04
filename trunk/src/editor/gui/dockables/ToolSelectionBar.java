@@ -81,6 +81,8 @@ public class ToolSelectionBar {
         floodFillUButton.addChangeListener(listener);
         heightFillOButton.addChangeListener(listener);
         heightFillUButton.addChangeListener(listener);
+        settingsFillOButton.addChangeListener(listener);
+        settingsFillUButton.addChangeListener(listener);
         shapeOButton.addChangeListener(listener);
         shapeUButton.addChangeListener(listener);
         slider1.addChangeListener(listener);

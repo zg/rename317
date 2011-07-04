@@ -26,7 +26,6 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
     private EditorMainWindow editorMainWindow;
     public JagexFileStore[] jagexFileStores = new JagexFileStore[5];
     private OnDemandFetcher onDemandFetcher;
-    private JagexArchive titleJagexArchive;
     private SceneGraph sceneGraph;
     private MapRegion mapRegion;
     private TileSetting[] tileSettings;
@@ -90,6 +89,15 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
     /* Flood fill fields */
     private int recurseOMeter = 0;
     private boolean[][][] fillTraversed;
+    /* Threading fields */
+    private boolean mapRefreshRequested = false;
+    private int heightlevelChangeRequest = -1;
+    private boolean renderSettingsChanged = false;
+    private int loadMapRequestX = -1;
+    private int loadMapRequestZ = -1;
+    private boolean saveMapRequest = false;
+    private int editingHL = 0;
+
     /* Pencil fields */
    // private boolean[][][] selectedFields;
 
@@ -137,7 +145,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 jagexFileStores[i] = new JagexFileStore(Signlink.cache_dat, Signlink.cache_idx[i], i + 1);
         }
         try {
-            titleJagexArchive = getJagexArchive(1);
+            JagexArchive titleJagexArchive = getJagexArchive(1);
             smallFont = new RSFont(false, "p11_full", titleJagexArchive);
             plainFont = new RSFont(false, "p12_full", titleJagexArchive);
             boldFont = new RSFont(false, "b12_full", titleJagexArchive);
@@ -306,16 +314,45 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
     protected void doLogic() {
         if (onDemandFetcher != null)
             on_demand_process();
+        if (loadMapRequestX != -1 && loadMapRequestZ != -1){
+                _loadMap(loadMapRequestX,loadMapRequestZ);
+                loadMapRequestX = -1;
+                loadMapRequestZ = -1;
+        }
         if (mapLoaded){
+            if (mapRefreshRequested){
+                sceneGraph.clearCullingClusters();
+                sceneGraph.clearTiles();
+                mapRegion.addTiles(tileSettings, sceneGraph, editorMainWindow.getEditorToolbar().getSettings());
+                setHeightLevel(heightLevel);
+
+                mapRefreshRequested = false;
+            }
+            if (heightlevelChangeRequest != -1){
+                int heightlevelChangeRequest = this.heightlevelChangeRequest;
+                heightLevel = heightlevelChangeRequest;
+                sceneGraph.setHeightLevel(heightlevelChangeRequest);
+                renderMinimap(heightlevelChangeRequest);
+                repaint();
+                this.heightlevelChangeRequest = -1;
+            }
+            if (renderSettingsChanged){
+                refreshMap();
+                renderSettingsChanged = false;
+            }
+            if (saveMapRequest) {
+                _saveMap();
+                saveMapRequest = false;
+            }
             processCameraInput();
             sceneGraph.clearHightlights();
             if (SceneGraph.clickedTileX != -1){
                 if (editorMainWindow.getToolSelectionBar().getSelectedTool()
                         == ToolSelectionBar.EditorTools.HEIGHT_EDIT)
                     sceneGraph.enableHeightHighlight();
-                highlightTile(SceneGraph.clickedTileZ,SceneGraph.clickedTileX,SceneGraph.clickedTileY);
+                highlightTile(editorMainWindow.getEditorToolbar().getTargetHL(),SceneGraph.clickedTileX,SceneGraph.clickedTileY);
                 if (mouseButtonDown == 1){
-                    selectTile(SceneGraph.clickedTileZ,SceneGraph.clickedTileX,SceneGraph.clickedTileY);
+                    selectTile(editorMainWindow.getEditorToolbar().getTargetHL(),SceneGraph.clickedTileX,SceneGraph.clickedTileY);
                 }
             }
             if (mouseButtonDown != 2){
@@ -324,6 +361,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         }
         if (resizeWidth != -1)
             processResize();
+
     }
 
     private void selectTile(int z, int x, int y) {
@@ -521,7 +559,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                     mapRegion.shapeA[y][x][z] = 0;
                 break;
         }
-        if (recurseOMeter >= 500){
+        if (recurseOMeter >= 900){
             recurseOMeter--;
             return;
         }
@@ -532,12 +570,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         recurseOMeter--;
     }
 
-
-
     private void refreshMap() {
-        sceneGraph.clearCullingClusters();
-        mapRegion.addTiles(tileSettings,sceneGraph, editorMainWindow.getEditorToolbar().getSettings());
-        sceneGraph.setHeightLevel(heightLevel);
+        mapRefreshRequested = true;
     }
 
     @Override
@@ -717,7 +751,12 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         }
     }
 
-    public void loadMap(int x, int z) {
+    public void loadMap(int x,int z){
+        loadMapRequestX = x;
+        loadMapRequestZ = z;
+    }
+
+    public void _loadMap(int x, int z) {
         x /= 64;
         z /= 64;
         currentMapX = x;
@@ -773,10 +812,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
     }
 
     public void setHeightLevel(int hL) {
-        heightLevel = hL;
-        sceneGraph.setHeightLevel(hL);
-        renderMinimap(hL);
-        repaint();
+        heightlevelChangeRequest = hL;
     }
 
     private void renderMinimap(int _y) {
@@ -928,17 +964,19 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         int colour = 0xffff00;
         if (super.fps < 15)
             colour = 0xff0000;
-        plainFont.drawTextHLeftVMid(colour,"Fps:" + super.fps, y, x);
+        boldFont.drawTextHRightVTop("Loaded map: ("+currentMapX+","+currentMapZ+")",
+                gameScreenCanvas.canvasWidth-20,20,0xFFFF00);
+        boldFont.drawTextHRightVTop("Camera pos: ("+(currentMapX*64+(xCameraPos >> 7))+","+(currentMapZ*64+(yCameraPos >> 7))+")",
+                gameScreenCanvas.canvasWidth-20,35,0xFFFF00);
+        plainFont.drawTextHLeftVTop("Fps:" + super.fps, x, y, colour);
         y += 15;
         Runtime runtime = Runtime.getRuntime();
         int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024L));
-        plainFont.drawTextHLeftVMid(0xffff00,"Heap usage:" + j1 + "m",y, x);
+        plainFont.drawTextHLeftVTop("Heap usage:" + j1 + "m", x, y, 0xffff00);
         y += 15;
-        plainFont.drawTextHLeftVMid(0xffff00,"Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", y, x);
+        plainFont.drawTextHLeftVTop("Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", x, y, 0xffff00);
         y += 15;
     }
-
-
 
     public void paintMinimap(Graphics g) {
         minimapGraphics = g;
@@ -1073,26 +1111,14 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
     }
 
     public void setRenderSettings(int settings) {
-        sceneGraph.initToNull();
-        ObjectDef.memCache1.unlinkAll();
-        ObjectDef.memCache2.unlinkAll();
-        System.gc();
-        for (int i = 0; i < 4; i++)
-            tileSettings[i].init();
-        refreshMap();
-        for (int _x = 0;_x < mapWidth;_x++)
-            for (int _z = 0;_z < mapHeight;_z++){
-                int objectIdx = onDemandFetcher.getMapIndex(1,currentMapZ+_z,currentMapX+_x);
-                if (objectIdx == -1)
-                    continue;
-                byte[] objectData = GZIPWrapper.decompress(jagexFileStores[4].decompress(objectIdx));
-                if (objectData == null)
-                    continue;
-                mapRegion.loadObjects(_x*64,tileSettings,_z*64,sceneGraph,objectData);
-            }
+        renderSettingsChanged = true;
     }
 
-    public void saveMap() {
+    public void saveMap(){
+        saveMapRequest = true;
+    }
+
+    private void _saveMap() {
         int x = currentMapX;
         int z = currentMapZ;
         for (int _x = 0;_x < mapWidth;_x++)
