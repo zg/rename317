@@ -548,13 +548,13 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 boolean e = x == mapTileW - 1 || mapRegion.getOverLay()[y][x+1][z  ] != 0;
                 mapRegion.tileShape[y][x][z] = 1;
                 if (n && w && (!s) && (!e))
-                    mapRegion.tileRotation[y][x][z] = 1;
+                    mapRegion.tileShapeRotation[y][x][z] = 1;
                 else if (n && e && (!s) && (!w))
-                    mapRegion.tileRotation[y][x][z] = 2;
+                    mapRegion.tileShapeRotation[y][x][z] = 2;
                 else if (s && e && (!n) && (!w))
-                    mapRegion.tileRotation[y][x][z] = 3;
+                    mapRegion.tileShapeRotation[y][x][z] = 3;
                 else if (s && w && (!n) && (!e))
-                    mapRegion.tileRotation[y][x][z] = 0;
+                    mapRegion.tileShapeRotation[y][x][z] = 0;
                 else
                     mapRegion.tileShape[y][x][z] = 0;
                 break;
@@ -584,7 +584,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             return;
         gameScreenCanvas.drawGraphics(0, graphics, 0);
         if (selectedTileX != -1)
-            ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getShapeA()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeB()[selectedTileY][selectedTileX][selectedTileZ]);
+            ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getTileShape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeRotation()[selectedTileY][selectedTileX][selectedTileZ]);
         }
 
     @Override
@@ -595,7 +595,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 drawMinimap();
             }gameScreenCanvas.drawGraphics(0, graphics, 0);
             if (selectedTileX != -1)
-                        ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getShapeA()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeB()[selectedTileY][selectedTileX][selectedTileZ]);
+                        ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getTileShape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeRotation()[selectedTileY][selectedTileX][selectedTileZ]);
 
         } catch (Exception e){
             System.err.println("Exception while rendering frame!");
@@ -949,7 +949,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         draw3dScreen();
         gameScreenCanvas.drawGraphics(0, super.graphics, 0);
         if (selectedTileX != -1)
-               ShapedTile.drawShape(super.graphics,(byte) (mapRegion.getShapeA()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeB()[selectedTileY][selectedTileX][selectedTileZ]);
+               ShapedTile.drawShape(super.graphics,(byte) (mapRegion.getTileShape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeRotation()[selectedTileY][selectedTileX][selectedTileZ]);
         xCameraPos = l;
         zCameraPos = i1;
         yCameraPos = j1;

@@ -30,7 +30,7 @@ public class MapRegion {
         underLay = new byte[4][xMapSize][yMapSize];
         overLay = new byte[4][xMapSize][yMapSize];
         tileShape = new byte[4][xMapSize][yMapSize];
-        tileRotation = new byte[4][xMapSize][yMapSize];
+        tileShapeRotation = new byte[4][xMapSize][yMapSize];
         tile_culling_bitmap = new int[4][xMapSize + 1][yMapSize + 1];
         object_shadow_data = new byte[4][xMapSize + 1][yMapSize + 1];
         tileLightness = new int[xMapSize + 1][yMapSize + 1];
@@ -258,7 +258,7 @@ public class MapRegion {
                                     sceneGraph.addTile(z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), 0, 0, 0, 0, underlay_rgb, 0);
                                 } else {
                                     int shape = tileShape[z][X][Y] + 1;
-                                    byte rotation = tileRotation[z][X][Y];
+                                    byte rotation = tileShapeRotation[z][X][Y];
                                     Floor overlay = Floor.cache[overlay_id - 1];
                                     int overlay_texture = overlay.texture;
                                     int overlay_hsl;
@@ -1038,7 +1038,7 @@ label0:
                 {
                     overLay[y][x][z] = stream.g1b();
                     tileShape[y][x][z] = (byte)((value - 2) / 4);
-                    tileRotation[y][x][z] = (byte) (((value - 2) + shapeBOffset) & 3);
+                    tileShapeRotation[y][x][z] = (byte) (((value - 2) + shapeBOffset) & 3);
                 } else
                 if(value <= 81)
                     tileSettings[y][x][z] = (byte)(value - 49);
@@ -1080,7 +1080,7 @@ label0:
 
     private void writeTile(int y,int x,int z, Packet packet) {
         if(overLay[y][x][z] != 0){
-            packet.p1((tileShape[y][x][z] * 4) + (tileRotation[y][x][z] & 3) + 2);
+            packet.p1((tileShape[y][x][z] * 4) + (tileShapeRotation[y][x][z] & 3) + 2);
             packet.p1(overLay[y][x][z]);
         }
         if(tileSettings[y][x][z] != 0)
@@ -1539,12 +1539,12 @@ label0:
         return overLay;
     }
 
-    public byte[][][] getShapeA() {
+    public byte[][][] getTileShape() {
         return tileShape;
     }
 
-    public byte[][][] getShapeB() {
-        return tileRotation;
+    public byte[][][] getShapeRotation() {
+        return tileShapeRotation;
     }
 
     public byte[][][] getUnderLay() {
@@ -1587,7 +1587,7 @@ label0:
     static int setZ = 99;
     private final int xMapSize;
     private final int yMapSize;
-    public final byte[][][] tileRotation;
+    public final byte[][][] tileShapeRotation;
     private final byte[][][] tileSettings;
     public static boolean lowMem = true;
     private static final int bitValues[] = {

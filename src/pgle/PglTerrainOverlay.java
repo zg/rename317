@@ -80,8 +80,8 @@ public class PglTerrainOverlay {
         try{
             for (int x = 0;x < 103;x++)
                 for (int z = 0;z < 103;z++){
-                    int shapeA = mapRegion.getShapeA()[heightLevel][x][z] + 1;
-                    int shapeB = mapRegion.getShapeB()[heightLevel][x][z];
+                    int shapeA = mapRegion.getTileShape()[heightLevel][x][z] + 1;
+                    int shapeB = mapRegion.getShapeRotation()[heightLevel][x][z];
                     int overlay = mapRegion.getOverLay()[heightLevel][x][z] & 0xff;
                     int yA = -mapRegion.getHeightMap()[heightLevel][x][z];
                     int yB = -mapRegion.getHeightMap()[heightLevel][x + 1][z];
