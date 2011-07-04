@@ -6,18 +6,18 @@ import java.awt.*;
 public class ShapedTile
 {
 
-    public ShapedTile(int tileX, int tileZ, int yA, int yB, int yC, int yD, int cAA, int cBA, int cCA, int cDA, int rgba, int cA, int cB, int cC, int cD, int rgb, int texture, int shapeA, int shapeB)
+    public ShapedTile(int tileX, int tileZ, int yA, int yB, int yC, int yD, int cAA, int cBA, int cCA, int cDA, int rgba, int cA, int cB, int cC, int cD, int rgb, int texture, int shape, int rotation)
     {
         flat = !(yA != yB || yA != yD || yA != yC);
-        this.shapeA = shapeA;
-        this.shapeB = shapeB;
+        this.shape = shape;
+        this.rotation = rotation;
         colourRGB = rgb;
         colourRGBA = rgba;
         char const512 = '\200';
         int const256 = const512 / 2;
         int const128 = const512 / 4;
         int const384 = (const512 * 3) / 4;
-        int shapedTileMesh[] = shapedTilePointData[shapeA];
+        int shapedTileMesh[] = shapedTilePointData[shape];
         int meshLength = shapedTileMesh.length;
         origVertexX = new int[meshLength];
         origVertexY = new int[meshLength];
@@ -30,11 +30,11 @@ public class ShapedTile
         {
             int vertexType = shapedTileMesh[vertexPtr];
             if((vertexType & 1) == 0 && vertexType <= 8)
-                vertexType = (vertexType - shapeB - shapeB - 1 & 7) + 1;
+                vertexType = (vertexType - rotation - rotation - 1 & 7) + 1;
             if(vertexType > 8 && vertexType <= 12)
-                vertexType = (vertexType - 9 - shapeB & 3) + 9;
+                vertexType = (vertexType - 9 - rotation & 3) + 9;
             if(vertexType > 12 && vertexType <= 16)
-                vertexType = (vertexType - 13 - shapeB & 3) + 13;
+                vertexType = (vertexType - 13 - rotation & 3) + 13;
             int vertexX;
             int vertexZ;
             int vertexY;
@@ -174,7 +174,7 @@ public class ShapedTile
             vertexColourUnderlay[vertexPtr] = vertexCUnderlay;
         }
 
-        int shapedTileElements[] = shapedTileElementData[shapeA];
+        int shapedTileElements[] = shapedTileElementData[shape];
         int vertexCount = shapedTileElements.length / 4;
         triangleA = new int[vertexCount];
         triangleB = new int[vertexCount];
@@ -193,11 +193,11 @@ public class ShapedTile
             int idxC = shapedTileElements[offset + 3];
             offset += 4;
             if(idxA < 4)
-                idxA = idxA - shapeB & 3;
+                idxA = idxA - rotation & 3;
             if(idxB < 4)
-                idxB = idxB - shapeB & 3;
+                idxB = idxB - rotation & 3;
             if(idxC < 4)
-                idxC = idxC - shapeB & 3;
+                idxC = idxC - rotation & 3;
             triangleA[vID] = idxA;
             triangleB[vID] = idxB;
             triangleC[vID] = idxC;
@@ -247,8 +247,8 @@ public class ShapedTile
     final int[] triangleC;
     int triangleTexture[];
     final boolean flat;
-    final int shapeA;
-    final int shapeB;
+    final int shape;
+    final int rotation;
     final int colourRGB;
     final int colourRGBA;
     static final int[] screenX = new int[6];
@@ -296,35 +296,51 @@ public class ShapedTile
     };
     public static final int[][] shapedTileElementData = {
         {
-            0, 1, 2, 3, 0, 0, 1, 3
+            0, 1, 2, 3,
+            0, 0, 1, 3
         }, {
-            1, 1, 2, 3, 1, 0, 1, 3
+            1, 1, 2, 3,
+            1, 0, 1, 3
         }, {
-            0, 1, 2, 3, 1, 0, 1, 3
+            0, 1, 2, 3,
+            1, 0, 1, 3
         }, {
-            0, 0, 1, 2, 0, 0, 2, 4, 1, 0, 
-            4, 3
+            0, 0, 1, 2,
+            0, 0, 2, 4,
+            1, 0, 4, 3
         }, {
-            0, 0, 1, 4, 0, 0, 4, 3, 1, 1, 
-            2, 4
+            0, 0, 1, 4,
+            0, 0, 4, 3,
+            1, 1, 2, 4
         }, {
-            0, 0, 4, 3, 1, 0, 1, 2, 1, 0, 
-            2, 4
+            0, 0, 4, 3,
+            1, 0, 1, 2,
+            1, 0, 2, 4
         }, {
-            0, 1, 2, 4, 1, 0, 1, 4, 1, 0, 
-            4, 3
+            0, 1, 2, 4,
+            1, 0, 1, 4,
+            1, 0, 4, 3
         }, {
-            0, 4, 1, 2, 0, 4, 2, 5, 1, 0, 
-            4, 5, 1, 0, 5, 3
+            0, 4, 1, 2,
+            0, 4, 2, 5,
+            1, 0, 4, 5,
+            1, 0, 5, 3
         }, {
-            0, 4, 1, 2, 0, 4, 2, 3, 0, 4, 
-            3, 5, 1, 0, 4, 5
+            0, 4, 1, 2,
+            0, 4, 2, 3,
+            0, 4, 3, 5,
+            1, 0, 4, 5
         }, {
-            0, 0, 4, 5, 1, 4, 1, 2, 1, 4, 
-            2, 3, 1, 4, 3, 5
+            0, 0, 4, 5,
+            1, 4, 1, 2,
+            1, 4, 2, 3,
+            1, 4, 3, 5
         }, {
-            0, 0, 1, 5, 0, 1, 4, 5, 0, 1, 
-            2, 4, 1, 0, 5, 3, 1, 5, 4, 3, 
+            0, 0, 1, 5,
+            0, 1, 4, 5,
+            0, 1, 2, 4,
+            1, 0, 5, 3,
+            1, 5, 4, 3,
             1, 4, 2, 3
         }, {
             1, 0, 1, 5, 1, 1, 4, 5, 1, 1, 

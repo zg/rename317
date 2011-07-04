@@ -841,8 +841,8 @@ public class SceneGraph {
         ShapedTile shapedTile = currentTile.shapedTile;
         if(shapedTile == null)
             return;
-        int shapeA = shapedTile.shapeA;
-        int shapeB = shapedTile.shapeB;
+        int shapeA = shapedTile.shape;
+        int shapeB = shapedTile.rotation;
         int underlayRGB = shapedTile.colourRGB;
         int overlayRGB = shapedTile.colourRGBA;
         int shapePoints[] = tileShapePoints[shapeA];

@@ -24,6 +24,12 @@ public class ToolSelectionBar {
     private JToggleButton selectButton;
     private JSlider slider1;
     private JLabel brushSizeLabel;
+    private JToggleButton heightFillUButton;
+    private JToggleButton heightFillOButton;
+    private JToggleButton settingsFillOButton;
+    private JToggleButton settingsFillUButton;
+    private JToggleButton shapeOButton;
+    private JToggleButton shapeUButton;
     private EditorTools tool = EditorTools.SELECT;
 
     public ToolSelectionBar() {
@@ -44,12 +50,24 @@ public class ToolSelectionBar {
                     tool = EditorTools.HEIGHT_EDIT;
                 if (heightSetButton.isSelected())
                     tool = EditorTools.HEIGHT_SET;
-                if (applySettingsButton.isSelected())
-                    tool = EditorTools.APPLY_SETTINGS;
                 if (floodFillOButton.isSelected())
                     tool = EditorTools.FLOODFILL_OVERLAY;
                 if (floodFillUButton.isSelected())
                     tool = EditorTools.FLOODFILL_UNDERLAY;
+                if (heightFillOButton.isSelected())
+                    tool = EditorTools.HEIGHTFILL_OVERLAY;
+                if (heightFillUButton.isSelected())
+                    tool = EditorTools.HEIGHTFILL_UNDERLAY;
+                if (applySettingsButton.isSelected())
+                    tool = EditorTools.APPLY_SETTINGS;
+                if (settingsFillOButton.isSelected())
+                    tool = EditorTools.SETTINGSFILL_OVERLAY;
+                if (settingsFillUButton.isSelected())
+                    tool = EditorTools.SETTINGSFILL_UNDERLAY;
+                if (shapeOButton.isSelected())
+                    tool = EditorTools.ADDSHAPES_OVERLAY;
+                if (shapeUButton.isSelected())
+                    tool = EditorTools.ADDSHAPES_UNDERLAY;
                 brushSizeLabel.setText(Integer.toString(slider1.getValue()));
             }
         };
@@ -61,6 +79,10 @@ public class ToolSelectionBar {
         applySettingsButton.addChangeListener(listener);
         floodFillOButton.addChangeListener(listener);
         floodFillUButton.addChangeListener(listener);
+        heightFillOButton.addChangeListener(listener);
+        heightFillUButton.addChangeListener(listener);
+        shapeOButton.addChangeListener(listener);
+        shapeUButton.addChangeListener(listener);
         slider1.addChangeListener(listener);
     }
 
@@ -96,12 +118,12 @@ public class ToolSelectionBar {
      */
     private void $$$setupUI$$$() {
         mainPane = new JPanel();
-        mainPane.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 12, new Insets(0, 0, 0, 0), -1, -1));
+        mainPane.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 18, new Insets(0, 0, 0, 0), -1, -1));
         paintOverlayButton = new JToggleButton();
         paintOverlayButton.setText("PO");
         mainPane.add(paintOverlayButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(27, 25), null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
-        mainPane.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(0, 11, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        mainPane.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(0, 17, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         paintUnderlayButton = new JToggleButton();
         paintUnderlayButton.setText("PU");
         mainPane.add(paintUnderlayButton, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -113,7 +135,7 @@ public class ToolSelectionBar {
         mainPane.add(heightSetButton, new com.intellij.uiDesigner.core.GridConstraints(0, 6, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         applySettingsButton = new JToggleButton();
         applySettingsButton.setText("AS");
-        mainPane.add(applySettingsButton, new com.intellij.uiDesigner.core.GridConstraints(0, 7, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPane.add(applySettingsButton, new com.intellij.uiDesigner.core.GridConstraints(0, 9, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         selectButton = new JToggleButton();
         selectButton.setSelected(true);
         selectButton.setText("S");
@@ -125,19 +147,37 @@ public class ToolSelectionBar {
         slider1.setMinorTickSpacing(1);
         slider1.setPaintTicks(true);
         slider1.setValue(1);
-        mainPane.add(slider1, new com.intellij.uiDesigner.core.GridConstraints(0, 9, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPane.add(slider1, new com.intellij.uiDesigner.core.GridConstraints(0, 15, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setText("Brush size:");
-        mainPane.add(label1, new com.intellij.uiDesigner.core.GridConstraints(0, 8, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPane.add(label1, new com.intellij.uiDesigner.core.GridConstraints(0, 14, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         brushSizeLabel = new JLabel();
         brushSizeLabel.setText("1");
-        mainPane.add(brushSizeLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 10, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPane.add(brushSizeLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 16, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         floodFillOButton = new JToggleButton();
         floodFillOButton.setText("FO");
         mainPane.add(floodFillOButton, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         floodFillUButton = new JToggleButton();
         floodFillUButton.setText("FU");
         mainPane.add(floodFillUButton, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        heightFillUButton = new JToggleButton();
+        heightFillUButton.setText("HFU");
+        mainPane.add(heightFillUButton, new com.intellij.uiDesigner.core.GridConstraints(0, 8, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        heightFillOButton = new JToggleButton();
+        heightFillOButton.setText("HFO");
+        mainPane.add(heightFillOButton, new com.intellij.uiDesigner.core.GridConstraints(0, 7, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        settingsFillOButton = new JToggleButton();
+        settingsFillOButton.setText("FSO");
+        mainPane.add(settingsFillOButton, new com.intellij.uiDesigner.core.GridConstraints(0, 10, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        settingsFillUButton = new JToggleButton();
+        settingsFillUButton.setText("FSU");
+        mainPane.add(settingsFillUButton, new com.intellij.uiDesigner.core.GridConstraints(0, 11, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        shapeOButton = new JToggleButton();
+        shapeOButton.setText("SO");
+        mainPane.add(shapeOButton, new com.intellij.uiDesigner.core.GridConstraints(0, 12, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        shapeUButton = new JToggleButton();
+        shapeUButton.setText("SU");
+        mainPane.add(shapeUButton, new com.intellij.uiDesigner.core.GridConstraints(0, 13, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         ButtonGroup buttonGroup;
         buttonGroup = new ButtonGroup();
         buttonGroup.add(selectButton);
@@ -148,6 +188,12 @@ public class ToolSelectionBar {
         buttonGroup.add(floodFillOButton);
         buttonGroup.add(applySettingsButton);
         buttonGroup.add(floodFillUButton);
+        buttonGroup.add(heightFillOButton);
+        buttonGroup.add(heightFillUButton);
+        buttonGroup.add(settingsFillOButton);
+        buttonGroup.add(settingsFillUButton);
+        buttonGroup.add(shapeOButton);
+        buttonGroup.add(shapeUButton);
     }
 
     /**
@@ -158,6 +204,14 @@ public class ToolSelectionBar {
     }
 
     public enum EditorTools {
-        PAINT_OVERLAY, PAINT_UNDERLAY, HEIGHT_EDIT, HEIGHT_SET, APPLY_SETTINGS, SELECT, FLOODFILL_OVERLAY, FLOODFILL_UNDERLAY;
+        PAINT_OVERLAY, PAINT_UNDERLAY,
+        HEIGHT_EDIT,
+        HEIGHT_SET,
+        APPLY_SETTINGS,
+        SELECT,
+        FLOODFILL_OVERLAY, FLOODFILL_UNDERLAY,
+        HEIGHTFILL_OVERLAY, HEIGHTFILL_UNDERLAY,
+        SETTINGSFILL_OVERLAY, SETTINGSFILL_UNDERLAY,
+        ADDSHAPES_OVERLAY, ADDSHAPES_UNDERLAY;
     }
 }

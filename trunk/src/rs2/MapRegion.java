@@ -493,17 +493,17 @@ label5:
             _lightness = 0;
         else if (_lightness > 255)
             _lightness = 255;
-        int huerand = (_hue + (int) (Math.random() * 16D)) - 8;
+        int huerand = _hue;
         if (huerand < 0)
             huerand = 0;
         else if (huerand > 255)
             huerand = 255;
-        int satrand = (_saturation + (int) (Math.random() * 48D)) - 24;
+        int satrand = _saturation;
         if (satrand < 0)
             satrand = 0;
         else if (satrand > 255)
             satrand = 255;
-        int lightrand = (_lightness + (int) (Math.random() * 48D)) - 24;
+        int lightrand = _lightness;
         if (lightrand < 0)
             lightrand = 0;
         else if (lightrand > 255)
@@ -1089,10 +1089,10 @@ label0:
             packet.p1(underLay[y][x][z] + 81);
         if(!automaticHeight[y][x][z]){
             packet.p1(1);
-            if (z == 0)
+            if (y == 0)
                 packet.p1((-heightMap[y][x][z]) / 8);
             else
-                packet.p1((heightMap[y][x][z-1]-heightMap[y][x][z]) / 8);
+                packet.p1((heightMap[y-1][x][z]-heightMap[y][x][z]) / 8);
         } else
             packet.p1(0);
     }
@@ -1571,7 +1571,7 @@ label0:
     private static int lightness_offset = (int)(Math.random() * 33D) - 16;
     private final byte[][][] object_shadow_data;
     private final int[][][] tile_culling_bitmap;
-    private final byte[][][] shapeA;
+    public final byte[][][] shapeA;
     private static final int faceXOffset[] = {
         1, 0, -1, 0
     };
@@ -1587,7 +1587,7 @@ label0:
     static int setZ = 99;
     private final int xMapSize;
     private final int yMapSize;
-    private final byte[][][] shapeB;
+    public final byte[][][] shapeB;
     private final byte[][][] tileSettings;
     public static boolean lowMem = true;
     private static final int bitValues[] = {
