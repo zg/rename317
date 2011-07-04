@@ -161,17 +161,17 @@ public class Client extends GameShell {
         Rasterizer.lineOffsets = anIntArray1180;
         chatBack.drawImage(0, 0);
         if (messagePromptRaised) {
-            boldFont.drawText(0, aString1121, 40, 239);
-            boldFont.drawText(128, promptInput + "*", 60, 239);
+            boldFont.drawTextHMidVTop(aString1121, 239, 40, 0);
+            boldFont.drawTextHMidVTop(promptInput + "*", 239, 60, 128);
         } else if (inputDialogState == 1) {
-            boldFont.drawText(0, "Enter amount:", 40, 239);
-            boldFont.drawText(128, amountOrNameInput + "*", 60, 239);
+            boldFont.drawTextHMidVTop("Enter amount:", 239, 40, 0);
+            boldFont.drawTextHMidVTop(amountOrNameInput + "*", 239, 60, 128);
         } else if (inputDialogState == 2) {
-            boldFont.drawText(0, "Enter name:", 40, 239);
-            boldFont.drawText(128, amountOrNameInput + "*", 60, 239);
+            boldFont.drawTextHMidVTop("Enter name:", 239, 40, 0);
+            boldFont.drawTextHMidVTop(amountOrNameInput + "*", 239, 60, 128);
         } else if (aString844 != null) {
-            boldFont.drawText(0, aString844, 40, 239);
-            boldFont.drawText(128, "Click to continue", 60, 239);
+            boldFont.drawTextHMidVTop(aString844, 239, 40, 0);
+            boldFont.drawTextHMidVTop("Click to continue", 239, 60, 128);
         } else if (backDialogID != -1)
             interface_render(0, 0, 0, RSInterface.interfaceCache[backDialogID]);
         else if (dialogID != -1) {
@@ -196,7 +196,7 @@ public class Client extends GameShell {
                     }
                     if (l == 0) {
                         if (i1 > 0 && i1 < 110)
-                            RSFont.drawTextHLeftVMid(0, chatMessages[k], i1, 4);
+                            RSFont.drawTextHLeftVTop(chatMessages[k], 4, i1, 0);
                         j++;
                     }
                     if ((l == 1 || l == 2) && (l == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s1))) {
@@ -210,17 +210,17 @@ public class Client extends GameShell {
                                 modIcons[1].drawImage(j1, i1 - 12);
                                 j1 += 14;
                             }
-                            RSFont.drawTextHLeftVMid(0, s1 + ":", i1, j1);
-                            j1 += RSFont.getTextWidth(s1) + 8;
-                            RSFont.drawTextHLeftVMid(255, chatMessages[k], i1, j1);
+                            RSFont.drawTextHLeftVTop(s1 + ":", j1, i1, 0);
+                            j1 += RSFont.getFormattedStringWith(s1) + 8;
+                            RSFont.drawTextHLeftVTop(chatMessages[k], j1, i1, 255);
                         }
                         j++;
                     }
                     if ((l == 3 || l == 7) && ui_split_private_chat == 0 && (l == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s1))) {
                         if (i1 > 0 && i1 < 110) {
                             int k1 = 4;
-                            RSFont.drawTextHLeftVMid(0, "From", i1, k1);
-                            k1 += RSFont.getTextWidth("From ");
+                            RSFont.drawTextHLeftVTop("From", k1, i1, 0);
+                            k1 += RSFont.getFormattedStringWith("From ");
                             if (byte0 == 1) {
                                 modIcons[0].drawImage(k1, i1 - 12);
                                 k1 += 14;
@@ -229,32 +229,32 @@ public class Client extends GameShell {
                                 modIcons[1].drawImage(k1, i1 - 12);
                                 k1 += 14;
                             }
-                            RSFont.drawTextHLeftVMid(0, s1 + ":", i1, k1);
-                            k1 += RSFont.getTextWidth(s1) + 8;
-                            RSFont.drawTextHLeftVMid(0x800000, chatMessages[k], i1, k1);
+                            RSFont.drawTextHLeftVTop(s1 + ":", k1, i1, 0);
+                            k1 += RSFont.getFormattedStringWith(s1) + 8;
+                            RSFont.drawTextHLeftVTop(chatMessages[k], k1, i1, 0x800000);
                         }
                         j++;
                     }
                     if (l == 4 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s1))) {
                         if (i1 > 0 && i1 < 110)
-                            RSFont.drawTextHLeftVMid(0x800080, s1 + " " + chatMessages[k], i1, 4);
+                            RSFont.drawTextHLeftVTop(s1 + " " + chatMessages[k], 4, i1, 0x800080);
                         j++;
                     }
                     if (l == 5 && ui_split_private_chat == 0 && privateChatMode < 2) {
                         if (i1 > 0 && i1 < 110)
-                            RSFont.drawTextHLeftVMid(0x800000, chatMessages[k], i1, 4);
+                            RSFont.drawTextHLeftVTop(chatMessages[k], 4, i1, 0x800000);
                         j++;
                     }
                     if (l == 6 && ui_split_private_chat == 0 && privateChatMode < 2) {
                         if (i1 > 0 && i1 < 110) {
-                            RSFont.drawTextHLeftVMid(0, "To " + s1 + ":", i1, 4);
-                            RSFont.drawTextHLeftVMid(0x800000, chatMessages[k], i1, 12 + RSFont.getTextWidth("To " + s1));
+                            RSFont.drawTextHLeftVTop("To " + s1 + ":", 4, i1, 0);
+                            RSFont.drawTextHLeftVTop(chatMessages[k], 12 + RSFont.getFormattedStringWith("To " + s1), i1, 0x800000);
                         }
                         j++;
                     }
                     if (l == 8 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s1))) {
                         if (i1 > 0 && i1 < 110)
-                            RSFont.drawTextHLeftVMid(0x7e3200, s1 + " " + chatMessages[k], i1, 4);
+                            RSFont.drawTextHLeftVTop(s1 + " " + chatMessages[k], 4, i1, 0x7e3200);
                         j++;
                     }
                 }
@@ -269,8 +269,8 @@ public class Client extends GameShell {
                 s = session_player.name;
             else
                 s = TextClass.fixName(myUsername);
-            RSFont.drawTextHLeftVMid(0, s + ":", 90, 4);
-            RSFont.drawTextHLeftVMid(255, inputString + "*", 90, 6 + RSFont.getTextWidth(s + ": "));
+            RSFont.drawTextHLeftVTop(s + ":", 4, 90, 0);
+            RSFont.drawTextHLeftVTop(inputString + "*", 6 + RSFont.getFormattedStringWith(s + ": "), 90, 255);
             Graphics2D.drawHLine(0, 77, 479, 0);
         }
         if (menuOpen && menuScreenArea == 2)
@@ -1209,7 +1209,7 @@ public class Client extends GameShell {
                 if (((Mobile) (obj)).textSpoken != null && (j >= session_player_count || publicChatMode == 0 || publicChatMode == 3 || publicChatMode == 1 && isFriendOrSelf(((Player) obj).name))) {
                     npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height);
                     if (spriteDrawX > -1 && anInt974 < anInt975) {
-                        anIntArray979[anInt974] = boldFont.method384(((Mobile) (obj)).textSpoken) / 2;
+                        anIntArray979[anInt974] = boldFont.getStringWidth(((Mobile) (obj)).textSpoken) / 2;
                         anIntArray978[anInt974] = boldFont.charHeight;
                         anIntArray976[anInt974] = spriteDrawX;
                         anIntArray977[anInt974] = spriteDrawY;
@@ -1255,8 +1255,8 @@ public class Client extends GameShell {
                                 spriteDrawY -= 10;
                             }
                             hitMarks[((Mobile) (obj)).hitMarkTypes[j1]].drawSprite(spriteDrawX - 12, spriteDrawY - 12);
-                            smallFont.drawText(0, String.valueOf(((Mobile) (obj)).hitArray[j1]), spriteDrawY + 4, spriteDrawX);
-                            smallFont.drawText(0xffffff, String.valueOf(((Mobile) (obj)).hitArray[j1]), spriteDrawY + 3, spriteDrawX - 1);
+                            smallFont.drawTextHMidVTop(String.valueOf(((Mobile) (obj)).hitArray[j1]), spriteDrawX, spriteDrawY + 4, 0);
+                            smallFont.drawTextHMidVTop(String.valueOf(((Mobile) (obj)).hitArray[j1]), spriteDrawX - 1, spriteDrawY + 3, 0xffffff);
                         }
                     }
 
@@ -1317,12 +1317,12 @@ public class Client extends GameShell {
                             i3 = 0xffffff - 0x50000 * (l3 - 100);
                     }
                     if (anIntArray981[k] == 0) {
-                        boldFont.drawText(0, s, spriteDrawY + 1, spriteDrawX);
-                        boldFont.drawText(i3, s, spriteDrawY, spriteDrawX);
+                        boldFont.drawTextHMidVTop(s, spriteDrawX, spriteDrawY + 1, 0);
+                        boldFont.drawTextHMidVTop(s, spriteDrawX, spriteDrawY, i3);
                     }
                     if (anIntArray981[k] == 1) {
-                        boldFont.method386(0, s, spriteDrawX, anInt1265, spriteDrawY + 1);
-                        boldFont.method386(i3, s, spriteDrawX, anInt1265, spriteDrawY);
+                        boldFont.drawTextHRMidVTopWaving(s, spriteDrawX, spriteDrawY + 1, 0, anInt1265);
+                        boldFont.drawTextHRMidVTopWaving(s, spriteDrawX, spriteDrawY, i3, anInt1265);
                     }
                     if (anIntArray981[k] == 2) {
                         boldFont.method387(spriteDrawX, s, anInt1265, spriteDrawY + 1, 0);
@@ -1333,11 +1333,11 @@ public class Client extends GameShell {
                         boldFont.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY, spriteDrawX, i3);
                     }
                     if (anIntArray981[k] == 4) {
-                        int i4 = boldFont.method384(s);
+                        int i4 = boldFont.getStringWidth(s);
                         int k4 = ((150 - anIntArray982[k]) * (i4 + 100)) / 150;
                         Graphics2D.setBounds(334, spriteDrawX - 50, spriteDrawX + 50, 0);
-                        boldFont.drawTextHLeftVMid(0, s, spriteDrawY + 1, (spriteDrawX + 50) - k4);
-                        boldFont.drawTextHLeftVMid(i3, s, spriteDrawY, (spriteDrawX + 50) - k4);
+                        boldFont.drawTextHLeftVTop(s, (spriteDrawX + 50) - k4, spriteDrawY + 1, 0);
+                        boldFont.drawTextHLeftVTop(s, (spriteDrawX + 50) - k4, spriteDrawY, i3);
                         Graphics2D.setDefaultBounds();
                     }
                     if (anIntArray981[k] == 5) {
@@ -1348,13 +1348,13 @@ public class Client extends GameShell {
                         else if (j4 > 125)
                             l4 = j4 - 125;
                         Graphics2D.setBounds(spriteDrawY + 5, 0, 512, spriteDrawY - boldFont.charHeight - 1);
-                        boldFont.drawText(0, s, spriteDrawY + 1 + l4, spriteDrawX);
-                        boldFont.drawText(i3, s, spriteDrawY + l4, spriteDrawX);
+                        boldFont.drawTextHMidVTop(s, spriteDrawX, spriteDrawY + 1 + l4, 0);
+                        boldFont.drawTextHMidVTop(s, spriteDrawX, spriteDrawY + l4, i3);
                         Graphics2D.setDefaultBounds();
                     }
                 } else {
-                    boldFont.drawText(0, s, spriteDrawY + 1, spriteDrawX);
-                    boldFont.drawText(0xffff00, s, spriteDrawY, spriteDrawX);
+                    boldFont.drawTextHMidVTop(s, spriteDrawX, spriteDrawY + 1, 0);
+                    boldFont.drawTextHMidVTop(s, spriteDrawX, spriteDrawY, 0xffff00);
                 }
             }
         } catch (Exception e) {
@@ -1593,7 +1593,7 @@ public class Client extends GameShell {
         Graphics2D.fillRect(i, j, k, l, i1);
         Graphics2D.fillRect(i + 1, j + 1, k - 2, 16, 0);
         Graphics2D.drawRect(i + 1, j + 18, k - 2, l - 19, 0);
-        boldFont.drawTextHLeftVMid(i1, "Choose Option", j + 14, i + 3);
+        boldFont.drawTextHLeftVTop("Choose Option", i + 3, j + 14, i1);
         int j1 = super.mouseEventX;
         int k1 = super.mouseEventY;
         if (menuScreenArea == 0) {
@@ -2187,8 +2187,8 @@ public class Client extends GameShell {
     private void loadingStages() {
         if (lowMem && loadingStage == 2 && MapRegion.anInt131 != plane) {
             gameScreenCanvas.initDrawingArea();
-            plainFont.drawText(0, "Loading - please wait.", 151, 257);
-            plainFont.drawText(0xffffff, "Loading - please wait.", 150, 256);
+            plainFont.drawTextHMidVTop("Loading - please wait.", 257, 151, 0);
+            plainFont.drawTextHMidVTop("Loading - please wait.", 256, 150, 0xffffff);
             gameScreenCanvas.drawGraphics(4, super.graphics, 4);
             loadingStage = 1;
             aLong824 = System.currentTimeMillis();
@@ -2813,13 +2813,13 @@ public class Client extends GameShell {
         char c = '\u0168';//what are these?
         char c1 = '\310';
         byte byte1 = 20;
-        boldFont.drawText(0xffffff, "RuneScape is loading - please wait...", c1 / 2 - 26 - byte1, c / 2);
+        boldFont.drawTextHMidVTop("RuneScape is loading - please wait...", c / 2, c1 / 2 - 26 - byte1, 0xffffff);
         int j = c1 / 2 - 18 - byte1;
         Graphics2D.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
         Graphics2D.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
         Graphics2D.fillRect(c / 2 - 150, j + 2, i * 3, 30, 0x8c1111);
         Graphics2D.fillRect((c / 2 - 150) + i * 3, j + 2, 300 - i * 3, 30, 0);
-        boldFont.drawText(0xffffff, s, (c1 / 2 + 5) - byte1, c / 2);
+        boldFont.drawTextHMidVTop(s, c / 2, (c1 / 2 + 5) - byte1, 0xffffff);
         aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if (repaintRequested) {
             repaintRequested = false;
@@ -3021,10 +3021,10 @@ public class Client extends GameShell {
             return;
         }
         gameScreenCanvas.initDrawingArea();
-        plainFont.drawText(0, "Connection lost", 144, 257);
-        plainFont.drawText(0xffffff, "Connection lost", 143, 256);
-        plainFont.drawText(0, "Please wait - attempting to reestablish", 159, 257);
-        plainFont.drawText(0xffffff, "Please wait - attempting to reestablish", 158, 256);
+        plainFont.drawTextHMidVTop("Connection lost", 257, 144, 0);
+        plainFont.drawTextHMidVTop("Connection lost", 256, 143, 0xffffff);
+        plainFont.drawTextHMidVTop("Please wait - attempting to reestablish", 257, 159, 0);
+        plainFont.drawTextHMidVTop("Please wait - attempting to reestablish", 256, 158, 0xffffff);
         gameScreenCanvas.drawGraphics(4, super.graphics, 4);
         miniMapLock = 0;
         destX = 0;
@@ -4751,9 +4751,9 @@ public class Client extends GameShell {
                 if ((k == 3 || k == 7) && (k == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
                     int l = 329 - i * 13;
                     int k1 = 4;
-                    RSFont.drawTextHLeftVMid(0, "From", l, k1);
-                    RSFont.drawTextHLeftVMid(65535, "From", l - 1, k1);
-                    k1 += RSFont.getTextWidth("From ");
+                    RSFont.drawTextHLeftVTop("From", k1, l, 0);
+                    RSFont.drawTextHLeftVTop("From", k1, l - 1, 65535);
+                    k1 += RSFont.getFormattedStringWith("From ");
                     if (byte1 == 1) {
                         modIcons[0].drawImage(k1, l - 12);
                         k1 += 14;
@@ -4762,22 +4762,22 @@ public class Client extends GameShell {
                         modIcons[1].drawImage(k1, l - 12);
                         k1 += 14;
                     }
-                    RSFont.drawTextHLeftVMid(0, s + ": " + chatMessages[j], l, k1);
-                    RSFont.drawTextHLeftVMid(65535, s + ": " + chatMessages[j], l - 1, k1);
+                    RSFont.drawTextHLeftVTop(s + ": " + chatMessages[j], k1, l, 0);
+                    RSFont.drawTextHLeftVTop(s + ": " + chatMessages[j], k1, l - 1, 65535);
                     if (++i >= 5)
                         return;
                 }
                 if (k == 5 && privateChatMode < 2) {
                     int i1 = 329 - i * 13;
-                    RSFont.drawTextHLeftVMid(0, chatMessages[j], i1, 4);
-                    RSFont.drawTextHLeftVMid(65535, chatMessages[j], i1 - 1, 4);
+                    RSFont.drawTextHLeftVTop(chatMessages[j], 4, i1, 0);
+                    RSFont.drawTextHLeftVTop(chatMessages[j], 4, i1 - 1, 65535);
                     if (++i >= 5)
                         return;
                 }
                 if (k == 6 && privateChatMode < 2) {
                     int j1 = 329 - i * 13;
-                    RSFont.drawTextHLeftVMid(0, "To " + s + ": " + chatMessages[j], j1, 4);
-                    RSFont.drawTextHLeftVMid(65535, "To " + s + ": " + chatMessages[j], j1 - 1, 4);
+                    RSFont.drawTextHLeftVTop("To " + s + ": " + chatMessages[j], 4, j1, 0);
+                    RSFont.drawTextHLeftVTop("To " + s + ": " + chatMessages[j], 4, j1 - 1, 65535);
                     if (++i >= 5)
                         return;
                 }
@@ -6948,8 +6948,8 @@ public class Client extends GameShell {
                                             class30_sub2_sub1_sub1_2.drawSprite(k5, j6);
                                         if (class30_sub2_sub1_sub1_2.w2 == 33 || class9_1.invStackSizes[i3] != 1) {
                                             int k10 = class9_1.invStackSizes[i3];
-                                            smallFont.drawTextHLeftVMid(0, logic_get_amount_string(k10), j6 + 10 + j7, k5 + 1 + k6);
-                                            smallFont.drawTextHLeftVMid(0xffff00, logic_get_amount_string(k10), j6 + 9 + j7, k5 + k6);
+                                            smallFont.drawTextHLeftVTop(logic_get_amount_string(k10), k5 + 1 + k6, j6 + 10 + j7, 0);
+                                            smallFont.drawTextHLeftVTop(logic_get_amount_string(k10), k5 + k6, j6 + 9 + j7, 0xffff00);
                                         }
                                     }
                                 }
@@ -7469,16 +7469,16 @@ public class Client extends GameShell {
             int i1 = 0xffff00;
             if (super.fps < 15)
                 i1 = 0xff0000;
-            plainFont.method380("Fps:" + super.fps, c, i1, k);
+            plainFont.drawTextHRightVTop("Fps:" + super.fps, c, k, i1);
             k += 15;
             Runtime runtime = Runtime.getRuntime();
             int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024L));
             i1 = 0xffff00;
             if (j1 > 0x2000000 && lowMem)
                 i1 = 0xff0000;
-            plainFont.method380("Heap usage:" + j1 + "m", c, 0xffff00, k);
+            plainFont.drawTextHRightVTop("Heap usage:" + j1 + "m", c, k, 0xffff00);
             k += 15;
-            plainFont.method380("Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", c, i1, k);
+            plainFont.drawTextHRightVTop("Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", c, k, i1);
             k += 15;
         }
         if (systemUpdateTime != 0) {
@@ -7486,9 +7486,9 @@ public class Client extends GameShell {
             int l = j / 60;
             j %= 60;
             if (j < 10)
-                plainFont.drawTextHLeftVMid(0xffff00, "System update in: " + l + ":0" + j, 329, 4);
+                plainFont.drawTextHLeftVTop("System update in: " + l + ":0" + j, 4, 329, 0xffff00);
             else
-                plainFont.drawTextHLeftVMid(0xffff00, "System update in: " + l + ":" + j, 329, 4);
+                plainFont.drawTextHLeftVTop("System update in: " + l + ":" + j, 4, 329, 0xffff00);
             anInt849++;
             if (anInt849 > 75) {
                 anInt849 = 0;
@@ -7570,9 +7570,9 @@ public class Client extends GameShell {
     }
 
     private void determineMenuSize() {
-        int i = boldFont.getTextWidth("Choose Option");
+        int i = boldFont.getFormattedStringWith("Choose Option");
         for (int j = 0; j < menuActionRow; j++) {
-            int k = boldFont.getTextWidth(menuActionName[j]);
+            int k = boldFont.getFormattedStringWith(menuActionName[j]);
             if (k > i)
                 i = k;
         }
@@ -8141,7 +8141,7 @@ public class Client extends GameShell {
                 if ((k == 3 || k == 7) && (k == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
                     int l = 329 - i * 13;
                     if (super.mouseEventX > 4 && super.mouseEventY - 4 > l - 10 && super.mouseEventY - 4 <= l + 3) {
-                        int i1 = plainFont.getTextWidth("From:  " + s + chatMessages[j]) + 25;
+                        int i1 = plainFont.getFormattedStringWith("From:  " + s + chatMessages[j]) + 25;
                         if (i1 > 450)
                             i1 = 450;
                         if (super.mouseEventX < 4 + i1) {
@@ -9224,8 +9224,8 @@ public class Client extends GameShell {
                 loadingStage = 1;
                 aLong824 = System.currentTimeMillis();
                 gameScreenCanvas.initDrawingArea();
-                plainFont.drawText(0, "Loading - please wait.", 151, 257);
-                plainFont.drawText(0xffffff, "Loading - please wait.", 150, 256);
+                plainFont.drawTextHMidVTop("Loading - please wait.", 257, 151, 0);
+                plainFont.drawTextHMidVTop("Loading - please wait.", 256, 150, 0xffffff);
                 gameScreenCanvas.drawGraphics(4, super.graphics, 4);
                 if (pktType == 73) {
                     int k16 = 0;

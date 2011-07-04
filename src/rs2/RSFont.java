@@ -12,7 +12,7 @@ public class RSFont extends Graphics2D {
         glyphHeight = new int[256];
         horizontalKerning = new int[256];
         verticalKerning = new int[256];
-        rsb = new int[256];
+        charEffectiveWidth = new int[256];
         aRandom1498 = new Random();
         isStrikethrough = false;
         Packet data = new Packet(jagexArchive.getDataForName(s + ".dat"));
@@ -25,10 +25,10 @@ public class RSFont extends Graphics2D {
         {
             horizontalKerning[l] = index.g1();
             verticalKerning[l] = index.g1();
-            int i1 = glyphWidth[l] = index.g2();
+            int width = glyphWidth[l] = index.g2();
             int j1 = glyphHeight[l] = index.g2();
             int k1 = index.g1();
-            int l1 = i1 * j1;
+            int l1 = width * j1;
             glyphPixels[l] = new byte[l1];
             if(k1 == 0)
             {
@@ -38,10 +38,10 @@ public class RSFont extends Graphics2D {
             } else
             if(k1 == 1)
             {
-                for(int j2 = 0; j2 < i1; j2++)
+                for(int j2 = 0; j2 < width; j2++)
                 {
                     for(int l2 = 0; l2 < j1; l2++)
-                        glyphPixels[l][j2 + l2 * i1] = data.g1b();
+                        glyphPixels[l][j2 + l2 * width] = data.g1b();
 
                 }
 
@@ -49,98 +49,98 @@ public class RSFont extends Graphics2D {
             if(j1 > charHeight && l < 128)
                 charHeight = j1;
             horizontalKerning[l] = 1;
-            rsb[l] = i1 + 2;
+            charEffectiveWidth[l] = width + 2;
             int k2 = 0;
             for(int i3 = j1 / 7; i3 < j1; i3++)
-                k2 += glyphPixels[l][i3 * i1];
+                k2 += glyphPixels[l][i3 * width];
 
             if(k2 <= j1 / 7)
             {
-                rsb[l]--;
+                charEffectiveWidth[l]--;
                 horizontalKerning[l] = 0;
             }
             k2 = 0;
             for(int j3 = j1 / 7; j3 < j1; j3++)
-                k2 += glyphPixels[l][(i1 - 1) + j3 * i1];
+                k2 += glyphPixels[l][(width - 1) + j3 * width];
 
             if(k2 <= j1 / 7)
-                rsb[l]--;
+                charEffectiveWidth[l]--;
         }
 
         if(flag)
         {
-            rsb[32] = rsb[73];
+            charEffectiveWidth[32] = charEffectiveWidth[73];
         } else
         {
-            rsb[32] = rsb[105];
+            charEffectiveWidth[32] = charEffectiveWidth[105];
         }
     }
 
-    public void method380(String s, int x, int c, int y)
+    public void drawTextHRightVTop(String string, int x, int y, int colour)
     {
-        drawTextHLeftVMid(c, s, y, x - method384(s));
+        drawTextHLeftVTop(string, x - getStringWidth(string), y, colour);
     }
 
-    public void drawText(int i, String s, int k, int l)
+    public void drawTextHMidVTop(String string, int x, int y, int colour)
     {
-        drawTextHLeftVMid(i, s, k, l - method384(s) / 2);
+        drawTextHLeftVTop(string, x - getStringWidth(string) / 2, y, colour);
     }
 
-    public void method382(int i, int j, String s, int l, boolean flag)//drawcenteredtext?
+    public void method382(int i, int x, String string, int l, boolean flag)//drawcenteredtext?
     {
-        method389(flag, j - getTextWidth(s) / 2, i, s, l);
+        method389(flag, x - getFormattedStringWith(string) / 2, i, string, l);
     }
 
-    public int getTextWidth(String s)
+    public int getFormattedStringWith(String string)
     {
-        if(s == null)
+        if(string == null)
             return 0;
         int j = 0;
-        for(int k = 0; k < s.length(); k++)
-            if(s.charAt(k) == '@' && k + 4 < s.length() && s.charAt(k + 4) == '@')
+        for(int k = 0; k < string.length(); k++)
+            if(string.charAt(k) == '@' && k + 4 < string.length() && string.charAt(k + 4) == '@')
                 k += 4;
             else
-                j += rsb[s.charAt(k)];
+                j += charEffectiveWidth[string.charAt(k)];
 
         return j;
     }
 
-    public int method384(String s)
+    public int getStringWidth(String s)
     {
         if(s == null)
             return 0;
         int j = 0;
         for(int k = 0; k < s.length(); k++)
-            j += rsb[s.charAt(k)];
+            j += charEffectiveWidth[s.charAt(k)];
         return j;
     }
 
-    public void drawTextHLeftVMid(int i, String s, int j, int l)
+    public void drawTextHLeftVTop(String string, int x, int y, int colour)
     {
-        if(s == null)
+        if(string == null)
             return;
-        j -= charHeight;
-        for(int i1 = 0; i1 < s.length(); i1++)
+        y -= charHeight;
+        for(int i1 = 0; i1 < string.length(); i1++)
         {
-            char c = s.charAt(i1);
+            char c = string.charAt(i1);
             if(c != ' ')
-                method392(glyphPixels[c], l + horizontalKerning[c], j + verticalKerning[c], glyphWidth[c], glyphHeight[c], i);
-            l += rsb[c];
+                drawGlyph(glyphPixels[c], x + horizontalKerning[c], y + verticalKerning[c], glyphWidth[c], glyphHeight[c], colour);
+            x += charEffectiveWidth[c];
         }
     }
 
-    public void method386(int i, String s, int j, int k, int l)
+    public void drawTextHRMidVTopWaving(String string, int x, int y, int colour, int wavePart)
     {
-        if(s == null)
+        if(string == null)
             return;
-        j -= method384(s) / 2;
-        l -= charHeight;
-        for(int i1 = 0; i1 < s.length(); i1++)
+        x -= getStringWidth(string) / 2;
+        y -= charHeight;
+        for(int i1 = 0; i1 < string.length(); i1++)
         {
-            char c = s.charAt(i1);
+            char c = string.charAt(i1);
             if(c != ' ')
-                method392(glyphPixels[c], j + horizontalKerning[c], l + verticalKerning[c] + (int)(Math.sin((double)i1 / 2D + (double)k / 5D) * 5D), glyphWidth[c], glyphHeight[c], i);
-            j += rsb[c];
+                drawGlyph(glyphPixels[c], x + horizontalKerning[c], y + verticalKerning[c] + (int) (Math.sin((double) i1 / 2D + (double) wavePart / 5D) * 5D), glyphWidth[c], glyphHeight[c], colour);
+            x += charEffectiveWidth[c];
         }
 
     }
@@ -149,33 +149,33 @@ public class RSFont extends Graphics2D {
     {
         if(s == null)
             return;
-        i -= method384(s) / 2;
+        i -= getStringWidth(s) / 2;
         k -= charHeight;
         for(int i1 = 0; i1 < s.length(); i1++)
         {
             char c = s.charAt(i1);
             if(c != ' ')
-                method392(glyphPixels[c], i + horizontalKerning[c] + (int)(Math.sin((double)i1 / 5D + (double)j / 5D) * 5D), k + verticalKerning[c] + (int)(Math.sin((double)i1 / 3D + (double)j / 5D) * 5D), glyphWidth[c], glyphHeight[c], l);
-            i += rsb[c];
+                drawGlyph(glyphPixels[c], i + horizontalKerning[c] + (int) (Math.sin((double) i1 / 5D + (double) j / 5D) * 5D), k + verticalKerning[c] + (int) (Math.sin((double) i1 / 3D + (double) j / 5D) * 5D), glyphWidth[c], glyphHeight[c], l);
+            i += charEffectiveWidth[c];
         }
 
     }
 
-    public void method388(int i, String s, int j, int k, int l, int i1)
+    public void method388(int wavePart, String string, int wavePart2, int y, int x, int colour)
     {
-        if(s == null)
+        if(string == null)
             return;
-        double d = 7D - (double)i / 8D;
+        double d = 7D - (double)wavePart / 8D;
         if(d < 0.0D)
             d = 0.0D;
-        l -= method384(s) / 2;
-        k -= charHeight;
-        for(int k1 = 0; k1 < s.length(); k1++)
+        x -= getStringWidth(string) / 2;
+        y -= charHeight;
+        for(int k1 = 0; k1 < string.length(); k1++)
         {
-            char c = s.charAt(k1);
+            char c = string.charAt(k1);
             if(c != ' ')
-                method392(glyphPixels[c], l + horizontalKerning[c], k + verticalKerning[c] + (int)(Math.sin((double)k1 / 1.5D + (double)j) * d), glyphWidth[c], glyphHeight[c], i1);
-            l += rsb[c];
+                drawGlyph(glyphPixels[c], x + horizontalKerning[c], y + verticalKerning[c] + (int) (Math.sin((double) k1 / 1.5D + (double) wavePart2) * d), glyphWidth[c], glyphHeight[c], colour);
+            x += charEffectiveWidth[c];
         }
 
     }
@@ -200,10 +200,10 @@ public class RSFont extends Graphics2D {
                 if(c != ' ')
                 {
                     if(flag1)
-                        method392(glyphPixels[c], i + horizontalKerning[c] + 1, k + verticalKerning[c] + 1, glyphWidth[c], glyphHeight[c], 0);
-                    method392(glyphPixels[c], i + horizontalKerning[c], k + verticalKerning[c], glyphWidth[c], glyphHeight[c], j);
+                        drawGlyph(glyphPixels[c], i + horizontalKerning[c] + 1, k + verticalKerning[c] + 1, glyphWidth[c], glyphHeight[c], 0);
+                    drawGlyph(glyphPixels[c], i + horizontalKerning[c], k + verticalKerning[c], glyphWidth[c], glyphHeight[c], j);
                 }
-                i += rsb[c];
+                i += charEffectiveWidth[c];
             }
         if(isStrikethrough)
             drawHLine(l, k + (int)((double) charHeight * 0.69999999999999996D), i - l, 0x800000);
@@ -231,7 +231,7 @@ public class RSFont extends Graphics2D {
                         method394(192, i + horizontalKerning[c] + 1, glyphPixels[c], glyphWidth[c], ypos + verticalKerning[c] + 1, glyphHeight[c], 0);
                     method394(j1, i + horizontalKerning[c], glyphPixels[c], glyphWidth[c], ypos + verticalKerning[c], glyphHeight[c], j);
                 }
-                i += rsb[c];
+                i += charEffectiveWidth[c];
                 if((aRandom1498.nextInt() & 3) == 0)
                     i++;
             }
@@ -281,7 +281,7 @@ public class RSFont extends Graphics2D {
         return -1;
     }
 
-    private void method392(byte abyte0[], int i, int j, int k, int l, int i1)
+    private void drawGlyph(byte abyte0[], int i, int j, int k, int l, int i1)
     {
         int j1 = i + j * width;
         int k1 = width - k;
@@ -426,7 +426,7 @@ public class RSFont extends Graphics2D {
     private final int[] glyphHeight;
     private final int[] horizontalKerning;
     private final int[] verticalKerning;
-    private final int[] rsb;
+    private final int[] charEffectiveWidth;
     public int charHeight;
     private final Random aRandom1498;
     private boolean isStrikethrough;

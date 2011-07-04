@@ -78,6 +78,23 @@ public class SceneGraph {
 
     }
 
+    public void clearTiles()
+    {
+        for(int z = 0; z < zMapSize; z++)
+        {
+            for(int x = 0; x < xMapSize; x++)
+            {
+                for(int y = 0; y < yMapSize; y++){
+                    if (tileArray[z][x][y] == null)
+                        continue;
+                    tileArray[z][x][y].shapedTile = null;
+                    tileArray[z][x][y].myPlainTile= null;
+                }
+
+            }
+
+        }
+    }
     public void clearCullingClusters(){
         for(int l = 0; l < Math.min(anInt472,cullingClusters.length); l++)
         {
