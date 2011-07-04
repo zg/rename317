@@ -170,11 +170,11 @@ public class SceneGraph {
         }
     }
 
-    public void addTile(int zz, int x, int y, int shapeA, int shapeB, int j1, int zA,
+    public void addTile(int zz, int x, int y, int shape, int rotation, int j1, int zA,
             int zB, int zD, int zC, int colourA, int colourB, int colourD, int colourC,
             int colourAA, int colourBA, int colourDA, int colourCA, int cRGB2, int RGBA)
     {
-        if(shapeA == 0)
+        if(shape == 0)
         {
             PlainTile plainTile = new PlainTile(colourA, colourB, colourD, colourC, -1, cRGB2, false);
             for(int heightLevel = zz; heightLevel >= 0; heightLevel--)
@@ -184,7 +184,7 @@ public class SceneGraph {
             tileArray[zz][x][y].myPlainTile = plainTile;
             return;
         }
-        if(shapeA == 1)
+        if(shape == 1)
         {
             PlainTile plainTile_1 = new PlainTile(colourAA, colourBA, colourDA, colourCA, j1, RGBA, zA == zB && zA == zD && zA == zC);
             for(int z = zz; z >= 0; z--)
@@ -194,7 +194,7 @@ public class SceneGraph {
             tileArray[zz][x][y].myPlainTile = plainTile_1;
             return;
         }
-        ShapedTile shapedTile = new ShapedTile(x, y, zA, zB, zC, zD, colourAA, colourBA, colourCA, colourDA, RGBA, colourA, colourB, colourC, colourD, cRGB2, j1, shapeA, shapeB);
+        ShapedTile shapedTile = new ShapedTile(x, y, zA, zB, zC, zD, colourAA, colourBA, colourCA, colourDA, RGBA, colourA, colourB, colourC, colourD, cRGB2, j1, shape, rotation);
         for(int z = zz; z >= 0; z--)
             if(tileArray[z][x][y] == null)
                 tileArray[z][x][y] = new Tile(z, x, y);

@@ -63,7 +63,7 @@ public class FrequencyGenerator//mhm not too sure
         return anIntArray665[i] * 2;
     }
 
-    public void method545(Packet stream, AmplitudeEnvelope class29)
+    public void method545(Packet stream, AmplitudeEnvelope amplitudeEnvelope)
     {
         int i = stream.g1();
         anIntArray665[0] = i >> 4;
@@ -99,11 +99,18 @@ public class FrequencyGenerator//mhm not too sure
             }
 
             if(j != 0 || anIntArray668[1] != anIntArray668[0])
-                class29.readValues(stream);
+                amplitudeEnvelope.readValues(stream);
         } else
         {
             anIntArray668[0] = anIntArray668[1] = 0;
         }
+        
+        for(int bbbb = 0; bbbb < anIntArrayArrayArray666.length;bbbb++)
+        	for(int b = 0; b < anIntArrayArrayArray666[bbbb].length;b++)
+        		for(int c = 0; c < anIntArrayArrayArray666[bbbb][b].length;c++)
+        		{
+        			System.out.println("anIntArrayArrayArray666["+bbbb+"]["+b+"]["+c+"] = "+ anIntArrayArrayArray666[bbbb][b][c]);
+        		}
     }
 
     public FrequencyGenerator()

@@ -382,8 +382,7 @@ final class BZ2InputStream {
 					groupPos--;
 					zt = tMinLen;
 					byte zj;
-					for (zvec = BZ2InputStream.getBits(zt, block); zvec > tLimit[zt]; zvec = zvec << 1
-						| zj) {
+					for (zvec = BZ2InputStream.getBits(zt, block); zvec > tLimit[zt]; zvec = zvec << 1 | zj) {
 						zt++;
 						zj = BZ2InputStream.readBit(block);
 					}

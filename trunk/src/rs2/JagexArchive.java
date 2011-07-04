@@ -5,7 +5,7 @@ public class JagexArchive {
 
     public JagexArchive(byte in[])
     {
-               Packet stream = new Packet(in);
+        Packet stream = new Packet(in);
         int resultLength = stream.g3();
         int rawLength = stream.g3();
         if(rawLength != resultLength)
