@@ -1,6 +1,5 @@
 package editor;
 
-import com.sun.javaws.jnl.XMLFormat;
 import editor.gui.EditorMainWindow;
 import editor.gui.dockables.ToolSelectionBar;
 import editor.renderer.GameViewPanel;
@@ -26,9 +25,8 @@ import java.net.InetAddress;
 public class EditorMain extends GameShell implements ComponentListener, WindowListener {
     private EditorMainWindow editorMainWindow;
     public JagexFileStore[] jagexFileStores = new JagexFileStore[5];
+    private OnDemandFetcher onDemandFetcher;
     private JagexArchive titleJagexArchive;
-    private byte[][][] tileSettingBits;
-    private int[][][] heightMap;
     private SceneGraph sceneGraph;
     private MapRegion mapRegion;
     private TileSetting[] tileSettings;
@@ -36,49 +34,65 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
     private RSFont plainFont;
     private RSFont boldFont;
     private RgbImage minimapImage;
-    private OnDemandFetcher onDemandFetcher;
     private RgbImage compass;
     private IndexedImage[] mapScenes;
     private RgbImage[] mapFunctions;
     private RgbImage mapMarker;
-    private int[] compassShape1;
-    private int[] compassShape2;
-    private int[] minimapShape1;
-    private int[] minimapShape2;
     private int fieldJ;
+    private GraphicsBuffer minimapIP;
     private GraphicsBuffer gameScreenCanvas;
+    /* Map fields */
     private int mapWidth = 2;//- Settings
     private int mapHeight = 2;//- Settings
     private int heightLevel = 0;
+    private boolean mapLoaded = false;
+    private int currentMapX;
+    private int currentMapZ;
     private int mapTileW = mapWidth * 64;
     private int mapTileH = mapHeight * 64;
+    private byte[][][] tileSettingBits;
+    private int[][][] heightMap;
+    /* Camera fields */
     private int xCameraPos=mapWidth*32*128;;
     private int yCameraPos=mapHeight*32*128;
     private int xCameraCurve = (int) (Math.random() * 20D) - 10 & 0x7ff;;
     private int zCameraPos = -540;
     private int yCameraCurve = 128;
-    private GraphicsBuffer minimapIP;
+    /* Minimap fields */
+    private int[] compassShape1;
+    private int[] compassShape2;
+    private int[] minimapShape1;
+    private int[] minimapShape2;
     private int numOfMapMarkers = 0;
     private RgbImage[] markGraphic;
     private int[] markPosX;
     private int[] markPosY;
-    private boolean mapLoaded = false;
-    private int resizeWidth = -1;
-    private int resizeHeight = -1;
-    private int currentMapX;
-    private int currentMapZ;
     private Graphics minimapGraphics;
+    /* Mouse 360* camera fields */
     private int lastMouseX = -1;
     private int lastMouseY = -1;
     private int[] isOnScreen;
+    /* Resizable window fields*/
     private int lastResizeHeight = -1;
     private int lastResizeWidth = -1;
+    private int resizeWidth = -1;
+    private int resizeHeight = -1;
+    /* Render setting fields */
     private boolean showAllHLs = false;
+    /* Basic editing fields */
     private int selectedTileY = -1;
     private int selectedTileX = -1;
     private int selectedTileZ = -1;
+    /* Mod height fields */
     private int heightEditingSpeed = 10;
+    /* Set height fields */
     private int setHeight;
+    /* Flood fill fields */
+    private int recurseOMeter = 0;
+    private boolean[][][] fillTraversed;
+    /* Pencil fields */
+   // private boolean[][][] selectedFields;
+
 
     private JagexArchive getJagexArchive(int i) {
         byte abyte0[] = null;
@@ -321,6 +335,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         if (editorMainWindow.getToolSelectionBar().getBrushSize() % 2 == 0 || halfW == 0){
             for (int _x = x;_x < editorMainWindow.getToolSelectionBar().getBrushSize()+x;_x++)
                 for (int _z = y;_z < editorMainWindow.getToolSelectionBar().getBrushSize()+y;_z++)   {
+                    if (z < 0 || _x < 0 || _z < 0 || z > 3 || _x >= mapTileW || _z >= mapTileH)
+                        continue;
                     int dx = Math.abs(x-_x);
                     int dy = Math.abs(y-_z);
                     float d = (int) Math.sqrt(dx*dx + dy*dy);
@@ -329,6 +345,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         } else {
             for (int _x = x-halfW;_x <= halfW+x;_x++)
                 for (int _z = y-halfW;_z <= halfW+y;_z++)   {
+                    if (z < 0 || _x < 0 || _z < 0 || z > 3 || _x >= mapTileW || _z >= mapTileH)
+                        continue;
                     int dx = Math.abs(x-_x);
                     int dy = Math.abs(y-_z);
                     float d = (int) Math.sqrt(dx*dx + dy*dy);
@@ -343,17 +361,19 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         if (editorMainWindow.getToolSelectionBar().getBrushSize() % 2 == 0 || halfW == 0){
             for (int _x = x;_x < editorMainWindow.getToolSelectionBar().getBrushSize()+x;_x++)
                 for (int _z = y;_z < editorMainWindow.getToolSelectionBar().getBrushSize()+y;_z++)   {
+                    if (z < 0 || _x < 0 || _z < 0 || z > 3 || _x >= mapTileW || _z >= mapTileH)
+                        continue;
                     int dx = Math.abs(x-_x);
                     int dy = Math.abs(y-_z);
-                    //float d = (int) Math.sqrt(dx*dx + dy*dy);
                     sceneGraph.setHighlightedTile(_x,_z);
                 }
         } else {
             for (int _x = x-halfW;_x <= halfW+x;_x++)
                 for (int _z = y-halfW;_z <= halfW+y;_z++)   {
+                    if (z < 0 || _x < 0 || _z < 0 || z > 3 || _x >= mapTileW || _z >= mapTileH)
+                        continue;
                     int dx = Math.abs(x-_x);
                     int dy = Math.abs(y-_z);
-                    //float d = (int) Math.sqrt(dx*dx + dy*dy);
                     sceneGraph.setHighlightedTile(_x,_z);
                 }
         }
@@ -381,17 +401,17 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             case HEIGHT_EDIT:
                 mapRegion.automaticHeight[z][x][y] = false;
                 if (!controlDown){
-                    heightMap[z][x][y]-=heightEditingSpeed/(d * 0.25f + 1f);
+                    heightMap[z][x][y]-=(heightEditingSpeed/(d * 0.25f + 1f)) % 8;
                 } else {
                     if (heightMap[z][x][y] < 0)
-                        heightMap[z][x][y]+=heightEditingSpeed/(d * 0.25f + 1f);
+                        heightMap[z][x][y]+=(heightEditingSpeed/(d * 0.25f + 1f)) % 8;
                 }
                 break;
             case HEIGHT_SET:
                 mapRegion.automaticHeight[z][x][y] = false;
                 if (!controlDown && setHeight != -1){
                     heightMap[z][x][y]=setHeight;
-                } else {
+                } else if (controlDown && d == 0) {
                     setHeight = heightMap[z][x][y];
                 }
                 break;
@@ -403,33 +423,116 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 if (d == 0)
                     doFloodFill(z,x,y,false,-1);
                 break;
+            case HEIGHTFILL_OVERLAY:
+                if (d == 0)
+                    if (controlDown)
+                        setHeight = heightMap[z][x][y];
+                    else
+                        doFloodFill(z, x, y, true, -1);
+                break;
+            case HEIGHTFILL_UNDERLAY:
+                if (d == 0)
+                    if (controlDown)
+                        setHeight = heightMap[z][x][y];
+                    else
+                        doFloodFill(z, x, y, false, -1);
+                break;
+            case SETTINGSFILL_OVERLAY:
+            case SETTINGSFILL_UNDERLAY:
+                if (d == 0){
+                    editorMainWindow.getSettingsBrushEditorWindow().setCurrentTileBits(tileSettingBits[z][x][y]);
+                    doFloodFill(z,x,y,editorMainWindow.getToolSelectionBar().getSelectedTool() == ToolSelectionBar.EditorTools.SETTINGSFILL_OVERLAY,-1);
+                }
+                break;
+            case APPLY_SETTINGS:
+                tileSettingBits[z][x][y] = (byte) editorMainWindow.getSettingsBrushEditorWindow().getBitField();
+                break;
+            case ADDSHAPES_OVERLAY:
+            case ADDSHAPES_UNDERLAY:
+                 doFloodFill(z,x,y,editorMainWindow.getToolSelectionBar().getSelectedTool() == ToolSelectionBar.EditorTools.ADDSHAPES_OVERLAY,-1);
+                break;
         }
 
     }
 
     private void doFloodFill(int y, int x, int z, boolean isOverlay,int curId) {
-        if (y < 0 || x < 0 || z < 0 || y > 3 || x >= mapTileW || z >= mapTileH)
+        if (curId == -1) {
+            recurseOMeter = 0;
+            fillTraversed = new boolean[4][mapTileW][mapTileH];
+        }
+        recurseOMeter++;
+        if (y < 0 || x < 0 || z < 0 || y > 3 || x >= mapTileW || z >= mapTileH){
+            recurseOMeter--;
             return;
+        }
         if (isOverlay){
-            int overlayId = mapRegion.getOverLay()[y][x][z];
+            int overlayId = mapRegion.getOverLay()[y][x][z] & 0xFF;
             if (curId == -1){
                 curId = overlayId;
-            } else if (curId != overlayId)
+            } else if (curId != overlayId || fillTraversed[y][x][z]) {
+                recurseOMeter--;
                 return;
-            mapRegion.setOverlay(y,x,z,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
+            }
         } else {
-            int underlayId = mapRegion.getUnderLay()[y][x][z];
+            int underlayId = mapRegion.getUnderLay()[y][x][z] & 0xFF;
             if (curId == -1){
                 curId = underlayId;
-            } else if (curId != underlayId)
+            } else if (curId != underlayId || fillTraversed[y][x][z]) {
+                recurseOMeter--;
                 return;
-            mapRegion.setUnderlay(y,x,z,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
+            }
+        }
+        fillTraversed[y][x][z] = true;
+        switch (editorMainWindow.getToolSelectionBar().getSelectedTool()){
+            case HEIGHTFILL_OVERLAY:
+                heightMap[y][x+1][z]=setHeight;
+                heightMap[y][x+1][z+1]=setHeight;
+                heightMap[y][x][z+1]=setHeight;
+            case HEIGHTFILL_UNDERLAY:
+                mapRegion.automaticHeight[y][x][z] = false;
+                heightMap[y][x][z]=setHeight;
+                break;
+            case SETTINGSFILL_OVERLAY:
+            case SETTINGSFILL_UNDERLAY:
+                tileSettingBits[y][x][z] = (byte) editorMainWindow.getSettingsBrushEditorWindow().getBitField();
+                break;
+            case FLOODFILL_OVERLAY:
+                mapRegion.setOverlay(y, x, z, editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId() + 1);
+                break;
+            case FLOODFILL_UNDERLAY:
+                mapRegion.setUnderlay(y,x,z,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
+                break;
+            case ADDSHAPES_OVERLAY:
+            case ADDSHAPES_UNDERLAY:
+                boolean n = z == mapTileH - 1 || mapRegion.getOverLay()[y][x][z + 1] != 0;
+                boolean s = z == 0 || mapRegion.getOverLay()[y][x][z - 1] != 0;
+                boolean w = x == 0 || mapRegion.getOverLay()[y][x-1][z  ] != 0;
+                boolean e = x == mapTileW - 1 || mapRegion.getOverLay()[y][x+1][z  ] != 0;
+                mapRegion.shapeA[y][x][z] = 1;
+                if (n && w && (!s) && (!e))
+                    mapRegion.shapeB[y][x][z] = 1;
+                else if (n && e && (!s) && (!w))
+                    mapRegion.shapeB[y][x][z] = 2;
+                else if (s && e && (!n) && (!w))
+                    mapRegion.shapeB[y][x][z] = 3;
+                else if (s && w && (!n) && (!e))
+                    mapRegion.shapeB[y][x][z] = 0;
+                else
+                    mapRegion.shapeA[y][x][z] = 0;
+                break;
+        }
+        if (recurseOMeter >= 500){
+            recurseOMeter--;
+            return;
         }
         for (int _x = x-1; _x <= x+1; _x++)
-            doFloodFill(y, _x, z, isOverlay,curId);
+            doFloodFill(y, _x, z, isOverlay, curId);
         for (int _z = z-1; _z <= z+1; _z++)
-            doFloodFill(y, x, _z, isOverlay,curId);
+            doFloodFill(y, x, _z, isOverlay, curId);
+        recurseOMeter--;
     }
+
+
 
     private void refreshMap() {
         sceneGraph.clearCullingClusters();
@@ -443,6 +546,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
 
     @Override
     protected void repaintGame() {
+        if (graphics == null)
+            return;
         gameScreenCanvas.drawGraphics(0, graphics, 0);
         if (selectedTileX != -1)
             ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getShapeA()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeB()[selectedTileY][selectedTileX][selectedTileZ]);
@@ -459,7 +564,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                         ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getShapeA()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeB()[selectedTileY][selectedTileX][selectedTileZ]);
 
         } catch (Exception e){
-
+            System.err.println("Exception while rendering frame!");
         }
 
     }
@@ -490,7 +595,6 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
     private void drawMapScenes(int y, int k, int x, int i1, int z) {
         int interactableObjectUID = sceneGraph.getWallObjectUID(z, x, y);
             int mhTile = mapTileH;// mapHeight*64;
-            int mwTile = mapTileW;//mapWidth*64;
         if (interactableObjectUID != 0) {
             int uid = sceneGraph.getIDTAGForXYZ(z, x, y, interactableObjectUID);
             int lineDirection = uid >> 6 & 3;
@@ -498,7 +602,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             int lineColour = k;
             if (interactableObjectUID > 0)
                 lineColour = i1;
-            int minimapPixels[] = minimapImage.myPixels;
+            @SuppressWarnings({"MismatchedReadAndWriteOfArray"}) int minimapPixels[] = minimapImage.myPixels;
             int pixelOffset = (128 + 128 * 786) +  x * 4 + ((mhTile - 1) - y) * 786 * 4;
             int objectID = interactableObjectUID >> 14 & 0x7fff;
             ObjectDef object = ObjectDef.forID(objectID);
@@ -583,7 +687,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 int l4 = 0xeeeeee;
                 if (interactableObjectUID > 0)
                     l4 = 0xee0000;
-                int ai1[] = minimapImage.myPixels;
+                @SuppressWarnings({"MismatchedReadAndWriteOfArray"}) int ai1[] = minimapImage.myPixels;
                 int l5 = (128 + 128 * 786) + x * 4 + ((mhTile - 1) - y) * 786 * 4;
                 if (l2 == 0 || l2 == 2) {
                     ai1[l5 + 786*3] = l4;
@@ -642,7 +746,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                     mapRegion.initMapTables(_z*64,64,64,_x*64);
                     continue;
                 }
-                byte[] terrainData = JavaUncompress.decompress(jagexFileStores[4].decompress(terrainIdx));
+                byte[] terrainData = GZIPWrapper.decompress(jagexFileStores[4].decompress(terrainIdx));
                 if (terrainData == null){
                     mapRegion.initMapTables(_z*64,64,64,_x*64);
                     continue;
@@ -654,7 +758,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 int objectIdx = onDemandFetcher.getMapIndex(1,z+_z,x+_x);
                 if (objectIdx == -1)
                     continue;
-                byte[] objectData = JavaUncompress.decompress(jagexFileStores[4].decompress(objectIdx));
+                byte[] objectData = GZIPWrapper.decompress(jagexFileStores[4].decompress(objectIdx));
                 if (objectData == null)
                     continue;
                 mapRegion.loadObjects(_x*64,tileSettings,_z*64,sceneGraph,objectData);
@@ -981,10 +1085,25 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 int objectIdx = onDemandFetcher.getMapIndex(1,currentMapZ+_z,currentMapX+_x);
                 if (objectIdx == -1)
                     continue;
-                byte[] objectData = JavaUncompress.decompress(jagexFileStores[4].decompress(objectIdx));
+                byte[] objectData = GZIPWrapper.decompress(jagexFileStores[4].decompress(objectIdx));
                 if (objectData == null)
                     continue;
                 mapRegion.loadObjects(_x*64,tileSettings,_z*64,sceneGraph,objectData);
+            }
+    }
+
+    public void saveMap() {
+        int x = currentMapX;
+        int z = currentMapZ;
+        for (int _x = 0;_x < mapWidth;_x++)
+            for (int _z = 0;_z < mapHeight;_z++){
+                int terrainIdx = onDemandFetcher.getMapIndex(0, z + _z, x + _x);
+                Packet mapStorage = new Packet(new byte[131072]);//128KB should be enough
+                mapRegion.writeMapRegion(_x * 64, _z * 64, mapStorage);
+                byte[] terrainData = new byte[mapStorage.pos];
+                System.arraycopy(mapStorage.data,0,terrainData,0,mapStorage.pos);
+                terrainData = GZIPWrapper.compress(terrainData);
+                jagexFileStores[4].put(terrainData.length,terrainData,terrainIdx);
             }
     }
 }

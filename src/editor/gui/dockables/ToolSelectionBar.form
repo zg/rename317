@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="editor.gui.dockables.ToolSelectionBar">
-  <grid id="27dc6" binding="mainPane" layout-manager="GridLayoutManager" row-count="1" column-count="12" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPane" layout-manager="GridLayoutManager" row-count="1" column-count="18" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="819" height="36"/>
+      <xy x="20" y="20" width="1176" height="36"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -20,7 +20,7 @@
       </component>
       <hspacer id="86499">
         <constraints>
-          <grid row="0" column="11" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="17" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
       <component id="ca097" class="javax.swing.JToggleButton" binding="paintUnderlayButton">
@@ -49,7 +49,7 @@
       </component>
       <component id="c3862" class="javax.swing.JToggleButton" binding="applySettingsButton">
         <constraints>
-          <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="AS"/>
@@ -66,7 +66,7 @@
       </component>
       <component id="d6530" class="javax.swing.JSlider" binding="slider1" default-binding="true">
         <constraints>
-          <grid row="0" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="15" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <majorTickSpacing value="2"/>
@@ -79,7 +79,7 @@
       </component>
       <component id="3c319" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Brush size:"/>
@@ -87,7 +87,7 @@
       </component>
       <component id="838c8" class="javax.swing.JLabel" binding="brushSizeLabel">
         <constraints>
-          <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="1"/>
@@ -109,6 +109,54 @@
           <text value="FU"/>
         </properties>
       </component>
+      <component id="bcd8b" class="javax.swing.JToggleButton" binding="heightFillUButton">
+        <constraints>
+          <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="HFU"/>
+        </properties>
+      </component>
+      <component id="463a" class="javax.swing.JToggleButton" binding="heightFillOButton">
+        <constraints>
+          <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="HFO"/>
+        </properties>
+      </component>
+      <component id="dc8ef" class="javax.swing.JToggleButton" binding="settingsFillOButton">
+        <constraints>
+          <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="FSO"/>
+        </properties>
+      </component>
+      <component id="ebafd" class="javax.swing.JToggleButton" binding="settingsFillUButton">
+        <constraints>
+          <grid row="0" column="11" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="FSU"/>
+        </properties>
+      </component>
+      <component id="aace4" class="javax.swing.JToggleButton" binding="shapeOButton">
+        <constraints>
+          <grid row="0" column="12" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="SO"/>
+        </properties>
+      </component>
+      <component id="8f9bf" class="javax.swing.JToggleButton" binding="shapeUButton">
+        <constraints>
+          <grid row="0" column="13" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="SU"/>
+        </properties>
+      </component>
     </children>
   </grid>
   <buttonGroups>
@@ -121,6 +169,12 @@
       <member id="72d32"/>
       <member id="c3862"/>
       <member id="5b45c"/>
+      <member id="463a"/>
+      <member id="bcd8b"/>
+      <member id="dc8ef"/>
+      <member id="ebafd"/>
+      <member id="aace4"/>
+      <member id="8f9bf"/>
     </group>
   </buttonGroups>
 </form>

@@ -13,12 +13,13 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 {
 
     private EditorMain editorInstance;
+    private boolean DISABLE_CRC = true;
 
     private boolean crcMatches(int i, int j, byte abyte0[])
     {
         if(abyte0 == null || abyte0.length < 2)
             return false;
-        if (clientInstance == null)
+        if (clientInstance == null || DISABLE_CRC)
             return true;
         int k = abyte0.length - 2;
         int footer = ((abyte0[k] & 0xff) << 8) + (abyte0[k + 1] & 0xff);
@@ -805,8 +806,8 @@ public class OnDemandFetcher extends OnDemandFetcherParent
 
     public byte[] getDataFromCache(int id, int c) {
         if (clientInstance != null)
-            return JavaUncompress.decompress(clientInstance.jagexFileStores[c+1].decompress(id));
+            return GZIPWrapper.decompress(clientInstance.jagexFileStores[c + 1].decompress(id));
         else
-            return JavaUncompress.decompress(editorInstance.jagexFileStores[c+1].decompress(id));
+            return GZIPWrapper.decompress(editorInstance.jagexFileStores[c + 1].decompress(id));
     }
 }

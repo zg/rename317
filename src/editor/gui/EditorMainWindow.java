@@ -158,6 +158,12 @@ public class EditorMainWindow {
                 }
             }
         });
+        saveMapMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //For now use a JOptionPane
+                editor.saveMap();
+            }
+        });
     }
 
     public void show() {
