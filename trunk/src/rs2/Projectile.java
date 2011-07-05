@@ -46,12 +46,12 @@ public class Projectile extends Entity {
             return model_1;
     }
 
-    public Projectile(int i, int j, int l, int i1, int j1, int k1,
+    public Projectile(int i, int j, int l, int i1, int j1, int z,
                          int l1, int i2, int j2, int k2, int l2)
     {
         aBoolean1579 = false;
         aSpotAnim_1592 = SpotAnim.cache[l2];
-        anInt1597 = k1;
+        plane = z;
         anInt1580 = j2;
         anInt1581 = i2;
         anInt1582 = l1;
@@ -107,5 +107,5 @@ public class Projectile extends Entity {
     private int anInt1594;
     public int anInt1595;
     private int anInt1596;
-    public final int anInt1597;
+    public final int plane;
 }

@@ -3,12 +3,12 @@ package rs2;
 
 public class StillGraphic extends Entity {
 
-    public StillGraphic(int i, int j, int l, int i1, int j1, int k1,
+    public StillGraphic(int z, int j, int l, int i1, int j1, int k1,
                         int l1)
     {
         transformCompleted = false;
         spotAnim = SpotAnim.cache[i1];
-        anInt1560 = i;
+        plane = z;
         anInt1561 = l1;
         anInt1562 = k1;
         anInt1563 = j1;
@@ -66,7 +66,7 @@ public class StillGraphic extends Entity {
 
     }
 
-    public final int anInt1560;
+    public final int plane;
     public final int anInt1561;
     public final int anInt1562;
     public final int anInt1563;

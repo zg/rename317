@@ -183,40 +183,40 @@ public class TileSetting
         }
     }
 
-    public void method212(boolean flag, int j, int k, int l, int i1, int j1)
+    public void method212(boolean flag, int objectSizeX, int objectSizeY, int objectX, int objectY, int j1)
     {
         int k1 = 256;
         if(flag)
             k1 += 0x20000;
-        l -= anInt290;
-        i1 -= anInt291;
+        objectX -= anInt290;
+        objectY -= anInt291;
         if(j1 == 1 || j1 == 3)
         {
-            int l1 = j;
-            j = k;
-            k = l1;
+            int l1 = objectSizeX;
+            objectSizeX = objectSizeY;
+            objectSizeY = l1;
         }
-        for(int i2 = l; i2 < l + j; i2++)
-            if(i2 >= 0 && i2 < sizeX)
+        for(int x = objectX; x < objectX + objectSizeX; x++)
+            if(x >= 0 && x < sizeX)
             {
-                for(int j2 = i1; j2 < i1 + k; j2++)
-                    if(j2 >= 0 && j2 < sizeY)
-                        orClipTable(i2, j2, k1);
+                for(int y = objectY; y < objectY + objectSizeY; y++)
+                    if(y >= 0 && y < sizeY)
+                        orClipTable(x, y, k1);
 
             }
 
     }
 
-    public void orClipTableSET(int i, int k)
+    public void orClipTableSET(int y, int x)
     {
-        k -= anInt290;
-        i -= anInt291;
-        clipData[k][i] |= 0x200000;
+        x -= anInt290;
+        y -= anInt291;
+        clipData[x][y] |= 0x200000;
     }
 
-    private void orClipTable(int i, int j, int k)
+    private void orClipTable(int x, int y, int k)
     {
-        clipData[i][j] |= k;
+        clipData[x][y] |= k;
     }
 
     public void method215(int i, int j, boolean flag, int k, int l)
