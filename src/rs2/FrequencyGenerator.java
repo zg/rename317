@@ -104,7 +104,7 @@ public class FrequencyGenerator//mhm not too sure
         {
             anIntArray668[0] = anIntArray668[1] = 0;
         }
-        
+        if(1 != 1)
         for(int bbbb = 0; bbbb < anIntArrayArrayArray666.length;bbbb++)
         	for(int b = 0; b < anIntArrayArrayArray666[bbbb].length;b++)
         		for(int c = 0; c < anIntArrayArrayArray666[bbbb][b].length;c++)

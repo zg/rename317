@@ -214,6 +214,81 @@ public class Graphics2D extends NodeSub {
 		}
 
 	}
+	
+
+	public static void fillCircleAlpha(int posX, int posY, int radius, int colour, int alpha)//draw circle? - used for highlighting the map symbols ;D
+	{
+		/*
+		 * looks like they used this as there base model
+		 * for(float i = -RADIUS; i < RADIUS; i +=RADIUS/NUM_LINES)
+		 *	{
+		 *	ycoord = i;
+		 *	xcoord1 = sqrt(RADIUS^2 - i^2);
+		 *	xcoord2 = -xcoord1;
+		 * }
+		 */
+		int dest_intensity = 256 - alpha;
+		int src_red = (colour >> 16 & 0xff) * alpha;
+		int src_green = (colour >> 8 & 0xff) * alpha;
+		int src_blue = (colour & 0xff) * alpha;
+		int i3 = posY - radius;
+		if(i3 < 0)
+			i3 = 0;
+		int j3 = posY + radius;
+		if(j3 >= height)
+			j3 = height - 1;
+		for(int y = i3; y <= j3; y++)
+		{
+			int l3 = y - posY;
+			int i4 = (int)Math.sqrt(radius * radius - l3 * l3);
+			int x = posX - i4;
+			if(x < 0)
+				x = 0;
+			int k4 = posX + i4;
+			if(k4 >= width)
+				k4 = width - 1;
+			int pixel_offset = x + y * width;
+			for(int i5 = x; i5 <= k4; i5++)
+			{
+				int dest_red = (pixels[pixel_offset] >> 16 & 0xff) * dest_intensity;
+				int dest_green = (pixels[pixel_offset] >> 8 & 0xff) * dest_intensity;
+				int dest_blue = (pixels[pixel_offset] & 0xff) * dest_intensity;
+				int result_rgb = ((src_red + dest_red >> 8) << 16) + ((src_green + dest_green >> 8) << 8) + (src_blue + dest_blue >> 8);
+				pixels[pixel_offset++] = result_rgb;
+			}
+
+		}
+
+	}
+	public static void fillCircle(int posX, int posY, int radius, int colour)
+	{
+		int i3 = posY - radius;
+		if(i3 < 0)
+			i3 = 0;
+		int j3 = posY + radius;
+		if(j3 >= height)
+			j3 = height - 1;
+		for(int y = i3; y <= j3; y++)
+		{
+			int l3 = y - posY;
+			int i4 = (int)Math.sqrt(radius * radius - l3 * l3);
+			int x = posX - i4;
+			if(x < 0)
+				x = 0;
+			int k4 = posX + i4;
+			if(k4 >= width)
+				k4 = width - 1;
+			int pixel_offset = x + y * width;
+			for(int i5 = x; i5 <= k4; i5++)
+			{
+
+				pixels[pixel_offset++] = colour;
+			}
+
+		}
+
+	}
+
 
 	Graphics2D() {
 	}

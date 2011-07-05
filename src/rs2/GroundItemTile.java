@@ -22,5 +22,5 @@ public class GroundItemTile {
     Entity secondGroundItem;
     Entity thirdGroundItem;
     int uid;
-    int anInt52;//todo - what is this O_O
+    int anInt52;//todo - what is this O_O -- top item model?
 }

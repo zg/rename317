@@ -2801,29 +2801,41 @@ public class Client extends GameShell {
         repaintRequested = true;
     }
 
-    protected void drawLoadingText(int i, String s) {
-        anInt1079 = i;
-        aString1049 = s;
+    protected void drawLoadingText(int percentage, String text) {
+        loadingBarPercantage = percentage;
+        loadingBarText = text;
         resetImageProducers();
         if (titleJagexArchive == null) {
-            super.drawLoadingText(i, s);
+            super.drawLoadingText(percentage, text);
             return;
         }
         aRSImageProducer_1109.initDrawingArea();//loading area ??
         char c = '\u0168';//what are these?
         char c1 = '\310';
         byte byte1 = 20;
-        boldFont.drawTextHMidVTop("RuneScape is loading - please wait...", c / 2, c1 / 2 - 26 - byte1, 0xffffff);
-        int j = c1 / 2 - 18 - byte1;
-        Graphics2D.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
-        Graphics2D.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
-        Graphics2D.fillRect(c / 2 - 150, j + 2, i * 3, 30, 0x8c1111);
-        Graphics2D.fillRect((c / 2 - 150) + i * 3, j + 2, 300 - i * 3, 30, 0);
-        boldFont.drawTextHMidVTop(s, c / 2, (c1 / 2 + 5) - byte1, 0xffffff);
-        aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
+        if(!circleLoadingBar)
+        {
+        	boldFont.drawTextHMidVTop("RuneScape is loading - please wait...", c / 2, c1 / 2 - 26 - byte1, 0xffffff);
+        	int j = c1 / 2 - 18 - byte1;
+        	Graphics2D.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
+        	Graphics2D.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
+        	Graphics2D.fillRect(c / 2 - 150, j + 2, percentage * 3, 30, 0x8c1111);
+        	Graphics2D.fillRect((c / 2 - 150) + percentage * 3, j + 2, 300 - percentage * 3, 30, 0);
+        	boldFont.drawTextHMidVTop(text, c / 2, (c1 / 2 + 5) - byte1, 0xffffff);
+        }
+        else
+        	{
+        	Graphics2D.fillCircle(50,50,  percentage/2, 0xff00ff);
+        	Graphics2D.fillCircle(100,50, percentage/2, 0xff0000);
+        	Graphics2D.fillCircle(150,50, percentage/2, 0xff00ff);
+        	Graphics2D.fillCircle(200,50, percentage/2, 0xff0000);
+        	Graphics2D.fillCircle(250,50, percentage/2, 0xff00ff);
+        	Graphics2D.fillCircle(300,50, percentage/2, 0xff0000);
+        	}
+        	aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if (repaintRequested) {
             repaintRequested = false;
-            if (!aBoolean831) {
+           if (!aBoolean831) {
                 aRSImageProducer_1110.drawGraphics(0, super.graphics, 0);
                 aRSImageProducer_1111.drawGraphics(0, super.graphics, 637);
             }
@@ -6194,7 +6206,7 @@ public class Client extends GameShell {
            // EditorMain.main(null);
             return;
         } catch (Exception exception) {
-            Signlink.reporterror("loaderror " + aString1049 + " " + anInt1079);
+            Signlink.reporterror("loaderror " + loadingBarText + " " + loadingBarPercantage);
             exception.printStackTrace();
         }
         loadingError = true;
@@ -10584,7 +10596,7 @@ public class Client extends GameShell {
     private int isMember;
     private boolean char_edit_gender;
     private int anInt1048;
-    private String aString1049;
+    private String loadingBarText;
     private static int anInt1051;
     private final int[] minimapShape1;
     private JagexArchive titleJagexArchive;
@@ -10612,7 +10624,7 @@ public class Client extends GameShell {
     private RgbImage mapDotPlayer;
     private RgbImage mapDotFriend;
     private RgbImage mapDotTeam;
-    private int anInt1079;
+    private int loadingBarPercantage;
     private boolean aBoolean1080;
     private String[] user_friends_name_string;
     private Packet inStream;
@@ -10806,7 +10818,8 @@ public class Client extends GameShell {
     public static int anInt1290;
     public String server = "";
     public static boolean guiLaunch = true;
-
+    public static boolean circleLoadingBar = true;
+    
     static {
         XP_FOR_LEVEL = new int[99];
         int i = 0;
