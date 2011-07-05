@@ -1203,38 +1203,38 @@ label0:
         return (hsl & 0xff80) + l;
     }
 
-    public static void method188(SceneGraph sceneGraph, int i, int j, int k, int l, TileSetting tileSetting, int ai[][][], int i1,
-                                 int j1, int k1)
+    public static void method188(SceneGraph sceneGraph, int i, int y, int k, int l, TileSetting tileSetting, int ai[][][], int x,
+                                 int objectID, int z)
     {
-        int l1 = ai[l][i1][j];
-        int i2 = ai[l][i1 + 1][j];
-        int j2 = ai[l][i1 + 1][j + 1];
-        int k2 = ai[l][i1][j + 1];
+        int l1 = ai[l][x][y];
+        int i2 = ai[l][x + 1][y];
+        int j2 = ai[l][x + 1][y + 1];
+        int k2 = ai[l][x][y + 1];
         int l2 = l1 + i2 + j2 + k2 >> 2;
-        ObjectDef class46 = ObjectDef.forID(j1);
-        int i3 = i1 + (j << 7) + (j1 << 14) + 0x40000000;
-        if(!class46.hasActions)
+        ObjectDef objectDef = ObjectDef.forID(objectID);
+        int i3 = x + (y << 7) + (objectID << 14) + 0x40000000;
+        if(!objectDef.hasActions)
             i3 += 0x80000000;
         byte byte1 = (byte)((i << 6) + k);
         if(k == 22)
         {
             Object obj;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj = class46.method578(22, i, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj = objectDef.method578(22, i, l1, i2, j2, k2, -1);
             else
-                obj = new ObjectOnTile(j1, i, 22, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addGroundDecoration(k1, l2, j, ((Entity) (obj)), byte1, i3, i1);
-            if(class46.isUnwalkable && class46.hasActions)
-                tileSetting.orClipTableSET(j, i1);
+                obj = new ObjectOnTile(objectID, i, 22, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addGroundDecoration(z, l2, y, ((Entity) (obj)), byte1, i3, x);
+            if(objectDef.isUnwalkable && objectDef.hasActions)
+                tileSetting.orClipTableSET(y, x);
             return;
         }
         if(k == 10 || k == 11)
         {
             Object obj1;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj1 = class46.method578(10, i, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj1 = objectDef.method578(10, i, l1, i2, j2, k2, -1);
             else
-                obj1 = new ObjectOnTile(j1, i, 10, i2, j2, l1, k2, class46.animationID, true);
+                obj1 = new ObjectOnTile(objectID, i, 10, i2, j2, l1, k2, objectDef.animationID, true);
             if(obj1 != null)
             {
                 int j5 = 0;
@@ -1244,53 +1244,53 @@ label0:
                 int i5;
                 if(i == 1 || i == 3)
                 {
-                    k4 = class46.sizeY;
-                    i5 = class46.sizeX;
+                    k4 = objectDef.sizeY;
+                    i5 = objectDef.sizeX;
                 } else
                 {
-                    k4 = class46.sizeX;
-                    i5 = class46.sizeY;
+                    k4 = objectDef.sizeX;
+                    i5 = objectDef.sizeY;
                 }
-                sceneGraph.addEntityB(i3, byte1, l2, i5, ((Entity) (obj1)), k4, k1, j5, j, i1);
+                sceneGraph.addEntityB(i3, byte1, l2, i5, ((Entity) (obj1)), k4, z, j5, y, x);
             }
-            if(class46.isUnwalkable)
-                tileSetting.method212(class46.aBoolean757, class46.sizeX, class46.sizeY, i1, j, i);
+            if(objectDef.isUnwalkable)
+                tileSetting.method212(objectDef.aBoolean757, objectDef.sizeX, objectDef.sizeY, x, y, i);
             return;
         }
         if(k >= 12)
         {
             Object obj2;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj2 = class46.method578(k, i, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj2 = objectDef.method578(k, i, l1, i2, j2, k2, -1);
             else
-                obj2 = new ObjectOnTile(j1, i, k, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addEntityB(i3, byte1, l2, 1, ((Entity) (obj2)), 1, k1, 0, j, i1);
-            if(class46.isUnwalkable)
-                tileSetting.method212(class46.aBoolean757, class46.sizeX, class46.sizeY, i1, j, i);
+                obj2 = new ObjectOnTile(objectID, i, k, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addEntityB(i3, byte1, l2, 1, ((Entity) (obj2)), 1, z, 0, y, x);
+            if(objectDef.isUnwalkable)
+                tileSetting.method212(objectDef.aBoolean757, objectDef.sizeX, objectDef.sizeY, x, y, i);
             return;
         }
         if(k == 0)
         {
             Object obj3;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj3 = class46.method578(0, i, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj3 = objectDef.method578(0, i, l1, i2, j2, k2, -1);
             else
-                obj3 = new ObjectOnTile(j1, i, 0, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallObject(bitValues[i], ((Entity) (obj3)), i3, j, byte1, i1, null, l2, 0, k1,i);
-            if(class46.isUnwalkable)
-                tileSetting.method211(j, i, i1, k, class46.aBoolean757);
+                obj3 = new ObjectOnTile(objectID, i, 0, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addWallObject(bitValues[i], ((Entity) (obj3)), i3, y, byte1, x, null, l2, 0, z,i);
+            if(objectDef.isUnwalkable)
+                tileSetting.method211(y, i, x, k, objectDef.aBoolean757);
             return;
         }
         if(k == 1)
         {
             Object obj4;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj4 = class46.method578(1, i, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj4 = objectDef.method578(1, i, l1, i2, j2, k2, -1);
             else
-                obj4 = new ObjectOnTile(j1, i, 1, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallObject(highNybbleBitValues[i], ((Entity) (obj4)), i3, j, byte1, i1, null, l2, 0, k1,i);
-            if(class46.isUnwalkable)
-                tileSetting.method211(j, i, i1, k, class46.aBoolean757);
+                obj4 = new ObjectOnTile(objectID, i, 1, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addWallObject(highNybbleBitValues[i], ((Entity) (obj4)), i3, y, byte1, x, null, l2, 0, z,i);
+            if(objectDef.isUnwalkable)
+                tileSetting.method211(y, i, x, k, objectDef.aBoolean757);
             return;
         }
         if(k == 2)
@@ -1298,45 +1298,45 @@ label0:
             int j3 = i + 1 & 3;
             Object obj11;
             Object obj12;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
             {
-                obj11 = class46.method578(2, 4 + i, l1, i2, j2, k2, -1);
-                obj12 = class46.method578(2, j3, l1, i2, j2, k2, -1);
+                obj11 = objectDef.method578(2, 4 + i, l1, i2, j2, k2, -1);
+                obj12 = objectDef.method578(2, j3, l1, i2, j2, k2, -1);
             } else
             {
-                obj11 = new ObjectOnTile(j1, 4 + i, 2, i2, j2, l1, k2, class46.animationID, true);
-                obj12 = new ObjectOnTile(j1, j3, 2, i2, j2, l1, k2, class46.animationID, true);
+                obj11 = new ObjectOnTile(objectID, 4 + i, 2, i2, j2, l1, k2, objectDef.animationID, true);
+                obj12 = new ObjectOnTile(objectID, j3, 2, i2, j2, l1, k2, objectDef.animationID, true);
             }
-            sceneGraph.addWallObject(bitValues[i], ((Entity) (obj11)), i3, j, byte1, i1, ((Entity) (obj12)), l2, bitValues[j3], k1,i);
-            if(class46.isUnwalkable)
-                tileSetting.method211(j, i, i1, k, class46.aBoolean757);
+            sceneGraph.addWallObject(bitValues[i], ((Entity) (obj11)), i3, y, byte1, x, ((Entity) (obj12)), l2, bitValues[j3], z,i);
+            if(objectDef.isUnwalkable)
+                tileSetting.method211(y, i, x, k, objectDef.aBoolean757);
             return;
         }
         if(k == 3)
         {
             Object obj5;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj5 = class46.method578(3, i, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj5 = objectDef.method578(3, i, l1, i2, j2, k2, -1);
             else
-                obj5 = new ObjectOnTile(j1, i, 3, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallObject(highNybbleBitValues[i], ((Entity) (obj5)), i3, j, byte1, i1, null, l2, 0, k1,i);
-            if(class46.isUnwalkable)
-                tileSetting.method211(j, i, i1, k, class46.aBoolean757);
+                obj5 = new ObjectOnTile(objectID, i, 3, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addWallObject(highNybbleBitValues[i], ((Entity) (obj5)), i3, y, byte1, x, null, l2, 0, z,i);
+            if(objectDef.isUnwalkable)
+                tileSetting.method211(y, i, x, k, objectDef.aBoolean757);
             return;
         }
         if(k == 9)
         {
             Object obj6;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj6 = class46.method578(k, i, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj6 = objectDef.method578(k, i, l1, i2, j2, k2, -1);
             else
-                obj6 = new ObjectOnTile(j1, i, k, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addEntityB(i3, byte1, l2, 1, ((Entity) (obj6)), 1, k1, 0, j, i1);
-            if(class46.isUnwalkable)
-                tileSetting.method212(class46.aBoolean757, class46.sizeX, class46.sizeY, i1, j, i);
+                obj6 = new ObjectOnTile(objectID, i, k, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addEntityB(i3, byte1, l2, 1, ((Entity) (obj6)), 1, z, 0, y, x);
+            if(objectDef.isUnwalkable)
+                tileSetting.method212(objectDef.aBoolean757, objectDef.sizeX, objectDef.sizeY, x, y, i);
             return;
         }
-        if(class46.isSolid)
+        if(objectDef.isSolid)
             if(i == 1)
             {
                 int k3 = k2;
@@ -1365,55 +1365,55 @@ label0:
         if(k == 4)
         {
             Object obj7;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj7 = class46.method578(4, 0, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj7 = objectDef.method578(4, 0, l1, i2, j2, k2, -1);
             else
-                obj7 = new ObjectOnTile(j1, 0, 4, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallDecoration(i3, j, i * 512, k1, 0, l2, ((Entity) (obj7)), i1, byte1, 0, bitValues[i]);
+                obj7 = new ObjectOnTile(objectID, 0, 4, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addWallDecoration(i3, y, i * 512, z, 0, l2, ((Entity) (obj7)), x, byte1, 0, bitValues[i]);
             return;
         }
         if(k == 5)
         {
             int j4 = 16;
-            int l4 = sceneGraph.getWallObjectUID(k1, i1, j);
+            int l4 = sceneGraph.getWallObjectUID(z, x, y);
             if(l4 > 0)
                 j4 = ObjectDef.forID(l4 >> 14 & 0x7fff).anInt775;
             Object obj13;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj13 = class46.method578(4, 0, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj13 = objectDef.method578(4, 0, l1, i2, j2, k2, -1);
             else
-                obj13 = new ObjectOnTile(j1, 0, 4, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallDecoration(i3, j, i * 512, k1, faceXOffset[i] * j4, l2, ((Entity) (obj13)), i1, byte1, faceYOffset[i] * j4, bitValues[i]);
+                obj13 = new ObjectOnTile(objectID, 0, 4, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addWallDecoration(i3, y, i * 512, z, faceXOffset[i] * j4, l2, ((Entity) (obj13)), x, byte1, faceYOffset[i] * j4, bitValues[i]);
             return;
         }
         if(k == 6)
         {
             Object obj8;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj8 = class46.method578(4, 0, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj8 = objectDef.method578(4, 0, l1, i2, j2, k2, -1);
             else
-                obj8 = new ObjectOnTile(j1, 0, 4, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallDecoration(i3, j, i, k1, 0, l2, ((Entity) (obj8)), i1, byte1, 0, 256);
+                obj8 = new ObjectOnTile(objectID, 0, 4, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addWallDecoration(i3, y, i, z, 0, l2, ((Entity) (obj8)), x, byte1, 0, 256);
             return;
         }
         if(k == 7)
         {
             Object obj9;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj9 = class46.method578(4, 0, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj9 = objectDef.method578(4, 0, l1, i2, j2, k2, -1);
             else
-                obj9 = new ObjectOnTile(j1, 0, 4, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallDecoration(i3, j, i, k1, 0, l2, ((Entity) (obj9)), i1, byte1, 0, 512);
+                obj9 = new ObjectOnTile(objectID, 0, 4, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addWallDecoration(i3, y, i, z, 0, l2, ((Entity) (obj9)), x, byte1, 0, 512);
             return;
         }
         if(k == 8)
         {
             Object obj10;
-            if(class46.animationID == -1 && class46.configObjectIDs == null)
-                obj10 = class46.method578(4, 0, l1, i2, j2, k2, -1);
+            if(objectDef.animationID == -1 && objectDef.configObjectIDs == null)
+                obj10 = objectDef.method578(4, 0, l1, i2, j2, k2, -1);
             else
-                obj10 = new ObjectOnTile(j1, 0, 4, i2, j2, l1, k2, class46.animationID, true);
-            sceneGraph.addWallDecoration(i3, j, i, k1, 0, l2, ((Entity) (obj10)), i1, byte1, 0, 768);
+                obj10 = new ObjectOnTile(objectID, 0, 4, i2, j2, l1, k2, objectDef.animationID, true);
+            sceneGraph.addWallDecoration(i3, y, i, z, 0, l2, ((Entity) (obj10)), x, byte1, 0, 768);
         }
     }
 

@@ -312,17 +312,17 @@ public class SceneGraph {
         tileArray[tileZ][tileX][tileY].wallDecoration = wallDecoration;
     }
 
-    public boolean addEntityB(int i, byte byte0, int j, int k, Entity class30_sub2_sub4, int l, int i1,
-                             int j1, int k1, int l1)
+    public boolean addEntityB(int i, byte byte0, int j, int k, Entity entity, int l, int z,
+                             int j1, int y, int x)
     {
-        if(class30_sub2_sub4 == null)
+        if(entity == null)
         {
             return true;
         } else
         {
-            int i2 = l1 * 128 + 64 * l;
-            int j2 = k1 * 128 + 64 * k;
-            return addEntityC(i1, l1, k1, l, k, i2, j2, j, class30_sub2_sub4, j1, false, i, byte0);
+            int i2 = x * 128 + 64 * l;
+            int j2 = y * 128 + 64 * k;
+            return addEntityC(z, x, y, l, k, i2, j2, j, entity, j1, false, i, byte0);
         }
     }
 
@@ -834,9 +834,9 @@ public class SceneGraph {
 
     }
 
-    public void drawMinimapTile(int y, int x, int z, int pixels[], int pixelPointer, int scanLength)
+    public void drawMinimapTile(int z, int x, int y, int pixels[], int pixelPointer, int scanLength)
     {
-        Tile currentTile = tileArray[y][x][z];
+        Tile currentTile = tileArray[z][x][y];
         if(currentTile == null)
             return;
         PlainTile plainTile = currentTile.myPlainTile;

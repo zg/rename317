@@ -9,7 +9,7 @@
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
                 <floating animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true"/>
                 <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true">
-                    <location x="25" y="46"/>
+                    <location x="268" y="170"/>
                     <size width="1636" height="200"/>
                 </floatingLive>
                 <anchor visible="true" title="Tools" previewEnabled="true" previewDelay="1000" previewTransparentRatio="0.65">
@@ -50,18 +50,21 @@
                 </anchor>
             </descriptors>
         </toolWindow>
-        <toolWindow id="Minimap" available="true" visible="false" active="false" autoHide="false" anchor="RIGHT" anchorIndex="1" type="DOCKED" aggregateMode="false" maximized="false" index="5" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
+        <toolWindow id="Minimap" available="true" visible="true" active="true" autoHide="false" anchor="RIGHT" anchorIndex="1" type="FLOATING_LIVE" aggregateMode="false" maximized="false" index="5" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
             <descriptors>
                 <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="200" minimumDockLength="100" popupMenuEnabled="true"/>
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
                 <floating animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true"/>
-                <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5" resizable="true"/>
+                <floatingLive animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" modal="false" transparentMode="true" transparentDelay="1500" transparentRatio="0.7" addToTaskBar="false" alwaysOnTop="true" osDecorated="false" resizable="true">
+                    <location x="980" y="175"/>
+                    <size width="200" height="483"/>
+                </floatingLive>
                 <anchor visible="true" title="Minimap" previewEnabled="true" previewDelay="1000" previewTransparentRatio="0.65">
                     <lockingAnchors></lockingAnchors>
                 </anchor>
             </descriptors>
         </toolWindow>
-        <toolWindow id="Settings Editor" available="true" visible="false" active="false" autoHide="false" anchor="RIGHT" anchorIndex="0" type="DOCKED" aggregateMode="false" maximized="false" index="6" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
+        <toolWindow id="Settings Editor" available="true" visible="true" active="false" autoHide="false" anchor="RIGHT" anchorIndex="0" type="DOCKED" aggregateMode="false" maximized="false" index="6" flashing="false" lockedOnAnchor="false" hideOnZeroTabs="true">
             <descriptors>
                 <docked animating="true" autoHide="false" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" dockLength="200" minimumDockLength="100" popupMenuEnabled="true"/>
                 <sliding animating="true" autoHide="true" enabled="true" hideRepresentativeButtonOnVisible="false" idVisibleOnTitleBar="true" titleBarButtonsVisible="true" titleBarVisible="true" transparentMode="true" transparentDelay="1000" transparentRatio="0.5"/>
@@ -76,10 +79,10 @@
     <toolWindowManagerDescriptor numberingEnabled="true" previewEnabled="true" showUnavailableTools="false">
         <pushAway pushAwayMode="VERTICAL">
             <mode type="MOST_RECENT">
-                <anchor type="RIGHT"/>
                 <anchor type="BOTTOM"/>
                 <anchor type="LEFT"/>
                 <anchor type="TOP"/>
+                <anchor type="RIGHT"/>
             </mode>
         </pushAway>
     </toolWindowManagerDescriptor>
