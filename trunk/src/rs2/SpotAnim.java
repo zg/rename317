@@ -23,40 +23,40 @@ public class SpotAnim {
     {
         do
         {
-            int i = stream.g1();
-            if(i == 0)
+            int opCode = stream.g1();
+            if(opCode == 0)
                 return;
-            if(i == 1)
+            if(opCode == 1)
                 modelID = stream.g2();
             else
-            if(i == 2)
+            if(opCode == 2)
             {
                 animationID = stream.g2();
                 if(rs2.Sequence.anims != null)
                     animationSequence = rs2.Sequence.anims[animationID];
             } else
-            if(i == 4)
+            if(opCode == 4)
                 resizeXY = stream.g2();
             else
-            if(i == 5)
+            if(opCode == 5)
                 resizeZ = stream.g2();
             else
-            if(i == 6)
+            if(opCode == 6)
                 rotation = stream.g2();
             else
-            if(i == 7)
+            if(opCode == 7)
                 modelBrightness = stream.g1();
             else
-            if(i == 8)
+            if(opCode == 8)
                 modelShadow = stream.g1();
             else
-            if(i >= 40 && i < 50)
-                originalModelColours[i - 40] = stream.g2();
+            if(opCode >= 40 && opCode < 50)
+                originalModelColours[opCode - 40] = stream.g2();
             else
-            if(i >= 50 && i < 60)
-                modifiedModelColours[i - 50] = stream.g2();
+            if(opCode >= 50 && opCode < 60)
+                modifiedModelColours[opCode - 50] = stream.g2();
             else
-                System.out.println("Error unrecognised spotanim config code: " + i);
+                System.out.println("Error unrecognised spotanim config code: " + opCode);
         } while(true);
     }
 

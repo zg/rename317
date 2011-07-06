@@ -161,7 +161,7 @@ public class Client extends GameShell {
         Rasterizer.lineOffsets = anIntArray1180;
         chatBack.drawImage(0, 0);
         if (messagePromptRaised) {
-            boldFont.drawTextHMidVTop(aString1121, 239, 40, 0);
+            boldFont.drawTextHMidVTop(chatboxInputneededString, 239, 40, 0);
             boldFont.drawTextHMidVTop(promptInput + "*", 239, 60, 128);
         } else if (inputDialogState == 1) {
             boldFont.drawTextHMidVTop("Enter amount:", 239, 40, 0);
@@ -260,10 +260,10 @@ public class Client extends GameShell {
                 }
 
             Graphics2D.setDefaultBounds();
-            anInt1211 = j * 14 + 7;
-            if (anInt1211 < 78)
-                anInt1211 = 78;
-            renderChatInterface(77, anInt1211 - anInt1089 - 77, 0, 463, anInt1211);
+            scrollMax = j * 14 + 7;
+            if (scrollMax < 78)
+                scrollMax = 78;
+            renderChatInterface(77, scrollMax - anInt1089 - 77, 0, 463, scrollMax);
             String s;
             if (session_player != null && session_player.name != null)
                 s = session_player.name;
@@ -339,7 +339,7 @@ public class Client extends GameShell {
                     k -= 17;
                     j1 -= 357;
                 }
-                if (k < menuOffsetX - 10 || k > menuOffsetX + menuWidth + 10 || j1 < menuOffsetY - 10 || j1 > menuOffsetY + anInt952 + 10) {
+                if (k < menuOffsetX - 10 || k > menuOffsetX + menuWidth + 10 || j1 < menuOffsetY - 10 || j1 > menuOffsetY + menuHeight + 10) {
                     menuOpen = false;
                     if (menuScreenArea == 1)
                         needDrawTabArea = true;
@@ -961,31 +961,30 @@ public class Client extends GameShell {
         }
 
     }
-
-    private void renderChatInterface(int j, int k, int y, int x, int j1) {
+    private void renderChatInterface(int height, int scrollPosition, int y, int x, int scrollMax) {
         scrollBar1.drawImage(x, y);
-        scrollBar2.drawImage(x, (y + j) - 16);
-        Graphics2D.fillRect(x, y + 16, 16, j - 32, anInt1002);
-        int k1 = ((j - 32) * j) / j1;
-        if (k1 < 8)
-            k1 = 8;
-        int l1 = ((j - 32 - k1) * k) / (j1 - j);
-        Graphics2D.fillRect(x, y + 16 + l1, 16, k1, anInt1063);
-        Graphics2D.drawVLine(x, y + 16 + l1, k1, anInt902);
-        Graphics2D.drawVLine(x + 1, y + 16 + l1, k1, anInt902);
-        Graphics2D.drawHLine(x, y + 16 + l1, 16, anInt902);
-        Graphics2D.drawHLine(x, y + 17 + l1, 16, anInt902);
-        Graphics2D.drawVLine(x + 15, y + 16 + l1, k1, anInt927);
-        Graphics2D.drawVLine(x + 14, y + 17 + l1, k1 - 1, anInt927);
-        Graphics2D.drawHLine(x, y + 15 + l1 + k1, 16, anInt927);
-        Graphics2D.drawHLine(x + 1, y + 14 + l1 + k1, 15, anInt927);
+        scrollBar2.drawImage(x, (y + height) - 16);
+        Graphics2D.fillRect(x, y + 16, 16, height - 32, anInt1002);
+        int height_ = ((height - 32) * height) / scrollMax;
+        if (height_ < 8)
+            height_ = 8;
+        int currentScrollPos = ((height - 32 - height_) * scrollPosition) / (scrollMax - height);
+        Graphics2D.fillRect(x, y + 16 + currentScrollPos, 16, height_, anInt1063);
+        Graphics2D.drawVLine(x, y + 16 + currentScrollPos, height_, anInt902);
+        Graphics2D.drawVLine(x + 1, y + 16 + currentScrollPos, height_, anInt902);
+        Graphics2D.drawHLine(x, y + 16 + currentScrollPos, 16, anInt902);
+        Graphics2D.drawHLine(x, y + 17 + currentScrollPos, 16, anInt902);
+        Graphics2D.drawVLine(x + 15, y + 16 + currentScrollPos, height_, anInt927);
+        Graphics2D.drawVLine(x + 14, y + 17 + currentScrollPos, height_ - 1, anInt927);
+        Graphics2D.drawHLine(x, y + 15 + currentScrollPos + height_, 16, anInt927);
+        Graphics2D.drawHLine(x + 1, y + 14 + currentScrollPos + height_, 15, anInt927);
     }
 
-    private void getNpcPos(Packet stream, int i) {
+    private void getNpcPos(Packet stream, int packetSize) {
         anInt839 = 0;
         sessionNpcsAwaitingUpdatePtr = 0;
         updateNPCs(stream);
-        networkReadNpcSpawnRequests(i, stream);
+        networkReadNpcSpawnRequests(packetSize, stream);
         readNpcUpdateMask(stream);
         for (int k = 0; k < anInt839; k++) {
             int l = anIntArray840[k];
@@ -995,8 +994,8 @@ public class Client extends GameShell {
             }
         }
 
-        if (stream.pos != i) {
-            Signlink.reporterror(myUsername + " size mismatch in getnpcpos - pos:" + stream.pos + " psize:" + i);
+        if (stream.pos != packetSize) {
+            Signlink.reporterror(myUsername + " size mismatch in getnpcpos - pos:" + stream.pos + " psize:" + packetSize);
             throw new RuntimeException("eek");
         }
         for (int i1 = 0; i1 < sessionNpcCount; i1++)
@@ -1585,15 +1584,15 @@ public class Client extends GameShell {
     }
 
     private void drawMenu() {
-        int i = menuOffsetX;
-        int j = menuOffsetY;
-        int k = menuWidth;
-        int l = anInt952;
-        int i1 = 0x5d5447;
-        Graphics2D.fillRect(i, j, k, l, i1);
-        Graphics2D.fillRect(i + 1, j + 1, k - 2, 16, 0);
-        Graphics2D.drawRect(i + 1, j + 18, k - 2, l - 19, 0);
-        boldFont.drawTextHLeftVTop("Choose Option", i + 3, j + 14, i1);
+        int x = menuOffsetX;
+        int y = menuOffsetY;
+        int width = menuWidth;
+        int height = menuHeight;
+        int colour = 0x5d5447;
+        Graphics2D.fillRect(x, y, width, height, colour);
+        Graphics2D.fillRect(x + 1, y + 1, width - 2, 16, 0);
+        Graphics2D.drawRect(x + 1, y + 18, width - 2, height - 19, 0);
+        boldFont.drawTextHLeftVTop("Choose Option", x + 3, y + 14, colour);
         int j1 = super.mouseEventX;
         int k1 = super.mouseEventY;
         if (menuScreenArea == 0) {
@@ -1609,11 +1608,11 @@ public class Client extends GameShell {
             k1 -= 357;
         }
         for (int l1 = 0; l1 < menuActionRow; l1++) {
-            int i2 = j + 31 + (menuActionRow - 1 - l1) * 15;
+            int i2 = y + 31 + (menuActionRow - 1 - l1) * 15;
             int j2 = 0xffffff;
-            if (j1 > i && j1 < i + k && k1 > i2 - 13 && k1 < i2 + 3)
+            if (j1 > x && j1 < x + width && k1 > i2 - 13 && k1 < i2 + 3)
                 j2 = 0xffff00;
-            boldFont.method389(true, i + 3, j2, menuActionName[l1], i2);
+            boldFont.method389(true, x + 3, j2, menuActionName[l1], i2);
         }
 
     }
@@ -1675,13 +1674,13 @@ public class Client extends GameShell {
         return i2 * (128 - l1) + j2 * l1 >> 7;
     }
 
-    private static String logic_get_amount_string(int j) {
-        if (j < 100000)
-            return String.valueOf(j);
-        if (j < 10000000)
-            return j / 1000 + "K";
+    private static String logic_get_amount_string(int ammount) {
+        if (ammount < 100000)
+            return String.valueOf(ammount);
+        if (ammount < 10000000)
+            return ammount / 1000 + "K";
         else
-            return j / 1000000 + "M";
+            return ammount / 1000000 + "M";
     }
 
     private void network_disconnect() {
@@ -1766,7 +1765,7 @@ public class Client extends GameShell {
         on_demand_process();
     }
 
-    private void world_post_players_to_renderer(boolean flag) {
+    private void world_post_players_to_renderer(boolean flag) {//if flag is true only draw current player?
         if (session_player.boundExtentX >> 7 == destX && session_player.boundExtentY >> 7 == destY)
             destX = 0;
         int j = session_player_count;
@@ -1807,48 +1806,48 @@ public class Client extends GameShell {
     }
 
     private boolean interface_handle_dynamic_content_action(RSInterface class9) {
-        int j = class9.content_type;
+        int contentType = class9.content_type;
         if (network_friends_server_status == 2) {
-            if (j == 201) {
+            if (contentType == 201) {
                 inputTaken = true;
                 inputDialogState = 0;
                 messagePromptRaised = true;
                 promptInput = "";
                 friendsListAction = 1;
-                aString1121 = "Enter name of friend to add to list";
+                chatboxInputneededString = "Enter name of friend to add to list";
             }
-            if (j == 202) {
+            if (contentType == 202) {
                 inputTaken = true;
                 inputDialogState = 0;
                 messagePromptRaised = true;
                 promptInput = "";
                 friendsListAction = 2;
-                aString1121 = "Enter name of friend to delete from list";
+                chatboxInputneededString = "Enter name of friend to delete from list";
             }
         }
-        if (j == 205) {
+        if (contentType == 205) {
             anInt1011 = 250;
             return true;
         }
-        if (j == 501) {
+        if (contentType == 501) {
             inputTaken = true;
             inputDialogState = 0;
             messagePromptRaised = true;
             promptInput = "";
             friendsListAction = 4;
-            aString1121 = "Enter name of player to add to list";
+            chatboxInputneededString = "Enter name of player to add to list";
         }
-        if (j == 502) {
+        if (contentType == 502) {
             inputTaken = true;
             inputDialogState = 0;
             messagePromptRaised = true;
             promptInput = "";
             friendsListAction = 5;
-            aString1121 = "Enter name of player to delete from list";
+            chatboxInputneededString = "Enter name of player to delete from list";
         }
-        if (j >= 300 && j <= 313) {
-            int type = (j - 300) / 2;
-            int direction = j & 1;
+        if (contentType >= 300 && contentType <= 313) {
+            int type = (contentType - 300) / 2;
+            int direction = contentType & 1;
             int current_id = char_edit_idkits[type];
             if (current_id != -1) {
                 do {
@@ -1862,9 +1861,9 @@ public class Client extends GameShell {
                 char_edit_model_changed = true;
             }
         }
-        if (j >= 314 && j <= 323) {
-            int type = (j - 314) / 2;
-            int direction = j & 1;
+        if (contentType >= 314 && contentType <= 323) {
+            int type = (contentType - 314) / 2;
+            int direction = contentType & 1;
             int current_colour = char_edit_colours[type];
             if (direction == 0 && --current_colour < 0)
                 current_colour = playerBodyRecolours[type].length - 1;
@@ -1873,15 +1872,15 @@ public class Client extends GameShell {
             char_edit_colours[type] = current_colour;
             char_edit_model_changed = true;
         }
-        if (j == 324 && !char_edit_gender) {
+        if (contentType == 324 && !char_edit_gender) {
             char_edit_gender = true;
             char_edit_change_gender();
         }
-        if (j == 325 && char_edit_gender) {
+        if (contentType == 325 && char_edit_gender) {
             char_edit_gender = false;
             char_edit_change_gender();
         }
-        if (j == 326) {
+        if (contentType == 326) {
             stream.p1isaac(101);
             stream.p1(char_edit_gender ? 0 : 1);
             for (int i1 = 0; i1 < 7; i1++)
@@ -1892,14 +1891,14 @@ public class Client extends GameShell {
 
             return true;
         }
-        if (j == 613)
+        if (contentType == 613)
             report_abuse_mute_player = !report_abuse_mute_player;
-        if (j >= 601 && j <= 612) {
+        if (contentType >= 601 && contentType <= 612) {
             clearTopInterfaces();
             if (reportAbuseInput.length() > 0) {
                 stream.p1isaac(218);
                 stream.p8(TextClass.longForName(reportAbuseInput));
-                stream.p1(j - 601);
+                stream.p1(contentType - 601);
                 stream.p1(report_abuse_mute_player ? 1 : 0);
             }
         }
@@ -2243,27 +2242,27 @@ public class Client extends GameShell {
 
     private void renderProjectiles()//todo- confirm
     {
-        for (Projectile class30_sub2_sub4_sub4 = (Projectile) aClass19_1013.getFront(); class30_sub2_sub4_sub4 != null; class30_sub2_sub4_sub4 = (Projectile) aClass19_1013.getNext())
-            if (class30_sub2_sub4_sub4.plane != plane || currentTime > class30_sub2_sub4_sub4.anInt1572)
-                class30_sub2_sub4_sub4.unlink();
-            else if (currentTime >= class30_sub2_sub4_sub4.anInt1571) {
-                if (class30_sub2_sub4_sub4.anInt1590 > 0) {
-                    Npc npc = sessionNpcs[class30_sub2_sub4_sub4.anInt1590 - 1];
+        for (Projectile projectile = (Projectile) aClass19_1013.getFront(); projectile != null; projectile = (Projectile) aClass19_1013.getNext())
+            if (projectile.plane != plane || currentTime > projectile.anInt1572)
+                projectile.unlink();
+            else if (currentTime >= projectile.anInt1571) {
+                if (projectile.anInt1590 > 0) {
+                    Npc npc = sessionNpcs[projectile.anInt1590 - 1];
                     if (npc != null && npc.boundExtentX >= 0 && npc.boundExtentX < 13312 && npc.boundExtentY >= 0 && npc.boundExtentY < 13312)
-                        class30_sub2_sub4_sub4.method455(currentTime, npc.boundExtentY, method42(class30_sub2_sub4_sub4.plane, npc.boundExtentY, npc.boundExtentX) - class30_sub2_sub4_sub4.anInt1583, npc.boundExtentX);
+                        projectile.method455(currentTime, npc.boundExtentY, method42(projectile.plane, npc.boundExtentY, npc.boundExtentX) - projectile.anInt1583, npc.boundExtentX);
                 }
-                if (class30_sub2_sub4_sub4.anInt1590 < 0) {
-                    int j = -class30_sub2_sub4_sub4.anInt1590 - 1;
+                if (projectile.anInt1590 < 0) {
+                    int j = -projectile.anInt1590 - 1;
                     Player player;
                     if (j == playerID)
                         player = session_player;
                     else
                         player = session_players[j];
                     if (player != null && player.boundExtentX >= 0 && player.boundExtentX < 13312 && player.boundExtentY >= 0 && player.boundExtentY < 13312)
-                        class30_sub2_sub4_sub4.method455(currentTime, player.boundExtentY, method42(class30_sub2_sub4_sub4.plane, player.boundExtentY, player.boundExtentX) - class30_sub2_sub4_sub4.anInt1583, player.boundExtentX);
+                        projectile.method455(currentTime, player.boundExtentY, method42(projectile.plane, player.boundExtentY, player.boundExtentX) - projectile.anInt1583, player.boundExtentX);
                 }
-                class30_sub2_sub4_sub4.method456(anInt945);
-                sceneGraph.addEntityA(plane, class30_sub2_sub4_sub4.anInt1595, (int) class30_sub2_sub4_sub4.aDouble1587, -1, (int) class30_sub2_sub4_sub4.aDouble1586, 60, (int) class30_sub2_sub4_sub4.aDouble1585, class30_sub2_sub4_sub4, false);
+                projectile.method456(anInt945);
+                sceneGraph.addEntityA(plane, projectile.anInt1595, (int) projectile.aDouble1587, -1, (int) projectile.aDouble1586, 60, (int) projectile.aDouble1585, projectile, false);
             }
 
     }
@@ -2568,7 +2567,7 @@ public class Client extends GameShell {
             aBoolean1017 = false;
             stream.p1isaac(86);
             stream.p2(anInt1184);
-            stream.sp2(minimapInt1);
+            stream.sp2(minimapAngle);
         }
         if (super.awtFocus && !aBoolean954) {
             aBoolean954 = true;
@@ -2583,8 +2582,8 @@ public class Client extends GameShell {
         loadingStages();
         method115();
         method90();
-        anInt1009++;
-        if (anInt1009 > 750)
+        timeoutCounter++;
+        if (timeoutCounter > 750)
             dropClient();
         updatePlayerInstances();
         forceNpcUpdateBlock();
@@ -2880,24 +2879,24 @@ public class Client extends GameShell {
 
     private boolean clickObject(int i, int j, int k)//todo- confirm
     {
-        int i1 = i >> 14 & 0x7fff;
+        int objectID = i >> 14 & 0x7fff;
         int j1 = sceneGraph.getIDTAGForXYZ(plane, k, j, i);
         if (j1 == -1)
             return false;
         int k1 = j1 & 0x1f;
         int l1 = j1 >> 6 & 3;
         if (k1 == 10 || k1 == 11 || k1 == 22) {
-            ObjectDef class46 = ObjectDef.forID(i1);
+            ObjectDef objectDef = ObjectDef.forID(objectID);
             int i2;
             int j2;
             if (l1 == 0 || l1 == 2) {
-                i2 = class46.sizeX;
-                j2 = class46.sizeY;
+                i2 = objectDef.sizeX;
+                j2 = objectDef.sizeY;
             } else {
-                i2 = class46.sizeY;
-                j2 = class46.sizeX;
+                i2 = objectDef.sizeY;
+                j2 = objectDef.sizeX;
             }
-            int k2 = class46.anInt768;
+            int k2 = objectDef.anInt768;
             if (l1 != 0)
                 k2 = (k2 << l1 & 0xf) + (k2 >> 4 - l1);
             doWalkTo(2, 0, j2, 0, session_player.pathY[0], i2, k2, j, session_player.pathX[0], false, k);
@@ -3705,7 +3704,7 @@ public class Client extends GameShell {
                     promptInput = "";
                     friendsListAction = 3;
                     aLong953 = friendsListAsLongs[k3];
-                    aString1121 = "Enter message to send to " + user_friends_name_string[k3];
+                    chatboxInputneededString = "Enter message to send to " + user_friends_name_string[k3];
                 }
             }
         }
@@ -4155,11 +4154,11 @@ public class Client extends GameShell {
 
     private void printDebug() {
         System.out.println("============");
-        System.out.println("flame-cycle:" + anInt1208);
+        System.out.println("flame-cycle:" + flameCycle);
         if (onDemandFetcher != null)
             System.out.println("Od-cycle:" + onDemandFetcher.onDemandCycle);
         System.out.println("loop-cycle:" + currentTime);
-        System.out.println("draw-cycle:" + anInt1061);
+        System.out.println("draw-cycle:" + drawCycle);
         System.out.println("ptype:" + pktType);
         System.out.println("psize:" + pktSize);
         if (socketStream != null)
@@ -4930,7 +4929,7 @@ public class Client extends GameShell {
     {
         int l = k * k + j * j;
         if (l > 4225 && l < 0x15f90) {
-            int i1 = minimapInt1 + minimapInt2 & 0x7ff;
+            int i1 = minimapAngle + minimapInt2 & 0x7ff;
             int j1 = Model.SINE[i1];
             int k1 = Model.COSINE[i1];
             j1 = (j1 * 256) / (minimapInt3 + 256);
@@ -5099,7 +5098,7 @@ public class Client extends GameShell {
                 anInt842 = -1;
                 anInt843 = -1;
                 pktSize = 0;
-                anInt1009 = 0;
+                timeoutCounter = 0;
                 systemUpdateTime = 0;
                 anInt1011 = 0;
                 anInt855 = 0;
@@ -5118,7 +5117,7 @@ public class Client extends GameShell {
                 anInt896 = (int) (Math.random() * 80D) - 40;
                 minimapInt2 = (int) (Math.random() * 120D) - 60;
                 minimapInt3 = (int) (Math.random() * 30D) - 20;
-                minimapInt1 = (int) (Math.random() * 20D) - 10 & 0x7ff;
+                minimapAngle = (int) (Math.random() * 20D) - 10 & 0x7ff;
                 miniMapLock = 0;
                 anInt985 = -1;
                 destX = 0;
@@ -5253,7 +5252,7 @@ public class Client extends GameShell {
                 anInt842 = -1;
                 anInt843 = -1;
                 pktSize = 0;
-                anInt1009 = 0;
+                timeoutCounter = 0;
                 systemUpdateTime = 0;
                 menuActionRow = 0;
                 menuOpen = false;
@@ -5748,27 +5747,27 @@ public class Client extends GameShell {
     }
 
     private void method89(GameObjectSpawnRequest gameObjectSpawnRequest) {
-        int i = 0;
-        int j = -1;
-        int k = 0;
-        int l = 0;
+        int objectUID = 0;
+        int id = -1;
+        int type = 0;
+        int face = 0;
         if (gameObjectSpawnRequest.anInt1296 == 0)
-            i = sceneGraph.getWallObjectUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y);
+            objectUID = sceneGraph.getWallObjectUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y);
         if (gameObjectSpawnRequest.anInt1296 == 1)
-            i = sceneGraph.getWallDecorationUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y);
+            objectUID = sceneGraph.getWallDecorationUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y);
         if (gameObjectSpawnRequest.anInt1296 == 2)
-            i = sceneGraph.getInteractableObjectUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y);
+            objectUID = sceneGraph.getInteractableObjectUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y);
         if (gameObjectSpawnRequest.anInt1296 == 3)
-            i = sceneGraph.getGroundDecorationUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y);
-        if (i != 0) {
-            int i1 = sceneGraph.getIDTAGForXYZ(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y, i);
-            j = i >> 14 & 0x7fff;
-            k = i1 & 0x1f;
-            l = i1 >> 6;
+            objectUID = sceneGraph.getGroundDecorationUID(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y);
+        if (objectUID != 0) {
+            int i1 = sceneGraph.getIDTAGForXYZ(gameObjectSpawnRequest.plane, gameObjectSpawnRequest.x, gameObjectSpawnRequest.y, objectUID);
+            id = objectUID >> 14 & 0x7fff;
+            type = i1 & 0x1f;
+            face = i1 >> 6;
         }
-        gameObjectSpawnRequest.id = j;
-        gameObjectSpawnRequest.type = k;
-        gameObjectSpawnRequest.face = l;
+        gameObjectSpawnRequest.id = id;
+        gameObjectSpawnRequest.type = type;
+        gameObjectSpawnRequest.face = face;
     }
 
     private void method90()//todo - handlemusicevents
@@ -5868,12 +5867,12 @@ public class Client extends GameShell {
             RSFont fancyFont = new RSFont(true, "q8_full", titleJagexArchive);
             drawLogo();
             loadTitleScreen();
-            JagexArchive jagexArchive = streamLoaderForName(2, "config", "config", expectedCRCs[2], 30);
-            JagexArchive jagexArchive_1 = streamLoaderForName(3, "interface", "interface", expectedCRCs[3], 35);
-            JagexArchive jagexArchive_2 = streamLoaderForName(4, "2d graphics", "media", expectedCRCs[4], 40);
-            JagexArchive jagexArchive_3 = streamLoaderForName(6, "textures", "textures", expectedCRCs[6], 45);
-            JagexArchive jagexArchive_4 = streamLoaderForName(7, "chat system", "wordenc", expectedCRCs[7], 50);
-            JagexArchive jagexArchive_5 = streamLoaderForName(8, "sound effects", "sounds", expectedCRCs[8], 55);
+            JagexArchive configArchive = streamLoaderForName(2, "config", "config", expectedCRCs[2], 30);
+            JagexArchive interfaceArchive = streamLoaderForName(3, "interface", "interface", expectedCRCs[3], 35);
+            JagexArchive mediaArchive = streamLoaderForName(4, "2d graphics", "media", expectedCRCs[4], 40);
+            JagexArchive textureArchive = streamLoaderForName(6, "textures", "textures", expectedCRCs[6], 45);
+            JagexArchive wordencArchive = streamLoaderForName(7, "chat system", "wordenc", expectedCRCs[7], 50);
+            JagexArchive soundArchive = streamLoaderForName(8, "sound effects", "sounds", expectedCRCs[8], 55);
             tileSettingBits = new byte[4][104][104];
             intGroundArray = new int[4][105][105];
             sceneGraph = new SceneGraph(4, 104, 104, intGroundArray);
@@ -6008,101 +6007,101 @@ public class Client extends GameShell {
             drawLoadingText(80, "Unpacking media");
             for (int count = 0; count < statusGlobes.length; count++)
                 statusGlobes[count] = new RgbImage("./globes/globes_" + count + ".png");
-            invBack = new IndexedImage(jagexArchive_2, "invback", 0);
-            chatBack = new IndexedImage(jagexArchive_2, "chatback", 0);
-            mapBack = new IndexedImage(jagexArchive_2, "mapback", 0);
-            backBase1 = new IndexedImage(jagexArchive_2, "backbase1", 0);
-            backBase2 = new IndexedImage(jagexArchive_2, "backbase2", 0);
-            backHmid1 = new IndexedImage(jagexArchive_2, "backhmid1", 0);
+            invBack = new IndexedImage(mediaArchive, "invback", 0);
+            chatBack = new IndexedImage(mediaArchive, "chatback", 0);
+            mapBack = new IndexedImage(mediaArchive, "mapback", 0);
+            backBase1 = new IndexedImage(mediaArchive, "backbase1", 0);
+            backBase2 = new IndexedImage(mediaArchive, "backbase2", 0);
+            backHmid1 = new IndexedImage(mediaArchive, "backhmid1", 0);
             for (int j3 = 0; j3 < 13; j3++)
-                sideIcons[j3] = new IndexedImage(jagexArchive_2, "sideicons", j3);
+                sideIcons[j3] = new IndexedImage(mediaArchive, "sideicons", j3);
 
-            compass = new RgbImage(jagexArchive_2, "compass", 0);
-            mapEdge = new RgbImage(jagexArchive_2, "mapedge", 0);
+            compass = new RgbImage(mediaArchive, "compass", 0);
+            mapEdge = new RgbImage(mediaArchive, "mapedge", 0);
             mapEdge.method345();
             try {
                 for (int k3 = 0; k3 < 100; k3++)
-                    mapScenes[k3] = new IndexedImage(jagexArchive_2, "mapscene", k3);
+                    mapScenes[k3] = new IndexedImage(mediaArchive, "mapscene", k3);
 
             } catch (Exception _ex) {
             }
             try {
                 for (int l3 = 0; l3 < 100; l3++)
-                    mapFunctions[l3] = new RgbImage(jagexArchive_2, "mapfunction", l3);
+                    mapFunctions[l3] = new RgbImage(mediaArchive, "mapfunction", l3);
 
             } catch (Exception _ex) {
             }
             try {
                 for (int i4 = 0; i4 < 20; i4++)
-                    hitMarks[i4] = new RgbImage(jagexArchive_2, "hitmarks", i4);
+                    hitMarks[i4] = new RgbImage(mediaArchive, "hitmarks", i4);
 
             } catch (Exception _ex) {
             }
             try {
                 for (int j4 = 0; j4 < 20; j4++)
-                    headIcons[j4] = new RgbImage(jagexArchive_2, "headicons", j4);
+                    headIcons[j4] = new RgbImage(mediaArchive, "headicons", j4);
 
             } catch (Exception _ex) {
             }
-            mapFlag = new RgbImage(jagexArchive_2, "mapmarker", 0);
-            mapMarker = new RgbImage(jagexArchive_2, "mapmarker", 1);
+            mapFlag = new RgbImage(mediaArchive, "mapmarker", 0);
+            mapMarker = new RgbImage(mediaArchive, "mapmarker", 1);
             for (int k4 = 0; k4 < 8; k4++)
-                crosses[k4] = new RgbImage(jagexArchive_2, "cross", k4);
+                crosses[k4] = new RgbImage(mediaArchive, "cross", k4);
 
-            mapDotItem = new RgbImage(jagexArchive_2, "mapdots", 0);
-            mapDotNPC = new RgbImage(jagexArchive_2, "mapdots", 1);
-            mapDotPlayer = new RgbImage(jagexArchive_2, "mapdots", 2);
-            mapDotFriend = new RgbImage(jagexArchive_2, "mapdots", 3);
-            mapDotTeam = new RgbImage(jagexArchive_2, "mapdots", 4);
-            scrollBar1 = new IndexedImage(jagexArchive_2, "scrollbar", 0);
-            scrollBar2 = new IndexedImage(jagexArchive_2, "scrollbar", 1);
-            redStone1 = new IndexedImage(jagexArchive_2, "redstone1", 0);
-            redStone2 = new IndexedImage(jagexArchive_2, "redstone2", 0);
-            redStone3 = new IndexedImage(jagexArchive_2, "redstone3", 0);
-            redStone1_2 = new IndexedImage(jagexArchive_2, "redstone1", 0);
+            mapDotItem = new RgbImage(mediaArchive, "mapdots", 0);
+            mapDotNPC = new RgbImage(mediaArchive, "mapdots", 1);
+            mapDotPlayer = new RgbImage(mediaArchive, "mapdots", 2);
+            mapDotFriend = new RgbImage(mediaArchive, "mapdots", 3);
+            mapDotTeam = new RgbImage(mediaArchive, "mapdots", 4);
+            scrollBar1 = new IndexedImage(mediaArchive, "scrollbar", 0);
+            scrollBar2 = new IndexedImage(mediaArchive, "scrollbar", 1);
+            redStone1 = new IndexedImage(mediaArchive, "redstone1", 0);
+            redStone2 = new IndexedImage(mediaArchive, "redstone2", 0);
+            redStone3 = new IndexedImage(mediaArchive, "redstone3", 0);
+            redStone1_2 = new IndexedImage(mediaArchive, "redstone1", 0);
             redStone1_2.flipHorizontal();
-            redStone2_2 = new IndexedImage(jagexArchive_2, "redstone2", 0);
+            redStone2_2 = new IndexedImage(mediaArchive, "redstone2", 0);
             redStone2_2.flipHorizontal();
-            redStone1_3 = new IndexedImage(jagexArchive_2, "redstone1", 0);
+            redStone1_3 = new IndexedImage(mediaArchive, "redstone1", 0);
             redStone1_3.flipVertical();
-            redStone2_3 = new IndexedImage(jagexArchive_2, "redstone2", 0);
+            redStone2_3 = new IndexedImage(mediaArchive, "redstone2", 0);
             redStone2_3.flipVertical();
-            redStone3_2 = new IndexedImage(jagexArchive_2, "redstone3", 0);
+            redStone3_2 = new IndexedImage(mediaArchive, "redstone3", 0);
             redStone3_2.flipVertical();
-            redStone1_4 = new IndexedImage(jagexArchive_2, "redstone1", 0);
+            redStone1_4 = new IndexedImage(mediaArchive, "redstone1", 0);
             redStone1_4.flipHorizontal();
             redStone1_4.flipVertical();
-            redStone2_4 = new IndexedImage(jagexArchive_2, "redstone2", 0);
+            redStone2_4 = new IndexedImage(mediaArchive, "redstone2", 0);
             redStone2_4.flipHorizontal();
             redStone2_4.flipVertical();
             for (int l4 = 0; l4 < 2; l4++)
-                modIcons[l4] = new IndexedImage(jagexArchive_2, "mod_icons", l4);
+                modIcons[l4] = new IndexedImage(mediaArchive, "mod_icons", l4);
 
-            RgbImage rgbImage = new RgbImage(jagexArchive_2, "backleft1", 0);
+            RgbImage rgbImage = new RgbImage(mediaArchive, "backleft1", 0);
             backLeftIP1 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
-            rgbImage = new RgbImage(jagexArchive_2, "backleft2", 0);
+            rgbImage = new RgbImage(mediaArchive, "backleft2", 0);
             backLeftIP2 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
-            rgbImage = new RgbImage(jagexArchive_2, "backright1", 0);
+            rgbImage = new RgbImage(mediaArchive, "backright1", 0);
             backRightIP1 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
-            rgbImage = new RgbImage(jagexArchive_2, "backright2", 0);
+            rgbImage = new RgbImage(mediaArchive, "backright2", 0);
             backRightIP2 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
-            rgbImage = new RgbImage(jagexArchive_2, "backtop1", 0);
+            rgbImage = new RgbImage(mediaArchive, "backtop1", 0);
             backTopIP1 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
-            rgbImage = new RgbImage(jagexArchive_2, "backvmid1", 0);
+            rgbImage = new RgbImage(mediaArchive, "backvmid1", 0);
             backVmidIP1 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
-            rgbImage = new RgbImage(jagexArchive_2, "backvmid2", 0);
+            rgbImage = new RgbImage(mediaArchive, "backvmid2", 0);
             backVmidIP2 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
-            rgbImage = new RgbImage(jagexArchive_2, "backvmid3", 0);
+            rgbImage = new RgbImage(mediaArchive, "backvmid3", 0);
             backVmidIP3 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
-            rgbImage = new RgbImage(jagexArchive_2, "backhmid2", 0);
+            rgbImage = new RgbImage(mediaArchive, "backhmid2", 0);
             backVmidIP2_2 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
             rgbImage.method346(0, 0);
             int i5 = (int) (Math.random() * 21D) - 10;
@@ -6117,29 +6116,29 @@ public class Client extends GameShell {
             }
 
             drawLoadingText(83, "Unpacking textures");
-            Rasterizer.unpackTextures(jagexArchive_3);
+            Rasterizer.unpackTextures(textureArchive);
             Rasterizer.calculatePalette(0.80000000000000004D);
             Rasterizer.resetTextures(20);
             drawLoadingText(86, "Unpacking config");
-            Sequence.unpackConfig(jagexArchive);
-            ObjectDef.unpackConfig(jagexArchive);
-            Floor.unpackConfig(jagexArchive);
-            ItemDef.unpackConfig(jagexArchive);
-            NpcDef.unpackConfig(jagexArchive);
-            IdentityKit.unpackConfig(jagexArchive);
-            SpotAnim.unpackConfig(jagexArchive);
-            SettingUsagePointers.unpackConfig(jagexArchive);
-            VarBit.unpackConfig(jagexArchive);
+            Sequence.unpackConfig(configArchive);
+            ObjectDef.unpackConfig(configArchive);
+            Floor.unpackConfig(configArchive);
+            ItemDef.unpackConfig(configArchive);
+            NpcDef.unpackConfig(configArchive);
+            IdentityKit.unpackConfig(configArchive);
+            SpotAnim.unpackConfig(configArchive);
+            SettingUsagePointers.unpackConfig(configArchive);
+            VarBit.unpackConfig(configArchive);
             ItemDef.isMembers = isMembers;
             if (!lowMem) {
                 drawLoadingText(90, "Unpacking sounds");
-                byte abyte0[] = jagexArchive_5.getDataForName("sounds.dat");
+                byte abyte0[] = soundArchive.getDataForName("sounds.dat");
                 Packet stream = new Packet(abyte0);
                 Sound.unpack(stream);
             }
             drawLoadingText(95, "Unpacking interfaces");
             RSFont aclass30_sub2_sub1_sub4s[] = {smallFont, plainFont, boldFont, fancyFont};
-            RSInterface.unpack(jagexArchive_1, aclass30_sub2_sub1_sub4s, jagexArchive_2);
+            RSInterface.unpack(interfaceArchive, aclass30_sub2_sub1_sub4s, mediaArchive);
             drawLoadingText(100, "Preparing game engine");
             drawLogo();
             for (int _y = 0; _y < 33; _y++) {
@@ -6157,8 +6156,8 @@ public class Client extends GameShell {
                     break;
                 }
 
-                compassShape1[_y] = firstXOfLine;
-                compassShape2[_y] = lastXOfLine - firstXOfLine;
+                compassHingeSize[_y] = firstXOfLine;
+                compassWidthMap[_y] = lastXOfLine - firstXOfLine;
             }
 
             for (int l6 = 5; l6 < 156; l6++) {
@@ -6190,12 +6189,12 @@ public class Client extends GameShell {
             for (int i8 = 0; i8 < 64; i8++) {
                 int k8 = i8 * 32 + 15;
                 int l8 = 600 + k8 * 3;
-                int i9 = Rasterizer.SINE[k8];
-                ai[i8] = l8 * i9 >> 16;
+                int sine = Rasterizer.SINE[k8];
+                ai[i8] = l8 * sine >> 16;
             }
 
             SceneGraph.setupViewport(500, 800, 512, 334, ai);
-            Censor.loadConfig(jagexArchive_4);
+            Censor.loadConfig(wordencArchive);
             mouseDetection = new MouseDetection(this);
             startRunnable(mouseDetection, 10);
             ObjectOnTile.clientInstance = this;
@@ -6250,20 +6249,20 @@ public class Client extends GameShell {
             if (i >= 0 && j >= 0 && i < 146 && j < 151) {
                 i -= 73;
                 j -= 75;
-                int k = minimapInt1 + minimapInt2 & 0x7ff;
-                int i1 = Rasterizer.SINE[k];
-                int j1 = Rasterizer.COSINE[k];
-                i1 = i1 * (minimapInt3 + 256) >> 8;
-                j1 = j1 * (minimapInt3 + 256) >> 8;
-                int k1 = j * i1 + i * j1 >> 11;
-                int l1 = j * j1 - i * i1 >> 11;
+                int k = minimapAngle + minimapInt2 & 0x7ff;
+                int sine = Rasterizer.SINE[k];
+                int cosine = Rasterizer.COSINE[k];
+                sine = sine * (minimapInt3 + 256) >> 8;
+                cosine = cosine * (minimapInt3 + 256) >> 8;
+                int k1 = j * sine + i * cosine >> 11;
+                int l1 = j * cosine - i * sine >> 11;
                 int i2 = session_player.boundExtentX + k1 >> 7;
                 int j2 = session_player.boundExtentY - l1 >> 7;
                 boolean flag1 = doWalkTo(1, 0, 0, 0, session_player.pathY[0], 0, 0, j2, session_player.pathX[0], true, i2);
                 if (flag1) {
                     stream.p1(i);
                     stream.p1(j);
-                    stream.p2(minimapInt1);
+                    stream.p2(minimapAngle);
                     stream.p1(57);
                     stream.p1(minimapInt2);
                     stream.p1(minimapInt3);
@@ -6685,14 +6684,14 @@ public class Client extends GameShell {
             needDrawTabArea = false;
         }
         if (backDialogID == -1) {
-            aClass9_1059.scrollPosition = anInt1211 - anInt1089 - 77;
+            aClass9_1059.scrollPosition = scrollMax - anInt1089 - 77;
             if (super.mouseEventX > 448 && super.mouseEventX < 560 && super.mouseEventY > 332)
-                scrollInterface(463, 77, super.mouseEventX - 17, super.mouseEventY - 357, aClass9_1059, 0, false, anInt1211);
-            int i = anInt1211 - 77 - aClass9_1059.scrollPosition;
+                scrollInterface(463, 77, super.mouseEventX - 17, super.mouseEventY - 357, aClass9_1059, 0, false, scrollMax);
+            int i = scrollMax - 77 - aClass9_1059.scrollPosition;
             if (i < 0)
                 i = 0;
-            if (i > anInt1211 - 77)
-                i = anInt1211 - 77;
+            if (i > scrollMax - 77)
+                i = scrollMax - 77;
             if (anInt1089 != i) {
                 anInt1089 = i;
                 inputTaken = true;
@@ -6862,16 +6861,16 @@ public class Client extends GameShell {
     }
 
     private void renderStationaryGraphics() {
-        StillGraphic class30_sub2_sub4_sub3 = (StillGraphic) aClass19_1056.getFront();
-        for (; class30_sub2_sub4_sub3 != null; class30_sub2_sub4_sub3 = (StillGraphic) aClass19_1056.getNext())
-            if (class30_sub2_sub4_sub3.plane != plane || class30_sub2_sub4_sub3.transformCompleted)
-                class30_sub2_sub4_sub3.unlink();
-            else if (currentTime >= class30_sub2_sub4_sub3.anInt1564) {
-                class30_sub2_sub4_sub3.animationStep(anInt945);
-                if (class30_sub2_sub4_sub3.transformCompleted)
-                    class30_sub2_sub4_sub3.unlink();
+        StillGraphic stillGraphic = (StillGraphic) aClass19_1056.getFront();
+        for (; stillGraphic != null; stillGraphic = (StillGraphic) aClass19_1056.getNext())
+            if (stillGraphic.plane != plane || stillGraphic.transformCompleted)
+                stillGraphic.unlink();
+            else if (currentTime >= stillGraphic.anInt1564) {
+                stillGraphic.animationStep(anInt945);
+                if (stillGraphic.transformCompleted)
+                    stillGraphic.unlink();
                 else
-                    sceneGraph.addEntityA(class30_sub2_sub4_sub3.plane, 0, class30_sub2_sub4_sub3.anInt1563, -1, class30_sub2_sub4_sub3.anInt1562, 60, class30_sub2_sub4_sub3.anInt1561, class30_sub2_sub4_sub3, false);
+                    sceneGraph.addEntityA(stillGraphic.plane, 0, stillGraphic.anInt1563, -1, stillGraphic.y, 60, stillGraphic.x, stillGraphic, false);
             }
 
     }
@@ -6888,43 +6887,43 @@ public class Client extends GameShell {
         Graphics2D.setBounds(scroll_position + inter.height, x, x + inter.width, scroll_position);
         int i2 = inter.children.length;
         for (int j2 = 0; j2 < i2; j2++) {
-            int k2 = inter.childX[j2] + x;
-            int l2 = (inter.childY[j2] + scroll_position) - y;
-            RSInterface class9_1 = RSInterface.interfaceCache[inter.children[j2]];
-            k2 += class9_1.x_offset;
-            l2 += class9_1.y_offset;
-            if (class9_1.content_type > 0)
-                interface_handle_auto_content(class9_1);
-            if (class9_1.type == 0) {
-                if (class9_1.scrollPosition > class9_1.scrollMax - class9_1.height)
-                    class9_1.scrollPosition = class9_1.scrollMax - class9_1.height;
-                if (class9_1.scrollPosition < 0)
-                    class9_1.scrollPosition = 0;
-                interface_render(k2, class9_1.scrollPosition, l2, class9_1);
-                if (class9_1.scrollMax > class9_1.height)
-                    renderChatInterface(class9_1.height, class9_1.scrollPosition, l2, k2 + class9_1.width, class9_1.scrollMax);
-            } else if (class9_1.type != 1)
-                if (class9_1.type == 2) {
+            int xx = inter.childX[j2] + x;
+            int yy = (inter.childY[j2] + scroll_position) - y;
+            RSInterface rsInterface = RSInterface.interfaceCache[inter.children[j2]];
+            xx += rsInterface.x_offset;
+            yy += rsInterface.y_offset;
+            if (rsInterface.content_type > 0)
+                interface_handle_auto_content(rsInterface);
+            if (rsInterface.type == 0) {
+                if (rsInterface.scrollPosition > rsInterface.scrollMax - rsInterface.height)
+                    rsInterface.scrollPosition = rsInterface.scrollMax - rsInterface.height;
+                if (rsInterface.scrollPosition < 0)
+                    rsInterface.scrollPosition = 0;
+                interface_render(xx, rsInterface.scrollPosition, yy, rsInterface);
+                if (rsInterface.scrollMax > rsInterface.height)
+                    renderChatInterface(rsInterface.height, rsInterface.scrollPosition, yy, xx + rsInterface.width, rsInterface.scrollMax);
+            } else if (rsInterface.type != 1)
+                if (rsInterface.type == 2) {
                     int i3 = 0;
-                    for (int l3 = 0; l3 < class9_1.height; l3++) {
-                        for (int l4 = 0; l4 < class9_1.width; l4++) {
-                            int k5 = k2 + l4 * (32 + class9_1.invSpritePadX);
-                            int j6 = l2 + l3 * (32 + class9_1.invSpritePadY);
+                    for (int l3 = 0; l3 < rsInterface.height; l3++) {
+                        for (int l4 = 0; l4 < rsInterface.width; l4++) {
+                            int spriteX = xx + l4 * (32 + rsInterface.invSpritePadX);
+                            int spriteY = yy + l3 * (32 + rsInterface.invSpritePadY);
                             if (i3 < 20) {
-                                k5 += class9_1.spritesX[i3];
-                                j6 += class9_1.spritesY[i3];
+                                spriteX += rsInterface.spritesX[i3];
+                                spriteY += rsInterface.spritesY[i3];
                             }
-                            if (class9_1.inv[i3] > 0) {
+                            if (rsInterface.inv[i3] > 0) {
                                 int k6 = 0;
                                 int j7 = 0;
-                                int j9 = class9_1.inv[i3] - 1;
-                                if (k5 > Graphics2D.topX - 32 && k5 < Graphics2D.viewport_w && j6 > Graphics2D.topY - 32 && j6 < Graphics2D.viewport_h || activeInterfaceType != 0 && anInt1085 == i3) {
+                                int j9 = rsInterface.inv[i3] - 1;
+                                if (spriteX > Graphics2D.topX - 32 && spriteX < Graphics2D.viewport_w && spriteY > Graphics2D.topY - 32 && spriteY < Graphics2D.viewport_h || activeInterfaceType != 0 && anInt1085 == i3) {
                                     int l9 = 0;
-                                    if (itemSelected == 1 && anInt1283 == i3 && anInt1284 == class9_1.id)
+                                    if (itemSelected == 1 && anInt1283 == i3 && anInt1284 == rsInterface.id)
                                         l9 = 0xffffff;
-                                    RgbImage class30_sub2_sub1_sub1_2 = ItemDef.getSprite(j9, class9_1.invStackSizes[i3], l9);
+                                    RgbImage class30_sub2_sub1_sub1_2 = ItemDef.getSprite(j9, rsInterface.invStackSizes[i3], l9);
                                     if (class30_sub2_sub1_sub1_2 != null) {
-                                        if (activeInterfaceType != 0 && anInt1085 == i3 && anInt1084 == class9_1.id) {
+                                        if (activeInterfaceType != 0 && anInt1085 == i3 && anInt1084 == rsInterface.id) {
                                             k6 = super.mouseEventX - anInt1087;
                                             j7 = super.mouseEventY - anInt1088;
                                             if (k6 < 5 && k6 > -5)
@@ -6935,9 +6934,9 @@ public class Client extends GameShell {
                                                 k6 = 0;
                                                 j7 = 0;
                                             }
-                                            class30_sub2_sub1_sub1_2.drawSprite1(k5 + k6, j6 + j7);
-                                            if (j6 + j7 < Graphics2D.topY && inter.scrollPosition > 0) {
-                                                int i10 = (anInt945 * (Graphics2D.topY - j6 - j7)) / 3;
+                                            class30_sub2_sub1_sub1_2.drawSprite1(spriteX + k6, spriteY + j7);
+                                            if (spriteY + j7 < Graphics2D.topY && inter.scrollPosition > 0) {
+                                                int i10 = (anInt945 * (Graphics2D.topY - spriteY - j7)) / 3;
                                                 if (i10 > anInt945 * 10)
                                                     i10 = anInt945 * 10;
                                                 if (i10 > inter.scrollPosition)
@@ -6945,8 +6944,8 @@ public class Client extends GameShell {
                                                 inter.scrollPosition -= i10;
                                                 anInt1088 += i10;
                                             }
-                                            if (j6 + j7 + 32 > Graphics2D.viewport_h && inter.scrollPosition < inter.scrollMax - inter.height) {
-                                                int j10 = (anInt945 * ((j6 + j7 + 32) - Graphics2D.viewport_h)) / 3;
+                                            if (spriteY + j7 + 32 > Graphics2D.viewport_h && inter.scrollPosition < inter.scrollMax - inter.height) {
+                                                int j10 = (anInt945 * ((spriteY + j7 + 32) - Graphics2D.viewport_h)) / 3;
                                                 if (j10 > anInt945 * 10)
                                                     j10 = anInt945 * 10;
                                                 if (j10 > inter.scrollMax - inter.height - inter.scrollPosition)
@@ -6954,71 +6953,71 @@ public class Client extends GameShell {
                                                 inter.scrollPosition += j10;
                                                 anInt1088 -= j10;
                                             }
-                                        } else if (atInventoryInterfaceType != 0 && atInventoryIndex == i3 && atInventoryInterface == class9_1.id)
-                                            class30_sub2_sub1_sub1_2.drawSprite1(k5, j6);
+                                        } else if (atInventoryInterfaceType != 0 && atInventoryIndex == i3 && atInventoryInterface == rsInterface.id)
+                                            class30_sub2_sub1_sub1_2.drawSprite1(spriteX, spriteY);
                                         else
-                                            class30_sub2_sub1_sub1_2.drawSprite(k5, j6);
-                                        if (class30_sub2_sub1_sub1_2.w2 == 33 || class9_1.invStackSizes[i3] != 1) {
-                                            int k10 = class9_1.invStackSizes[i3];
-                                            smallFont.drawTextHLeftVTop(logic_get_amount_string(k10), k5 + 1 + k6, j6 + 10 + j7, 0);
-                                            smallFont.drawTextHLeftVTop(logic_get_amount_string(k10), k5 + k6, j6 + 9 + j7, 0xffff00);
+                                            class30_sub2_sub1_sub1_2.drawSprite(spriteX, spriteY);
+                                        if (class30_sub2_sub1_sub1_2.w2 == 33 || rsInterface.invStackSizes[i3] != 1) {
+                                            int k10 = rsInterface.invStackSizes[i3];
+                                            smallFont.drawTextHLeftVTop(logic_get_amount_string(k10), spriteX + 1 + k6, spriteY + 10 + j7, 0);
+                                            smallFont.drawTextHLeftVTop(logic_get_amount_string(k10), spriteX + k6, spriteY + 9 + j7, 0xffff00);
                                         }
                                     }
                                 }
-                            } else if (class9_1.rgbImages != null && i3 < 20) {
-                                RgbImage class30_sub2_sub1_sub1_1 = class9_1.rgbImages[i3];
+                            } else if (rsInterface.rgbImages != null && i3 < 20) {
+                                RgbImage class30_sub2_sub1_sub1_1 = rsInterface.rgbImages[i3];
                                 if (class30_sub2_sub1_sub1_1 != null)
-                                    class30_sub2_sub1_sub1_1.drawSprite(k5, j6);
+                                    class30_sub2_sub1_sub1_1.drawSprite(spriteX, spriteY);
                             }
                             i3++;
                         }
 
                     }
 
-                } else if (class9_1.type == 3) {
+                } else if (rsInterface.type == 3) {
                     boolean flag = false;
-                    if (anInt1039 == class9_1.id || anInt1048 == class9_1.id || anInt1026 == class9_1.id)
+                    if (anInt1039 == rsInterface.id || anInt1048 == rsInterface.id || anInt1026 == rsInterface.id)
                         flag = true;
-                    int j3;
-                    if (interface_test_condition(class9_1)) {
-                        j3 = class9_1.colour_conditiontrue;
-                        if (flag && class9_1.colour_conditiontrue_mouseover != 0)
-                            j3 = class9_1.colour_conditiontrue_mouseover;
+                    int colour;
+                    if (interface_test_condition(rsInterface)) {
+                        colour = rsInterface.colour_conditiontrue;
+                        if (flag && rsInterface.colour_conditiontrue_mouseover != 0)
+                            colour = rsInterface.colour_conditiontrue_mouseover;
                     } else {
-                        j3 = class9_1.colour_conditionfalse;
-                        if (flag && class9_1.colour_conditionfalse_mouseover != 0)
-                            j3 = class9_1.colour_conditionfalse_mouseover;
+                        colour = rsInterface.colour_conditionfalse;
+                        if (flag && rsInterface.colour_conditionfalse_mouseover != 0)
+                            colour = rsInterface.colour_conditionfalse_mouseover;
                     }
-                    if (class9_1.aByte254 == 0) {
-                        if (class9_1.filled)
-                            Graphics2D.fillRect(k2, l2, class9_1.width, class9_1.height, j3);
+                    if (rsInterface.aByte254 == 0) {
+                        if (rsInterface.filled)
+                            Graphics2D.fillRect(xx, yy, rsInterface.width, rsInterface.height, colour);
                         else
-                            Graphics2D.drawRect(k2, l2, class9_1.width, class9_1.height, j3);
-                    } else if (class9_1.filled)
-                        Graphics2D.fillRect(k2, l2, class9_1.width, class9_1.height, j3, 256 - (class9_1.aByte254 & 0xff));
+                            Graphics2D.drawRect(xx, yy, rsInterface.width, rsInterface.height, colour);
+                    } else if (rsInterface.filled)
+                        Graphics2D.fillRect(xx, yy, rsInterface.width, rsInterface.height, colour, 256 - (rsInterface.aByte254 & 0xff));
                     else
-                        Graphics2D.drawRect(k2, l2, class9_1.width, class9_1.height, j3, 256 - (class9_1.aByte254 & 0xff));
-                } else if (class9_1.type == 4) {
-                    RSFont RSFont = class9_1.font;
-                    String s = class9_1.text_conditionfalse;
+                        Graphics2D.drawRect(xx, yy, rsInterface.width, rsInterface.height, colour, 256 - (rsInterface.aByte254 & 0xff));
+                } else if (rsInterface.type == 4) {
+                    RSFont RSFont = rsInterface.font;
+                    String s = rsInterface.text_conditionfalse;
                     boolean flag1 = false;
-                    if (anInt1039 == class9_1.id || anInt1048 == class9_1.id || anInt1026 == class9_1.id)
+                    if (anInt1039 == rsInterface.id || anInt1048 == rsInterface.id || anInt1026 == rsInterface.id)
                         flag1 = true;
                     int i4;
-                    if (interface_test_condition(class9_1)) {
-                        i4 = class9_1.colour_conditiontrue;
-                        if (flag1 && class9_1.colour_conditiontrue_mouseover != 0)
-                            i4 = class9_1.colour_conditiontrue_mouseover;
-                        if (class9_1.text_conditiontrue.length() > 0)
-                            s = class9_1.text_conditiontrue;
+                    if (interface_test_condition(rsInterface)) {
+                        i4 = rsInterface.colour_conditiontrue;
+                        if (flag1 && rsInterface.colour_conditiontrue_mouseover != 0)
+                            i4 = rsInterface.colour_conditiontrue_mouseover;
+                        if (rsInterface.text_conditiontrue.length() > 0)
+                            s = rsInterface.text_conditiontrue;
                     } else {
-                        i4 = class9_1.colour_conditionfalse;
-                        if (flag1 && class9_1.colour_conditionfalse_mouseover != 0)
-                            i4 = class9_1.colour_conditionfalse_mouseover;
+                        i4 = rsInterface.colour_conditionfalse;
+                        if (flag1 && rsInterface.colour_conditionfalse_mouseover != 0)
+                            i4 = rsInterface.colour_conditionfalse_mouseover;
                     }
-                    if (class9_1.atActionType == 6 && aBoolean1149) {
+                    if (rsInterface.atActionType == 6 && aBoolean1149) {
                         s = "Please wait...";
-                        i4 = class9_1.colour_conditionfalse;
+                        i4 = rsInterface.colour_conditionfalse;
                     }
                     if (Graphics2D.width == 479) {
                         if (i4 == 0xffff00)
@@ -7026,37 +7025,37 @@ public class Client extends GameShell {
                         if (i4 == 49152)
                             i4 = 0xffffff;
                     }
-                    for (int l6 = l2 + RSFont.charHeight; s.length() > 0; l6 += RSFont.charHeight) {
+                    for (int l6 = yy + RSFont.charHeight; s.length() > 0; l6 += RSFont.charHeight) {
                         if (s.indexOf("%") != -1) {
                             do {
                                 int k7 = s.indexOf("%1");
                                 if (k7 == -1)
                                     break;
-                                s = s.substring(0, k7) + interfaceIntToString(interface_calculate_dynamic_value(class9_1, 0)) + s.substring(k7 + 2);
+                                s = s.substring(0, k7) + interfaceIntToString(interface_calculate_dynamic_value(rsInterface, 0)) + s.substring(k7 + 2);
                             } while (true);
                             do {
                                 int l7 = s.indexOf("%2");
                                 if (l7 == -1)
                                     break;
-                                s = s.substring(0, l7) + interfaceIntToString(interface_calculate_dynamic_value(class9_1, 1)) + s.substring(l7 + 2);
+                                s = s.substring(0, l7) + interfaceIntToString(interface_calculate_dynamic_value(rsInterface, 1)) + s.substring(l7 + 2);
                             } while (true);
                             do {
                                 int i8 = s.indexOf("%3");
                                 if (i8 == -1)
                                     break;
-                                s = s.substring(0, i8) + interfaceIntToString(interface_calculate_dynamic_value(class9_1, 2)) + s.substring(i8 + 2);
+                                s = s.substring(0, i8) + interfaceIntToString(interface_calculate_dynamic_value(rsInterface, 2)) + s.substring(i8 + 2);
                             } while (true);
                             do {
                                 int j8 = s.indexOf("%4");
                                 if (j8 == -1)
                                     break;
-                                s = s.substring(0, j8) + interfaceIntToString(interface_calculate_dynamic_value(class9_1, 3)) + s.substring(j8 + 2);
+                                s = s.substring(0, j8) + interfaceIntToString(interface_calculate_dynamic_value(rsInterface, 3)) + s.substring(j8 + 2);
                             } while (true);
                             do {
                                 int k8 = s.indexOf("%5");
                                 if (k8 == -1)
                                     break;
-                                s = s.substring(0, k8) + interfaceIntToString(interface_calculate_dynamic_value(class9_1, 4)) + s.substring(k8 + 2);
+                                s = s.substring(0, k8) + interfaceIntToString(interface_calculate_dynamic_value(rsInterface, 4)) + s.substring(k8 + 2);
                             } while (true);
                         }
                         int l8 = s.indexOf("\\n");
@@ -7068,60 +7067,60 @@ public class Client extends GameShell {
                             s1 = s;
                             s = "";
                         }
-                        if (class9_1.text_centered)
-                            RSFont.method382(i4, k2 + class9_1.width / 2, s1, l6, class9_1.text_shadow);
+                        if (rsInterface.text_centered)
+                            RSFont.method382(i4, xx + rsInterface.width / 2, s1, l6, rsInterface.text_shadow);
                         else
-                            RSFont.method389(class9_1.text_shadow, k2, i4, s1, l6);
+                            RSFont.method389(rsInterface.text_shadow, xx, i4, s1, l6);
                     }
 
-                } else if (class9_1.type == 5) {
+                } else if (rsInterface.type == 5) {
                     RgbImage rgbImage;
-                    if (interface_test_condition(class9_1))
-                        rgbImage = class9_1.image_conditiontrue;
+                    if (interface_test_condition(rsInterface))
+                        rgbImage = rsInterface.image_conditiontrue;
                     else
-                        rgbImage = class9_1.image_conditionfalse;
+                        rgbImage = rsInterface.image_conditionfalse;
                     if (rgbImage != null)
-                        rgbImage.drawSprite(k2, l2);
-                } else if (class9_1.type == 6) {
+                        rgbImage.drawSprite(xx, yy);
+                } else if (rsInterface.type == 6) {
                     int k3 = Rasterizer.centerX;
                     int j4 = Rasterizer.centerY;
-                    Rasterizer.centerX = k2 + class9_1.width / 2;
-                    Rasterizer.centerY = l2 + class9_1.height / 2;
-                    int i5 = Rasterizer.SINE[class9_1.anInt270] * class9_1.anInt269 >> 16;
-                    int l5 = Rasterizer.COSINE[class9_1.anInt270] * class9_1.anInt269 >> 16;
-                    boolean flag2 = interface_test_condition(class9_1);
+                    Rasterizer.centerX = xx + rsInterface.width / 2;
+                    Rasterizer.centerY = yy + rsInterface.height / 2;
+                    int i5 = Rasterizer.SINE[rsInterface.anInt270] * rsInterface.anInt269 >> 16;
+                    int l5 = Rasterizer.COSINE[rsInterface.anInt270] * rsInterface.anInt269 >> 16;
+                    boolean flag2 = interface_test_condition(rsInterface);
                     int i7;
                     if (flag2)
-                        i7 = class9_1.animation_conditiontrue;
+                        i7 = rsInterface.animation_conditiontrue;
                     else
-                        i7 = class9_1.animation_conditionfalse;
+                        i7 = rsInterface.animation_conditionfalse;
                     Model model;
                     if (i7 == -1) {
-                        model = class9_1.method209(-1, -1, flag2);
+                        model = rsInterface.method209(-1, -1, flag2);
                     } else {
                         Sequence sequence = Sequence.anims[i7];
-                        model = class9_1.method209(sequence.frame1IDS[class9_1.anim_frame], sequence.frame2IDS[class9_1.anim_frame], flag2);
+                        model = rsInterface.method209(sequence.frame1IDS[rsInterface.anim_frame], sequence.frame2IDS[rsInterface.anim_frame], flag2);
                     }
                     if (model != null)
-                        model.rendersingle(class9_1.anInt271, 0, class9_1.anInt270, 0, i5, l5);
+                        model.rendersingle(rsInterface.anInt271, 0, rsInterface.anInt270, 0, i5, l5);
                     Rasterizer.centerX = k3;
                     Rasterizer.centerY = j4;
-                } else if (class9_1.type == 7) {
-                    RSFont RSFont_1 = class9_1.font;
+                } else if (rsInterface.type == 7) {
+                    RSFont RSFont_1 = rsInterface.font;
                     int k4 = 0;
-                    for (int j5 = 0; j5 < class9_1.height; j5++) {
-                        for (int i6 = 0; i6 < class9_1.width; i6++) {
-                            if (class9_1.inv[k4] > 0) {
-                                ItemDef itemDef = ItemDef.forID(class9_1.inv[k4] - 1);
+                    for (int j5 = 0; j5 < rsInterface.height; j5++) {
+                        for (int i6 = 0; i6 < rsInterface.width; i6++) {
+                            if (rsInterface.inv[k4] > 0) {
+                                ItemDef itemDef = ItemDef.forID(rsInterface.inv[k4] - 1);
                                 String s2 = itemDef.name;
-                                if (itemDef.stackable || class9_1.invStackSizes[k4] != 1)
-                                    s2 = s2 + " x" + logicGetAmountString(class9_1.invStackSizes[k4]);
-                                int i9 = k2 + i6 * (115 + class9_1.invSpritePadX);
-                                int k9 = l2 + j5 * (12 + class9_1.invSpritePadY);
-                                if (class9_1.text_centered)
-                                    RSFont_1.method382(class9_1.colour_conditionfalse, i9 + class9_1.width / 2, s2, k9, class9_1.text_shadow);
+                                if (itemDef.stackable || rsInterface.invStackSizes[k4] != 1)
+                                    s2 = s2 + " x" + logicGetAmountString(rsInterface.invStackSizes[k4]);
+                                int i9 = xx + i6 * (115 + rsInterface.invSpritePadX);
+                                int k9 = yy + j5 * (12 + rsInterface.invSpritePadY);
+                                if (rsInterface.text_centered)
+                                    RSFont_1.method382(rsInterface.colour_conditionfalse, i9 + rsInterface.width / 2, s2, k9, rsInterface.text_shadow);
                                 else
-                                    RSFont_1.method389(class9_1.text_shadow, i9, class9_1.colour_conditionfalse, s2, k9);
+                                    RSFont_1.method389(rsInterface.text_shadow, i9, rsInterface.colour_conditionfalse, s2, k9);
                             }
                             k4++;
                         }
@@ -7337,7 +7336,7 @@ public class Client extends GameShell {
                 anInt1187 += (-12 - anInt1187) / 2;
             else
                 anInt1187 /= 2;
-            minimapInt1 = minimapInt1 + anInt1186 / 2 & 0x7ff;
+            minimapAngle = minimapAngle + anInt1186 / 2 & 0x7ff;
             anInt1184 += anInt1187 / 2;
             if (anInt1184 < 128)
                 anInt1184 = 128;
@@ -7404,7 +7403,7 @@ public class Client extends GameShell {
             showErrorScreen();
             return;
         }
-        anInt1061++;
+        drawCycle++;
         if (!loggedIn)
             drawLoginScreen(false, 0);
         else
@@ -7412,39 +7411,39 @@ public class Client extends GameShell {
         anInt1213 = 0;
     }
 
-    private boolean isFriendOrSelf(String s) {
-        if (s == null)
+    private boolean isFriendOrSelf(String username) {
+        if (username == null)
             return false;
         for (int i = 0; i < user_friends_count; i++)
-            if (s.equalsIgnoreCase(user_friends_name_string[i]))
+            if (username.equalsIgnoreCase(user_friends_name_string[i]))
                 return true;
-        return s.equalsIgnoreCase(session_player.name);
+        return username.equalsIgnoreCase(session_player.name);
     }
 
-    private static String logic_get_combat_risk_colour(int i, int j) {
-        int combatLvlDig = i - j;
-        if (combatLvlDig < -9)
+    private static String logic_get_combat_risk_colour(int level1, int level2) {
+        int combatLvlDif = level1 - level2;
+        if (combatLvlDif < -9)
             return "@red@";
-        if (combatLvlDig < -6)
+        if (combatLvlDif < -6)
             return "@or3@";
-        if (combatLvlDig < -3)
+        if (combatLvlDif < -3)
             return "@or2@";
-        if (combatLvlDig < 0)
+        if (combatLvlDif < 0)
             return "@or1@";
-        if (combatLvlDig > 9)
+        if (combatLvlDif > 9)
             return "@gre@";
-        if (combatLvlDig > 6)
+        if (combatLvlDif > 6)
             return "@gr3@";
-        if (combatLvlDig > 3)
+        if (combatLvlDif > 3)
             return "@gr2@";
-        if (combatLvlDig > 0)
+        if (combatLvlDif > 0)
             return "@gr1@";
         else
             return "@yel@";
     }
 
-    private void setWaveVolume(int i) {
-        Signlink.wavevol = i;
+    private void setWaveVolume(int wavVolume) {
+        Signlink.wavevol = wavVolume;
     }
 
     private void draw3dScreen() {
@@ -7476,22 +7475,22 @@ public class Client extends GameShell {
         if (anInt1055 == 1)
             headIcons[1].drawSprite(472, 296);
         if (fpsOn) {
-            char c = '\u01FB';
-            int k = 20;
-            int i1 = 0xffff00;
+            char x = '\u01FB';
+            int y = 20;
+            int colour = 0xffff00;
             if (super.fps < 15)
-                i1 = 0xff0000;
-            plainFont.drawTextHRightVTop("Fps:" + super.fps, c, k, i1);
-            k += 15;
+                colour = 0xff0000;
+            plainFont.drawTextHRightVTop("Fps:" + super.fps, x, y, colour);
+            y += 15;
             Runtime runtime = Runtime.getRuntime();
             int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024L));
-            i1 = 0xffff00;
+            colour = 0xffff00;
             if (j1 > 0x2000000 && lowMem)
-                i1 = 0xff0000;
-            plainFont.drawTextHRightVTop("Heap usage:" + j1 + "m", c, k, 0xffff00);
-            k += 15;
-            plainFont.drawTextHRightVTop("Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", c, k, i1);
-            k += 15;
+                colour = 0xff0000;
+            plainFont.drawTextHRightVTop("Heap usage:" + j1 + "m", x, y, 0xffff00);
+            y += 15;
+            plainFont.drawTextHRightVTop("Card usage :" + ((ServerMemoryManager.arbBufferMemory + ServerMemoryManager.textureMemory) / (1024 * 1024L)) + "m", x, y, colour);
+            y += 15;
         }
         if (systemUpdateTime != 0) {
             int j = systemUpdateTime / 50;
@@ -7607,7 +7606,7 @@ public class Client extends GameShell {
             menuOffsetX = i1;
             menuOffsetY = l1;
             menuWidth = i;
-            anInt952 = 15 * menuActionRow + 22;
+            menuHeight = 15 * menuActionRow + 22;
         }
         if (super.clickX > 553 && super.clickY > 205 && super.clickX < 743 && super.clickY < 466) {
             int j1 = super.clickX - 553 - i / 2;
@@ -7625,7 +7624,7 @@ public class Client extends GameShell {
             menuOffsetX = j1;
             menuOffsetY = i2;
             menuWidth = i;
-            anInt952 = 15 * menuActionRow + 22;
+            menuHeight = 15 * menuActionRow + 22;
         }
         if (super.clickX > 17 && super.clickY > 357 && super.clickX < 496 && super.clickY < 453) {
             int k1 = super.clickX - 17 - i / 2;
@@ -7643,7 +7642,7 @@ public class Client extends GameShell {
             menuOffsetX = k1;
             menuOffsetY = j2;
             menuWidth = i;
-            anInt952 = 15 * menuActionRow + 22;
+            menuHeight = 15 * menuActionRow + 22;
         }
     }
 
@@ -7755,61 +7754,61 @@ public class Client extends GameShell {
     private int method120() {
         int j = 3;
         if (yCameraCurve < 310) {
-            int k = xCameraPos >> 7;
-            int l = yCameraPos >> 7;
+            int x = xCameraPos >> 7;
+            int y = yCameraPos >> 7;
             int i1 = session_player.boundExtentX >> 7;
             int j1 = session_player.boundExtentY >> 7;
-            if ((tileSettingBits[plane][k][l] & 4) != 0)
+            if ((tileSettingBits[plane][x][y] & 4) != 0)
                 j = plane;
             int k1;
-            if (i1 > k)
-                k1 = i1 - k;
+            if (i1 > x)
+                k1 = i1 - x;
             else
-                k1 = k - i1;
+                k1 = x - i1;
             int l1;
-            if (j1 > l)
-                l1 = j1 - l;
+            if (j1 > y)
+                l1 = j1 - y;
             else
-                l1 = l - j1;
+                l1 = y - j1;
             if (k1 > l1) {
                 int i2 = (l1 * 0x10000) / k1;
                 int k2 = 32768;
-                while (k != i1) {
-                    if (k < i1)
-                        k++;
-                    else if (k > i1)
-                        k--;
-                    if ((tileSettingBits[plane][k][l] & 4) != 0)
+                while (x != i1) {
+                    if (x < i1)
+                        x++;
+                    else if (x > i1)
+                        x--;
+                    if ((tileSettingBits[plane][x][y] & 4) != 0)
                         j = plane;
                     k2 += i2;
                     if (k2 >= 0x10000) {
                         k2 -= 0x10000;
-                        if (l < j1)
-                            l++;
-                        else if (l > j1)
-                            l--;
-                        if ((tileSettingBits[plane][k][l] & 4) != 0)
+                        if (y < j1)
+                            y++;
+                        else if (y > j1)
+                            y--;
+                        if ((tileSettingBits[plane][x][y] & 4) != 0)
                             j = plane;
                     }
                 }
             } else {
                 int j2 = (k1 * 0x10000) / l1;
                 int l2 = 32768;
-                while (l != j1) {
-                    if (l < j1)
-                        l++;
-                    else if (l > j1)
-                        l--;
-                    if ((tileSettingBits[plane][k][l] & 4) != 0)
+                while (y != j1) {
+                    if (y < j1)
+                        y++;
+                    else if (y > j1)
+                        y--;
+                    if ((tileSettingBits[plane][x][y] & 4) != 0)
                         j = plane;
                     l2 += j2;
                     if (l2 >= 0x10000) {
                         l2 -= 0x10000;
-                        if (k < i1)
-                            k++;
-                        else if (k > i1)
-                            k--;
-                        if ((tileSettingBits[plane][k][l] & 4) != 0)
+                        if (x < i1)
+                            x++;
+                        else if (x > i1)
+                            x--;
+                        if ((tileSettingBits[plane][x][y] & 4) != 0)
                             j = plane;
                     }
                 }
@@ -7909,10 +7908,10 @@ public class Client extends GameShell {
                 }
                 if (j1 == 10) {
                     RSInterface class9_2 = RSInterface.interfaceCache[ai[l++]];
-                    int l2 = ai[l++] + 1;
-                    if (l2 >= 0 && l2 < ItemDef.totalItems && (!ItemDef.forID(l2).membersObject || isMembers)) {
+                    int itemID = ai[l++] + 1;
+                    if (itemID >= 0 && itemID < ItemDef.totalItems && (!ItemDef.forID(itemID).membersObject || isMembers)) {
                         for (int k3 = 0; k3 < class9_2.inv.length; k3++) {
-                            if (class9_2.inv[k3] != l2)
+                            if (class9_2.inv[k3] != itemID)
                                 continue;
                             k1 = 0x3b9ac9ff;
                             break;
@@ -7995,16 +7994,16 @@ public class Client extends GameShell {
                 if (abyte0[i5] == 0)
                     ai[i5] = 0;
 
-            compass.rotate(25, 25, 33, 33, minimapInt1, compassShape2, 256, compassShape1, 0, 0);
+            compass.rotate(25, 25, 33, 33, minimapAngle, compassWidthMap, 256, compassHingeSize, 0, 0);
 
             gameScreenCanvas.initDrawingArea();
             return;
         }
-        int angle = minimapInt1 + minimapInt2 & 0x7ff;
+        int angle = minimapAngle + minimapInt2 & 0x7ff;
         int centerX = 48 + session_player.boundExtentX / 32;
         int centerY = 464 - session_player.boundExtentY / 32;
         minimapImage.rotate(centerX, centerY, 146, 151, angle, minimapShape2, 256 + minimapInt3, minimapShape1, 5, 25);
-        compass.rotate(25, 25, 33, 33, minimapInt1, compassShape2, 256, compassShape1, 0, 0);
+        compass.rotate(25, 25, 33, 33, minimapAngle, compassWidthMap, 256, compassHingeSize, 0, 0);
         for (int j5 = 0; j5 < numOfMapMarkers; j5++) {
             int mapX = (markPosX[j5] * 4 + 2) - session_player.boundExtentX / 32;
             int mapY = (markPosY[j5] * 4 + 2) - session_player.boundExtentY / 32;
@@ -8439,7 +8438,7 @@ public class Client extends GameShell {
             int i = 0;
             int j = 20;
             while (aBoolean831) {
-                anInt1208++;
+                flameCycle++;
                 //calcFlamesPosition();
                 //calcFlamesPosition();
                 doFlamesDrawing();
@@ -8664,16 +8663,16 @@ public class Client extends GameShell {
         }
         if (packetID == 4) {
             int j2 = stream.g1();
-            int i5 = anInt1268 + (j2 >> 4 & 7);
-            int l7 = anInt1269 + (j2 & 7);
+            int x = anInt1268 + (j2 >> 4 & 7);
+            int y = anInt1269 + (j2 & 7);
             int k10 = stream.g2();
             int l12 = stream.g1();
             int j15 = stream.g2();
-            if (i5 >= 0 && l7 >= 0 && i5 < 104 && l7 < 104) {
-                i5 = i5 * 128 + 64;
-                l7 = l7 * 128 + 64;
-                StillGraphic class30_sub2_sub4_sub3 = new StillGraphic(plane, currentTime, j15, k10, method42(plane, l7, i5) - l12, l7, i5);
-                aClass19_1056.insertBack(class30_sub2_sub4_sub3);
+            if (x >= 0 && y >= 0 && x < 104 && y < 104) {
+                x = x * 128 + 64;
+                y = y * 128 + 64;
+                StillGraphic stillGraphic = new StillGraphic(plane, currentTime, j15, k10, method42(plane, y, x) - l12, y, x);
+                aClass19_1056.insertBack(stillGraphic);
             }
             return;
         }
@@ -8852,7 +8851,7 @@ public class Client extends GameShell {
     }
 
     private void markMinimap(RgbImage rgbImage, int i, int j) {
-        int k = minimapInt1 + minimapInt2 & 0x7ff;
+        int k = minimapAngle + minimapInt2 & 0x7ff;
         int l = i * i + j * j;
         if (l > 6400)
             return;
@@ -9019,7 +9018,7 @@ public class Client extends GameShell {
                 return false;
             inStream.pos = 0;
             socketStream.flushInputStream(inStream.data, pktSize);
-            anInt1009 = 0;
+            timeoutCounter = 0;
             anInt843 = anInt842;
             anInt842 = anInt841;
             anInt841 = pktType;
@@ -10081,7 +10080,7 @@ public class Client extends GameShell {
                 i = anInt984 / 256;
             if (aBooleanArray876[4] && anIntArray1203[4] + 128 > i)
                 i = anIntArray1203[4] + 128;
-            int k = minimapInt1 + anInt896 & 0x7ff;
+            int k = minimapAngle + anInt896 & 0x7ff;
             setCameraPos(600 + i * 3, i, anInt1014, method42(plane, session_player.boundExtentY, session_player.boundExtentX) - 50, k, anInt1015);
         }
         int j;
@@ -10212,7 +10211,7 @@ public class Client extends GameShell {
         drawingFlames = false;
         spriteDrawX = -1;
         spriteDrawY = -1;
-        compassShape1 = new int[33];
+        compassHingeSize = new int[33];
         anIntArray969 = new int[256];
         jagexFileStores = new JagexFileStore[5];
         sessionSettings = new int[2000];
@@ -10245,7 +10244,7 @@ public class Client extends GameShell {
         minimapShape1 = new int[151];
         anInt1054 = -1;
         aClass19_1056 = new Deque();
-        compassShape2 = new int[33];
+        compassWidthMap = new int[33];
         aClass9_1059 = new RSInterface();
         mapScenes = new IndexedImage[100];
         anInt1063 = 0x4d4233;
@@ -10262,7 +10261,7 @@ public class Client extends GameShell {
         menuActionCmd1 = new int[500];
         headIcons = new RgbImage[20];
         tabAreaAltered = false;
-        aString1121 = "";
+        chatboxInputneededString = "";
         atPlayerActions = new String[5];
         atPlayerArray = new boolean[5];
         anIntArrayArrayArray1129 = new int[4][13][13];
@@ -10290,7 +10289,7 @@ public class Client extends GameShell {
         anIntArray1203 = new int[5];
         anIntArray1207 = new int[50];
         anInt1210 = 2;
-        anInt1211 = 78;
+        scrollMax = 78;
         promptInput = "";
         modIcons = new IndexedImage[2];
         tabID = 3;
@@ -10501,7 +10500,7 @@ public class Client extends GameShell {
     private int menuOffsetX;
     private int menuOffsetY;
     private int menuWidth;
-    private int anInt952;
+    private int menuHeight;
     private long aLong953;
     private boolean aBoolean954;
     private long[] friendsListAsLongs;
@@ -10518,7 +10517,7 @@ public class Client extends GameShell {
     //private rs2.IndexedImage aIndexedImage_999;//never used
     //private rs2.IndexedImage aIndexedImage_967;//never used
 
-    private final int[] compassShape1;
+    private final int[] compassHingeSize;
     private final int[] anIntArray969;
     final JagexFileStore[] jagexFileStores;
     public int sessionSettings[];
@@ -10560,7 +10559,7 @@ public class Client extends GameShell {
     private int welcome_screen_last_login;
     private int pktSize;
     private int pktType;
-    private int anInt1009;
+    private int timeoutCounter;
     private int anInt1010;
     private int anInt1011;
     private Deque aClass19_1013;
@@ -10603,10 +10602,10 @@ public class Client extends GameShell {
     private int anInt1054;
     private int anInt1055;
     private Deque aClass19_1056;
-    private final int[] compassShape2;
+    private final int[] compassWidthMap;
     private final RSInterface aClass9_1059;
     private IndexedImage[] mapScenes;
-    private static int anInt1061;
+    private static int drawCycle;
     private int anInt1062;
     private final int anInt1063;
     private int friendsListAction;
@@ -10659,7 +10658,7 @@ public class Client extends GameShell {
     private GraphicsBuffer aRSImageProducer_1115;
     private static int mouseClickCounter;
     private int membersInt;
-    private String aString1121;
+    private String chatboxInputneededString;
     private RgbImage compass;
     private GraphicsBuffer aRSImageProducer_1123;
     private GraphicsBuffer aRSImageProducer_1124;
@@ -10722,7 +10721,7 @@ public class Client extends GameShell {
     private int[] anIntArray1182;
     private byte[][] terrainData;
     private int anInt1184;
-    private int minimapInt1;
+    private int minimapAngle;
     private int anInt1186;
     private int anInt1187;
     private static int anInt1188;
@@ -10742,10 +10741,10 @@ public class Client extends GameShell {
     static final int[] skinColours = {9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 58654, 5027, 1457, 16565, 34991, 25486};
     private static boolean flagged;
     private final int[] anIntArray1207;
-    private int anInt1208;
+    private int flameCycle;
     private int minimapInt2;
     private int anInt1210;
-    private int anInt1211;
+    private int scrollMax;
     private String promptInput;
     private int anInt1213;
     private int[][][] intGroundArray;

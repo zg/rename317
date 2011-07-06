@@ -27,17 +27,17 @@ public class ObjectOnTile extends Entity {
             if(sequence != null)
                 j = sequence.frame2IDS[frame];
         }
-        ObjectDef class46;
+        ObjectDef objectDef;
         if(anIntArray1600 != null)
-            class46 = method457();
+            objectDef = method457();
         else
-            class46 = ObjectDef.forID(anInt1610);
-        if(class46 == null)
+            objectDef = ObjectDef.forID(objectID);
+        if(objectDef == null)
         {
             return null;
         } else
         {
-            return class46.method578(anInt1611, anInt1612, anInt1603, anInt1604, anInt1605, anInt1606, j);
+            return objectDef.method578(anInt1611, anInt1612, anInt1603, anInt1604, anInt1605, anInt1606, j);
         }
     }
 
@@ -67,19 +67,19 @@ public class ObjectOnTile extends Entity {
             return ObjectDef.forID(anIntArray1600[i]);
     }
 
-    public ObjectOnTile(int i, int j, int k, int l, int i1, int j1,
-                         int k1, int l1, boolean randomize)
+    public ObjectOnTile(int objectID, int j, int k, int l, int i1, int j1,
+                         int k1, int animationID, boolean randomize)
     {
-        anInt1610 = i;
+        this.objectID = objectID;
         anInt1611 = k;
         anInt1612 = j;
         anInt1603 = j1;
         anInt1604 = l;
         anInt1605 = i1;
         anInt1606 = k1;
-        if(l1 != -1)
+        if(animationID != -1)
         {
-            sequence = Sequence.anims[l1];
+            sequence = Sequence.anims[animationID];
             frame = 0;
             delay = Client.currentTime;
             if(randomize && sequence.frameStep != -1)
@@ -88,7 +88,7 @@ public class ObjectOnTile extends Entity {
                 delay -= (int)(Math.random() * (double) sequence.getFrameLength(frame));
             }
         }
-        ObjectDef class46 = ObjectDef.forID(anInt1610);
+        ObjectDef class46 = ObjectDef.forID(this.objectID);
         anInt1601 = class46.configId_1;
         anInt1602 = class46.configID;
         anIntArray1600 = class46.configObjectIDs;
@@ -105,7 +105,7 @@ public class ObjectOnTile extends Entity {
     private Sequence sequence;
     private int delay;
     public static Client clientInstance;
-    private final int anInt1610;
+    private final int objectID;
     private final int anInt1611;
     private final int anInt1612;
 }

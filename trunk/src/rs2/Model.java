@@ -618,7 +618,7 @@ public class Model extends Entity {
                 method460(((OnDemandFetcher)abstractODFetcher).getDataFromCache(j,0), j);
                 return new Model(j, 0);//edited for new engine
             } else {
-                abstractODFetcher.method548(j);
+                abstractODFetcher.requestData(j);
                 return null;
             }
         } else {
@@ -631,7 +631,7 @@ public class Model extends Entity {
             return false;
         ModelHeader modelHeader = modelHeaderCache[i];
         if (modelHeader == null) {
-            abstractODFetcher.method548(i);
+            abstractODFetcher.requestData(i);
             return false;
         } else {
             return true;
@@ -1053,20 +1053,20 @@ public class Model extends Entity {
         triNIndex = model.triNIndex;
     }
 
-    public Model(boolean flag, boolean flag1, Model model) {
+    public Model(boolean isSolid, boolean nonFlatShading, Model model) {
         this.hash = model.hash*3+1;
         aBoolean1659 = false;
         vertexCount = model.vertexCount;
         triangleCount = model.triangleCount;
         textureTriangleCount = model.textureTriangleCount;
-        if (flag) {
+        if (isSolid) {
             vertexY = new int[vertexCount];
             System.arraycopy(model.vertexY, 0, vertexY, 0, vertexCount);
 
         } else {
             vertexY = model.vertexY;
         }
-        if (flag1) {
+        if (nonFlatShading) {
             triangleHslA = new int[triangleCount];
             triangleHslB = new int[triangleCount];
             triangleHslC = new int[triangleCount];

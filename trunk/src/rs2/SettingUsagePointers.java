@@ -6,27 +6,26 @@ public class SettingUsagePointers {
     public static void unpackConfig(JagexArchive jagexArchive)
     {
         Packet stream = new Packet(jagexArchive.getDataForName("varp.dat"));
-        anInt702 = 0;
         int cacheSize = stream.g2();
         if(cache == null)
             cache = new SettingUsagePointers[cacheSize];
-        if(anIntArray703 == null)
-            anIntArray703 = new int[cacheSize];
         for(int j = 0; j < cacheSize; j++)
         {
             if(cache[j] == null)
                 cache[j] = new SettingUsagePointers();
-            cache[j].readValues(stream, j);
+            cache[j].readValues(stream);
         }
         if(stream.pos != stream.data.length)
             System.out.println("varptype load mismatch");
     }
 
-    private void readValues(Packet stream, int i)
+    private void readValues(Packet stream)
     {
         do
         {
             int j = stream.g1();
+            if(j != 0)
+            System.out.println("opcode "+j);
             if(j == 0)
                 return;
             //int dummy;
@@ -37,7 +36,7 @@ public class SettingUsagePointers {
                 stream.g1();
             else
             if(j == 3)
-                anIntArray703[anInt702++] = i;
+            	{}
             else
             if(j == 4)
                 {}//dummy = 2;
@@ -75,8 +74,6 @@ public class SettingUsagePointers {
     }
 
     public static SettingUsagePointers cache[];
-    private static int anInt702;
-    private static int[] anIntArray703;
     public int usage;
 
 }

@@ -18,8 +18,8 @@ import static org.lwjgl.opengl.GL11.glLightModel;
 public class Entity extends NodeSub {
 
 
-    public void renderAtPoint(int i, int j, int k, int l, int i1, int j1, int k1,
-            int l1, int i2)
+    public void renderAtPoint(int i, int j, int k, int l, int i1, int x, int y,
+            int z, int i2)
     {
         Model model = this instanceof Model ? (Model) this : getRotatedModel();
         if(model != null)
@@ -36,7 +36,7 @@ public class Entity extends NodeSub {
                     modelPool.put(model,pgleNode);
                 }
                 if (pgleNode != null)
-                    renderAtPoint(pgleNode,i,j1,k1,l1);
+                    renderAtPoint(pgleNode,i,x,y,z);
                 if (pgleNode != null && this instanceof Projectile){
                     setEffectLight(Rasterizer.hsl2rgb[model.triangleColour[0]]);
                     effectLight.enable();
@@ -44,7 +44,7 @@ public class Entity extends NodeSub {
                 }
             }
             modelHeight = model.modelHeight;
-            model.renderAtPoint2(i, j, k, l, i1, j1, k1, l1, i2);
+            model.renderAtPoint2(i, j, k, l, i1, x, y, z, i2);
         }
     }
 

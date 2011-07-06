@@ -826,7 +826,7 @@ label0:
                 tileSetting.method212(class46.aBoolean757, class46.sizeX, class46.sizeY, l, i, j1);
             return;
         }
-        if(class46.isSolid)
+        if(class46.isModelSolid)
             if(j1 == 1)
             {
                 int j3 = zC;
@@ -1336,7 +1336,7 @@ label0:
                 tileSetting.method212(objectDef.aBoolean757, objectDef.sizeX, objectDef.sizeY, x, y, i);
             return;
         }
-        if(objectDef.isSolid)
+        if(objectDef.isModelSolid)
             if(i == 1)
             {
                 int k3 = k2;
