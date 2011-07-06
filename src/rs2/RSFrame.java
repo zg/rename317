@@ -6,14 +6,14 @@ import java.awt.*;
 public class RSFrame extends Frame
 {
 
-    public RSFrame(GameShell gameShell, int i, int j)
+    public RSFrame(GameShell gameShell, int width, int height)
     {
         this.gameShell = gameShell;
         setTitle("Jagex");
         setResizable(false);
         setVisible(true);
         toFront();
-        setSize(i + 8, j + 28);
+        setSize(width + 8, height + 28);
     }
 
     public Graphics getGraphics()

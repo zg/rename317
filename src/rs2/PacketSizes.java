@@ -3,7 +3,7 @@ package rs2;
 
 public class PacketSizes {
 
-    public static final int[] dummyArray = {//never used in rs2.Client..
+    public static final int[] dummyArray = {//never used in rs2.Client.. -- actualy this has a use, cant remember it tho, its todo with expected packet ids varying through revisions
         6, 21, 25, 33, 254, 127, 183, 87, 216, 215,
         211, 48, 15, 195, 149, 233, 162, 102, 104, 179,
         222, 103, 224, 81, 152, 89, 45, 11, 197, 187,

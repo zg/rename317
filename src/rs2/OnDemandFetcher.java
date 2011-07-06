@@ -131,9 +131,9 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         };
         for(int cachePtr = 0; cachePtr < 4; cachePtr++)
         {
-            byte abyte0[] = jagexArchive.getDataForName(versionFileNames[cachePtr]);
-            int j = abyte0.length / 2;
-            Packet stream = new Packet(abyte0);
+            byte data[] = jagexArchive.getDataForName(versionFileNames[cachePtr]);
+            int j = data.length / 2;
+            Packet stream = new Packet(data);
             versions[cachePtr] = new int[j];
             fileStatus[cachePtr] = new byte[j];
             for(int l = 0; l < j; l++)
@@ -146,9 +146,9 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         };
         for(int cachePtr = 0; cachePtr < 4; cachePtr++)
         {
-            byte abyte1[] = jagexArchive.getDataForName(crcFileNames[cachePtr]);
-            int size = abyte1.length / 4;
-            Packet stream_1 = new Packet(abyte1);
+            byte data[] = jagexArchive.getDataForName(crcFileNames[cachePtr]);
+            int size = data.length / 4;
+            Packet stream_1 = new Packet(data);
             crcs[cachePtr] = new int[size];
             for(int l1 = 0; l1 < size; l1++)
                 crcs[cachePtr][l1] = stream_1.g4();
@@ -205,9 +205,9 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         };
         for(int cachePtr = 0; cachePtr < 4; cachePtr++)
         {
-            byte abyte0[] = jagexArchive.getDataForName(versionFileNames[cachePtr]);
-            int j = abyte0.length / 2;
-            Packet stream = new Packet(abyte0);
+            byte data[] = jagexArchive.getDataForName(versionFileNames[cachePtr]);
+            int j = data.length / 2;
+            Packet stream = new Packet(data);
             versions[cachePtr] = new int[j];
             fileStatus[cachePtr] = new byte[j];
             for(int l = 0; l < j; l++)
@@ -220,9 +220,9 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         };
         for(int cachePtr = 0; cachePtr < 4; cachePtr++)
         {
-            byte abyte1[] = jagexArchive.getDataForName(crcFileNames[cachePtr]);
-            int size = abyte1.length / 4;
-            Packet stream_1 = new Packet(abyte1);
+            byte data[] = jagexArchive.getDataForName(crcFileNames[cachePtr]);
+            int size = data.length / 4;
+            Packet stream_1 = new Packet(data);
             crcs[cachePtr] = new int[size];
             for(int l1 = 0; l1 < size; l1++)
                 crcs[cachePtr][l1] = stream_1.g4();
@@ -571,7 +571,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         return -1;
     }
 
-    public void method548(int i)
+    public void requestData(int i)
     {
         method558(0, i);
     }

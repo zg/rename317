@@ -33,8 +33,8 @@ public class ObjectDef
         isUnwalkable = true;
         aBoolean757 = true;
         hasActions = false;
-        isSolid = false;
-        aBoolean769 = false;
+        isModelSolid = false;
+        nonFlatShading = false;
         aBoolean764 = false;
         animationID = -1;
         anInt775 = 16;
@@ -53,7 +53,7 @@ public class ObjectDef
         offsetH = 0;
         offsetY = 0;
         aBoolean736 = false;
-        aBoolean766 = false;
+        isSolidObject = false;
         anInt760 = -1;
         configId_1 = -1;
         configID = -1;
@@ -122,9 +122,9 @@ public class ObjectDef
         Model model = method581(i, k1, j);
         if(model == null)
             return null;
-        if(isSolid || aBoolean769)
-            model = new Model(isSolid, aBoolean769, model);
-        if(isSolid)
+        if(isModelSolid || nonFlatShading)
+            model = new Model(isModelSolid, nonFlatShading, model);
+        if(isModelSolid)
         {
             int l1 = (k + l + i1 + j1) / 4;
             for(int i2 = 0; i2 < model.vertexCount; i2++)
@@ -272,7 +272,7 @@ public class ObjectDef
             model_3.scaleT(modelSizeX, modelSizeY, modelSizeH);
         if(flag2)
             model_3.translate(offsetX, offsetH, offsetY);
-        model_3.light(64 + brightness, 768 + contrast * 5, -50, -10, -50, !aBoolean769);
+        model_3.light(64 + brightness, 768 + contrast * 5, -50, -10, -50, !nonFlatShading);
         if(anInt760 == 1)
             model_3.anInt1654 = model_3.modelHeight;
         memCache2.put(model_3, l1);
@@ -351,10 +351,10 @@ label0:
                         hasActions = true;
                 } else
                 if(j == 21)
-                    isSolid = true;
+                    isModelSolid = true;
                 else
                 if(j == 22)
-                    aBoolean769 = true;
+                    nonFlatShading = true;
                 else
                 if(j == 23)
                     aBoolean764 = true;
@@ -432,7 +432,7 @@ label0:
                 else
                 if(j == 74)
                 {
-                    aBoolean766 = true;
+                    isSolidObject = true;
                 } else
                 {
                     if(j != 75)
@@ -463,7 +463,7 @@ label0:
             if(actions != null)
                 hasActions = true;
         }
-        if(aBoolean766)
+        if(isSolidObject)
         {
             isUnwalkable = false;
             aBoolean757 = false;
@@ -500,13 +500,13 @@ label0:
     public int configObjectIDs[];
     private int anInt760;
     public int sizeY;
-    public boolean isSolid;
+    public boolean isModelSolid;
     public boolean aBoolean764;
     public static Client clientInstance;
-    private boolean aBoolean766;
+    private boolean isSolidObject;
     public boolean isUnwalkable;
     public int anInt768;
-    private boolean aBoolean769;
+    private boolean nonFlatShading;
     private static int cacheIndex;
     private int modelSizeH;
     private int[] objectModelIDs;

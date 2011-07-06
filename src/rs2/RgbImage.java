@@ -20,7 +20,7 @@ public class RgbImage extends Graphics2D {
         javax.swing.ImageIcon icon =new javax.swing.ImageIcon (filename);
         icon.getIconHeight();
         icon.getIconWidth();
-        System.out.println(icon.getIconHeight()+" "+icon.getIconWidth());
+        //System.out.println(icon.getIconHeight()+" "+icon.getIconWidth());
         try
         {
             Image image = Toolkit.getDefaultToolkit().createImage(FileOperations.ReadFile(filename));
@@ -40,7 +40,7 @@ public class RgbImage extends Graphics2D {
         }
     }
 
-    public RgbImage(byte abyte0[], Component component)
+    public RgbImage(byte data[], Component component)
     {
         try
         {
@@ -119,35 +119,35 @@ public class RgbImage extends Graphics2D {
         setTarget(myHeight, myWidth, myPixels);
     }
 
-    public void shiftColours(int i, int j, int k)
+    public void shiftColours(int r, int g, int b)
     {
         for(int i1 = 0; i1 < myPixels.length; i1++)
         {
             int j1 = myPixels[i1];
             if(j1 != 0)
             {
-                int k1 = j1 >> 16 & 0xff;
-                k1 += i;
-                if(k1 < 1)
-                    k1 = 1;
+                int endR = j1 >> 16 & 0xff;
+                endR += r;
+                if(endR < 1)
+                    endR = 1;
                 else
-                if(k1 > 255)
-                    k1 = 255;
-                int l1 = j1 >> 8 & 0xff;
-                l1 += j;
-                if(l1 < 1)
-                    l1 = 1;
+                if(endR > 255)
+                    endR = 255;
+                int endG = j1 >> 8 & 0xff;
+                endG += g;
+                if(endG < 1)
+                    endG = 1;
                 else
-                if(l1 > 255)
-                    l1 = 255;
-                int i2 = j1 & 0xff;
-                i2 += k;
-                if(i2 < 1)
-                    i2 = 1;
+                if(endG > 255)
+                    endG = 255;
+                int endB = j1 & 0xff;
+                endB += b;
+                if(endB < 1)
+                    endB = 1;
                 else
-                if(i2 > 255)
-                    i2 = 255;
-                myPixels[i1] = (k1 << 16) + (l1 << 8) + i2;
+                if(endB > 255)
+                    endB = 255;
+                myPixels[i1] = (endR << 16) + (endG << 8) + endB;
             }
         }
 

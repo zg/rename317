@@ -4,11 +4,11 @@ import java.io.*;
 
 public class JagexFileStore {//CacheIO or rs2.JagexFileStore..
 	
-    public JagexFileStore(RandomAccessFile randomaccessfile, RandomAccessFile randomaccessfile1, int j)
+    public JagexFileStore(RandomAccessFile dataFile_, RandomAccessFile indexFile_, int storeId)
     {
-        	storeID = j;
-            dataFile = randomaccessfile;
-            indexFile = randomaccessfile1;
+        	storeID = storeId;
+            dataFile = dataFile_;
+            indexFile = indexFile_;
     }
 
     public synchronized byte[] decompress(int i)

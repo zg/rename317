@@ -22,5 +22,4 @@ public class NodeSub extends Node {
 
     public NodeSub nextSub;
     NodeSub previousSub;
-    public static int anInt1305;
 }
