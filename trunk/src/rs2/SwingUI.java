@@ -88,7 +88,7 @@ public class SwingUI extends Client implements ActionListener {
 
 	public void initMenubar() {
 			JMenu fileMenu = new JMenu("File");
-			String[] mainButtons = new String[] { "Forums","IP", "-", "Exit" };
+			String[] mainButtons = new String[] { "317", "PI", "Forums","IP", "-", "Exit" };
 			for (String name : mainButtons) {
 				JMenuItem menuItem = new JMenuItem(name);
 				if (name.equalsIgnoreCase("-")) {
@@ -105,13 +105,26 @@ public class SwingUI extends Client implements ActionListener {
 					JMenuItem changeIP = new JMenuItem("change ip");
 					changeIP.addActionListener(this);
 					IPmenu.add(changeIP);
+				} else if(name.equalsIgnoreCase("317")) {
+					JMenu menu317 = new JMenu("317 Mode");
+					fileMenu.add(menu317);
+					JMenuItem playerFix317 = new JMenuItem("Player Bit Fix (enable 317 mode)");
+					playerFix317.addActionListener(this);
+					menu317.add(playerFix317);
+				} else if(name.equalsIgnoreCase("PI")) {
+					JMenu menuPI = new JMenu("PI Mode");
+					fileMenu.add(menuPI);
+					JMenuItem playerFixPI = new JMenuItem("Player Bit Fix (enable PI mode)");
+					playerFixPI.addActionListener(this);
+					menuPI.add(playerFixPI);
 				} else {
 					menuItem.addActionListener(this);
 					fileMenu.add(menuItem);
 				}
+				
 			}
 
-displayPaypal();
+			//displayPaypal();
 
 			JMenuBar menuBar = new JMenuBar();
 			JMenuBar jmenubar = new JMenuBar();
@@ -127,6 +140,11 @@ displayPaypal();
 		} catch (Exception e) {
 			return super.getCodeBase();
 		}
+	}
+	
+	public int getPlayerBitAmmount()
+	{System.out.println("lol nigga "+playerBitAmmount);
+		return playerBitAmmount;
 	}
 
 	public URL getDocumentBase() {
@@ -159,6 +177,10 @@ displayPaypal();
 					openURL("http://www.rune-server.org/forums.php");
 				} else if (cmd.equalsIgnoreCase("change ip")) {
 					displayWorldSelect();
+				} else if (cmd.equalsIgnoreCase("Player Bit Fix (enable 317 mode)")) {
+					playerBitAmmount = 12;
+				}else if (cmd.equalsIgnoreCase("Player Bit Fix (enable PI mode)")) {
+					playerBitAmmount = 14;
 				}
 
 			}

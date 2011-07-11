@@ -1738,7 +1738,7 @@ public class Client extends GameShell {
             if (i1 > 15)
                 i1 -= 32;
             int j1 = stream.gbits(1);
-            npc.desc = NpcDef.forID(stream.gbits(12));
+            npc.desc = NpcDef.forID(stream.gbits(getPlayerBitAmmount()));//stupid pi uses 14 bits instead of 12
             int k1 = stream.gbits(1);
             if (k1 == 1)
                 session_npcs_awaiting_update[sessionNpcsAwaitingUpdatePtr++] = k;
@@ -1754,7 +1754,12 @@ public class Client extends GameShell {
         stream.end_bit_block();
     }
 
-    public void doLogic() {
+    public int getPlayerBitAmmount() {//this isnt techinacly used, it uses the method from swingui
+    	return 0;
+	}
+
+
+	public void doLogic() {
         if (rsAlreadyLoaded || loadingError || genericLoadingError)
             return;
         currentTime++;
@@ -10816,6 +10821,7 @@ public class Client extends GameShell {
     private int anInt1289;
     public static int anInt1290;
     public String server = "";
+    public int playerBitAmmount = 12;//12 for 317, 14 for pi
     public static boolean guiLaunch = true;
     public static boolean circleLoadingBar = true;
     
