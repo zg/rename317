@@ -1254,8 +1254,8 @@ public class Client extends GameShell {
                                 spriteDrawY -= 10;
                             }
                             hitMarks[((Mobile) (obj)).hitMarkTypes[j1]].drawSprite(spriteDrawX - 12, spriteDrawY - 12);
-                            smallFont.drawTextHMidVTop(String.valueOf(((Mobile) (obj)).hitArray[j1]), spriteDrawX, spriteDrawY + 4, 0);
-                            smallFont.drawTextHMidVTop(String.valueOf(((Mobile) (obj)).hitArray[j1]), spriteDrawX - 1, spriteDrawY + 3, 0xffffff);
+                            smallFont.drawTextHMidVTop(String.valueOf(((Mobile) (obj)).hitDamages[j1]), spriteDrawX, spriteDrawY + 4, 0);
+                            smallFont.drawTextHMidVTop(String.valueOf(((Mobile) (obj)).hitDamages[j1]), spriteDrawX - 1, spriteDrawY + 3, 0xffffff);
                         }
                     }
 
@@ -4919,6 +4919,7 @@ public class Client extends GameShell {
         aRSImageProducer_1124 = new GraphicsBuffer(269, 37, getGameComponent());
         aRSImageProducer_1125 = new GraphicsBuffer(249, 45, getGameComponent());
         repaintRequested = true;
+        //Signlink.midii.fadeOut();
     }
 
     private String getDocumentBaseHost() {
@@ -5545,9 +5546,9 @@ public class Client extends GameShell {
                 }
             }
             if ((l & 8) != 0) {
-                int j1 = stream.nsp1();
-                int j2 = stream.ng1b();
-                npc.updateHitData(j2, j1, currentTime);
+                int hitDamage = stream.nsp1();
+                int hitType = stream.ng1b();
+                npc.updateHitData(hitType, hitDamage, currentTime);
                 npc.loopCycleStatus = currentTime + 300;
                 npc.currentHealth = stream.nsp1();
                 npc.maxHealth = stream.g1();
@@ -5576,9 +5577,9 @@ public class Client extends GameShell {
 
             }
             if ((l & 0x40) != 0) {
-                int l1 = stream.ng1b();
-                int k2 = stream.sg1();
-                npc.updateHitData(k2, l1, currentTime);
+                int hitDamage = stream.ng1b();
+                int hitType = stream.sg1();
+                npc.updateHitData(hitType, hitDamage, currentTime);
                 npc.loopCycleStatus = currentTime + 300;
                 npc.currentHealth = stream.sg1();
                 npc.maxHealth = stream.ng1b();

@@ -44,14 +44,14 @@ public class Mobile extends Entity {
         anInt1542 = 0;
     }
 
-    public final void updateHitData(int j, int k, int l)
+    public final void updateHitData(int hitType, int hitDamage, int currentTime)
     {
-        for(int i1 = 0; i1 < 4; i1++)
-            if(hitsLoopCycle[i1] <= l)
+        for(int hitPtr = 0; hitPtr < 4; hitPtr++)
+            if(hitsLoopCycle[hitPtr] <= currentTime)
             {
-                hitArray[i1] = k;
-                hitMarkTypes[i1] = j;
-                hitsLoopCycle[i1] = l + 70;
+                hitDamages[hitPtr] = hitDamage;
+                hitMarkTypes[hitPtr] = hitType;
+                hitsLoopCycle[hitPtr] = currentTime + 70;
                 return;
             }
     }
@@ -121,7 +121,7 @@ public class Mobile extends Entity {
         height = 200;
         anInt1511 = -1;
         anInt1512 = -1;
-        hitArray = new int[4];
+        hitDamages = new int[4];
         hitMarkTypes = new int[4];
         hitsLoopCycle = new int[4];
         anInt1517 = -1;
@@ -150,7 +150,7 @@ public class Mobile extends Entity {
     int anInt1511;//idle?
     int anInt1512;//idleTurn?
     int anInt1513;//
-    final int[] hitArray;
+    final int[] hitDamages;
     final int[] hitMarkTypes;
     final int[] hitsLoopCycle;
     int anInt1517;

@@ -202,7 +202,7 @@ public class Packet extends NodeSub {
 	for(int i = 0; i < buffer.length; i++)
 		buffer[i] = data[pos++];
 
-return buffer;
+	return buffer;
     }
 
     public void begin_bit_block()
@@ -251,15 +251,22 @@ return buffer;
             return g2() - 32768;
     }
 
+    public boolean rsaEnabled = false;
+    BigInteger e = new BigInteger("00000000000000000000000");//encryption exponent
+    BigInteger n = new BigInteger("00000000000000000000000");//public modulus
     public void rsaenc()
     {
         int i = pos;
         pos = 0;
-        byte abyte0[] = new byte[i];
-        gdata(abyte0, 0, i);
-        BigInteger biginteger2 = new BigInteger(abyte0);
-        BigInteger biginteger3 = biginteger2/*.modPow(biginteger, biginteger1)*/;
-        byte abyte1[] = biginteger3.toByteArray();
+        byte rsaBuffer[] = new byte[i];
+        gdata(rsaBuffer, 0, i);
+        BigInteger biginteger2 = new BigInteger(rsaBuffer);
+        BigInteger encryptedData;
+        if(rsaEnabled)
+        	encryptedData = biginteger2.modPow(e, n);
+        else
+        	encryptedData = biginteger2;
+        byte abyte1[] = encryptedData.toByteArray();
         pos = 0;
         p1(abyte1.length);
         pdata(abyte1, 0, abyte1.length);
