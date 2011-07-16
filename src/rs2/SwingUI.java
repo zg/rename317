@@ -143,7 +143,7 @@ public class SwingUI extends Client implements ActionListener {
 	}
 	
 	public int getPlayerBitAmmount()
-	{System.out.println("lol nigga "+playerBitAmmount);
+	{
 		return playerBitAmmount;
 	}
 
