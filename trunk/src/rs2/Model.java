@@ -999,7 +999,7 @@ public class Model extends Entity {
         calculateDiagonals();
     }
 
-    public Model(boolean flag, boolean flag1, boolean flag2, Model model) {
+    public Model(boolean flag, boolean animationNull, boolean flag2, Model model) {
         aBoolean1659 = false;
         vertexCount = model.vertexCount;
         triangleCount = model.triangleCount;
@@ -1027,7 +1027,7 @@ public class Model extends Entity {
             System.arraycopy(model.triangleColour, 0, triangleColour, 0, triangleCount);
 
         }
-        if (flag1) {
+        if (animationNull) {
             triangleAlpha = model.triangleAlpha;
         } else {
             triangleAlpha = new int[triangleCount];
@@ -1927,8 +1927,8 @@ public class Model extends Entity {
         return (hsl & 0xff80) + l;
     }
 
-    public void rendersingle(int j, int k, int l, int i1, int j1, int k1) {//todo figure if i has any significence to its value.
-        int i = 0; //was a parameter
+    public void rendersingle(int j, int k, int l, int i1, int sine, int cosine) {//todo figure if i has any significence to its value.
+        int i = 0; //was a parameters
         int l1 = Rasterizer.centerX;
         int i2 = Rasterizer.centerY;
         int j2 = SINE[i];//[i]
@@ -1939,7 +1939,7 @@ public class Model extends Entity {
         int k3 = COSINE[k];
         int l3 = SINE[l];
         int i4 = COSINE[l];
-        int j4 = j1 * l3 + k1 * i4 >> 16;
+        int j4 = sine * l3 + cosine * i4 >> 16;
         for (int k4 = 0; k4 < vertexCount; k4++) {
             int l4 = vertexX[k4];
             int i5 = vertexY[k4];
@@ -1960,8 +1960,8 @@ public class Model extends Entity {
                 l4 = i6;
             }
             l4 += i1;
-            i5 += j1;
-            j5 += k1;
+            i5 += sine;
+            j5 += cosine;
             int j6 = i5 * i4 - j5 * l3 >> 16;
             j5 = i5 * l3 + j5 * i4 >> 16;
             i5 = j6;

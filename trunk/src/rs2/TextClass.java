@@ -3,95 +3,95 @@ package rs2;
 
 public class TextClass {
 
-    public static long longForName(String s)
+    public static long nameToLong(String name)
     {
-        long l = 0L;
-        for(int i = 0; i < s.length() && i < 12; i++)
+        long value = 0L;
+        for(int i = 0; i < name.length() && i < 12; i++)
         {
-            char c = s.charAt(i);
-            l *= 37L;
+            char c = name.charAt(i);
+            value *= 37L;
             if(c >= 'A' && c <= 'Z')
-                l += (1 + c) - 65;
+                value += (1 + c) - 65;
             else
             if(c >= 'a' && c <= 'z')
-                l += (1 + c) - 97;
+                value += (1 + c) - 97;
             else
             if(c >= '0' && c <= '9')
-                l += (27 + c) - 48;
+                value += (27 + c) - 48;
         }
 
-        for(; l % 37L == 0L && l != 0L; l /= 37L);
-        return l;
+        for(; value % 37L == 0L && value != 0L; value /= 37L);
+        return value;
     }
 
-    public static String nameForLong(long l)
+    public static String longToName(long name)
     {
         try
         {
-            if(l <= 0L || l >= 0x5b5b57f8a98a5dd1L)
+            if(name <= 0L || name >= 0x5b5b57f8a98a5dd1L)
                 return "invalid_name";
-            if(l % 37L == 0L)
+            if(name % 37L == 0L)
                 return "invalid_name";
-            int i = 0;
-            char ac[] = new char[12];
-            while(l != 0L)
+            int length = 0;
+            char value[] = new char[12];
+            while(name != 0L)
             {
-                long l1 = l;
-                l /= 37L;
-                ac[11 - i++] = validChars[(int)(l1 - l * 37L)];
+                long l1 = name;
+                name /= 37L;
+                value[11 - length++] = validChars[(int)(l1 - name * 37L)];
             }
-            return new String(ac, 12 - i, i);
+            return new String(value, 12 - length, length);
         }
         catch(RuntimeException runtimeexception)
         {
-            Signlink.reporterror("81570, " + l + ", " + (byte) -99 + ", " + runtimeexception.toString());
+            Signlink.reporterror("81570, " + name + ", " + (byte) -99 + ", " + runtimeexception.toString());
         }
         throw new RuntimeException();
     }
 
-    public static long method585(String s)
+    public static long encodeSpriteName(String spriteName)
     {
-        s = s.toUpperCase();
-        long l = 0L;
-        for(int i = 0; i < s.length(); i++)
+        spriteName = spriteName.toUpperCase();
+        long value = 0L;
+        for(int i = 0; i < spriteName.length(); i++)
         {
-            l = (l * 61L + (long)s.charAt(i)) - 32L;
-            l = l + (l >> 56) & 0xffffffffffffffL;
+            value = (value * 61L + (long)spriteName.charAt(i)) - 32L;
+            value = value + (value >> 56) & 0xffffffffffffffL;
         }
-        return l;
+        return value;
     }
 
-    public static String decodeDNS(int i)
+    public static String decodeDNS(int address)
     {
-            return (i >> 24 & 0xff) + "." + (i >> 16 & 0xff) + "." + (i >> 8 & 0xff) + "." + (i & 0xff);
+            return (address >> 24 & 0xff) + "." + (address >> 16 & 0xff) + "." + (address >> 8 & 0xff) + "." + (address & 0xff);
     }
 
-    public static String fixName(String s)
+    public static String formatName(String name)
     {
-        if(s.length() > 0)
+        if(name.length() > 0)
         {
-            char ac[] = s.toCharArray();
-            for(int j = 0; j < ac.length; j++)
-                if(ac[j] == '_')
+            char nameArray[] = name.toCharArray();
+            for(int j = 0; j < nameArray.length; j++)
+                if(nameArray[j] == '_')
                 {
-                    ac[j] = ' ';
-                    if(j + 1 < ac.length && ac[j + 1] >= 'a' && ac[j + 1] <= 'z')
-                        ac[j + 1] = (char)((ac[j + 1] + 65) - 97);
+                    nameArray[j] = ' ';
+                    if(j + 1 < nameArray.length && nameArray[j + 1] >= 'a' && nameArray[j + 1] <= 'z')
+                        nameArray[j + 1] = (char)((nameArray[j + 1] + 65) - 97);
                 }
 
-            if(ac[0] >= 'a' && ac[0] <= 'z')
-                ac[0] = (char)((ac[0] + 65) - 97);
-            return new String(ac);
+            if(nameArray[0] >= 'a' && nameArray[0] <= 'z')
+                nameArray[0] = (char)((nameArray[0] + 65) - 97);
+            return new String(nameArray);
         } else
         {
-            return s;
+            return name;
         }
     }
 
-    public static String passwordAsterisks(String s)
+    public static String passwordAsterisks(String password)
     {
         StringBuffer stringbuffer = new StringBuffer();
-        for(int j = 0; j < s.length(); j++)
+        for(int j = 0; j < password.length(); j++)
             stringbuffer.append("*");
         return stringbuffer.toString();
     }

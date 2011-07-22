@@ -21,7 +21,7 @@ public class StillGraphic extends Entity {
         if(model == null)
             return null;
         int j = spotAnim.animationSequence.frame2IDS[eclapsedFrames];
-        Model model_1 = new Model(true, Animation.method532(j), false, model);
+        Model model_1 = new Model(true, Animation.isNullFrame(j), false, model);
         if(!transformCompleted)
         {
             model_1.createBones();

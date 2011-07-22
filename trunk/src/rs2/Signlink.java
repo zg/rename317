@@ -53,7 +53,7 @@ public final class Signlink implements Runnable {
         private static int savelen;
         private static String savereq = null;
         private static byte savebuf[] = null;
-        private static boolean midiplay;
+        public static boolean midiplay;
         private static int midipos;
         public static String midi = null;
         public static int midivol;

@@ -6,21 +6,17 @@ import java.awt.image.PixelGrabber;
 
 public class RgbImage extends Graphics2D {
 
-    public RgbImage(int i, int j)
+    public RgbImage(int width, int height)
     {
-        myPixels = new int[i * j];
-        myWidth = w2 = i;
-        myHeight = h2 = j;
+        myPixels = new int[width * height];
+        myWidth = w2 = width;
+        myHeight = h2 = height;
         xDrawOffset = yDrawOffset = 0;
     }
 
     public RgbImage(String filename)//clienthaxs own code :P
-    {
-
+    {//realy bad way to do this but everyone is using this shody code of mine now GAHH
         javax.swing.ImageIcon icon =new javax.swing.ImageIcon (filename);
-        icon.getIconHeight();
-        icon.getIconWidth();
-        //System.out.println(icon.getIconHeight()+" "+icon.getIconWidth());
         try
         {
             Image image = Toolkit.getDefaultToolkit().createImage(FileOperations.ReadFile(filename));

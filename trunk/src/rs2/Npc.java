@@ -10,7 +10,7 @@ public class Npc extends Mobile
         {
             int k = Sequence.anims[super.animation].frame2IDS[super.anInt1527];
             int i1 = -1;
-            if(super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511)
+            if(super.anInt1517 >= 0 && super.anInt1517 != super.standAnimIndex)
                 i1 = Sequence.anims[super.anInt1517].frame2IDS[super.anInt1518];
             return desc.method164(i1, k, Sequence.anims[super.animation].animationFlowControl);
         }
@@ -35,7 +35,7 @@ public class Npc extends Mobile
             if(model_1 != null)
             {
                 int j = spotAnim.animationSequence.frame2IDS[super.anInt1521];
-                Model model_2 = new Model(true, Animation.method532(j), false, model_1);
+                Model model_2 = new Model(true, Animation.isNullFrame(j), false, model_1);
                 model_2.translate(0, -super.anInt1524, 0);
                 model_2.createBones();
                 model_2.applyTransform(j);

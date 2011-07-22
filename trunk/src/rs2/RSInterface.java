@@ -4,213 +4,213 @@ package rs2;
 public class RSInterface
 {
 
-    public void swapInventoryItems(int i, int j)
+    public void swapInventoryItems(int firstSlot, int secondSlot)
     {
-        int k = inv[i];
-        inv[i] = inv[j];
-        inv[j] = k;
-        k = invStackSizes[i];
-        invStackSizes[i] = invStackSizes[j];
-        invStackSizes[j] = k;
+        int ammountofItem = inv[firstSlot];
+        inv[firstSlot] = inv[secondSlot];
+        inv[secondSlot] = ammountofItem;
+        ammountofItem = invStackSizes[firstSlot];
+        invStackSizes[firstSlot] = invStackSizes[secondSlot];
+        invStackSizes[secondSlot] = ammountofItem;
     }
 
-    public static void unpack(JagexArchive jagexArchive, RSFont RSFonts[], JagexArchive jagexArchive_1)
+    public static void unpack(JagexArchive interfaceArchive, RSFont RSFonts[], JagexArchive mediaArchive)
     {
         spriteCache = new MemCache(50000);
-        Packet stream = new Packet(jagexArchive.getDataForName("data"));
-        int i = -1;
-        int j = stream.g2();
-        interfaceCache = new RSInterface[j];
-        while(stream.pos < stream.data.length)
+        Packet interfaceData = new Packet(interfaceArchive.getDataForName("data"));
+        int parentID = -1;
+        int interfaceAmmount = interfaceData.g2();
+        interfaceCache = new RSInterface[interfaceAmmount];
+        while(interfaceData.pos < interfaceData.data.length)
         {
-            int k = stream.g2();
-            if(k == 65535)
+            int id = interfaceData.g2();
+            if(id == 65535)
             {
-                i = stream.g2();
-                k = stream.g2();
+                parentID = interfaceData.g2();
+                id = interfaceData.g2();
             }
-            RSInterface rsInterface = interfaceCache[k] = new RSInterface();
-            rsInterface.id = k;
-            rsInterface.parentID = i;
-            rsInterface.type = stream.g1();
-            rsInterface.atActionType = stream.g1();
-            rsInterface.content_type = stream.g2();
-            rsInterface.width = stream.g2();
-            rsInterface.height = stream.g2();
-            rsInterface.aByte254 = (byte) stream.g1();
-            rsInterface.anInt230 = stream.g1();
-            if(rsInterface.anInt230 != 0)
-                rsInterface.anInt230 = (rsInterface.anInt230 - 1 << 8) + stream.g1();
+            RSInterface rsInterface = interfaceCache[id] = new RSInterface();
+            rsInterface.id = id;
+            rsInterface.parentID = parentID;
+            rsInterface.type = interfaceData.g1();
+            rsInterface.atActionType = interfaceData.g1();
+            rsInterface.contentType = interfaceData.g2();
+            rsInterface.width = interfaceData.g2();
+            rsInterface.height = interfaceData.g2();
+            rsInterface.alpha = (byte) interfaceData.g1();
+            rsInterface.mouseOverPopupInterface = interfaceData.g1();
+            if(rsInterface.mouseOverPopupInterface != 0)
+                rsInterface.mouseOverPopupInterface = (rsInterface.mouseOverPopupInterface - 1 << 8) + interfaceData.g1();
             else
-                rsInterface.anInt230 = -1;
-            int i1 = stream.g1();
-            if(i1 > 0)
+                rsInterface.mouseOverPopupInterface = -1;
+            int conditionAmmount = interfaceData.g1();
+            if(conditionAmmount > 0)
             {
-                rsInterface.condition_type = new int[i1];
-                rsInterface.condition_value_to_compare = new int[i1];
-                for(int j1 = 0; j1 < i1; j1++)
+                rsInterface.conditionType = new int[conditionAmmount];
+                rsInterface.conditionValueToCompare = new int[conditionAmmount];
+                for(int conditionPtr = 0; conditionPtr < conditionAmmount; conditionPtr++)
                 {
-                    rsInterface.condition_type[j1] = stream.g1();
-                    rsInterface.condition_value_to_compare[j1] = stream.g2();
+                    rsInterface.conditionType[conditionPtr] = interfaceData.g1();
+                    rsInterface.conditionValueToCompare[conditionPtr] = interfaceData.g2();
                 }
 
             }
-            int k1 = stream.g1();
-            if(k1 > 0)
+            int formulaAmmount = interfaceData.g1();
+            if(formulaAmmount > 0)
             {
-                rsInterface.dynamic_value_formulas = new int[k1][];
-                for(int l1 = 0; l1 < k1; l1++)
+                rsInterface.dynamicValueFormulas = new int[formulaAmmount][];
+                for(int formulaPtr = 0; formulaPtr < formulaAmmount; formulaPtr++)
                 {
-                    int i3 = stream.g2();
-                    rsInterface.dynamic_value_formulas[l1] = new int[i3];
-                    for(int l4 = 0; l4 < i3; l4++)
-                        rsInterface.dynamic_value_formulas[l1][l4] = stream.g2();
+                    int subFormulaAmmount = interfaceData.g2();
+                    rsInterface.dynamicValueFormulas[formulaPtr] = new int[subFormulaAmmount];
+                    for(int subFormulaPtr = 0; subFormulaPtr < subFormulaAmmount; subFormulaPtr++)
+                        rsInterface.dynamicValueFormulas[formulaPtr][subFormulaPtr] = interfaceData.g2();
 
                 }
 
             }
             if(rsInterface.type == 0)
             {
-                rsInterface.scrollMax = stream.g2();
-                rsInterface.hidden_until_mouseover = stream.g1() == 1;
-                int i2 = stream.g2();
-                rsInterface.children = new int[i2];
-                rsInterface.childX = new int[i2];
-                rsInterface.childY = new int[i2];
-                for(int j3 = 0; j3 < i2; j3++)
+                rsInterface.scrollMax = interfaceData.g2();
+                rsInterface.hiddenUntilMouseover = interfaceData.g1() == 1;
+                int childAmmount = interfaceData.g2();
+                rsInterface.children = new int[childAmmount];
+                rsInterface.childX = new int[childAmmount];
+                rsInterface.childY = new int[childAmmount];
+                for(int j3 = 0; j3 < childAmmount; j3++)
                 {
-                    rsInterface.children[j3] = stream.g2();
-                    rsInterface.childX[j3] = stream.g2b();
-                    rsInterface.childY[j3] = stream.g2b();
+                    rsInterface.children[j3] = interfaceData.g2();
+                    rsInterface.childX[j3] = interfaceData.g2b();
+                    rsInterface.childY[j3] = interfaceData.g2b();
                 }
 
             }
             if(rsInterface.type == 1)
-            {
-                stream.g2();
-                stream.g1();
+            {//no type ones in cache 317 or 377
+            	interfaceData.g2();
+                interfaceData.g1();
             }
             if(rsInterface.type == 2)
             {
                 rsInterface.inv = new int[rsInterface.width * rsInterface.height];
                 rsInterface.invStackSizes = new int[rsInterface.width * rsInterface.height];
-                rsInterface.aBoolean259 = stream.g1() == 1;
-                rsInterface.isInventoryInterface = stream.g1() == 1;
-                rsInterface.usableItemInterface = stream.g1() == 1;
-                rsInterface.aBoolean235 = stream.g1() == 1;
-                rsInterface.invSpritePadX = stream.g1();
-                rsInterface.invSpritePadY = stream.g1();
+                rsInterface.aBoolean259 = interfaceData.g1() == 1;
+                rsInterface.isInventoryInterface = interfaceData.g1() == 1;
+                rsInterface.usableItemInterface = interfaceData.g1() == 1;
+                rsInterface.dragDeletes = interfaceData.g1() == 1;
+                rsInterface.invSpritePadX = interfaceData.g1();
+                rsInterface.invSpritePadY = interfaceData.g1();
                 rsInterface.spritesX = new int[20];
                 rsInterface.spritesY = new int[20];
                 rsInterface.rgbImages = new RgbImage[20];
-                for(int j2 = 0; j2 < 20; j2++)
+                for(int spritePtr = 0; spritePtr < 20; spritePtr++)
                 {
-                    int k3 = stream.g1();
+                    int k3 = interfaceData.g1();
                     if(k3 == 1)
                     {
-                        rsInterface.spritesX[j2] = stream.g2b();
-                        rsInterface.spritesY[j2] = stream.g2b();
-                        String s1 = stream.gstr();
-                        if(jagexArchive_1 != null && s1.length() > 0)
+                        rsInterface.spritesX[spritePtr] = interfaceData.g2b();
+                        rsInterface.spritesY[spritePtr] = interfaceData.g2b();
+                        String imageName = interfaceData.gstr();
+                        if(mediaArchive != null && imageName.length() > 0)
                         {
-                            int i5 = s1.lastIndexOf(",");
-                            rsInterface.rgbImages[j2] = method207(Integer.parseInt(s1.substring(i5 + 1)), jagexArchive_1, s1.substring(0, i5));
+                            int imageID = imageName.lastIndexOf(",");
+                            rsInterface.rgbImages[spritePtr] = getSprite(Integer.parseInt(imageName.substring(imageID + 1)), mediaArchive, imageName.substring(0, imageID));
                         }
                     }
                 }
 
                 rsInterface.actions = new String[5];
-                for(int l3 = 0; l3 < 5; l3++)
+                for(int actionPtr = 0; actionPtr < 5; actionPtr++)
                 {
-                    rsInterface.actions[l3] = stream.gstr();
-                    if(rsInterface.actions[l3].length() == 0)
-                        rsInterface.actions[l3] = null;
+                    rsInterface.actions[actionPtr] = interfaceData.gstr();
+                    if(rsInterface.actions[actionPtr].length() == 0)
+                        rsInterface.actions[actionPtr] = null;
                 }
 
             }
             if(rsInterface.type == 3)
-                rsInterface.filled = stream.g1() == 1;
+                rsInterface.filled = interfaceData.g1() == 1;
             if(rsInterface.type == 4 || rsInterface.type == 1)
             {
-                rsInterface.text_centered = stream.g1() == 1;
-                int k2 = stream.g1();
+                rsInterface.textCentered = interfaceData.g1() == 1;
+                int fontID = interfaceData.g1();
                 if(RSFonts != null)
-                    rsInterface.font = RSFonts[k2];
-                rsInterface.text_shadow = stream.g1() == 1;
+                    rsInterface.font = RSFonts[fontID];
+                rsInterface.textShadow = interfaceData.g1() == 1;
             }
             if(rsInterface.type == 4)
             {
-                rsInterface.text_conditionfalse = stream.gstr();
-                rsInterface.text_conditiontrue = stream.gstr();
+                rsInterface.textConditionFalse = interfaceData.gstr();
+                rsInterface.textConditionTrue = interfaceData.gstr();
             }
             if(rsInterface.type == 1 || rsInterface.type == 3 || rsInterface.type == 4)
-                rsInterface.colour_conditionfalse = stream.g4();
+                rsInterface.colourConditionFalse = interfaceData.g4();
             if(rsInterface.type == 3 || rsInterface.type == 4)
             {
-                rsInterface.colour_conditiontrue = stream.g4();
-                rsInterface.colour_conditionfalse_mouseover = stream.g4();
-                rsInterface.colour_conditiontrue_mouseover = stream.g4();
+                rsInterface.colourConditionTrue = interfaceData.g4();
+                rsInterface.colourConditionFalseMouseover = interfaceData.g4();
+                rsInterface.colourConditionTrueMouseover = interfaceData.g4();
             }
             if(rsInterface.type == 5)
             {
-                String s = stream.gstr();
-                if(jagexArchive_1 != null && s.length() > 0)
+                String imageName = interfaceData.gstr();
+                if(mediaArchive != null && imageName.length() > 0)
                 {
-                    int i4 = s.lastIndexOf(",");
-                    rsInterface.image_conditionfalse = method207(Integer.parseInt(s.substring(i4 + 1)), jagexArchive_1, s.substring(0, i4));
+                    int imageID = imageName.lastIndexOf(",");
+                    rsInterface.imageConditionFalse = getSprite(Integer.parseInt(imageName.substring(imageID + 1)), mediaArchive, imageName.substring(0, imageID));
                 }
-                s = stream.gstr();
-                if(jagexArchive_1 != null && s.length() > 0)
+                imageName = interfaceData.gstr();
+                if(mediaArchive != null && imageName.length() > 0)
                 {
-                    int j4 = s.lastIndexOf(",");
-                    rsInterface.image_conditiontrue = method207(Integer.parseInt(s.substring(j4 + 1)), jagexArchive_1, s.substring(0, j4));
+                    int imageID = imageName.lastIndexOf(",");
+                    rsInterface.imageConditionTrue = getSprite(Integer.parseInt(imageName.substring(imageID + 1)), mediaArchive, imageName.substring(0, imageID));
                 }
             }
             if(rsInterface.type == 6)
             {
-                int l = stream.g1();
-                if(l != 0)
+                int mediaID = interfaceData.g1();
+                if(mediaID != 0)
                 {
-                    rsInterface.anInt233 = 1;
-                    rsInterface.mediaID = (l - 1 << 8) + stream.g1();
+                    rsInterface.mediaType = 1;
+                    rsInterface.mediaID = (mediaID - 1 << 8) + interfaceData.g1();
                 }
-                l = stream.g1();
-                if(l != 0)
+                mediaID = interfaceData.g1();
+                if(mediaID != 0)
                 {
-                    rsInterface.anInt255 = 1;
-                    rsInterface.anInt256 = (l - 1 << 8) + stream.g1();
+                    rsInterface.enabledMediaType = 1;
+                    rsInterface.enabledMediaID = (mediaID - 1 << 8) + interfaceData.g1();
                 }
-                l = stream.g1();
-                if(l != 0)
-                    rsInterface.animation_conditionfalse = (l - 1 << 8) + stream.g1();
+                mediaID = interfaceData.g1();
+                if(mediaID != 0)
+                    rsInterface.animationConditionFalse = (mediaID - 1 << 8) + interfaceData.g1();
                 else
-                    rsInterface.animation_conditionfalse = -1;
-                l = stream.g1();
-                if(l != 0)
-                    rsInterface.animation_conditiontrue = (l - 1 << 8) + stream.g1();
+                    rsInterface.animationConditionFalse = -1;
+                mediaID = interfaceData.g1();
+                if(mediaID != 0)
+                    rsInterface.animationConditionTrue = (mediaID - 1 << 8) + interfaceData.g1();
                 else
-                    rsInterface.animation_conditiontrue = -1;
-                rsInterface.anInt269 = stream.g2();
-                rsInterface.anInt270 = stream.g2();
-                rsInterface.anInt271 = stream.g2();
+                    rsInterface.animationConditionTrue = -1;
+                rsInterface.zoom = interfaceData.g2();
+                rsInterface.rotation1 = interfaceData.g2();
+                rsInterface.rotation2 = interfaceData.g2();
             }
             if(rsInterface.type == 7)
             {
                 rsInterface.inv = new int[rsInterface.width * rsInterface.height];
                 rsInterface.invStackSizes = new int[rsInterface.width * rsInterface.height];
-                rsInterface.text_centered = stream.g1() == 1;
-                int l2 = stream.g1();
+                rsInterface.textCentered = interfaceData.g1() == 1;
+                int fontID = interfaceData.g1();
                 if(RSFonts != null)
-                    rsInterface.font = RSFonts[l2];
-                rsInterface.text_shadow = stream.g1() == 1;
-                rsInterface.colour_conditionfalse = stream.g4();
-                rsInterface.invSpritePadX = stream.g2b();
-                rsInterface.invSpritePadY = stream.g2b();
-                rsInterface.isInventoryInterface = stream.g1() == 1;
+                    rsInterface.font = RSFonts[fontID];
+                rsInterface.textShadow = interfaceData.g1() == 1;
+                rsInterface.colourConditionFalse = interfaceData.g4();
+                rsInterface.invSpritePadX = interfaceData.g2b();
+                rsInterface.invSpritePadY = interfaceData.g2b();
+                rsInterface.isInventoryInterface = interfaceData.g1() == 1;
                 rsInterface.actions = new String[5];
                 for(int k4 = 0; k4 < 5; k4++)
                 {
-                    rsInterface.actions[k4] = stream.gstr();
+                    rsInterface.actions[k4] = interfaceData.gstr();
                     if(rsInterface.actions[k4].length() == 0)
                         rsInterface.actions[k4] = null;
                 }
@@ -218,17 +218,17 @@ public class RSInterface
             }
             if(rsInterface.atActionType == 2 || rsInterface.type == 2)
             {
-                rsInterface.selectedActionName = stream.gstr();
-                rsInterface.spellName = stream.gstr();
-                rsInterface.spellUsableOn = stream.g2();
+                rsInterface.selectedActionName = interfaceData.gstr();
+                rsInterface.spellName = interfaceData.gstr();
+                rsInterface.spellUsableOn = interfaceData.g2();
             }
 
             if(rsInterface.type == 8)
-			  rsInterface.text_conditionfalse = stream.gstr();
+			  rsInterface.textConditionFalse = interfaceData.gstr();
 
             if(rsInterface.atActionType == 1 || rsInterface.atActionType == 4 || rsInterface.atActionType == 5 || rsInterface.atActionType == 6)
             {
-                rsInterface.tooltip = stream.gstr();
+                rsInterface.tooltip = interfaceData.gstr();
                 if(rsInterface.tooltip.length() == 0)
                 {
                     if(rsInterface.atActionType == 1)
@@ -241,35 +241,33 @@ public class RSInterface
                         rsInterface.tooltip = "Continue";
                 }
             }
-
-//aryan	Bot.notifyInterface(rsInterface);
 	}
         spriteCache = null;
     }
 
-    private Model get_model(int type, int j)
+    private Model getModel(int type, int id)
     {
-        Model model = (Model) modelCache.get((type << 16) + j);
+        Model model = (Model) modelCache.get((type << 16) + id);
         if(model != null)
             return model;
         if(type == 1)
-            model = Model.getModel(j);
+            model = Model.getModel(id);
         if(type == 2)
-            model = NpcDef.forID(j).getHeadModel();
+            model = NpcDef.forID(id).getHeadModel();
         if(type == 3)
-            model = Client.session_player.getHeadModel();
+            model = Client.sessionPlayer.getHeadModel();
         if(type == 4)
-            model = ItemDef.forID(j).get_inventory_model(50);
+            model = ItemDef.forID(id).get_inventory_model(50);
         if(type == 5)
             model = null;
         if(model != null)
-            modelCache.put(model, (type << 16) + j);
+            modelCache.put(model, (type << 16) + id);
         return model;
     }
 
-    private static RgbImage method207(int i, JagexArchive jagexArchive, String s)
+    private static RgbImage getSprite(int i, JagexArchive jagexArchive, String s)
     {
-        long l = (TextClass.method585(s) << 8) + (long)i;
+        long l = (TextClass.encodeSpriteName(s) << 8) + (long)i;
         RgbImage rgbImage = (RgbImage) spriteCache.get(l);
         if(rgbImage != null)
             return rgbImage;
@@ -285,104 +283,102 @@ public class RSInterface
         return rgbImage;
     }
 
-    public static void set_custom_model(boolean flag, Model model)
+    public static void setCustomModel(Model model)
     {
-        int i = 0;//was parameter
-        int j = 5;//was parameter
-        if(flag)
-            return;
+        int id = 0;//was parameter
+        int type = 5;//was parameter
         modelCache.unlinkAll();
-        if(model != null && j != 4)
-            modelCache.put(model, (j << 16) + i);
+        if(model != null && type != 4)
+            modelCache.put(model, (type << 16) + id);
     }
 
-    public Model method209(int j, int k, boolean flag)
+    public Model getAnimatedModel(int frame1ID, int frame2ID, boolean flag)
     {
-        Model model;
+        Model originalModel;
         if(flag)
-            model = get_model(anInt255, anInt256);
+            originalModel = getModel(enabledMediaType, enabledMediaID);
         else
-            model = get_model(anInt233, mediaID);
-        if(model == null)
+            originalModel = getModel(mediaType, mediaID);
+        if(originalModel == null)
             return null;
-        if(k == -1 && j == -1 && model.triangleColour == null)
-            return model;
-        Model model_1 = new Model(true, Animation.method532(k) & Animation.method532(j), false, model);
-        if(k != -1 || j != -1)
-            model_1.createBones();
-        if(k != -1)
-            model_1.applyTransform(k);
-        if(j != -1)
-            model_1.applyTransform(j);
-        model_1.light(64, 768, -50, -10, -50, true);
-            return model_1;
+        if(frame2ID == -1 && frame1ID == -1 && originalModel.triangleColour == null)
+            return originalModel;
+        Model animatedModel = new Model(true, Animation.isNullFrame(frame2ID) & Animation.isNullFrame(frame1ID), false, originalModel);
+        if(frame2ID != -1 || frame1ID != -1)
+            animatedModel.createBones();
+        if(frame2ID != -1)
+            animatedModel.applyTransform(frame2ID);
+        if(frame1ID != -1)
+            animatedModel.applyTransform(frame1ID);
+        animatedModel.light(64, 768, -50, -10, -50, true);
+            return animatedModel;
     }
 
     public RSInterface()
     {
     }
 
-    public RgbImage image_conditionfalse;
+    public RgbImage imageConditionFalse;
     public int anInt208;
     public RgbImage rgbImages[];
     public static RSInterface interfaceCache[];
-    public int condition_value_to_compare[];
-    public int content_type;
+    public int conditionValueToCompare[];
+    public int contentType;
     public int spritesX[];
-    public int colour_conditionfalse_mouseover;
+    public int colourConditionFalseMouseover;
     public int atActionType;
     public String spellName;
-    public int colour_conditiontrue;
+    public int colourConditionTrue;
     public int width;
     public String tooltip;
     public String selectedActionName;
-    public boolean text_centered;
+    public boolean textCentered;
     public int scrollPosition;
     public String actions[];
-    public int dynamic_value_formulas[][];
+    public int dynamicValueFormulas[][];
     public boolean filled;
-    public String text_conditiontrue;
-    public int anInt230;
+    public String textConditionTrue;
+    public int mouseOverPopupInterface;
     public int invSpritePadX;
-    public int colour_conditionfalse;
-    public int anInt233;
+    public int colourConditionFalse;
+    public int mediaType;
     public int mediaID;
-    public boolean aBoolean235;
+    public boolean dragDeletes;
     public int parentID;
     public int spellUsableOn;
     private static MemCache spriteCache;
-    public int colour_conditiontrue_mouseover;
+    public int colourConditionTrueMouseover;
     public int children[];
     public int childX[];
     public boolean usableItemInterface;
     public RSFont font;
     public int invSpritePadY;
-    public int condition_type[];
-    public int anim_frame;
+    public int conditionType[];
+    public int animFrame;
     public int spritesY[];
-    public String text_conditionfalse;
+    public String textConditionFalse;
     public boolean isInventoryInterface;
     public int id;
     public int invStackSizes[];
     public int inv[];
-    public byte aByte254;
-    private int anInt255;
-    private int anInt256;
-    public int animation_conditionfalse;
-    public int animation_conditiontrue;
+    public byte alpha;
+    private int enabledMediaType;
+    private int enabledMediaID;
+    public int animationConditionFalse;
+    public int animationConditionTrue;
     public boolean aBoolean259;
-    public RgbImage image_conditiontrue;
+    public RgbImage imageConditionTrue;
     public int scrollMax;
     public int type;
-    public int x_offset;
+    public int xOffset;
     private static final MemCache modelCache = new MemCache(30);
-    public int y_offset;
-    public boolean hidden_until_mouseover;
+    public int yOffset;
+    public boolean hiddenUntilMouseover;
     public int height;
-    public boolean text_shadow;
-    public int anInt269;
-    public int anInt270;
-    public int anInt271;
+    public boolean textShadow;
+    public int zoom;
+    public int rotation1;
+    public int rotation2;
     public int childY[];
 
 }

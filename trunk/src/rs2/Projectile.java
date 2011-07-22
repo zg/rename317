@@ -3,20 +3,20 @@ package rs2;
 
 public class Projectile extends Entity {
 
-    public void method455(int i, int j, int k, int l)
+    public void method455(int i, int offsetX, int k, int offsetY)
     {
         if(!aBoolean1579)
         {
-            double d = l - anInt1580;
-            double d2 = j - anInt1581;
+            double d = offsetY - anInt1580;
+            double d2 = offsetX - anInt1581;
             double d3 = Math.sqrt(d * d + d2 * d2);
             aDouble1585 = (double)anInt1580 + (d * (double)anInt1589) / d3;
             aDouble1586 = (double)anInt1581 + (d2 * (double)anInt1589) / d3;
             aDouble1587 = anInt1582;
         }
         double d1 = (anInt1572 + 1) - i;
-        aDouble1574 = ((double)l - aDouble1585) / d1;
-        aDouble1575 = ((double)j - aDouble1586) / d1;
+        aDouble1574 = ((double)offsetY - aDouble1585) / d1;
+        aDouble1575 = ((double)offsetX - aDouble1586) / d1;
         aDouble1576 = Math.sqrt(aDouble1574 * aDouble1574 + aDouble1575 * aDouble1575);
         if(!aBoolean1579)
             aDouble1577 = -aDouble1576 * Math.tan((double)anInt1588 * 0.02454369D);
@@ -31,7 +31,7 @@ public class Projectile extends Entity {
         int j = -1;
         if(aSpotAnim_1592.animationSequence != null)
             j = aSpotAnim_1592.animationSequence.frame2IDS[anInt1593];
-        Model model_1 = new Model(true, Animation.method532(j), false, model);
+        Model model_1 = new Model(true, Animation.isNullFrame(j), false, model);
         if(j != -1)
         {
             model_1.createBones();
