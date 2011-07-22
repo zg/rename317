@@ -122,7 +122,7 @@ public class Animation
 
     }
 
-    public static boolean method532(int i)
+    public static boolean isNullFrame(int i)
     {
         return i == -1;
     }

@@ -147,7 +147,7 @@ public class NpcDef
             memCache.put(model, type);
         }
         Model model_1 = Model.aModel_1621;
-        model_1.method464(model, Animation.method532(frameId) & Animation.method532(j));
+        model_1.method464(model, Animation.isNullFrame(frameId) & Animation.isNullFrame(j));
         if(frameId != -1 && j != -1)
             model_1.mixAnimationFrames(ai, j, frameId);
         else

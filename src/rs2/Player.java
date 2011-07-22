@@ -21,7 +21,7 @@ public class Player extends Mobile
             Model model_2 = spotAnim.getModel();
             if(model_2 != null)
             {
-                Model model_3 = new Model(true, Animation.method532(super.anInt1521), false, model_2);
+                Model model_3 = new Model(true, Animation.isNullFrame(super.anInt1521), false, model_2);
                 model_3.translate(0, -super.anInt1524, 0);
                 model_3.createBones();
                 model_3.applyTransform(spotAnim.animationSequence.frame2IDS[super.anInt1521]);
@@ -89,24 +89,24 @@ public class Player extends Mobile
         headIcon = stream.g1();
         desc = null;
         team = 0;
-        for(int j = 0; j < 12; j++)
+        for(int part = 0; part < 12; part++)
         {
             int k = stream.g1();
             if(k == 0)
             {
-                appearanceModels[j] = 0;
+                appearanceModels[part] = 0;
                 continue;
             }
             int i1 = stream.g1();
-            appearanceModels[j] = (k << 8) + i1;
-            if(j == 0 && appearanceModels[0] == 65535)
+            appearanceModels[part] = (k << 8) + i1;
+            if(part == 0 && appearanceModels[0] == 65535)
             {
                 desc = NpcDef.forID(stream.g2());
                 break;
             }
-            if(appearanceModels[j] >= 512 && appearanceModels[j] - 512 < ItemDef.totalItems)
+            if(appearanceModels[part] >= 512 && appearanceModels[part] - 512 < ItemDef.totalItems)
             {
-                int l1 = ItemDef.forID(appearanceModels[j] - 512).team;
+                int l1 = ItemDef.forID(appearanceModels[part] - 512).team;
                 if(l1 != 0)
                     team = l1;
             }
@@ -114,34 +114,34 @@ public class Player extends Mobile
 
         for(int l = 0; l < 5; l++)
         {
-            int j1 = stream.g1();
-            if(j1 < 0 || j1 >= Client.playerBodyRecolours[l].length)
-                j1 = 0;
-            appearanceColours[l] = j1;
+            int bodyColours = stream.g1();
+            if(bodyColours < 0 || bodyColours >= Client.playerBodyRecolours[l].length)
+                bodyColours = 0;
+            appearanceColours[l] = bodyColours;
         }
 
-        super.anInt1511 = stream.g2();
-        if(super.anInt1511 == 65535)
-            super.anInt1511 = -1;
-        super.anInt1512 = stream.g2();
-        if(super.anInt1512 == 65535)
-            super.anInt1512 = -1;
-        super.anInt1554 = stream.g2();
-        if(super.anInt1554 == 65535)
-            super.anInt1554 = -1;
-        super.anInt1555 = stream.g2();
-        if(super.anInt1555 == 65535)
-            super.anInt1555 = -1;
-        super.anInt1556 = stream.g2();
-        if(super.anInt1556 == 65535)
-            super.anInt1556 = -1;
-        super.anInt1557 = stream.g2();
-        if(super.anInt1557 == 65535)
-            super.anInt1557 = -1;
-        super.anInt1505 = stream.g2();
-        if(super.anInt1505 == 65535)
-            super.anInt1505 = -1;
-        name = TextClass.fixName(TextClass.nameForLong(stream.g8()));
+        super.standAnimIndex = stream.g2();
+        if(super.standAnimIndex == 65535)
+            super.standAnimIndex = -1;
+        super.standTurnAnimIndex = stream.g2();
+        if(super.standTurnAnimIndex == 65535)
+            super.standTurnAnimIndex = -1;
+        super.walkAnimIndex = stream.g2();
+        if(super.walkAnimIndex == 65535)
+            super.walkAnimIndex = -1;
+        super.turn180AnimIndex = stream.g2();
+        if(super.turn180AnimIndex == 65535)
+            super.turn180AnimIndex = -1;
+        super.turn90CWAnimIndex = stream.g2();
+        if(super.turn90CWAnimIndex == 65535)
+            super.turn90CWAnimIndex = -1;
+        super.turn90CCWAnimIndex = stream.g2();
+        if(super.turn90CCWAnimIndex == 65535)
+            super.turn90CCWAnimIndex = -1;
+        super.runAnimIndex = stream.g2();
+        if(super.runAnimIndex == 65535)
+            super.runAnimIndex = -1;
+        name = TextClass.formatName(TextClass.longToName(stream.g8()));
         combatLevel = stream.g1();
         skill = stream.g2();
         visible = true;
@@ -189,7 +189,7 @@ public class Player extends Mobile
         {
             Sequence sequence = Sequence.anims[super.animation];
             k = sequence.frame2IDS[super.anInt1527];
-            if(super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511)
+            if(super.anInt1517 >= 0 && super.anInt1517 != super.standAnimIndex)
                 i1 = Sequence.anims[super.anInt1517].frame2IDS[super.anInt1518];
             if(sequence.anInt360 >= 0)
             {
@@ -271,7 +271,7 @@ public class Player extends Mobile
         if(aBoolean1699)
             return model_1;
         Model model_2 = Model.aModel_1621;
-        model_2.method464(model_1, Animation.method532(k) & Animation.method532(i1));
+        model_2.method464(model_1, Animation.isNullFrame(k) & Animation.isNullFrame(i1));
         if(k != -1 && i1 != -1)
             model_2.mixAnimationFrames(Sequence.anims[super.animation].animationFlowControl, i1, k);
         else

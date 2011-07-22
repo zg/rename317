@@ -117,10 +117,10 @@ public class Mobile extends Entity {
         pathY = new int[10];
         interactingEntity = -1;
         anInt1504 = 32;
-        anInt1505 = -1;
+        runAnimIndex = -1;
         height = 200;
-        anInt1511 = -1;
-        anInt1512 = -1;
+        standAnimIndex = -1;
+        standTurnAnimIndex = -1;
         hitDamages = new int[4];
         hitMarkTypes = new int[4];
         hitsLoopCycle = new int[4];
@@ -132,10 +132,10 @@ public class Mobile extends Entity {
         boundDim = 1;
         aBoolean1541 = false;
         pathRun = new boolean[10];
-        anInt1554 = -1;
-        anInt1555 = -1;
-        anInt1556 = -1;
-        anInt1557 = -1;
+        walkAnimIndex = -1;
+        turn180AnimIndex = -1;
+        turn90CWAnimIndex = -1;
+        turn90CCWAnimIndex = -1;
     }
 
     public final int[] pathX;
@@ -143,13 +143,13 @@ public class Mobile extends Entity {
     public int interactingEntity;
     int anInt1503;
     int anInt1504;
-    int anInt1505;
+    int runAnimIndex;
     public String textSpoken;
     public int height;
     public int turnDirection;
-    int anInt1511;//idle?
-    int anInt1512;//idleTurn?
-    int anInt1513;//
+    int standAnimIndex;//idle?
+    int standTurnAnimIndex;//idleTurn?
+    int fancyTextColourType;//
     final int[] hitDamages;
     final int[] hitMarkTypes;
     final int[] hitsLoopCycle;
@@ -167,7 +167,7 @@ public class Mobile extends Entity {
     int anInt1528;
     int anInt1529;
     int anInt1530;
-    int anInt1531;
+    int fancyTextDrawType;
     public int loopCycleStatus;
     public int currentHealth;
     public int maxHealth;
@@ -189,8 +189,8 @@ public class Mobile extends Entity {
     public int boundExtentY;
     int currentRotation;
     final boolean[] pathRun;
-    int anInt1554;//walk?
-    int anInt1555;//turn180?
-    int anInt1556;//turn90clockwise?
-    int anInt1557;//turn90counterclockwise?
+    int walkAnimIndex;//walk?
+    int turn180AnimIndex;//turn180?
+    int turn90CWAnimIndex;//turn90clockwise?
+    int turn90CCWAnimIndex;//turn90counterclockwise?
 }

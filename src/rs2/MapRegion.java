@@ -945,13 +945,13 @@ label0:
         return class46.method577(j);
     }
 
-    public final void loadMapChunk(int i, int j, TileSetting aclass11[], int l, int i1, byte abyte0[], int j1, int k1, int l1)
+    public final void loadMapChunk(int tileZ, int tileRotation, TileSetting aclass11[], int x, int i1, byte abyte0[], int j1, int k1, int y)
     {
         for(int i2 = 0; i2 < 8; i2++)
         {
             for(int j2 = 0; j2 < 8; j2++)
-                if(l + i2 > 0 && l + i2 < xMapSize - 1 && l1 + j2 > 0 && l1 + j2 < yMapSize - 1)
-                    aclass11[k1].clipData[l + i2][l1 + j2] &= 0xfeffffff;
+                if(x + i2 > 0 && x + i2 < xMapSize - 1 && y + j2 > 0 && y + j2 < yMapSize - 1)
+                    aclass11[k1].clipData[x + i2][y + j2] &= 0xfeffffff;
 
         }
         Packet stream = new Packet(abyte0);
@@ -960,8 +960,8 @@ label0:
             for(int i3 = 0; i3 < 64; i3++)
             {
                 for(int j3 = 0; j3 < 64; j3++)
-                    if(l2 == i && i3 >= i1 && i3 < i1 + 8 && j3 >= j1 && j3 < j1 + 8)
-                        readTile(k1, l + MapUtility.getRotatedMapChunkX(j, j3 & 7, i3 & 7), l1 + MapUtility.getRotatedMapChunkY(j3 & 7, j, i3 & 7), 0, 0, j, stream);
+                    if(l2 == tileZ && i3 >= i1 && i3 < i1 + 8 && j3 >= j1 && j3 < j1 + 8)
+                        readTile(k1, x + MapUtility.getRotatedMapChunkX(tileRotation, j3 & 7, i3 & 7), y + MapUtility.getRotatedMapChunkY(j3 & 7, tileRotation, i3 & 7), 0, 0, tileRotation, stream);
                     else
                         readTile(0, -1, -1, 0, 0, 0, stream);
 
