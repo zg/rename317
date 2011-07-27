@@ -359,8 +359,8 @@ public class SceneGraph {
         return class30_sub2_sub4 == null || addEntityC(j, l1, k2, (i2 - l1) + 1, (i1 - k2) + 1, j1, k, k1, class30_sub2_sub4, l, true, j2, (byte) 0);
     }
 
-    private boolean addEntityC(int z, int x, int y, int tileHeight, int tileWidth, int j1, int k1,
-            int l1, Entity jagexNode, int rotation, boolean isDynamic, int j2, byte byte0)
+    private boolean addEntityC(int z, int x, int y, int tileHeight, int tileWidth, int worldX, int worldY,
+            int worldZ, Entity jagexNode, int rotation, boolean isDynamic, int j2, byte byte0)
     {
         for(int _x = x; _x < x + tileHeight; _x++)
         {
@@ -379,9 +379,9 @@ public class SceneGraph {
         interactableObject.uid = j2;
         interactableObject.aByte530 = byte0;
         interactableObject.zPos = z;
-        interactableObject.worldX = j1;
-        interactableObject.worldY = k1;
-        interactableObject.worldZ = l1;
+        interactableObject.worldX = worldX;
+        interactableObject.worldY = worldY;
+        interactableObject.worldZ = worldZ;
         interactableObject.jagexNode = jagexNode;
         interactableObject.rotation = rotation;
         interactableObject.tileLeft = x;

@@ -30,7 +30,7 @@ public class FileOperations {
             return abyte0;
         }
         catch (Exception e) {
-            System.err.println("[Native File Accessor] Read error:" + s);
+            //System.err.println("[Native File Accessor] Read error:" + s);
             return null;
         }
     }

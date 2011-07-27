@@ -422,8 +422,8 @@ public class Client extends GameShell {
     private void loadRegion() {
         try {
             anInt985 = -1;
-            aClass19_1056.clear();
-            aClass19_1013.clear();
+            stillGraphicDeque.clear();
+            projectileDeque.clear();
             Rasterizer.clearTextureCache();
             unlinkMRUNodes();
             sceneGraph.initToNull();
@@ -1189,7 +1189,7 @@ public class Client extends GameShell {
 
                         }
                     }
-                    if (j >= 0 && anInt855 == 10 && anInt933 == session_player_list[j]) {
+                    if (j >= 0 && headiconDrawType == 10 && otherPlayerID == session_player_list[j]) {
                         npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
                         if (spriteDrawX > -1)
                             headIcons[7].drawSprite(spriteDrawX - 12, spriteDrawY - l);
@@ -1201,7 +1201,7 @@ public class Client extends GameShell {
                         if (spriteDrawX > -1)
                             headIcons[npcDef.anInt75].drawSprite(spriteDrawX - 12, spriteDrawY - 30);
                     }
-                    if (anInt855 == 1 && anInt1222 == sessionNpcList[j - session_player_count] && currentTime % 20 < 10) {
+                    if (headiconDrawType == 1 && anInt1222 == sessionNpcList[j - session_player_count] && currentTime % 20 < 10) {
                         npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
                         if (spriteDrawX > -1)
                             headIcons[2].drawSprite(spriteDrawX - 12, spriteDrawY - 28);
@@ -1410,12 +1410,12 @@ public class Client extends GameShell {
                 int k = indexedImage.imgWidth * indexedImage.imgHeight - 1;
                 int j1 = indexedImage.imgWidth * anInt945 * 2;
                 byte abyte0[] = indexedImage.imgPixels;
-                byte abyte3[] = aByteArray912;
+                byte abyte3[] = animatedPixels;
                 for (int i2 = 0; i2 <= k; i2++)
                     abyte3[i2] = abyte0[i2 - j1 & k];
 
                 indexedImage.imgPixels = abyte3;
-                aByteArray912 = abyte0;
+                animatedPixels = abyte0;
                 Rasterizer.resetTexture(17);
                 anticheat11++;
                 if (anticheat11 > 1235) {
@@ -1442,12 +1442,12 @@ public class Client extends GameShell {
                 int l = indexedImage_1.imgWidth * indexedImage_1.imgHeight - 1;
                 int k1 = indexedImage_1.imgWidth * anInt945 * 2;
                 byte originalPixels[] = indexedImage_1.imgPixels;
-                byte shiftedPixels[] = aByteArray912;
+                byte shiftedPixels[] = animatedPixels;
                 for (int j2 = 0; j2 <= l; j2++)
                     shiftedPixels[j2] = originalPixels[j2 - k1 & l];
 
                 indexedImage_1.imgPixels = shiftedPixels;
-                aByteArray912 = originalPixels;
+                animatedPixels = originalPixels;
                 Rasterizer.resetTexture(24);
             }
             if (Rasterizer.textureLastUsed[34] >= j) {
@@ -1455,12 +1455,12 @@ public class Client extends GameShell {
                 int i1 = indexedImage_2.imgWidth * indexedImage_2.imgHeight - 1;
                 int l1 = indexedImage_2.imgWidth * anInt945 * 2;
                 byte originalPixels[] = indexedImage_2.imgPixels;
-                byte shiftedPixels[] = aByteArray912;
+                byte shiftedPixels[] = animatedPixels;
                 for (int k2 = 0; k2 <= i1; k2++)
                     shiftedPixels[k2] = originalPixels[k2 - l1 & i1];
 
                 indexedImage_2.imgPixels = shiftedPixels;
-                aByteArray912 = originalPixels;
+                animatedPixels = originalPixels;
                 Rasterizer.resetTexture(34);
             }
             if (Rasterizer.textureLastUsed[40] >= j) {
@@ -1468,12 +1468,12 @@ public class Client extends GameShell {
                 int i1 = indexedImage_2.imgWidth * indexedImage_2.imgHeight - 1;
                 int l1 = indexedImage_2.imgWidth * anInt945 * 2;
                 byte originalPixels[] = indexedImage_2.imgPixels;
-                byte shiftedPixels[] = aByteArray912;
+                byte shiftedPixels[] = animatedPixels;
                 for (int k2 = 0; k2 <= i1; k2++)
                     shiftedPixels[k2] = originalPixels[k2 - l1 & i1];
 
                 indexedImage_2.imgPixels = shiftedPixels;
-                aByteArray912 = originalPixels;
+                animatedPixels = originalPixels;
                 Rasterizer.resetTexture(40);
             }
         }
@@ -2249,7 +2249,7 @@ public class Client extends GameShell {
 
     private void renderProjectiles()//todo- confirm
     {
-        for (Projectile projectile = (Projectile) aClass19_1013.getFront(); projectile != null; projectile = (Projectile) aClass19_1013.getNext())
+        for (Projectile projectile = (Projectile) projectileDeque.getFront(); projectile != null; projectile = (Projectile) projectileDeque.getNext())
             if (projectile.plane != plane || currentTime > projectile.anInt1572)
                 projectile.unlink();
             else if (currentTime >= projectile.anInt1571) {
@@ -2458,7 +2458,7 @@ public class Client extends GameShell {
     }
 
     private void drawHeadIcon() {
-        if (anInt855 != 2)
+        if (headiconDrawType != 2)
             return;
         calcEntityScreenPos((anInt934 - baseX << 7) + anInt937, anInt936 * 2, (anInt935 - baseY << 7) + anInt938);
         if (spriteDrawX > -1 && currentTime % 20 < 10)
@@ -2760,8 +2760,8 @@ public class Client extends GameShell {
     }
 
     private void method63() {
-        GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest) aClass19_1179.getFront();
-        for (; gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest) aClass19_1179.getNext())
+        GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest) gameObjectSpawnDeque.getFront();
+        for (; gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest) gameObjectSpawnDeque.getNext())
             if (gameObjectSpawnRequest.anInt1294 == -1) {
                 gameObjectSpawnRequest.anInt1302 = 0;
                 method89(gameObjectSpawnRequest);
@@ -4061,7 +4061,7 @@ public class Client extends GameShell {
         anIntArrayArray825 = null;
         bigX = null;
         bigY = null;
-        aByteArray912 = null;
+        animatedPixels = null;
         tabAreaDrawingTarget = null;
         minimapIP = null;
         gameScreenCanvas = null;
@@ -4115,9 +4115,9 @@ public class Client extends GameShell {
         sessionNpcs = null;
         sessionNpcList = null;
         groundArray = null;
-        aClass19_1179 = null;
-        aClass19_1013 = null;
-        aClass19_1056 = null;
+        gameObjectSpawnDeque = null;
+        projectileDeque = null;
+        stillGraphicDeque = null;
         menuActionCmd2 = null;
         menuActionCmd3 = null;
         menuActionID = null;
@@ -5110,7 +5110,7 @@ public class Client extends GameShell {
                 timeoutCounter = 0;
                 systemUpdateTime = 0;
                 anInt1011 = 0;
-                anInt855 = 0;
+                headiconDrawType = 0;
                 menuActionRow = 0;
                 menuOpen = false;
                 super.idleTime = 0;
@@ -5142,8 +5142,8 @@ public class Client extends GameShell {
                     sessionNpcs[k2] = null;
 
                 sessionPlayer = session_players[session_player_idx] = new Player();
-                aClass19_1013.clear();
-                aClass19_1056.clear();
+                projectileDeque.clear();
+                stillGraphicDeque.clear();
                 for (int l2 = 0; l2 < 4; l2++) {
                     for (int i3 = 0; i3 < 104; i3++) {
                         for (int k3 = 0; k3 < 104; k3++)
@@ -5153,7 +5153,7 @@ public class Client extends GameShell {
 
                 }
 
-                aClass19_1179 = new Deque();
+                gameObjectSpawnDeque = new Deque();
                 network_friends_server_status = 0;
                 user_friends_count = 0;
                 dialogID = -1;
@@ -6871,8 +6871,8 @@ public class Client extends GameShell {
     }
 
     private void renderStationaryGraphics() {
-        StillGraphic stillGraphic = (StillGraphic) aClass19_1056.getFront();
-        for (; stillGraphic != null; stillGraphic = (StillGraphic) aClass19_1056.getNext())
+        StillGraphic stillGraphic = (StillGraphic) stillGraphicDeque.getFront();
+        for (; stillGraphic != null; stillGraphic = (StillGraphic) stillGraphicDeque.getNext())
             if (stillGraphic.plane != plane || stillGraphic.transformCompleted)
                 stillGraphic.unlink();
             else if (currentTime >= stillGraphic.anInt1564) {
@@ -6880,7 +6880,7 @@ public class Client extends GameShell {
                 if (stillGraphic.transformCompleted)
                     stillGraphic.unlink();
                 else
-                    sceneGraph.addEntityA(stillGraphic.plane, 0, stillGraphic.anInt1563, -1, stillGraphic.y, 60, stillGraphic.x, stillGraphic, false);
+                    sceneGraph.addEntityA(stillGraphic.plane, 0, stillGraphic.worldZ, -1, stillGraphic.y, 60, stillGraphic.x, stillGraphic, false);
             }
 
     }
@@ -7566,7 +7566,7 @@ public class Client extends GameShell {
 
     private void method115() {
         if (loadingStage == 2) {
-            for (GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest) aClass19_1179.getFront(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest) aClass19_1179.getNext()) {
+            for (GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest) gameObjectSpawnDeque.getFront(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest) gameObjectSpawnDeque.getNext()) {
                 if (gameObjectSpawnRequest.anInt1294 > 0)
                     gameObjectSpawnRequest.anInt1294--;
                 if (gameObjectSpawnRequest.anInt1294 == 0) {
@@ -8074,8 +8074,8 @@ public class Client extends GameShell {
                 }
         }
 
-        if (anInt855 != 0 && currentTime % 20 < 10) {
-            if (anInt855 == 1 && anInt1222 >= 0 && anInt1222 < sessionNpcs.length) {
+        if (headiconDrawType != 0 && currentTime % 20 < 10) {
+            if (headiconDrawType == 1 && anInt1222 >= 0 && anInt1222 < sessionNpcs.length) {
                 Npc class30_sub2_sub4_sub1_sub1_1 = sessionNpcs[anInt1222];
                 if (class30_sub2_sub4_sub1_sub1_1 != null) {
                     int k1 = class30_sub2_sub4_sub1_sub1_1.boundExtentX / 32 - sessionPlayer.boundExtentX / 32;
@@ -8083,13 +8083,13 @@ public class Client extends GameShell {
                     drawTargetIndicator(mapMarker, i4, k1);
                 }
             }
-            if (anInt855 == 2) {
+            if (headiconDrawType == 2) {
                 int l1 = ((anInt934 - baseX) * 4 + 2) - sessionPlayer.boundExtentX / 32;
                 int j4 = ((anInt935 - baseY) * 4 + 2) - sessionPlayer.boundExtentY / 32;
                 drawTargetIndicator(mapMarker, j4, l1);
             }
-            if (anInt855 == 10 && anInt933 >= 0 && anInt933 < session_players.length) {
-                Player class30_sub2_sub4_sub1_sub2_1 = session_players[anInt933];
+            if (headiconDrawType == 10 && otherPlayerID >= 0 && otherPlayerID < session_players.length) {
+                Player class30_sub2_sub4_sub1_sub2_1 = session_players[otherPlayerID];
                 if (class30_sub2_sub4_sub1_sub2_1 != null) {
                     int i2 = class30_sub2_sub4_sub1_sub2_1.boundExtentX / 32 - sessionPlayer.boundExtentX / 32;
                     int k4 = class30_sub2_sub4_sub1_sub2_1.boundExtentY / 32 - sessionPlayer.boundExtentY / 32;
@@ -8191,7 +8191,7 @@ public class Client extends GameShell {
 
     private void createObjectSpawnRequest(int j, int id2, int face2, int i1, int y, int type2, int plane, int x, int j2) {
         GameObjectSpawnRequest gameObjectSpawnRequest = null;
-        for (GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest) aClass19_1179.getFront(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest) aClass19_1179.getNext()) {
+        for (GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest) gameObjectSpawnDeque.getFront(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest) gameObjectSpawnDeque.getNext()) {
             if (gameObjectSpawnRequest_1.plane != plane || gameObjectSpawnRequest_1.x != x || gameObjectSpawnRequest_1.y != y || gameObjectSpawnRequest_1.anInt1296 != i1)
                 continue;
             gameObjectSpawnRequest = gameObjectSpawnRequest_1;
@@ -8205,7 +8205,7 @@ public class Client extends GameShell {
             gameObjectSpawnRequest.x = x;
             gameObjectSpawnRequest.y = y;
             method89(gameObjectSpawnRequest);
-            aClass19_1179.insertBack(gameObjectSpawnRequest);
+            gameObjectSpawnDeque.insertBack(gameObjectSpawnRequest);
         }
         gameObjectSpawnRequest.id2 = id2;
         gameObjectSpawnRequest.type2 = type2;
@@ -8683,7 +8683,7 @@ public class Client extends GameShell {
                 x = x * 128 + 64;
                 y = y * 128 + 64;
                 StillGraphic stillGraphic = new StillGraphic(plane, currentTime, j15, k10, method42(plane, y, x) - l12, y, x);
-                aClass19_1056.insertBack(stillGraphic);
+                stillGraphicDeque.insertBack(stillGraphic);
             }
             return;
         }
@@ -8737,7 +8737,7 @@ public class Client extends GameShell {
                 offsetX = offsetX * 128 + 64;
                 Projectile projectile = new Projectile(slope, endHeight, delay + currentTime, speed + currentTime, radius, plane, method42(plane, k8, l5) - startHeight, k8, l5, lockon, id);
                 projectile.method455(delay + currentTime, offsetX, method42(plane, offsetX, offsetY) - endHeight, offsetY);
-                aClass19_1013.insertBack(projectile);
+                projectileDeque.insertBack(projectile);
             }
         }
     }
@@ -9076,7 +9076,7 @@ public class Client extends GameShell {
 
                 }
 
-                for (GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest) aClass19_1179.getFront(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest) aClass19_1179.getNext())
+                for (GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest) gameObjectSpawnDeque.getFront(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest) gameObjectSpawnDeque.getNext())
                     if (gameObjectSpawnRequest.x >= bigRegionX && gameObjectSpawnRequest.x < bigRegionX + 8 && gameObjectSpawnRequest.y >= bigRegionY && gameObjectSpawnRequest.y < bigRegionY + 8 && gameObjectSpawnRequest.plane == plane)
                         gameObjectSpawnRequest.anInt1294 = 0;
 
@@ -9391,7 +9391,7 @@ public class Client extends GameShell {
 
                 }
 
-                for (GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest) aClass19_1179.getFront(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest) aClass19_1179.getNext()) {
+                for (GameObjectSpawnRequest gameObjectSpawnRequest_1 = (GameObjectSpawnRequest) gameObjectSpawnDeque.getFront(); gameObjectSpawnRequest_1 != null; gameObjectSpawnRequest_1 = (GameObjectSpawnRequest) gameObjectSpawnDeque.getNext()) {
                     gameObjectSpawnRequest_1.x -= i17;
                     gameObjectSpawnRequest_1.y -= j21;
                     if (gameObjectSpawnRequest_1.x < 0 || gameObjectSpawnRequest_1.y < 0 || gameObjectSpawnRequest_1.x >= 104 || gameObjectSpawnRequest_1.y >= 104)
@@ -9606,37 +9606,37 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 254) {
-                anInt855 = inStream.g1();
-                if (anInt855 == 1)
+                headiconDrawType = inStream.g1();
+                if (headiconDrawType == 1)
                     anInt1222 = inStream.g2();
-                if (anInt855 >= 2 && anInt855 <= 6) {
-                    if (anInt855 == 2) {
+                if (headiconDrawType >= 2 && headiconDrawType <= 6) {
+                    if (headiconDrawType == 2) {
                         anInt937 = 64;
                         anInt938 = 64;
                     }
-                    if (anInt855 == 3) {
+                    if (headiconDrawType == 3) {
                         anInt937 = 0;
                         anInt938 = 64;
                     }
-                    if (anInt855 == 4) {
+                    if (headiconDrawType == 4) {
                         anInt937 = 128;
                         anInt938 = 64;
                     }
-                    if (anInt855 == 5) {
+                    if (headiconDrawType == 5) {
                         anInt937 = 64;
                         anInt938 = 0;
                     }
-                    if (anInt855 == 6) {
+                    if (headiconDrawType == 6) {
                         anInt937 = 64;
                         anInt938 = 128;
                     }
-                    anInt855 = 2;
+                    headiconDrawType = 2;
                     anInt934 = inStream.g2();
                     anInt935 = inStream.g2();
                     anInt936 = inStream.g1();
                 }
-                if (anInt855 == 10)
-                    anInt933 = inStream.g2();
+                if (headiconDrawType == 10)
+                    otherPlayerID = inStream.g2();
                 pktType = -1;
                 return true;
             }
@@ -10205,7 +10205,7 @@ public class Client extends GameShell {
         anInt897 = 1;
         anIntArrayArray901 = new int[104][104];
         anInt902 = 0x766654;// some colour
-        aByteArray912 = new byte[16384];
+        animatedPixels = new byte[16384];
         user_levels = new int[Skills.COUNT];
         user_ignore_names = new long[100];
         loadingError = false;
@@ -10241,7 +10241,7 @@ public class Client extends GameShell {
         char_edit_colours = new int[5];
         anInt1002 = 0x23201b;
         amountOrNameInput = "";
-        aClass19_1013 = new Deque();
+        projectileDeque = new Deque();
         cameraMoved = false;
         currentStatusInterface = -1;
         anIntArray1030 = new int[5];
@@ -10253,7 +10253,7 @@ public class Client extends GameShell {
         char_edit_gender = true;
         minimapShape1 = new int[151];
         anInt1054 = -1;
-        aClass19_1056 = new Deque();
+        stillGraphicDeque = new Deque();
         compassWidthMap = new int[33];
         aClass9_1059 = new RSInterface();
         mapScenes = new IndexedImage[100];
@@ -10291,7 +10291,7 @@ public class Client extends GameShell {
         myPassword = "";
         genericLoadingError = false;
         reportAbuseInterfaceID = -1;
-        aClass19_1179 = new Deque();
+        gameObjectSpawnDeque = new Deque();
         anInt1184 = 128;
         invOverlayInterfaceID = -1;
         stream = Packet.create();
@@ -10426,7 +10426,7 @@ public class Client extends GameShell {
     private int[] anIntArray852;
     private int[] anIntArray853;
     private static int anticheat11;
-    private int anInt855;
+    private int headiconDrawType;
     private int openInterfaceID;
     private int xCameraPos;
     private int zCameraPos;
@@ -10477,7 +10477,7 @@ public class Client extends GameShell {
     private GraphicsBuffer backVmidIP2;
     private GraphicsBuffer backVmidIP3;
     private GraphicsBuffer backVmidIP2_2;
-    private byte[] aByteArray912;
+    private byte[] animatedPixels;
     private int anInt913;
     private int crossX;
     private int crossY;
@@ -10493,7 +10493,7 @@ public class Client extends GameShell {
     private int[][] anIntArrayArray929;
     private RgbImage char_edit_inactive_button;
     private RgbImage char_edit_active_button;
-    private int anInt933;
+    private int otherPlayerID;
     private int anInt934;
     private int anInt935;
     private int anInt936;
@@ -10571,7 +10571,7 @@ public class Client extends GameShell {
     private int timeoutCounter;
     private int anInt1010;
     private int anInt1011;
-    private Deque aClass19_1013;
+    private Deque projectileDeque;
     private int anInt1014;
     private int anInt1015;
     private int anInt1016;
@@ -10610,7 +10610,7 @@ public class Client extends GameShell {
     private JagexArchive titleJagexArchive;
     private int anInt1054;
     private int anInt1055;
-    private Deque aClass19_1056;
+    private Deque stillGraphicDeque;
     private final int[] compassWidthMap;
     private final RSInterface aClass9_1059;
     private IndexedImage[] mapScenes;
@@ -10724,7 +10724,7 @@ public class Client extends GameShell {
     private boolean genericLoadingError;
     private final int[] anIntArray1177 = {0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3};
     private int reportAbuseInterfaceID;
-    private Deque aClass19_1179;
+    private Deque gameObjectSpawnDeque;
     private int[] chatLineOffsets;
     private int[] anIntArray1181;
     private int[] anIntArray1182;

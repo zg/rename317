@@ -1,6 +1,6 @@
 package rs2;
 
-import javax.management.MXBean;
+//import javax.management.MXBean;
 
 public class Rasterizer extends Graphics2D {
 

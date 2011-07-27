@@ -240,7 +240,7 @@ public final class Signlink implements Runnable {
                                 savereq = null;
                         } else if (urlreq != null) {
                                 try {
-                                        System.out.println("urlstream");
+                                        System.out.println("urlstream O_o "+urlreq);
                                         urlstream = new DataInputStream((new URL(mainapp.getCodeBase(), urlreq)).openStream());
                                 } catch (Exception _ex) {
                                         urlstream = null;

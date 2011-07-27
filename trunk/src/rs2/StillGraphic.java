@@ -3,7 +3,7 @@ package rs2;
 
 public class StillGraphic extends Entity {
 
-    public StillGraphic(int z, int j, int l, int i1, int j1, int y,
+    public StillGraphic(int z, int currentTime, int l, int i1, int j1, int y,
                         int x)
     {
         transformCompleted = false;
@@ -11,8 +11,8 @@ public class StillGraphic extends Entity {
         plane = z;
         this.x = x;
         this.y = y;
-        anInt1563 = j1;
-        anInt1564 = j + l;
+        worldZ = j1;
+        anInt1564 = currentTime + l;
     }
 
     public Model getRotatedModel()
@@ -69,7 +69,7 @@ public class StillGraphic extends Entity {
     public final int plane;
     public final int x;
     public final int y;
-    public final int anInt1563;
+    public final int worldZ;
     public final int anInt1564;
     public boolean transformCompleted;
     private final SpotAnim spotAnim;
