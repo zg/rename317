@@ -122,9 +122,9 @@ public class Animation
 
     }
 
-    public static boolean isNullFrame(int i)
+    public static boolean isNullFrame(int frame)
     {
-        return i == -1;
+        return frame == -1;
     }
 
     private Animation()

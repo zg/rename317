@@ -6,7 +6,7 @@ public class Item extends Entity {
     public final Model getRotatedModel()
     {
         ItemDef itemDef = ItemDef.forID(ID);
-            return itemDef.method201(itemCount);
+            return itemDef.getModelForAmmount(itemCount);
     }
 
     public Item()

@@ -265,7 +265,7 @@ public class ItemDef
             if(i1 != -1)
                 definition = forID(i1);
         }
-        Model model = definition.method201(1);
+        Model model = definition.getModelForAmmount(1);
         if(model == null)
             return null;
         RgbImage rgbImage = null;
@@ -374,7 +374,7 @@ public class ItemDef
         return sprite2;
     }
 
-    public Model method201(int i)
+    public Model getModelForAmmount(int i)
     {
         if(stackIDs != null && i > 1)
         {
@@ -384,7 +384,7 @@ public class ItemDef
                     j = stackIDs[k];
 
             if(j != -1)
-                return forID(j).method201(1);
+                return forID(j).getModelForAmmount(1);
         }
         Model model = (Model) memCache2.get(id);
         if(model != null)
@@ -406,7 +406,7 @@ public class ItemDef
         return model;
     }
 
-    public Model get_inventory_model(int i)
+    public Model getInventoryModel(int i)
     {
         if(stackIDs != null && i > 1)
         {
@@ -416,7 +416,7 @@ public class ItemDef
                     j = stackIDs[k];
 
             if(j != -1)
-                return forID(j).get_inventory_model(1);
+                return forID(j).getInventoryModel(1);
         }
         Model model = Model.getModel(modelID);
         if(model == null)
