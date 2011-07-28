@@ -3,7 +3,7 @@ package rs2;
 
 public class Projectile extends Entity {
 
-    public void method455(int i, int offsetX, int k, int offsetY)
+    public void method455(int currentTime, int offsetX, int drawHeight, int offsetY)
     {
         if(!aBoolean1579)
         {
@@ -14,35 +14,35 @@ public class Projectile extends Entity {
             aDouble1586 = (double)anInt1581 + (d2 * (double)anInt1589) / d3;
             aDouble1587 = anInt1582;
         }
-        double d1 = (anInt1572 + 1) - i;
+        double d1 = (anInt1572 + 1) - currentTime;
         aDouble1574 = ((double)offsetY - aDouble1585) / d1;
         aDouble1575 = ((double)offsetX - aDouble1586) / d1;
         aDouble1576 = Math.sqrt(aDouble1574 * aDouble1574 + aDouble1575 * aDouble1575);
         if(!aBoolean1579)
             aDouble1577 = -aDouble1576 * Math.tan((double)anInt1588 * 0.02454369D);
-        aDouble1578 = (2D * ((double)k - aDouble1587 - aDouble1577 * d1)) / (d1 * d1);
+        aDouble1578 = (2D * ((double)drawHeight - aDouble1587 - aDouble1577 * d1)) / (d1 * d1);
     }
 
     public Model getRotatedModel()
     {
-        Model model = aSpotAnim_1592.getModel();
+        Model model = spotAnim.getModel();
         if(model == null)
             return null;
-        int j = -1;
-        if(aSpotAnim_1592.animationSequence != null)
-            j = aSpotAnim_1592.animationSequence.frame2IDS[anInt1593];
-        Model model_1 = new Model(true, Animation.isNullFrame(j), false, model);
-        if(j != -1)
+        int frameId = -1;
+        if(spotAnim.animationSequence != null)
+            frameId = spotAnim.animationSequence.frame2IDS[eclapsedFrames];
+        Model model_1 = new Model(true, Animation.isNullFrame(frameId), false, model);
+        if(frameId != -1)
         {
             model_1.createBones();
-            model_1.applyTransform(j);
+            model_1.applyTransform(frameId);
             model_1.triangleSkin = null;
             model_1.vertexSkin = null;
         }
-        if(aSpotAnim_1592.resizeXY != 128 || aSpotAnim_1592.resizeZ != 128)
-            model_1.scaleT(aSpotAnim_1592.resizeXY, aSpotAnim_1592.resizeXY, aSpotAnim_1592.resizeZ);
+        if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
+            model_1.scaleT(spotAnim.resizeXY, spotAnim.resizeXY, spotAnim.resizeZ);
         model_1.method474(anInt1596);
-        model_1.light(64 + aSpotAnim_1592.modelBrightness, 850 + aSpotAnim_1592.modelShadow, -30, -50, -30, true);
+        model_1.light(64 + spotAnim.modelBrightness, 850 + spotAnim.modelShadow, -30, -50, -30, true);
             return model_1;
     }
 
@@ -50,7 +50,7 @@ public class Projectile extends Entity {
                          int l1, int i2, int j2, int k2, int l2)
     {
         aBoolean1579 = false;
-        aSpotAnim_1592 = SpotAnim.cache[l2];
+        spotAnim = SpotAnim.cache[l2];
         plane = z;
         anInt1580 = j2;
         anInt1581 = i2;
@@ -64,22 +64,22 @@ public class Projectile extends Entity {
         aBoolean1579 = false;
     }
 
-    public void method456(int i)
+    public void method456(int timePassed)
     {
         aBoolean1579 = true;
-        aDouble1585 += aDouble1574 * (double)i;
-        aDouble1586 += aDouble1575 * (double)i;
-        aDouble1587 += aDouble1577 * (double)i + 0.5D * aDouble1578 * (double)i * (double)i;
-        aDouble1577 += aDouble1578 * (double)i;
+        aDouble1585 += aDouble1574 * (double)timePassed;
+        aDouble1586 += aDouble1575 * (double)timePassed;
+        aDouble1587 += aDouble1577 * (double)timePassed + 0.5D * aDouble1578 * (double)timePassed * (double)timePassed;
+        aDouble1577 += aDouble1578 * (double)timePassed;
         anInt1595 = (int)(Math.atan2(aDouble1574, aDouble1575) * 325.94900000000001D) + 1024 & 0x7ff;
         anInt1596 = (int)(Math.atan2(aDouble1577, aDouble1576) * 325.94900000000001D) & 0x7ff;
-        if(aSpotAnim_1592.animationSequence != null)
-            for(anInt1594 += i; anInt1594 > aSpotAnim_1592.animationSequence.getFrameLength(anInt1593);)
+        if(spotAnim.animationSequence != null)
+            for(duration += timePassed; duration > spotAnim.animationSequence.getFrameLength(eclapsedFrames);)
             {
-                anInt1594 -= aSpotAnim_1592.animationSequence.getFrameLength(anInt1593) + 1;
-                anInt1593++;
-                if(anInt1593 >= aSpotAnim_1592.animationSequence.frameCount)
-                    anInt1593 = 0;
+                duration -= spotAnim.animationSequence.getFrameLength(eclapsedFrames) + 1;
+                eclapsedFrames++;
+                if(eclapsedFrames >= spotAnim.animationSequence.frameCount)
+                    eclapsedFrames = 0;
             }
 
     }
@@ -102,9 +102,9 @@ public class Projectile extends Entity {
     private final int anInt1588;
     private final int anInt1589;
     public final int anInt1590;
-    private final SpotAnim aSpotAnim_1592;
-    private int anInt1593;
-    private int anInt1594;
+    private final SpotAnim spotAnim;
+    private int eclapsedFrames;
+    private int duration;
     public int anInt1595;
     private int anInt1596;
     public final int plane;

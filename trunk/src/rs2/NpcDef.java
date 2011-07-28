@@ -4,17 +4,17 @@ package rs2;
 public class NpcDef
 {
 
-    public static NpcDef forID(int i)
+    public static NpcDef forID(int itemId)
     {
         for(int j = 0; j < 20; j++)
-            if(cache[j].type == (long)i)
+            if(cache[j].type == (long)itemId)
                 return cache[j];
 
-        anInt56 = (anInt56 + 1) % 20;
-        NpcDef npcDef = cache[anInt56] = new NpcDef();
-        stream.pos = streamIndices[i];
-        npcDef.type = i;
-        npcDef.readValues(stream);
+        cacheIndex = (cacheIndex + 1) % 20;
+        NpcDef npcDef = cache[cacheIndex] = new NpcDef();
+        npcData.pos = streamIndices[itemId];
+        npcDef.type = itemId;
+        npcDef.readValues(npcData);
         return npcDef;
     }
 
@@ -30,22 +30,22 @@ public class NpcDef
         }
         if(aditionalModels == null)
             return null;
-        boolean flag1 = false;
+        boolean modelMissing = false;
         for(int i = 0; i < aditionalModels.length; i++)
             if(!Model.isCached(aditionalModels[i]))
-                flag1 = true;
+                modelMissing = true;
 
-        if(flag1)
+        if(modelMissing)
             return null;
-        Model aclass30_sub2_sub4_sub6s[] = new Model[aditionalModels.length];
-        for(int j = 0; j < aditionalModels.length; j++)
-            aclass30_sub2_sub4_sub6s[j] = Model.getModel(aditionalModels[j]);
+        Model additionalModels[] = new Model[aditionalModels.length];
+        for(int additionalModelPtr = 0; additionalModelPtr < aditionalModels.length; additionalModelPtr++)
+            additionalModels[additionalModelPtr] = Model.getModel(aditionalModels[additionalModelPtr]);
 
         Model model;
-        if(aclass30_sub2_sub4_sub6s.length == 1)
-            model = aclass30_sub2_sub4_sub6s[0];
+        if(additionalModels.length == 1)
+            model = additionalModels[0];
         else
-            model = new Model(aclass30_sub2_sub4_sub6s.length, aclass30_sub2_sub4_sub6s);
+            model = new Model(additionalModels.length, additionalModels);
         if(recolourOriginal != null)
         {
             for(int k = 0; k < recolourOriginal.length; k++)
@@ -83,15 +83,15 @@ public class NpcDef
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        stream = new Packet(jagexArchive.getDataForName("npc.dat"));
-        Packet stream2 = new Packet(jagexArchive.getDataForName("npc.idx"));
-        int totalNPCs = stream2.g2();
+        npcData = new Packet(jagexArchive.getDataForName("npc.dat"));
+        Packet indexData = new Packet(jagexArchive.getDataForName("npc.idx"));
+        int totalNPCs = indexData.g2();
         streamIndices = new int[totalNPCs];
         int i = 2;
-        for(int j = 0; j < totalNPCs; j++)
+        for(int npcPtr = 0; npcPtr < totalNPCs; npcPtr++)
         {
-            streamIndices[j] = i;
-            i += stream2.g2();
+            streamIndices[npcPtr] = i;
+            i += indexData.g2();
         }
 
         cache = new NpcDef[20];
@@ -105,10 +105,10 @@ public class NpcDef
         modelCache = null;
         streamIndices = null;
         cache = null;
-        stream = null;
+        npcData = null;
     }
 
-    public Model method164(int j, int frameId, int ai[])
+    public Model method164(int frameId2, int frameId, int framesFrom2[])
     {
         if(childrenIDs != null)
         {
@@ -116,7 +116,7 @@ public class NpcDef
             if(npcDef == null)
                 return null;
             else
-                return npcDef.method164(j, frameId, ai);
+                return npcDef.method164(frameId2, frameId, framesFrom2);
         }
         Model model = (Model) modelCache.get(type);
         if(model == null)
@@ -128,14 +128,14 @@ public class NpcDef
 
             if(flag)
                 return null;
-            Model aclass30_sub2_sub4_sub6s[] = new Model[npcModels.length];
+            Model models[] = new Model[npcModels.length];
             for(int j1 = 0; j1 < npcModels.length; j1++)
-                aclass30_sub2_sub4_sub6s[j1] = Model.getModel(npcModels[j1]);
+                models[j1] = Model.getModel(npcModels[j1]);
 
-            if(aclass30_sub2_sub4_sub6s.length == 1)
-                model = aclass30_sub2_sub4_sub6s[0];
+            if(models.length == 1)
+                model = models[0];
             else
-                model = new Model(aclass30_sub2_sub4_sub6s.length, aclass30_sub2_sub4_sub6s);
+                model = new Model(models.length, models);
             if(recolourOriginal != null)
             {
                 for(int k1 = 0; k1 < recolourOriginal.length; k1++)
@@ -143,13 +143,13 @@ public class NpcDef
 
             }
             model.createBones();
-            model.light(64 + lightModifier, 850 + magModifier, -30, -50, -30, true);
+            model.light(64 + lightModifier, 850 + shadowModifier, -30, -50, -30, true);
             modelCache.put(model, type);
         }
         Model model_1 = Model.aModel_1621;
-        model_1.method464(model, Animation.isNullFrame(frameId) & Animation.isNullFrame(j));
-        if(frameId != -1 && j != -1)
-            model_1.mixAnimationFrames(ai, j, frameId);
+        model_1.method464(model, Animation.isNullFrame(frameId) & Animation.isNullFrame(frameId2));
+        if(frameId != -1 && frameId2 != -1)
+            model_1.mixAnimationFrames(framesFrom2, frameId2, frameId);
         else
         if(frameId != -1)
             model_1.applyTransform(frameId);
@@ -159,7 +159,7 @@ public class NpcDef
         model_1.triangleSkin = null;
         model_1.vertexSkin = null;
         if(boundDim == 1)
-            model_1.aBoolean1659 = true;
+            model_1.oneSquareModel = true;
         return model_1;
     }
 
@@ -256,7 +256,7 @@ public class NpcDef
                 lightModifier = stream.g1b();
             else
             if(i == 101)
-                magModifier = stream.g1b() * 5;
+                shadowModifier = stream.g1b() * 5;
             else
             if(i == 102)
                 headIcon = stream.g2();
@@ -310,11 +310,11 @@ public class NpcDef
     }
 
     public int turn90CCWAnimIndex;
-    private static int anInt56;
+    private static int cacheIndex;
     private int varBitID;
     public int turn180AnimIndex;
     private int sessionSettingID;
-    private static Packet stream;
+    private static Packet npcData;
     public int combatLevel;
     //private final int anInt64;//never used
     public String name;
@@ -339,7 +339,7 @@ public class NpcDef
     public int childrenIDs[];
     public byte description[];
     private int scaleXZ;
-    private int magModifier;
+    private int shadowModifier;
     public boolean aBoolean93;
     private int[] npcModels;
     public static MemCache modelCache = new MemCache(30);

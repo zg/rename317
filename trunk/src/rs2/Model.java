@@ -56,7 +56,7 @@ public class Model extends Entity {
         //anInt1616 = 360;
         //anInt1617 = 1;
         //aBoolean1618 = true;
-        aBoolean1659 = false;
+        oneSquareModel = false;
         //anInt1620++;
         hash = i;
         ModelHeader class21 = modelHeaderCache[i];
@@ -72,14 +72,14 @@ public class Model extends Entity {
         triPIndex = new int[textureTriangleCount];//tri_a_buffer
         triMIndex = new int[textureTriangleCount];//b
         triNIndex = new int[textureTriangleCount];//c
-        if (class21.anInt376 >= 0)
+        if (class21.vskinBasePos >= 0)
             vertexVSkin = new int[vertexCount];//vertex_vskin
-        if (class21.anInt380 >= 0)
+        if (class21.drawTypeBasePos >= 0)
             triangleDrawType = new int[triangleCount];//triangle_draw_type
-        if (class21.anInt381 >= 0)
+        if (class21.facePriorityBasePos >= 0)
             facePriority = new int[triangleCount];//face_priority
         else
-            anInt1641 = -class21.anInt381 - 1;
+            anInt1641 = -class21.facePriorityBasePos - 1;
         if (class21.alphaBasepos >= 0)//alpha_basepos
             triangleAlpha = new int[triangleCount];//triangleAlpha
         if (class21.tskinBasepos >= 0)//tskin_basepos
@@ -94,7 +94,7 @@ public class Model extends Entity {
         Packet class30_sub2_sub2_3 = new Packet(class21.modelData);
         class30_sub2_sub2_3.pos = class21.vertexZOffset;
         Packet class30_sub2_sub2_4 = new Packet(class21.modelData);
-        class30_sub2_sub2_4.pos = class21.anInt376;
+        class30_sub2_sub2_4.pos = class21.vskinBasePos;
         int k = 0;
         int l = 0;
         int i1 = 0;
@@ -120,8 +120,8 @@ public class Model extends Entity {
         }
 
         class30_sub2_sub2.pos = class21.triColourOffset;
-        class30_sub2_sub2_1.pos = class21.anInt380;
-        class30_sub2_sub2_2.pos = class21.anInt381;
+        class30_sub2_sub2_1.pos = class21.drawTypeBasePos;
+        class30_sub2_sub2_2.pos = class21.facePriorityBasePos;
         class30_sub2_sub2_3.pos = class21.alphaBasepos;
         class30_sub2_sub2_4.pos = class21.tskinBasepos;
         for (int l1 = 0; l1 < triangleCount; l1++) {
@@ -186,7 +186,7 @@ public class Model extends Entity {
             }
         }
 
-        class30_sub2_sub2.pos = class21.anInt384;
+        class30_sub2_sub2.pos = class21.textureInfoBasePos;
         for (int j4 = 0; j4 < textureTriangleCount; j4++) {
             triPIndex[j4] = class30_sub2_sub2.g2();
             triMIndex[j4] = class30_sub2_sub2.g2();
@@ -565,26 +565,26 @@ public class Model extends Entity {
         l2 += modelHeader_1.modelVerticeCount;
         modelHeader_1.triMeshLinkOffset = l2;
         l2 += modelHeader_1.modelTriangleCount;
-        modelHeader_1.anInt381 = l2;
+        modelHeader_1.facePriorityBasePos = l2;
         if (l == 255)
             l2 += modelHeader_1.modelTriangleCount;
         else
-            modelHeader_1.anInt381 = -l - 1;
+            modelHeader_1.facePriorityBasePos = -l - 1;
         modelHeader_1.tskinBasepos = l2;
         if (j1 == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.tskinBasepos = -1;
-        modelHeader_1.anInt380 = l2;
+        modelHeader_1.drawTypeBasePos = l2;
         if (k == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
-            modelHeader_1.anInt380 = -1;
-        modelHeader_1.anInt376 = l2;
+            modelHeader_1.drawTypeBasePos = -1;
+        modelHeader_1.vskinBasePos = l2;
         if (k1 == 1)
             l2 += modelHeader_1.modelVerticeCount;
         else
-            modelHeader_1.anInt376 = -1;
+            modelHeader_1.vskinBasePos = -1;
         modelHeader_1.alphaBasepos = l2;
         if (i1 == 1)
             l2 += modelHeader_1.modelTriangleCount;
@@ -594,7 +594,7 @@ public class Model extends Entity {
         l2 += k2;
         modelHeader_1.triColourOffset = l2;
         l2 += modelHeader_1.modelTriangleCount * 2;
-        modelHeader_1.anInt384 = l2;
+        modelHeader_1.textureInfoBasePos = l2;
         l2 += modelHeader_1.modelTextureTriangleCount * 6;
         modelHeader_1.vertexXOffset = l2;
         l2 += l1;
@@ -639,7 +639,7 @@ public class Model extends Entity {
     }
 
     private Model() {
-        aBoolean1659 = false;
+        oneSquareModel = false;
     }
 
     /*private rs2.Model(int i)//never used O_o
@@ -789,7 +789,7 @@ public class Model extends Entity {
     }*/
 
     public Model(int i, Model aclass30_sub2_sub4_sub6s[]) {
-        aBoolean1659 = false;
+        oneSquareModel = false;
         boolean flag = false;
         boolean flag1 = false;
         boolean flag2 = false;
@@ -889,7 +889,7 @@ public class Model extends Entity {
 
     public Model(Model aclass30_sub2_sub4_sub6s[]) {
         int i = 2;//was parameter
-        aBoolean1659 = false;
+        oneSquareModel = false;
         boolean flag1 = false;
         boolean flag2 = false;
         boolean flag3 = false;
@@ -1000,7 +1000,7 @@ public class Model extends Entity {
     }
 
     public Model(boolean flag, boolean animationNull, boolean flag2, Model model) {
-        aBoolean1659 = false;
+        oneSquareModel = false;
         vertexCount = model.vertexCount;
         triangleCount = model.triangleCount;
         this.hash = model.hash*2+1;
@@ -1055,7 +1055,7 @@ public class Model extends Entity {
 
     public Model(boolean isSolid, boolean nonFlatShading, Model model) {
         this.hash = model.hash*3+1;
-        aBoolean1659 = false;
+        oneSquareModel = false;
         vertexCount = model.vertexCount;
         triangleCount = model.triangleCount;
         textureTriangleCount = model.textureTriangleCount;
@@ -2031,7 +2031,7 @@ public class Model extends Entity {
             int i6 = cursorXPos - Rasterizer.centerX;
             int k6 = cursorYPos - Rasterizer.centerY;
             if (i6 > k3 && i6 < l3 && k6 > i5 && k6 < k4)
-                if (aBoolean1659)
+                if (oneSquareModel)
                     resourceIDTAG[resourceCount++] = i2;
                 else
                     flag1 = true;
@@ -2445,7 +2445,7 @@ public class Model extends Entity {
 
         Model model = (Model) o;
 
-        if (aBoolean1659 != model.aBoolean1659)
+        if (oneSquareModel != model.oneSquareModel)
             return false;
         if (anInt1641 != model.anInt1641)
             return false;
@@ -2492,7 +2492,7 @@ public class Model extends Entity {
         result = 31 * result + diagonal3D;
         result = 31 * result + diagonal3DAboveorigin;
         result = 31 * result + anInt1654;
-        result = 31 * result + (aBoolean1659 ? 1 : 0);
+        result = 31 * result + (oneSquareModel ? 1 : 0);
         return result;
     }
 
@@ -2535,7 +2535,7 @@ public class Model extends Entity {
     public int[] triangleTSkin;
     public int vertexSkin[][];
     public int triangleSkin[][];
-    public boolean aBoolean1659;
+    public boolean oneSquareModel;
     VertexNormal vertexNormalOffset[];
     private static ModelHeader[] modelHeaderCache;
     private static OnDemandFetcherParent abstractODFetcher;

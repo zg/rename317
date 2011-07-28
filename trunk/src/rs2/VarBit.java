@@ -24,28 +24,28 @@ public class VarBit {
     {
         do
         {
-            int j = stream.g1();
-            if(j == 0)
+            int opCode = stream.g1();
+            if(opCode == 0)
                 return;
-            if(j == 1)
+            if(opCode == 1)
             {
                 configId = stream.g2();
                 leastSignificantBit = stream.g1();
                 mostSignificantBit = stream.g1();
             } else
-            if(j == 10)
+            if(opCode == 10)
                 stream.gstr();
             else
-            if(j == 2)
+            if(opCode == 2)
                 {}
             else
-            if(j == 3)
+            if(opCode == 3)
                 stream.g4();
             else
-            if(j == 4)
+            if(opCode == 4)
                 stream.g4();
             else
-                System.out.println("Error unrecognised config code: " + j);
+                System.out.println("Error unrecognised config code: " + opCode);
         } while(true);
     }
 

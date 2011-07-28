@@ -727,7 +727,7 @@ public class Client extends GameShell {
         }
 
         int uid = x + (y << 7) + 0x60000000;
-        sceneGraph.addGroundItemTile(x, uid, ((Entity) (obj1)), method42(plane, y * 128 + 64, x * 128 + 64), ((Entity) (obj2)), ((Entity) (obj)), plane, y);
+        sceneGraph.addGroundItemTile(x, uid, ((Entity) (obj1)), getFloorDrawHeight(plane, y * 128 + 64, x * 128 + 64), ((Entity) (obj2)), ((Entity) (obj)), plane, y);
     }
 
     private void renderNPCs(boolean flag)//todo- check this
@@ -748,7 +748,7 @@ public class Client extends GameShell {
             }
             if (!npc.desc.clickable)
                 k += 0x80000000;
-            sceneGraph.addEntityA(plane, npc.currentRotation, method42(plane, npc.boundExtentY, npc.boundExtentX), k, npc.boundExtentY, (npc.boundDim - 1) * 64 + 60, npc.boundExtentX, npc, npc.aBoolean1541);
+            sceneGraph.addEntityA(plane, npc.currentRotation, getFloorDrawHeight(plane, npc.boundExtentY, npc.boundExtentX), k, npc.boundExtentY, (npc.boundDim - 1) * 64 + 60, npc.boundExtentX, npc, npc.aBoolean1541);
         }
     }
 
@@ -1509,7 +1509,7 @@ public class Client extends GameShell {
     private void calcCameraPos() {
         int i = anInt1098 * 128 + 64;
         int j = anInt1099 * 128 + 64;
-        int k = method42(plane, j, i) - anInt1100;
+        int k = getFloorDrawHeight(plane, j, i) - anInt1100;
         if (xCameraPos < i) {
             xCameraPos += anInt1101 + ((i - xCameraPos) * anInt1102) / 1000;
             if (xCameraPos > i)
@@ -1542,7 +1542,7 @@ public class Client extends GameShell {
         }
         i = anInt995 * 128 + 64;
         j = anInt996 * 128 + 64;
-        k = method42(plane, j, i) - anInt997;
+        k = getFloorDrawHeight(plane, j, i) - anInt997;
         int l = i - xCameraPos;
         int i1 = k - zCameraPos;
         int j1 = j - yCameraPos;
@@ -1661,19 +1661,20 @@ public class Client extends GameShell {
         throw new RuntimeException();
     }
 
-    private int method42(int z, int j, int k) {
-        int l = k >> 7;
-        int i1 = j >> 7;
-        if (l < 0 || i1 < 0 || l > 103 || i1 > 103)
+    private int getFloorDrawHeight(int z, int y, int x) {//terain height? - set to -5000 for lols
+        int groundX = x >> 7;
+        int groundY = y >> 7;
+        if (groundX < 0 || groundY < 0 || groundX > 103 || groundY > 103)
             return 0;
         int groundZ = z;
-        if (groundZ < 3 && (tileSettingBits[1][l][i1] & 2) == 2)
+        if (groundZ < 3 && (tileSettingBits[1][groundX][groundY] & 2) == 2)
             groundZ++;
-        int k1 = k & 0x7f;
-        int l1 = j & 0x7f;
-        int i2 = intGroundArray[groundZ][l][i1] * (128 - k1) + intGroundArray[groundZ][l + 1][i1] * k1 >> 7;
-        int j2 = intGroundArray[groundZ][l][i1 + 1] * (128 - k1) + intGroundArray[groundZ][l + 1][i1 + 1] * k1 >> 7;
+        int k1 = x & 0x7f;
+        int l1 = y & 0x7f;
+        int i2 = intGroundArray[groundZ][groundX][groundY] * (128 - k1) + intGroundArray[groundZ][groundX + 1][groundY] * k1 >> 7;
+        int j2 = intGroundArray[groundZ][groundX][groundY + 1] * (128 - k1) + intGroundArray[groundZ][groundX + 1][groundY + 1] * k1 >> 7;
         return i2 * (128 - l1) + j2 * l1 >> 7;
+                        
     }
 
     private static String logic_get_amount_string(int ammount) {
@@ -1745,7 +1746,7 @@ public class Client extends GameShell {
             if (k1 == 1)
                 session_npcs_awaiting_update[sessionNpcsAwaitingUpdatePtr++] = k;
             npc.boundDim = npc.desc.boundDim;
-            npc.anInt1504 = npc.desc.degreesToTurn;
+            npc.degreesToTurn = npc.desc.degreesToTurn;
             npc.walkAnimIndex = npc.desc.walkAnimIndex;
             npc.turn180AnimIndex = npc.desc.turn180AnimIndex;
             npc.turn90CWAnimIndex = npc.desc.turn90CWAnimIndex;
@@ -1797,8 +1798,8 @@ public class Client extends GameShell {
                 continue;
             if (player.aModel_1714 != null && currentTime >= player.anInt1707 && currentTime < player.anInt1708) {
                 player.aBoolean1699 = false;
-                player.anInt1709 = method42(plane, player.boundExtentY, player.boundExtentX);
-                sceneGraph.addEntity(plane, player.boundExtentY, player, player.currentRotation, player.anInt1722, player.boundExtentX, player.anInt1709, player.anInt1719, player.anInt1721, i1, player.anInt1720);
+                player.terrainDrawHeight = getFloorDrawHeight(plane, player.boundExtentY, player.boundExtentX);
+                sceneGraph.addEntity(plane, player.boundExtentY, player, player.currentRotation, player.anInt1722, player.boundExtentX, player.terrainDrawHeight, player.anInt1719, player.anInt1721, i1, player.anInt1720);
                 continue;
             }
             if ((player.boundExtentX & 0x7f) == 64 && (player.boundExtentY & 0x7f) == 64) {
@@ -1806,8 +1807,8 @@ public class Client extends GameShell {
                     continue;
                 anIntArrayArray929[j1][k1] = anInt1265;
             }
-            player.anInt1709 = method42(plane, player.boundExtentY, player.boundExtentX);
-            sceneGraph.addEntityA(plane, player.currentRotation, player.anInt1709, i1, player.boundExtentY, 60, player.boundExtentX, player, player.aBoolean1541);
+            player.terrainDrawHeight = getFloorDrawHeight(plane, player.boundExtentY, player.boundExtentX);
+            sceneGraph.addEntityA(plane, player.currentRotation, player.terrainDrawHeight, i1, player.boundExtentY, 60, player.boundExtentX, player, player.aBoolean1541);
         }
 
     }
@@ -2256,7 +2257,7 @@ public class Client extends GameShell {
                 if (projectile.anInt1590 > 0) {
                     Npc npc = sessionNpcs[projectile.anInt1590 - 1];
                     if (npc != null && npc.boundExtentX >= 0 && npc.boundExtentX < 13312 && npc.boundExtentY >= 0 && npc.boundExtentY < 13312)
-                        projectile.method455(currentTime, npc.boundExtentY, method42(projectile.plane, npc.boundExtentY, npc.boundExtentX) - projectile.anInt1583, npc.boundExtentX);
+                        projectile.method455(currentTime, npc.boundExtentY, getFloorDrawHeight(projectile.plane, npc.boundExtentY, npc.boundExtentX) - projectile.anInt1583, npc.boundExtentX);
                 }
                 if (projectile.anInt1590 < 0) {
                     int j = -projectile.anInt1590 - 1;
@@ -2266,7 +2267,7 @@ public class Client extends GameShell {
                     else
                         player = session_players[j];
                     if (player != null && player.boundExtentX >= 0 && player.boundExtentX < 13312 && player.boundExtentY >= 0 && player.boundExtentY < 13312)
-                        projectile.method455(currentTime, player.boundExtentY, method42(projectile.plane, player.boundExtentY, player.boundExtentX) - projectile.anInt1583, player.boundExtentX);
+                        projectile.method455(currentTime, player.boundExtentY, getFloorDrawHeight(projectile.plane, player.boundExtentY, player.boundExtentX) - projectile.anInt1583, player.boundExtentX);
                 }
                 projectile.method456(anInt945);
                 sceneGraph.addEntityA(plane, projectile.anInt1595, (int) projectile.aDouble1587, -1, (int) projectile.aDouble1586, 60, (int) projectile.aDouble1585, projectile, false);
@@ -2453,7 +2454,7 @@ public class Client extends GameShell {
             if (class9_1.type == 1)
                 method60(class9_1.id);
             class9_1.animFrame = 0;
-            class9_1.anInt208 = 0;
+            class9_1.duration = 0;
         }
     }
 
@@ -4218,7 +4219,7 @@ public class Client extends GameShell {
                         stream.p1(0);
                         int k = stream.pos;
                         stream.p8(aLong953);
-                        TextInput.method526(promptInput, stream);
+                        TextInput.writeToStream(promptInput, stream);
                         stream.psize1(stream.pos - k);
                         promptInput = TextInput.processText(promptInput);
                         promptInput = Censor.doCensor(promptInput);
@@ -4389,7 +4390,7 @@ public class Client extends GameShell {
                         stream.sp1(fancyTextDrawType);
                         stream.sp1(fancyTextColourType);
                         aStream_834.pos = 0;
-                        TextInput.method526(inputString, aStream_834);
+                        TextInput.writeToStream(inputString, aStream_834);
                         stream.ispdata(aStream_834.data, 0, aStream_834.pos);
                         stream.psize1(stream.pos - j3);
                         inputString = TextInput.processText(inputString);
@@ -5528,31 +5529,31 @@ public class Client extends GameShell {
             int k = session_npcs_awaiting_update[j];
             Npc npc = sessionNpcs[k];
             int l = stream.g1();
-            if ((l & 0x10) != 0) {
-                int i1 = stream.ig2();
-                if (i1 == 65535)
-                    i1 = -1;
-                int i2 = stream.g1();
-                if (i1 == npc.animation && i1 != -1) {
-                    int l2 = Sequence.anims[i1].anInt365;
+            if ((l & 0x10) != 0) {//npc animation mask
+                int animationID = stream.ig2();
+                if (animationID == 65535)
+                    animationID = -1;
+                int animationDelay = stream.g1();
+                if (animationID == npc.animation && animationID != -1) {
+                    int l2 = Sequence.anims[animationID].anInt365;
                     if (l2 == 1) {
                         npc.anInt1527 = 0;
                         npc.anInt1528 = 0;
-                        npc.anInt1529 = i2;
+                        npc.animationDelay = animationDelay;
                         npc.anInt1530 = 0;
                     }
                     if (l2 == 2)
                         npc.anInt1530 = 0;
-                } else if (i1 == -1 || npc.animation == -1 || Sequence.anims[i1].anInt359 >= Sequence.anims[npc.animation].anInt359) {
-                    npc.animation = i1;
+                } else if (animationID == -1 || npc.animation == -1 || Sequence.anims[animationID].anInt359 >= Sequence.anims[npc.animation].anInt359) {
+                    npc.animation = animationID;
                     npc.anInt1527 = 0;
                     npc.anInt1528 = 0;
-                    npc.anInt1529 = i2;
+                    npc.animationDelay = animationDelay;
                     npc.anInt1530 = 0;
                     npc.anInt1542 = npc.pathLength;
                 }
             }
-            if ((l & 8) != 0) {
+            if ((l & 8) != 0) {//hit update mask
                 int hitDamage = stream.nsp1();
                 int hitType = stream.ng1b();
                 npc.updateHitData(hitType, hitDamage, currentTime);
@@ -5560,30 +5561,30 @@ public class Client extends GameShell {
                 npc.currentHealth = stream.nsp1();
                 npc.maxHealth = stream.g1();
             }
-            if ((l & 0x80) != 0) {
-                npc.anInt1520 = stream.g2();
+            if ((l & 0x80) != 0) {//npcGraphics
+                npc.gfxId = stream.g2();
                 int k1 = stream.g4();
-                npc.anInt1524 = k1 >> 16;
-                npc.anInt1523 = currentTime + (k1 & 0xffff);
-                npc.anInt1521 = 0;
+                npc.graphicHeight = k1 >> 16;
+                npc.gfxDelay = currentTime + (k1 & 0xffff);
+                npc.currentAnim = 0;
                 npc.anInt1522 = 0;
-                if (npc.anInt1523 > currentTime)
-                    npc.anInt1521 = -1;
-                if (npc.anInt1520 == 65535)
-                    npc.anInt1520 = -1;
+                if (npc.gfxDelay > currentTime)
+                    npc.currentAnim = -1;
+                if (npc.gfxId == 65535)
+                    npc.gfxId = -1;
             }
-            if ((l & 0x20) != 0) {
+            if ((l & 0x20) != 0) {//face entity
                 npc.interactingEntity = stream.g2();
                 if (npc.interactingEntity == 65535)
                     npc.interactingEntity = -1;
             }
-            if ((l & 1) != 0) {
+            if ((l & 1) != 0) {//forced chat
                 npc.textSpoken = stream.gstr();
                 npc.textCycle = 100;
                 //	entityMessage(npc);
 
             }
-            if ((l & 0x40) != 0) {
+            if ((l & 0x40) != 0) {//hit_2
                 int hitDamage = stream.ng1b();
                 int hitType = stream.sg1();
                 npc.updateHitData(hitType, hitDamage, currentTime);
@@ -5591,19 +5592,19 @@ public class Client extends GameShell {
                 npc.currentHealth = stream.sg1();
                 npc.maxHealth = stream.ng1b();
             }
-            if ((l & 2) != 0) {
+            if ((l & 2) != 0) {//TRANSFORM
                 npc.desc = NpcDef.forID(stream.isg2());
                 npc.boundDim = npc.desc.boundDim;
-                npc.anInt1504 = npc.desc.degreesToTurn;
+                npc.degreesToTurn = npc.desc.degreesToTurn;
                 npc.walkAnimIndex = npc.desc.walkAnimIndex;
                 npc.turn180AnimIndex = npc.desc.turn180AnimIndex;
                 npc.turn90CWAnimIndex = npc.desc.turn90CWAnimIndex;
                 npc.turn90CCWAnimIndex = npc.desc.turn90CCWAnimIndex;
                 npc.standAnimIndex = npc.desc.idleAnimation;
             }
-            if ((l & 4) != 0) {
-                npc.anInt1538 = stream.ig2();
-                npc.anInt1539 = stream.ig2();
+            if ((l & 4) != 0) {//FACE_COORDINATE
+                npc.faceX = stream.ig2();//packet.putLEShort(loc.getX() * 2 + 1);
+                npc.faceY = stream.ig2();//packet.putLEShort(loc.getY() * 2 + 1);
             }
         }
     }
@@ -6394,7 +6395,7 @@ public class Client extends GameShell {
     {
         if (mobile.boundExtentX < 128 || mobile.boundExtentY < 128 || mobile.boundExtentX >= 13184 || mobile.boundExtentY >= 13184) {
             mobile.animation = -1;
-            mobile.anInt1520 = -1;
+            mobile.gfxId = -1;
             mobile.anInt1547 = 0;
             mobile.anInt1548 = 0;
             mobile.boundExtentX = mobile.pathX[0] * 128 + mobile.boundDim * 64;
@@ -6403,7 +6404,7 @@ public class Client extends GameShell {
         }
         if (mobile == sessionPlayer && (mobile.boundExtentX < 1536 || mobile.boundExtentY < 1536 || mobile.boundExtentX >= 11776 || mobile.boundExtentY >= 11776)) {
             mobile.animation = -1;
-            mobile.anInt1520 = -1;
+            mobile.gfxId = -1;
             mobile.anInt1547 = 0;
             mobile.anInt1548 = 0;
             mobile.boundExtentX = mobile.pathX[0] * 128 + mobile.boundDim * 64;
@@ -6427,18 +6428,18 @@ public class Client extends GameShell {
         mobile.boundExtentX += (j - mobile.boundExtentX) / i;
         mobile.boundExtentY += (k - mobile.boundExtentY) / i;
         mobile.anInt1503 = 0;
-        if (mobile.anInt1549 == 0)
+        if (mobile.turnInfo == 0)
             mobile.turnDirection = 1024;
-        if (mobile.anInt1549 == 1)
+        if (mobile.turnInfo == 1)
             mobile.turnDirection = 1536;
-        if (mobile.anInt1549 == 2)
+        if (mobile.turnInfo == 2)
             mobile.turnDirection = 0;
-        if (mobile.anInt1549 == 3)
+        if (mobile.turnInfo == 3)
             mobile.turnDirection = 512;
     }
 
     private void refreshEntityFaceDirection(Mobile mobile) {
-        if (mobile.anInt1548 == currentTime || mobile.animation == -1 || mobile.anInt1529 != 0 || mobile.anInt1528 + 1 > Sequence.anims[mobile.animation].getFrameLength(mobile.anInt1527)) {
+        if (mobile.anInt1548 == currentTime || mobile.animation == -1 || mobile.animationDelay != 0 || mobile.anInt1528 + 1 > Sequence.anims[mobile.animation].getFrameLength(mobile.anInt1527)) {
             int i = mobile.anInt1548 - mobile.anInt1547;
             int j = currentTime - mobile.anInt1547;
             int k = mobile.anInt1543 * 128 + mobile.boundDim * 64;
@@ -6449,13 +6450,13 @@ public class Client extends GameShell {
             mobile.boundExtentY = (l * (i - j) + j1 * j) / i;
         }
         mobile.anInt1503 = 0;
-        if (mobile.anInt1549 == 0)
+        if (mobile.turnInfo == 0)
             mobile.turnDirection = 1024;
-        if (mobile.anInt1549 == 1)
+        if (mobile.turnInfo == 1)
             mobile.turnDirection = 1536;
-        if (mobile.anInt1549 == 2)
+        if (mobile.turnInfo == 2)
             mobile.turnDirection = 0;
-        if (mobile.anInt1549 == 3)
+        if (mobile.turnInfo == 3)
             mobile.turnDirection = 512;
         mobile.currentRotation = mobile.turnDirection;
     }
@@ -6466,7 +6467,7 @@ public class Client extends GameShell {
             mobile.anInt1503 = 0;
             return;
         }
-        if (mobile.animation != -1 && mobile.anInt1529 == 0) {
+        if (mobile.animation != -1 && mobile.animationDelay == 0) {
             Sequence sequence = Sequence.anims[mobile.animation];
             if (mobile.anInt1542 > 0 && sequence.anInt363 == 0) {
                 mobile.anInt1503++;
@@ -6518,7 +6519,7 @@ public class Client extends GameShell {
             j1 = mobile.walkAnimIndex;
         mobile.anInt1517 = j1;
         int k1 = 4;
-        if (mobile.currentRotation != mobile.turnDirection && mobile.interactingEntity == -1 && mobile.anInt1504 != 0)
+        if (mobile.currentRotation != mobile.turnDirection && mobile.interactingEntity == -1 && mobile.degreesToTurn != 0)
             k1 = 2;
         if (mobile.pathLength > 2)
             k1 = 6;
@@ -6558,7 +6559,7 @@ public class Client extends GameShell {
     }
 
     private void appendFocusDestination(Mobile mobile) {
-        if (mobile.anInt1504 == 0)
+        if (mobile.degreesToTurn == 0)
             return;
         if (mobile.interactingEntity != -1 && mobile.interactingEntity < 32768) {
             Npc npc = sessionNpcs[mobile.interactingEntity];
@@ -6581,22 +6582,22 @@ public class Client extends GameShell {
                     mobile.turnDirection = (int) (Math.atan2(l1, i2) * 325.94900000000001D) & 0x7ff;
             }
         }
-        if ((mobile.anInt1538 != 0 || mobile.anInt1539 != 0) && (mobile.pathLength == 0 || mobile.anInt1503 > 0)) {
-            int k = mobile.boundExtentX - (mobile.anInt1538 - baseX - baseX) * 64;
-            int j1 = mobile.boundExtentY - (mobile.anInt1539 - baseY - baseY) * 64;
+        if ((mobile.faceX != 0 || mobile.faceY != 0) && (mobile.pathLength == 0 || mobile.anInt1503 > 0)) {
+            int k = mobile.boundExtentX - (mobile.faceX - baseX - baseX) * 64;
+            int j1 = mobile.boundExtentY - (mobile.faceY - baseY - baseY) * 64;
             if (k != 0 || j1 != 0)
                 mobile.turnDirection = (int) (Math.atan2(k, j1) * 325.94900000000001D) & 0x7ff;
-            mobile.anInt1538 = 0;
-            mobile.anInt1539 = 0;
+            mobile.faceX = 0;
+            mobile.faceY = 0;
         }
         int l = mobile.turnDirection - mobile.currentRotation & 0x7ff;
         if (l != 0) {
-            if (l < mobile.anInt1504 || l > 2048 - mobile.anInt1504)
+            if (l < mobile.degreesToTurn || l > 2048 - mobile.degreesToTurn)
                 mobile.currentRotation = mobile.turnDirection;
             else if (l > 1024)
-                mobile.currentRotation -= mobile.anInt1504;
+                mobile.currentRotation -= mobile.degreesToTurn;
             else
-                mobile.currentRotation += mobile.anInt1504;
+                mobile.currentRotation += mobile.degreesToTurn;
             mobile.currentRotation &= 0x7ff;
             if (mobile.anInt1517 == mobile.standAnimIndex && mobile.currentRotation != mobile.turnDirection) {
                 if (mobile.standTurnAnimIndex != -1) {
@@ -6622,24 +6623,24 @@ public class Client extends GameShell {
                 mobile.anInt1518 = 0;
             }
         }
-        if (mobile.anInt1520 != -1 && currentTime >= mobile.anInt1523) {
-            if (mobile.anInt1521 < 0)
-                mobile.anInt1521 = 0;
-            Sequence sequence_1 = SpotAnim.cache[mobile.anInt1520].animationSequence;
-            for (mobile.anInt1522++; mobile.anInt1521 < sequence_1.frameCount && mobile.anInt1522 > sequence_1.getFrameLength(mobile.anInt1521); mobile.anInt1521++)
-                mobile.anInt1522 -= sequence_1.getFrameLength(mobile.anInt1521);
+        if (mobile.gfxId != -1 && currentTime >= mobile.gfxDelay) {
+            if (mobile.currentAnim < 0)
+                mobile.currentAnim = 0;
+            Sequence sequence_1 = SpotAnim.cache[mobile.gfxId].animationSequence;
+            for (mobile.anInt1522++; mobile.currentAnim < sequence_1.frameCount && mobile.anInt1522 > sequence_1.getFrameLength(mobile.currentAnim); mobile.currentAnim++)
+                mobile.anInt1522 -= sequence_1.getFrameLength(mobile.currentAnim);
 
-            if (mobile.anInt1521 >= sequence_1.frameCount && (mobile.anInt1521 < 0 || mobile.anInt1521 >= sequence_1.frameCount))
-                mobile.anInt1520 = -1;
+            if (mobile.currentAnim >= sequence_1.frameCount && (mobile.currentAnim < 0 || mobile.currentAnim >= sequence_1.frameCount))
+                mobile.gfxId = -1;
         }
-        if (mobile.animation != -1 && mobile.anInt1529 <= 1) {
+        if (mobile.animation != -1 && mobile.animationDelay <= 1) {
             Sequence sequence_2 = Sequence.anims[mobile.animation];
             if (sequence_2.anInt363 == 1 && mobile.anInt1542 > 0 && mobile.anInt1547 <= currentTime && mobile.anInt1548 < currentTime) {
-                mobile.anInt1529 = 1;
+                mobile.animationDelay = 1;
                 return;
             }
         }
-        if (mobile.animation != -1 && mobile.anInt1529 == 0) {
+        if (mobile.animation != -1 && mobile.animationDelay == 0) {
             Sequence sequence_3 = Sequence.anims[mobile.animation];
             for (mobile.anInt1528++; mobile.anInt1527 < sequence_3.frameCount && mobile.anInt1528 > sequence_3.getFrameLength(mobile.anInt1527); mobile.anInt1527++)
                 mobile.anInt1528 -= sequence_3.getFrameLength(mobile.anInt1527);
@@ -6654,8 +6655,8 @@ public class Client extends GameShell {
             }
             mobile.aBoolean1541 = sequence_3.aBoolean358;
         }
-        if (mobile.anInt1529 > 0)
-            mobile.anInt1529--;
+        if (mobile.animationDelay > 0)
+            mobile.animationDelay--;
     }
 
     private void drawGameScreen() {
@@ -7195,46 +7196,46 @@ public class Client extends GameShell {
             player.anInt1546 = stream.sg1();
             player.anInt1547 = stream.isg2() + currentTime;
             player.anInt1548 = stream.sg2() + currentTime;
-            player.anInt1549 = stream.sg1();
+            player.turnInfo = stream.sg1();
             player.method446();
         }
-        if ((i & 0x100) != 0) {
-            player.anInt1520 = stream.ig2();
+        if ((i & 0x100) != 0) {//graphics
+            player.gfxId = stream.ig2();
             int k = stream.g4();
-            player.anInt1524 = k >> 16;
-            player.anInt1523 = currentTime + (k & 0xffff);
-            player.anInt1521 = 0;
+            player.graphicHeight = k >> 16;
+            player.gfxDelay = currentTime + (k & 0xffff);
+            player.currentAnim = 0;
             player.anInt1522 = 0;
-            if (player.anInt1523 > currentTime)
-                player.anInt1521 = -1;
-            if (player.anInt1520 == 65535)
-                player.anInt1520 = -1;
+            if (player.gfxDelay > currentTime)
+                player.currentAnim = -1;
+            if (player.gfxId == 65535)
+                player.gfxId = -1;
         }
-        if ((i & 8) != 0) {
-            int l = stream.ig2();
-            if (l == 65535)
-                l = -1;
-            int i2 = stream.ng1b();
-            if (l == player.animation && l != -1) {
-                int i3 = Sequence.anims[l].anInt365;
+        if ((i & 8) != 0) {//animation
+            int animationID = stream.ig2();
+            if (animationID == 65535)
+                animationID = -1;
+            int animationDelay = stream.ng1b();
+            if (animationID == player.animation && animationID != -1) {
+                int i3 = Sequence.anims[animationID].anInt365;
                 if (i3 == 1) {
                     player.anInt1527 = 0;
                     player.anInt1528 = 0;
-                    player.anInt1529 = i2;
+                    player.animationDelay = animationDelay;
                     player.anInt1530 = 0;
                 }
                 if (i3 == 2)
                     player.anInt1530 = 0;
-            } else if (l == -1 || player.animation == -1 || Sequence.anims[l].anInt359 >= Sequence.anims[player.animation].anInt359) {
-                player.animation = l;
+            } else if (animationID == -1 || player.animation == -1 || Sequence.anims[animationID].anInt359 >= Sequence.anims[player.animation].anInt359) {
+                player.animation = animationID;
                 player.anInt1527 = 0;
                 player.anInt1528 = 0;
-                player.anInt1529 = i2;
+                player.animationDelay = animationDelay;
                 player.anInt1530 = 0;
                 player.anInt1542 = player.pathLength;
             }
         }
-        if ((i & 4) != 0) {
+        if ((i & 4) != 0) {//forced chat
             player.textSpoken = stream.gstr();
             if (player.textSpoken.charAt(0) == '~') {
                 player.textSpoken = player.textSpoken.substring(1);
@@ -7245,15 +7246,15 @@ public class Client extends GameShell {
             player.fancyTextDrawType = 0;
             player.textCycle = 150;
         }
-        if ((i & 0x80) != 0) {
-            int i1 = stream.ig2();
-            int j2 = stream.g1();
-            int j3 = stream.ng1b();
+        if ((i & 0x80) != 0) {//chat
+            int textInfo = stream.ig2();
+            int rights = stream.g1();
+            int length = stream.ng1b();
             int k3 = stream.pos;
             if (player.name != null && player.visible) {
                 long l3 = TextClass.nameToLong(player.name);
                 boolean flag = false;
-                if (j2 <= 1) {
+                if (rights <= 1) {
                     for (int i4 = 0; i4 < user_ignore_count; i4++) {
                         if (user_ignore_names[i4] != l3)
                             continue;
@@ -7265,21 +7266,21 @@ public class Client extends GameShell {
                 if (!flag && anInt1251 == 0)
                     try {
                         aStream_834.pos = 0;
-                        stream.igdata(aStream_834.data, 0, j3);
+                        stream.igdata(aStream_834.data, 0, length);
                         aStream_834.pos = 0;
-                        String s = TextInput.method525(j3, aStream_834);
+                        String s = TextInput.readFromStream(length, aStream_834);
                         s = Censor.doCensor(s);
                         player.textSpoken = s;
-                        player.fancyTextColourType = i1 >> 8;
-                        player.privelage = j2;
+                        player.fancyTextColourType = textInfo >> 8;
+                        player.privelage = rights;
 
                         //entityMessage(player);
 
-                        player.fancyTextDrawType = i1 & 0xff;
+                        player.fancyTextDrawType = textInfo & 0xff;
                         player.textCycle = 150;
-                        if (j2 == 2 || j2 == 3)
+                        if (rights == 2 || rights == 3)
                             pushMessage(s, 1, "@cr2@" + player.name);
-                        else if (j2 == 1)
+                        else if (rights == 1)
                             pushMessage(s, 1, "@cr1@" + player.name);
                         else
                             pushMessage(s, 2, player.name);
@@ -7287,37 +7288,37 @@ public class Client extends GameShell {
                         Signlink.reporterror("cde2");
                     }
             }
-            stream.pos = k3 + j3;
+            stream.pos = k3 + length;
         }
-        if ((i & 1) != 0) {
+        if ((i & 1) != 0) {//face entity
             player.interactingEntity = stream.ig2();
             if (player.interactingEntity == 65535)
                 player.interactingEntity = -1;
         }
-        if ((i & 0x10) != 0) {
-            int j1 = stream.ng1b();
-            byte abyte0[] = new byte[j1];
-            Packet stream_1 = new Packet(abyte0);
-            stream.gdata(abyte0, 0, j1);
-            aStreamArray895s[j] = stream_1;
-            player.updatePlayer(stream_1);
+        if ((i & 0x10) != 0) {//appearance
+            int length = stream.ng1b();
+            byte appearanceBuffer[] = new byte[length];
+            Packet appearanceStream = new Packet(appearanceBuffer);
+            stream.gdata(appearanceBuffer, 0, length);
+            aStreamArray895s[j] = appearanceStream;
+            player.updatePlayer(appearanceStream);
         }
-        if ((i & 2) != 0) {
-            player.anInt1538 = stream.isg2();
-            player.anInt1539 = stream.ig2();
+        if ((i & 2) != 0) {//face coord
+            player.faceX = stream.isg2();
+            player.faceY = stream.ig2();
         }
-        if ((i & 0x20) != 0) {
-            int k1 = stream.g1();
-            int k2 = stream.nsp1();
-            player.updateHitData(k2, k1, currentTime);
+        if ((i & 0x20) != 0) {//hit
+            int hitDamage = stream.g1();
+            int hitType = stream.nsp1();
+            player.updateHitData(hitType, hitDamage, currentTime);
             player.loopCycleStatus = currentTime + 300;
             player.currentHealth = stream.ng1b();
             player.maxHealth = stream.g1();
         }
         if ((i & 0x200) != 0) {
-            int l1 = stream.g1();
-            int l2 = stream.sg1();
-            player.updateHitData(l2, l1, currentTime);
+            int hitDamage = stream.g1();
+            int hitType = stream.sg1();
+            player.updateHitData(hitType, hitDamage, currentTime);
             player.loopCycleStatus = currentTime + 300;
             player.currentHealth = stream.g1();
             player.maxHealth = stream.ng1b();
@@ -7359,7 +7360,7 @@ public class Client extends GameShell {
             //anInt1184=1000;//lol turns world upside down
             int l = anInt1014 >> 7;
             int i1 = anInt1015 >> 7;
-            int j1 = method42(plane, anInt1015, anInt1014);
+            int terrainDrawHeight = getFloorDrawHeight(plane, anInt1015, anInt1014);
             int k1 = 0;
             if (l > 3 && i1 > 3 && l < 100 && i1 < 100) {
                 for (int l1 = l - 4; l1 <= l + 4; l1++) {
@@ -7367,7 +7368,7 @@ public class Client extends GameShell {
                         int l2 = plane;
                         if (l2 < 3 && (tileSettingBits[1][l1][k2] & 2) == 2)
                             l2++;
-                        int i3 = j1 - intGroundArray[l2][l1][k2];
+                        int i3 = terrainDrawHeight - intGroundArray[l2][l1][k2];
                         if (i3 > k1)
                             k1 = i3;
                     }
@@ -7729,31 +7730,31 @@ public class Client extends GameShell {
         aClass30_Sub2_Sub1_Sub1_1202 = null;
     }
 
-    private boolean animateRSInterface(int i, int j) {
+    private boolean animateRSInterface(int timePassed, int j) {
         boolean flag1 = false;
         RSInterface class9 = RSInterface.interfaceCache[j];
         for (int k = 0; k < class9.children.length; k++) {
             if (class9.children[k] == -1)
                 break;
-            RSInterface class9_1 = RSInterface.interfaceCache[class9.children[k]];
-            if (class9_1.type == 1)
-                flag1 |= animateRSInterface(i, class9_1.id);
-            if (class9_1.type == 6 && (class9_1.animationConditionFalse != -1 || class9_1.animationConditionTrue != -1)) {
-                boolean flag2 = interface_test_condition(class9_1);
+            RSInterface rsInterface = RSInterface.interfaceCache[class9.children[k]];
+            if (rsInterface.type == 1)
+                flag1 |= animateRSInterface(timePassed, rsInterface.id);
+            if (rsInterface.type == 6 && (rsInterface.animationConditionFalse != -1 || rsInterface.animationConditionTrue != -1)) {
+                boolean flag2 = interface_test_condition(rsInterface);
                 int l;
                 if (flag2)
-                    l = class9_1.animationConditionTrue;
+                    l = rsInterface.animationConditionTrue;
                 else
-                    l = class9_1.animationConditionFalse;
+                    l = rsInterface.animationConditionFalse;
                 if (l != -1) {
                     Sequence sequence = Sequence.anims[l];
-                    for (class9_1.anInt208 += i; class9_1.anInt208 > sequence.getFrameLength(class9_1.animFrame); ) {
-                        class9_1.anInt208 -= sequence.getFrameLength(class9_1.animFrame) + 1;
-                        class9_1.animFrame++;
-                        if (class9_1.animFrame >= sequence.frameCount) {
-                            class9_1.animFrame -= sequence.frameStep;
-                            if (class9_1.animFrame < 0 || class9_1.animFrame >= sequence.frameCount)
-                                class9_1.animFrame = 0;
+                    for (rsInterface.duration += timePassed; rsInterface.duration > sequence.getFrameLength(rsInterface.animFrame); ) {
+                        rsInterface.duration -= sequence.getFrameLength(rsInterface.animFrame) + 1;
+                        rsInterface.animFrame++;
+                        if (rsInterface.animFrame >= sequence.frameCount) {
+                            rsInterface.animFrame -= sequence.frameStep;
+                            if (rsInterface.animFrame < 0 || rsInterface.animFrame >= sequence.frameCount)
+                                rsInterface.animFrame = 0;
                         }
                         flag1 = true;
                     }
@@ -7834,8 +7835,8 @@ public class Client extends GameShell {
     }
 
     private int resetCameraHeight() {
-        int j = method42(plane, yCameraPos, xCameraPos);
-        if (j - zCameraPos < 800 && (tileSettingBits[plane][xCameraPos >> 7][yCameraPos >> 7] & 4) != 0)
+        int terrainDrawHeight = getFloorDrawHeight(plane, yCameraPos, xCameraPos);
+        if (terrainDrawHeight - zCameraPos < 800 && (tileSettingBits[plane][xCameraPos >> 7][yCameraPos >> 7] & 4) != 0)
             return plane;
         else
             return 3;
@@ -8121,9 +8122,9 @@ public class Client extends GameShell {
             spriteDrawY = -1;
             return;
         }
-        int i1 = method42(plane, l, i) - j;
+        int terrainDrawHeight = getFloorDrawHeight(plane, l, i) - j;
         i -= xCameraPos;
-        i1 -= zCameraPos;
+        terrainDrawHeight -= zCameraPos;
         l -= yCameraPos;
         int ySine = Model.SINE[yCameraCurve];
         int yCosine = Model.COSINE[yCameraCurve];
@@ -8132,12 +8133,12 @@ public class Client extends GameShell {
         int j2 = l * xSine + i * xCosine >> 16;
         l = l * xCosine - i * xSine >> 16;
         i = j2;
-        j2 = i1 * yCosine - l * ySine >> 16;
-        l = i1 * ySine + l * yCosine >> 16;
-        i1 = j2;
+        j2 = terrainDrawHeight * yCosine - l * ySine >> 16;
+        l = terrainDrawHeight * ySine + l * yCosine >> 16;
+        terrainDrawHeight = j2;
         if (l >= 50) {
             spriteDrawX = Rasterizer.centerX + (i << 9) / l;
-            spriteDrawY = Rasterizer.centerY + (i1 << 9) / l;
+            spriteDrawY = Rasterizer.centerY + (terrainDrawHeight << 9) / l;
         } else {
             spriteDrawX = -1;
             spriteDrawY = -1;
@@ -8644,7 +8645,7 @@ public class Client extends GameShell {
                     }
                     player.anInt1711 = x * 128 + i23 * 64;
                     player.anInt1713 = y * 128 + j23 * 64;
-                    player.anInt1712 = method42(plane, player.anInt1713, player.anInt1711);
+                    player.anInt1712 = getFloorDrawHeight(plane, player.anInt1713, player.anInt1711);
                     if (byte2 > byte0) {
                         byte byte4 = byte2;
                         byte2 = byte0;
@@ -8685,7 +8686,7 @@ public class Client extends GameShell {
             if (x >= 0 && y >= 0 && x < 104 && y < 104) {
                 x = x * 128 + 64;
                 y = y * 128 + 64;
-                StillGraphic stillGraphic = new StillGraphic(plane, currentTime, j15, k10, method42(plane, y, x) - l12, y, x);
+                StillGraphic stillGraphic = new StillGraphic(plane, currentTime, j15, k10, getFloorDrawHeight(plane, y, x) - l12, y, x);
                 stillGraphicDeque.insertBack(stillGraphic);
             }
             return;
@@ -8738,8 +8739,8 @@ public class Client extends GameShell {
                 k8 = k8 * 128 + 64;
                 offsetY = offsetY * 128 + 64;
                 offsetX = offsetX * 128 + 64;
-                Projectile projectile = new Projectile(slope, endHeight, delay + currentTime, speed + currentTime, radius, plane, method42(plane, k8, l5) - startHeight, k8, l5, lockon, id);
-                projectile.method455(delay + currentTime, offsetX, method42(plane, offsetX, offsetY) - endHeight, offsetY);
+                Projectile projectile = new Projectile(slope, endHeight, delay + currentTime, speed + currentTime, radius, plane, getFloorDrawHeight(plane, k8, l5) - startHeight, k8, l5, lockon, id);
+                projectile.method455(delay + currentTime, offsetX, getFloorDrawHeight(plane, offsetX, offsetY) - endHeight, offsetY);
                 projectileDeque.insertBack(projectile);
             }
         }
@@ -9000,8 +9001,8 @@ public class Client extends GameShell {
         if (socketStream == null)
             return false;
         try {
-            int i = socketStream.available();
-            if (i == 0)
+            int bytesAvailable = socketStream.available();
+            if (bytesAvailable == 0)
                 return false;
             if (pktType == -1) {
                 socketStream.flushInputStream(inStream.data, 1);
@@ -9009,26 +9010,26 @@ public class Client extends GameShell {
                 if (encryption != null)
                     pktType = pktType - encryption.next() & 0xff;
                 pktSize = PacketSizes.packetSizes[pktType];
-                i--;
+                bytesAvailable--;
             }
             if (pktSize == -1)
-                if (i > 0) {
+                if (bytesAvailable > 0) {
                     socketStream.flushInputStream(inStream.data, 1);
                     pktSize = inStream.data[0] & 0xff;
-                    i--;
+                    bytesAvailable--;
                 } else {
                     return false;
                 }
             if (pktSize == -2)
-                if (i > 1) {
+                if (bytesAvailable > 1) {
                     socketStream.flushInputStream(inStream.data, 2);
                     inStream.pos = 0;
                     pktSize = inStream.g2();
-                    i -= 2;
+                    bytesAvailable -= 2;
                 } else {
                     return false;
                 }
-            if (i < pktSize)
+            if (bytesAvailable < pktSize)
                 return false;
             inStream.pos = 0;
             socketStream.flushInputStream(inStream.data, pktSize);
@@ -9133,7 +9134,7 @@ public class Client extends GameShell {
                 if (anInt1102 >= 100) {
                     xCameraPos = anInt1098 * 128 + 64;
                     yCameraPos = anInt1099 * 128 + 64;
-                    zCameraPos = method42(plane, yCameraPos, xCameraPos) - anInt1100;
+                    zCameraPos = getFloorDrawHeight(plane, yCameraPos, xCameraPos) - anInt1100;
                 }
                 pktType = -1;
                 return true;
@@ -9178,10 +9179,10 @@ public class Client extends GameShell {
                 return true;
             }
             if (pktType == 121) {
-                int j2 = inStream.isg2();
+                int songId = inStream.isg2();
                 int k10 = inStream.sg2();
                 if (musicEnabled && !lowMem) {
-                    nextSong = j2;
+                    nextSong = songId;
                     songChanging = false;
                     onDemandFetcher.loadToCache(2, nextSong);
                     prevSong = k10;
@@ -9712,7 +9713,7 @@ public class Client extends GameShell {
                     try {
                         anIntArray1240[anInt1169] = chatID;
                         anInt1169 = (anInt1169 + 1) % 100;
-                        String s9 = TextInput.method525(pktSize - 13, inStream);
+                        String s9 = TextInput.readFromStream(pktSize - 13, inStream);
                         if (fromPlayerRights != 3)
                             s9 = Censor.doCensor(s9);
                         if (fromPlayerRights == 2 || fromPlayerRights == 3)
@@ -9881,7 +9882,7 @@ public class Client extends GameShell {
                 if (anInt999 >= 100) {
                     int k7 = anInt995 * 128 + 64;
                     int k14 = anInt996 * 128 + 64;
-                    int i20 = method42(plane, k14, k7) - anInt997;
+                    int i20 = getFloorDrawHeight(plane, k14, k7) - anInt997;
                     int l22 = k7 - xCameraPos;
                     int k25 = i20 - zCameraPos;
                     int j28 = k14 - yCameraPos;
@@ -9991,7 +9992,7 @@ public class Client extends GameShell {
                 rsInterface.animationConditionFalse = animationID;
                 if (animationID == -1) {
                     rsInterface.animFrame = 0;
-                    rsInterface.anInt208 = 0;
+                    rsInterface.duration = 0;
                 }
                 pktType = -1;
                 return true;
@@ -10095,7 +10096,7 @@ public class Client extends GameShell {
             if (useCustomCamera[4] && customLowestYaw[4] + 128 > i)
                 i = customLowestYaw[4] + 128;
             int k = minimapAngle + anInt896 & 0x7ff;
-            setCameraPos(600 + i * 3, i, anInt1014, method42(plane, sessionPlayer.boundExtentY, sessionPlayer.boundExtentX) - 50, k, anInt1015);
+            setCameraPos(600 + i * 3, i, anInt1014, getFloorDrawHeight(plane, sessionPlayer.boundExtentY, sessionPlayer.boundExtentX) - 50, k, anInt1015);
         }
         int j;
         if (!inCutscene)

@@ -185,7 +185,7 @@ public class ItemDef
         modelSizeY = 128;
         modelSizeZ = 128;
         lightModifier = 0;
-        magMultiplyer = 0;
+        shadowModifier = 0;
         team = 0;
     }
 
@@ -400,8 +400,8 @@ public class ItemDef
                 model.recolour(originalModelColours[colourPtr], modifiedModelColours[colourPtr]);
 
         }
-        model.light(64 + lightModifier, 768 + magMultiplyer, -50, -10, -50, true);
-        model.aBoolean1659 = true;
+        model.light(64 + lightModifier, 768 + shadowModifier, -50, -10, -50, true);
+        model.oneSquareModel = true;
         modelCache.put(model, id);
         return model;
     }
@@ -571,7 +571,7 @@ public class ItemDef
                 lightModifier = stream.g1b();
             else
             if(opCode == 114)
-                magMultiplyer = stream.g1b() * 5;
+                shadowModifier = stream.g1b() * 5;//shadowing?
             else
             if(opCode == 115)
                 team = stream.g1();
@@ -611,7 +611,7 @@ public class ItemDef
     public int modelZoom;
     public static boolean isMembers = true;
     private static Packet itemData;
-    private int magMultiplyer;
+    private int shadowModifier;
     private int maleEmblem;
     private int maleEquip2;
     public String actions[];

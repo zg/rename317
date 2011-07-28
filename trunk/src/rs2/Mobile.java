@@ -116,7 +116,7 @@ public class Mobile extends Entity {
         pathX = new int[10];
         pathY = new int[10];
         interactingEntity = -1;
-        anInt1504 = 32;
+        degreesToTurn = 32;
         runAnimIndex = -1;
         height = 200;
         standAnimIndex = -1;
@@ -125,7 +125,7 @@ public class Mobile extends Entity {
         hitMarkTypes = new int[4];
         hitsLoopCycle = new int[4];
         anInt1517 = -1;
-        anInt1520 = -1;
+        gfxId = -1;
         animation = -1;
         loopCycleStatus = -1000;
         textCycle = 100;
@@ -142,7 +142,7 @@ public class Mobile extends Entity {
     public final int[] pathY;
     public int interactingEntity;
     int anInt1503;
-    int anInt1504;
+    int degreesToTurn;
     int runAnimIndex;
     public String textSpoken;
     public int height;
@@ -156,16 +156,16 @@ public class Mobile extends Entity {
     int anInt1517;
     int anInt1518;
     int anInt1519;
-    int anInt1520;
-    int anInt1521;
+    int gfxId;
+    int currentAnim;
     int anInt1522;
-    int anInt1523;
-    int anInt1524;
+    int gfxDelay;
+    int graphicHeight;
     int pathLength;
     public int animation;
     int anInt1527;
     int anInt1528;
-    int anInt1529;
+    int animationDelay;
     int anInt1530;
     int fancyTextDrawType;
     public int loopCycleStatus;
@@ -173,8 +173,8 @@ public class Mobile extends Entity {
     public int maxHealth;
     int textCycle;
     int time;
-    int anInt1538;
-    int anInt1539;
+    int faceX;
+    int faceY;
     int boundDim;
     boolean aBoolean1541;
     int anInt1542;
@@ -184,7 +184,7 @@ public class Mobile extends Entity {
     int anInt1546;
     int anInt1547;
     int anInt1548;
-    int anInt1549;
+    int turnInfo;//int for how many degrees to turn
     public int boundExtentX;
     public int boundExtentY;
     int currentRotation;
