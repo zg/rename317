@@ -3,11 +3,11 @@ package rs2;
 
 public class TextInput {
 
-    public static String method525(int i, Packet stream)
+    public static String readFromStream(int length, Packet stream)
     {
         int j = 0;
         int k = -1;
-        for(int l = 0; l < i; l++)
+        for(int ptr = 0; ptr < length; ptr++)
         {
             int i1 = stream.g1();
             int j1 = i1 >> 4 & 0xf;
@@ -51,15 +51,15 @@ public class TextInput {
         return new String(aCharArray631, 0, j);
     }
 
-    public static void method526(String s, Packet stream)
+    public static void writeToStream(String text, Packet stream)
     {
-        if(s.length() > 80)
-            s = s.substring(0, 80);
-        s = s.toLowerCase();
+        if(text.length() > 80)
+            text = text.substring(0, 80);
+        text = text.toLowerCase();
         int i = -1;
-        for(int j = 0; j < s.length(); j++)
+        for(int j = 0; j < text.length(); j++)
         {
-            char c = s.charAt(j);
+            char c = text.charAt(j);
             int k = 0;
             for(int l = 0; l < validChars.length; l++)
             {
@@ -95,10 +95,10 @@ public class TextInput {
     public static String processText(String s)
     {
         stream.pos = 0;
-        method526(s, stream);
+        writeToStream(s, stream);
         int j = stream.pos;
         stream.pos = 0;
-        String s1 = method525(j, stream);
+        String s1 = readFromStream(j, stream);
         return s1;
     }
 

@@ -12,19 +12,19 @@ public class Player extends Mobile
         if(model == null)
             return null;
         super.height = model.modelHeight;
-        model.aBoolean1659 = true;
+        model.oneSquareModel = true;
         if(aBoolean1699)
             return model;
-        if(super.anInt1520 != -1 && super.anInt1521 != -1)
+        if(super.gfxId != -1 && super.currentAnim != -1)
         {
-            SpotAnim spotAnim = SpotAnim.cache[super.anInt1520];
+            SpotAnim spotAnim = SpotAnim.cache[super.gfxId];
             Model model_2 = spotAnim.getModel();
             if(model_2 != null)
             {
-                Model model_3 = new Model(true, Animation.isNullFrame(super.anInt1521), false, model_2);
-                model_3.translate(0, -super.anInt1524, 0);
+                Model model_3 = new Model(true, Animation.isNullFrame(super.currentAnim), false, model_2);
+                model_3.translate(0, -super.graphicHeight, 0);
                 model_3.createBones();
-                model_3.applyTransform(spotAnim.animationSequence.frame2IDS[super.anInt1521]);
+                model_3.applyTransform(spotAnim.animationSequence.frame2IDS[super.currentAnim]);
                 model_3.triangleSkin = null;
                 model_3.vertexSkin = null;
                 if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
@@ -43,7 +43,7 @@ public class Player extends Mobile
             if(Client.currentTime >= anInt1707 && Client.currentTime < anInt1708)
             {
                 Model model_1 = aModel_1714;
-                model_1.translate(anInt1711 - super.boundExtentX, anInt1712 - anInt1709, anInt1713 - super.boundExtentY);
+                model_1.translate(anInt1711 - super.boundExtentX, anInt1712 - terrainDrawHeight, anInt1713 - super.boundExtentY);
                 if(super.turnDirection == 512)
                 {
                     model_1.rotateBy90();
@@ -75,10 +75,10 @@ public class Player extends Mobile
                     model_1.rotateBy90();
                     model_1.rotateBy90();
                 }
-                model_1.translate(super.boundExtentX - anInt1711, anInt1709 - anInt1712, super.boundExtentY - anInt1713);
+                model_1.translate(super.boundExtentX - anInt1711, terrainDrawHeight - anInt1712, super.boundExtentY - anInt1713);
             }
         }
-        model.aBoolean1659 = true;
+        model.oneSquareModel = true;
         return model;
     }
 
@@ -172,7 +172,7 @@ public class Player extends Mobile
         if(desc != null)
         {
             int j = -1;
-            if(super.animation >= 0 && super.anInt1529 == 0)
+            if(super.animation >= 0 && super.animationDelay == 0)
                 j = Sequence.anims[super.animation].frame2IDS[super.anInt1527];
             else
             if(super.anInt1517 >= 0)
@@ -185,7 +185,7 @@ public class Player extends Mobile
         int i1 = -1;
         int j1 = -1;
         int k1 = -1;
-        if(super.animation >= 0 && super.anInt1529 == 0)
+        if(super.animation >= 0 && super.animationDelay == 0)
         {
             Sequence sequence = Sequence.anims[super.animation];
             k = sequence.frame2IDS[super.anInt1527];
@@ -360,7 +360,7 @@ public class Player extends Mobile
     public int headIcon;
     public int anInt1707;
     int anInt1708;
-    int anInt1709;
+    int terrainDrawHeight;
     boolean visible;
     int anInt1711;
     int anInt1712;

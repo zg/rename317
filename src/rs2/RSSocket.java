@@ -64,19 +64,19 @@ public class RSSocket
             return inputStream.available();
     }
 
-    public void flushInputStream(byte abyte0[], int j)
+    public void flushInputStream(byte data[], int length)
         throws IOException
     {
-        int i = 0;//was parameter
+        int offset = 0;//was parameter
         if(closed)
             return;
         int k;
-        for(; j > 0; j -= k)
+        for(; length > 0; length -= k)
         {
-            k = inputStream.read(abyte0, i, j);
+            k = inputStream.read(data, offset, length);
             if(k <= 0)
                 throw new IOException("EOF");
-            i += k;
+            offset += k;
         }
 
     }
@@ -116,8 +116,8 @@ public class RSSocket
     {
         while(isWriter)
         {
-            int i;
-            int j;
+            int length;
+            int offset;
             synchronized(this)
             {
                 if(buffIndex == writeIndex)
@@ -128,23 +128,23 @@ public class RSSocket
                     catch(InterruptedException _ex) { }
                 if(!isWriter)
                     return;
-                j = writeIndex;
+                offset = writeIndex;
                 if(buffIndex >= writeIndex)
-                    i = buffIndex - writeIndex;
+                    length = buffIndex - writeIndex;
                 else
-                    i = 5000 - writeIndex;
+                    length = 5000 - writeIndex;
             }
-            if(i > 0)
+            if(length > 0)
             {
                 try
                 {
-                    outputStream.write(buffer, j, i);
+                    outputStream.write(buffer, offset, length);
                 }
                 catch(IOException _ex)
                 {
                     hasIOError = true;
                 }
-                writeIndex = (writeIndex + i) % 5000;
+                writeIndex = (writeIndex + length) % 5000;
                 try
                 {
                     if(buffIndex == writeIndex)

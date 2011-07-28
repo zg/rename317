@@ -319,7 +319,7 @@ public class RSInterface
     }
 
     public RgbImage imageConditionFalse;
-    public int anInt208;
+    public int duration;
     public RgbImage rgbImages[];
     public static RSInterface interfaceCache[];
     public int conditionValueToCompare[];

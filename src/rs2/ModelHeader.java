@@ -16,13 +16,13 @@ public class ModelHeader
     public int vertexXOffset;
     public int vertexYOffset;
     public int vertexZOffset;
-    public int anInt376;
+    public int vskinBasePos;
     public int triVPointOffset;
     public int triMeshLinkOffset;
     public int triColourOffset;
-    public int anInt380;
-    public int anInt381;
+    public int drawTypeBasePos;
+    public int facePriorityBasePos;
     public int alphaBasepos;
     public int tskinBasepos;
-    public int anInt384;
+    public int textureInfoBasePos;
 }
