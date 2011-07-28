@@ -167,8 +167,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             Model.initialize(onDemandFetcher.getVersionCount(0), onDemandFetcher);
             drawLoadingText(65, "Requesting animations");
             int k = onDemandFetcher.getVersionCount(1);
-            for (int i1 = 0; i1 < k; i1++)
-                onDemandFetcher.method558(1, i1);
+            for (int id = 0; id < k; id++)
+                onDemandFetcher.loadToCache(1, id);
             while (onDemandFetcher.getNodeCount() > 0) {
                 int j1 = k - onDemandFetcher.getNodeCount();
                 if (j1 > 0)
@@ -189,7 +189,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             for (int k1 = 0; k1 < k; k1++) {
                 int l1 = onDemandFetcher.getModelIndex(k1);
                 if ((l1 & 1) != 0)
-                    onDemandFetcher.method558(0, k1);
+                    onDemandFetcher.loadToCache(0, k1);
             }
 
             k = onDemandFetcher.getNodeCount();
@@ -764,8 +764,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         //Clean region-local caches
         Rasterizer.clearTextureCache();
         sceneGraph.initToNull();
-        ObjectDef.memCache1.unlinkAll();
-        ObjectDef.memCache2.unlinkAll();
+        ObjectDef.modelCache.unlinkAll();
+        ObjectDef.modelCache2.unlinkAll();
         System.gc();
         for (int i = 0; i < 4; i++)
             tileSettings[i].init();

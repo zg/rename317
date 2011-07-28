@@ -604,9 +604,9 @@ public class Model extends Entity {
         l2 += j2;
     }
 
-    public static void method461(int j)//clearHeader?
+    public static void clearHeader(int id)//clearHeader?
     {
-        modelHeaderCache[j] = null;
+        modelHeaderCache[id] = null;
     }
 
     public static Model getModel(int j) {
@@ -1927,7 +1927,7 @@ public class Model extends Entity {
         return (hsl & 0xff80) + l;
     }
 
-    public void rendersingle(int j, int k, int l, int i1, int sine, int cosine) {//todo figure if i has any significence to its value.
+    public void rendersingle(int j, int diagionalRotation, int l, int i1, int sine, int cosine) {//todo figure if i has any significence to its value.
         int i = 0; //was a parameters
         int l1 = Rasterizer.centerX;
         int i2 = Rasterizer.centerY;
@@ -1935,8 +1935,8 @@ public class Model extends Entity {
         int k2 = COSINE[i];//[i]
         int l2 = SINE[j];
         int i3 = COSINE[j];
-        int j3 = SINE[k];
-        int k3 = COSINE[k];
+        int j3 = SINE[diagionalRotation];
+        int k3 = COSINE[diagionalRotation];
         int l3 = SINE[l];
         int i4 = COSINE[l];
         int j4 = sine * l3 + cosine * i4 >> 16;
@@ -1944,7 +1944,7 @@ public class Model extends Entity {
             int l4 = vertexX[k4];
             int i5 = vertexY[k4];
             int j5 = vertexZ[k4];
-            if (k != 0) {
+            if (diagionalRotation != 0) {
                 int k5 = i5 * j3 + l4 * k3 >> 16;
                 i5 = i5 * k3 - l4 * j3 >> 16;
                 l4 = k5;

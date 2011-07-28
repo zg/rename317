@@ -356,21 +356,21 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         return animIndices.length;
     }
 
-    public void method558(int i, int j)
+    public void loadToCache(int dataType, int id)
     {
-        if(i < 0 || i > versions.length || j < 0 || j > versions[i].length)
+        if(dataType < 0 || dataType > versions.length || id < 0 || id > versions[dataType].length)
             return;
-        if(versions[i][j] == 0)
+        if(versions[dataType][id] == 0)
             return;
         synchronized(queue)
         {
             for(OnDemandData onDemandData = (OnDemandData) queue.getFront(); onDemandData != null; onDemandData = (OnDemandData) queue.getNext())
-                if(onDemandData.dataType == i && onDemandData.ID == j)
+                if(onDemandData.dataType == dataType && onDemandData.ID == id)
                     return;
 
             OnDemandData onDemandData_1 = new OnDemandData();
-            onDemandData_1.dataType = i;
-            onDemandData_1.ID = j;
+            onDemandData_1.dataType = dataType;
+            onDemandData_1.ID = id;
             onDemandData_1.incomplete = true;
             synchronized(aClass19_1370)
             {
@@ -571,9 +571,9 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         return -1;
     }
 
-    public void requestData(int i)
+    public void requestData(int id)
     {
-        method558(0, i);
+        loadToCache(0, id);
     }
 
     public void method563(byte byte0, int i, int j)
