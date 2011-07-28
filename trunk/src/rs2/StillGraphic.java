@@ -12,7 +12,7 @@ public class StillGraphic extends Entity {
         this.x = x;
         this.y = y;
         worldZ = j1;
-        anInt1564 = currentTime + l;
+        stillGraphicsLoopCycle = currentTime + l;
     }
 
     public Model getRotatedModel()
@@ -70,7 +70,7 @@ public class StillGraphic extends Entity {
     public final int x;
     public final int y;
     public final int worldZ;
-    public final int anInt1564;
+    public final int stillGraphicsLoopCycle;
     public boolean transformCompleted;
     private final SpotAnim spotAnim;
     private int eclapsedFrames;

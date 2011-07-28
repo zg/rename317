@@ -1546,12 +1546,12 @@ public class Model extends Entity {
         }
     }
 
-    public void translate(int i, int j, int l) {
-        hash += (i*j*l)*362345L;
+    public void translate(int x, int y, int z) {
+        hash += (x*y*z)*362345L;
         for (int i1 = 0; i1 < vertexCount; i1++) {
-            vertexX[i1] += i;
-            vertexY[i1] += j;
-            vertexZ[i1] += l;
+            vertexX[i1] += x;
+            vertexY[i1] += y;
+            vertexZ[i1] += z;
         }
 
     }
@@ -1575,12 +1575,12 @@ public class Model extends Entity {
         }
     }
 
-    public void scaleT(int i, int j, int l) {
-        hash *= i*j*l;
+    public void scaleT(int scaleX, int scaleZ, int scaleY) {
+        hash *= scaleX*scaleZ*scaleY;
         for (int i1 = 0; i1 < vertexCount; i1++) {
-            vertexX[i1] = (vertexX[i1] * i) / 128;
-            vertexY[i1] = (vertexY[i1] * l) / 128;
-            vertexZ[i1] = (vertexZ[i1] * j) / 128;
+            vertexX[i1] = (vertexX[i1] * scaleX) / 128;
+            vertexY[i1] = (vertexY[i1] * scaleY) / 128;
+            vertexZ[i1] = (vertexZ[i1] * scaleZ) / 128;
         }
 
     }
