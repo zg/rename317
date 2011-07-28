@@ -6875,7 +6875,7 @@ public class Client extends GameShell {
         for (; stillGraphic != null; stillGraphic = (StillGraphic) stillGraphicDeque.getNext())
             if (stillGraphic.plane != plane || stillGraphic.transformCompleted)
                 stillGraphic.unlink();
-            else if (currentTime >= stillGraphic.anInt1564) {
+            else if (currentTime >= stillGraphic.stillGraphicsLoopCycle) {
                 stillGraphic.animationStep(anInt945);
                 if (stillGraphic.transformCompleted)
                     stillGraphic.unlink();

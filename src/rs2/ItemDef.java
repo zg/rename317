@@ -103,41 +103,41 @@ public class ItemDef
         return isEquipted;
     }
 
-    public Model method196(int i)
+    public Model method196(int gender)
     {
-        int j = maleEquip1;
-        int k = maleEquip2;
-        int l = maleEmblem;
-        if(i == 1)
+        int equip1 = maleEquip1;
+        int equip2 = maleEquip2;
+        int emblem = maleEmblem;
+        if(gender == 1)
         {
-            j = femaleEquip1;
-            k = femaleEquip2;
-            l = femaleEmblem;
+            equip1 = femaleEquip1;
+            equip2 = femaleEquip2;
+            emblem = femaleEmblem;
         }
-        if(j == -1)
+        if(equip1 == -1)
             return null;
-        Model model = Model.getModel(j);
-        if(k != -1)
-            if(l != -1)
+        Model model = Model.getModel(equip1);
+        if(equip2 != -1)
+            if(emblem != -1)
             {
-                Model model_1 = Model.getModel(k);
-                Model model_3 = Model.getModel(l);
+                Model model_1 = Model.getModel(equip2);
+                Model model_3 = Model.getModel(emblem);
                 Model aclass30_sub2_sub4_sub6_1s[] = {
                         model, model_1, model_3
                 };
                 model = new Model(3, aclass30_sub2_sub4_sub6_1s);
             } else
             {
-                Model model_2 = Model.getModel(k);
+                Model model_2 = Model.getModel(equip2);
                 Model aclass30_sub2_sub4_sub6s[] = {
                         model, model_2
                 };
                 model = new Model(2, aclass30_sub2_sub4_sub6s);
             }
-        if(i == 0 && aByte205 != 0)
-            model.translate(0, aByte205, 0);
-        if(i == 1 && aByte154 != 0)
-            model.translate(0, aByte154, 0);
+        if(gender == 0 && maleYOffset != 0)
+            model.translate(0, maleYOffset, 0);
+        if(gender == 1 && femaleYOffset != 0)
+            model.translate(0, femaleYOffset, 0);
         if(originalModelColours != null)
         {
             for(int i1 = 0; i1 < originalModelColours.length; i1++)
@@ -167,10 +167,10 @@ public class ItemDef
         actions = null;
         maleEquip1 = -1;
         maleEquip2 = -1;
-        aByte205 = 0;
+        maleYOffset = 0;
         femaleEquip1 = -1;
         femaleEquip2 = -1;
-        aByte154 = 0;
+        femaleYOffset = 0;
         maleEmblem = -1;
         femaleEmblem = -1;
         maleDialogue = -1;
@@ -181,11 +181,11 @@ public class ItemDef
         stackAmounts = null;
         certID = -1;
         certTemplateID = -1;
-        anInt167 = 128;
-        anInt192 = 128;
-        anInt191 = 128;
-        anInt196 = 0;
-        anInt184 = 0;
+        modelSizeX = 128;
+        modelSizeY = 128;
+        modelSizeZ = 128;
+        lightModifier = 0;
+        magMultiplyer = 0;
         team = 0;
     }
 
@@ -392,15 +392,15 @@ public class ItemDef
         model = Model.getModel(modelID);
         if(model == null)
             return null;
-        if(anInt167 != 128 || anInt192 != 128 || anInt191 != 128)
-            model.scaleT(anInt167, anInt191, anInt192);
+        if(modelSizeX != 128 || modelSizeY != 128 || modelSizeZ != 128)
+            model.scaleT(modelSizeX, modelSizeZ, modelSizeY);
         if(originalModelColours != null)
         {
-            for(int l = 0; l < originalModelColours.length; l++)
-                model.recolour(originalModelColours[l], modifiedModelColours[l]);
+            for(int colourPtr = 0; colourPtr < originalModelColours.length; colourPtr++)
+                model.recolour(originalModelColours[colourPtr], modifiedModelColours[colourPtr]);
 
         }
-        model.light(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
+        model.light(64 + lightModifier, 768 + magMultiplyer, -50, -10, -50, true);
         model.aBoolean1659 = true;
         memCache2.put(model, id);
         return model;
@@ -423,8 +423,8 @@ public class ItemDef
             return null;
         if(originalModelColours != null)
         {
-            for(int l = 0; l < originalModelColours.length; l++)
-                model.recolour(originalModelColours[l], modifiedModelColours[l]);
+            for(int colourPtr = 0; colourPtr < originalModelColours.length; colourPtr++)
+                model.recolour(originalModelColours[colourPtr], modifiedModelColours[colourPtr]);
 
         }
         return model;
@@ -482,7 +482,7 @@ public class ItemDef
             if(i == 23)
             {
                 maleEquip1 = stream.g2();
-                aByte205 = stream.g1b();
+                maleYOffset = stream.g1b();
             } else
             if(i == 24)
                 maleEquip2 = stream.g2();
@@ -490,7 +490,7 @@ public class ItemDef
             if(i == 25)
             {
                 femaleEquip1 = stream.g2();
-                aByte154 = stream.g1b();
+                femaleYOffset = stream.g1b();
             } else
             if(i == 26)
                 femaleEquip2 = stream.g2();
@@ -559,19 +559,19 @@ public class ItemDef
                 stackAmounts[i - 100] = stream.g2();
             } else
             if(i == 110)
-                anInt167 = stream.g2();
+                modelSizeX = stream.g2();
             else
             if(i == 111)
-                anInt192 = stream.g2();
+                modelSizeY = stream.g2();
             else
             if(i == 112)
-                anInt191 = stream.g2();
+                modelSizeZ = stream.g2();
             else
             if(i == 113)
-                anInt196 = stream.g1b();
+                lightModifier = stream.g1b();
             else
             if(i == 114)
-                anInt184 = stream.g1b() * 5;
+                magMultiplyer = stream.g1b() * 5;
             else
             if(i == 115)
                 team = stream.g1();
@@ -583,7 +583,7 @@ public class ItemDef
         id = -1;
     }
 
-    private byte aByte154;
+    private byte femaleYOffset;
     public int value;
     private int[] originalModelColours;
     public int id;
@@ -596,7 +596,7 @@ public class ItemDef
     private int femaleEquip2;
     private int maleEquip1;
     private int maleDialogueHat;
-    private int anInt167;
+    private int modelSizeX;
     public String groundActions[];
     private int modelOffset1;
     public String name;
@@ -611,17 +611,17 @@ public class ItemDef
     public int modelZoom;
     public static boolean isMembers = true;
     private static Packet stream;
-    private int anInt184;
+    private int magMultiplyer;
     private int maleEmblem;
     private int maleEquip2;
     public String actions[];
     public int sprite_rotation_scale;
-    private int anInt191;
-    private int anInt192;
+    private int modelSizeZ;
+    private int modelSizeY;
     private int[] stackIDs;
     private int modelOffset2;
     private static int[] streamIndices;
-    private int anInt196;
+    private int lightModifier;
     private int femaleDialogue;
     public int modelRotation2;
     private int femaleEquip1;
@@ -629,6 +629,6 @@ public class ItemDef
     public int team;
     public static int totalItems;
     private int anInt204;
-    private byte aByte205;
+    private byte maleYOffset;
 
 }
