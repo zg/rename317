@@ -28,18 +28,18 @@ public class NpcDef
             else
                 return npcDef.getHeadModel();
         }
-        if(anIntArray73 == null)
+        if(aditionalModels == null)
             return null;
         boolean flag1 = false;
-        for(int i = 0; i < anIntArray73.length; i++)
-            if(!Model.isCached(anIntArray73[i]))
+        for(int i = 0; i < aditionalModels.length; i++)
+            if(!Model.isCached(aditionalModels[i]))
                 flag1 = true;
 
         if(flag1)
             return null;
-        Model aclass30_sub2_sub4_sub6s[] = new Model[anIntArray73.length];
-        for(int j = 0; j < anIntArray73.length; j++)
-            aclass30_sub2_sub4_sub6s[j] = Model.getModel(anIntArray73[j]);
+        Model aclass30_sub2_sub4_sub6s[] = new Model[aditionalModels.length];
+        for(int j = 0; j < aditionalModels.length; j++)
+            aclass30_sub2_sub4_sub6s[j] = Model.getModel(aditionalModels[j]);
 
         Model model;
         if(aclass30_sub2_sub4_sub6s.length == 1)
@@ -58,9 +58,9 @@ public class NpcDef
     public NpcDef method161()
     {
         int j = -1;
-        if(anInt57 != -1)
+        if(varBitID != -1)
         {
-            VarBit varBit = VarBit.cache[anInt57];
+            VarBit varBit = VarBit.cache[varBitID];
             int k = varBit.configId;
             int l = varBit.leastSignificantBit;
             int i1 = varBit.mostSignificantBit;
@@ -70,11 +70,11 @@ public class NpcDef
             else
                 j = clientInstance.sessionSettings[k] >> l & j1;
         } else
-        if(anInt59 != -1)
+        if(sessionSettingID != -1)
             if (clientInstance == null)
                 j = 0;
             else
-                j = clientInstance.sessionSettings[anInt59];
+                j = clientInstance.sessionSettings[sessionSettingID];
         if(j < 0 || j >= childrenIDs.length || childrenIDs[j] == -1)
             return null;
         else
@@ -102,7 +102,7 @@ public class NpcDef
 
     public static void clearCache()
     {
-        memCache = null;
+        modelCache = null;
         streamIndices = null;
         cache = null;
         stream = null;
@@ -118,19 +118,19 @@ public class NpcDef
             else
                 return npcDef.method164(j, frameId, ai);
         }
-        Model model = (Model) memCache.get(type);
+        Model model = (Model) modelCache.get(type);
         if(model == null)
         {
             boolean flag = false;
-            for(int i1 = 0; i1 < anIntArray94.length; i1++)
-                if(!Model.isCached(anIntArray94[i1]))
+            for(int i1 = 0; i1 < npcModels.length; i1++)
+                if(!Model.isCached(npcModels[i1]))
                     flag = true;
 
             if(flag)
                 return null;
-            Model aclass30_sub2_sub4_sub6s[] = new Model[anIntArray94.length];
-            for(int j1 = 0; j1 < anIntArray94.length; j1++)
-                aclass30_sub2_sub4_sub6s[j1] = Model.getModel(anIntArray94[j1]);
+            Model aclass30_sub2_sub4_sub6s[] = new Model[npcModels.length];
+            for(int j1 = 0; j1 < npcModels.length; j1++)
+                aclass30_sub2_sub4_sub6s[j1] = Model.getModel(npcModels[j1]);
 
             if(aclass30_sub2_sub4_sub6s.length == 1)
                 model = aclass30_sub2_sub4_sub6s[0];
@@ -143,8 +143,8 @@ public class NpcDef
 
             }
             model.createBones();
-            model.light(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
-            memCache.put(model, type);
+            model.light(64 + lightModifier, 850 + magModifier, -30, -50, -30, true);
+            modelCache.put(model, type);
         }
         Model model_1 = Model.aModel_1621;
         model_1.method464(model, Animation.isNullFrame(frameId) & Animation.isNullFrame(j));
@@ -153,12 +153,12 @@ public class NpcDef
         else
         if(frameId != -1)
             model_1.applyTransform(frameId);
-        if(anInt91 != 128 || anInt86 != 128)
-            model_1.scaleT(anInt91, anInt91, anInt86);
+        if(scaleXZ != 128 || scaleY != 128)
+            model_1.scaleT(scaleXZ, scaleXZ, scaleY);
         model_1.calculateDiagonals();
         model_1.triangleSkin = null;
         model_1.vertexSkin = null;
-        if(aByte68 == 1)
+        if(boundDim == 1)
             model_1.aBoolean1659 = true;
         return model_1;
     }
@@ -173,9 +173,9 @@ public class NpcDef
             if(i == 1)
             {
                 int j = stream.g1();
-                anIntArray94 = new int[j];
+                npcModels = new int[j];
                 for(int j1 = 0; j1 < j; j1++)
-                    anIntArray94[j1] = stream.g2();
+                    npcModels[j1] = stream.g2();
 
             } else
             if(i == 2)
@@ -185,20 +185,20 @@ public class NpcDef
                 description = stream.gstrbyte();
             else
             if(i == 12)
-                aByte68 = stream.g1b();
+                boundDim = stream.g1b();
             else
             if(i == 13)
                 idleAnimation = stream.g2();
             else
             if(i == 14)
-                anInt67 = stream.g2();
+                walkAnimIndex = stream.g2();
             else
             if(i == 17)
             {
-                anInt67 = stream.g2();
-                anInt58 = stream.g2();
-                anInt83 = stream.g2();
-                anInt55 = stream.g2();
+                walkAnimIndex = stream.g2();
+                turn180AnimIndex = stream.g2();
+                turn90CWAnimIndex = stream.g2();
+                turn90CCWAnimIndex = stream.g2();
             } else
             if(i >= 30 && i < 40)
             {
@@ -222,10 +222,10 @@ public class NpcDef
             } else
             if(i == 60)
             {
-                int l = stream.g1();
-                anIntArray73 = new int[l];
-                for(int l1 = 0; l1 < l; l1++)
-                    anIntArray73[l1] = stream.g2();
+                int additionalModelLen = stream.g1();
+                aditionalModels = new int[additionalModelLen];
+                for(int l1 = 0; l1 < additionalModelLen; l1++)
+                    aditionalModels[l1] = stream.g2();
 
             } else
             if(i == 90)
@@ -238,40 +238,40 @@ public class NpcDef
                 stream.g2();
             else
             if(i == 93)
-                aBoolean87 = false;
+                drawMinimapDot = false;//dont show on minimap
             else
             if(i == 95)
                 combatLevel = stream.g2();
             else
             if(i == 97)
-                anInt91 = stream.g2();
+                scaleXZ = stream.g2();
             else
             if(i == 98)
-                anInt86 = stream.g2();
+                scaleY = stream.g2();
             else
-            if(i == 99)
+            if(i == 99)//should be isVisible but method146 is wrong?
                 aBoolean93 = true;
             else
             if(i == 100)
-                anInt85 = stream.g1b();
+                lightModifier = stream.g1b();
             else
             if(i == 101)
-                anInt92 = stream.g1b() * 5;
+                magModifier = stream.g1b() * 5;
             else
             if(i == 102)
-                anInt75 = stream.g2();
+                headIcon = stream.g2();
             else
             if(i == 103)
-                anInt79 = stream.g2();
+                degreesToTurn = stream.g2();
             else
             if(i == 106)
             {
-                anInt57 = stream.g2();
-                if(anInt57 == 65535)
-                    anInt57 = -1;
-                anInt59 = stream.g2();
-                if(anInt59 == 65535)
-                    anInt59 = -1;
+                varBitID = stream.g2();
+                if(varBitID == 65535)
+                    varBitID = -1;
+                sessionSettingID = stream.g2();
+                if(sessionSettingID == 65535)
+                    sessionSettingID = -1;
                 int i1 = stream.g1();
                 childrenIDs = new int[i1 + 1];
                 for(int i2 = 0; i2 <= i1; i2++)
@@ -283,65 +283,65 @@ public class NpcDef
 
             } else
             if(i == 107)
-                aBoolean84 = false;
+                clickable = false;
         } while(true);
     }
 
     private NpcDef()
     {
-        anInt55 = -1;
-        anInt57 = -1;
-        anInt58 = -1;
-        anInt59 = -1;
+        turn90CCWAnimIndex = -1;
+        varBitID = -1;
+        turn180AnimIndex = -1;
+        sessionSettingID = -1;
         combatLevel = -1;
         //anInt64 = 1834;//never used
-        anInt67 = -1;
-        aByte68 = 1;
-        anInt75 = -1;
+        walkAnimIndex = -1;
+        boundDim = 1;
+        headIcon = -1;
         idleAnimation = -1;
         type = -1L;
-        anInt79 = 32;
-        anInt83 = -1;
-        aBoolean84 = true;
-        anInt86 = 128;
-        aBoolean87 = true;
-        anInt91 = 128;
+        degreesToTurn = 32;
+        turn90CWAnimIndex = -1;
+        clickable = true;
+        scaleY = 128;
+        drawMinimapDot = true;
+        scaleXZ = 128;
         aBoolean93 = false;
     }
 
-    public int anInt55;
+    public int turn90CCWAnimIndex;
     private static int anInt56;
-    private int anInt57;
-    public int anInt58;
-    private int anInt59;
+    private int varBitID;
+    public int turn180AnimIndex;
+    private int sessionSettingID;
     private static Packet stream;
     public int combatLevel;
     //private final int anInt64;//never used
     public String name;
     public String actions[];
-    public int anInt67;
-    public byte aByte68;
+    public int walkAnimIndex;
+    public byte boundDim;
     private int[] recolourTarget;
     private static int[] streamIndices;
-    private int[] anIntArray73;
-    public int anInt75;
+    private int[] aditionalModels;
+    public int headIcon;
     private int[] recolourOriginal;
     public int idleAnimation;
     public long type;
-    public int anInt79;
+    public int degreesToTurn;
     private static NpcDef[] cache;
     public static Client clientInstance;
-    public int anInt83;
-    public boolean aBoolean84;
-    private int anInt85;
-    private int anInt86;
-    public boolean aBoolean87;
+    public int turn90CWAnimIndex;
+    public boolean clickable;
+    private int lightModifier;
+    private int scaleY;
+    public boolean drawMinimapDot;
     public int childrenIDs[];
     public byte description[];
-    private int anInt91;
-    private int anInt92;
+    private int scaleXZ;
+    private int magModifier;
     public boolean aBoolean93;
-    private int[] anIntArray94;
-    public static MemCache memCache = new MemCache(30);
+    private int[] npcModels;
+    public static MemCache modelCache = new MemCache(30);
 
 }

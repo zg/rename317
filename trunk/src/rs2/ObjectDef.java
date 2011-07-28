@@ -70,8 +70,8 @@ public class ObjectDef
 
     public static void clearCache()
     {
-        memCache1 = null;
-        memCache2 = null;
+        modelCache = null;
+        modelCache2 = null;
         streamIndices = null;
         cache = null;
         stream = null;
@@ -188,27 +188,27 @@ public class ObjectDef
             if(j != 10)
                 return null;
             l1 = (long)((type << 6) + l) + ((long)(k + 1) << 32);
-            Model model_1 = (Model) memCache2.get(l1);
+            Model model_1 = (Model) modelCache2.get(l1);
             if(model_1 != null)
                 return model_1;
             if(objectModelIDs == null)
                 return null;
-            boolean flag1 = aBoolean751 ^ (l > 3);
+            boolean mirror = aBoolean751 ^ (l > 3);
             int k1 = objectModelIDs.length;
             for(int i2 = 0; i2 < k1; i2++)
             {
                 int l2 = objectModelIDs[i2];
-                if(flag1)
+                if(mirror)
                     l2 += 0x10000;
-                model = (Model) memCache1.get(l2);
+                model = (Model) modelCache.get(l2);
                 if(model == null)
                 {
                     model = Model.getModel(l2 & 0xffff);
                     if(model == null)
                         return null;
-                    if(flag1)
+                    if(mirror)
                         model.mirrorModel();
-                    memCache1.put(model, l2);
+                    modelCache.put(model, l2);
                 }
                 if(k1 > 1)
                     aModelArray741s[i2] = model;
@@ -230,14 +230,14 @@ public class ObjectDef
             if(i1 == -1)
                 return null;
             l1 = (long)((type << 6) + (i1 << 3) + l) + ((long)(k + 1) << 32);
-            Model model_2 = (Model) memCache2.get(l1);
+            Model model_2 = (Model) modelCache2.get(l1);
             if(model_2 != null)
                 return model_2;
             int j2 = objectModelIDs[i1];
             boolean flag3 = aBoolean751 ^ (l > 3);
             if(flag3)
                 j2 += 0x10000;
-            model = (Model) memCache1.get(j2);
+            model = (Model) modelCache.get(j2);
             if(model == null)
             {
                 model = Model.getModel(j2 & 0xffff);
@@ -245,7 +245,7 @@ public class ObjectDef
                     return null;
                 if(flag3)
                     model.mirrorModel();
-                memCache1.put(model, j2);
+                modelCache.put(model, j2);
             }
         }
         boolean flag;
@@ -275,7 +275,7 @@ public class ObjectDef
         model_3.light(64 + brightness, 768 + contrast * 5, -50, -10, -50, !nonFlatShading);
         if(anInt760 == 1)
             model_3.anInt1654 = model_3.modelHeight;
-        memCache2.put(model_3, l1);
+        modelCache2.put(model_3, l1);
         return model_3;
     }
 
@@ -516,12 +516,12 @@ label0:
     public byte description[];
     public boolean hasActions;
     public boolean aBoolean779;
-    public static MemCache memCache2 = new MemCache(30);
+    public static MemCache modelCache2 = new MemCache(30);
     public int animationID;
     private static ObjectDef[] cache;
     private int offsetY;
     private int[] modifiedModelColors;
-    public static MemCache memCache1 = new MemCache(500);
+    public static MemCache modelCache = new MemCache(500);
     public String actions[];
 
 }

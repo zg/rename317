@@ -4,15 +4,15 @@ public class IdentityKit {
 
     public static void unpackConfig(JagexArchive jagexArchive)
     {
-        Packet stream = new Packet(jagexArchive.getDataForName("idk.dat"));
-        length = stream.g2();
+        Packet idkData = new Packet(jagexArchive.getDataForName("idk.dat"));
+        length = idkData.g2();
         if(cache == null)
             cache = new IdentityKit[length];
         for(int j = 0; j < length; j++)
         {
             if(cache[j] == null)
                 cache[j] = new IdentityKit();
-            cache[j].readValues(stream);
+            cache[j].readValues(idkData);
         }
     }
 

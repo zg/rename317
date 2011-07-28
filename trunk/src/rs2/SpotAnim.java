@@ -82,7 +82,7 @@ public class SpotAnim {
 */
     public Model getModel()
     {
-        Model model = (Model) memCache.get(id);
+        Model model = (Model) modelCache.get(id);
         if(model != null)
             return model;
         model = Model.getModel(modelID);
@@ -92,7 +92,7 @@ public class SpotAnim {
             if(originalModelColours[0] != 0)
                 model.recolour(originalModelColours[i], modifiedModelColours[i]);
 
-        memCache.put(model, id);
+        modelCache.put(model, id);
         return model;
     }
 
@@ -117,6 +117,6 @@ public class SpotAnim {
     public int rotation;
     public int modelBrightness;
     public int modelShadow;
-    public static MemCache memCache = new MemCache(30);
+    public static MemCache modelCache = new MemCache(30);
 
 }

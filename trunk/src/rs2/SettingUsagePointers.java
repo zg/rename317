@@ -24,8 +24,6 @@ public class SettingUsagePointers {
         do
         {
             int j = stream.g1();
-            if(j != 0)
-            System.out.println("opcode "+j);
             if(j == 0)
                 return;
             //int dummy;

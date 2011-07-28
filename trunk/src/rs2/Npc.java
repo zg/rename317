@@ -50,7 +50,7 @@ public class Npc extends Mobile
                 model = new Model(aModel);
             }
         }
-        if(desc.aByte68 == 1)
+        if(desc.boundDim == 1)
             model.aBoolean1659 = true;
         return model;
     }
