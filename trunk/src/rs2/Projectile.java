@@ -10,16 +10,16 @@ public class Projectile extends Entity {
             double d = offsetY - anInt1580;
             double d2 = offsetX - anInt1581;
             double d3 = Math.sqrt(d * d + d2 * d2);
-            aDouble1585 = (double)anInt1580 + (d * (double)anInt1589) / d3;
-            aDouble1586 = (double)anInt1581 + (d2 * (double)anInt1589) / d3;
-            aDouble1587 = anInt1582;
+            aDouble1585 = (double)anInt1580 + (d * (double)radius) / d3;
+            aDouble1586 = (double)anInt1581 + (d2 * (double)radius) / d3;
+            aDouble1587 = _drawHeight;
         }
-        double d1 = (anInt1572 + 1) - currentTime;
+        double d1 = (speedTime + 1) - currentTime;
         aDouble1574 = ((double)offsetY - aDouble1585) / d1;
         aDouble1575 = ((double)offsetX - aDouble1586) / d1;
         aDouble1576 = Math.sqrt(aDouble1574 * aDouble1574 + aDouble1575 * aDouble1575);
         if(!aBoolean1579)
-            aDouble1577 = -aDouble1576 * Math.tan((double)anInt1588 * 0.02454369D);
+            aDouble1577 = -aDouble1576 * Math.tan((double)slope * 0.02454369D);
         aDouble1578 = (2D * ((double)drawHeight - aDouble1587 - aDouble1577 * d1)) / (d1 * d1);
     }
 
@@ -46,21 +46,21 @@ public class Projectile extends Entity {
             return model_1;
     }
 
-    public Projectile(int i, int j, int l, int i1, int j1, int z,
-                         int l1, int i2, int j2, int k2, int l2)
+    public Projectile(int slope_, int endHeight_, int delayTime_, int speedTime_, int radius_, int z,
+                         int drawHeight_, int i2, int j2, int lockOn_, int id)
     {
         aBoolean1579 = false;
-        spotAnim = SpotAnim.cache[l2];
+        spotAnim = SpotAnim.cache[id];
         plane = z;
         anInt1580 = j2;
         anInt1581 = i2;
-        anInt1582 = l1;
-        anInt1571 = l;
-        anInt1572 = i1;
-        anInt1588 = i;
-        anInt1589 = j1;
-        anInt1590 = k2;
-        anInt1583 = j;
+        _drawHeight = drawHeight_;
+        delayTime = delayTime_;
+        speedTime = speedTime_;
+        slope = slope_;
+        radius = radius_;
+        lockOn = lockOn_;
+        endHeight = endHeight_;
         aBoolean1579 = false;
     }
 
@@ -84,8 +84,8 @@ public class Projectile extends Entity {
 
     }
 
-    public final int anInt1571;
-    public final int anInt1572;
+    public final int delayTime;
+    public final int speedTime;
     private double aDouble1574;
     private double aDouble1575;
     private double aDouble1576;
@@ -94,14 +94,14 @@ public class Projectile extends Entity {
     private boolean aBoolean1579;
     private final int anInt1580;
     private final int anInt1581;
-    private final int anInt1582;
-    public final int anInt1583;
+    private final int _drawHeight;
+    public final int endHeight;
     public double aDouble1585;
     public double aDouble1586;
     public double aDouble1587;
-    private final int anInt1588;
-    private final int anInt1589;
-    public final int anInt1590;
+    private final int slope;
+    private final int radius;
+    public final int lockOn;
     private final SpotAnim spotAnim;
     private int eclapsedFrames;
     private int duration;
