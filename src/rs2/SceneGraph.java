@@ -234,14 +234,14 @@ public class SceneGraph {
         tileArray[Z][X][Y].groundDecoration = groundDecoration;
     }
 
-    public void addGroundItemTile(int x, int uid, Entity secondGroundItem, int k, Entity thirdGroundItem, Entity firstGroundItem,
+    public void addGroundItemTile(int x, int uid, Entity secondGroundItem, int drawHeight, Entity thirdGroundItem, Entity firstGroundItem,
                           int z, int y)
     {
         GroundItemTile itemTile = new GroundItemTile();
         itemTile.firstGroundItem = firstGroundItem;
         itemTile.xPos = x * 128 + 64;
         itemTile.yPos = y * 128 + 64;
-        itemTile.zPos = k;
+        itemTile.zPos = drawHeight;
         itemTile.uid = uid;
         itemTile.secondGroundItem = secondGroundItem;
         itemTile.thirdGroundItem = thirdGroundItem;
@@ -326,31 +326,31 @@ public class SceneGraph {
         }
     }
 
-    public boolean addEntityA(int i, int j, int k, int l, int i1, int j1,
-                             int k1, Entity class30_sub2_sub4, boolean flag)
+    public boolean addEntityA(int plane, int rotation, int drawHight, int l, int boundExtentY, int j1,
+                             int boundExtentX, Entity npc, boolean flag)
     {
-        if(class30_sub2_sub4 == null)
+        if(npc == null)
             return true;
-        int l1 = k1 - j1;
-        int i2 = i1 - j1;
-        int j2 = k1 + j1;
-        int k2 = i1 + j1;
+        int x = boundExtentX - j1;
+        int y = boundExtentY - j1;
+        int j2 = boundExtentX + j1;
+        int k2 = boundExtentY + j1;
         if(flag)
         {
-            if(j > 640 && j < 1408)
+            if(rotation > 640 && rotation < 1408)
                 k2 += 128;
-            if(j > 1152 && j < 1920)
+            if(rotation > 1152 && rotation < 1920)
                 j2 += 128;
-            if(j > 1664 || j < 384)
-                i2 -= 128;
-            if(j > 128 && j < 896)
-                l1 -= 128;
+            if(rotation > 1664 || rotation < 384)
+                y -= 128;
+            if(rotation > 128 && rotation < 896)
+                x -= 128;
         }
-        l1 /= 128;
-        i2 /= 128;
+        x /= 128;
+        y /= 128;
         j2 /= 128;
         k2 /= 128;
-        return addEntityC(i, l1, i2, (j2 - l1) + 1, (k2 - i2) + 1, k1, i1, k, class30_sub2_sub4, j, true, l, (byte)0);
+        return addEntityC(plane, x, y, (j2 - x) + 1, (k2 - y) + 1, boundExtentX, boundExtentY, drawHight, npc, rotation, true, l, (byte)0);
     }
 
     public boolean addEntity(int j, int k, Entity class30_sub2_sub4, int l, int i1, int j1,

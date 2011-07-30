@@ -3,7 +3,7 @@ package rs2;
 
 public class StillGraphic extends Entity {
 
-    public StillGraphic(int z, int currentTime, int l, int i1, int terrainDrawHeight, int y,
+    public StillGraphic(int z, int currentTime, int l, int i1, int drawHeight, int y,
                         int x)
     {
         transformCompleted = false;
@@ -11,7 +11,7 @@ public class StillGraphic extends Entity {
         plane = z;
         this.x = x;
         this.y = y;
-        worldZ = terrainDrawHeight;
+        worldZ = drawHeight;
         stillGraphicsLoopCycle = currentTime + l;
     }
 

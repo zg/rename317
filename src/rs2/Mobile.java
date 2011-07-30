@@ -38,7 +38,7 @@ public class Mobile extends Entity {
         this.boundExtentY = pathY[0] * 128 + boundDim * 64;
     }
 
-    public final void method446()
+    public final void method446()//resetPath?
     {
         pathLength = 0;
         anInt1542 = 0;

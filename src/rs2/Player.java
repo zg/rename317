@@ -43,7 +43,7 @@ public class Player extends Mobile
             if(Client.currentTime >= anInt1707 && Client.currentTime < anInt1708)
             {
                 Model model_1 = aModel_1714;
-                model_1.translate(anInt1711 - super.boundExtentX, anInt1712 - terrainDrawHeight, anInt1713 - super.boundExtentY);
+                model_1.translate(anInt1711 - super.boundExtentX, anInt1712 - drawHeight, anInt1713 - super.boundExtentY);
                 if(super.turnDirection == 512)
                 {
                     model_1.rotateBy90();
@@ -75,7 +75,7 @@ public class Player extends Mobile
                     model_1.rotateBy90();
                     model_1.rotateBy90();
                 }
-                model_1.translate(super.boundExtentX - anInt1711, terrainDrawHeight - anInt1712, super.boundExtentY - anInt1713);
+                model_1.translate(super.boundExtentX - anInt1711, drawHeight - anInt1712, super.boundExtentY - anInt1713);
             }
         }
         model.oneSquareModel = true;
@@ -360,7 +360,7 @@ public class Player extends Mobile
     public int headIcon;
     public int anInt1707;
     int anInt1708;
-    int terrainDrawHeight;
+    int drawHeight;
     boolean visible;
     int anInt1711;
     int anInt1712;
