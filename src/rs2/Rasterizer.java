@@ -680,8 +680,106 @@ public class Rasterizer extends Graphics2D {
 			y_c += width;
 		}
 	}
+	
+	//562 drawshadedline
+	//has vertex blending :O
+	public static void drawShadedLine562(int dest[], int dest_off, int startX, int endX, int colorIndex, int grad) {
+        int off = 0;
+        int color;
+        int loops;
+        if (restrict_edges) {
+            if (endX > Graphics2D.viewportRx)
+                endX = Graphics2D.viewportRx;
+            if (startX < 0)
+                startX = 0;
+        }
+        if (startX < endX) {
+            dest_off += startX - 1;
+            colorIndex += off * startX;
+            if (notTextured) {
+                loops = endX - startX >> 2;
+                if (loops > 0)
+					off = (grad - colorIndex) * anIntArray1468[loops] >> 15;
+				else
+					off = 0;
+                if (alpha == 0) {
+                    if (loops > 0) {
+                        do {
+                            color = hsl2rgb[colorIndex >> 8];
+                            colorIndex += off;
+                            dest[++dest_off] = color;
+                            dest[++dest_off] = color;
+                            dest[++dest_off] = color;
+                            dest[++dest_off] = color;
+                        } while (--loops > 0);
+                    }
+                    loops = endX - startX & 0x3;
+                    if (loops > 0) {
+                        color = hsl2rgb[colorIndex >> 8];
+                        do
+                            dest[++dest_off] = color;
+                        while (--loops > 0);
+                    }
+                } else {
+                    int src_alpha = alpha;
+                    int dest_alpha = 256 - alpha;
+                    if (loops > 0) {
+                        do {
+                            color = hsl2rgb[colorIndex >> 8];
+                            colorIndex += off;
+                            color = (((color & 0xff00ff) * dest_alpha >> 8 & 0xff00ff) + ((color & 0xff00) * dest_alpha >> 8 & 0xff00));
+                            int i_169_ = dest[++dest_off];
+                            dest[dest_off] = (color + ((i_169_ & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((i_169_ & 0xff00) * src_alpha >> 8 & 0xff00));
+                            i_169_ = dest[++dest_off];
+                            dest[dest_off] = (color + ((i_169_ & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((i_169_ & 0xff00) * src_alpha >> 8 & 0xff00));
+                            i_169_ = dest[++dest_off];
+                            dest[dest_off] = (color + ((i_169_ & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((i_169_ & 0xff00) * src_alpha >> 8 & 0xff00));
+                            i_169_ = dest[++dest_off];
+                            dest[dest_off] = (color + ((i_169_ & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((i_169_ & 0xff00) * src_alpha >> 8 & 0xff00));
+                        } while (--loops > 0);
+                    }
+                    loops = endX - startX & 0x3;
+                    if (loops > 0) {
+                        color = hsl2rgb[colorIndex >> 8];
+                        color = (((color & 0xff00ff) * dest_alpha >> 8 & 0xff00ff) + ((color & 0xff00) * dest_alpha >> 8 & 0xff00));
+                        do {
+                            int i_170_ = dest[++dest_off];
+                            dest[dest_off] = (color + ((i_170_ & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((i_170_ & 0xff00) * src_alpha >> 8 & 0xff00));
+                        } while (--loops > 0);
+                    }
+                }
+            } else {
+                loops = endX - startX;
+                if (alpha == 0) {
+                    do {
+                        dest[++dest_off] = hsl2rgb[colorIndex >> 8];
+                        colorIndex += off;
+                    } while (--loops > 0);
+                } else {
+                    int i = alpha;
+                    int i_171_ = 256 - alpha;
+                    do {
+                        color = hsl2rgb[colorIndex >> 8];
+                        colorIndex += off;
+                        color = (((color & 0xff00ff) * i_171_ >> 8 & 0xff00ff) + ((color & 0xff00) * i_171_ >> 8 & 0xff00));
+                        int i_ = dest[++dest_off];
+                        dest[dest_off] = (color + ((i_ & 0xff00ff) * i >> 8 & 0xff00ff) + ((i_ & 0xff00) * i >> 8 & 0xff00));
+                    } while (--loops > 0);
+                }
+            }
+        }
+    }
 
+
+	
+	//this is the 508 drawshadedline
 	public static void drawShadedLine(int[] dest, int dest_off, int start_x, int end_x, int color_index, int grad) {
+		if(1 != 2)
+		{//divert all calls to the new method as its better
+			drawShadedLine562(dest, dest_off, start_x, end_x, color_index, grad);
+		return;
+		}
+		
 		int color;
 		int loops;
 		int off = 0;
@@ -731,12 +829,9 @@ public class Rasterizer extends Graphics2D {
 						do {
 							color = hsl2rgb[color_index >> 8];
 							color_index += off;
-							color = (((color & 0xff00ff) * dest_alpha >> 8 & 0xff00ff) + ((color & 0xff00)
-									* dest_alpha >> 8 & 0xff00));
+							color = (((color & 0xff00ff) * dest_alpha >> 8 & 0xff00ff) + ((color & 0xff00) * dest_alpha >> 8 & 0xff00));
 							int i = dest[dest_off];
-							dest[dest_off++] = (color
-									+ ((i & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((i & 0xff00)
-									* src_alpha >> 8 & 0xff00));
+							dest[dest_off++] = (color + ((i & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((i & 0xff00) * src_alpha >> 8 & 0xff00));
 							i = dest[dest_off];
 							dest[dest_off++] = (color
 									+ ((i & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((i & 0xff00)
@@ -1234,8 +1329,7 @@ public class Rasterizer extends Graphics2D {
 		int dest_alpha = alpha;
 		int src_alpha = 256 - alpha;
 		loops = ((loops & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((loops & 0xff00) * src_alpha >> 8 & 0xff00);
-		  while (--rgb >= 0) {
-
+		  while (--rgb >= 0) {//alpha channel fix
 				dest[dest_off] = loops + ((dest[dest_off] & 0xff00ff) * dest_alpha >> 8 & 0xff00ff) + ((dest[dest_off] & 0xff00) * dest_alpha >> 8 & 0xff00);
 				dest_off++;
 				dest[dest_off] = loops + ((dest[dest_off] & 0xff00ff) * dest_alpha >> 8 & 0xff00ff) + ((dest[dest_off] & 0xff00) * dest_alpha >> 8 & 0xff00);
