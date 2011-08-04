@@ -681,6 +681,218 @@ public class Rasterizer extends Graphics2D {
 		}
 	}
 	
+	
+
+	public static void drawShadedLine656(int dest[], int dest_off, int color, int loops, int startX, int endX, 
+			float colorIndex, int grad)//this looks like it :O
+	{
+		int off = 0;
+		if(restrict_edges)
+		{
+			if(endX > Graphics2D.viewportRx)
+				endX = Graphics2D.viewportRx;
+			if(startX < 0)
+				startX = 0;
+		}
+		if(startX >= endX)
+			return;
+		dest_off += startX - 1;
+		colorIndex += off * (float)startX;
+		boolean aBoolean2126=true;//no idea D: seems to have something todo with blending
+		if(aBoolean2126)
+		{
+			if(notTextured)
+			{
+				loops = endX - startX >> 2;
+				off *= 4F;//mhm
+				
+				//added code to get the grad working again
+				if(loops > 0)
+					off = (grad - (int)colorIndex) * anIntArray1468[loops] >> 15;
+					else
+						off = 0;
+				if(alpha == 0)
+				{
+					if(loops > 0)
+						do
+						{
+							color = hsl2rgb[(int)colorIndex>>8];
+							colorIndex += off;
+								dest[++dest_off] = color;
+								dest[++dest_off] = color;
+								dest[++dest_off] = color;
+								dest[++dest_off] = color;
+						} while(--loops > 0);
+					loops = endX - startX & 3;
+					if(loops > 0)
+					{
+						color = hsl2rgb[(int)colorIndex>>8];
+						do
+						{
+								dest[++dest_off] = color;
+						} while(--loops > 0);
+						return;
+					}
+				} else
+				{
+					int j1 = alpha;
+					int j2 = 256 - alpha;
+					if(loops > 0)
+						do
+						{
+							color = hsl2rgb[(int)colorIndex>>8];
+							colorIndex += off;
+							color = ((color & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((color & 0xff00) * j2 >> 8 & 0xff00);
+
+								int j3 = dest[++dest_off];
+								dest[dest_off] = (j2 | j3 >> 24) << 24 | color + ((j3 & 0xff00ff) * j1 >> 8 & 0xff00ff) + ((j3 & 0xff00) * j1 >> 8 & 0xff00);
+
+								int k3 = dest[++dest_off];
+								dest[dest_off] = (j2 | k3 >> 24) << 24 | color + ((k3 & 0xff00ff) * j1 >> 8 & 0xff00ff) + ((k3 & 0xff00) * j1 >> 8 & 0xff00);
+
+								int l3 = dest[++dest_off];
+								dest[dest_off] = (j2 | l3 >> 24) << 24 | color + ((l3 & 0xff00ff) * j1 >> 8 & 0xff00ff) + ((l3 & 0xff00) * j1 >> 8 & 0xff00);
+
+								int i4 = dest[++dest_off];
+								dest[dest_off] = (j2 | i4 >> 24) << 24 | color + ((i4 & 0xff00ff) * j1 >> 8 & 0xff00ff) + ((i4 & 0xff00) * j1 >> 8 & 0xff00);
+
+						} while(--loops > 0);
+					loops = endX - startX & 3;
+					if(loops > 0)
+					{
+						color = hsl2rgb[(int)colorIndex>>8];
+						color = ((color & 0xff00ff) * j2 >> 8 & 0xff00ff) + ((color & 0xff00) * j2 >> 8 & 0xff00);
+						do
+						{
+
+								int j4 = dest[++dest_off];
+								dest[dest_off] = (j2 | j4 >> 24) << 24 | color + ((j4 & 0xff00ff) * j1 >> 8 & 0xff00ff) + ((j4 & 0xff00) * j1 >> 8 & 0xff00);
+
+						} while(--loops > 0);
+					}
+				}
+				return;
+			}
+			loops = endX - startX;
+			if(alpha == 0)
+			{
+				do
+				{
+
+						dest[++dest_off] = hsl2rgb[(int)colorIndex>>8];
+
+					colorIndex += off;
+				} while(--loops > 0);
+				return;
+			}
+			int src_alpha = alpha;
+			int dest_alpha = 256 - alpha;
+			do
+			{
+
+					color = hsl2rgb[(int)colorIndex>>8];
+					color = ((color & 0xff00ff) * dest_alpha >> 8 & 0xff00ff) + ((color & 0xff00) * dest_alpha >> 8 & 0xff00);
+					int k4 = dest[++dest_off];
+					dest[dest_off] = (dest_alpha | k4 >> 24) << 24 | color + ((k4 & 0xff00ff) * src_alpha >> 8 & 0xff00ff) + ((k4 & 0xff00) * src_alpha >> 8 & 0xff00);
+
+				colorIndex += off;
+			} while(--loops > 0);
+			return;
+		}
+		if(notTextured)
+		{
+			loops = endX - startX >> 2;
+			off *= 4F;
+			if(alpha == 0)
+			{
+				if(loops > 0)
+					do
+					{
+                        color = hsl2rgb[(int)colorIndex >> 8];
+                        colorIndex += off;
+                        dest[++dest_off] = color;
+                        dest[++dest_off] = color;
+                        dest[++dest_off] = color;
+                        dest[++dest_off] = color;
+                        
+					} while(--loops > 0);
+				loops = endX - startX & 3;
+				if(loops > 0)
+				{
+					color = hsl2rgb[(int)colorIndex>>8];
+					do
+					{
+							dest[++dest_off] = color;
+					} while(--loops > 0);
+					return;
+				}
+			} else
+			{
+				int l1 = alpha;
+				int l2 = 256 - alpha;
+				if(loops > 0)
+					do
+					{
+						color = hsl2rgb[(int)colorIndex>>8];
+						colorIndex += off;
+						color = ((color & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((color & 0xff00) * l2 >> 8 & 0xff00);
+
+							int l4 = dest[++dest_off];
+							dest[dest_off] = (l2 | l4 >> 24) << 24 | color + ((l4 & 0xff00ff) * l1 >> 8 & 0xff00ff) + ((l4 & 0xff00) * l1 >> 8 & 0xff00);
+
+							int i5 = dest[++dest_off];
+							dest[dest_off] = (l2 | i5 >> 24) << 24 | color + ((i5 & 0xff00ff) * l1 >> 8 & 0xff00ff) + ((i5 & 0xff00) * l1 >> 8 & 0xff00);
+
+							int j5 = dest[++dest_off];
+							dest[dest_off] = (l2 | j5 >> 24) << 24 | color + ((j5 & 0xff00ff) * l1 >> 8 & 0xff00ff) + ((j5 & 0xff00) * l1 >> 8 & 0xff00);
+
+							int k5 = dest[++dest_off];
+							dest[dest_off] = (l2 | k5 >> 24) << 24 | color + ((k5 & 0xff00ff) * l1 >> 8 & 0xff00ff) + ((k5 & 0xff00) * l1 >> 8 & 0xff00);
+						
+					} while(--loops > 0);
+				loops = endX - startX & 3;
+				if(loops > 0)
+				{
+					color = hsl2rgb[(int)colorIndex>>8];
+					color = ((color & 0xff00ff) * l2 >> 8 & 0xff00ff) + ((color & 0xff00) * l2 >> 8 & 0xff00);
+					do
+					{
+
+							int l5 = dest[++dest_off];
+							dest[dest_off] = (l2 | l5 >> 24) << 24 | color + ((l5 & 0xff00ff) * l1 >> 8 & 0xff00ff) + ((l5 & 0xff00) * l1 >> 8 & 0xff00);
+
+					} while(--loops > 0);
+				}
+			}
+			return;
+		}
+		loops = endX - startX;
+		if(alpha == 0)
+		{
+			do
+			{
+
+					dest[++dest_off] = hsl2rgb[(int)colorIndex>>8];
+
+				colorIndex += off;
+			} while(--loops > 0);
+			return;
+		}
+		int i2 = alpha;
+		int i3 = 256 - alpha;
+		do
+		{
+
+				color = hsl2rgb[(int)colorIndex>>8];
+				color = ((color & 0xff00ff) * i3 >> 8 & 0xff00ff) + ((color & 0xff00) * i3 >> 8 & 0xff00);
+				int i6 = dest[++dest_off];
+				dest[dest_off] = (i3 | i6 >> 24) << 24 | color + ((i6 & 0xff00ff) * i2 >> 8 & 0xff00ff) + ((i6 & 0xff00) * i2 >> 8 & 0xff00);
+			
+			colorIndex += off;
+
+		} while(--loops > 0);
+	}
+
 	//562 drawshadedline
 	//has vertex blending :O
 	public static void drawShadedLine562(int dest[], int dest_off, int startX, int endX, int colorIndex, int grad) {
@@ -690,8 +902,10 @@ public class Rasterizer extends Graphics2D {
         if (restrict_edges) {
             if (endX > Graphics2D.viewportRx)
                 endX = Graphics2D.viewportRx;
-            if (startX < 0)
+            if (startX < 0) {
+            	//colorIndex -= startX * off;//not sure if needed
                 startX = 0;
+            }
         }
         if (startX < endX) {
             dest_off += startX - 1;
@@ -776,8 +990,9 @@ public class Rasterizer extends Graphics2D {
 	public static void drawShadedLine(int[] dest, int dest_off, int start_x, int end_x, int color_index, int grad) {
 		if(1 != 2)
 		{//divert all calls to the new method as its better
-			drawShadedLine562(dest, dest_off, start_x, end_x, color_index, grad);
-		return;
+//			drawShadedLine562(dest, dest_off, start_x, end_x, color_index, grad);
+			drawShadedLine656(dest, dest_off, 0, 0, start_x, end_x, color_index, grad);
+			return;
 		}
 		
 		int color;
