@@ -1925,79 +1925,79 @@ public class Client extends GameShell {
 
     }
 
-    private void drawMapScenes(int y, int k, int x, int i1, int z) {
+    private void drawMapScenes(int y, int lineColour_, int x, int secondaryColour_, int z) {//also draws the walls on map
         int interactableObjectUID = sceneGraph.getWallObjectUID(z, x, y);
         if (interactableObjectUID != 0) {
             int l1 = sceneGraph.getIDTAGForXYZ(z, x, y, interactableObjectUID);
-            int k2 = l1 >> 6 & 3;
-            int i3 = l1 & 0x1f;
-            int k3 = k;
+            int direction = l1 >> 6 & 3;
+            int type = l1 & 0x1f;
+            int colour = lineColour_;
             if (interactableObjectUID > 0)
-                k3 = i1;
-            int ai[] = minimapImage.myPixels;
-            int k4 = 24624 + x * 4 + (103 - y) * 512 * 4;
-            int i5 = interactableObjectUID >> 14 & 0x7fff;
-            ObjectDef class46_2 = ObjectDef.forID(i5);
-            if (class46_2.mapSceneID != -1) {
-                IndexedImage indexedImage_2 = mapScenes[class46_2.mapSceneID];
+                colour = secondaryColour_;
+            int mapPixels[] = minimapImage.myPixels;
+            int pixel = 24624 + x * 4 + (103 - y) * 512 * 4;
+            int objectID = interactableObjectUID >> 14 & 0x7fff;
+            ObjectDef object = ObjectDef.forID(objectID);
+            if (object.mapSceneID != -1) {
+                IndexedImage indexedImage_2 = mapScenes[object.mapSceneID];
                 if (indexedImage_2 != null) {
-                    int i6 = (class46_2.sizeX * 4 - indexedImage_2.imgWidth) / 2;
-                    int j6 = (class46_2.sizeY * 4 - indexedImage_2.imgHeight) / 2;
-                    indexedImage_2.drawImage(48 + x * 4 + i6, 48 + (104 - y - class46_2.sizeY) * 4 + j6);
+                    int i6 = (object.sizeX * 4 - indexedImage_2.imgWidth) / 2;
+                    int j6 = (object.sizeY * 4 - indexedImage_2.imgHeight) / 2;
+                    indexedImage_2.drawImage(48 + x * 4 + i6, 48 + (104 - y - object.sizeY) * 4 + j6);
                 }
             } else {
-                if (i3 == 0 || i3 == 2)
-                    if (k2 == 0) {
-                        ai[k4] = k3;
-                        ai[k4 + 512] = k3;
-                        ai[k4 + 1024] = k3;
-                        ai[k4 + 1536] = k3;
-                    } else if (k2 == 1) {
-                        ai[k4] = k3;
-                        ai[k4 + 1] = k3;
-                        ai[k4 + 2] = k3;
-                        ai[k4 + 3] = k3;
-                    } else if (k2 == 2) {
-                        ai[k4 + 3] = k3;
-                        ai[k4 + 3 + 512] = k3;
-                        ai[k4 + 3 + 1024] = k3;
-                        ai[k4 + 3 + 1536] = k3;
-                    } else if (k2 == 3) {
-                        ai[k4 + 1536] = k3;
-                        ai[k4 + 1536 + 1] = k3;
-                        ai[k4 + 1536 + 2] = k3;
-                        ai[k4 + 1536 + 3] = k3;
+                if (type == 0 || type == 2)
+                    if (direction == 0) {
+                        mapPixels[pixel] = colour;
+                        mapPixels[pixel + 512] = colour;
+                        mapPixels[pixel + 1024] = colour;
+                        mapPixels[pixel + 1536] = colour;
+                    } else if (direction == 1) {
+                        mapPixels[pixel] = colour;
+                        mapPixels[pixel + 1] = colour;
+                        mapPixels[pixel + 2] = colour;
+                        mapPixels[pixel + 3] = colour;
+                    } else if (direction == 2) {
+                        mapPixels[pixel + 3] = colour;
+                        mapPixels[pixel + 3 + 512] = colour;
+                        mapPixels[pixel + 3 + 1024] = colour;
+                        mapPixels[pixel + 3 + 1536] = colour;
+                    } else if (direction == 3) {
+                        mapPixels[pixel + 1536] = colour;
+                        mapPixels[pixel + 1536 + 1] = colour;
+                        mapPixels[pixel + 1536 + 2] = colour;
+                        mapPixels[pixel + 1536 + 3] = colour;
                     }
-                if (i3 == 3)
-                    if (k2 == 0)
-                        ai[k4] = k3;
-                    else if (k2 == 1)
-                        ai[k4 + 3] = k3;
-                    else if (k2 == 2)
-                        ai[k4 + 3 + 1536] = k3;
-                    else if (k2 == 3)
-                        ai[k4 + 1536] = k3;
-                if (i3 == 2)
-                    if (k2 == 3) {
-                        ai[k4] = k3;
-                        ai[k4 + 512] = k3;
-                        ai[k4 + 1024] = k3;
-                        ai[k4 + 1536] = k3;
-                    } else if (k2 == 0) {
-                        ai[k4] = k3;
-                        ai[k4 + 1] = k3;
-                        ai[k4 + 2] = k3;
-                        ai[k4 + 3] = k3;
-                    } else if (k2 == 1) {
-                        ai[k4 + 3] = k3;
-                        ai[k4 + 3 + 512] = k3;
-                        ai[k4 + 3 + 1024] = k3;
-                        ai[k4 + 3 + 1536] = k3;
-                    } else if (k2 == 2) {
-                        ai[k4 + 1536] = k3;
-                        ai[k4 + 1536 + 1] = k3;
-                        ai[k4 + 1536 + 2] = k3;
-                        ai[k4 + 1536 + 3] = k3;
+                if (type == 3)
+                    if (direction == 0)
+                        mapPixels[pixel] = colour;
+                    else if (direction == 1)
+                        mapPixels[pixel + 3] = colour;
+                    else if (direction == 2)
+                        mapPixels[pixel + 3 + 1536] = colour;
+                    else if (direction == 3)
+                        mapPixels[pixel + 1536] = colour;
+                if (type == 2)
+                    if (direction == 3) {
+                        mapPixels[pixel] = colour;
+                        mapPixels[pixel + 512] = colour;
+                        mapPixels[pixel + 1024] = colour;
+                        mapPixels[pixel + 1536] = colour;
+                    } else if (direction == 0) {
+                        mapPixels[pixel] = colour;
+                        mapPixels[pixel + 1] = colour;
+                        mapPixels[pixel + 2] = colour;
+                        mapPixels[pixel + 3] = colour;
+                    } else if (direction == 1) {
+                        mapPixels[pixel + 3] = colour;
+                        mapPixels[pixel + 3 + 512] = colour;
+                        mapPixels[pixel + 3 + 1024] = colour;
+                        mapPixels[pixel + 3 + 1536] = colour;
+                    } else if (direction == 2) {
+                        mapPixels[pixel + 1536] = colour;
+                        mapPixels[pixel + 1536 + 1] = colour;
+                        mapPixels[pixel + 1536 + 2] = colour;
+                        mapPixels[pixel + 1536 + 3] = colour;
                     }
             }
         }
@@ -2009,28 +2009,28 @@ public class Client extends GameShell {
             int l3 = interactableObjectUID >> 14 & 0x7fff;
             ObjectDef class46_1 = ObjectDef.forID(l3);
             if (class46_1.mapSceneID != -1) {
-                IndexedImage indexedImage_1 = mapScenes[class46_1.mapSceneID];
-                if (indexedImage_1 != null) {
-                    int j5 = (class46_1.sizeX * 4 - indexedImage_1.imgWidth) / 2;
-                    int k5 = (class46_1.sizeY * 4 - indexedImage_1.imgHeight) / 2;
-                    indexedImage_1.drawImage(48 + x * 4 + j5, 48 + (104 - y - class46_1.sizeY) * 4 + k5);
+                IndexedImage scene = mapScenes[class46_1.mapSceneID];
+                if (scene != null) {
+                    int j5 = (class46_1.sizeX * 4 - scene.imgWidth) / 2;
+                    int k5 = (class46_1.sizeY * 4 - scene.imgHeight) / 2;
+                    scene.drawImage(48 + x * 4 + j5, 48 + (104 - y - class46_1.sizeY) * 4 + k5);
                 }
             } else if (j3 == 9) {
                 int l4 = 0xeeeeee;
                 if (interactableObjectUID > 0)
                     l4 = 0xee0000;
-                int ai1[] = minimapImage.myPixels;
+                int mapPixels[] = minimapImage.myPixels;
                 int l5 = 24624 + x * 4 + (103 - y) * 512 * 4;
                 if (l2 == 0 || l2 == 2) {
-                    ai1[l5 + 1536] = l4;
-                    ai1[l5 + 1024 + 1] = l4;
-                    ai1[l5 + 512 + 2] = l4;
-                    ai1[l5 + 3] = l4;
+                    mapPixels[l5 + 1536] = l4;
+                    mapPixels[l5 + 1024 + 1] = l4;
+                    mapPixels[l5 + 512 + 2] = l4;
+                    mapPixels[l5 + 3] = l4;
                 } else {
-                    ai1[l5] = l4;
-                    ai1[l5 + 512 + 1] = l4;
-                    ai1[l5 + 1024 + 2] = l4;
-                    ai1[l5 + 1536 + 3] = l4;
+                    mapPixels[l5] = l4;
+                    mapPixels[l5 + 512 + 1] = l4;
+                    mapPixels[l5 + 1024 + 2] = l4;
+                    mapPixels[l5 + 1536 + 3] = l4;
                 }
             }
         }
