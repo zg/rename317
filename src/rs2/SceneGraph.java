@@ -776,13 +776,15 @@ public class SceneGraph {
     }
 
     private void method308(Model model, Model model_1, int t_x, int t_Y, int k, boolean flag)
-    {
+    {//causes some glitch when using the new shader D:
+
         anInt488++;
         int l = 0;
         int ai[] = model_1.vertexX;
         int i1 = model_1.vertexCount;
         for(int j1 = 0; j1 < model.vertexCount; j1++)
         {
+        	
             VertexNormal vertexNormal = model.vertexNormals[j1];
             VertexNormal vertexNormal_1 = model.vertexNormalOffset[j1];
             if(vertexNormal_1.magnitude != 0)
@@ -832,7 +834,8 @@ public class SceneGraph {
             if(anIntArray487[model_1.triangleA[l1]] == anInt488 && anIntArray487[model_1.triangleB[l1]] == anInt488 && anIntArray487[model_1.triangleC[l1]] == anInt488)
                 model_1.triangleDrawType[l1] = -1;
 
-    }
+    	
+    	}
 
     public void drawMinimapTile(int z, int x, int y, int pixels[], int pixelPointer, int scanLength)
     {

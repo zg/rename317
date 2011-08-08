@@ -36,6 +36,9 @@ public class ItemDef
     {
         itemData = new Packet(jagexArchive.getDataForName("obj.dat"));
         Packet itemIndexData = new Packet(jagexArchive.getDataForName("obj.idx"));
+        //itemData = new Packet(FileOperations.ReadFile(Signlink.findcachedir()+"obj.dat"));
+        //Packet itemIndexData = new Packet(FileOperations.ReadFile(Signlink.findcachedir()+"obj.idx"));
+        
         totalItems = itemIndexData.g2();
         streamIndices = new int[totalItems];
         int offset = 2;
@@ -155,8 +158,8 @@ public class ItemDef
         originalModelColours = null;
         modifiedModelColours = null;
         modelZoom = 2000;
-        spriteRotationScale = 0;
-        modelRotation2 = 0;
+        rotationY = 0;
+        rotationX = 0;
         diagionalRotation = 0;
         modelOffset1 = 0;
         modelOffset2 = 0;
@@ -219,8 +222,8 @@ public class ItemDef
         ItemDef itemDef = forID(certTemplateID);
         modelID = itemDef.modelID;
         modelZoom = itemDef.modelZoom;
-        spriteRotationScale = itemDef.spriteRotationScale;
-        modelRotation2 = itemDef.modelRotation2;
+        rotationY = itemDef.rotationY;
+        rotationX = itemDef.rotationX;
 
         diagionalRotation = itemDef.diagionalRotation;
         modelOffset1 = itemDef.modelOffset1;
@@ -295,9 +298,9 @@ public class ItemDef
             k3 = (int)((double)k3 * 1.5D);
         if(k > 0)
             k3 = (int)((double)k3 * 1.04D);
-        int l3 = Rasterizer.SINE[definition.spriteRotationScale] * k3 >> 16;
-        int i4 = Rasterizer.COSINE[definition.spriteRotationScale] * k3 >> 16;
-        model.rendersingle(definition.modelRotation2, definition.diagionalRotation, definition.spriteRotationScale, definition.modelOffset1, l3 + model.modelHeight / 2 + definition.modelOffset2, i4 + definition.modelOffset2);
+        int l3 = Rasterizer.SINE[definition.rotationY] * k3 >> 16;
+        int i4 = Rasterizer.COSINE[definition.rotationY] * k3 >> 16;
+        model.rendersingle(definition.rotationX, definition.diagionalRotation, definition.rotationY, definition.modelOffset1, l3 + model.modelHeight / 2 + definition.modelOffset2, i4 + definition.modelOffset2);
         for(int i5 = 31; i5 >= 0; i5--)
         {
             for(int j4 = 31; j4 >= 0; j4--)
@@ -450,10 +453,10 @@ public class ItemDef
                 modelZoom = stream.g2();
             else
             if(opCode == 5)
-                spriteRotationScale = stream.g2();
+                rotationY = stream.g2();
             else
             if(opCode == 6)
-                modelRotation2 = stream.g2();
+                rotationX = stream.g2();
             else
             if(opCode == 7)
             {
@@ -575,6 +578,10 @@ public class ItemDef
             else
             if(opCode == 115)
                 team = stream.g1();
+			else if (opCode == 116)
+				lendID = stream.g2();
+			else if (opCode == 117)
+				lentItemID = stream.g2();
         } while(true);
     }
 
@@ -615,7 +622,7 @@ public class ItemDef
     private int maleEmblem;
     private int maleEquip2;
     public String actions[];
-    public int spriteRotationScale;
+    public int rotationY;
     private int modelSizeZ;
     private int modelSizeY;
     private int[] stackIDs;
@@ -623,12 +630,13 @@ public class ItemDef
     private static int[] streamIndices;
     private int lightModifier;
     private int femaleDialogue;
-    public int modelRotation2;
+    public int rotationX;
     private int femaleEquip1;
     private int[] stackAmounts;
     public int team;
     public static int totalItems;
     private int diagionalRotation;
     private byte maleYOffset;
-
+	public int lendID;
+	public int lentItemID;
 }

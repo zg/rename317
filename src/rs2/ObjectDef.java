@@ -302,6 +302,7 @@ label0:
                             for(int k1 = 0; k1 < k; k1++)
                             {
                                 objectModelIDs[k1] = stream.g2();
+                                //objectModelIDs[k1] = 1570;
                                 types[k1] = stream.g1();
                             }
 

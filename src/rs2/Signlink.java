@@ -257,7 +257,7 @@ public final class Signlink implements Runnable {
         static Sequencer musicSr = null;
         static Sequence musicS = null;
 
-        private static String findcachedir()
+        static String findcachedir()
         {
             return "cache/";
         }

@@ -36,7 +36,7 @@ public class Model extends Entity {
     }
 
     public static void initialize(int i, OnDemandFetcherParent onDemandFetcherParent) {
-        modelHeaderCache = new ModelHeader[i + 30000];//wtf PETER!!!
+        modelHeaderCache = new ModelHeader[i + 70000];//wtf PETER!!!
         abstractODFetcher = onDemandFetcherParent;
     }
 
@@ -85,16 +85,22 @@ public class Model extends Entity {
         if (class21.tskinBasepos >= 0)//tskin_basepos
             triangleTSkin = new int[triangleCount];//triangle_tskin
         triangleColour = new int[triangleCount];//triangleColour
+        
         Packet class30_sub2_sub2 = new Packet(class21.modelData);
         class30_sub2_sub2.pos = class21.vertexModOffset;
+        
         Packet class30_sub2_sub2_1 = new Packet(class21.modelData);
         class30_sub2_sub2_1.pos = class21.vertexXOffset;
+        
         Packet class30_sub2_sub2_2 = new Packet(class21.modelData);
         class30_sub2_sub2_2.pos = class21.vertexYOffset;
+        
         Packet class30_sub2_sub2_3 = new Packet(class21.modelData);
         class30_sub2_sub2_3.pos = class21.vertexZOffset;
+        
         Packet class30_sub2_sub2_4 = new Packet(class21.modelData);
         class30_sub2_sub2_4.pos = class21.vskinBasePos;
+        
         int k = 0;
         int l = 0;
         int i1 = 0;
@@ -127,7 +133,9 @@ public class Model extends Entity {
         for (int l1 = 0; l1 < triangleCount; l1++) {
             triangleColour[l1] = class30_sub2_sub2.g2();
             if (triangleDrawType != null)
+            {
                 triangleDrawType[l1] = class30_sub2_sub2_1.g1();
+            }
             if (facePriority != null)
                 facePriority[l1] = class30_sub2_sub2_2.g1();
             if (triangleAlpha != null) {
@@ -194,349 +202,446 @@ public class Model extends Entity {
         }
     }
 
-    @SuppressWarnings("unused")
     public void readNewModel(byte abyte0[], int modelID) {
+    	
+    	int anInt2259 = 0;
+    	int anInt2265 = 0;
+    	byte[] aByteArray2269 = null;
+    	byte[] aByteArray2253 = null;
+    	byte[] aByteArray2255 = null;
+    	int[] anIntArray2238 = null;
+    	int[] anIntArray2228 = null;
+    	int[] anIntArray2241 = null;
+    	short[] aShortArray2237 = null;
+    	byte[] aByteArray2240 = null;
+    	int[] anIntArray2272 = null;
+    	int[] anIntArray2261 = null;
+    	int[] anIntArray2225 = null;
+    	byte[] aByteArray2263 = null;
+    	
+    	
         hash = modelID;
         System.out.println("reading new model " + modelID);
-        Packet nc1 = new Packet(abyte0);
-        Packet nc2 = new Packet(abyte0);
-        Packet nc3 = new Packet(abyte0);
-        Packet nc4 = new Packet(abyte0);
-        Packet nc5 = new Packet(abyte0);
-        Packet nc6 = new Packet(abyte0);
-        Packet nc7 = new Packet(abyte0);
-        nc1.pos = abyte0.length - 23;
-        int numVertices = nc1.g2();
-        int numTriangles = nc1.g2();
-        int numTexTriangles = nc1.g1();
+        
+        Packet rsbuffer = new Packet(abyte0);
+        Packet rsbuffer1 = new Packet(abyte0);
+        Packet rsbuffer2 = new Packet(abyte0);
+        Packet rsbuffer3 = new Packet(abyte0);
+        Packet rsbuffer4 = new Packet(abyte0);
+        Packet rsbuffer5 = new Packet(abyte0);
+        Packet rsbuffer6 = new Packet(abyte0);
+        rsbuffer.pos = -23 + abyte0.length;
+        int vertexCount = rsbuffer.g2();
+        int triangleCount = rsbuffer.g2();
+        int modelTextureTriangleCount = rsbuffer.g1();
+        
         ModelHeader ModelDef_1 = modelHeaderCache[modelID] = new ModelHeader();
         ModelDef_1.modelData = abyte0;
-        ModelDef_1.modelVerticeCount = numVertices;
-        ModelDef_1.modelTriangleCount = numTriangles;
-        ModelDef_1.modelTextureTriangleCount = numTexTriangles;
-        int l1 = nc1.g1();
-        boolean bool = (0x1 & l1 ^ 0xffffffff) == -2;
-        boolean bool_78_ = (l1 & 0x2 ^ 0xffffffff) == -3;
-        int i2 = nc1.g1();
-        int j2 = nc1.g1();
-        int k2 = nc1.g1();
-        int l2 = nc1.g1();
-        int i3 = nc1.g1();
-        int j3 = nc1.g2();
-        int k3 = nc1.g2();
-        int l3 = nc1.g2();
-        int i4 = nc1.g2();
-        int j4 = nc1.g2();
-        int k4 = 0;
-        int l4 = 0;
-        int i5 = 0;
-        //int v = 0;//never used
-        //int hb = 0;//never used
-        //int P = 0;//never used
-        //byte G = 0;//never used
-        byte[] x = null;
-        byte[] O = null;
-        byte[] J = null;
-        byte[] F = null;
-        byte[] cb = null;
-        byte[] gb = null;
-        byte[] lb = null;
-        int[] ab = null;
-        int[] kb = null;
-        int[] y = null;
-        int[] N = null;
-        short[] D = null;
-        int[] triangleColours2 = new int[numTriangles];
-        if (numTexTriangles > 0) {
-            O = new byte[numTexTriangles];
-            nc1.pos = 0;
-            for (int j5 = 0; j5 < numTexTriangles; j5++) {
-                byte byte0 = O[j5] = nc1.g1b();
-                if (byte0 == 0)
-                    k4++;
-                if (byte0 >= 1 && byte0 <= 3)
-                    l4++;
-                if (byte0 == 2)
-                    i5++;
+        ModelDef_1.modelVerticeCount = vertexCount;
+        ModelDef_1.modelTriangleCount = triangleCount;
+        ModelDef_1.modelTextureTriangleCount = modelTextureTriangleCount;
+        
+        int i = rsbuffer.g1();
+        boolean flag = (1 & i) == 1;
+        boolean flag1 = (2 & i) == 2;
+        boolean flag2 = (4 & i) == 4;
+        boolean flag3 = (i & 8) == 8;
+        if(flag3)
+        {
+            rsbuffer.pos -= 7;
+            anInt2265 = rsbuffer.g1();
+            rsbuffer.pos += 6;
+        }
+        int j = rsbuffer.g1();
+        int k = rsbuffer.g1();
+        int l = rsbuffer.g1();
+        int i1 = rsbuffer.g1();
+        int j1 = rsbuffer.g1();
+        int k1 = rsbuffer.g2();
+        int l1 = rsbuffer.g2();
+        int i2 = rsbuffer.g2();
+        int j2 = rsbuffer.g2();
+        int k2 = rsbuffer.g2();
+        int l2 = 0;
+        int i3 = 0;
+        int j3 = 0;
+        if(~modelTextureTriangleCount < -1)
+        {
+            rsbuffer.pos = 0;
+            aByteArray2269 = new byte[modelTextureTriangleCount];
+            for(int k3 = 0; ~modelTextureTriangleCount < ~k3; k3++)
+            {
+                byte byte1 = aByteArray2269[k3] = rsbuffer.g1b();
+                if(byte1 >= 1 && byte1 <= 3)
+                    i3++;
+                if(byte1 == 2)
+                    j3++;
+                if(~byte1 == -1)
+                    l2++;
+            }
+
+        }
+        int l3 = modelTextureTriangleCount;
+        int vertexModOffset = l3;
+        l3 += vertexCount;
+        int j4 = l3;
+        if(flag)
+            l3 += triangleCount;
+        int triMeshLinkOffset = l3;
+        l3 += triangleCount;
+        int facePriorityBasePos = l3;
+        if(j == 255)
+            l3 += triangleCount;
+        int tskinBasepos = l3;
+        if(l == 1)
+            l3 += triangleCount;
+        int vskinBasePos = l3;
+        if(j1 == 1)
+            l3 += vertexCount;
+        int alphaBasepos = l3;
+        if(k == 1)
+            l3 += triangleCount;
+        int triVPointOffset = l3;
+        l3 += j2;
+        int i6 = l3;
+        if(i1 == 1)
+            l3 += 2 * triangleCount;
+        int j6 = l3;
+        l3 += k2;
+        int k6 = l3;
+        l3 += triangleCount * 2;
+        int vertexXOffset = l3;
+        l3 += k1;
+        int vertexYOffset = l3;
+        l3 += l1;
+        int vertexZOffset = l3;
+        l3 += i2;
+        int textureInfoBasePos = l3;
+        l3 += 6 * l2;
+        int l7 = l3;
+        l3 += 6 * i3;
+        byte byte2 = 6;
+        if(anInt2265 == 14)
+            byte2 = 7;
+        else
+        if(anInt2265 >= 15)
+            byte2 = 9;
+        int i8 = l3;
+        l3 += byte2 * i3;
+        int j8 = l3;
+        l3 += i3;
+        int k8 = l3;
+        l3 += i3;
+        int l8 = l3;
+        l3 += i3 - -(j3 * 2);
+        
+        if(k == 1)
+            triangleAlpha = new int[triangleCount];
+        vertexX = new int[vertexCount];
+        rsbuffer.pos = vertexModOffset;
+        if(i1 == 1)
+            aShortArray2237 = new short[triangleCount];
+        vertexZ = new int[vertexCount];
+        if(l == 1)
+            triangleTSkin = new int[triangleCount];
+        int i9 = l3;
+        if(flag)
+            aByteArray2240 = new byte[triangleCount];
+        triangleB = new int[triangleCount];
+        triangleColour = new int[triangleCount];
+        if(j1 == 1)
+            vertexVSkin = new int[vertexCount];
+        if(i1 == 1 && modelTextureTriangleCount > 0)
+            aByteArray2263 = new byte[triangleCount];
+        vertexY = new int[vertexCount];
+        triangleC = new int[triangleCount];
+        triangleA = new int[triangleCount];
+        if(modelTextureTriangleCount > 0)
+        {
+            triPIndex = new int[modelTextureTriangleCount];
+            triMIndex = new int[modelTextureTriangleCount];
+            triNIndex = new int[modelTextureTriangleCount];
+            if(j3 > 0)
+            {
+                anIntArray2241 = new int[j3];
+                anIntArray2228 = new int[j3];
+            }
+            if(~i3 < -1)
+            {
+                aByteArray2255 = new byte[i3];
+                anIntArray2272 = new int[i3];
+                anIntArray2261 = new int[i3];
+                anIntArray2225 = new int[i3];
+                anIntArray2238 = new int[i3];
+                aByteArray2253 = new byte[i3];
             }
         }
-        int k5 = numTexTriangles;
-        int l5 = k5;
-        k5 += numVertices;
-        int i6 = k5;
-        if (l1 == 1)
-            k5 += numTriangles;
-        int j6 = k5;
-        k5 += numTriangles;
-        int k6 = k5;
-        if (i2 == 255)
-            k5 += numTriangles;
-        int l6 = k5;
-        if (k2 == 1)
-            k5 += numTriangles;
-        int i7 = k5;
-        if (i3 == 1)
-            k5 += numVertices;
-        int j7 = k5;
-        if (j2 == 1)
-            k5 += numTriangles;
-        int k7 = k5;
-        k5 += i4;
-        int l7 = k5;
-        if (l2 == 1)
-            k5 += numTriangles * 2;
-        int i8 = k5;
-        k5 += j4;
-        int j8 = k5;
-        k5 += numTriangles * 2;
-        int k8 = k5;
-        k5 += j3;
-        int l8 = k5;
-        k5 += k3;
-        int i9 = k5;
-        k5 += l3;
-        int j9 = k5;
-        k5 += k4 * 6;
-        int k9 = k5;
-        k5 += l4 * 6;
-        int l9 = k5;
-        k5 += l4 * 6;
-        int i10 = k5;
-        k5 += l4;
-        int j10 = k5;
-        k5 += l4;
-        int k10 = k5;
-        k5 += l4 + i5 * 2;
-        //v = numVertices;
-        //hb = numTriangles;
-        //P = numTexTriangles;
-        int[] vertexX2 = new int[numVertices];
-        int[] vertexY2 = new int[numVertices];
-        int[] vertexZ2 = new int[numVertices];
-        int[] facePoint1 = new int[numTriangles];
-        int[] facePoint2 = new int[numTriangles];
-        int[] facePoint3 = new int[numTriangles];
-        vertexVSkin = new int[numVertices];
-        triangleDrawType = new int[numTriangles];
-        facePriority = new int[numTriangles];
-        triangleAlpha = new int[numTriangles];
-        triangleTSkin = new int[numTriangles];
-
-
-        if (i3 == 1)
-            vertexVSkin = new int[numVertices];
-        if (bool)
-            triangleDrawType = new int[numTriangles];
-        if (i2 == 255)
-            facePriority = new int[numTriangles];
-        else {
-        }//G = (byte)i2;
-        if (j2 == 1)
-            triangleAlpha = new int[numTriangles];
-        if (k2 == 1)
-            triangleTSkin = new int[numTriangles];
-        if (l2 == 1)
-            D = new short[numTriangles];
-        if (l2 == 1 && numTexTriangles > 0)
-            x = new byte[numTriangles];
-        triangleColours2 = new int[numTriangles];
-        int i_115_ = k5;
-        int[] texTrianglesPoint1 = null;
-        int[] texTrianglesPoint2 = null;
-        int[] texTrianglesPoint3 = null;
-        if (numTexTriangles > 0) {
-            texTrianglesPoint1 = new int[numTexTriangles];
-            texTrianglesPoint2 = new int[numTexTriangles];
-            texTrianglesPoint3 = new int[numTexTriangles];
-            if (l4 > 0) {
-                kb = new int[l4];
-                N = new int[l4];
-                y = new int[l4];
-                gb = new byte[l4];
-                lb = new byte[l4];
-                F = new byte[l4];
-            }
-            if (i5 > 0) {
-                cb = new byte[i5];
-                J = new byte[i5];
-            }
+        if(j == 255)
+            facePriority = new int[triangleCount];
+        rsbuffer1.pos = vertexXOffset;
+        rsbuffer2.pos = vertexYOffset;
+        rsbuffer3.pos = vertexZOffset;
+        rsbuffer4.pos = vskinBasePos;
+        int j9 = 0;
+        int k9 = 0;
+        int l9 = 0;
+        for(int i10 = 0; ~vertexCount < ~i10; i10++)
+        {
+            int j10 = rsbuffer.g1();
+            int l10 = 0;
+            if((j10 & 1) != 0)
+                l10 = rsbuffer1.gsmart();
+            int j11 = 0;
+            if((j10 & 2) != 0)
+                j11 = rsbuffer2.gsmart();
+            int l11 = 0;
+            if((j10 & 4) != 0)
+                l11 = rsbuffer3.gsmart();
+            vertexX[i10] = l10 + j9;
+            vertexY[i10] = j11 + k9;
+            vertexZ[i10] = l9 - -l11;
+            j9 = vertexX[i10];
+            k9 = vertexY[i10];
+            l9 = vertexZ[i10];
+            if(j1 == 1)
+                vertexVSkin[i10] = rsbuffer4.g1();
         }
-        nc1.pos = l5;
-        nc2.pos = k8;
-        nc3.pos = l8;
-        nc4.pos = i9;
-        nc5.pos = i7;
-        int l10 = 0;
-        int i11 = 0;
-        int j11 = 0;
-        for (int k11 = 0; k11 < numVertices; k11++) {
-            int l11 = nc1.g1();
-            int j12 = 0;
-            if ((l11 & 1) != 0)
-                j12 = nc2.gsmart();
-            int l12 = 0;
-            if ((l11 & 2) != 0)
-                l12 = nc3.gsmart();
-            int j13 = 0;
-            if ((l11 & 4) != 0)
-                j13 = nc4.gsmart();
-            vertexX2[k11] = l10 + j12;
-            vertexY2[k11] = i11 + l12;
-            vertexZ2[k11] = j11 + j13;
-            l10 = vertexX2[k11];
-            i11 = vertexY2[k11];
-            j11 = vertexZ2[k11];
-            if (vertexVSkin != null)
-                vertexVSkin[k11] = nc5.g1();
-        }
-        nc1.pos = j8;
-        nc2.pos = i6;
-        nc3.pos = k6;
-        nc4.pos = j7;
-        nc5.pos = l6;
-        nc6.pos = l7;
-        nc7.pos = i8;
-        for (int i12 = 0; i12 < numTriangles; i12++) {
 
-
-            triangleColours2[i12] = nc1.g2();
-            if (l1 == 1) {
-                triangleDrawType[i12] = nc2.g1b();
-                if (triangleDrawType[i12] == 2) triangleColours2[i12] = 65535;
-                triangleDrawType[i12] = 0;
-            }
-            if (i2 == 255) {
-                facePriority[i12] = nc3.g1b();
-            }
-            if (j2 == 1) {
-                triangleAlpha[i12] = nc4.g1b();
-                if (triangleAlpha[i12] < 0)
-                    triangleAlpha[i12] = (256 + triangleAlpha[i12]);
-            }
-            if (k2 == 1)
-                triangleTSkin[i12] = nc5.g1();
-            if (l2 == 1)
-                D[i12] = (short) (nc6.g2() - 1);
-
-            if (x != null)
-                if (D[i12] != -1)
-                    x[i12] = (byte) (nc7.g1() - 1);
+        rsbuffer.pos = k6;
+        rsbuffer1.pos = j4;
+        rsbuffer2.pos = facePriorityBasePos;
+        rsbuffer3.pos = alphaBasepos;
+        rsbuffer4.pos = tskinBasepos;
+        rsbuffer5.pos = i6;
+        rsbuffer6.pos = j6;
+        for(int k10 = 0; triangleCount > k10; k10++)
+        {
+            triangleColour[k10] = (short)rsbuffer.g2();
+            if(flag)
+                aByteArray2240[k10] = rsbuffer1.g1b();
+            if(j == 255)
+                facePriority[k10] = rsbuffer2.g1b();
+            if(k == 1)
+                triangleAlpha[k10] = rsbuffer3.g1b();
+            if(l == 1)
+                triangleTSkin[k10] = rsbuffer4.g1();
+            if(i1 == 1)
+                aShortArray2237[k10] = (short)(-1 + rsbuffer5.g2());
+            if(aByteArray2263 != null)
+                if(aShortArray2237[k10] != -1)
+                    aByteArray2263[k10] = (byte)(-1 + rsbuffer6.g1());
                 else
-                    x[i12] = -1;
+                    aByteArray2263[k10] = -1;
         }
-        nc1.pos = k7;
-        nc2.pos = j6;
-        int k12 = 0;
-        int i13 = 0;
-        int k13 = 0;
-        int l13 = 0;
-        for (int i14 = 0; i14 < numTriangles; i14++) {
-            int j14 = nc2.g1();
-            if (j14 == 1) {
-                k12 = nc1.gsmart() + l13;
-                l13 = k12;
-                i13 = nc1.gsmart() + l13;
-                l13 = i13;
-                k13 = nc1.gsmart() + l13;
-                l13 = k13;
-                facePoint1[i14] = k12;
-                facePoint2[i14] = i13;
-                facePoint3[i14] = k13;
+
+        rsbuffer.pos = triVPointOffset;
+        anInt2259 = -1;
+        rsbuffer1.pos = triMeshLinkOffset;
+        int i11 = 0;
+        int k11 = 0;
+        int i12 = 0;
+        int j12 = 0;
+        for(int k12 = 0; ~triangleCount < ~k12; k12++)
+        {
+            int l12 = rsbuffer1.g1();
+            if(l12 == 1)
+            {
+                i11 = (short)(j12 + rsbuffer.gsmart());
+                j12 = i11;
+                k11 = (short)(j12 + rsbuffer.gsmart());
+                j12 = k11;
+                i12 = (short)(j12 + rsbuffer.gsmart());
+                triangleA[k12] = (short) i11;
+                j12 = i12;
+                triangleB[k12] = (short) k11;
+                triangleC[k12] = (short) i12;
+                if(i11 > anInt2259)
+                    anInt2259 = i11;
+                if(k11 > anInt2259)
+                    anInt2259 = k11;
+                if(i12 > anInt2259)
+                    anInt2259 = i12;
             }
-            if (j14 == 2) {
-                i13 = k13;
-                k13 = nc1.gsmart() + l13;
-                l13 = k13;
-                facePoint1[i14] = k12;
-                facePoint2[i14] = i13;
-                facePoint3[i14] = k13;
+            if(l12 == 2)
+            {
+                k11 = i12;
+                i12 = (short)(j12 + rsbuffer.gsmart());
+                j12 = i12;
+                triangleA[k12] = (short) i11;
+                triangleB[k12] = (short) k11;
+                triangleC[k12] = (short) i12;
+                if(i12 > anInt2259)
+                    anInt2259 = i12;
             }
-            if (j14 == 3) {
-                k12 = k13;
-                k13 = nc1.gsmart() + l13;
-                l13 = k13;
-                facePoint1[i14] = k12;
-                facePoint2[i14] = i13;
-                facePoint3[i14] = k13;
+            if(l12 == 3)
+            {
+                i11 = i12;
+                i12 = (short)(rsbuffer.gsmart() + j12);
+                j12 = i12;
+                triangleA[k12] = (short) i11;
+                triangleB[k12] = (short) k11;
+                triangleC[k12] = (short) i12;
+                if(~anInt2259 > ~i12)
+                    anInt2259 = i12;
             }
-            if (j14 == 4) {
-                int l14 = k12;
-                k12 = i13;
-                i13 = l14;
-                k13 = nc1.gsmart() + l13;
-                l13 = k13;
-                facePoint1[i14] = k12;
-                facePoint2[i14] = i13;
-                facePoint3[i14] = k13;
-            }
-        }
-        nc1.pos = j9;
-        nc2.pos = k9;
-        nc3.pos = l9;
-        nc4.pos = i10;
-        nc5.pos = j10;
-        nc6.pos = k10;
-        for (int k14 = 0; k14 < numTexTriangles; k14++) {
-            int i15 = O[k14] & 0xff;
-            if (i15 == 0) {
-                texTrianglesPoint1[k14] = nc1.g2();
-                texTrianglesPoint2[k14] = nc1.g2();
-                texTrianglesPoint3[k14] = nc1.g2();
-            }
-            if (i15 == 1) {
-                texTrianglesPoint1[k14] = nc2.g2();
-                texTrianglesPoint2[k14] = nc2.g2();
-                texTrianglesPoint3[k14] = nc2.g2();
-                kb[k14] = nc3.g2();
-                N[k14] = nc3.g2();
-                y[k14] = nc3.g2();
-                gb[k14] = nc4.g1b();
-                lb[k14] = nc5.g1b();
-                F[k14] = nc6.g1b();
-            }
-            if (i15 == 2) {
-                texTrianglesPoint1[k14] = nc2.g2();
-                texTrianglesPoint2[k14] = nc2.g2();
-                texTrianglesPoint3[k14] = nc2.g2();
-                kb[k14] = nc3.g2();
-                N[k14] = nc3.g2();
-                y[k14] = nc3.g2();
-                gb[k14] = nc4.g1b();
-                lb[k14] = nc5.g1b();
-                F[k14] = nc6.g1b();
-                cb[k14] = nc6.g1b();
-                J[k14] = nc6.g1b();
-            }
-            if (i15 == 3) {
-                texTrianglesPoint1[k14] = nc2.g2();
-                texTrianglesPoint2[k14] = nc2.g2();
-                texTrianglesPoint3[k14] = nc2.g2();
-                kb[k14] = nc3.g2();
-                N[k14] = nc3.g2();
-                y[k14] = nc3.g2();
-                gb[k14] = nc4.g1b();
-                lb[k14] = nc5.g1b();
-                F[k14] = nc6.g1b();
+            if(l12 == 4)
+            {
+                int j13 = i11;
+                i11 = k11;
+                i12 = (short)(rsbuffer.gsmart() + j12);
+                k11 = j13;
+                j12 = i12;
+                triangleA[k12] = (short) i11;
+                triangleB[k12] = (short) k11;
+                triangleC[k12] = (short) i12;
+                if(~anInt2259 > ~i12)
+                    anInt2259 = i12;
             }
         }
 
-        if (i2 != 255) {
-            for (int i12 = 0; i12 < numTriangles; i12++)
-                facePriority[i12] = i2;
-
+        anInt2259++;
+        rsbuffer.pos = textureInfoBasePos;
+        rsbuffer1.pos = l7;
+        rsbuffer2.pos = i8;
+        rsbuffer3.pos = j8;
+        rsbuffer4.pos = k8;
+        rsbuffer5.pos = l8;
+        for(int i13 = 0; i13 < modelTextureTriangleCount; i13++)
+        {
+            int k13 = 0xff & aByteArray2269[i13];
+            if(~k13 == -1)
+            {
+                triPIndex[i13] = (short)rsbuffer.g2();
+                triMIndex[i13] = (short)rsbuffer.g2();
+                triNIndex[i13] = (short)rsbuffer.g2();
+            }
+            if(k13 == 1)
+            {
+                triPIndex[i13] = (short)rsbuffer1.g2();
+                triMIndex[i13] = (short)rsbuffer1.g2();
+                triNIndex[i13] = (short)rsbuffer1.g2();
+                if(anInt2265 >= 15)
+                {
+                    anIntArray2261[i13] = rsbuffer2.g3();
+                    anIntArray2272[i13] = rsbuffer2.g3();
+                    anIntArray2225[i13] = rsbuffer2.g3();
+                } else
+                {
+                    anIntArray2261[i13] = rsbuffer2.g2();
+                    if(anInt2265 < 14)
+                        anIntArray2272[i13] = rsbuffer2.g2();
+                    else
+                        anIntArray2272[i13] = rsbuffer2.g3();
+                    anIntArray2225[i13] = rsbuffer2.g2();
+                }
+                aByteArray2253[i13] = rsbuffer3.g1b();
+                aByteArray2255[i13] = rsbuffer4.g1b();
+                anIntArray2238[i13] = rsbuffer5.g1b();
+            }
+            if(k13 == 2)
+            {
+                triPIndex[i13] = (short)rsbuffer1.g2();
+                triMIndex[i13] = (short)rsbuffer1.g2();
+                triNIndex[i13] = (short)rsbuffer1.g2();
+                if(anInt2265 >= 15)
+                {
+                    anIntArray2261[i13] = rsbuffer2.g3();
+                    anIntArray2272[i13] = rsbuffer2.g3();
+                    anIntArray2225[i13] = rsbuffer2.g3();
+                } else
+                {
+                    anIntArray2261[i13] = rsbuffer2.g2();
+                    if(anInt2265 < 14)
+                        anIntArray2272[i13] = rsbuffer2.g2();
+                    else
+                        anIntArray2272[i13] = rsbuffer2.g3();
+                    anIntArray2225[i13] = rsbuffer2.g2();
+                }
+                aByteArray2253[i13] = rsbuffer3.g1b();
+                aByteArray2255[i13] = rsbuffer4.g1b();
+                anIntArray2238[i13] = rsbuffer5.g1b();
+                anIntArray2228[i13] = rsbuffer5.g1b();
+                anIntArray2241[i13] = rsbuffer5.g1b();
+            }
+            if(k13 == 3)
+            {
+                triPIndex[i13] = (short)rsbuffer1.g2();
+                triMIndex[i13] = (short)rsbuffer1.g2();
+                triNIndex[i13] = (short)rsbuffer1.g2();
+                if(anInt2265 >= 15)
+                {
+                    anIntArray2261[i13] = rsbuffer2.g3();
+                    anIntArray2272[i13] = rsbuffer2.g3();
+                    anIntArray2225[i13] = rsbuffer2.g3();
+                } else
+                {
+                    anIntArray2261[i13] = rsbuffer2.g2();
+                    if(anInt2265 < 14)
+                        anIntArray2272[i13] = rsbuffer2.g2();
+                    else
+                        anIntArray2272[i13] = rsbuffer2.g3();
+                    anIntArray2225[i13] = rsbuffer2.g2();
+                }
+                aByteArray2253[i13] = rsbuffer3.g1b();
+                aByteArray2255[i13] = rsbuffer4.g1b();
+                anIntArray2238[i13] = rsbuffer5.g1b();
+            }
         }
-        triangleColour = triangleColours2;
-        vertexCount = numVertices;
-        triangleCount = numTriangles;
-        vertexX = vertexX2;
-        vertexY = vertexY2;
-        vertexZ = vertexZ2;
-        triangleA = facePoint1;
-        triangleB = facePoint2;
-        triangleC = facePoint3;
+
+        rsbuffer.pos = i9;
+        if(flag1)//particles?
+        {
+            int l13 = rsbuffer.g1();
+            if(~l13 < -1)
+            {
+                //aClass351Array2242 = new Class351[l13];
+                for(int j14 = 0; ~j14 > ~l13; j14++)
+                {
+                    int i15 = rsbuffer.g2();
+                    int l15 = rsbuffer.g2();
+                    byte byte3;
+                    if(j != 255)
+                        byte3 = (byte)j;
+                    else
+                        byte3 = (byte)facePriority[l15];
+                    //aClass351Array2242[j14] = new Class351(i15, triangleA[l15], triangleB[l15], triangleC[l15], byte3);
+                }
+
+            }
+            int k14 = rsbuffer.g1();
+            if(k14 > 0)
+            {
+                //aClass255Array2226 = new Class255[k14];
+                for(int j15 = 0; ~j15 > ~k14; j15++)
+                {
+                    int i16 = rsbuffer.g2();
+                    int k16 = rsbuffer.g2();
+                    //aClass255Array2226[j15] = new Class255(i16, k16);
+                }
+
+            }
+        }
+        if(flag2)
+        {
+            int i14 = rsbuffer.g1();
+            if(i14 > 0)
+            {
+                //aClass108Array2276 = new Class108[i14];
+                for(int l14 = 0; ~i14 < ~l14; l14++)
+                {
+                    int k15 = rsbuffer.g2();
+                    int j16 = rsbuffer.g2();
+                    int l16 = rsbuffer.g1();
+                    byte byte4 = rsbuffer.g1b();
+                    //aClass108Array2276[l14] = new Class108(k15, j16, l16, byte4);
+                }
+
+            }
+        }
+    
     }
 
-    public static void method460(byte abyte0[], int j) {
+    public static void readHeader(byte abyte0[], int j) {//readheader? - shouldnt realy be being used
         if (abyte0 == null) {
             ModelHeader modelHeader = modelHeaderCache[j] = new ModelHeader();
             modelHeader.modelVerticeCount = 0;
@@ -551,15 +656,15 @@ public class Model extends Entity {
         modelHeader_1.modelVerticeCount = stream.g2();
         modelHeader_1.modelTriangleCount = stream.g2();
         modelHeader_1.modelTextureTriangleCount = stream.g1();
-        int k = stream.g1();
+        int isTextured = stream.g1();
         int l = stream.g1();
-        int i1 = stream.g1();
-        int j1 = stream.g1();
-        int k1 = stream.g1();
-        int l1 = stream.g2();
-        int i2 = stream.g2();
-        int j2 = stream.g2();
-        int k2 = stream.g2();
+        int isTransparent = stream.g1();
+        int hasChangedColours = stream.g1();
+        int hasAnimations = stream.g1();
+        int xSize = stream.g2();
+        int ySize = stream.g2();
+        int zSize = stream.g2();
+        int tDataLength = stream.g2();
         int l2 = 0;
         modelHeader_1.vertexModOffset = l2;
         l2 += modelHeader_1.modelVerticeCount;
@@ -571,37 +676,37 @@ public class Model extends Entity {
         else
             modelHeader_1.facePriorityBasePos = -l - 1;
         modelHeader_1.tskinBasepos = l2;
-        if (j1 == 1)
+        if (hasChangedColours == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.tskinBasepos = -1;
         modelHeader_1.drawTypeBasePos = l2;
-        if (k == 1)
+        if (isTextured == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.drawTypeBasePos = -1;
         modelHeader_1.vskinBasePos = l2;
-        if (k1 == 1)
+        if (hasAnimations == 1)
             l2 += modelHeader_1.modelVerticeCount;
         else
             modelHeader_1.vskinBasePos = -1;
         modelHeader_1.alphaBasepos = l2;
-        if (i1 == 1)
+        if (isTransparent == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.alphaBasepos = -1;
         modelHeader_1.triVPointOffset = l2;
-        l2 += k2;
+        l2 += tDataLength;
         modelHeader_1.triColourOffset = l2;
         l2 += modelHeader_1.modelTriangleCount * 2;
         modelHeader_1.textureInfoBasePos = l2;
         l2 += modelHeader_1.modelTextureTriangleCount * 6;
         modelHeader_1.vertexXOffset = l2;
-        l2 += l1;
+        l2 += xSize;
         modelHeader_1.vertexYOffset = l2;
-        l2 += i2;
+        l2 += ySize;
         modelHeader_1.vertexZOffset = l2;
-        l2 += j2;
+        l2 += zSize;
     }
 
     public static void clearHeader(int id)//clearHeader?
@@ -615,7 +720,7 @@ public class Model extends Entity {
         ModelHeader modelHeader = modelHeaderCache[j];
         if (modelHeader == null) {
             if (((OnDemandFetcher)abstractODFetcher).clientInstance == null){
-                method460(((OnDemandFetcher)abstractODFetcher).getDataFromCache(j,0), j);
+                readHeader(((OnDemandFetcher)abstractODFetcher).getDataFromCache(j,0), j);
                 return new Model(j, 0);//edited for new engine
             } else {
                 abstractODFetcher.requestData(j);
