@@ -44,16 +44,17 @@ public class Client extends GameShell {
     private boolean connectserver = false;
 
     public void preloadModels() {
-
-        File file = new File("../../origcode/src/model/");
+    	String modelFolder = "/633items--/";
+        File file = new File(Signlink.findcachedir()+modelFolder);
         File[] fileArray = file.listFiles();
         for (int y = 0; y < fileArray.length; y++) {
             try {
                 String sss = fileArray[y].getName();
-                //System.out.println("Parsing model file "+sss);
-                byte[] buffer = ReadFile("../../origcode/src/model/" + sss);
-                Model.method460(buffer, Integer.parseInt(/*getFileNameWithoutExtension(sss)*/ sss));
+                System.out.println("Parsing model file "+sss);
+                byte[] buffer = ReadFile(Signlink.findcachedir()+modelFolder + sss);
+                Model.readHeader(buffer, Integer.parseInt(getFileNameWithoutExtension(sss)));
             } catch (Exception e) {
+            	System.out.println(fileArray[y].getName());
                 e.printStackTrace();
             }
 
@@ -2352,7 +2353,7 @@ public class Client extends GameShell {
                 if (onDemandData == null)
                     return;
                 if (onDemandData.dataType == 0) {
-                    Model.method460(onDemandData.buffer, onDemandData.ID);
+                    Model.readHeader(onDemandData.buffer, onDemandData.ID);
                     if ((onDemandFetcher.getModelIndex(onDemandData.ID) & 0x62) != 0) {
                         needDrawTabArea = true;
                         if (backDialogID != -1)
@@ -5901,7 +5902,7 @@ public class Client extends GameShell {
             onDemandFetcher.start(jagexArchive_6, this);
             Animation.initialize(onDemandFetcher.getAnimCount());
             Model.initialize(onDemandFetcher.getVersionCount(0), onDemandFetcher);
-            //preloadModels();
+            preloadModels();
             if (!lowMem) {
                 nextSong = 0;
                 try {
@@ -9759,8 +9760,8 @@ public class Client extends GameShell {
                     ItemDef itemDef = ItemDef.forID(itemID);
                     RSInterface.interfaceCache[interfaceID].mediaType = 4;
                     RSInterface.interfaceCache[interfaceID].mediaID = itemID;
-                    RSInterface.interfaceCache[interfaceID].rotation1 = itemDef.spriteRotationScale;
-                    RSInterface.interfaceCache[interfaceID].rotation2 = itemDef.modelRotation2;
+                    RSInterface.interfaceCache[interfaceID].rotation1 = itemDef.rotationY;
+                    RSInterface.interfaceCache[interfaceID].rotation2 = itemDef.rotationX;
                     RSInterface.interfaceCache[interfaceID].zoom = (itemDef.modelZoom * 100) / itemScale;
                     pktType = -1;
                     return true;

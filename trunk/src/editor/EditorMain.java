@@ -127,7 +127,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 if (onDemandData == null)
                     return;
                 if (onDemandData.dataType == 0)
-                    Model.method460(onDemandData.buffer, onDemandData.ID);
+                    Model.readHeader(onDemandData.buffer, onDemandData.ID);
                 if (onDemandData.dataType == 1 && onDemandData.buffer != null)
                     rs2.Animation.load(onDemandData.buffer);
             } while (onDemandData.dataType != 93 || !onDemandFetcher.method564(onDemandData.ID));
