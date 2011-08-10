@@ -18,15 +18,15 @@ public class VertexNormal
         return (x / magnitude) / 256.0f;
     }
 
-    public float getY() {
-        if (magnitude == 0)
-            return z / 256.0f;
-        return (x / magnitude) / 256.0f;
-    }
-
     public float getZ() {
         if (magnitude == 0)
+            return z / 256.0f;
+        return (z / magnitude) / 256.0f;
+    }
+
+    public float getY() {
+        if (magnitude == 0)
             return y / 256.0f;
-        return (x / magnitude) / 256.0f;
+        return (y / magnitude) / 256.0f;
     }
 }

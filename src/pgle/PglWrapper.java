@@ -1,24 +1,29 @@
 package pgle;
 
-import com.sun.rowset.internal.InsertRow;
+import com.sun.corba.se.spi.orbutil.fsm.Input;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import org.peterbjornx.pgl2.camera.Camera;
 import org.peterbjornx.pgl2.camera.controls.FogRenderControl;
+import org.peterbjornx.pgl2.geom.SkyBoxNode;
 import org.peterbjornx.pgl2.input.cameracontrol.FirstPersonCamera;
 import org.peterbjornx.pgl2.light.OpenGLLightManager;
 import org.peterbjornx.pgl2.math.VectorMath;
 import org.peterbjornx.pgl2.model.Node;
 import org.peterbjornx.pgl2.terrain.Terrain;
-import org.peterbjornx.pgl2.terrain.TerrainSource;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import rs2.MapRegion;
+import rs2.SceneGraph;
+import rt4.AthmosphericEffects;
 import rt4.Class7_Sub1;
+import rt4.OpenGLManager;
+
+import javax.swing.*;
+import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -46,15 +51,45 @@ public class PglWrapper {
         glEnable(GL_COLOR_MATERIAL);
         glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
         glEnable(GL_LIGHTING);
+        glShadeModel(GL_SMOOTH);
         //lightManager = new OpenGLLightManager();
        // rsTileManager.setOpenGLLightManager(lightManager);
 
-        sun = new PglSun();
-        sun.setSunColor(new Color(0xFF, 0xFF, 0xFF, 0xff), 1.0F, 1.0F, 0.6F);
-        sun.setSunPosition(new Vector3f(-30, -50, -30));
+        //sun = new PglSun();
+        //sun.setSunColor(new Color(0xFF, 0xFF, 0xFF, 0xff), 0.7f, 0.7f, 0.4f);
+        //sun.setSunPosition(new Vector3f(-30, -50, -30));
+        AthmosphericEffects.setupLighting();
         glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 1.0f);
         glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 0.0015625f/5f);
-       glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0);//.000625f);
+        glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0);//.000625f);
+    }
+
+    public void merge(){
+           /* int width = 765;
+            int height = 504;
+            Canvas c = new Canvas() ;
+            SceneGraph.clientInstance.gameFrame.add(c);
+            c.setSize(width, height);
+            c.setLocation(4, 24);
+            c.addMouseListener(SceneGraph.clientInstance);
+            c.addMouseMotionListener(SceneGraph.clientInstance);
+            c.addKeyListener(SceneGraph.clientInstance);
+            c.addFocusListener(SceneGraph.clientInstance);
+            c.setFocusable(false);
+            JPanel p = new JPanel();
+            p.setLocation(4, 24);
+            p.addMouseListener(SceneGraph.clientInstance);
+            p.addMouseMotionListener(SceneGraph.clientInstance);
+            p.addKeyListener(SceneGraph.clientInstance);
+            p.addFocusListener(SceneGraph.clientInstance);
+            SceneGraph.clientInstance.gameFrame.add(p);
+            p.setSize(width, height);  * /
+
+        try {
+            Display.setParent(c);
+        } catch (LWJGLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }          */
     }
 
     /**
@@ -62,13 +97,14 @@ public class PglWrapper {
      */
     public void initJgle() {
         try {
-            int width = 640;
-            int height = 480;
+            int width = 765;
+            int height = 504;
             Display.setDisplayMode(new DisplayMode(width, height));
             Display.create();
+            merge();
             scene = new Node();
             camera = new Camera();
-            camera.setViewport(new Vector2f(0, 0), new Vector2f(width, height));
+            camera.setViewport(new Vector2f(0,0),new Vector2f(width,height));//new Vector2f(4, height - 334 - 4), new Vector2f(512, 334));
             camera.setNearClip(1f);
             camera.setFarClip(128 * 30.0f);
             camera.setActive(true);
@@ -84,8 +120,9 @@ public class PglWrapper {
             fog.setMode(9729);     //linear
             fog.setHint(4353);     //fastest
             fog.setEnd((float) (fogEnd - 256));
-            camera.addRenderControl(fog);
+            //camera.addRenderControl(fog);
             scene.add(camera);
+            scene.add(new SkyBoxNode(4,"./skybox/Sunset",".jpg"));
             rsTileManager = new RsTileManager();
             scene.add(rsTileManager);
             firstPersonCamera = new FirstPersonCamera();
@@ -117,6 +154,36 @@ public class PglWrapper {
     public void setCameraPosition(int x,int z,int y){
         camera.setPosition(new Vector3f(x,-y,z));
     }
+    /**
+         * The entry point for this SimpleApplication
+         */
+        public void process2D() {
+            if (!running)
+                return;
+            if (!Display.isCloseRequested()) {
+                try {
+                    Display.makeCurrent();
+                } catch (LWJGLException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+                try {
+                    Display.swapBuffers();
+                } catch (LWJGLException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+                Display.processMessages();
+                try {
+                    ServerMemoryManager.processQueues();
+                } catch (Exception e){e.printStackTrace();
+                    System.out.println("ServerMemoryManager exception :O");
+                }
+            } else {
+                Display.destroy();
+                System.err.println("Closing window");
+                running = false;
+            }
+
+        }
 
     /**
      * The entry point for this SimpleApplication
@@ -133,6 +200,8 @@ public class PglWrapper {
             preRender();
            // lightManager.startLighting(new Camera());
             scene.render(null);
+            //if (SceneGraph.clientInstance != null)
+           //     SceneGraph.clientInstance.draw2DToGL();
            // lightManager.stopLighting();
             try {
                 Display.swapBuffers();
@@ -154,8 +223,9 @@ public class PglWrapper {
     }
 
     public void doLighting(){
-        if (Class7_Sub1.useLighting)
-            sun.activateNoManager();
+        //if (Class7_Sub1.useLighting)
+        //    sun.activateNoManager();
+        AthmosphericEffects.loadLightPositions();
     }
 
     public void preRender() {
@@ -183,5 +253,9 @@ public class PglWrapper {
 
     public void setCameraRotation(int xCameraCurve, int yCameraCurve, int i) {
         camera.setRotation(VectorMath.eulerAnglesToQuaternion(new Vector3f(xCameraCurve * 0.17578125f,yCameraCurve * 0.17578125f,i * 0.17578125f)));
+    }
+
+    public PglSun getSun() {
+        return sun;
     }
 }

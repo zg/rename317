@@ -450,7 +450,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
     protected int myHeight;
     protected Graphics graphics;
     protected GraphicsBuffer fullGameScreen;
-    protected RSFrame gameFrame;
+    public RSFrame gameFrame;
     private boolean shouldClearScreen;
     protected boolean awtFocus;
     protected int idleTime;

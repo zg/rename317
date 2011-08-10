@@ -181,7 +181,7 @@ public class Client extends GameShell {
         } else {
             RSFont RSFont = plainFont;
             int j = 0;
-            Graphics2D.setBounds(77, 0, 463, 0);
+            DrawingArea.setBounds(77, 0, 463, 0);
             for (int k = 0; k < 100; k++)
                 if (chatMessages[k] != null) {
                     int l = chatTypes[k];
@@ -261,7 +261,7 @@ public class Client extends GameShell {
                     }
                 }
 
-            Graphics2D.setDefaultBounds();
+            DrawingArea.setDefaultBounds();
             scrollMax = j * 14 + 7;
             if (scrollMax < 78)
                 scrollMax = 78;
@@ -273,7 +273,7 @@ public class Client extends GameShell {
                 s = TextClass.formatName(myUsername);
             RSFont.drawTextHLeftVTop(s + ":", 4, 90, 0);
             RSFont.drawTextHLeftVTop(inputString + "*", 6 + RSFont.getFormattedStringWith(s + ": "), 90, 255);
-            Graphics2D.drawHLine(0, 77, 479, 0);
+            DrawingArea.drawHLine(0, 77, 479, 0);
         }
         if (menuOpen && menuScreenArea == 2)
             drawMenu();
@@ -571,6 +571,7 @@ public class Client extends GameShell {
             }
             method63();
         } catch (Exception exception) {
+            exception.printStackTrace();
         }
         ObjectDef.modelCache.unlinkAll();
         if (super.gameFrame != null) {
@@ -966,20 +967,20 @@ public class Client extends GameShell {
     private void renderChatInterface(int height, int scrollPosition, int y, int x, int scrollMax) {
         scrollBar1.drawImage(x, y);
         scrollBar2.drawImage(x, (y + height) - 16);
-        Graphics2D.fillRect(x, y + 16, 16, height - 32, anInt1002);
+        DrawingArea.fillRect(x, y + 16, 16, height - 32, anInt1002);
         int height_ = ((height - 32) * height) / scrollMax;
         if (height_ < 8)
             height_ = 8;
         int currentScrollPos = ((height - 32 - height_) * scrollPosition) / (scrollMax - height);
-        Graphics2D.fillRect(x, y + 16 + currentScrollPos, 16, height_, anInt1063);
-        Graphics2D.drawVLine(x, y + 16 + currentScrollPos, height_, anInt902);
-        Graphics2D.drawVLine(x + 1, y + 16 + currentScrollPos, height_, anInt902);
-        Graphics2D.drawHLine(x, y + 16 + currentScrollPos, 16, anInt902);
-        Graphics2D.drawHLine(x, y + 17 + currentScrollPos, 16, anInt902);
-        Graphics2D.drawVLine(x + 15, y + 16 + currentScrollPos, height_, anInt927);
-        Graphics2D.drawVLine(x + 14, y + 17 + currentScrollPos, height_ - 1, anInt927);
-        Graphics2D.drawHLine(x, y + 15 + currentScrollPos + height_, 16, anInt927);
-        Graphics2D.drawHLine(x + 1, y + 14 + currentScrollPos + height_, 15, anInt927);
+        DrawingArea.fillRect(x, y + 16 + currentScrollPos, 16, height_, anInt1063);
+        DrawingArea.drawVLine(x, y + 16 + currentScrollPos, height_, anInt902);
+        DrawingArea.drawVLine(x + 1, y + 16 + currentScrollPos, height_, anInt902);
+        DrawingArea.drawHLine(x, y + 16 + currentScrollPos, 16, anInt902);
+        DrawingArea.drawHLine(x, y + 17 + currentScrollPos, 16, anInt902);
+        DrawingArea.drawVLine(x + 15, y + 16 + currentScrollPos, height_, anInt927);
+        DrawingArea.drawVLine(x + 14, y + 17 + currentScrollPos, height_ - 1, anInt927);
+        DrawingArea.drawHLine(x, y + 15 + currentScrollPos + height_, 16, anInt927);
+        DrawingArea.drawHLine(x + 1, y + 14 + currentScrollPos + height_, 15, anInt927);
     }
 
     private void getNpcPos(Packet stream, int packetSize) {
@@ -1236,8 +1237,8 @@ public class Client extends GameShell {
                             int i1 = (((Mobile) (obj)).currentHealth * 30) / ((Mobile) (obj)).maxHealth;
                             if (i1 > 30)
                                 i1 = 30;
-                            Graphics2D.fillRect(spriteDrawX - 15, spriteDrawY - 3, i1, 5, 65280);
-                            Graphics2D.fillRect((spriteDrawX - 15) + i1, spriteDrawY - 3, 30 - i1, 5, 0xff0000);
+                            DrawingArea.fillRect(spriteDrawX - 15, spriteDrawY - 3, i1, 5, 65280);
+                            DrawingArea.fillRect((spriteDrawX - 15) + i1, spriteDrawY - 3, 30 - i1, 5, 0xff0000);
                         }
                     } catch (Exception e) {
                     }
@@ -1337,10 +1338,10 @@ public class Client extends GameShell {
                     if (textDrawType[chatPtr] == 4) {//scroll:
                         int i4 = boldFont.getStringWidth(chatText);
                         int k4 = ((150 - anIntArray982[chatPtr]) * (i4 + 100)) / 150;
-                        Graphics2D.setBounds(334, spriteDrawX - 50, spriteDrawX + 50, 0);
+                        DrawingArea.setBounds(334, spriteDrawX - 50, spriteDrawX + 50, 0);
                         boldFont.drawTextHLeftVTop(chatText, (spriteDrawX + 50) - k4, spriteDrawY + 1, 0);
                         boldFont.drawTextHLeftVTop(chatText, (spriteDrawX + 50) - k4, spriteDrawY, textColour);
-                        Graphics2D.setDefaultBounds();
+                        DrawingArea.setDefaultBounds();
                     }
                     if (textDrawType[chatPtr] == 5) {//slide:
                         int j4 = 150 - anIntArray982[chatPtr];
@@ -1349,10 +1350,10 @@ public class Client extends GameShell {
                             l4 = j4 - 25;
                         else if (j4 > 125)
                             l4 = j4 - 125;
-                        Graphics2D.setBounds(spriteDrawY + 5, 0, 512, spriteDrawY - boldFont.charHeight - 1);
+                        DrawingArea.setBounds(spriteDrawY + 5, 0, 512, spriteDrawY - boldFont.charHeight - 1);
                         boldFont.drawTextHMidVTop(chatText, spriteDrawX, spriteDrawY + 1 + l4, 0);
                         boldFont.drawTextHMidVTop(chatText, spriteDrawX, spriteDrawY + l4, textColour);
-                        Graphics2D.setDefaultBounds();
+                        DrawingArea.setDefaultBounds();
                     }
                 } else {
                     boldFont.drawTextHMidVTop(chatText, spriteDrawX, spriteDrawY + 1, 0);
@@ -1592,9 +1593,9 @@ public class Client extends GameShell {
         int width = menuWidth;
         int height = menuHeight;
         int colour = 0x5d5447;
-        Graphics2D.fillRect(x, y, width, height, colour);
-        Graphics2D.fillRect(x + 1, y + 1, width - 2, 16, 0);
-        Graphics2D.drawRect(x + 1, y + 18, width - 2, height - 19, 0);
+        DrawingArea.fillRect(x, y, width, height, colour);
+        DrawingArea.fillRect(x + 1, y + 1, width - 2, 16, 0);
+        DrawingArea.drawRect(x + 1, y + 18, width - 2, height - 19, 0);
         boldFont.drawTextHLeftVTop("Choose Option", x + 3, y + 14, colour);
         int j1 = super.mouseEventX;
         int k1 = super.mouseEventY;
@@ -2367,7 +2368,7 @@ public class Client extends GameShell {
                 if (onDemandData.dataType == 3 && loadingStage == 1) {
                     for (int i = 0; i < terrainData.length; i++) {
                         if (terrainIndices[i] == onDemandData.ID) {
-                            terrainData[i] = onDemandData.buffer;
+                            terrainData[i] = FileOperations.ReadFile("./hddata/maps/"+onDemandData.ID);//onDemandData.buffer;
                             if (onDemandData.buffer == null)
                                 terrainIndices[i] = -1;
                             break;
@@ -2785,23 +2786,23 @@ public class Client extends GameShell {
         aRSImageProducer_1124 = null;
         aRSImageProducer_1125 = null;
         aRSImageProducer_1110 = new GraphicsBuffer(128, 265, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1111 = new GraphicsBuffer(128, 265, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1107 = new GraphicsBuffer(509, 171, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1108 = new GraphicsBuffer(360, 255, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1109 = new GraphicsBuffer(360, 264, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1112 = new GraphicsBuffer(202, 238, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1113 = new GraphicsBuffer(203, 238, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1114 = new GraphicsBuffer(74, 94, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1115 = new GraphicsBuffer(75, 94, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         if (titleJagexArchive != null) {
             drawLogo();
             loadTitleScreen();
@@ -2825,20 +2826,20 @@ public class Client extends GameShell {
         {
         	boldFont.drawTextHMidVTop("RuneScape is loading - please wait...", c / 2, c1 / 2 - 26 - byte1, 0xffffff);
         	int j = c1 / 2 - 18 - byte1;
-        	Graphics2D.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
-        	Graphics2D.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
-        	Graphics2D.fillRect(c / 2 - 150, j + 2, percentage * 3, 30, 0x8c1111);
-        	Graphics2D.fillRect((c / 2 - 150) + percentage * 3, j + 2, 300 - percentage * 3, 30, 0);
+        	DrawingArea.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
+        	DrawingArea.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
+        	DrawingArea.fillRect(c / 2 - 150, j + 2, percentage * 3, 30, 0x8c1111);
+        	DrawingArea.fillRect((c / 2 - 150) + percentage * 3, j + 2, 300 - percentage * 3, 30, 0);
         	boldFont.drawTextHMidVTop(text, c / 2, (c1 / 2 + 5) - byte1, 0xffffff);
         }
         else
         	{
-        	Graphics2D.fillCircle(50,50,  percentage/2, 0xff00ff);
-        	Graphics2D.fillCircle(100,50, percentage/2, 0xff0000);
-        	Graphics2D.fillCircle(150,50, percentage/2, 0xff00ff);
-        	Graphics2D.fillCircle(200,50, percentage/2, 0xff0000);
-        	Graphics2D.fillCircle(250,50, percentage/2, 0xff00ff);
-        	Graphics2D.fillCircle(300,50, percentage/2, 0xff0000);
+        	DrawingArea.fillCircle(50,50,  percentage/2, 0xff00ff);
+        	DrawingArea.fillCircle(100,50, percentage/2, 0xff0000);
+        	DrawingArea.fillCircle(150,50, percentage/2, 0xff00ff);
+        	DrawingArea.fillCircle(200,50, percentage/2, 0xff0000);
+        	DrawingArea.fillCircle(250,50, percentage/2, 0xff00ff);
+        	DrawingArea.fillCircle(300,50, percentage/2, 0xff0000);
         	}
         	aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if (repaintRequested) {
@@ -4310,6 +4311,15 @@ public class Client extends GameShell {
                         dropClient();
                     if (inputString.equals("::lag"))
                         printDebug();
+                    if (inputString.startsWith("::sun")){
+                        try {
+                            String[] t = inputString.split(" ");
+                            pglWrapper.getSun().setSunColor(new org.lwjgl.util.Color(0xFf,0xff,0xff),Float.parseFloat(t[1]),Float.parseFloat(t[2]),Float.parseFloat(t[3]));
+                        } catch (Exception e){
+                            pushMessage("Error executing command", 2, "@cr2@RuneScape Client");
+                            e.printStackTrace();
+                        }
+                    }
                     if (inputString.equals("::lighting"))
                         Class7_Sub1.useLighting = !Class7_Sub1.useLighting;
                     if (inputString.equals("::prefetchmusic")) {
@@ -4918,11 +4928,11 @@ public class Client extends GameShell {
         aRSImageProducer_1115 = null;
         aRSImageProducer_1166 = new GraphicsBuffer(479, 96, getGameComponent());
         minimapIP = new GraphicsBuffer(172, 156, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         mapBack.drawImage(0, 0);
         tabAreaDrawingTarget = new GraphicsBuffer(190, 261, getGameComponent());
         gameScreenCanvas = new GraphicsBuffer(512, 334, getGameComponent());
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         aRSImageProducer_1123 = new GraphicsBuffer(496, 50, getGameComponent());
         aRSImageProducer_1124 = new GraphicsBuffer(269, 37, getGameComponent());
         aRSImageProducer_1125 = new GraphicsBuffer(249, 45, getGameComponent());
@@ -5196,6 +5206,8 @@ public class Client extends GameShell {
                 //int anInt1260 = 0;//never used
                 resetImageProducers2();
                 stopMidi();//stop music on login
+                pglWrapper = new PglWrapper();
+                pglWrapper.initJgle();
                 return;
             }
             if (k == 3) {
@@ -5890,7 +5902,7 @@ public class Client extends GameShell {
             JagexArchive soundArchive = streamLoaderForName(8, "sound effects", "sounds", expectedCRCs[8], 55);
             tileSettingBits = new byte[4][104][104];
             intGroundArray = new int[4][105][105];
-            sceneGraph = new SceneGraph(4, 104, 104, intGroundArray);
+            sceneGraph = new SceneGraph(4, 104, 104, intGroundArray,null);
             for (int j = 0; j < 4; j++)
                 tileSettings[j] = new TileSetting(104, 104);
 
@@ -6895,11 +6907,11 @@ public class Client extends GameShell {
             return;
         if (inter.hiddenUntilMouseover && anInt1026 != inter.id && anInt1048 != inter.id && anInt1039 != inter.id)
             return;
-        int i1 = Graphics2D.topX;
-        int j1 = Graphics2D.topY;
-        int k1 = Graphics2D.viewport_w;
-        int l1 = Graphics2D.viewport_h;
-        Graphics2D.setBounds(scroll_position + inter.height, x, x + inter.width, scroll_position);
+        int i1 = DrawingArea.topX;
+        int j1 = DrawingArea.topY;
+        int k1 = DrawingArea.viewport_w;
+        int l1 = DrawingArea.viewport_h;
+        DrawingArea.setBounds(scroll_position + inter.height, x, x + inter.width, scroll_position);
         int i2 = inter.children.length;
         for (int j2 = 0; j2 < i2; j2++) {
             int xx = inter.childX[j2] + x;
@@ -6932,7 +6944,7 @@ public class Client extends GameShell {
                                 int k6 = 0;
                                 int j7 = 0;
                                 int j9 = rsInterface.inv[i3] - 1;
-                                if (spriteX > Graphics2D.topX - 32 && spriteX < Graphics2D.viewport_w && spriteY > Graphics2D.topY - 32 && spriteY < Graphics2D.viewport_h || activeInterfaceType != 0 && anInt1085 == i3) {
+                                if (spriteX > DrawingArea.topX - 32 && spriteX < DrawingArea.viewport_w && spriteY > DrawingArea.topY - 32 && spriteY < DrawingArea.viewport_h || activeInterfaceType != 0 && anInt1085 == i3) {
                                     int l9 = 0;
                                     if (itemSelected == 1 && lastItemSelectedSlot == i3 && lastItemSelectedInterface == rsInterface.id)
                                         l9 = 0xffffff;
@@ -6950,8 +6962,8 @@ public class Client extends GameShell {
                                                 j7 = 0;
                                             }
                                             class30_sub2_sub1_sub1_2.drawSprite1(spriteX + k6, spriteY + j7);
-                                            if (spriteY + j7 < Graphics2D.topY && inter.scrollPosition > 0) {
-                                                int i10 = (animationTimePassed * (Graphics2D.topY - spriteY - j7)) / 3;
+                                            if (spriteY + j7 < DrawingArea.topY && inter.scrollPosition > 0) {
+                                                int i10 = (animationTimePassed * (DrawingArea.topY - spriteY - j7)) / 3;
                                                 if (i10 > animationTimePassed * 10)
                                                     i10 = animationTimePassed * 10;
                                                 if (i10 > inter.scrollPosition)
@@ -6959,8 +6971,8 @@ public class Client extends GameShell {
                                                 inter.scrollPosition -= i10;
                                                 anInt1088 += i10;
                                             }
-                                            if (spriteY + j7 + 32 > Graphics2D.viewport_h && inter.scrollPosition < inter.scrollMax - inter.height) {
-                                                int j10 = (animationTimePassed * ((spriteY + j7 + 32) - Graphics2D.viewport_h)) / 3;
+                                            if (spriteY + j7 + 32 > DrawingArea.viewport_h && inter.scrollPosition < inter.scrollMax - inter.height) {
+                                                int j10 = (animationTimePassed * ((spriteY + j7 + 32) - DrawingArea.viewport_h)) / 3;
                                                 if (j10 > animationTimePassed * 10)
                                                     j10 = animationTimePassed * 10;
                                                 if (j10 > inter.scrollMax - inter.height - inter.scrollPosition)
@@ -7006,13 +7018,13 @@ public class Client extends GameShell {
                     //rsInterface.alpha += (byte)-50;//sexi
                     if (rsInterface.alpha == 0) {
                         if (rsInterface.filled)
-                            Graphics2D.fillRect(xx, yy, rsInterface.width, rsInterface.height, colour);
+                            DrawingArea.fillRect(xx, yy, rsInterface.width, rsInterface.height, colour);
                         else
-                            Graphics2D.drawRect(xx, yy, rsInterface.width, rsInterface.height, colour);
+                            DrawingArea.drawRect(xx, yy, rsInterface.width, rsInterface.height, colour);
                     } else if (rsInterface.filled)
-                        Graphics2D.fillRect(xx, yy, rsInterface.width, rsInterface.height, colour, 256 - (rsInterface.alpha & 0xff));
+                        DrawingArea.fillRect(xx, yy, rsInterface.width, rsInterface.height, colour, 256 - (rsInterface.alpha & 0xff));
                     else
-                        Graphics2D.drawRect(xx, yy, rsInterface.width, rsInterface.height, colour, 256 - (rsInterface.alpha & 0xff));
+                        DrawingArea.drawRect(xx, yy, rsInterface.width, rsInterface.height, colour, 256 - (rsInterface.alpha & 0xff));
                 } else if (rsInterface.type == 4) {
                     RSFont RSFont = rsInterface.font;
                     String s = rsInterface.textConditionFalse;
@@ -7035,7 +7047,7 @@ public class Client extends GameShell {
                         s = "Please wait...";
                         i4 = rsInterface.colourConditionFalse;
                     }
-                    if (Graphics2D.width == 479) {
+                    if (DrawingArea.width == 479) {
                         if (i4 == 0xffff00)
                             i4 = 255;
                         if (i4 == 49152)
@@ -7146,7 +7158,7 @@ public class Client extends GameShell {
                 }
         }
 
-        Graphics2D.setBounds(l1, i1, k1, j1);
+        DrawingArea.setBounds(l1, i1, k1, j1);
     }
 
     private void randomizeBackground(IndexedImage indexedImage) {
@@ -8005,7 +8017,7 @@ public class Client extends GameShell {
         //drawStatusGlobes();
         if (miniMapLock == 2) {
             byte abyte0[] = mapBack.imgPixels;
-            int ai[] = Graphics2D.pixels;
+            int ai[] = DrawingArea.pixels;
             int k2 = abyte0.length;
             for (int i5 = 0; i5 < k2; i5++)
                 if (abyte0[i5] == 0)
@@ -8108,7 +8120,7 @@ public class Client extends GameShell {
             int l4 = (destY * 4 + 2) - sessionPlayer.boundExtentY / 32;
             markMinimap(mapFlag, j2, l4);
         }
-        Graphics2D.fillRect(97, 78, 3, 3, 0xffffff);
+        DrawingArea.fillRect(97, 78, 3, 3, 0xffffff);
         gameScreenCanvas.initDrawingArea();
     }
 
@@ -8401,7 +8413,7 @@ public class Client extends GameShell {
         if (stage != 1) {
             titlebox.drawSprite(0, 0);
         } else {
-            Graphics2D.resetImage();//need to redraw titlescreen (black space)
+            DrawingArea.resetImage();//need to redraw titlescreen (black space)
             drawLogo();
             aRSImageProducer_1109.initDrawingArea();
             loadingBox1.drawSprite(60, 20);
@@ -10135,7 +10147,7 @@ public class Client extends GameShell {
         Model.resourceCount = 0;
         Model.cursorXPos = super.mouseEventX - 4;
         Model.cursorYPos = super.mouseEventY - 4;
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         //xxx disables graphics            if(graphicsEnabled){
         if (pglWrapper != null) {
             pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);

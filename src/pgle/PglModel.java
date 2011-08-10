@@ -43,11 +43,15 @@ public class PglModel {
   //  private ModelRendererGL modelRendererGL;
 
     private PglModel(Model rsModel){
+
         this.rsModel = rsModel;
     }
 
     public static PglModel createPglModel(Model rsModel,boolean animated){
         PglModel model;
+        if (textures[0] == null)
+            for (int i = 0;i < 50;i++)
+                textures[i] = getTexture(i);
         if (!animated){
             model = modelCache.get(rsModel);
             if (model != null)
@@ -222,9 +226,9 @@ public class PglModel {
         int verBIdx = rsModel.triangleB[triIdx];
         int verCIdx = rsModel.triangleC[triIdx];
         int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
-        Vector3f normalA = new Vector3f(rsModel.vertexNormals[verAIdx].getX(), -rsModel.vertexNormals[verAIdx].getY(), rsModel.vertexNormals[verAIdx].getZ());
-        Vector3f normalB = new Vector3f(rsModel.vertexNormals[verBIdx].getX(), -rsModel.vertexNormals[verBIdx].getY(), rsModel.vertexNormals[verBIdx].getZ());
-        Vector3f normalC = new Vector3f(rsModel.vertexNormals[verCIdx].getX(), -rsModel.vertexNormals[verCIdx].getY(), rsModel.vertexNormals[verCIdx].getZ());
+        Vector3f normalA = new Vector3f(rsModel.vertexNormals[verAIdx].getX(), rsModel.vertexNormals[verAIdx].getY(), rsModel.vertexNormals[verAIdx].getZ());
+        Vector3f normalB = new Vector3f(rsModel.vertexNormals[verBIdx].getX(), rsModel.vertexNormals[verBIdx].getY(), rsModel.vertexNormals[verBIdx].getZ());
+        Vector3f normalC = new Vector3f(rsModel.vertexNormals[verCIdx].getX(), rsModel.vertexNormals[verCIdx].getY(), rsModel.vertexNormals[verCIdx].getZ());
         Color colorT = fromRgb(0x808080,alpha);
         Color colorA = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
         Color colorB = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslB[triIdx]],alpha);
@@ -350,7 +354,5 @@ public class PglModel {
         }
     }
     static {
-        for (int i = 0;i < 50;i++)
-            textures[i] = getTexture(i);
     }
 }

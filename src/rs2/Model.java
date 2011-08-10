@@ -1750,69 +1750,69 @@ public class Model extends Entity {
 
      public void calculateNormals508() {
          vertexNormals = null;
-	if (vertexNormals == null) {
-	    vertexNormals = new VertexNormal[vertexCount];
-	    for (int i = 0; i < vertexCount; i++)
-		vertexNormals[i] = new VertexNormal();
-	    for (int i = 0; i < triangleCount; i++) {
-		int i_157_ = triangleA[i];
-		int i_158_ = triangleB[i];
-		int i_159_ = triangleC[i];
-		int i_160_ = vertexX[i_158_] - vertexX[i_157_];
-		int i_161_ = vertexY[i_158_] - vertexY[i_157_];
-		int i_162_ = vertexZ[i_158_] - vertexZ[i_157_];
-		int i_163_ = vertexX[i_159_] - vertexX[i_157_];
-		int i_164_ = vertexY[i_159_] - vertexY[i_157_];
-		int i_165_ = vertexZ[i_159_] - vertexZ[i_157_];
-		int i_166_ = i_161_ * i_165_ - i_164_ * i_162_;
-		int i_167_ = i_162_ * i_163_ - i_165_ * i_160_;
-		int i_168_;
-		for (i_168_ = i_160_ * i_164_ - i_163_ * i_161_;
-		     (i_166_ > 8192 || i_167_ > 8192 || i_168_ > 8192
-		      || i_166_ < -8192 || i_167_ < -8192 || i_168_ < -8192);
-		     i_168_ >>= 1) {
-		    i_166_ >>= 1;
-		    i_167_ >>= 1;
-		}
-		int i_169_ = (int) Math.sqrt((double) (i_166_ * i_166_
-						       + i_167_ * i_167_
-						       + i_168_ * i_168_));
-		if (i_169_ <= 0)
-		    i_169_ = 1;
-		i_166_ = i_166_ * 256 / i_169_;
-		i_167_ = i_167_ * 256 / i_169_;
-		i_168_ = i_168_ * 256 / i_169_;
-		int i_170_;
-		if (triangleDrawType == null)
-		    i_170_ = (byte) 0;
-		else
-		    i_170_ = triangleDrawType[i] & 1;
-		if (i_170_ == 0) {
-		    VertexNormal vertexNormal = vertexNormals[i_157_];
-		    vertexNormal.x += i_166_;
-		    vertexNormal.y += i_167_;
-		    vertexNormal.z += i_168_;
-		    vertexNormal.magnitude++;
-		    vertexNormal = vertexNormals[i_158_];
-		    vertexNormal.x += i_166_;
-		    vertexNormal.y += i_167_;
-		    vertexNormal.z += i_168_;
-		    vertexNormal.magnitude++;
-		    vertexNormal = vertexNormals[i_159_];
-		    vertexNormal.x += i_166_;
-		    vertexNormal.y += i_167_;
-		    vertexNormal.z += i_168_;
-		    vertexNormal.magnitude++;
-		} else if (i_170_ == 1) {
-		    if (triangleNormals == null || triangleNormals.length != triangleCount)
-			triangleNormals = new TriangleNormal[triangleCount];
-		    TriangleNormal triangleNormal = triangleNormals[i] = new TriangleNormal();
-		    triangleNormal.x = i_166_;
-		    triangleNormal.y = i_167_;
-		    triangleNormal.z = i_168_;
-		}
-	    }
-	}
+        if (vertexNormals == null) {
+            vertexNormals = new VertexNormal[vertexCount];
+            for (int i = 0; i < vertexCount; i++)
+            vertexNormals[i] = new VertexNormal();
+            for (int i = 0; i < triangleCount; i++) {
+            int i_157_ = triangleA[i];
+            int i_158_ = triangleB[i];
+            int i_159_ = triangleC[i];
+            int i_160_ = vertexX[i_158_] - vertexX[i_157_];
+            int i_161_ = vertexY[i_158_] - vertexY[i_157_];
+            int i_162_ = vertexZ[i_158_] - vertexZ[i_157_];
+            int i_163_ = vertexX[i_159_] - vertexX[i_157_];
+            int i_164_ = vertexY[i_159_] - vertexY[i_157_];
+            int i_165_ = vertexZ[i_159_] - vertexZ[i_157_];
+            int i_166_ = i_161_ * i_165_ - i_164_ * i_162_;
+            int i_167_ = i_162_ * i_163_ - i_165_ * i_160_;
+            int i_168_;
+            for (i_168_ = i_160_ * i_164_ - i_163_ * i_161_;
+                 (i_166_ > 8192 || i_167_ > 8192 || i_168_ > 8192
+                  || i_166_ < -8192 || i_167_ < -8192 || i_168_ < -8192);
+                 i_168_ >>= 1) {
+                i_166_ >>= 1;
+                i_167_ >>= 1;
+            }
+            int i_169_ = (int) Math.sqrt((double) (i_166_ * i_166_
+                                   + i_167_ * i_167_
+                                   + i_168_ * i_168_));
+            if (i_169_ <= 0)
+                i_169_ = 1;
+            i_166_ = i_166_ * 256 / i_169_;
+            i_167_ = i_167_ * 256 / i_169_;
+            i_168_ = i_168_ * 256 / i_169_;
+            int i_170_;
+            if (triangleDrawType == null)
+                i_170_ = (byte) 0;
+            else
+                i_170_ = triangleDrawType[i] & 1;
+            if (i_170_ == 0) {
+                VertexNormal vertexNormal = vertexNormals[i_157_];
+                vertexNormal.x += i_166_;
+                vertexNormal.y += i_167_;
+                vertexNormal.z += i_168_;
+                vertexNormal.magnitude++;
+                vertexNormal = vertexNormals[i_158_];
+                vertexNormal.x += i_166_;
+                vertexNormal.y += i_167_;
+                vertexNormal.z += i_168_;
+                vertexNormal.magnitude++;
+                vertexNormal = vertexNormals[i_159_];
+                vertexNormal.x += i_166_;
+                vertexNormal.y += i_167_;
+                vertexNormal.z += i_168_;
+                vertexNormal.magnitude++;
+            } else if (i_170_ == 1) {
+                if (triangleNormals == null || triangleNormals.length != triangleCount)
+                triangleNormals = new TriangleNormal[triangleCount];
+                TriangleNormal triangleNormal = triangleNormals[i] = new TriangleNormal();
+                triangleNormal.x = i_166_;
+                triangleNormal.y = i_167_;
+                triangleNormal.z = i_168_;
+            }
+            }
+        }
     }
 
     public void light(int lightMod, int magMultiplyer, int l_x, int l_y, int l_z, boolean flatShading) {
@@ -2096,19 +2096,19 @@ public class Model extends Entity {
             return;
         int j3 = z * xCurveSine + x * xCurveCosine >> 16;
         int k3 = j3 - diagonal2DAboveorigin << 9;
-        if (k3 / i3 >= Graphics2D.viewportCx)
+        if (k3 / i3 >= DrawingArea.viewportCx)
             return;
         int l3 = j3 + diagonal2DAboveorigin << 9;
-        if (l3 / i3 <= -Graphics2D.viewportCx)
+        if (l3 / i3 <= -DrawingArea.viewportCx)
             return;
         int i4 = y * yCameraCosine - j2 * yCameraSine >> 16;
         int j4 = diagonal2DAboveorigin * yCameraSine >> 16;
         int k4 = i4 + j4 << 9;
-        if (k4 / i3 <= -Graphics2D.viewportCy)
+        if (k4 / i3 <= -DrawingArea.viewportCy)
             return;
         int l4 = j4 + (super.modelHeight * yCameraCosine >> 16);
         int i5 = i4 - l4 << 9;
-        if (i5 / i3 >= Graphics2D.viewportCy)
+        if (i5 / i3 >= DrawingArea.viewportCy)
             return;
         int j5 = l2 + (super.modelHeight * yCameraSine >> 16);
         boolean flag = false;
@@ -2211,7 +2211,7 @@ public class Model extends Entity {
                     }
                     if ((i3 - l3) * (vertexSY[j2] - vertexSY[k1]) - (vertexSY[l] - vertexSY[k1]) * (k4 - l3) > 0) {
                         aBooleanArray1664[k] = false;
-                        aBooleanArray1663[k] = i3 < 0 || l3 < 0 || k4 < 0 || i3 > Graphics2D.viewportRx || l3 > Graphics2D.viewportRx || k4 > Graphics2D.viewportRx;
+                        aBooleanArray1663[k] = i3 < 0 || l3 < 0 || k4 < 0 || i3 > DrawingArea.viewportRx || l3 > DrawingArea.viewportRx || k4 > DrawingArea.viewportRx;
                         int k5 = (depthBuffer[l] + depthBuffer[k1] + depthBuffer[j2]) / 3 + diagonal3DAboveorigin;
                         faceLists[k5][depthListIndices[k5]++] = k;
                     }
@@ -2467,7 +2467,7 @@ public class Model extends Entity {
         if ((j3 - j4) * (k7 - j7) - (i7 - j7) * (j5 - j4) > 0) {
             Rasterizer.restrict_edges = false;
             if (l == 3) {
-                if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > Graphics2D.viewportRx || j4 > Graphics2D.viewportRx || j5 > Graphics2D.viewportRx)
+                if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewportRx || j4 > DrawingArea.viewportRx || j5 > DrawingArea.viewportRx)
                     Rasterizer.restrict_edges = true;
                 int l7;
                 if (triangleDrawType == null)
@@ -2493,7 +2493,7 @@ public class Model extends Entity {
                 }
             }
             if (l == 4) {
-                if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > Graphics2D.viewportRx || j4 > Graphics2D.viewportRx || j5 > Graphics2D.viewportRx || anIntArray1678[3] < 0 || anIntArray1678[3] > Graphics2D.viewportRx)
+                if (j3 < 0 || j4 < 0 || j5 < 0 || j3 > DrawingArea.viewportRx || j4 > DrawingArea.viewportRx || j5 > DrawingArea.viewportRx || anIntArray1678[3] < 0 || anIntArray1678[3] > DrawingArea.viewportRx)
                     Rasterizer.restrict_edges = true;
                 int i8;
                 if (triangleDrawType == null)

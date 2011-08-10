@@ -1,8 +1,13 @@
 package rs2;
 
 
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
 import java.awt.*;
 import java.awt.image.*;
+import java.nio.IntBuffer;
 
 public class GraphicsBuffer
 		implements ImageProducer, ImageObserver {
@@ -23,7 +28,7 @@ public class GraphicsBuffer
 	}
 
 	public void initDrawingArea() {
-		Graphics2D.setTarget(canvasHeight, canvasWidth, componentPixels);
+		DrawingArea.setTarget(canvasHeight, canvasWidth, componentPixels);
 	}
 
 	public void drawGraphics(int y, Graphics g, int x) {
@@ -74,4 +79,16 @@ public class GraphicsBuffer
 	private final ColorModel colorModel;
 	private ImageConsumer myImageConsumer;
 	private final Image image;
+
+    public void drawGraphicsGL(int y, int x) {
+        GL11.glRasterPos2i(x,503-canvasHeight-y);
+        int[] _componentPixels = new int[componentPixels.length];
+        IntBuffer i = BufferUtils.createIntBuffer(_componentPixels.length);
+        for (int _y = 0;_y < canvasHeight;_y++){
+            int screeny = canvasHeight - _y - 1;
+            i.put(_componentPixels,screeny * canvasWidth, canvasWidth);
+        }
+        i.flip();
+       // GL11.glDrawPixels(canvasWidth, canvasHeight, GL12.GL_BGRA, GL11.GL_UNSIGNED_BYTE, i);
+    }
 }

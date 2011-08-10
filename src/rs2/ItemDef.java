@@ -282,16 +282,16 @@ public class ItemDef
         int centerX = Rasterizer.centerX;
         int centerY = Rasterizer.centerY;
         int lineOffsets[] = Rasterizer.lineOffsets;
-        int pixels[] = Graphics2D.pixels;
-        int width = Graphics2D.width;
-        int height = Graphics2D.height;
-        int topX = Graphics2D.topX;
-        int width_ = Graphics2D.viewport_w;
-        int topY = Graphics2D.topY;
-        int height_ = Graphics2D.viewport_h;
+        int pixels[] = DrawingArea.pixels;
+        int width = DrawingArea.width;
+        int height = DrawingArea.height;
+        int topX = DrawingArea.topX;
+        int width_ = DrawingArea.viewport_w;
+        int topY = DrawingArea.topY;
+        int height_ = DrawingArea.viewport_h;
         Rasterizer.notTextured = false;
-        Graphics2D.setTarget(32, 32, sprite2.myPixels);
-        Graphics2D.fillRect(0, 0, 32, 32, 0);
+        DrawingArea.setTarget(32, 32, sprite2.myPixels);
+        DrawingArea.fillRect(0, 0, 32, 32, 0);
         Rasterizer.setDefaultBounds();
         int k3 = definition.modelZoom;
         if(k == -1)
@@ -363,8 +363,8 @@ public class ItemDef
         }
         if(k == 0)
             rgbImageCache.put(sprite2, itemID);
-        Graphics2D.setTarget(height, width, pixels);
-        Graphics2D.setBounds(height_, topX, width_, topY);
+        DrawingArea.setTarget(height, width, pixels);
+        DrawingArea.setBounds(height_, topX, width_, topY);
         Rasterizer.centerX = centerX;
         Rasterizer.centerY = centerY;
         Rasterizer.lineOffsets = lineOffsets;

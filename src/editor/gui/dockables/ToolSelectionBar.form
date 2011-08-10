@@ -16,6 +16,7 @@
         </constraints>
         <properties>
           <text value="PO"/>
+          <toolTipText value="Paint Overlay"/>
         </properties>
       </component>
       <hspacer id="86499">
@@ -29,6 +30,7 @@
         </constraints>
         <properties>
           <text value="PU"/>
+          <toolTipText value="Paint Underlay"/>
         </properties>
       </component>
       <component id="d08c8" class="javax.swing.JToggleButton" binding="heighChgButton">
@@ -37,6 +39,7 @@
         </constraints>
         <properties>
           <text value="HM"/>
+          <toolTipText value="Modify height"/>
         </properties>
       </component>
       <component id="d9e5e" class="javax.swing.JToggleButton" binding="heightSetButton">
@@ -45,6 +48,7 @@
         </constraints>
         <properties>
           <text value="HS"/>
+          <toolTipText value="Set height"/>
         </properties>
       </component>
       <component id="c3862" class="javax.swing.JToggleButton" binding="applySettingsButton">
@@ -53,6 +57,7 @@
         </constraints>
         <properties>
           <text value="AS"/>
+          <toolTipText value="Apply settings"/>
         </properties>
       </component>
       <component id="ce6e5" class="javax.swing.JToggleButton" binding="selectButton">
@@ -62,6 +67,7 @@
         <properties>
           <selected value="true"/>
           <text value="S"/>
+          <toolTipText value="Select"/>
         </properties>
       </component>
       <component id="d6530" class="javax.swing.JSlider" binding="slider1" default-binding="true">
@@ -99,6 +105,7 @@
         </constraints>
         <properties>
           <text value="FO"/>
+          <toolTipText value="Fill overlay"/>
         </properties>
       </component>
       <component id="5b45c" class="javax.swing.JToggleButton" binding="floodFillUButton">
@@ -107,6 +114,7 @@
         </constraints>
         <properties>
           <text value="FU"/>
+          <toolTipText value="Fill underlay"/>
         </properties>
       </component>
       <component id="bcd8b" class="javax.swing.JToggleButton" binding="heightFillUButton">
@@ -115,6 +123,7 @@
         </constraints>
         <properties>
           <text value="HFU"/>
+          <toolTipText value="Fill area demarked by underlay with set height"/>
         </properties>
       </component>
       <component id="463a" class="javax.swing.JToggleButton" binding="heightFillOButton">
@@ -123,6 +132,7 @@
         </constraints>
         <properties>
           <text value="HFO"/>
+          <toolTipText value="Fill area demarked by overlay with set height"/>
         </properties>
       </component>
       <component id="dc8ef" class="javax.swing.JToggleButton" binding="settingsFillOButton">
@@ -131,6 +141,7 @@
         </constraints>
         <properties>
           <text value="FSO"/>
+          <toolTipText value="Fill area demarked by overlay with settings"/>
         </properties>
       </component>
       <component id="ebafd" class="javax.swing.JToggleButton" binding="settingsFillUButton">
@@ -139,6 +150,7 @@
         </constraints>
         <properties>
           <text value="FSU"/>
+          <toolTipText value="Fill area demarked by underlay with settings"/>
         </properties>
       </component>
       <component id="aace4" class="javax.swing.JToggleButton" binding="shapeOButton">
@@ -147,6 +159,7 @@
         </constraints>
         <properties>
           <text value="SO"/>
+          <toolTipText value="Smooth edges of overlay"/>
         </properties>
       </component>
       <component id="8f9bf" class="javax.swing.JToggleButton" binding="shapeUButton">
@@ -155,6 +168,7 @@
         </constraints>
         <properties>
           <text value="SU"/>
+          <toolTipText value="Smooth edges within underlay"/>
         </properties>
       </component>
     </children>
