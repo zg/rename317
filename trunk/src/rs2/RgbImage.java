@@ -4,7 +4,7 @@ package rs2;
 import java.awt.*;
 import java.awt.image.PixelGrabber;
 
-public class RgbImage extends Graphics2D {
+public class RgbImage extends DrawingArea {
 
     public RgbImage(int width, int height)
     {
@@ -403,7 +403,7 @@ public class RgbImage extends Graphics2D {
             __pxoffset = __pxoffset * hingesize >> 8;
             int xSomething = (center_x << 16) + (negCenterY * __pyoffset + negCenterX * __pxoffset);
             int k3 = (center_y << 16) + (negCenterY * __pxoffset - negCenterX * __pyoffset);
-            int baseOffset = some_x + some_y * Graphics2D.width;
+            int baseOffset = some_x + some_y * DrawingArea.width;
             for(some_y = 0; some_y < height; some_y++)
             {
                 int targetLineOffset = ai1[some_y];
@@ -419,7 +419,7 @@ public class RgbImage extends Graphics2D {
 
                 xSomething += __pyoffset;
                 k3 += __pxoffset;
-                baseOffset += Graphics2D.width;
+                baseOffset += DrawingArea.width;
             }
 
         }
@@ -442,7 +442,7 @@ public class RgbImage extends Graphics2D {
             __pxoffset = __pxoffset * hingesize >> 8;
             int i3 = (center_x << 16) + (j2 * __pyoffset + i2 * __pxoffset);
             int j3 = (center_y << 16) + (j2 * __pxoffset - i2 * __pyoffset);
-            int off = x + y * Graphics2D.width;
+            int off = x + y * DrawingArea.width;
             for(y = 0; y < height; y++)
             {
                 int l3 = off;
@@ -461,7 +461,7 @@ public class RgbImage extends Graphics2D {
 
                 i3 += __pyoffset;
                 j3 += __pxoffset;
-                off += Graphics2D.width;
+                off += DrawingArea.width;
             }
 
         }
@@ -489,7 +489,7 @@ public class RgbImage extends Graphics2D {
             __pxoffset = __pxoffset * hingesize >> 8;
             int i3 = (center_x << 16) + (j2 * __pyoffset + i2 * __pxoffset);
             int j3 = (center_y << 16) + (j2 * __pxoffset - i2 * __pyoffset);
-            int off = x + y * Graphics2D.width;
+            int off = x + y * DrawingArea.width;
             for(y = 0; y < height; y++)
             {
                 int l3 = off;
@@ -508,7 +508,7 @@ public class RgbImage extends Graphics2D {
 
                 i3 += __pyoffset;
                 j3 += __pxoffset;
-                off += Graphics2D.width;
+                off += DrawingArea.width;
             }
 
         }

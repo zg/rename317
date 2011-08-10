@@ -2,8 +2,6 @@ package rs2;
 
 // Decompiler options: packimports(3)
 
-import java.io.File;
-
 public class MapRegion {
 
     private int[][][] underlayRgb;
@@ -102,7 +100,7 @@ public class MapRegion {
                     int normal_z = (hDY << 8) / square;
                     int j16 = light_off + (l_x * normal_x + l_y * normal_y + l_z * normal_z) / sqrtA;
                     int j17 = (something_with_objects[X - 1][Y] >> 2) + (something_with_objects[X + 1][Y] >> 3) + (something_with_objects[X][Y - 1] >> 2) + (something_with_objects[X][Y + 1] >> 3) + (something_with_objects[X][Y] >> 1);
-                    tileLightness[X][Y] = j16 - j17;
+                    tileLightness[X][Y] = 96;// j16 - j17;
                 }
 
             }
@@ -255,7 +253,7 @@ public class MapRegion {
                                 underlayRgb[z][X][Y] = underlay_rgb;
                                 if(overlay_id == 0 || (renderMode & NO_OVERLAY_BIT) != 0)
                                 {
-                                    sceneGraph.addTile(z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), 0, 0, 0, 0, underlay_rgb, 0);
+                                    sceneGraph.addTile(z, X, Y, 0, 0, -1, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), 0, 0, 0, 0, underlay_rgb, 0, false);
                                 } else {
                                     int shape = tileShape[z][X][Y] + 1;
                                     byte rotation = tileShapeRotation[z][X][Y];
@@ -275,7 +273,7 @@ public class MapRegion {
                                         overlay_hsl = overlay.hslColour;//pack_hsl(overlay.hue, overlay.saturation, overlay.lightness);
                                         overlay_rgb = Rasterizer.hsl2rgb[mix_lightness_gt(overlay.hslColour, 96)];
                                     }
-                                    sceneGraph.addTile(z, X, Y, shape, rotation, overlay_texture, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), mix_lightness_gt(overlay_hsl, shadow_a), mix_lightness_gt(overlay_hsl, shadow_b), mix_lightness_gt(overlay_hsl, shadow_d), mix_lightness_gt(overlay_hsl, shadow_c), underlay_rgb, overlay_rgb);
+                                    sceneGraph.addTile(z, X, Y, shape, rotation, overlay_texture, zA, zB, zD, zC, mix_lightness(underlay_hsl_real, shadow_a), mix_lightness(underlay_hsl_real, shadow_b), mix_lightness(underlay_hsl_real, shadow_d), mix_lightness(underlay_hsl_real, shadow_c), mix_lightness_gt(overlay_hsl, shadow_a), mix_lightness_gt(overlay_hsl, shadow_b), mix_lightness_gt(overlay_hsl, shadow_d), mix_lightness_gt(overlay_hsl, shadow_c), underlay_rgb, overlay_rgb, false);
                                 }
                             }
                         }
@@ -599,7 +597,7 @@ label0:
                 obj = class46.method578(22, j1, zA, zB, zD, zC, -1);
             else
                 obj = new ObjectOnTile(i1, j1, 22, zB, zD, zA, zC, class46.animationID, true);
-            sceneGraph.addGroundDecoration(k, zMix, i, ((Entity) (obj)), objConf, idTag, l);
+            sceneGraph.addGroundDecoration(k, zMix, i, ((Entity) (obj)), objConf, idTag, l, false);
             if(class46.isUnwalkable && class46.hasActions && tileSetting != null)
                 tileSetting.orClipTableSET(i, l);
             return;
@@ -1223,7 +1221,7 @@ label0:
                 obj = objectDef.method578(22, i, l1, i2, j2, k2, -1);
             else
                 obj = new ObjectOnTile(objectID, i, 22, i2, j2, l1, k2, objectDef.animationID, true);
-            sceneGraph.addGroundDecoration(z, l2, y, ((Entity) (obj)), byte1, i3, x);
+            sceneGraph.addGroundDecoration(z, l2, y, ((Entity) (obj)), byte1, i3, x, false);
             if(objectDef.isUnwalkable && objectDef.hasActions)
                 tileSetting.orClipTableSET(y, x);
             return;

@@ -3,7 +3,7 @@ package rs2;
 
 //import javax.management.MXBean;
 
-public class Rasterizer extends Graphics2D {
+public class Rasterizer extends DrawingArea {
 
     public static RgbImage[] textureImagesHD = new RgbImage[670];
 	private static boolean useLatestShadeLine = true;
@@ -1008,8 +1008,8 @@ public class Rasterizer extends Graphics2D {
 		int loops;
 		int off = 0;
 		if (restrict_edges) {
-			if (end_x > Graphics2D.viewportRx) {
-				end_x = Graphics2D.viewportRx;
+			if (end_x > DrawingArea.viewportRx) {
+				end_x = DrawingArea.viewportRx;
 			}
 			if (start_x < 0) {
 				color_index -= start_x * off;

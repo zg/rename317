@@ -5,7 +5,7 @@ import editor.gui.dockables.ToolSelectionBar;
 import editor.renderer.GameViewPanel;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import rs2.*;
-import rs2.Graphics2D;
+import rs2.DrawingArea;
 
 import javax.swing.*;
 import java.awt.*;
@@ -154,7 +154,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             JagexArchive textureArchive = getJagexArchive(6);
             tileSettingBits = new byte[4][mapTileW][mapTileH];
             heightMap = new int[4][mapTileW + 1][mapTileH + 1];
-            sceneGraph = new SceneGraph(4,mapTileW, mapTileH, heightMap);
+            sceneGraph = new SceneGraph(4,mapTileW, mapTileH, heightMap,null);
             for (int j = 0; j < 4; j++)
                 tileSettings[j] = new TileSetting(mapTileW, mapTileH);
 
@@ -301,7 +301,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             return;
         startGraphicsBlock();
         gameScreenCanvas = new GraphicsBuffer(resizeWidth, resizeHeight, getGameComponent());
-        Graphics2D.fillRect(0, 0, resizeWidth, resizeHeight, 0);
+        DrawingArea.fillRect(0, 0, resizeWidth, resizeHeight, 0);
         Rasterizer.setBounds(resizeWidth, resizeHeight);
         SceneGraph.setupViewport(500, 800, resizeWidth, resizeHeight, isOnScreen);
         this.resizeWidth = -1;
@@ -333,6 +333,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 heightLevel = heightlevelChangeRequest;
                 sceneGraph.setHeightLevel(heightlevelChangeRequest);
                 renderMinimap(heightlevelChangeRequest);
+                editorMainWindow.getEditorToolbar().setHeightLevel(heightlevelChangeRequest);
                 repaint();
                 this.heightlevelChangeRequest = -1;
             }
@@ -401,8 +402,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 for (int _z = y;_z < editorMainWindow.getToolSelectionBar().getBrushSize()+y;_z++)   {
                     if (z < 0 || _x < 0 || _z < 0 || z > 3 || _x >= mapTileW || _z >= mapTileH)
                         continue;
-                    int dx = Math.abs(x-_x);
-                    int dy = Math.abs(y-_z);
+                    //int dx = Math.abs(x-_x);
+                    //int dy = Math.abs(y-_z);
                     sceneGraph.setHighlightedTile(_x,_z);
                 }
         } else {
@@ -410,8 +411,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 for (int _z = y-halfW;_z <= halfW+y;_z++)   {
                     if (z < 0 || _x < 0 || _z < 0 || z > 3 || _x >= mapTileW || _z >= mapTileH)
                         continue;
-                    int dx = Math.abs(x-_x);
-                    int dy = Math.abs(y-_z);
+                    //int dx = Math.abs(x-_x);
+                    //int dy = Math.abs(y-_z);
                     sceneGraph.setHighlightedTile(_x,_z);
                 }
         }
@@ -449,6 +450,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 mapRegion.automaticHeight[z][x][y] = false;
                 if (!controlDown && setHeight != -1){
                     heightMap[z][x][y]=setHeight;
+                    editorMainWindow.getEditorToolbar().setTargetHeight(setHeight);
                 } else if (controlDown && d == 0) {
                     setHeight = heightMap[z][x][y];
                 }
@@ -463,16 +465,18 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 break;
             case HEIGHTFILL_OVERLAY:
                 if (d == 0)
-                    if (controlDown)
+                    if (controlDown){
                         setHeight = heightMap[z][x][y];
-                    else
+                        editorMainWindow.getEditorToolbar().setTargetHeight(setHeight);
+                    } else
                         doFloodFill(z, x, y, true, -1);
                 break;
             case HEIGHTFILL_UNDERLAY:
                 if (d == 0)
-                    if (controlDown)
+                    if (controlDown){
                         setHeight = heightMap[z][x][y];
-                    else
+                        editorMainWindow.getEditorToolbar().setTargetHeight(setHeight);
+                    } else
                         doFloodFill(z, x, y, false, -1);
                 break;
             case SETTINGSFILL_OVERLAY:
@@ -903,7 +907,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
 
     private void drawMinimap() {
         minimapIP.initDrawingArea();
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         int i = xCameraCurve & 0x7ff;
         int j = 128+xCameraPos / 32;
         int l2 = (786-128) - yCameraPos / 32;
@@ -915,7 +919,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             int mapY = (markPosY[j5] * 4 + 2) - yCameraPos / 32;
             markMinimap(markGraphic[j5], mapX, mapY);
         }
-        Graphics2D.fillRect(minimapIP.canvasWidth/2, minimapIP.canvasHeight/2, 3, 3, 0xffffff);
+        DrawingArea.fillRect(minimapIP.canvasWidth / 2, minimapIP.canvasHeight / 2, 3, 3, 0xffffff);
         if (minimapGraphics != null && editorMainWindow.getMapViewPanel().getGraphics() != null)
             minimapIP.drawGraphics(0,editorMainWindow.getMapViewPanel().getGraphics(),0);
         gameScreenCanvas.initDrawingArea();
@@ -933,7 +937,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         Model.cursorXPos = super.mouseEventX - 4;
         Model.cursorYPos = super.mouseEventY - 4;
         gameScreenCanvas.initDrawingArea();
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         //xxx disables graphics            if(graphicsEnabled){
         //pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);
         //pglWrapper.setCameraRotation(-xCameraCurve, 0, yCameraCurve);
@@ -1131,5 +1135,9 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 terrainData = GZIPWrapper.compress(terrainData);
                 jagexFileStores[4].put(terrainData.length,terrainData,terrainIdx);
             }
+    }
+
+    public void setTargetHeight(int targetHeight) {
+        setHeight = targetHeight;
     }
 }

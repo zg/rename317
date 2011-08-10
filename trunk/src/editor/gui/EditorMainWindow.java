@@ -85,6 +85,7 @@ public class EditorMainWindow {
                 if (editorToolbar.getHeightlevel() != editor.getHeightLevel())
                     editor.setHeightLevel(editorToolbar.getHeightlevel());
                 editor.setShowAllHLs(editorToolbar.getShowAllHLs());
+                editor.setTargetHeight(editorToolbar.getTargetHeight());
                 if (e != null)
                     editor.setRenderSettings(editorToolbar.getSettings());
             }

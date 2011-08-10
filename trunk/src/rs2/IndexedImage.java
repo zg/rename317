@@ -1,7 +1,7 @@
 package rs2;
 
 
-public class IndexedImage extends Graphics2D {
+public class IndexedImage extends DrawingArea {
 
     public IndexedImage(JagexArchive jagexArchive, String s, int i)
     {

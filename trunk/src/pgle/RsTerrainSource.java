@@ -2,6 +2,7 @@ package pgle;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
+import org.lwjgl.util.vector.Vector3f;
 import org.peterbjornx.pgl2.terrain.TerrainSource;
 import org.peterbjornx.pgl2.texture.Texture2D;
 import rs2.Floor;
@@ -20,6 +21,7 @@ public class RsTerrainSource implements TerrainSource {
     private Color[][] colourMap = new Color[104][104];
     private int[][] heightMap = new int[104][104];
     private int heightLevel = 0;
+    private PglTerrainModel model;
 
     public RsTerrainSource(MapRegion mapRegion) {
         this.mapRegion = mapRegion;
@@ -33,12 +35,14 @@ public class RsTerrainSource implements TerrainSource {
             for (int z = 0;z < 104;z++){
                 if (underlays[x][z] == 0)
                     underlays[x][z] = 1;
-                Floor underlay = Floor.cache[underlays[x][z] - 1];
+                Floor underlay = Floor.cache[(underlays[x][z] & 0xFF) - 1];
                 int underlayRgb = underlaysRgb[x][z];
                 colourMap[x][z] = new Color(underlayRgb >> 16,underlayRgb >> 8,underlayRgb & 0xFF);
                 textureMap[x][z] = underlay.hdUlTexture;
-                heightMap[x][z] = -heightmap[x][z];
+                heightMap[x][z] = (((!(mapRegion.getOverLay()[heightLevel][x][z] == 6 && mapRegion.getTileShape()[heightLevel][x][z] != 1)) || heightmap[x][z] != 0) ? -heightmap[x][z] : -200)-9;
+
             }
+        model = new PglTerrainModel(mapRegion,0);
     }
 
     public int[][] getHeightMap() {
@@ -51,6 +55,11 @@ public class RsTerrainSource implements TerrainSource {
 
     public int[][] getTextureMap() {
         return textureMap;
+    }
+
+    @Override
+    public Vector3f[][] getNormalMap() {
+        return model.getNormals();
     }
 
     public Texture2D getTexture(int id) {

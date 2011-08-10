@@ -66,8 +66,8 @@ public class PglSun {
             sunGLLight1.setPosition((Vector3f)position.negate());
             this.position = position;
             light0Position[0] = (int) position.getX();
-            light0Position[1] = (int) position.getX();
-            light0Position[2] = (int) position.getX();
+            light0Position[1] = (int) position.getY();
+            light0Position[2] = (int) position.getZ();
         }
     }
 

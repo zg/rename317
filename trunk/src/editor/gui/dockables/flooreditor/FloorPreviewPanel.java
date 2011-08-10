@@ -3,10 +3,8 @@ package editor.gui.dockables.flooreditor;
 import rs2.*;
 
 import javax.swing.*;
-import javax.swing.text.ZoneView;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.text.BreakIterator;
 
 /**
  * Created by IntelliJ IDEA.
@@ -55,42 +53,42 @@ public class FloorPreviewPanel extends JPanel{
     public void paint(Graphics g) {    //TODO: Add texture colour blending
         GameShell.startGraphicsBlock();
         graphicsBuffer.initDrawingArea();
-        Graphics2D.resetImage();
+        DrawingArea.resetImage();
         if (myFloor != null)
             switch (mode){
                 case RT3_GAME:
                     if (myFloor.texture != -1)
                         Rasterizer.textureImages[myFloor.texture].drawImage(0,0);
                     else
-                        Graphics2D.fillRect(0,0,128,128,myFloor.colour2);
+                        DrawingArea.fillRect(0, 0, 128, 128, myFloor.colour2);
                     break;
                 case RT3_GAME_LD:
                     if (myFloor.texture != -1)
-                        Graphics2D.fillRect(0,0,128,128,Rasterizer.getAverageTextureColour(myFloor.texture));
+                        DrawingArea.fillRect(0, 0, 128, 128, Rasterizer.getAverageTextureColour(myFloor.texture));
                     else
-                        Graphics2D.fillRect(0, 0, 128, 128, myFloor.colour2);
+                        DrawingArea.fillRect(0, 0, 128, 128, myFloor.colour2);
                     break;
                 case RT3_MAP:
                     if (myFloor.texture != -1)
-                        Graphics2D.fillRect(0,0,128,128,Rasterizer.getAverageTextureColour(myFloor.texture));
+                        DrawingArea.fillRect(0, 0, 128, 128, Rasterizer.getAverageTextureColour(myFloor.texture));
                     else
-                        Graphics2D.fillRect(0, 0, 128, 128, myFloor.minimapColour);
+                        DrawingArea.fillRect(0, 0, 128, 128, myFloor.minimapColour);
                     break;
                 case RT4P_OVERLAY:
                     if (myFloor.hdTexture != -1)
                         Rasterizer.textureImagesHD[myFloor.hdTexture].drawSprite(0,0);
                     else
-                        Graphics2D.fillRect(0,0,128,128,myFloor.hdColour);
+                        DrawingArea.fillRect(0, 0, 128, 128, myFloor.hdColour);
                     break;
                 case RT4P_UNDERLAY:
                     if (myFloor.hdUlTexture != -1)
                         Rasterizer.textureImagesHD[myFloor.hdUlTexture].drawSprite(0,0);
                     else
-                        Graphics2D.fillRect(0,0,128,128,myFloor.hdUlColour);
+                        DrawingArea.fillRect(0, 0, 128, 128, myFloor.hdUlColour);
                     break;
             }
         else
-            Graphics2D.fillRect(0, 0, 128, 128, 0xFF0000);
+            DrawingArea.fillRect(0, 0, 128, 128, 0xFF0000);
         GameShell.endGraphicsBlock();
         graphicsBuffer.drawGraphics(0,g,0);
     }
