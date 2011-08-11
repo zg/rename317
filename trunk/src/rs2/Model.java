@@ -213,7 +213,6 @@ public class Model extends Entity {
     	int[] anIntArray2228 = null;
     	int[] anIntArray2241 = null;
     	short[] aShortArray2237 = null;
-    	byte[] aByteArray2240 = null;
     	int[] anIntArray2272 = null;
     	int[] anIntArray2261 = null;
     	int[] anIntArray2225 = null;
@@ -346,7 +345,7 @@ public class Model extends Entity {
             triangleTSkin = new int[triangleCount];
         int i9 = l3;
         if(flag)
-            aByteArray2240 = new byte[triangleCount];
+            triangleDrawType = new int[triangleCount];
         triangleB = new int[triangleCount];
         triangleColour = new int[triangleCount];
         if(j1 == 1)
@@ -418,7 +417,7 @@ public class Model extends Entity {
         {
             triangleColour[k10] = (short)rsbuffer.g2();
             if(flag)
-                aByteArray2240[k10] = rsbuffer1.g1b();
+                triangleDrawType[k10] = rsbuffer1.g1b();
             if(j == 255)
                 facePriority[k10] = rsbuffer2.g1b();
             if(k == 1)
@@ -1668,8 +1667,16 @@ public class Model extends Entity {
                 triangleColour[k] = j;
 
     }
+    
+    public boolean fliped = false;
 
     public void mirrorModel() {//mirrors the model, used on lumbys castle doors, alkarid gates etcetc
+    	if(fliped)
+    	{
+    		System.out.println("fuuu");
+    		return;
+    	}
+    	fliped = true;
         for (int vertex = 0; vertex < vertexCount; vertex++)
             vertexZ[vertex] = -vertexZ[vertex];
 

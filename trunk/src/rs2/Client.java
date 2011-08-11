@@ -5914,7 +5914,7 @@ public class Client extends GameShell {
             onDemandFetcher.start(jagexArchive_6, this);
             Animation.initialize(onDemandFetcher.getAnimCount());
             Model.initialize(onDemandFetcher.getVersionCount(0), onDemandFetcher);
-            preloadModels();
+           // preloadModels();
             if (!lowMem) {
                 nextSong = 0;
                 try {
