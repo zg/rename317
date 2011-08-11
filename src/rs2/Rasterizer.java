@@ -693,8 +693,8 @@ public class Rasterizer extends DrawingArea {
 		int off = 0;
 		if(restrict_edges)
 		{
-			if(endX > Graphics2D.viewportRx)
-				endX = Graphics2D.viewportRx;
+			if(endX > DrawingArea.viewportRx)
+				endX = DrawingArea.viewportRx;
 			if(startX < 0)
 				startX = 0;
 		}
@@ -909,8 +909,8 @@ public class Rasterizer extends DrawingArea {
         int color;
         int loops;
         if (restrict_edges) {
-            if (endX > Graphics2D.viewportRx)
-                endX = Graphics2D.viewportRx;
+            if (endX > DrawingArea.viewportRx)
+                endX = DrawingArea.viewportRx;
             if (startX < 0) {
             	//colorIndex -= startX * off;//not sure if needed
                 startX = 0;
