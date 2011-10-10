@@ -105,8 +105,8 @@ public class RSInterface
                 rsInterface.rgbImages = new RgbImage[20];
                 for(int spritePtr = 0; spritePtr < 20; spritePtr++)
                 {
-                    int k3 = interfaceData.g1();
-                    if(k3 == 1)
+                    int hasImage = interfaceData.g1();
+                    if(hasImage == 1)
                     {
                         rsInterface.spritesX[spritePtr] = interfaceData.g2b();
                         rsInterface.spritesY[spritePtr] = interfaceData.g2b();
@@ -301,7 +301,7 @@ public class RSInterface
             originalModel = getModel(mediaType, mediaID);
         if(originalModel == null)
             return null;
-        if(frame2ID == -1 && frame1ID == -1 && originalModel.triangleColour == null)
+        if(frame2ID == -1 && frame1ID == -1 && originalModel.triangleColourOrTexture == null)
             return originalModel;
         Model animatedModel = new Model(true, Animation.isNullFrame(frame2ID) & Animation.isNullFrame(frame1ID), false, originalModel);
         if(frame2ID != -1 || frame1ID != -1)

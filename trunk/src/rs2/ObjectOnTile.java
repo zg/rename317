@@ -5,7 +5,7 @@ public class ObjectOnTile extends Entity {
                      //ObjectAnimation
     public Model getRotatedModel()
     {
-        int j = -1;
+        int anim = -1;
         if(sequence != null)
         {
             int k = Client.currentTime - delay;
@@ -25,7 +25,7 @@ public class ObjectOnTile extends Entity {
             }
             delay = Client.currentTime - k;
             if(sequence != null)
-                j = sequence.frame2IDS[frame];
+                anim = sequence.frame2IDS[frame];
         }
         ObjectDef objectDef;
         if(anIntArray1600 != null)
@@ -37,7 +37,7 @@ public class ObjectOnTile extends Entity {
             return null;
         } else
         {
-            return objectDef.method578(anInt1611, anInt1612, anInt1603, anInt1604, anInt1605, anInt1606, j);
+            return objectDef.renderObject(anInt1611, anInt1612, anInt1603, anInt1604, anInt1605, anInt1606, anim);
         }
     }
 

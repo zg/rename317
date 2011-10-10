@@ -1411,33 +1411,14 @@ public class Client extends GameShell {
                 IndexedImage indexedImage = Rasterizer.textureImages[17];
                 int k = indexedImage.imgWidth * indexedImage.imgHeight - 1;
                 int j1 = indexedImage.imgWidth * animationTimePassed * 2;
-                byte abyte0[] = indexedImage.imgPixels;
-                byte abyte3[] = animatedPixels;
+                byte originalPixels[] = indexedImage.imgPixels;
+                byte shiftedPixels[] = animatedPixels;
                 for (int i2 = 0; i2 <= k; i2++)
-                    abyte3[i2] = abyte0[i2 - j1 & k];
+                    shiftedPixels[i2] = originalPixels[i2 - j1 & k];
 
-                indexedImage.imgPixels = abyte3;
-                animatedPixels = abyte0;
+                indexedImage.imgPixels = shiftedPixels;
+                animatedPixels = originalPixels;
                 Rasterizer.resetTexture(17);
-                anticheat11++;
-                if (anticheat11 > 1235) {
-                    anticheat11 = 0;
-                    stream.p1isaac(226);
-                    stream.p1(0);
-                    int l2 = stream.pos;
-                    stream.p2(58722);
-                    stream.p1(240);
-                    stream.p2((int) (Math.random() * 65536D));
-                    stream.p1((int) (Math.random() * 256D));
-                    if ((int) (Math.random() * 2D) == 0)
-                        stream.p2(51825);
-                    stream.p1((int) (Math.random() * 256D));
-                    stream.p2((int) (Math.random() * 65536D));
-                    stream.p2(7130);
-                    stream.p2((int) (Math.random() * 65536D));
-                    stream.p2(61657);
-                    stream.psize1(stream.pos - l2);
-                }
             }
             if (Rasterizer.textureLastUsed[24] >= j) {
                 IndexedImage indexedImage_1 = Rasterizer.textureImages[24];
@@ -2834,12 +2815,13 @@ public class Client extends GameShell {
         }
         else
         	{
-        	DrawingArea.fillCircle(50,50,  percentage/2, 0xff00ff);
-        	DrawingArea.fillCircle(100,50, percentage/2, 0xff0000);
-        	DrawingArea.fillCircle(150,50, percentage/2, 0xff00ff);
-        	DrawingArea.fillCircle(200,50, percentage/2, 0xff0000);
-        	DrawingArea.fillCircle(250,50, percentage/2, 0xff00ff);
-        	DrawingArea.fillCircle(300,50, percentage/2, 0xff0000);
+        	//DrawingArea.fillCircle(50,50,  percentage/2, 0xff00ff);
+        	//DrawingArea.fillCircle(100,50, percentage/2, 0xff0000);
+        	//DrawingArea.fillCircle(150,50, percentage/2, 0xff00ff);
+        	//DrawingArea.fillCircle(200,50, percentage/2, 0xff0000);
+        	//DrawingArea.fillCircle(250,50, percentage/2, 0xff00ff);
+        	minimapImage = new RgbImage("C:/640.png");
+        	DrawingArea.blockImageTransfer(128, 128, 1500, 1500, minimapImage.myPixels);
         	}
         	aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if (repaintRequested) {
@@ -5914,7 +5896,7 @@ public class Client extends GameShell {
             onDemandFetcher.start(jagexArchive_6, this);
             Animation.initialize(onDemandFetcher.getAnimCount());
             Model.initialize(onDemandFetcher.getVersionCount(0), onDemandFetcher);
-           // preloadModels();
+            //preloadModels();
             if (!lowMem) {
                 nextSong = 0;
                 try {
@@ -8645,7 +8627,7 @@ public class Client extends GameShell {
                 int j22 = intGroundArray[plane][x + 1][y];
                 int k22 = intGroundArray[plane][x + 1][y + 1];
                 int l22 = intGroundArray[plane][x][y + 1];
-                Model model = class46.method578(j19, i20, i22, j22, k22, l22, -1);
+                Model model = class46.renderObject(j19, i20, i22, j22, k22, l22, -1);
                 if (model != null) {
                     createObjectSpawnRequest(k17 + 1, -1, 0, l20, y, 0, plane, x, l14 + 1);
                     player.anInt1707 = l14 + currentTime;
@@ -8728,10 +8710,10 @@ public class Client extends GameShell {
             int objectRotation = bits & 3;
             int i11 = anIntArray1177[objectType];
             int j13 = stream.g1();
-            int k15 = bigRegionX + (j13 >> 4 & 7);
-            int l16 = bigRegionY + (j13 & 7);
-            if (k15 >= 0 && l16 >= 0 && k15 < 104 && l16 < 104)
-                createObjectSpawnRequest(-1, -1, objectRotation, i11, l16, objectType, plane, k15, 0);
+            int x = bigRegionX + (j13 >> 4 & 7);
+            int y = bigRegionY + (j13 & 7);
+            if (x >= 0 && y >= 0 && x < 104 && y < 104)
+                createObjectSpawnRequest(-1, -1, objectRotation, i11, y, objectType, plane, x, 0);
             return;
         }
         if (packetID == 117) {
@@ -9235,8 +9217,8 @@ public class Client extends GameShell {
                     for (int z = 0; z < 4; z++) {
                         for (int x = 0; x < 13; x++) {
                             for (int y = 0; y < 13; y++) {
-                                int i26 = inStream.gbits(1);
-                                if (i26 == 1)
+                                int tileExists = inStream.gbits(1);
+                                if (tileExists == 1)
                                     constructionMapInformation[z][x][y] = inStream.gbits(26);
                                 else
                                     constructionMapInformation[z][x][y] = -1;
