@@ -2212,7 +2212,7 @@ public class ModelRendererGL {
         }
         for (int destTriangleIdx = 0; destTriangleIdx < triangleCount; destTriangleIdx++) {
             int sourceTriangleIndex = is[destTriangleIdx];
-            int sourceColour = model.triangleColour[sourceTriangleIndex] & 0xffff;
+            int sourceColour = model.triangleColourOrTexture[sourceTriangleIndex] & 0xffff;
             short sourceTexture;
             if (model.triangleTexture == null)
                 sourceTexture = (short) -1;
@@ -2448,7 +2448,7 @@ public class ModelRendererGL {
                 triangleTexture[destTriangleIdx] = (short) -1;
             if (triangleTSkin != null)
                 triangleTSkin[destTriangleIdx] = (byte) model.triangleTSkin[sourceTriangleIndex];
-            triangleColour[destTriangleIdx] = (short) model.triangleColour[sourceTriangleIndex];
+            triangleColour[destTriangleIdx] = (short) model.triangleColourOrTexture[sourceTriangleIndex];
             if (model.triangleAlpha != null)
                 triangleAlpha[destTriangleIdx] = (byte) model.triangleAlpha[sourceTriangleIndex];
         }

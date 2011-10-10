@@ -57,6 +57,7 @@ public class PglModel {
             if (model != null)
                 return model;
         }
+        //System.out.println(rsModel);
         model = new PglModel(rsModel);
         model.addTriangles();
    //     model.modelRendererGL =new ModelRendererGL(rsModel,64,850,true);
@@ -67,6 +68,12 @@ public class PglModel {
     }
 
     private void generateTexCoords(){
+    	if(rsModel.triPIndex == null || rsModel.triPIndex.length == 0)
+    	{//TODO:proper fix (whats causing this)
+    		//System.outs.println("O NOESSSSS");
+    		return;
+    	}
+//    	System.out.println(rsModel.triPIndex.length);
         texcoordA = new Vector3f[rsModel.triangleCount];
         texcoordB = new Vector3f[rsModel.triangleCount];
         texcoordC = new Vector3f[rsModel.triangleCount];
@@ -85,7 +92,7 @@ public class PglModel {
             else
                 triangleDrawType = rsModel.triangleDrawType[tri];
             if ((triangleDrawType & 2) == 2)
-                sourceTexture = rsModel.triangleColour[tri];
+                sourceTexture = rsModel.triangleColourOrTexture[tri];
             i_340_ = triangleDrawType >> 2;
             if (sourceTexture != -1) {
                 if (i_340_ == -1) {
@@ -195,7 +202,7 @@ public class PglModel {
         int verAIdx = rsModel.triangleA[triIdx];
         int verBIdx = rsModel.triangleB[triIdx];
         int verCIdx = rsModel.triangleC[triIdx];
-        int texture = rsModel.triangleColour[triIdx];
+        int texture = rsModel.triangleColourOrTexture[triIdx];
         int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
         Vector3f normalT = new Vector3f(rsModel.triangleNormals[triIdx].x / 255.0f,-(rsModel.triangleNormals[triIdx].y / 255.0f),rsModel.triangleNormals[triIdx].z / 255.0f);
         Color colorT = Class7_Sub1.useLighting ? fromRgb(0x808080,alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
@@ -233,7 +240,7 @@ public class PglModel {
         Color colorA = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
         Color colorB = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslB[triIdx]],alpha);
         Color colorC = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslC[triIdx]],alpha);
-        int texture = rsModel.triangleColour[triIdx];
+        int texture = rsModel.triangleColourOrTexture[triIdx];
 
         int bufAIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
@@ -263,7 +270,7 @@ public class PglModel {
         int verCIdx = rsModel.triangleC[triIdx];
         int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
         Vector3f normalT = new Vector3f(rsModel.triangleNormals[triIdx].x / 255.0f,-(rsModel.triangleNormals[triIdx].y / 255.0f),rsModel.triangleNormals[triIdx].z / 255.0f);
-        Color colorT = Class7_Sub1.useLighting ? fromRgb(Rasterizer.hsl2rgb[rsModel.triangleColour[triIdx]],alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
+        Color colorT = Class7_Sub1.useLighting ? fromRgb(Rasterizer.hsl2rgb[rsModel.triangleColourOrTexture[triIdx]],alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
         int bufAIdx = geometry.addVertex(
                         new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
                         , normalT, new Vector3f(0, 0, 0), colorT);
@@ -294,7 +301,7 @@ public class PglModel {
         Vector3f normalA = new Vector3f(rsModel.vertexNormals[verAIdx].getX(), -rsModel.vertexNormals[verAIdx].getY(), rsModel.vertexNormals[verAIdx].getZ());
         Vector3f normalB = new Vector3f(rsModel.vertexNormals[verBIdx].getX(), -rsModel.vertexNormals[verBIdx].getY(), rsModel.vertexNormals[verBIdx].getZ());
         Vector3f normalC = new Vector3f(rsModel.vertexNormals[verCIdx].getX(), -rsModel.vertexNormals[verCIdx].getY(), rsModel.vertexNormals[verCIdx].getZ());
-        Color colorT = fromRgb(Rasterizer.hsl2rgb[rsModel.triangleColour[triIdx]],alpha);
+        Color colorT = fromRgb(Rasterizer.hsl2rgb[rsModel.triangleColourOrTexture[triIdx]],alpha);
         Color colorA = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
         Color colorB = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslB[triIdx]],alpha);
         Color colorC = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslC[triIdx]],alpha);

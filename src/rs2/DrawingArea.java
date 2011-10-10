@@ -18,7 +18,132 @@ public class DrawingArea extends NodeSub {
 		viewportRx = viewport_w;
 		viewportCx = viewport_w / 2;
 	}
+	
+	static final void blockImageTransfer(int i, int i_46_, int i_47_, int i_48_, int[] spritePixels) {
+		  int i_49_ = i_47_ * i_47_;
+		  int x = i - i_47_ >> 4;
+		  int width = i + i_47_ + 15 >> 4;
+		  int y = i_46_ - i_47_ >> 4;
+		  int height = i_46_ + i_47_ + 15 >> 4;
+		  if (x < topX)
+		      x = topX;
+		  if (width > viewport_w)
+		      width = viewport_w;
+		  if (y < topY)
+		      y = topY;
+		  if (height > viewport_h)
+		      height = viewport_h;
+		  int i_54_ = (x << 4) - i;
+		  i_54_ *= i_54_;
+		  int i_55_ = (x + 1 << 4) - i;
+		  i_55_ *= i_55_;
+		  int i_56_ = (x + 2 << 4) - i;
+		  i_56_ *= i_56_;
+		  int i_57_ = i_55_ - i_54_;
+		  int i_58_ = i_56_ - i_55_;
+		  int i_59_ = i_58_ - i_57_;
+		  int i_60_ = (y << 4) - i_46_;
+		  i_60_ *= i_60_;
+		  int i_61_ = (y + 1 << 4) - i_46_;
+		  i_61_ *= i_61_;
+		  int i_62_ = (y + 2 << 4) - i_46_;
+		  i_62_ *= i_62_;
+		  int i_63_ = i_61_ - i_60_;
+		  int i_64_ = i_62_ - i_61_;
+		  int i_65_ = i_64_ - i_63_;
+		  int ptr = x + y * DrawingArea.width;
+		  int i_67_ = DrawingArea.width + x - width;
+		  a(i_59_, i_49_, ptr, pixels, i_48_, spritePixels, i_67_, i_57_, x - width, i_60_ + i_54_,
+		    i_63_, i_65_, y - height);
+		    }
+		    
+		    private static final void a
+		  (int i_72_, int i_73_, int i_74_, int[] is, int i_75_, int[] is_76_,
+		   int i_77_, int i_78_, int i_79_, int i_80_, int i_81_, int i_82_,
+		   int i_83_) {
+		  for (/**/; i_83_ < 0; i_83_++) {
+		      int i_70_ = i_80_;
+		      int i_71_ = i_78_;
+		      for (int i_84_ = i_79_; i_84_ < 0; i_84_++) {
+		    if (i_70_ < i_73_) {
+		        int i = is_76_[(i_73_ - i_70_) * i_75_ / i_73_];
+		        int i_68_ = is[i_74_];
+		        int i_69_ = i + i_68_;
+		        i = (i & 0xff00ff) + (i_68_ & 0xff00ff);
+		        i_68_ = (i & 0x1000100) + (i_69_ - i & 0x10000);
+		        is[i_74_] = i_69_ - i_68_ | i_68_ - (i_68_ >>> 8);
+		    }
+		    i_74_++;
+		    i_70_ += i_71_;
+		    i_71_ += i_72_;
+		      }
+		      i_74_ += i_77_;
+		      i_80_ += i_81_;
+		      i_81_ += i_82_;
+		  }
+		    }
 
+	
+    static final void drawDiagionalLine(int x, int y, int width, int height, int colour) {
+    	width -= x;
+    	height -= y;
+    	if (height == 0) {
+    	    if (width >= 0)
+    		drawHLine(x, y, width + 1, colour);
+    	    else
+    		drawHLine(x + width, y, -width + 1, colour);
+    	} else if (width == 0) {
+    	    if (height >= 0)
+    		drawVLine(x, y, height + 1, colour);
+    	    else
+    		drawVLine(x, y + height, -height + 1, colour);
+    	} else {
+    	    if (width + height < 0) {
+    		x += width;
+    		width = -width;
+    		y += height;
+    		height = -height;
+    	    }
+    	    if (width > height) {
+    		y <<= 16;
+    		y += 32768;
+    		height <<= 16;
+    		int i_38_ = (int) Math.floor((double) height / (double) width + 0.5);
+    		width += x;
+    		if (x < topX) {
+    		    y += i_38_ * (topX - x);
+    		    x = topX;
+    		}
+    		if (width >= viewport_w)
+    		    width = viewport_w - 1;
+    		for (/**/; x <= width; x++) {
+    		    int i_39_ = y >> 16;
+    		    if (i_39_ >= topY && i_39_ < viewport_h)
+    			pixels[x + i_39_ * DrawingArea.width] = colour;
+    		    y += i_38_;
+    		}
+    	    } else {
+    		x <<= 16;
+    		x += 32768;
+    		width <<= 16;
+    		int i_40_ = (int) Math.floor((double) width / (double) height + 0.5);
+    		height += y;
+    		if (y < topY) {
+    		    x += i_40_ * (topY - y);
+    		    y = topY;
+    		}
+    		if (height >= viewport_h)
+    		    height = viewport_h - 1;
+    		for (/**/; y <= height; y++) {
+    		    int i_41_ = x >> 16;
+    		    if (i_41_ >= topX && i_41_ < viewport_w)
+    			pixels[i_41_ + y * DrawingArea.width] = colour;
+    		    x += i_40_;
+    		}
+    	    }
+    	}
+        }
+    
 	public static void setBounds(int height, int topX, int width, int topY) {
 		if (topX < 0) {
 			topX = 0;

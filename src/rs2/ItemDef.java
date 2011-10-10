@@ -194,6 +194,8 @@ public class ItemDef
 
     public static ItemDef forID(int itemID)
     {
+    	if(itemID >= streamIndices.length)
+    		return forID(1);
         for(int j = 0; j < 10; j++)
             if(cache[j].id == itemID)
                 return cache[j];

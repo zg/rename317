@@ -38,7 +38,7 @@ public class Entity extends NodeSub {
                 if (pgleNode != null)
                     renderAtPoint(pgleNode,i,x,y,z);
                 if (pgleNode != null && this instanceof Projectile){
-                    setEffectLight(Rasterizer.hsl2rgb[model.triangleColour[0]]);
+                    setEffectLight(Rasterizer.hsl2rgb[model.triangleColourOrTexture[0]]);
                     effectLight.enable();
                     effectLight.loadValues();
                 }

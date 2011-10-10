@@ -1,6 +1,8 @@
 package rs2;
 
 
+import java.io.File;
+
 import rt4.TriangleNormal;
 
 public class Model extends Entity {
@@ -43,10 +45,116 @@ public class Model extends Entity {
 
     public Model(int modelId, int j) {
         byte[] is = modelHeaderCache[modelId].modelData;
-        if (is[is.length - 1] == -1 && is[is.length - 2] == -1)
+    
+       // if(new File(Signlink.findcachedir()+"/converted633Items/"+modelId+".dat").exists()){
+       // 	readCustomFormat(FileOperations.ReadFile(Signlink.findcachedir()+"/converted633Items/"+modelId+".dat"),modelId);
+        	//readCustomFormat(FileOperations.ReadFile(Signlink.findcachedir()+"/converted633Items/534.dat"),modelId);
+      //  }        else{
+   
+        	if (is[is.length - 1] == -1 && is[is.length - 2] == -1)
             readNewModel(is, modelId);
         else
             readOldModel(modelId);
+  //  }
+        }
+    
+    
+    public void readCustomFormat(byte[] data, int modelId)
+    {//Clienthaxs format
+    	Packet stream = new Packet(data);
+    	vertexCount = stream.g2();
+    	vertexX = new int[vertexCount];
+    	vertexY = new int[vertexCount];
+    	vertexZ = new int[vertexCount];
+
+    	for(int v = 0; v < vertexCount; v++) {
+    		vertexX[v] = stream.gsmart();
+    		vertexY[v] = stream.gsmart();
+    		vertexZ[v] = stream.gsmart();
+    	}
+
+    	boolean hasVSkin = stream.g1() == 1;
+    	if(hasVSkin)
+    	{
+    		vertexVSkin = new int[vertexCount];
+    		for(int v = 0; v < vertexCount; v++) {
+    			vertexVSkin[v] = stream.g1();
+    		}
+    	}
+
+    	triangleCount = stream.g2();
+    	triangleColourOrTexture = new int[triangleCount];
+
+    	for(int t = 0; t < triangleCount; t++) {
+    		triangleColourOrTexture[t] = stream.g2();
+    	}
+
+    	boolean hasDrawTypes = stream.g1() == 1;
+    	if(hasDrawTypes)
+    	{
+    		triangleDrawType = new int[triangleCount];
+    		for(int t = 0; t < triangleCount; t++)
+    		{
+    			triangleDrawType[t] = stream.g2();
+    		}
+    	}
+
+    	boolean hasFacePriorities = stream.g1() == 1;
+    	if(hasFacePriorities)
+    	{
+    		facePriority = new int[triangleCount];
+    		for(int t = 0; t < triangleCount; t++)
+    		{
+    			facePriority[t] = stream.g1();
+    		}
+    	}
+
+    	boolean hasAlpha = stream.g1() == 1;
+    	if(hasAlpha)
+    	{
+    		triangleAlpha = new int[triangleCount];
+    		for(int t = 0; t < triangleCount; t++)
+    		{
+    			triangleAlpha[t] = stream.g1();
+    		}
+    	}
+
+    	boolean hasTSkin = stream.g1() == 1;
+    	if(hasTSkin)
+    	{
+    		triangleTSkin = new int[triangleCount];
+    		for(int t = 0; t < triangleCount; t++)
+    		{
+    			triangleTSkin[t] = stream.g1();
+    		}
+    	}
+
+    	triangleA = new int[triangleCount];
+    	triangleB = new int[triangleCount];
+    	triangleC = new int[triangleCount];
+
+    	for(int t = 0; t < triangleCount; t++)
+    	{
+    		triangleA[t] = stream.gsmart();                          
+    		triangleB[t] = stream.gsmart();
+    		triangleC[t] = stream.gsmart();
+    	}
+
+    	textureTriangleCount = stream.g1();
+    	boolean hasTextures = stream.g1() == 1;
+    	if(hasTextures)
+    	{
+    		triPIndex = new int[textureTriangleCount];
+    		triMIndex = new int[textureTriangleCount];
+    		triNIndex = new int[textureTriangleCount];
+
+    		for(int t = 0; t < textureTriangleCount; t++) {//this might be a glitch
+    			triPIndex[t] = stream.g2();
+    			triMIndex[t] = stream.g2();
+    			triNIndex[t] = stream.g2();
+
+    		}
+    	}
     }
 
     private void readOldModel(int i) {
@@ -84,7 +192,7 @@ public class Model extends Entity {
             triangleAlpha = new int[triangleCount];//triangleAlpha
         if (class21.tskinBasepos >= 0)//tskin_basepos
             triangleTSkin = new int[triangleCount];//triangle_tskin
-        triangleColour = new int[triangleCount];//triangleColour
+        triangleColourOrTexture = new int[triangleCount];//triangleColour
         
         Packet class30_sub2_sub2 = new Packet(class21.modelData);
         class30_sub2_sub2.pos = class21.vertexModOffset;
@@ -131,7 +239,7 @@ public class Model extends Entity {
         class30_sub2_sub2_3.pos = class21.alphaBasepos;
         class30_sub2_sub2_4.pos = class21.tskinBasepos;
         for (int l1 = 0; l1 < triangleCount; l1++) {
-            triangleColour[l1] = class30_sub2_sub2.g2();
+            triangleColourOrTexture[l1] = class30_sub2_sub2.g2();
             if (triangleDrawType != null)
             {
                 triangleDrawType[l1] = class30_sub2_sub2_1.g1();
@@ -206,7 +314,7 @@ public class Model extends Entity {
     	
     	int anInt2259 = 0;
     	int anInt2265 = 0;
-    	byte[] aByteArray2269 = null;
+    	byte[] textureDrawType = null;
     	byte[] aByteArray2253 = null;
     	byte[] aByteArray2255 = null;
     	int[] anIntArray2238 = null;
@@ -267,10 +375,10 @@ public class Model extends Entity {
         if(~modelTextureTriangleCount < -1)
         {
             rsbuffer.pos = 0;
-            aByteArray2269 = new byte[modelTextureTriangleCount];
+            textureDrawType = new byte[modelTextureTriangleCount];
             for(int k3 = 0; ~modelTextureTriangleCount < ~k3; k3++)
             {
-                byte byte1 = aByteArray2269[k3] = rsbuffer.g1b();
+                byte byte1 = textureDrawType[k3] = rsbuffer.g1b();
                 if(byte1 >= 1 && byte1 <= 3)
                     i3++;
                 if(byte1 == 2)
@@ -283,7 +391,7 @@ public class Model extends Entity {
         int l3 = modelTextureTriangleCount;
         int vertexModOffset = l3;
         l3 += vertexCount;
-        int j4 = l3;
+        int triangleDrawTypeBasePos = l3;
         if(flag)
             l3 += triangleCount;
         int triMeshLinkOffset = l3;
@@ -307,7 +415,7 @@ public class Model extends Entity {
             l3 += 2 * triangleCount;
         int j6 = l3;
         l3 += k2;
-        int k6 = l3;
+        int triangleColourOrTextureBasePos = l3;
         l3 += triangleCount * 2;
         int vertexXOffset = l3;
         l3 += k1;
@@ -347,7 +455,7 @@ public class Model extends Entity {
         if(flag)
             triangleDrawType = new int[triangleCount];
         triangleB = new int[triangleCount];
-        triangleColour = new int[triangleCount];
+        triangleColourOrTexture = new int[triangleCount];
         if(j1 == 1)
             vertexVSkin = new int[vertexCount];
         if(i1 == 1 && modelTextureTriangleCount > 0)
@@ -406,8 +514,8 @@ public class Model extends Entity {
                 vertexVSkin[i10] = rsbuffer4.g1();
         }
 
-        rsbuffer.pos = k6;
-        rsbuffer1.pos = j4;
+        rsbuffer.pos = triangleColourOrTextureBasePos;
+        rsbuffer1.pos = triangleDrawTypeBasePos;
         rsbuffer2.pos = facePriorityBasePos;
         rsbuffer3.pos = alphaBasepos;
         rsbuffer4.pos = tskinBasepos;
@@ -415,7 +523,7 @@ public class Model extends Entity {
         rsbuffer6.pos = j6;
         for(int k10 = 0; triangleCount > k10; k10++)
         {
-            triangleColour[k10] = (short)rsbuffer.g2();
+            triangleColourOrTexture[k10] = (short)rsbuffer.g2();
             if(flag)
                 triangleDrawType[k10] = rsbuffer1.g1b();
             if(j == 255)
@@ -507,14 +615,14 @@ public class Model extends Entity {
         rsbuffer5.pos = l8;
         for(int i13 = 0; i13 < modelTextureTriangleCount; i13++)
         {
-            int k13 = 0xff & aByteArray2269[i13];
-            if(~k13 == -1)
+            int readType = 0xff & textureDrawType[i13];
+            if(~readType == -1)
             {
                 triPIndex[i13] = (short)rsbuffer.g2();
                 triMIndex[i13] = (short)rsbuffer.g2();
                 triNIndex[i13] = (short)rsbuffer.g2();
             }
-            if(k13 == 1)
+            if(readType == 1)
             {
                 triPIndex[i13] = (short)rsbuffer1.g2();
                 triMIndex[i13] = (short)rsbuffer1.g2();
@@ -537,7 +645,7 @@ public class Model extends Entity {
                 aByteArray2255[i13] = rsbuffer4.g1b();
                 anIntArray2238[i13] = rsbuffer5.g1b();
             }
-            if(k13 == 2)
+            if(readType == 2)
             {
                 triPIndex[i13] = (short)rsbuffer1.g2();
                 triMIndex[i13] = (short)rsbuffer1.g2();
@@ -562,7 +670,7 @@ public class Model extends Entity {
                 anIntArray2228[i13] = rsbuffer5.g1b();
                 anIntArray2241[i13] = rsbuffer5.g1b();
             }
-            if(k13 == 3)
+            if(readType == 3)
             {
                 triPIndex[i13] = (short)rsbuffer1.g2();
                 triMIndex[i13] = (short)rsbuffer1.g2();
@@ -892,7 +1000,7 @@ public class Model extends Entity {
 
     }*/
 
-    public Model(int i, Model aclass30_sub2_sub4_sub6s[]) {
+    public Model(int numOfModels, Model modelParts[]) {
         oneSquareModel = false;
         boolean flag = false;
         boolean flag1 = false;
@@ -902,8 +1010,8 @@ public class Model extends Entity {
         triangleCount = 0;
         textureTriangleCount = 0;
         anInt1641 = -1;
-        for (int k = 0; k < i; k++) {
-            Model model = aclass30_sub2_sub4_sub6s[k];
+        for (int k = 0; k < numOfModels; k++) {
+            Model model = modelParts[k];
             if (model != null) {
                 vertexCount += model.vertexCount;
                 triangleCount += model.triangleCount;
@@ -941,13 +1049,13 @@ public class Model extends Entity {
             triangleAlpha = new int[triangleCount];
         if (flag3)
             triangleTSkin = new int[triangleCount];
-        triangleColour = new int[triangleCount];
+        triangleColourOrTexture = new int[triangleCount];
         vertexCount = 0;
         triangleCount = 0;
         textureTriangleCount = 0;
         int l = 0;
-        for (int i1 = 0; i1 < i; i1++) {
-            Model model_1 = aclass30_sub2_sub4_sub6s[i1];
+        for (int i1 = 0; i1 < numOfModels; i1++) {
+            Model model_1 = modelParts[i1];
             if (model_1 != null) {
                 for (int j1 = 0; j1 < model_1.triangleCount; j1++) {
                     if (flag)
@@ -971,7 +1079,7 @@ public class Model extends Entity {
                             triangleAlpha[triangleCount] = model_1.triangleAlpha[j1];
                     if (flag3 && model_1.triangleTSkin != null)
                         triangleTSkin[triangleCount] = model_1.triangleTSkin[j1];
-                    triangleColour[triangleCount] = model_1.triangleColour[j1];
+                    triangleColourOrTexture[triangleCount] = model_1.triangleColourOrTexture[j1];
                     triangleA[triangleCount] = method465(model_1, model_1.triangleA[j1]);
                     triangleB[triangleCount] = method465(model_1, model_1.triangleB[j1]);
                     triangleC[triangleCount] = method465(model_1, model_1.triangleC[j1]);
@@ -1018,7 +1126,7 @@ public class Model extends Entity {
                         flag2 = true;
                 }
                 flag3 |= model.triangleAlpha != null;
-                flag4 |= model.triangleColour != null;
+                flag4 |= model.triangleColourOrTexture != null;
                 hash += model.hash * Math.pow(10,k*3);
             }
         }
@@ -1042,7 +1150,7 @@ public class Model extends Entity {
         if (flag3)
             triangleAlpha = new int[triangleCount];
         if (flag4)
-            triangleColour = new int[triangleCount];
+            triangleColourOrTexture = new int[triangleCount];
         vertexCount = 0;
         triangleCount = 0;
         textureTriangleCount = 0;
@@ -1084,8 +1192,8 @@ public class Model extends Entity {
                             triangleAlpha[triangleCount] = 0;
                         else
                             triangleAlpha[triangleCount] = model_1.triangleAlpha[i2];
-                    if (flag4 && model_1.triangleColour != null)
-                        triangleColour[triangleCount] = model_1.triangleColour[i2];
+                    if (flag4 && model_1.triangleColourOrTexture != null)
+                        triangleColourOrTexture[triangleCount] = model_1.triangleColourOrTexture[i2];
                     triangleCount++;
                 }
 
@@ -1125,10 +1233,10 @@ public class Model extends Entity {
 
         }
         if (flag) {
-            triangleColour = model.triangleColour;
+            triangleColourOrTexture = model.triangleColourOrTexture;
         } else {
-            triangleColour = new int[triangleCount];
-            System.arraycopy(model.triangleColour, 0, triangleColour, 0, triangleCount);
+            triangleColourOrTexture = new int[triangleCount];
+            System.arraycopy(model.triangleColourOrTexture, 0, triangleColourOrTexture, 0, triangleCount);
 
         }
         if (animationNull) {
@@ -1208,7 +1316,7 @@ public class Model extends Entity {
         }
         vertexX = model.vertexX;
         vertexZ = model.vertexZ;
-        triangleColour = model.triangleColour;
+        triangleColourOrTexture = model.triangleColourOrTexture;
         triangleAlpha = model.triangleAlpha;
         facePriority = model.facePriority;
         anInt1641 = model.anInt1641;
@@ -1264,7 +1372,7 @@ public class Model extends Entity {
             }
         }
         triangleDrawType = model.triangleDrawType;
-        triangleColour = model.triangleColour;
+        triangleColourOrTexture = model.triangleColourOrTexture;
         facePriority = model.facePriority;
         anInt1641 = model.anInt1641;
         triangleSkin = model.triangleSkin;
@@ -1282,20 +1390,20 @@ public class Model extends Entity {
 
     private int method465(Model model, int i) {
         int j = -1;
-        int k = model.vertexX[i];
-        int l = model.vertexY[i];
-        int i1 = model.vertexZ[i];
+        int x = model.vertexX[i];
+        int y = model.vertexY[i];
+        int z = model.vertexZ[i];
         for (int j1 = 0; j1 < vertexCount; j1++) {
-            if (k != vertexX[j1] || l != vertexY[j1] || i1 != vertexZ[j1])
+            if (x != vertexX[j1] || y != vertexY[j1] || z != vertexZ[j1])
                 continue;
             j = j1;
             break;
         }
 
         if (j == -1) {
-            vertexX[vertexCount] = k;
-            vertexY[vertexCount] = l;
-            vertexZ[vertexCount] = i1;
+            vertexX[vertexCount] = x;
+            vertexY[vertexCount] = y;
+            vertexZ[vertexCount] = z;
             if (model.vertexVSkin != null)
                 vertexVSkin[vertexCount] = model.vertexVSkin[i];
             j = vertexCount++;
@@ -1324,7 +1432,7 @@ public class Model extends Entity {
         diagonal3D = diagonal3DAboveorigin + (int) (Math.sqrt(diagonal2DAboveorigin * diagonal2DAboveorigin + maxY * maxY) + 0.98999999999999999D);
     }
 
-    public void method467() {
+    public void normalise() {//normalise?
         super.modelHeight = 0;
         maxY = 0;
         for (int i = 0; i < vertexCount; i++) {
@@ -1663,8 +1771,8 @@ public class Model extends Entity {
     public void recolour(int i, int j) {
         hash += (i*100000000L)+(j*10000000000L);
         for (int k = 0; k < triangleCount; k++)
-            if (triangleColour[k] == i)
-                triangleColour[k] = j;
+            if (triangleColourOrTexture[k] == i)
+                triangleColourOrTexture[k] = j;
 
     }
     
@@ -1878,7 +1986,7 @@ public class Model extends Entity {
                 vertexNormal_2.magnitude++;
             } else {
                 int lightness = lightMod + (l_x * normalX + l_y * normalY + l_z * normalZ) / (mag + mag / 2);
-                triangleHslA[triID] = mixLightness(triangleColour[triID], lightness, triangleDrawType[triID]);
+                triangleHslA[triID] = mixLightness(triangleColourOrTexture[triID], lightness, triangleDrawType[triID]);
             }
         }
 //todo - this can be condensed - DONE
@@ -1914,7 +2022,7 @@ public class Model extends Entity {
                     int lightness = lightMod + (l_x * triangleNormals[triID].x +
                                                 l_y * triangleNormals[triID].y +
                                                 l_z * triangleNormals[triID].z) / (mag + mag / 2);
-                    triangleHslA[triID] = mixLightness(triangleColour[triID], lightness, triangleDrawType[triID]);
+                    triangleHslA[triID] = mixLightness(triangleColourOrTexture[triID], lightness, triangleDrawType[triID]);
                 }
             }
     //todo - this can be condensed - DONE
@@ -1942,7 +2050,7 @@ public class Model extends Entity {
             int triB = triangleB[triID];
             int triC = triangleC[triID];
             if (triangleDrawType == null) {
-                int t_hsl = triangleColour[triID];
+                int t_hsl = triangleColourOrTexture[triID];
                 VertexNormal vertexNormal = super.vertexNormals[triA];
                 int l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
                 triangleHslA[triID] = mixLightness(t_hsl, l, 0);
@@ -1955,7 +2063,7 @@ public class Model extends Entity {
             } else if ((triangleDrawType[triID] & 1) == 0) {
                 //Bit 1 of triangle_draw_type ON means mix_lightness returns just lightness
                 //instead of mixed hsl
-                int t_hsl = triangleColour[triID];
+                int t_hsl = triangleColourOrTexture[triID];
                 int t_flags = triangleDrawType[triID];
                 VertexNormal vertexNormal_1 = super.vertexNormals[triA];
                 int l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
@@ -1982,7 +2090,7 @@ public class Model extends Entity {
             int triB = triangleB[triID];
             int triC = triangleC[triID];
             if (triangleDrawType == null) {
-                int t_hsl = triangleColour[triID];
+                int t_hsl = triangleColourOrTexture[triID];
                 VertexNormal vertexNormal = super.vertexNormals[triA];
                 int l = intensity + (l_x * vertexNormal.x + l_y * vertexNormal.y + l_z * vertexNormal.z) / (falloff * vertexNormal.magnitude);
                 triangleHslA[triID] = mixLightness(t_hsl, l, 0);
@@ -1995,7 +2103,7 @@ public class Model extends Entity {
             } else if ((triangleDrawType[triID] & 1) == 0) {
                 //Bit 1 of triangle_draw_type ON means mix_lightness returns just lightness
                 //instead of mixed hsl
-                int t_hsl = triangleColour[triID];
+                int t_hsl = triangleColourOrTexture[triID];
                 int t_flags = triangleDrawType[triID];
                 VertexNormal vertexNormal_1 = super.vertexNormals[triA];
                 int l = intensity + (l_x * vertexNormal_1.x + l_y * vertexNormal_1.y + l_z * vertexNormal_1.z) / (falloff * vertexNormal_1.magnitude);
@@ -2380,7 +2488,7 @@ public class Model extends Entity {
             int tP = triPIndex[textriPtr];
             int tM = triMIndex[textriPtr];
             int tN = triNIndex[textriPtr];
-            Rasterizer.drawTexturedTriangle(vertexSY[tA], vertexSY[tB], vertexSY[tC], vertexSX[tA], vertexSX[tB], vertexSX[tC], triangleHslA[triPtr], triangleHslB[triPtr], triangleHslC[triPtr], vertexMvX[tP], vertexMvX[tM], vertexMvX[tN], vertexMvY[tP], vertexMvY[tM], vertexMvY[tN], vertexMvZ[tP], vertexMvZ[tM], vertexMvZ[tN], triangleColour[triPtr]);
+            Rasterizer.drawTexturedTriangle(vertexSY[tA], vertexSY[tB], vertexSY[tC], vertexSX[tA], vertexSX[tB], vertexSX[tC], triangleHslA[triPtr], triangleHslB[triPtr], triangleHslC[triPtr], vertexMvX[tP], vertexMvX[tM], vertexMvX[tN], vertexMvY[tP], vertexMvY[tM], vertexMvY[tN], vertexMvZ[tP], vertexMvZ[tM], vertexMvZ[tN], triangleColourOrTexture[triPtr]);
             return;
         }
         if (triangleDrawType == 3) {
@@ -2388,7 +2496,7 @@ public class Model extends Entity {
             int i2 = triPIndex[k1];
             int k2 = triMIndex[k1];
             int i3 = triNIndex[k1];
-            Rasterizer.drawTexturedTriangle(vertexSY[tA], vertexSY[tB], vertexSY[tC], vertexSX[tA], vertexSX[tB], vertexSX[tC], triangleHslA[triPtr], triangleHslA[triPtr], triangleHslA[triPtr], vertexMvX[i2], vertexMvX[k2], vertexMvX[i3], vertexMvY[i2], vertexMvY[k2], vertexMvY[i3], vertexMvZ[i2], vertexMvZ[k2], vertexMvZ[i3], triangleColour[triPtr]);
+            Rasterizer.drawTexturedTriangle(vertexSY[tA], vertexSY[tB], vertexSY[tC], vertexSX[tA], vertexSX[tB], vertexSX[tC], triangleHslA[triPtr], triangleHslA[triPtr], triangleHslA[triPtr], vertexMvX[i2], vertexMvX[k2], vertexMvX[i3], vertexMvY[i2], vertexMvY[k2], vertexMvY[i3], vertexMvZ[i2], vertexMvZ[k2], vertexMvZ[i3], triangleColourOrTexture[triPtr]);
         }
     }
 
@@ -2490,13 +2598,13 @@ public class Model extends Entity {
                     int k9 = triPIndex[j8];
                     int k10 = triMIndex[j8];
                     int k11 = triNIndex[j8];
-                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], vertexMvX[k9], vertexMvX[k10], vertexMvX[k11], vertexMvY[k9], vertexMvY[k10], vertexMvY[k11], vertexMvZ[k9], vertexMvZ[k10], vertexMvZ[k11], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], vertexMvX[k9], vertexMvX[k10], vertexMvX[k11], vertexMvY[k9], vertexMvY[k10], vertexMvY[k11], vertexMvZ[k9], vertexMvZ[k10], vertexMvZ[k11], triangleColourOrTexture[i]);
                 } else if (l7 == 3) {
                     int k8 = triangleDrawType[i] >> 2;
                     int l9 = triPIndex[k8];
                     int l10 = triMIndex[k8];
                     int l11 = triNIndex[k8];
-                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[l9], vertexMvX[l10], vertexMvX[l11], vertexMvY[l9], vertexMvY[l10], vertexMvY[l11], vertexMvZ[l9], vertexMvZ[l10], vertexMvZ[l11], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[l9], vertexMvX[l10], vertexMvX[l11], vertexMvY[l9], vertexMvY[l10], vertexMvY[l11], vertexMvZ[l9], vertexMvZ[l10], vertexMvZ[l11], triangleColourOrTexture[i]);
                 }
             }
             if (l == 4) {
@@ -2523,8 +2631,8 @@ public class Model extends Entity {
                     int i10 = triPIndex[i9];
                     int i11 = triMIndex[i9];
                     int i12 = triNIndex[i9];
-                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], vertexMvX[i10], vertexMvX[i11], vertexMvX[i12], vertexMvY[i10], vertexMvY[i11], vertexMvY[i12], vertexMvZ[i10], vertexMvZ[i11], vertexMvZ[i12], triangleColour[i]);
-                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], vertexMvX[i10], vertexMvX[i11], vertexMvX[i12], vertexMvY[i10], vertexMvY[i11], vertexMvY[i12], vertexMvZ[i10], vertexMvZ[i11], vertexMvZ[i12], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], vertexMvX[i10], vertexMvX[i11], vertexMvX[i12], vertexMvY[i10], vertexMvY[i11], vertexMvY[i12], vertexMvZ[i10], vertexMvZ[i11], vertexMvZ[i12], triangleColourOrTexture[i]);
+                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], vertexMvX[i10], vertexMvX[i11], vertexMvX[i12], vertexMvY[i10], vertexMvY[i11], vertexMvY[i12], vertexMvZ[i10], vertexMvZ[i11], vertexMvZ[i12], triangleColourOrTexture[i]);
                     return;
                 }
                 if (i8 == 3) {
@@ -2532,8 +2640,8 @@ public class Model extends Entity {
                     int j10 = triPIndex[j9];
                     int j11 = triMIndex[j9];
                     int j12 = triNIndex[j9];
-                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[j10], vertexMvX[j11], vertexMvX[j12], vertexMvY[j10], vertexMvY[j11], vertexMvY[j12], vertexMvZ[j10], vertexMvZ[j11], vertexMvZ[j12], triangleColour[i]);
-                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[j10], vertexMvX[j11], vertexMvX[j12], vertexMvY[j10], vertexMvY[j11], vertexMvY[j12], vertexMvZ[j10], vertexMvZ[j11], vertexMvZ[j12], triangleColour[i]);
+                    Rasterizer.drawTexturedTriangle(i7, j7, k7, j3, j4, j5, triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[j10], vertexMvX[j11], vertexMvX[j12], vertexMvY[j10], vertexMvY[j11], vertexMvY[j12], vertexMvZ[j10], vertexMvZ[j11], vertexMvZ[j12], triangleColourOrTexture[i]);
+                    Rasterizer.drawTexturedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], triangleHslA[i], triangleHslA[i], triangleHslA[i], vertexMvX[j10], vertexMvX[j11], vertexMvX[j12], vertexMvY[j10], vertexMvY[j11], vertexMvY[j12], vertexMvZ[j10], vertexMvZ[j11], vertexMvZ[j12], triangleColourOrTexture[i]);
                 }
             }
         }
@@ -2627,7 +2735,7 @@ public class Model extends Entity {
     public int triangleDrawType[];
     public int[] facePriority;
     public int[] triangleAlpha;
-    public int triangleColour[];
+    public int triangleColourOrTexture[];
 
     private int anInt1641;
     public int textureTriangleCount;

@@ -33,7 +33,7 @@ public class ObjectDef
         isUnwalkable = true;
         aBoolean757 = true;
         hasActions = false;
-        isModelSolid = false;
+        adjustToTerrain = false;
         nonFlatShading = false;
         aBoolean764 = false;
         animationID = -1;
@@ -117,27 +117,27 @@ public class ObjectDef
         return true;
     }
 
-    public Model method578(int i, int j, int k, int l, int i1, int j1, int k1)
+    public Model renderObject(int objectType, int face, int zA, int zB, int zD, int zC, int currentAnimID)
     {
-        Model model = method581(i, k1, j);
+        Model model = getAnimatedModel(objectType, currentAnimID, face);
         if(model == null)
             return null;
-        if(isModelSolid || nonFlatShading)
-            model = new Model(isModelSolid, nonFlatShading, model);
-        if(isModelSolid)
+        if(adjustToTerrain || nonFlatShading)
+            model = new Model(adjustToTerrain, nonFlatShading, model);
+        adjustToTerrain = true;
+        if(adjustToTerrain)
         {
-            int l1 = (k + l + i1 + j1) / 4;
-            for(int i2 = 0; i2 < model.vertexCount; i2++)
+            int l1 = (zA + zB + zD + zC) / 4;
+            for(int v = 0; v < model.vertexCount; v++)
             {
-                int j2 = model.vertexX[i2];
-                int k2 = model.vertexZ[i2];
-                int l2 = k + ((l - k) * (j2 + 64)) / 128;
-                int i3 = j1 + ((i1 - j1) * (j2 + 64)) / 128;
-                int j3 = l2 + ((i3 - l2) * (k2 + 64)) / 128;
-                model.vertexY[i2] += j3 - l1;
+                int vertexX = model.vertexX[v];
+                int vertexY = model.vertexZ[v];
+                int l2 = zA + ((zB - zA) * (vertexX + 64)) / 128;
+                int i3 = zC + ((zD - zC) * (vertexX + 64)) / 128;
+                int j3 = l2 + ((i3 - l2) * (vertexY + 64)) / 128;
+                model.vertexY[v] += j3 - l1;
             }
-
-            model.method467();
+            model.normalise();
         }
         return model;
     }
@@ -179,49 +179,49 @@ public class ObjectDef
             return forID(configObjectIDs[i]);
     }
 
-    private Model method581(int j, int k, int l)
+    private Model getAnimatedModel(int objectType, int currentAnimID, int face)
     {
         Model model = null;
-        long l1;
+        long hash;
         if(types == null)
         {
-            if(j != 10)
+            if(objectType != 10)
                 return null;
-            l1 = (long)((type << 6) + l) + ((long)(k + 1) << 32);
-            Model model_1 = (Model) modelCache2.get(l1);
+            hash = (long)((type << 6) + face) + ((long)(currentAnimID + 1) << 32);
+            Model model_1 = (Model) modelCache2.get(hash);
             if(model_1 != null)
                 return model_1;
             if(objectModelIDs == null)
                 return null;
-            boolean mirror = aBoolean751 ^ (l > 3);
-            int k1 = objectModelIDs.length;
-            for(int i2 = 0; i2 < k1; i2++)
+            boolean mirror = aBoolean751 ^ (face > 3);
+            int numberOfModels = objectModelIDs.length;
+            for(int i2 = 0; i2 < numberOfModels; i2++)
             {
-                int l2 = objectModelIDs[i2];
+                int subModelID = objectModelIDs[i2];
                 if(mirror)
-                    l2 += 0x10000;
-                model = (Model) modelCache.get(l2);
+                    subModelID += 0x10000;
+                model = (Model) modelCache.get(subModelID);
                 if(model == null)
                 {
-                    model = Model.getModel(l2 & 0xffff);
+                    model = Model.getModel(subModelID & 0xffff);
                     if(model == null)
                         return null;
                     if(mirror)
                         model.mirrorModel();
-                    modelCache.put(model, l2);
+                    modelCache.put(model, subModelID);
                 }
-                if(k1 > 1)
-                    aModelArray741s[i2] = model;
+                if(numberOfModels > 1)
+                    modelParts[i2] = model;
             }
 
-            if(k1 > 1)
-                model = new Model(k1, aModelArray741s);
+            if(numberOfModels > 1)
+                model = new Model(numberOfModels, modelParts);
         } else
         {
             int i1 = -1;
             for(int j1 = 0; j1 < types.length; j1++)
             {
-                if(types[j1] != j)
+                if(types[j1] != objectType)
                     continue;
                 i1 = j1;
                 break;
@@ -229,13 +229,13 @@ public class ObjectDef
 
             if(i1 == -1)
                 return null;
-            l1 = (long)((type << 6) + (i1 << 3) + l) + ((long)(k + 1) << 32);
-            Model model_2 = (Model) modelCache2.get(l1);
+            hash = (long)((type << 6) + (i1 << 3) + face) + ((long)(currentAnimID + 1) << 32);
+            Model model_2 = (Model) modelCache2.get(hash);
             if(model_2 != null)
                 return model_2;
             int j2 = objectModelIDs[i1];
-            boolean flag3 = aBoolean751 ^ (l > 3);
-            if(flag3)
+            boolean mirrorModel = aBoolean751 ^ (face > 3);
+            if(mirrorModel)
                 j2 += 0x10000;
             model = (Model) modelCache.get(j2);
             if(model == null)
@@ -243,24 +243,24 @@ public class ObjectDef
                 model = Model.getModel(j2 & 0xffff);
                 if(model == null)
                     return null;
-                if(flag3)
+                if(mirrorModel)
                     model.mirrorModel();
                 modelCache.put(model, j2);
             }
         }
-        boolean flag;
-        flag = modelSizeX != 128 || modelSizeH != 128 || modelSizeY != 128;
-        boolean flag2;
-        flag2 = offsetX != 0 || offsetH != 0 || offsetY != 0;
-        Model model_3 = new Model(modifiedModelColors == null, Animation.isNullFrame(k), l == 0 && k == -1 && !flag && !flag2, model);
-        if(k != -1)
+        boolean needsScaling;
+        needsScaling = modelSizeX != 128 || modelSizeH != 128 || modelSizeY != 128;
+        boolean modelIsOffset;
+        modelIsOffset = offsetX != 0 || offsetH != 0 || offsetY != 0;
+        Model model_3 = new Model(modifiedModelColors == null, Animation.isNullFrame(currentAnimID), face == 0 && currentAnimID == -1 && !needsScaling && !modelIsOffset, model);
+        if(currentAnimID != -1)
         {
             model_3.createBones();
-            model_3.applyTransform(k);
+            model_3.applyTransform(currentAnimID);
             model_3.triangleSkin = null;
             model_3.vertexSkin = null;
         }
-        while(l-- > 0)
+        while(face-- > 0)
             model_3.rotateBy90();
         if(modifiedModelColors != null)
         {
@@ -268,14 +268,14 @@ public class ObjectDef
                 model_3.recolour(modifiedModelColors[k2], originalModelColors[k2]);
 
         }
-        if(flag)
+        if(needsScaling)
             model_3.scaleT(modelSizeX, modelSizeY, modelSizeH);
-        if(flag2)
+        if(modelIsOffset)
             model_3.translate(offsetX, offsetH, offsetY);
         model_3.light(64 + brightness, 768 + contrast * 5, -50, -10, -50, !nonFlatShading);
         if(anInt760 == 1)
             model_3.anInt1654 = model_3.modelHeight;
-        modelCache2.put(model_3, l1);
+        modelCache2.put(model_3, hash);
         return model_3;
     }
 
@@ -302,7 +302,7 @@ label0:
                             for(int k1 = 0; k1 < k; k1++)
                             {
                                 objectModelIDs[k1] = stream.g2();
-                                //objectModelIDs[k1] = 1570;
+                                
                                 types[k1] = stream.g1();
                             }
 
@@ -352,7 +352,7 @@ label0:
                         hasActions = true;
                 } else
                 if(j == 21)
-                    isModelSolid = true;
+                    adjustToTerrain = true;
                 else
                 if(j == 22)
                     nonFlatShading = true;
@@ -483,7 +483,7 @@ label0:
     private int offsetX;
     public String name;
     private int modelSizeY;
-    private static final Model[] aModelArray741s = new Model[4];
+    private static final Model[] modelParts = new Model[4];
     private byte contrast;
     public int sizeX;
     private int offsetH;
@@ -501,7 +501,7 @@ label0:
     public int configObjectIDs[];
     private int anInt760;
     public int sizeY;
-    public boolean isModelSolid;
+    public boolean adjustToTerrain;
     public boolean aBoolean764;
     public static Client clientInstance;
     private boolean isSolidObject;
