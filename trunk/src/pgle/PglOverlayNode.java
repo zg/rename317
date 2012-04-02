@@ -20,6 +20,8 @@ public class PglOverlayNode extends GeometryNode{
 
     @Override
     protected void renderGeometry(Camera camera) {
+    	try{
         overlay.render();
+    	}catch(Exception e){e.printStackTrace();}
     }
 }

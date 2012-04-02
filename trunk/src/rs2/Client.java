@@ -2815,13 +2815,13 @@ public class Client extends GameShell {
         }
         else
         	{
-        	//DrawingArea.fillCircle(50,50,  percentage/2, 0xff00ff);
-        	//DrawingArea.fillCircle(100,50, percentage/2, 0xff0000);
-        	//DrawingArea.fillCircle(150,50, percentage/2, 0xff00ff);
-        	//DrawingArea.fillCircle(200,50, percentage/2, 0xff0000);
-        	//DrawingArea.fillCircle(250,50, percentage/2, 0xff00ff);
-        	minimapImage = new RgbImage("C:/640.png");
-        	DrawingArea.blockImageTransfer(128, 128, 1500, 1500, minimapImage.myPixels);
+        	DrawingArea.fillCircle(50,50,  percentage/2, 0xff00ff);
+        	DrawingArea.fillCircle(100,50, percentage/2, 0xff0000);
+        	DrawingArea.fillCircle(150,50, percentage/2, 0xff00ff);
+        	DrawingArea.fillCircle(200,50, percentage/2, 0xff0000);
+        	DrawingArea.fillCircle(250,50, percentage/2, 0xff00ff);
+        	//minimapImage = new RgbImage("C:/640.png");
+        	//DrawingArea.blockImageTransfer(128, 128, 1500, 1500, minimapImage.myPixels);
         	}
         	aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if (repaintRequested) {
@@ -3333,7 +3333,7 @@ public class Client extends GameShell {
         if (l == 626) {
             RSInterface class9_1 = RSInterface.interfaceCache[k];
             spellSelected = 1;
-            anInt1137 = k;
+            selectedSpellID = k;
             spellUsableOn = class9_1.spellUsableOn;
             itemSelected = 0;
             needDrawTabArea = true;
@@ -3449,7 +3449,7 @@ public class Client extends GameShell {
             stream.ip2(k + baseY);
             stream.p2(itemID);
             stream.ip2(j + baseX);
-            stream.sp2(anInt1137);
+            stream.sp2(selectedSpellID);
         }
         if (l == 646) {
             stream.p1isaac(185);
@@ -3510,7 +3510,7 @@ public class Client extends GameShell {
                 crossIndex = 0;
                 stream.p1isaac(131);
                 stream.isp2(itemID);
-                stream.sp2(anInt1137);
+                stream.sp2(selectedSpellID);
             }
         }
         if (l == 200)
@@ -3560,7 +3560,7 @@ public class Client extends GameShell {
                 crossIndex = 0;
                 stream.p1isaac(249);
                 stream.sp2(itemID);
-                stream.ip2(anInt1137);
+                stream.ip2(selectedSpellID);
             }
         }
         if (l == 729) {
@@ -3590,7 +3590,7 @@ public class Client extends GameShell {
         if (l == 956 && clickObject(itemID, k, j)) {
             stream.p1isaac(35);
             stream.ip2(j + baseX);
-            stream.sp2(anInt1137);
+            stream.sp2(selectedSpellID);
             stream.sp2(k + baseY);
             stream.ip2(itemID >> 14 & 0x7fff);
         }
@@ -3633,7 +3633,7 @@ public class Client extends GameShell {
             stream.p2(j);
             stream.sp2(itemID);
             stream.p2(k);
-            stream.sp2(anInt1137);
+            stream.sp2(selectedSpellID);
             atInventoryLoopCycle = 0;
             atInventoryInterface = k;
             atInventoryIndex = j;
@@ -10682,7 +10682,7 @@ public class Client extends GameShell {
     private int menuActionRow;
     private static int anticheat3;
     private int spellSelected;
-    private int anInt1137;
+    private int selectedSpellID;
     private int spellUsableOn;
     private String spellTooltip;
     private RgbImage[] markGraphic;
@@ -10826,7 +10826,7 @@ public class Client extends GameShell {
     public String server = "";
     public int playerBitAmmount = 12;//12 for 317, 14 for pi
     public static boolean guiLaunch = true;
-    public static boolean circleLoadingBar = true;
+    public static boolean circleLoadingBar = false;
     
     static {
         XP_FOR_LEVEL = new int[99];

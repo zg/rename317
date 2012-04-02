@@ -334,6 +334,8 @@ public class PglModel {
     public void render(){
        // modelRendererGL.render();
        // if (1==1)return;
+      //TODO FIX LWJGL stupid 2.8.3 buffer checks *RAGE*
+        
         textures[0].bind();
         geometry.bind();
         element.bind();

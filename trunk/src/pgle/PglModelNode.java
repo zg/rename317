@@ -20,6 +20,8 @@ public class PglModelNode extends GeometryNode{
 
     @Override
     protected void renderGeometry(Camera camera) {
+    	try{
         model.render();
+    	}catch(Exception e){e.printStackTrace();}
     }
 }
