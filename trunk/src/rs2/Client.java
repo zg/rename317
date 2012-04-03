@@ -2349,8 +2349,11 @@ public class Client extends GameShell {
                 if (onDemandData.dataType == 3 && loadingStage == 1) {
                     for (int i = 0; i < terrainData.length; i++) {
                         if (terrainIndices[i] == onDemandData.ID) {
+                        	if(useNewTerrain)
                             terrainData[i] = FileOperations.ReadFile("./hddata/maps/"+onDemandData.ID);//onDemandData.buffer;
-                            if (onDemandData.buffer == null)
+                        	else
+                        	terrainData[i] = onDemandData.buffer;
+                        		if (onDemandData.buffer == null)
                                 terrainIndices[i] = -1;
                             break;
                         }
@@ -10831,6 +10834,7 @@ public class Client extends GameShell {
     public static boolean guiLaunch = true;
     public static boolean circleLoadingBar = false;
     public static final boolean glEnabled = false;
+    public static final boolean useNewTerrain = false;
     static {
         XP_FOR_LEVEL = new int[99];
         int i = 0;
