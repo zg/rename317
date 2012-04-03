@@ -17,7 +17,7 @@
 	<classpathentry kind="lib" path="lib/forms_rt-6.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Rename317/lib/native/windows"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="rename317/lib/native/windows"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/PGLEngine2_Library.jar"/>

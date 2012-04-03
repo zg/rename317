@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Floor {
 
-    private static final boolean WRITE_HD = true;
+    private static final boolean WRITE_HD = false;
 
     public static void unpackConfig(JagexArchive jagexArchive) {
         Packet stream = new Packet(jagexArchive.getDataForName("flo.dat"));
