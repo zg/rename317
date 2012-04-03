@@ -5188,8 +5188,11 @@ public class Client extends GameShell {
                 //int anInt1260 = 0;//never used
                 resetImageProducers2();
                 stopMidi();//stop music on login
+                if(glEnabled)
+                {
                 pglWrapper = new PglWrapper();
                 pglWrapper.initJgle();
+                }
                 return;
             }
             if (k == 3) {
@@ -6139,12 +6142,12 @@ public class Client extends GameShell {
             SettingUsagePointers.unpackConfig(configArchive);
             VarBit.unpackConfig(configArchive);
             ItemDef.isMembers = isMembers;
-            if (!lowMem) {
+            /*if (!lowMem) {
                 drawLoadingText(90, "Unpacking sounds");
                 byte soundData[] = soundArchive.getDataForName("sounds.dat");
                 Packet stream = new Packet(soundData);
                 Sound.unpack(stream);
-            }
+            }*/
             drawLoadingText(95, "Unpacking interfaces");
             RSFont fonts[] = {smallFont, plainFont, boldFont, fancyFont};
             RSInterface.unpack(interfaceArchive, fonts, mediaArchive);
@@ -10827,7 +10830,7 @@ public class Client extends GameShell {
     public int playerBitAmmount = 12;//12 for 317, 14 for pi
     public static boolean guiLaunch = true;
     public static boolean circleLoadingBar = false;
-    
+    public static final boolean glEnabled = false;
     static {
         XP_FOR_LEVEL = new int[99];
         int i = 0;

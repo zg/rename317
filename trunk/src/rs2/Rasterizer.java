@@ -78,14 +78,14 @@ public class Rasterizer extends DrawingArea {
 				loadedTextureCount++;
 			} catch (Exception exception) {
 			}
-		}
+		}/*
         for (int k = 0;k < textureImagesHD.length;k++)
             try{
                 textureImagesHD[k] = new RgbImage("./hddata/texture/"+k+".png");
             } catch (Exception ignored){
                 textureImagesHD[k] = textureImagesHD[k - 1];
             }
-	}
+	*/}
 
 	public static int getAverageTextureColour(int textureId) {
 		if (averageTextureColour[textureId] != 0) {

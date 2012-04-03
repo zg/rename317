@@ -10,7 +10,7 @@ public class SceneGraph {
 
     private static int visibleAreaWidth = 53;
     private static int visibleAreaHeight = 53;
-    public static final boolean USE_HD = true;
+    public static final boolean USE_HD = false;
     private LinkedList<Tile> highlights = new LinkedList<Tile>();
     public static int clickedTileZ;
     private boolean heightHighlight;
