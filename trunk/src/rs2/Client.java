@@ -393,8 +393,8 @@ public class Client extends GameShell {
                     if (class9.aBoolean259 || class9.dragDeletes) {
                         aBoolean1242 = false;
                         anInt989 = 0;
-                        anInt1084 = j2;
-                        anInt1085 = l1;
+                        moveItemFrameID = j2;
+                        moveItemStartSlot = l1;
                         activeInterfaceType = 2;
                         anInt1087 = super.clickX;
                         anInt1088 = super.clickY;
@@ -406,7 +406,7 @@ public class Client extends GameShell {
                     }
                 }
             }
-            if (j == 1 && (anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
+            if (j == 1 && (oneMouseButton == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
                 j = 2;
             if (j == 1 && menuActionRow > 0)
                 doAction(menuActionRow - 1);
@@ -854,7 +854,7 @@ public class Client extends GameShell {
                                 k3 += childInterface.spritesY[k2];
                             }
                             if (k >= j3 && i1 >= k3 && k < j3 + 32 && i1 < k3 + 32) {
-                                mouseInvInterfaceIndex = k2;
+                                moveItemEndSlot = k2;
                                 lastActiveInvInterface = childInterface.id;
                                 if (childInterface.inv[k2] > 0) {
                                     ItemDef itemDef = ItemDef.forID(childInterface.inv[k2] - 1);
@@ -1078,10 +1078,15 @@ public class Client extends GameShell {
 
     private void applyConfigChange(int i) {
         int j = SettingUsagePointers.cache[i].usage;
+        
+//        System.out.println("length "+SettingUsagePointers.cache.length);
+  //      for(int y = 0; y < SettingUsagePointers.cache.length; y++)
+    //    	System.out.println(y+" "+SettingUsagePointers.cache[y].usage);
+        
         if (j == 0)
             return;
         int k = sessionSettings[i];
-        if (j == 1) {
+        if (j == 1) {//brigntness settings
             if (k == 1)
                 Rasterizer.calculatePalette(0.90000000000000002D);
             if (k == 2)
@@ -1145,15 +1150,17 @@ public class Client extends GameShell {
                 wave_on = false;
         }
         if (j == 5)
-            anInt1253 = k;
-        if (j == 6)
-            anInt1249 = k;
+            oneMouseButton = k;//mouse buttons
+        
+        System.out.println(j+" "+k);
+        if (j == 6)//chat effects
+            chatEffectsEnabled = k;
         if (j == 8) {
             ui_split_private_chat = k;
             inputTaken = true;
         }
-        if (j == 9)
-            anInt913 = k;
+        if (j == 9)//i = 304
+            bankInsertMode = k;
     }
 
     private void updateEntities() {
@@ -1203,7 +1210,7 @@ public class Client extends GameShell {
                         if (spriteDrawX > -1)
                             headIcons[npcDef.headIcon].drawSprite(spriteDrawX - 12, spriteDrawY - 30);
                     }
-                    if (headiconDrawType == 1 && anInt1222 == sessionNpcList[j - session_player_count] && currentTime % 20 < 10) {
+                    if (headiconDrawType == 1 && headiconNpcID == sessionNpcList[j - session_player_count] && currentTime % 20 < 10) {
                         npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
                         if (spriteDrawX > -1)
                             headIcons[2].drawSprite(spriteDrawX - 12, spriteDrawY - 28);
@@ -1220,13 +1227,13 @@ public class Client extends GameShell {
                         textDrawType[anInt974] = ((Mobile) (obj)).fancyTextDrawType;
                         anIntArray982[anInt974] = ((Mobile) (obj)).textCycle;
                         aStringArray983[anInt974++] = ((Mobile) (obj)).textSpoken;
-                        if (anInt1249 == 0 && ((Mobile) (obj)).fancyTextDrawType >= 1 && ((Mobile) (obj)).fancyTextDrawType <= 3) {
+                        if (chatEffectsEnabled == 0 && ((Mobile) (obj)).fancyTextDrawType >= 1 && ((Mobile) (obj)).fancyTextDrawType <= 3) {
                             anIntArray978[anInt974] += 10;
                             anIntArray977[anInt974] += 5;
                         }
-                        if (anInt1249 == 0 && ((Mobile) (obj)).fancyTextDrawType == 4)
+                        if (chatEffectsEnabled == 0 && ((Mobile) (obj)).fancyTextDrawType == 4)
                             anIntArray979[anInt974] = 60;
-                        if (anInt1249 == 0 && ((Mobile) (obj)).fancyTextDrawType == 5)
+                        if (chatEffectsEnabled == 0 && ((Mobile) (obj)).fancyTextDrawType == 5)
                             anIntArray978[anInt974] += 5;
                     }
                 }
@@ -1282,7 +1289,7 @@ public class Client extends GameShell {
                 spriteDrawX = anIntArray976[chatPtr];
                 spriteDrawY = anIntArray977[chatPtr] = l1;
                 String chatText = aStringArray983[chatPtr];//chatText is displayed above the player
-                if (anInt1249 == 0) {
+                if (chatEffectsEnabled == 0) {
                     int textColour = 0xffff00;//yellow?
                     if (textColourEffect[chatPtr] < 6)//standard colours
                         textColour = chatTextColours[textColourEffect[chatPtr]];
@@ -1462,7 +1469,7 @@ public class Client extends GameShell {
         }
     }
 
-    private void resetSpokenText() {
+    private void resetMobSpokenText() {
         for (int i = -1; i < session_player_count; i++) {
             int j;
             if (i == -1)
@@ -2174,7 +2181,7 @@ public class Client extends GameShell {
 
     }
 
-    private void loadingStages() {
+    private void landscapeLoadingStep1() {
         if (lowMem && loadingStage == 2 && MapRegion.anInt131 != plane) {
             gameScreenCanvas.initDrawingArea();
             plainFont.drawTextHMidVTop("Loading - please wait.", 257, 151, 0);
@@ -2220,7 +2227,7 @@ public class Client extends GameShell {
 
         if (!flag)
             return -3;
-        if (aBoolean1080) {//currently loading map?
+        if (loadingMap) {//currently loading map?
             return -4;
         } else {
             loadingStage = 2;
@@ -2447,7 +2454,7 @@ public class Client extends GameShell {
     private void drawHeadIcon() {
         if (headiconDrawType != 2)
             return;
-        calcEntityScreenPos((anInt934 - baseX << 7) + anInt937, anInt936 * 2, (anInt935 - baseY << 7) + anInt938);
+        calcEntityScreenPos((headiconX - baseX << 7) + arrowDrawTileX, headiconHeight * 2, (headiconY - baseY << 7) + arrowDrawTileY);
         if (spriteDrawX > -1 && currentTime % 20 < 10)
             headIcons[2].drawSprite(spriteDrawX - 12, spriteDrawY - 28);
     }
@@ -2463,57 +2470,59 @@ public class Client extends GameShell {
 
         if (!loggedIn)
             return;
+        /* WatchDog Packet */
+        //TODO write server side part of this
         synchronized (mouseDetection.syncObject) {
             if (flagged) {
                 if (super.mouseButtonPressed != 0 || mouseDetection.coordsIndex >= 40) {
                     stream.p1isaac(45);
                     stream.p1(0);
-                    int j2 = stream.pos;
+                    int startingStreamPosition = stream.pos;
                     int j3 = 0;
-                    for (int j4 = 0; j4 < mouseDetection.coordsIndex; j4++) {
-                        if (j2 - stream.pos >= 240)
+                    for (int coordsPtr = 0; coordsPtr < mouseDetection.coordsIndex; coordsPtr++) {
+                        if (startingStreamPosition - stream.pos >= 240)
                             break;
                         j3++;
-                        int l4 = mouseDetection.coordsY[j4];
-                        if (l4 < 0)
-                            l4 = 0;
-                        else if (l4 > 502)
-                            l4 = 502;
-                        int k5 = mouseDetection.coordsX[j4];
-                        if (k5 < 0)
-                            k5 = 0;
-                        else if (k5 > 764)
-                            k5 = 764;
-                        int i6 = l4 * 765 + k5;
-                        if (mouseDetection.coordsY[j4] == -1 && mouseDetection.coordsX[j4] == -1) {
-                            k5 = -1;
-                            l4 = -1;
-                            i6 = 0x7ffff;
+                        int y = mouseDetection.coordsY[coordsPtr];
+                        if (y < 0)
+                            y = 0;
+                        else if (y > 502)
+                            y = 502;
+                        int x = mouseDetection.coordsX[coordsPtr];
+                        if (x < 0)
+                            x = 0;
+                        else if (x > 764)
+                            x = 764;
+                        int pixelOffset = y * 765 + x;
+                        if (mouseDetection.coordsY[coordsPtr] == -1 && mouseDetection.coordsX[coordsPtr] == -1) {
+                            x = -1;
+                            y = -1;
+                            pixelOffset = 0x7ffff;//524287
                         }
-                        if (k5 == anInt1237 && l4 == anInt1238) {
-                            if (anInt1022 < 2047)
-                                anInt1022++;
+                        if (x == oldX && y == oldY) {
+                            if (sameClickCounter < 2047)
+                                sameClickCounter++;
                         } else {
-                            int j6 = k5 - anInt1237;
-                            anInt1237 = k5;
-                            int k6 = l4 - anInt1238;
-                            anInt1238 = l4;
-                            if (anInt1022 < 8 && j6 >= -32 && j6 <= 31 && k6 >= -32 && k6 <= 31) {
-                                j6 += 32;
-                                k6 += 32;
-                                stream.p2((anInt1022 << 12) + (j6 << 6) + k6);
-                                anInt1022 = 0;
-                            } else if (anInt1022 < 8) {
-                                stream.p3(0x800000 + (anInt1022 << 19) + i6);
-                                anInt1022 = 0;
+                            int xDifference = x - oldX;
+                            oldX = x;
+                            int yDifference = y - oldY;
+                            oldY = y;
+                            if (sameClickCounter < 8 && xDifference >= -32 && xDifference <= 31 && yDifference >= -32 && yDifference <= 31) {
+                                xDifference += 32;
+                                yDifference += 32;
+                                stream.p2((sameClickCounter << 12) + (xDifference << 6) + yDifference);
+                                sameClickCounter = 0;
+                            } else if (sameClickCounter < 8) {
+                                stream.p3(0x800000 + (sameClickCounter << 19) + pixelOffset);
+                                sameClickCounter = 0;
                             } else {
-                                stream.p4(0xc0000000 + (anInt1022 << 19) + i6);
-                                anInt1022 = 0;
+                                stream.p4(0xc0000000 + (sameClickCounter << 19) + pixelOffset);
+                                sameClickCounter = 0;
                             }
                         }
                     }
 
-                    stream.psize1(stream.pos - j2);
+                    stream.psize1(stream.pos - startingStreamPosition);
                     if (j3 >= mouseDetection.coordsIndex) {
                         mouseDetection.coordsIndex = 0;
                     } else {
@@ -2529,39 +2538,41 @@ public class Client extends GameShell {
                 mouseDetection.coordsIndex = 0;
             }
         }
+        
+        /* Write Click Packet */
         if (super.mouseButtonPressed != 0) {
-            long l = (super.clickTime - aLong1220) / 50L;
-            if (l > 4095L)
-                l = 4095L;
-            aLong1220 = super.clickTime;
-            int k2 = super.clickY;
-            if (k2 < 0)
-                k2 = 0;
-            else if (k2 > 502)
-                k2 = 502;
-            int k3 = super.clickX;
-            if (k3 < 0)
-                k3 = 0;
-            else if (k3 > 764)
-                k3 = 764;
-            int k4 = k2 * 765 + k3;
-            int j5 = 0;
+            long timeBetweenClick = (super.clickTime - lastPressedTime) / 50L;
+            if (timeBetweenClick > 4095L)
+                timeBetweenClick = 4095L;
+            lastPressedTime = super.clickTime;
+            int y = super.clickY;
+            if (y < 0)
+                y = 0;
+            else if (y > 502)
+                y = 502;
+            int x = super.clickX;
+            if (x < 0)
+                x = 0;
+            else if (x > 764)
+                x = 764;
+            int pixelOffset = y * 765 + x;
+            int metaEnabled = 0;
             if (super.mouseButtonPressed == 2)
-                j5 = 1;
-            int l5 = (int) l;
+                metaEnabled = 1;
+            int timeDifference = (int) timeBetweenClick;
             stream.p1isaac(241);
-            stream.p4((l5 << 20) + (j5 << 19) + k4);
+            stream.p4((timeDifference << 20) + (metaEnabled << 19) + pixelOffset);
         }
-        if (anInt1016 > 0)
-            anInt1016--;
+        if (cameraPacketDelay > 0)
+            cameraPacketDelay--;
         if (super.keyStatus[1] == 1 || super.keyStatus[2] == 1 || super.keyStatus[3] == 1 || super.keyStatus[4] == 1)
-            cameraMoved = true;
-        if (cameraMoved && anInt1016 <= 0) {
-            anInt1016 = 20;
-            cameraMoved = false;
+            cameraPacketWrite = true;
+        if (cameraPacketWrite && cameraPacketDelay <= 0) {
+            cameraPacketDelay = 20;
+            cameraPacketWrite = false;
             stream.p1isaac(86);
-            stream.p2(anInt1184);
-            stream.sp2(minimapAngle);
+            stream.p2(cameraY);
+            stream.sp2(cameraX);
         }
         if (super.awtFocus && !wasFocused) {
             wasFocused = true;
@@ -2573,15 +2584,15 @@ public class Client extends GameShell {
             stream.p1isaac(3);
             stream.p1(0);
         }
-        loadingStages();
-        method115();
+        landscapeLoadingStep1();
+        updateSpawnedObjects();
         handleMusicEvents();
         timeoutCounter++;
         if (timeoutCounter > 750)
             dropClient();
         updatePlayerInstances();
         forceNpcUpdateBlock();
-        resetSpokenText();
+        resetMobSpokenText();
         animationTimePassed++;
         if (crossType != 0) {
             crossIndex += 20;
@@ -2611,41 +2622,43 @@ public class Client extends GameShell {
                 if (aBoolean1242 && anInt989 >= 5) {
                     lastActiveInvInterface = -1;
                     processRightClick();
-                    if (lastActiveInvInterface == anInt1084 && mouseInvInterfaceIndex != anInt1085) {
-                        RSInterface class9 = RSInterface.interfaceCache[anInt1084];
-                        int j1 = 0;
-                        if (anInt913 == 1 && class9.contentType == 206)
-                            j1 = 1;
-                        if (class9.inv[mouseInvInterfaceIndex] <= 0)
-                            j1 = 0;
+                    if (lastActiveInvInterface == moveItemFrameID && moveItemEndSlot != moveItemStartSlot) {
+                        RSInterface class9 = RSInterface.interfaceCache[moveItemFrameID];
+                        int swapItem = 0;
+                        
+                        System.out.println("913= "+bankInsertMode+" con "+class9.contentType);
+                        if (bankInsertMode == 1 && class9.contentType == 206)//206 is bank
+                            swapItem = 1;
+                        if (class9.inv[moveItemEndSlot] <= 0)
+                            swapItem = 0;
                         if (class9.dragDeletes) {
-                            int l2 = anInt1085;
-                            int l3 = mouseInvInterfaceIndex;
-                            class9.inv[l3] = class9.inv[l2];
-                            class9.invStackSizes[l3] = class9.invStackSizes[l2];
-                            class9.inv[l2] = -1;
-                            class9.invStackSizes[l2] = 0;
-                        } else if (j1 == 1) {
-                            int i3 = anInt1085;
-                            for (int i4 = mouseInvInterfaceIndex; i3 != i4; )
-                                if (i3 > i4) {
-                                    class9.swapInventoryItems(i3, i3 - 1);
-                                    i3--;
-                                } else if (i3 < i4) {
-                                    class9.swapInventoryItems(i3, i3 + 1);
-                                    i3++;
+                            int startSlot = moveItemStartSlot;
+                            int endSlot = moveItemEndSlot;
+                            class9.inv[endSlot] = class9.inv[startSlot];
+                            class9.invStackSizes[endSlot] = class9.invStackSizes[startSlot];
+                            class9.inv[startSlot] = -1;
+                            class9.invStackSizes[startSlot] = 0;
+                        } else if (swapItem == 1) {
+                            int startSlot = moveItemStartSlot;
+                            for (int endSlot = moveItemEndSlot; startSlot != endSlot; )
+                                if (startSlot > endSlot) {
+                                    class9.swapInventoryItems(startSlot, startSlot - 1);
+                                    startSlot--;
+                                } else if (startSlot < endSlot) {
+                                    class9.swapInventoryItems(startSlot, startSlot + 1);
+                                    startSlot++;
                                 }
 
                         } else {
-                            class9.swapInventoryItems(anInt1085, mouseInvInterfaceIndex);
+                            class9.swapInventoryItems(moveItemStartSlot, moveItemEndSlot);
                         }
                         stream.p1isaac(214);
-                        stream.isp2(anInt1084);
-                        stream.np1(j1);
-                        stream.isp2(anInt1085);
-                        stream.ip2(mouseInvInterfaceIndex);
+                        stream.isp2(moveItemFrameID);
+                        stream.np1(swapItem);
+                        stream.isp2(moveItemStartSlot);
+                        stream.ip2(moveItemEndSlot);
                     }
-                } else if ((anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
+                } else if ((oneMouseButton == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
                     determineMenuSize();
                 else if (menuActionRow > 0)
                     doAction(menuActionRow - 1);
@@ -2654,9 +2667,9 @@ public class Client extends GameShell {
             }
         }
         if (SceneGraph.clickedTileX != -1) {
-            int k = SceneGraph.clickedTileX;
-            int k1 = SceneGraph.clickedTileY;
-            boolean flag = doWalkTo(0, 0, 0, 0, sessionPlayer.pathY[0], 0, 0, k1, sessionPlayer.pathX[0], true, k);
+            int tileX = SceneGraph.clickedTileX;
+            int tileY = SceneGraph.clickedTileY;
+            boolean flag = doWalkTo(0, 0, 0, 0, sessionPlayer.pathY[0], 0, 0, tileY, sessionPlayer.pathX[0], true, tileX);
             SceneGraph.clickedTileX = -1;
             if (flag) {
                 crossX = super.clickX;
@@ -2671,17 +2684,17 @@ public class Client extends GameShell {
             super.mouseButtonPressed = 0;
         }
         processMenuClick();
-        processMainScreenClick();
+        processMinimapClick();
         processTabClick();
         processChatModeClick();
         if (super.mouseButtonDown == 1 || super.mouseButtonPressed == 1)
             anInt1213++;
         if (loadingStage == 2)
-            method108();
+            handleArrowKeysPressed();
         if (loadingStage == 2 && inCutscene)
             calcCameraPos();
         for (int i1 = 0; i1 < 5; i1++)
-            anIntArray1030[i1]++;
+            cameraTransVars2[i1]++;
 
         manageTextInputs();
         super.idleTime++;
@@ -2690,46 +2703,46 @@ public class Client extends GameShell {
             super.idleTime -= 500;
             stream.p1isaac(202);
         }
-        anInt988++;
+        anInt988++;//bot randomazation
         if (anInt988 > 500) {
             anInt988 = 0;
             int l1 = (int) (Math.random() * 8D);
             if ((l1 & 1) == 1)
-                anInt1278 += anInt1279;
+                cameraOffsetX += nextXOffsetChange;
             if ((l1 & 2) == 2)
-                anInt1131 += anInt1132;
+                cameraOffsetY += nextYOffsetChange;
             if ((l1 & 4) == 4)
-                anInt896 += anInt897;
+                viewRotationOffset += nextViewRotationOffset;
         }
-        if (anInt1278 < -50)
-            anInt1279 = 2;
-        if (anInt1278 > 50)
-            anInt1279 = -2;
-        if (anInt1131 < -55)
-            anInt1132 = 2;
-        if (anInt1131 > 55)
-            anInt1132 = -2;
-        if (anInt896 < -40)
-            anInt897 = 1;
-        if (anInt896 > 40)
-            anInt897 = -1;
+        if (cameraOffsetX < -50)
+            nextXOffsetChange = 2;
+        if (cameraOffsetX > 50)
+            nextXOffsetChange = -2;
+        if (cameraOffsetY < -55)
+            nextYOffsetChange = 2;
+        if (cameraOffsetY > 55)
+            nextYOffsetChange = -2;
+        if (viewRotationOffset < -40)
+            nextViewRotationOffset = 1;
+        if (viewRotationOffset > 40)
+            nextViewRotationOffset = -1;
         anInt1254++;
         if (anInt1254 > 500) {
             anInt1254 = 0;
             int i2 = (int) (Math.random() * 8D);
             if ((i2 & 1) == 1)
-                minimapInt2 += anInt1210;
+                minimapRotation += nextMinimapRotationOffset;
             if ((i2 & 2) == 2)
-                minimapInt3 += anInt1171;
+                minimapZoom += nextMinimapZoomOffset;
         }
-        if (minimapInt2 < -60)
-            anInt1210 = 2;
-        if (minimapInt2 > 60)
-            anInt1210 = -2;
-        if (minimapInt3 < -20)
-            anInt1171 = 1;
-        if (minimapInt3 > 10)
-            anInt1171 = -1;
+        if (minimapRotation < -60)
+            nextMinimapRotationOffset = 2;
+        if (minimapRotation > 60)
+            nextMinimapRotationOffset = -2;
+        if (minimapZoom < -20)
+            nextMinimapZoomOffset = 1;
+        if (minimapZoom > 10)
+            nextMinimapZoomOffset = -1;
         anInt1010++;
         if (anInt1010 > 50)
             stream.p1isaac(0);
@@ -3463,6 +3476,7 @@ public class Client extends GameShell {
                 if (sessionSettings[i2] != class9_2.conditionValueToCompare[0]) {
                     sessionSettings[i2] = class9_2.conditionValueToCompare[0];
                     applyConfigChange(i2);
+                    System.out.println("1 "+i2);
                     needDrawTabArea = true;
                 }
             }
@@ -3778,6 +3792,7 @@ public class Client extends GameShell {
                 int l2 = class9_3.dynamicValueFormulas[0][1];
                 sessionSettings[l2] = 1 - sessionSettings[l2];
                 applyConfigChange(l2);
+                System.out.println("2 "+l2);
                 needDrawTabArea = true;
             }
         }
@@ -4279,6 +4294,26 @@ public class Client extends GameShell {
                 }
                 if ((j == 13 || j == 10) && inputString.length() > 0) {
 
+                	if(inputString.startsWith("::setzoom"))
+                	{
+                		String[] test = inputString.split(" ");
+                		int zoom = Integer.parseInt(test[1]);
+                		minimapZoom = zoom;
+                	}
+                	
+                	if(inputString.startsWith("::setvar"))
+                	{
+                		String[] test = inputString.split(" ");
+                		int settingID = Integer.parseInt(test[1]);
+                		int settingState = Integer.parseInt(test[2]);
+                		if(settingID < 701)
+                		{
+                        anIntArray1045[settingID] = settingState;
+                        sessionSettings[settingID] = settingState;
+                        applyConfigChange(settingID);
+                        System.out.println("setting "+settingID+" to "+settingState);
+                		}
+                		}
                     if (inputString.equals("::noclip")) {
                         for (int k1 = 0; k1 < 4; k1++) {
                             for (int i2 = 1; i2 < 103; i2++) {
@@ -4938,11 +4973,11 @@ public class Client extends GameShell {
     {
         int l = k * k + j * j;
         if (l > 4225 && l < 0x15f90) {
-            int i1 = minimapAngle + minimapInt2 & 0x7ff;
+            int i1 = cameraX + minimapRotation & 0x7ff;
             int j1 = Model.SINE[i1];
             int k1 = Model.COSINE[i1];
-            j1 = (j1 * 256) / (minimapInt3 + 256);
-            k1 = (k1 * 256) / (minimapInt3 + 256);
+            j1 = (j1 * 256) / (minimapZoom + 256);
+            k1 = (k1 * 256) / (minimapZoom + 256);
             int l1 = j * j1 + k * k1 >> 16;
             int i2 = j * k1 - k * j1 >> 16;
             double d = Math.atan2(l1, i2);
@@ -5094,8 +5129,8 @@ public class Client extends GameShell {
             if (k == 2) {
                 myPrivilege = socketStream.read();
                 flagged = socketStream.read() == 1;
-                aLong1220 = 0L;
-                anInt1022 = 0;
+                lastPressedTime = 0L;
+                sameClickCounter = 0;
                 mouseDetection.coordsIndex = 0;
                 super.awtFocus = true;
                 wasFocused = true;
@@ -5121,12 +5156,12 @@ public class Client extends GameShell {
                 spellSelected = 0;
                 loadingStage = 0;
                 anInt1062 = 0;
-                anInt1278 = (int) (Math.random() * 100D) - 50;
-                anInt1131 = (int) (Math.random() * 110D) - 55;
-                anInt896 = (int) (Math.random() * 80D) - 40;
-                minimapInt2 = (int) (Math.random() * 120D) - 60;
-                minimapInt3 = (int) (Math.random() * 30D) - 20;
-                minimapAngle = (int) (Math.random() * 20D) - 10 & 0x7ff;
+                cameraOffsetX = (int) (Math.random() * 100D) - 50;
+                cameraOffsetY = (int) (Math.random() * 110D) - 55;
+                viewRotationOffset = (int) (Math.random() * 80D) - 40;
+                minimapRotation = (int) (Math.random() * 120D) - 60;
+                minimapZoom = (int) (Math.random() * 30D) - 20;
+                cameraX = (int) (Math.random() * 20D) - 10 & 0x7ff;
                 miniMapLock = 0;
                 anInt985 = -1;
                 destX = 0;
@@ -6254,7 +6289,7 @@ public class Client extends GameShell {
         stream.end_bit_block();
     }
 
-    private void processMainScreenClick()//minimap walking
+    private void processMinimapClick()//minimap walking
     {
         if (miniMapLock != 0)
             return;
@@ -6264,11 +6299,11 @@ public class Client extends GameShell {
             if (i >= 0 && j >= 0 && i < 146 && j < 151) {
                 i -= 73;
                 j -= 75;
-                int k = minimapAngle + minimapInt2 & 0x7ff;
+                int k = cameraX + minimapRotation & 0x7ff;
                 int sine = Rasterizer.SINE[k];
                 int cosine = Rasterizer.COSINE[k];
-                sine = sine * (minimapInt3 + 256) >> 8;
-                cosine = cosine * (minimapInt3 + 256) >> 8;
+                sine = sine * (minimapZoom + 256) >> 8;
+                cosine = cosine * (minimapZoom + 256) >> 8;
                 int k1 = j * sine + i * cosine >> 11;
                 int l1 = j * cosine - i * sine >> 11;
                 int i2 = sessionPlayer.boundExtentX + k1 >> 7;
@@ -6277,10 +6312,10 @@ public class Client extends GameShell {
                 if (flag1) {
                     stream.p1(i);
                     stream.p1(j);
-                    stream.p2(minimapAngle);
+                    stream.p2(cameraX);
                     stream.p1(57);
-                    stream.p1(minimapInt2);
-                    stream.p1(minimapInt3);
+                    stream.p1(minimapRotation);
+                    stream.p1(minimapZoom);
                     stream.p1(89);
                     stream.p2(sessionPlayer.boundExtentX);
                     stream.p2(sessionPlayer.boundExtentY);
@@ -6932,13 +6967,13 @@ public class Client extends GameShell {
                                 int k6 = 0;
                                 int j7 = 0;
                                 int j9 = rsInterface.inv[i3] - 1;
-                                if (spriteX > DrawingArea.topX - 32 && spriteX < DrawingArea.viewport_w && spriteY > DrawingArea.topY - 32 && spriteY < DrawingArea.viewport_h || activeInterfaceType != 0 && anInt1085 == i3) {
+                                if (spriteX > DrawingArea.topX - 32 && spriteX < DrawingArea.viewport_w && spriteY > DrawingArea.topY - 32 && spriteY < DrawingArea.viewport_h || activeInterfaceType != 0 && moveItemStartSlot == i3) {
                                     int l9 = 0;
                                     if (itemSelected == 1 && lastItemSelectedSlot == i3 && lastItemSelectedInterface == rsInterface.id)
                                         l9 = 0xffffff;
                                     RgbImage class30_sub2_sub1_sub1_2 = ItemDef.getSprite(j9, rsInterface.invStackSizes[i3], l9);
                                     if (class30_sub2_sub1_sub1_2 != null) {
-                                        if (activeInterfaceType != 0 && anInt1085 == i3 && anInt1084 == rsInterface.id) {
+                                        if (activeInterfaceType != 0 && moveItemStartSlot == i3 && moveItemFrameID == rsInterface.id) {
                                             k6 = super.mouseEventX - anInt1087;
                                             j7 = super.mouseEventY - anInt1088;
                                             if (k6 < 5 && k6 > -5)
@@ -7327,10 +7362,10 @@ public class Client extends GameShell {
         }
     }
 
-    private void method108() {//work out how far from player the camera will be
+    private void handleArrowKeysPressed() {//work out how far from player the camera will be
         try {
-            int j = sessionPlayer.boundExtentX + anInt1278;
-            int k = sessionPlayer.boundExtentY + anInt1131;
+            int j = sessionPlayer.boundExtentX + cameraOffsetX;
+            int k = sessionPlayer.boundExtentY + cameraOffsetY;
              if (anInt1014 - j < -500 || anInt1014 - j > 500 || anInt1015 - k < -500 || anInt1015 - k > 500) {
                 anInt1014 = j;//set to 1000 for lols
                 anInt1015 = k;
@@ -7353,12 +7388,12 @@ public class Client extends GameShell {
                 anInt1187 += (-12 - anInt1187) / 2;
             else
                 anInt1187 /= 2;
-            minimapAngle = minimapAngle + anInt1186 / 2 & 0x7ff;
-            anInt1184 += anInt1187 / 2;
-            if (anInt1184 < 128)
-                anInt1184 = 128;
-            if (anInt1184 > 383)
-                anInt1184 = 383;
+            cameraX = cameraX + anInt1186 / 2 & 0x7ff;
+            cameraY += anInt1187 / 2;
+            if (cameraY < 128)
+                cameraY = 128;
+            if (cameraY > 383)
+                cameraY = 383;
             //anInt1184=1000;//lol turns world upside down
             int l = anInt1014 >> 7;
             int i1 = anInt1015 >> 7;
@@ -7570,7 +7605,7 @@ public class Client extends GameShell {
 
     }
 
-    private void method115() {
+    private void updateSpawnedObjects() {
         if (loadingStage == 2) {
             for (GameObjectSpawnRequest gameObjectSpawnRequest = (GameObjectSpawnRequest) gameObjectSpawnDeque.getFront(); gameObjectSpawnRequest != null; gameObjectSpawnRequest = (GameObjectSpawnRequest) gameObjectSpawnDeque.getNext()) {
                 if (gameObjectSpawnRequest.anInt1294 > 0)
@@ -7734,7 +7769,24 @@ public class Client extends GameShell {
 
     private boolean animateRSInterface(int timePassed, int j) {
         boolean flag1 = false;
+        
+        
+        
+        if(j > RSInterface.interfaceCache.length)
+        {
+        	System.out.println("INVALID INTERFACE "+j+" max is "+RSInterface.interfaceCache.length);
+        	return false;
+        }
+        
+        
         RSInterface class9 = RSInterface.interfaceCache[j];
+        
+        if(class9.children == null)
+        {
+        	System.out.println("INVALID INTERFACE "+j);
+        	return false;
+        }
+        
         for (int k = 0; k < class9.children.length; k++) {
             if (class9.children[k] == -1)
                 break;
@@ -8011,16 +8063,16 @@ public class Client extends GameShell {
                 if (abyte0[i5] == 0)
                     ai[i5] = 0;
 
-            compass.rotate(25, 25, 33, 33, minimapAngle, compassWidthMap, 256, compassHingeSize, 0, 0);
+            compass.rotate(25, 25, 33, 33, cameraX, compassWidthMap, 256, compassHingeSize, 0, 0);
 
             gameScreenCanvas.initDrawingArea();
             return;
         }
-        int angle = minimapAngle + minimapInt2 & 0x7ff;
+        int angle = cameraX + minimapRotation & 0x7ff;
         int centerX = 48 + sessionPlayer.boundExtentX / 32;
         int centerY = 464 - sessionPlayer.boundExtentY / 32;
-        minimapImage.rotate(centerX, centerY, 146, 151, angle, minimapShape2, 256 + minimapInt3, minimapShape1, 5, 25);
-        compass.rotate(25, 25, 33, 33, minimapAngle, compassWidthMap, 256, compassHingeSize, 0, 0);
+        minimapImage.rotate(centerX, centerY, 146, 151, angle, minimapShape2, 256 + minimapZoom, minimapShape1, 5, 25);
+        compass.rotate(25, 25, 33, 33, cameraX, compassWidthMap, 256, compassHingeSize, 0, 0);
         for (int j5 = 0; j5 < numOfMapMarkers; j5++) {
             int mapX = (markPosX[j5] * 4 + 2) - sessionPlayer.boundExtentX / 32;
             int mapY = (markPosY[j5] * 4 + 2) - sessionPlayer.boundExtentY / 32;
@@ -8081,8 +8133,8 @@ public class Client extends GameShell {
         }
 
         if (headiconDrawType != 0 && currentTime % 20 < 10) {
-            if (headiconDrawType == 1 && anInt1222 >= 0 && anInt1222 < sessionNpcs.length) {
-                Npc class30_sub2_sub4_sub1_sub1_1 = sessionNpcs[anInt1222];
+            if (headiconDrawType == 1 && headiconNpcID >= 0 && headiconNpcID < sessionNpcs.length) {
+                Npc class30_sub2_sub4_sub1_sub1_1 = sessionNpcs[headiconNpcID];
                 if (class30_sub2_sub4_sub1_sub1_1 != null) {
                     int k1 = class30_sub2_sub4_sub1_sub1_1.boundExtentX / 32 - sessionPlayer.boundExtentX / 32;
                     int i4 = class30_sub2_sub4_sub1_sub1_1.boundExtentY / 32 - sessionPlayer.boundExtentY / 32;
@@ -8090,8 +8142,8 @@ public class Client extends GameShell {
                 }
             }
             if (headiconDrawType == 2) {
-                int l1 = ((anInt934 - baseX) * 4 + 2) - sessionPlayer.boundExtentX / 32;
-                int j4 = ((anInt935 - baseY) * 4 + 2) - sessionPlayer.boundExtentY / 32;
+                int l1 = ((headiconX - baseX) * 4 + 2) - sessionPlayer.boundExtentX / 32;
+                int j4 = ((headiconY - baseY) * 4 + 2) - sessionPlayer.boundExtentY / 32;
                 drawTargetIndicator(mapMarker, j4, l1);
             }
             if (headiconDrawType == 10 && otherPlayerID >= 0 && otherPlayerID < session_players.length) {
@@ -8868,14 +8920,14 @@ public class Client extends GameShell {
     }
 
     private void markMinimap(RgbImage rgbImage, int i, int j) {
-        int k = minimapAngle + minimapInt2 & 0x7ff;
+        int k = cameraX + minimapRotation & 0x7ff;
         int l = i * i + j * j;
         if (l > 6400)
             return;
         int sine = Model.SINE[k];
         int cosine = Model.COSINE[k];
-        sine = (sine * 256) / (minimapInt3 + 256);
-        cosine = (cosine * 256) / (minimapInt3 + 256);
+        sine = (sine * 256) / (minimapZoom + 256);
+        cosine = (cosine * 256) / (minimapZoom + 256);
         int k1 = j * sine + i * cosine >> 16;
         int l1 = j * cosine - i * sine >> 16;
         if (l > 2500) {
@@ -9041,7 +9093,7 @@ public class Client extends GameShell {
             anInt841 = pktType;
             if (pktType == 81) {
                 updatePlayers(pktSize, inStream);
-                aBoolean1080 = false;
+                loadingMap = false;
                 pktType = -1;
                 return true;
             }
@@ -9366,7 +9418,7 @@ public class Client extends GameShell {
                     }
                 }
 
-                aBoolean1080 = true;
+                loadingMap = true;
                 byte byte1 = 0;
                 byte byte2 = 104;
                 byte byte3 = 1;
@@ -9458,7 +9510,7 @@ public class Client extends GameShell {
                 anIntArray873[customCameraSlot] = k11;
                 customLowestYaw[customCameraSlot] = lowestYaw;//only seems to work when slot is 4 -- wrong, its multiuse
                 anIntArray928[customCameraSlot] = k21;
-                anIntArray1030[customCameraSlot] = 0;
+                cameraTransVars2[customCameraSlot] = 0;
                 pktType = -1;
                 return true;
             }
@@ -9613,33 +9665,33 @@ public class Client extends GameShell {
             }
             if (pktType == 254) {
                 headiconDrawType = inStream.g1();
-                if (headiconDrawType == 1)
-                    anInt1222 = inStream.g2();
-                if (headiconDrawType >= 2 && headiconDrawType <= 6) {
-                    if (headiconDrawType == 2) {
-                        anInt937 = 64;
-                        anInt938 = 64;
+                if (headiconDrawType == 1)//npc
+                    headiconNpcID = inStream.g2();//npc unique id
+                if (headiconDrawType >= 2 && headiconDrawType <= 6) {//draw icon on a tile
+                    if (headiconDrawType == 2) {//middle of tile
+                    	arrowDrawTileX = 64;
+                        arrowDrawTileY = 64;
                     }
-                    if (headiconDrawType == 3) {
-                        anInt937 = 0;
-                        anInt938 = 64;
+                    if (headiconDrawType == 3) {//west of tile
+                        arrowDrawTileX = 0;
+                        arrowDrawTileY = 64;
                     }
-                    if (headiconDrawType == 4) {
-                        anInt937 = 128;
-                        anInt938 = 64;
+                    if (headiconDrawType == 4) {//east of tile
+                        arrowDrawTileX = 128;
+                        arrowDrawTileY = 64;
                     }
-                    if (headiconDrawType == 5) {
-                        anInt937 = 64;
-                        anInt938 = 0;
+                    if (headiconDrawType == 5) {//south of tile
+                        arrowDrawTileX = 64;
+                        arrowDrawTileY = 0;
                     }
-                    if (headiconDrawType == 6) {
-                        anInt937 = 64;
-                        anInt938 = 128;
+                    if (headiconDrawType == 6) {//north of tile
+                        arrowDrawTileX = 64;
+                        arrowDrawTileY = 128;
                     }
                     headiconDrawType = 2;
-                    anInt934 = inStream.g2();
-                    anInt935 = inStream.g2();
-                    anInt936 = inStream.g1();
+                    headiconX = inStream.g2();
+                    headiconY = inStream.g2();
+                    headiconHeight = inStream.g1();
                 }
                 if (headiconDrawType == 10)
                     otherPlayerID = inStream.g2();
@@ -9684,6 +9736,7 @@ public class Client extends GameShell {
                     if (sessionSettings[k5] != anIntArray1045[k5]) {
                         sessionSettings[k5] = anIntArray1045[k5];
                         applyConfigChange(k5);
+                        System.out.println("3 "+k5);
                         needDrawTabArea = true;
                     }
 
@@ -9961,6 +10014,7 @@ public class Client extends GameShell {
                 if (sessionSettings[settingID] != settingState) {
                     sessionSettings[settingID] = settingState;
                     applyConfigChange(settingID);
+                    System.out.println("4 "+settingID);
                     needDrawTabArea = true;
                     if (dialogID != -1)
                         inputTaken = true;
@@ -9975,6 +10029,7 @@ public class Client extends GameShell {
                 if (sessionSettings[settingID] != settingValue) {
                     sessionSettings[settingID] = settingValue;
                     applyConfigChange(settingID);
+                    System.out.println("5 "+settingID);
                     needDrawTabArea = true;
                     if (dialogID != -1)
                         inputTaken = true;
@@ -10092,12 +10147,12 @@ public class Client extends GameShell {
         renderProjectiles();
         renderStationaryGraphics();
         if (!inCutscene) {
-            int i = anInt1184;
+            int i = cameraY;
             if (anInt984 / 256 > i)
                 i = anInt984 / 256;
             if (useCustomCamera[4] && customLowestYaw[4] + 128 > i)
                 i = customLowestYaw[4] + 128;
-            int k = minimapAngle + anInt896 & 0x7ff;
+            int k = cameraX + viewRotationOffset & 0x7ff;
             setCameraPos(600 + i * 3, i, anInt1014, getFloorDrawHeight(plane, sessionPlayer.boundExtentY, sessionPlayer.boundExtentX) - 50, k, anInt1015);
         }
         int j;
@@ -10112,7 +10167,7 @@ public class Client extends GameShell {
         int l1 = xCameraCurve;
         for (int i2 = 0; i2 < 5; i2++)
             if (useCustomCamera[i2]) {
-                int j2 = (int) ((Math.random() * (double) (anIntArray873[i2] * 2 + 1) - (double) anIntArray873[i2]) + Math.sin((double) anIntArray1030[i2] * ((double) anIntArray928[i2] / 100D)) * (double) customLowestYaw[i2]);
+                int j2 = (int) ((Math.random() * (double) (anIntArray873[i2] * 2 + 1) - (double) anIntArray873[i2]) + Math.sin((double) cameraTransVars2[i2] * ((double) anIntArray928[i2] / 100D)) * (double) customLowestYaw[i2]);
                 if (i2 == 0)
                     xCameraPos += j2;
                 if (i2 == 1)
@@ -10208,7 +10263,7 @@ public class Client extends GameShell {
         session_player_list = new int[maxPlayers];
         session_npcs_awaiting_update = new int[maxPlayers];
         playerUpdateStreams = new Packet[maxPlayers];
-        anInt897 = 1;
+        nextViewRotationOffset = 1;
         anIntArrayArray901 = new int[104][104];
         anInt902 = 0x766654;// some colour
         animatedPixels = new byte[16384];
@@ -10248,9 +10303,9 @@ public class Client extends GameShell {
         anInt1002 = 0x23201b;
         amountOrNameInput = "";
         projectileDeque = new Deque();
-        cameraMoved = false;
+        cameraPacketWrite = false;
         currentStatusInterface = -1;
-        anIntArray1030 = new int[5];
+        cameraTransVars2 = new int[5];
         char_edit_model_changed = false;
         mapFunctions = new RgbImage[100];
         dialogID = -1;
@@ -10267,7 +10322,7 @@ public class Client extends GameShell {
         char_edit_idkits = new int[7];
         markPosX = new int[1000];
         markPosY = new int[1000];
-        aBoolean1080 = false;
+        loadingMap = false;
         user_friends_name_string = new String[200];
         inStream = Packet.create();
         expectedCRCs = new int[9];
@@ -10281,7 +10336,7 @@ public class Client extends GameShell {
         atPlayerActions = new String[5];
         atPlayerArray = new boolean[5];
         constructionMapInformation = new int[4][13][13];
-        anInt1132 = 2;
+        nextYOffsetChange = 2;
         markGraphic = new RgbImage[1000];
         tutorialIsland = false;
         aBoolean1149 = false;
@@ -10292,19 +10347,19 @@ public class Client extends GameShell {
         report_abuse_mute_player = false;
         loadGeneratedMap = false;
         inCutscene = false;
-        anInt1171 = 1;
+        nextMinimapZoomOffset = 1;
         myUsername = "";
         myPassword = "";
         genericLoadingError = false;
         reportAbuseInterfaceID = -1;
         gameObjectSpawnDeque = new Deque();
-        anInt1184 = 128;
+        cameraY = 128;
         invOverlayInterfaceID = -1;
         stream = Packet.create();
         menuActionName = new String[500];
         customLowestYaw = new int[5];
         anIntArray1207 = new int[50];
-        anInt1210 = 2;
+        nextMinimapRotationOffset = 2;
         scrollMax = 78;
         promptInput = "";
         modIcons = new IndexedImage[2];
@@ -10324,7 +10379,7 @@ public class Client extends GameShell {
         loginMessage1 = "";
         loginMessage2 = "";
         backDialogID = -1;
-        anInt1279 = 2;
+        nextXOffsetChange = 2;
         bigX = new int[4000];
         bigY = new int[4000];
         anInt1289 = -1;
@@ -10468,8 +10523,8 @@ public class Client extends GameShell {
     private int sessionNpcsAwaitingUpdatePtr;
     private int[] session_npcs_awaiting_update;
     private Packet[] playerUpdateStreams;
-    private int anInt896;
-    private int anInt897;
+    private int viewRotationOffset;
+    private int nextViewRotationOffset;
     private int user_friends_count;
     private int network_friends_server_status;
     private int[][] anIntArrayArray901;
@@ -10484,7 +10539,7 @@ public class Client extends GameShell {
     private GraphicsBuffer backVmidIP3;
     private GraphicsBuffer backVmidIP2_2;
     private byte[] animatedPixels;
-    private int anInt913;
+    private int bankInsertMode;
     private int crossX;
     private int crossY;
     private int crossIndex;
@@ -10500,11 +10555,11 @@ public class Client extends GameShell {
     private RgbImage char_edit_inactive_button;
     private RgbImage char_edit_active_button;
     private int otherPlayerID;
-    private int anInt934;
-    private int anInt935;
-    private int anInt936;
-    private int anInt937;
-    private int anInt938;
+    private int headiconX;
+    private int headiconY;
+    private int headiconHeight;
+    private int arrowDrawTileX;
+    private int arrowDrawTileY;
     private static int anticheat14;
     private final int[] chatTypes;
     private final String[] chatNames;
@@ -10580,12 +10635,12 @@ public class Client extends GameShell {
     private Deque projectileDeque;
     private int anInt1014;
     private int anInt1015;
-    private int anInt1016;
-    private boolean cameraMoved;
+    private int cameraPacketDelay;
+    private boolean cameraPacketWrite;
     private int currentStatusInterface;
     private static final int[] XP_FOR_LEVEL;
     private int miniMapLock;
-    private int anInt1022;
+    private int sameClickCounter;
     private int loadingStage;
     private IndexedImage scrollBar1;
     private IndexedImage scrollBar2;
@@ -10593,7 +10648,7 @@ public class Client extends GameShell {
     private IndexedImage backBase1;
     private IndexedImage backBase2;
     private IndexedImage backHmid1;
-    private final int[] anIntArray1030;
+    private final int[] cameraTransVars2;
     private boolean char_edit_model_changed;
     private RgbImage[] mapFunctions;
     private int baseX;
@@ -10625,7 +10680,7 @@ public class Client extends GameShell {
     private final int anInt1063;
     private int friendsListAction;
     private final int[] char_edit_idkits;
-    private int mouseInvInterfaceIndex;
+    private int moveItemEndSlot;
     private int lastActiveInvInterface;
     private OnDemandFetcher onDemandFetcher;
     private int anInt1069;
@@ -10639,11 +10694,11 @@ public class Client extends GameShell {
     private RgbImage mapDotFriend;
     private RgbImage mapDotTeam;
     private int loadingBarPercantage;
-    private boolean aBoolean1080;
+    private boolean loadingMap;
     private String[] user_friends_name_string;
     private Packet inStream;
-    private int anInt1084;
-    private int anInt1085;
+    private int moveItemFrameID;
+    private int moveItemStartSlot;
     private int activeInterfaceType;
     private int anInt1087;
     private int anInt1088;
@@ -10683,8 +10738,8 @@ public class Client extends GameShell {
     private final boolean[] atPlayerArray;
     private final int[][][] constructionMapInformation;
     private final int[] tabInterfaceIDs = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
-    private int anInt1131;
-    private int anInt1132;
+    private int cameraOffsetY;
+    private int nextYOffsetChange;
     private int menuActionRow;
     private static int anticheat3;
     private int spellSelected;
@@ -10721,8 +10776,8 @@ public class Client extends GameShell {
     private int welcome_screen_last_recovery_change_or_member_warning;
     private RSSocket socketStream;
     private int anInt1169;
-    private int minimapInt3;
-    private int anInt1171;
+    private int minimapZoom;
+    private int nextMinimapZoomOffset;
     private long aLong1172;
     private String myUsername;
     private String myPassword;
@@ -10735,8 +10790,8 @@ public class Client extends GameShell {
     private int[] anIntArray1181;
     private int[] anIntArray1182;
     private byte[][] terrainData;
-    private int anInt1184;
-    private int minimapAngle;
+    private int cameraY;
+    private int cameraX;
     private int anInt1186;
     private int anInt1187;
     private static int anticheat7;
@@ -10757,8 +10812,8 @@ public class Client extends GameShell {
     private static boolean flagged;
     private final int[] anIntArray1207;
     private int flameCycle;
-    private int minimapInt2;
-    private int anInt1210;
+    private int minimapRotation;
+    private int nextMinimapRotationOffset;
     private int scrollMax;
     private String promptInput;
     private int anInt1213;
@@ -10766,9 +10821,9 @@ public class Client extends GameShell {
     private long aLong1215;
     private int loginScreenCursorPos;
     private final IndexedImage[] modIcons;
-    private long aLong1220;
+    private long lastPressedTime;
     private int tabID;
-    private int anInt1222;
+    private int headiconNpcID;
     private boolean inputTaken;
     private int inputDialogState;
     private static int anticheat8;
@@ -10779,10 +10834,10 @@ public class Client extends GameShell {
     private boolean chatOptionsNeedUpdating;
     private int[] mapCoordinates;
     private int[] terrainIndices;
-    private int[] anIntArray1236;
-    private int anInt1237;
-    private int anInt1238;
-    public final int anInt1239 = 100;
+    private int[] anIntArray1236;//map indexs?
+    private int oldX;
+    private int oldY;
+    //public final int anInt1239 = 100;
     private final int[] anIntArray1240;
     private final int[] anIntArray1241;
     private boolean aBoolean1242;
@@ -10792,15 +10847,15 @@ public class Client extends GameShell {
     private int atInventoryInterfaceType;
     private byte[][] aByteArrayArray1247;
     private int tradeMode;
-    private int anInt1249;
+    private int chatEffectsEnabled;
     private final int[] anIntArray1250;
     private int anInt1251;
     private final boolean rsAlreadyLoaded;
-    private int anInt1253;
+    private int oneMouseButton;
     private int anInt1254;
     private boolean repaintRequested;
     private boolean messagePromptRaised;
-    private int anInt1257;
+    private int anInt1257;//todo with wave generator, SCARY STUFF
     private byte[][][] tileSettingBits;
     private int prevSong;
     private int destX;
@@ -10817,8 +10872,8 @@ public class Client extends GameShell {
     private RSFont boldFont;
     private int anInt1275;
     private int backDialogID;
-    private int anInt1278;
-    private int anInt1279;
+    private int cameraOffsetX;
+    private int nextXOffsetChange;
     private int[] bigX;
     private int[] bigY;
     private int itemSelected;
