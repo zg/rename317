@@ -5,13 +5,13 @@ public class Tile extends Node {
 
     public boolean highlighted = false;
 
-    public Tile(int i, int j, int k)
+    public Tile(int z, int x, int y)
     {
         interactableObjects = new InteractableObject[5];
         anIntArray1319 = new int[5];
-        anInt1310 = tileZ = i;
-        anInt1308 = j;
-        anInt1309 = k;
+        anInt1310 = tileZ = z;//need to merge 1310 and tileZ
+        anInt1308 = x;
+        anInt1309 = y;
     }
 
     int tileZ;

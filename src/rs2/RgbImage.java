@@ -164,39 +164,39 @@ public class RgbImage extends DrawingArea {
         yDrawOffset = 0;
     }
 
-    public void method346(int i, int j)
+    public void method346(int x, int y)
     {
-        i += xDrawOffset;
-        j += yDrawOffset;
-        int l = i + j * width;
+        x += xDrawOffset;
+        y += yDrawOffset;
+        int pixelOffset = x + y * width;
         int i1 = 0;
         int j1 = myHeight;
         int k1 = myWidth;
         int l1 = width - k1;
         int i2 = 0;
-        if(j < topY)
+        if(y < topY)
         {
-            int j2 = topY - j;
+            int j2 = topY - y;
             j1 -= j2;
-            j = topY;
+            y = topY;
             i1 += j2 * k1;
-            l += j2 * width;
+            pixelOffset += j2 * width;
         }
-        if(j + j1 > viewport_h)
-            j1 -= (j + j1) - viewport_h;
-        if(i < topX)
+        if(y + j1 > viewport_h)
+            j1 -= (y + j1) - viewport_h;
+        if(x < topX)
         {
-            int k2 = topX - i;
+            int k2 = topX - x;
             k1 -= k2;
-            i = topX;
+            x = topX;
             i1 += k2;
-            l += k2;
+            pixelOffset += k2;
             i2 += k2;
             l1 += k2;
         }
-        if(i + k1 > viewport_w)
+        if(x + k1 > viewport_w)
         {
-            int l2 = (i + k1) - viewport_w;
+            int l2 = (x + k1) - viewport_w;
             k1 -= l2;
             i2 += l2;
             l1 += l2;
@@ -205,7 +205,7 @@ public class RgbImage extends DrawingArea {
         {
         } else
         {
-            method347(l, k1, j1, i2, i1, l1, myPixels, pixels);
+            method347(pixelOffset, k1, j1, i2, i1, l1, myPixels, pixels);
         }
     }
 

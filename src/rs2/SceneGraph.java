@@ -1240,6 +1240,7 @@ label0:
             int Y = TILE.anInt1309;
             int k = TILE.tileZ;
             int l = TILE.anInt1310;
+            System.out.println(k+" "+l);
             Tile aclass30_sub3[][] = tileArray[k];
             if(TILE.aBoolean1322)
             {
