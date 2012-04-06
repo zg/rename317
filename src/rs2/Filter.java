@@ -1,5 +1,10 @@
 package rs2;
 
+/*
+ * 
+ * Thanks to kshishkov on #libav-devel for the help with this 
+ * 
+ */
 public class Filter
 {
 
@@ -29,8 +34,8 @@ public class Filter
         {
             float f1 = (float)anIntArray668[0] + (float)(anIntArray668[1] - anIntArray668[0]) * f;
             f1 *= 0.003051758F;// some kind of transformer?
-            aFloat671 = (float)Math.pow(0.10000000000000001D, f1 / 20F);
-            anInt672 = (int)(aFloat671 * 65536F);
+            attenuation = (float)Math.pow(0.10000000000000001D, f1 / 20F);
+            attenuation16Bit = (int)(attenuation * 65536F);
         }
         if(anIntArray665[i] == 0)
             return 0;
@@ -54,7 +59,7 @@ public class Filter
         if(i == 0)
         {
             for(int l = 0; l < anIntArray665[0] * 2; l++)
-                aFloatArrayArray669[0][l] *= aFloat671;
+                aFloatArrayArray669[0][l] *= attenuation;
 
         }
         for(int i1 = 0; i1 < anIntArray665[i] * 2; i1++)
@@ -121,7 +126,7 @@ public class Filter
     private final int[] anIntArray668;
     private static final float[][] aFloatArrayArray669 = new float[2][8];
     static final int[][] anIntArrayArray670 = new int[2][8];
-    private static float aFloat671;
-    static int anInt672;
+    private static float attenuation;
+    static int attenuation16Bit;
 
 }
