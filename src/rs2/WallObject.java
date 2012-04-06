@@ -21,5 +21,5 @@ public class WallObject
     public Entity node1;
     public Entity node2;
     public int uid;
-    byte aByte281;
+    byte objConf;
 }

@@ -8,8 +8,8 @@ import java.util.LinkedList;
 
 public class SceneGraph {
 
-    private static int visibleAreaWidth = 53;
-    private static int visibleAreaHeight = 53;
+    private static int visibleAreaWidth = 53;//53;
+    private static int visibleAreaHeight = 53;//53;
     public static final boolean USE_HD = false;
     private LinkedList<Tile> highlights = new LinkedList<Tile>();
     public static int clickedTileZ;
@@ -314,7 +314,7 @@ public class SceneGraph {
             return;
         WallObject wallObject = new WallObject();
         wallObject.uid = uid;
-        wallObject.aByte281 = byte0;
+        wallObject.objConf = byte0;
         wallObject.xPos = x * 128 + 64;
         wallObject.yPos = y * 128 + 64;
         wallObject.zPos = i1;
@@ -403,6 +403,7 @@ public class SceneGraph {
     private boolean addEntityC(int z, int x, int y, int tileHeight, int tileWidth, int worldX, int worldY,
             int worldZ, Entity jagexNode, int rotation, boolean isDynamic, int j2, byte byte0)
     {
+    	//if(1 == 1)return false;
         for(int _x = x; _x < x + tileHeight; _x++)
         {
             for(int _y = y; _y < y + tileWidth; _y++)
@@ -418,7 +419,7 @@ public class SceneGraph {
 
         InteractableObject interactableObject = new InteractableObject();
         interactableObject.uid = j2;
-        interactableObject.aByte530 = byte0;
+        interactableObject.objConf = byte0;
         interactableObject.zPos = z;
         interactableObject.worldX = worldX;
         interactableObject.worldY = worldY;
@@ -675,18 +676,18 @@ public class SceneGraph {
 
     public int getIDTAGForXYZ(int z, int x, int y, int interactableObjectUID)
     {
-        Tile class30_sub3 = tileArray[z][x][y];
-        if(class30_sub3 == null)
+        Tile tile = tileArray[z][x][y];
+        if(tile == null)
             return -1;
-        if(class30_sub3.wallObject != null && class30_sub3.wallObject.uid == interactableObjectUID)
-            return class30_sub3.wallObject.aByte281 & 0xff;
-        if(class30_sub3.wallDecoration != null && class30_sub3.wallDecoration.uid == interactableObjectUID)
-            return class30_sub3.wallDecoration.objConf & 0xff;
-        if(class30_sub3.groundDecoration != null && class30_sub3.groundDecoration.uid == interactableObjectUID)
-            return class30_sub3.groundDecoration.objConf & 0xff;
-        for(int i1 = 0; i1 < class30_sub3.entityCount; i1++)
-            if(class30_sub3.interactableObjects[i1].uid == interactableObjectUID)
-                return class30_sub3.interactableObjects[i1].aByte530 & 0xff;
+        if(tile.wallObject != null && tile.wallObject.uid == interactableObjectUID)
+            return tile.wallObject.objConf & 0xff;
+        if(tile.wallDecoration != null && tile.wallDecoration.uid == interactableObjectUID)
+            return tile.wallDecoration.objConf & 0xff;
+        if(tile.groundDecoration != null && tile.groundDecoration.uid == interactableObjectUID)
+            return tile.groundDecoration.objConf & 0xff;
+        for(int entity = 0; entity < tile.entityCount; entity++)
+            if(tile.interactableObjects[entity].uid == interactableObjectUID)
+                return tile.interactableObjects[entity].objConf & 0xff;
 
         return -1;
     }
@@ -694,6 +695,7 @@ public class SceneGraph {
     public void shadeModels(int l_x, int l_y, int l_z, int mag_multiplier, int lightness)
     {
         int dist_from_origin = (int)Math.sqrt(l_x * l_x + l_y * l_y + l_z * l_z);
+
         int l_magnitude = mag_multiplier * dist_from_origin >> 8;//Devide by 256 then times 768 wtf
         for(int _z = 0; _z < zMapSize; _z++)
         {
@@ -769,39 +771,40 @@ public class SceneGraph {
         }
     }
 
-    private void method307(int i, int j, int k, int l, int i1, Model model)
-    {
+    private void method307(int z, int j, int k, int x, int y, Model model)
+    {//seems to 'snap' models togeather such as fences and walls nso they dont look retarded
+    	//if(1 == 1)return;
         boolean flag = true;
-        int j1 = l;
-        int k1 = l + j;
-        int l1 = i1 - 1;
-        int i2 = i1 + k;
-        for(int z = i; z <= i + 1; z++)
-            if(z != zMapSize)
+        int j1 = x;
+        int k1 = x + j;
+        int l1 = y - 1;
+        int i2 = y + k;
+        for(int zPtr = z; zPtr <= z + 1; zPtr++)
+            if(zPtr != zMapSize)
             {
-                for(int x = j1; x <= k1; x++)
-                    if(x >= 0 && x < xMapSize)
+                for(int xPtr = j1; xPtr <= k1; xPtr++)
+                    if(xPtr >= 0 && xPtr < xMapSize)
                     {
-                        for(int y = l1; y <= i2; y++)
-                            if(y >= 0 && y < yMapSize && (!flag || x >= k1 || y >= i2 || y < i1 && x != l))
+                        for(int yPtr = l1; yPtr <= i2; yPtr++)
+                            if(yPtr >= 0 && yPtr < yMapSize && (!flag || xPtr >= k1 || yPtr >= i2 || yPtr < y && xPtr != x))
                             {
-                                Tile class30_sub3 = tileArray[z][x][y];
-                                if(class30_sub3 != null)
+                                Tile tile = tileArray[zPtr][xPtr][yPtr];
+                                if(tile != null)
                                 {
-                                    int i3 = (heightmap[z][x][y] + heightmap[z][x + 1][y] + heightmap[z][x][y + 1] + heightmap[z][x + 1][y + 1]) / 4 - (heightmap[i][l][i1] + heightmap[i][l + 1][i1] + heightmap[i][l][i1 + 1] + heightmap[i][l + 1][i1 + 1]) / 4;
-                                    WallObject class10 = class30_sub3.wallObject;
-                                    if(class10 != null && class10.node1 != null && class10.node1.vertexNormals != null)
-                                        method308(model, (Model)class10.node1, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
-                                    if(class10 != null && class10.node2 != null && class10.node2.vertexNormals != null)
-                                        method308(model, (Model)class10.node2, (x - l) * 128 + (1 - j) * 64, i3, (y - i1) * 128 + (1 - k) * 64, flag);
-                                    for(int j3 = 0; j3 < class30_sub3.entityCount; j3++)
+                                    int i3 = (heightmap[zPtr][xPtr][yPtr] + heightmap[zPtr][xPtr + 1][yPtr] + heightmap[zPtr][xPtr][yPtr + 1] + heightmap[zPtr][xPtr + 1][yPtr + 1]) / 4 - (heightmap[z][x][y] + heightmap[z][x + 1][y] + heightmap[z][x][y + 1] + heightmap[z][x + 1][y + 1]) / 4;
+                                    WallObject wallObject = tile.wallObject;
+                                    if(wallObject != null && wallObject.node1 != null && wallObject.node1.vertexNormals != null)
+                                        method308(model, (Model)wallObject.node1, (xPtr - x) * 128 + (1 - j) * 64, i3, (yPtr - y) * 128 + (1 - k) * 64, flag);
+                                    if(wallObject != null && wallObject.node2 != null && wallObject.node2.vertexNormals != null)
+                                        method308(model, (Model)wallObject.node2, (xPtr - x) * 128 + (1 - j) * 64, i3, (yPtr - y) * 128 + (1 - k) * 64, flag);
+                                    for(int j3 = 0; j3 < tile.entityCount; j3++)
                                     {
-                                        InteractableObject class28 = class30_sub3.interactableObjects[j3];
+                                        InteractableObject class28 = tile.interactableObjects[j3];
                                         if(class28 != null && class28.jagexNode != null && class28.jagexNode.vertexNormals != null)
                                         {
                                             int k3 = (class28.tileRight - class28.tileLeft) + 1;
                                             int l3 = (class28.tileBottom - class28.tileTop) + 1;
-                                            method308(model, (Model)class28.jagexNode, (class28.tileLeft - l) * 128 + (k3 - j) * 64, i3, (class28.tileTop - i1) * 128 + (l3 - k) * 64, flag);
+                                            method308(model, (Model)class28.jagexNode, (class28.tileLeft - x) * 128 + (k3 - j) * 64, i3, (class28.tileTop - y) * 128 + (l3 - k) * 64, flag);
                                         }
                                     }
 
@@ -1105,7 +1108,7 @@ label0:
                             singleTile.aBoolean1324 = singleTile.entityCount > 0;
                             anInt446++;
                         }
-                }
+                        }
 
             }
 
@@ -1236,43 +1239,43 @@ label0:
                 if(TILE == null)
                     return;
             } while(!TILE.aBoolean1323);
-            int X = TILE.anInt1308;
-            int Y = TILE.anInt1309;
-            int k = TILE.tileZ;
-            int l = TILE.anInt1310;
-            System.out.println(k+" "+l);
-            Tile aclass30_sub3[][] = tileArray[k];
-            if(TILE.aBoolean1322)
+            int tileX = TILE.tileX;
+            int tileY = TILE.tileY;
+            int tileZ = TILE.tileZ;
+            Tile aclass30_sub3[][] = tileArray[tileZ];
+            
+            
+            if(TILE.aBoolean1322)//TODO, draw prioritys
             {
                 if(flag)
                 {
-                    if(k > 0)
+                    if(tileZ > 0)
                     {
-                        Tile class30_sub3_2 = tileArray[k - 1][X][Y];
+                        Tile class30_sub3_2 = tileArray[tileZ - 1][tileX][tileY];
                         if(class30_sub3_2 != null && class30_sub3_2.aBoolean1323)
                             continue;
                     }
-                    if(X <= xCameraPositionTile && X > anInt449)
+                    if(tileX <= xCameraPositionTile && tileX > anInt449)
                     {
-                        Tile class30_sub3_3 = aclass30_sub3[X - 1][Y];
+                        Tile class30_sub3_3 = aclass30_sub3[tileX - 1][tileY];
                         if(class30_sub3_3 != null && class30_sub3_3.aBoolean1323 && (class30_sub3_3.aBoolean1322 || (TILE.anInt1320 & 1) == 0))
                             continue;
                     }
-                    if(X >= xCameraPositionTile && X < anInt450 - 1)
+                    if(tileX >= xCameraPositionTile && tileX < anInt450 - 1)
                     {
-                        Tile class30_sub3_4 = aclass30_sub3[X + 1][Y];
+                        Tile class30_sub3_4 = aclass30_sub3[tileX + 1][tileY];
                         if(class30_sub3_4 != null && class30_sub3_4.aBoolean1323 && (class30_sub3_4.aBoolean1322 || (TILE.anInt1320 & 4) == 0))
                             continue;
                     }
-                    if(Y <= yCameraPositionTile && Y > anInt451)
+                    if(tileY <= yCameraPositionTile && tileY > anInt451)
                     {
-                        Tile class30_sub3_5 = aclass30_sub3[X][Y - 1];
+                        Tile class30_sub3_5 = aclass30_sub3[tileX][tileY - 1];
                         if(class30_sub3_5 != null && class30_sub3_5.aBoolean1323 && (class30_sub3_5.aBoolean1322 || (TILE.anInt1320 & 8) == 0))
                             continue;
                     }
-                    if(Y >= yCameraPositionTile && Y < anInt452 - 1)
+                    if(tileY >= yCameraPositionTile && tileY < anInt452 - 1)
                     {
-                        Tile class30_sub3_6 = aclass30_sub3[X][Y + 1];
+                        Tile class30_sub3_6 = aclass30_sub3[tileX][tileY + 1];
                         if(class30_sub3_6 != null && class30_sub3_6.aBoolean1323 && (class30_sub3_6.aBoolean1322 || (TILE.anInt1320 & 2) == 0))
                             continue;
                     }
@@ -1286,11 +1289,11 @@ label0:
                     Tile tile = TILE.tileBelow0;
                     if(tile.myPlainTile != null)
                     {
-                        if(!method320(0, X, Y))
-                            renderPlainTile(tile.myPlainTile, 0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y,tile.highlighted);
+                        if(!method320(0, tileX, tileY))
+                            renderPlainTile(tile.myPlainTile, 0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, tileX, tileY,tile.highlighted);
                     } else
-                    if(tile.shapedTile != null && !method320(0, X, Y))
-                        renderShapedTile(X, yCurveSine, xCurveSine, tile.shapedTile, yCurveCosine, Y, xCurveCosine, TILE.highlighted,0);
+                    if(tile.shapedTile != null && !method320(0, tileX, tileY))
+                        renderShapedTile(tileX, yCurveSine, xCurveSine, tile.shapedTile, yCurveCosine, tileY, xCurveCosine, TILE.highlighted,0);
                     WallObject wallObject = tile.wallObject;
                     if(wallObject != null){
                         wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
@@ -1310,16 +1313,16 @@ label0:
                 boolean flag1 = false;
                 if(TILE.myPlainTile != null)
                 {
-                    if(!method320(l, X, Y))
+                    if(!method320(tileZ, tileX, tileY))
                     {
                         flag1 = true;
-                        renderPlainTile(TILE.myPlainTile, l, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, X, Y, TILE.highlighted);
+                        renderPlainTile(TILE.myPlainTile, tileZ, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, tileX, tileY, TILE.highlighted);
                     }
                 } else
-                if(TILE.shapedTile != null && !method320(l, X, Y))
+                if(TILE.shapedTile != null && !method320(tileZ, tileX, tileY))
                 {
                     flag1 = true;
-                    renderShapedTile(X, yCurveSine, xCurveSine, TILE.shapedTile, yCurveCosine, Y, xCurveCosine,TILE.highlighted, l);
+                    renderShapedTile(tileX, yCurveSine, xCurveSine, TILE.shapedTile, yCurveCosine, tileY, xCurveCosine,TILE.highlighted, tileZ);
                 }
                 int j1 = 0;
                 int j2 = 0;
@@ -1327,23 +1330,25 @@ label0:
                 WallDecoration wallDecoration = TILE.wallDecoration;
                 if(wallObject != null || wallDecoration != null)
                 {
-                    if(xCameraPositionTile == X)
+                    if(xCameraPositionTile == tileX)
                         j1++;
                     else
-                    if(xCameraPositionTile < X)
+                    if(xCameraPositionTile < tileX)
                         j1 += 2;
-                    if(yCameraPositionTile == Y)
+                    if(yCameraPositionTile == tileY)
                         j1 += 3;
                     else
-                    if(yCameraPositionTile > Y)
+                    if(yCameraPositionTile > tileY)
                         j1 += 6;
                     j2 = anIntArray478[j1];
                     TILE.anInt1328 = anIntArray480[j1];
                 }
                 if(wallObject != null)
                 {
+                    
                     if((wallObject.orientation & anIntArray479[j1]) != 0)
                     {
+                    	
                         if(wallObject.orientation == 16)
                         {
                             TILE.anInt1325 = 3;
@@ -1371,16 +1376,16 @@ label0:
                     {
                         TILE.anInt1325 = 0;
                     }
-                    if((wallObject.orientation & j2) != 0 && !method321(l, X, Y, wallObject.orientation))
+                    if((wallObject.orientation & j2) != 0 && !method321(tileZ, tileX, tileY, wallObject.orientation))
                         wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
-                    if (wallObject.pgleNode1 != null && (wallObject.orientation & j2) != 0 && !method321(l, X, Y, wallObject.orientation))
+                    if (wallObject.pgleNode1 != null && (wallObject.orientation & j2) != 0 && !method321(tileZ, tileX, tileY, wallObject.orientation))
                         renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
-                    if((wallObject.orientation1 & j2) != 0 && !method321(l, X, Y, wallObject.orientation1))
+                    if((wallObject.orientation1 & j2) != 0 && !method321(tileZ, tileX, tileY, wallObject.orientation1))
                         wallObject.node2.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
-                    if (wallObject.pgleNode1 != null && (wallObject.orientation & j2) != 0 && !method321(l, X, Y, wallObject.orientation))
+                    if (wallObject.pgleNode1 != null && (wallObject.orientation & j2) != 0 && !method321(tileZ, tileX, tileY, wallObject.orientation))
                              renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
                 }
-                if(wallDecoration != null && !method322(l, X, Y, wallDecoration.myMob.modelHeight))
+                if(wallDecoration != null && !method322(tileZ, tileX, tileY, wallDecoration.myMob.modelHeight))
                     if((wallDecoration.configBits & j2) != 0){
                         wallDecoration.myMob.renderAtPoint(wallDecoration.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallDecoration.xPos - xCameraPosition, wallDecoration.zPos - zCameraPosition, wallDecoration.yPos - yCameraPosition, wallDecoration.uid);
                         if (wallDecoration.pgleNode != null)
@@ -1446,32 +1451,33 @@ label0:
                 int k4 = TILE.anInt1320;
                 if(k4 != 0)
                 {
-                    if(X < xCameraPositionTile && (k4 & 4) != 0)
+                    if(tileX < xCameraPositionTile && (k4 & 4) != 0)
                     {
-                        Tile class30_sub3_17 = aclass30_sub3[X + 1][Y];
+                        Tile class30_sub3_17 = aclass30_sub3[tileX + 1][tileY];
                         if(class30_sub3_17 != null && class30_sub3_17.aBoolean1323)
                             aClass19_477.insertBack(class30_sub3_17);
                     }
-                    if(Y < yCameraPositionTile && (k4 & 2) != 0)
+                    if(tileY < yCameraPositionTile && (k4 & 2) != 0)
                     {
-                        Tile class30_sub3_18 = aclass30_sub3[X][Y + 1];
+                        Tile class30_sub3_18 = aclass30_sub3[tileX][tileY + 1];
                         if(class30_sub3_18 != null && class30_sub3_18.aBoolean1323)
                             aClass19_477.insertBack(class30_sub3_18);
                     }
-                    if(X > xCameraPositionTile && (k4 & 1) != 0)
+                    if(tileX > xCameraPositionTile && (k4 & 1) != 0)
                     {
-                        Tile class30_sub3_19 = aclass30_sub3[X - 1][Y];
+                        Tile class30_sub3_19 = aclass30_sub3[tileX - 1][tileY];
                         if(class30_sub3_19 != null && class30_sub3_19.aBoolean1323)
                             aClass19_477.insertBack(class30_sub3_19);
                     }
-                    if(Y > yCameraPositionTile && (k4 & 8) != 0)
+                    if(tileY > yCameraPositionTile && (k4 & 8) != 0)
                     {
-                        Tile class30_sub3_20 = aclass30_sub3[X][Y - 1];
+                        Tile class30_sub3_20 = aclass30_sub3[tileX][tileY - 1];
                         if(class30_sub3_20 != null && class30_sub3_20.aBoolean1323)
                             aClass19_477.insertBack(class30_sub3_20);
                     }
                 }
             }
+            //TILE.anInt1325 = 10;
             if(TILE.anInt1325 != 0)
             {
                 boolean flag2 = true;
@@ -1486,13 +1492,14 @@ label0:
                 if(flag2)
                 {
                     WallObject wallObject = TILE.wallObject;
-                    if(!method321(l, X, Y, wallObject.orientation))
+                    if(!method321(tileZ, tileX, tileY, wallObject.orientation))
                         wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
-                    if (wallObject.node1 != null && !method321(l, X, Y, wallObject.orientation))
+                    if (wallObject.node1 != null && !method321(tileZ, tileX, tileY, wallObject.orientation))
                         renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
                     TILE.anInt1325 = 0;
                 }
             }
+            
             if(TILE.aBoolean1324)
                 try
                 {
@@ -1576,9 +1583,9 @@ label0:
                             break;
                         InteractableObject interactableObject = interactableObjects[l3];
                         interactableObject.anInt528 = anInt448;
-                        if(interactableObject.pgleNode != null && !method323(l, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
+                        if(interactableObject.pgleNode != null && !method323(tileZ, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
                             renderAtPoint((GeometryNode) interactableObject.pgleNode,interactableObject.rotation, interactableObject.worldX, interactableObject.worldZ, interactableObject.worldY);
-                        if(!method323(l, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
+                        if(!method323(tileZ, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
                             interactableObject.jagexNode.renderAtPoint(interactableObject.rotation, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, interactableObject.worldX - xCameraPosition, interactableObject.worldZ - zCameraPosition, interactableObject.worldY - yCameraPosition, interactableObject.uid);
                         for(int k7 = interactableObject.tileLeft; k7 <= interactableObject.tileRight; k7++)
                         {
@@ -1588,7 +1595,7 @@ label0:
                                 if(class30_sub3_22.anInt1325 != 0)
                                     aClass19_477.insertBack(class30_sub3_22);
                                 else
-                                if((k7 != X || l8 != Y) && class30_sub3_22.aBoolean1323)
+                                if((k7 != tileX || l8 != tileY) && class30_sub3_22.aBoolean1323)
                                     aClass19_477.insertBack(class30_sub3_22);
                             }
 
@@ -1604,27 +1611,27 @@ label0:
                 }
             if(!TILE.aBoolean1323 || TILE.anInt1325 != 0)
                 continue;
-            if(X <= xCameraPositionTile && X > anInt449)
+            if(tileX <= xCameraPositionTile && tileX > anInt449)
             {
-                Tile class30_sub3_8 = aclass30_sub3[X - 1][Y];
+                Tile class30_sub3_8 = aclass30_sub3[tileX - 1][tileY];
                 if(class30_sub3_8 != null && class30_sub3_8.aBoolean1323)
                     continue;
             }
-            if(X >= xCameraPositionTile && X < anInt450 - 1)
+            if(tileX >= xCameraPositionTile && tileX < anInt450 - 1)
             {
-                Tile class30_sub3_9 = aclass30_sub3[X + 1][Y];
+                Tile class30_sub3_9 = aclass30_sub3[tileX + 1][tileY];
                 if(class30_sub3_9 != null && class30_sub3_9.aBoolean1323)
                     continue;
             }
-            if(Y <= yCameraPositionTile && Y > anInt451)
+            if(tileY <= yCameraPositionTile && tileY > anInt451)
             {
-                Tile class30_sub3_10 = aclass30_sub3[X][Y - 1];
+                Tile class30_sub3_10 = aclass30_sub3[tileX][tileY - 1];
                 if(class30_sub3_10 != null && class30_sub3_10.aBoolean1323)
                     continue;
             }
-            if(Y >= yCameraPositionTile && Y < anInt452 - 1)
+            if(tileY >= yCameraPositionTile && tileY < anInt452 - 1)
             {
-                Tile class30_sub3_11 = aclass30_sub3[X][Y + 1];
+                Tile class30_sub3_11 = aclass30_sub3[tileX][tileY + 1];
                 if(class30_sub3_11 != null && class30_sub3_11.aBoolean1323)
                     continue;
             }
@@ -1650,7 +1657,7 @@ label0:
             if(TILE.anInt1328 != 0)
             {
                 WallDecoration wallDecoration = TILE.wallDecoration;
-                if(wallDecoration != null && !method322(l, X, Y, wallDecoration.myMob.modelHeight))
+                if(wallDecoration != null && !method322(tileZ, tileX, tileY, wallDecoration.myMob.modelHeight))
                     if((wallDecoration.configBits & TILE.anInt1328) != 0){
                         wallDecoration.myMob.renderAtPoint(wallDecoration.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallDecoration.xPos - xCameraPosition, wallDecoration.zPos - zCameraPosition, wallDecoration.yPos - yCameraPosition, wallDecoration.uid);
                         if (wallDecoration.pgleNode != null)
@@ -1692,42 +1699,42 @@ label0:
                 WallObject wallObject = TILE.wallObject;
                 if(wallObject != null)
                 {
-                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1))
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(tileZ, tileX, tileY, wallObject.orientation1))
                         wallObject.node2.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
-                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1) && wallObject.pgleNode2 != null)
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(tileZ, tileX, tileY, wallObject.orientation1) && wallObject.pgleNode2 != null)
                              renderAtPoint((GeometryNode) wallObject.pgleNode2, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
-                    if((wallObject.orientation & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation))
+                    if((wallObject.orientation & TILE.anInt1328) != 0 && !method321(tileZ, tileX, tileY, wallObject.orientation))
                         wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
-                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1) && wallObject.pgleNode1 != null)
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(tileZ, tileX, tileY, wallObject.orientation1) && wallObject.pgleNode1 != null)
                              renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);}
             }
-            if(k < zMapSize - 1)
+            if(tileZ < zMapSize - 1)
             {
-                Tile class30_sub3_12 = tileArray[k + 1][X][Y];
+                Tile class30_sub3_12 = tileArray[tileZ + 1][tileX][tileY];
                 if(class30_sub3_12 != null && class30_sub3_12.aBoolean1323)
                     aClass19_477.insertBack(class30_sub3_12);
             }
-            if(X < xCameraPositionTile)
+            if(tileX < xCameraPositionTile)
             {
-                Tile class30_sub3_13 = aclass30_sub3[X + 1][Y];
+                Tile class30_sub3_13 = aclass30_sub3[tileX + 1][tileY];
                 if(class30_sub3_13 != null && class30_sub3_13.aBoolean1323)
                     aClass19_477.insertBack(class30_sub3_13);
             }
-            if(Y < yCameraPositionTile)
+            if(tileY < yCameraPositionTile)
             {
-                Tile class30_sub3_14 = aclass30_sub3[X][Y + 1];
+                Tile class30_sub3_14 = aclass30_sub3[tileX][tileY + 1];
                 if(class30_sub3_14 != null && class30_sub3_14.aBoolean1323)
                     aClass19_477.insertBack(class30_sub3_14);
             }
-            if(X > xCameraPositionTile)
+            if(tileX > xCameraPositionTile)
             {
-                Tile class30_sub3_15 = aclass30_sub3[X - 1][Y];
+                Tile class30_sub3_15 = aclass30_sub3[tileX - 1][tileY];
                 if(class30_sub3_15 != null && class30_sub3_15.aBoolean1323)
                     aClass19_477.insertBack(class30_sub3_15);
             }
-            if(Y > yCameraPositionTile)
+            if(tileY > yCameraPositionTile)
             {
-                Tile class30_sub3_16 = aclass30_sub3[X][Y - 1];
+                Tile class30_sub3_16 = aclass30_sub3[tileX][tileY - 1];
                 if(class30_sub3_16 != null && class30_sub3_16.aBoolean1323)
                     aClass19_477.insertBack(class30_sub3_16);
             }
@@ -1746,10 +1753,9 @@ label0:
                 if(TILE == null)
                     return;
             } while(!TILE.aBoolean1323);
-            int X = TILE.anInt1308;
-            int Y = TILE.anInt1309;
+            int X = TILE.tileX;
+            int Y = TILE.tileY;
             int k = TILE.tileZ;
-            int l = TILE.anInt1310;
             Tile aclass30_sub3[][] = underworldTileArray[k];
             if(TILE.aBoolean1322)
             {
@@ -1856,7 +1862,8 @@ label0:
                     break;
                 }
             }
-            if(TILE.aBoolean1324)
+            
+            if(TILE.aBoolean1324)//contains entity ( object )
                 try
                 {
                     int i1 = TILE.entityCount;
@@ -1939,9 +1946,9 @@ label0:
                             break;
                         InteractableObject interactableObject = interactableObjects[l3];
                         interactableObject.anInt528 = anInt448;
-                        if(interactableObject.pgleNode != null && !method323(l, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
+                        if(interactableObject.pgleNode != null && !method323(k, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
                             renderAtPoint((GeometryNode) interactableObject.pgleNode,interactableObject.rotation, interactableObject.worldX, interactableObject.worldZ, interactableObject.worldY);
-                        if(!method323(l, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
+                        if(!method323(k, interactableObject.tileLeft, interactableObject.tileRight, interactableObject.tileTop, interactableObject.tileBottom, interactableObject.jagexNode.modelHeight))
                             interactableObject.jagexNode.renderAtPoint(interactableObject.rotation, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, interactableObject.worldX - xCameraPosition, interactableObject.worldZ - zCameraPosition, interactableObject.worldY - yCameraPosition, interactableObject.uid);
                         for(int k7 = interactableObject.tileLeft; k7 <= interactableObject.tileRight; k7++)
                         {
@@ -2013,7 +2020,7 @@ label0:
             if(TILE.anInt1328 != 0)
             {
                 WallDecoration wallDecoration = TILE.wallDecoration;
-                if(wallDecoration != null && !method322(l, X, Y, wallDecoration.myMob.modelHeight))
+                if(wallDecoration != null && !method322(k, X, Y, wallDecoration.myMob.modelHeight))
                     if((wallDecoration.configBits & TILE.anInt1328) != 0){
                         wallDecoration.myMob.renderAtPoint(wallDecoration.face, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallDecoration.xPos - xCameraPosition, wallDecoration.zPos - zCameraPosition, wallDecoration.yPos - yCameraPosition, wallDecoration.uid);
                         if (wallDecoration.pgleNode != null)
@@ -2055,13 +2062,13 @@ label0:
                 WallObject wallObject = TILE.wallObject;
                 if(wallObject != null)
                 {
-                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1))
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(k, X, Y, wallObject.orientation1))
                         wallObject.node2.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
-                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1) && wallObject.pgleNode2 != null)
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(k, X, Y, wallObject.orientation1) && wallObject.pgleNode2 != null)
                              renderAtPoint((GeometryNode) wallObject.pgleNode2, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);
-                    if((wallObject.orientation & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation))
+                    if((wallObject.orientation & TILE.anInt1328) != 0 && !method321(k, X, Y, wallObject.orientation))
                         wallObject.node1.renderAtPoint(0, yCurveSine, yCurveCosine, xCurveSine, xCurveCosine, wallObject.xPos - xCameraPosition, wallObject.zPos - zCameraPosition, wallObject.yPos - yCameraPosition, wallObject.uid);
-                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(l, X, Y, wallObject.orientation1) && wallObject.pgleNode1 != null)
+                    if((wallObject.orientation1 & TILE.anInt1328) != 0 && !method321(k, X, Y, wallObject.orientation1) && wallObject.pgleNode1 != null)
                              renderAtPoint((GeometryNode) wallObject.pgleNode1, 0, wallObject.xPos, wallObject.zPos, wallObject.yPos);}
             }
             if(k < zMapSize - 1)
@@ -2338,6 +2345,7 @@ label0:
         int cluster_count = cullingClusterPointer[plane];
         CullingCluster clusters[] = cullingClusters[plane];
         processed_culling_clusters_ptr = 0;
+        
         for(int ptr = 0; ptr < cluster_count; ptr++)
         {
             CullingCluster cluster = clusters[ptr];
@@ -2597,27 +2605,27 @@ for_outer:
         return method324(i1 + 1, heightmap[i][j][k] - l, j1 + 1) && method324((i1 + 128) - 1, heightmap[i][j + 1][k] - l, j1 + 1) && method324((i1 + 128) - 1, heightmap[i][j + 1][k + 1] - l, (j1 + 128) - 1) && method324(i1 + 1, heightmap[i][j][k + 1] - l, (j1 + 128) - 1);
     }
 
-    private boolean method323(int i, int j, int k, int l, int i1, int j1)
+    private boolean method323(int y, int x, int k, int z, int i1, int j1)
     {
-        if(j == k && l == i1)
+        if(x == k && z == i1)
         {
-            if(!method320(i, j, l))
+            if(!method320(y, x, z))
                 return false;
-            int k1 = j << 7;
-            int i2 = l << 7;
-            return method324(k1 + 1, heightmap[i][j][l] - j1, i2 + 1) && method324((k1 + 128) - 1, heightmap[i][j + 1][l] - j1, i2 + 1) && method324((k1 + 128) - 1, heightmap[i][j + 1][l + 1] - j1, (i2 + 128) - 1) && method324(k1 + 1, heightmap[i][j][l + 1] - j1, (i2 + 128) - 1);
+            int k1 = x << 7;
+            int i2 = z << 7;
+            return method324(k1 + 1, heightmap[y][x][z] - j1, i2 + 1) && method324((k1 + 128) - 1, heightmap[y][x + 1][z] - j1, i2 + 1) && method324((k1 + 128) - 1, heightmap[y][x + 1][z + 1] - j1, (i2 + 128) - 1) && method324(k1 + 1, heightmap[y][x][z + 1] - j1, (i2 + 128) - 1);
         }
-        for(int l1 = j; l1 <= k; l1++)
+        for(int l1 = x; l1 <= k; l1++)
         {
-            for(int j2 = l; j2 <= i1; j2++)
-                if(anIntArrayArrayArray445[i][l1][j2] == -anInt448)
+            for(int j2 = z; j2 <= i1; j2++)
+                if(anIntArrayArrayArray445[y][l1][j2] == -anInt448)
                     return false;
 
         }
 
-        int k2 = (j << 7) + 1;
-        int l2 = (l << 7) + 2;
-        int i3 = heightmap[i][j][l] - j1;
+        int k2 = (x << 7) + 1;
+        int l2 = (z << 7) + 2;
+        int i3 = heightmap[y][x][z] - j1;
         if(!method324(k2, i3, l2))
             return false;
         int j3 = (k << 7) - 1;
@@ -2628,7 +2636,7 @@ for_outer:
     }
 
     private boolean method324(int x, int y, int z)
-    {
+    {//true for culled tile
         for(int l = 0; l < processed_culling_clusters_ptr; l++)
         {
             CullingCluster class47 = processed_culling_clusters[l];

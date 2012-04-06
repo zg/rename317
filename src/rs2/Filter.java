@@ -1,18 +1,18 @@
 package rs2;
 
-public class FrequencyGenerator//mhm not too sure
+public class Filter
 {
 
-    private float method541(int i, int j, float f)
+    private float amplitude(int i, int j, float f)
     {
         float f1 = (float)anIntArrayArrayArray667[i][0][j] + f * (float)(anIntArrayArrayArray667[i][1][j] - anIntArrayArrayArray667[i][0][j]);
             f1 *= 0.001525879F;
             return 1.0F - (float)Math.pow(10D, -f1 / 20F);
     }
 
-    private float calculateDigitalFrequency(float note)// like angular velocity or some shit
+    private float normalize(float octave)// like angular velocity or some shit
     {//32.7032f Represents the note C1 on a piano keyboard. 
-        float frequency = 32.7032F * (float)Math.pow(2D, note);
+        float frequency = 32.7032F * (float)Math.pow(2D, octave);
         return (frequency * 3.141593F) / 11025F;
     }
 
@@ -20,7 +20,7 @@ public class FrequencyGenerator//mhm not too sure
     {
         float f1 = (float)anIntArrayArrayArray666[j][0][i] + f * (float)(anIntArrayArrayArray666[j][1][i] - anIntArrayArrayArray666[j][0][i]);
         f1 *= 0.0001220703F;
-        return calculateDigitalFrequency(f1);
+        return normalize(f1);
     }
 
     public int method544(int i, float f)
@@ -34,12 +34,12 @@ public class FrequencyGenerator//mhm not too sure
         }
         if(anIntArray665[i] == 0)
             return 0;
-        float f2 = method541(i, 0, f);
+        float f2 = amplitude(i, 0, f);
         aFloatArrayArray669[i][0] = -2F * f2 * (float)Math.cos(method543(f, 0, i));
         aFloatArrayArray669[i][1] = f2 * f2;
         for(int k = 1; k < anIntArray665[i]; k++)
         {
-            float f3 = method541(i, k, f);
+            float f3 = amplitude(i, k, f);
             float f4 = -2F * f3 * (float)Math.cos(method543(f, k, i));
             float f5 = f3 * f3;
             aFloatArrayArray669[i][k * 2 + 1] = aFloatArrayArray669[i][k * 2 - 1] * f5;
@@ -63,7 +63,7 @@ public class FrequencyGenerator//mhm not too sure
         return anIntArray665[i] * 2;
     }
 
-    public void method545(Packet stream, AmplitudeEnvelope amplitudeEnvelope)
+    public void method545(Packet stream, Envelope amplitudeEnvelope)
     {
         int i = stream.g1();
         anIntArray665[0] = i >> 4;
@@ -99,21 +99,15 @@ public class FrequencyGenerator//mhm not too sure
             }
 
             if(j != 0 || anIntArray668[1] != anIntArray668[0])
-                amplitudeEnvelope.readValues(stream);
+                amplitudeEnvelope.decodeSegments(stream);
         } else
         {
             anIntArray668[0] = anIntArray668[1] = 0;
         }
-        if(1 != 1)
-        for(int bbbb = 0; bbbb < anIntArrayArrayArray666.length;bbbb++)
-        	for(int b = 0; b < anIntArrayArrayArray666[bbbb].length;b++)
-        		for(int c = 0; c < anIntArrayArrayArray666[bbbb][b].length;c++)
-        		{
-        			System.out.println("anIntArrayArrayArray666["+bbbb+"]["+b+"]["+c+"] = "+ anIntArrayArrayArray666[bbbb][b][c]);
-        		}
+
     }
 
-    public FrequencyGenerator()
+    public Filter()
     {
         anIntArray665 = new int[2];
         anIntArrayArrayArray666 = new int[2][2][4];
