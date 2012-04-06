@@ -138,7 +138,7 @@ public class Sample
                     l7 = sampleLength - i5;
                 for(; j7 < l7; j7++)
                 {
-                    int j8 = (int)((long) encoded[j7 + i5] * (long)Filter.anInt672 >> 16);
+                    int j8 = (int)((long) encoded[j7 + i5] * (long)Filter.attenuation16Bit >> 16);
                     for(int k8 = 0; k8 < i5; k8++)
                         j8 += (int)((long) encoded[(j7 + i5) - 1 - k8] * (long)Filter.anIntArrayArray670[0][k8] >> 16);
 
@@ -157,7 +157,7 @@ public class Sample
                         l7 = sampleLength - i5;
                     for(; j7 < l7; j7++)
                     {
-                        int l8 = (int)((long) encoded[j7 + i5] * (long)Filter.anInt672 >> 16);
+                        int l8 = (int)((long) encoded[j7 + i5] * (long)Filter.attenuation16Bit >> 16);
                         for(int k9 = 0; k9 < i5; k9++)
                             l8 += (int)((long) encoded[(j7 + i5) - 1 - k9] * (long)Filter.anIntArrayArray670[0][k9] >> 16);
 
