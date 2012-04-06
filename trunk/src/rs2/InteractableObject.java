@@ -21,5 +21,5 @@ public class InteractableObject
     public int anInt527;
     public int anInt528;
     public int uid;
-    public byte aByte530;
+    public byte objConf;
 }

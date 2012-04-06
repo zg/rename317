@@ -9,15 +9,14 @@ public class Tile extends Node {
     {
         interactableObjects = new InteractableObject[5];
         anIntArray1319 = new int[5];
-        anInt1310 = tileZ = z;//need to merge 1310 and tileZ
-        anInt1308 = x;
-        anInt1309 = y;
+        tileZ = z;
+        tileX = x;
+        tileY = y;
     }
 
+    final int tileX;
+    final int tileY;
     int tileZ;
-    final int anInt1308;
-    final int anInt1309;
-    final int anInt1310;
     public PlainTile myPlainTile;
     public ShapedTile shapedTile;
     public WallObject wallObject;

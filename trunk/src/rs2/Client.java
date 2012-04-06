@@ -5835,7 +5835,7 @@ public class Client extends GameShell {
                         if (!replayWave())
                             flag1 = true;
                     } else {
-                        Packet stream = Sound.generateWaveData(anIntArray1241[i], anIntArray1207[i]);
+                        Packet stream = Track.data(anIntArray1241[i], anIntArray1207[i]);
                         if (System.currentTimeMillis() + (long) (stream.pos / 22) > aLong1172 + (long) (anInt1257 / 22)) {
                             anInt1257 = stream.pos;
                             aLong1172 = System.currentTimeMillis();
@@ -8573,7 +8573,7 @@ public class Client extends GameShell {
             if (sessionPlayer.pathX[0] >= k3 - i14 && sessionPlayer.pathX[0] <= k3 + i14 && sessionPlayer.pathY[0] >= j6 - i14 && sessionPlayer.pathY[0] <= j6 + i14 && wave_on && !lowMem && anInt1062 < 50) {
                 anIntArray1207[anInt1062] = i9;
                 anIntArray1241[anInt1062] = i16;
-                anIntArray1250[anInt1062] = Sound.anIntArray326[i9];
+                anIntArray1250[anInt1062] = Track.anIntArray326[i9];
                 anInt1062++;
             }
         }
@@ -9526,7 +9526,7 @@ public class Client extends GameShell {
                 if (wave_on && !lowMem && anInt1062 < 50) {
                     anIntArray1207[anInt1062] = songID;
                     anIntArray1241[anInt1062] = volume;
-                    anIntArray1250[anInt1062] = delay + Sound.anIntArray326[songID];
+                    anIntArray1250[anInt1062] = delay + Track.anIntArray326[songID];
                     anInt1062++;
                 }
                 pktType = -1;
