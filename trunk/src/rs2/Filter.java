@@ -45,24 +45,24 @@ public class Filter
         return normalize(f1);
     }
 
-    public int method544(int i, float f)
+    public int method544(int i, float smoothing)
     {
         if(i == 0)
         {
-            float f1 = (float)anIntArray668[0] + (float)(anIntArray668[1] - anIntArray668[0]) * f;
+            float f1 = (float)anIntArray668[0] + (float)(anIntArray668[1] - anIntArray668[0]) * smoothing;
             f1 *= 0.003051758F;// some kind of transformer?
             attenuation = (float)Math.pow(0.10000000000000001D, f1 / 20F);
             attenuation16Bit = (int)(attenuation * 65536F);
         }
         if(anIntArray665[i] == 0)
             return 0;
-        float f2 = decrementFactor(i, 0, f);
-        aFloatArrayArray669[i][0] = -2F * f2 * (float)Math.cos(method543(f, 0, i));
+        float f2 = decrementFactor(i, 0, smoothing);
+        aFloatArrayArray669[i][0] = -2F * f2 * (float)Math.cos(method543(smoothing, 0, i));
         aFloatArrayArray669[i][1] = f2 * f2;
         for(int k = 1; k < anIntArray665[i]; k++)
         {
-            float f3 = decrementFactor(i, k, f);
-            float f4 = -2F * f3 * (float)Math.cos(method543(f, k, i));
+            float f3 = decrementFactor(i, k, smoothing);
+            float f4 = -2F * f3 * (float)Math.cos(method543(smoothing, k, i));
             float f5 = f3 * f3;
             aFloatArrayArray669[i][k * 2 + 1] = aFloatArrayArray669[i][k * 2 - 1] * f5;
             aFloatArrayArray669[i][k * 2] = aFloatArrayArray669[i][k * 2 - 1] * f4 + aFloatArrayArray669[i][k * 2 - 2] * f5;
