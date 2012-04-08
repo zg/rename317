@@ -24,12 +24,12 @@ public class Track {
         } while(true);
     }
 
-    public static Packet data(int i, int id)
+    public static Packet data(int volume, int id)
     {
         if(TRACKS[id] != null)
         {
             Track sound = TRACKS[id];
-            return sound.pack(i);
+            return sound.pack(volume);
         } else
         {
             return null;
@@ -75,9 +75,9 @@ public class Track {
         return j;
     }
 
-    private Packet pack(int i)
+    private Packet pack(int volume)
     {//http://soundfile.sapp.org/doc/WaveFormat/
-        int SubChunk2Size = encode(i);
+        int SubChunk2Size = encode(volume);
         riff_data.pos = 0;
         riff_data.p4(0x52494646);//RIFF
         riff_data.ip4(36 + SubChunk2Size);//36 + SubChunk2Size, or more precisely: 4+(8+SubChunk1Size)+(8+SubChunk2Size)
@@ -98,7 +98,7 @@ public class Track {
         return riff_data;
     }
 
-    private int encode(int i)//getSubChunk2Size - packs the pcm
+    private int encode(int volume)//getSubChunk2Size - packs the pcm
     {
         int j = 0;
         for(int k = 0; k < 10; k++)
@@ -111,8 +111,8 @@ public class Track {
         int i1 = (22050 * anInt330) / 1000;
         int j1 = (22050 * anInt331) / 1000;
         if(i1 < 0 || i1 > l || j1 < 0 || j1 > l || i1 >= j1)
-            i = 0;
-        int k1 = l + (j1 - i1) * (i - 1);
+            volume = 0;
+        int k1 = l + (j1 - i1) * (volume - 1);
         for(int l1 = 44; l1 < k1 + 44; l1++)
             output[l1] = -128;
 
@@ -128,7 +128,7 @@ public class Track {
 //http://soundfile.sapp.org/src/SoundHeader.cpp
             }
 
-        if(i > 1)
+        if(volume > 1)
         {
             i1 += 44;
             j1 += 44;
@@ -137,7 +137,7 @@ public class Track {
             for(int j3 = l - 1; j3 >= j1; j3--)
                 output[j3 + k2] = output[j3];
 
-            for(int k3 = 1; k3 < i; k3++)
+            for(int k3 = 1; k3 < volume; k3++)
             {
                 int l2 = (j1 - i1) * k3;
                 System.arraycopy(output, i1, output, i1 + l2, j1 - i1);
