@@ -34,9 +34,9 @@ public class IdentityKit {
                     bodyModelIDs[ptr] = stream.g2();
 
             } else
-            if(opcode == 3)
+            if(opcode == 3){
                 notSelectable = true;
-            else
+            }else
             if(opcode >= 40 && opcode < 50)
                 recolourOriginal[opcode - 40] = stream.g2();
             else
@@ -47,7 +47,7 @@ public class IdentityKit {
                 headModelIDs[opcode - 60] = stream.g2();
             else
                 System.out.println("Error unrecognised config code: " + opcode);
-        } while(true);
+            } while(true);
     }
 
     public boolean isBodyDownloaded()

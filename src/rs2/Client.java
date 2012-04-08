@@ -5831,17 +5831,17 @@ public class Client extends GameShell {
             if (anIntArray1250[i] <= 0) {
                 boolean flag1 = false;
                 try {
-                    if (anIntArray1207[i] == anInt874 && anIntArray1241[i] == anInt1289) {
+                    if (songIDs[i] == currentSongID && songVolumes[i] == currentSongVolume) {
                         if (!replayWave())
                             flag1 = true;
                     } else {
-                        Packet stream = Track.data(anIntArray1241[i], anIntArray1207[i]);
+                        Packet stream = Track.data(songVolumes[i], songIDs[i]);
                         if (System.currentTimeMillis() + (long) (stream.pos / 22) > aLong1172 + (long) (anInt1257 / 22)) {
                             anInt1257 = stream.pos;
                             aLong1172 = System.currentTimeMillis();
                             if (saveWave(stream.data, stream.pos)) {
-                                anInt874 = anIntArray1207[i];
-                                anInt1289 = anIntArray1241[i];
+                                currentSongID = songIDs[i];
+                                currentSongVolume = songVolumes[i];
                             } else {
                                 flag1 = true;
                             }
@@ -5852,8 +5852,8 @@ public class Client extends GameShell {
                 if (!flag1 || anIntArray1250[i] == -5) {
                     anInt1062--;
                     for (int j = i; j < anInt1062; j++) {
-                        anIntArray1207[j] = anIntArray1207[j + 1];
-                        anIntArray1241[j] = anIntArray1241[j + 1];
+                        songIDs[j] = songIDs[j + 1];
+                        songVolumes[j] = songVolumes[j + 1];
                         anIntArray1250[j] = anIntArray1250[j + 1];
                     }
 
@@ -7966,7 +7966,7 @@ public class Client extends GameShell {
 
                     }
                 }
-                if (j1 == 5)
+                if (j1 == 5)//varbit
                     k1 = sessionSettings[ai[l++]];
                 if (j1 == 6)
                     k1 = XP_FOR_LEVEL[user_stats[ai[l++]] - 1];
@@ -8571,8 +8571,8 @@ public class Client extends GameShell {
             int i14 = l11 >> 4 & 0xf;
             int i16 = l11 & 7;
             if (sessionPlayer.pathX[0] >= k3 - i14 && sessionPlayer.pathX[0] <= k3 + i14 && sessionPlayer.pathY[0] >= j6 - i14 && sessionPlayer.pathY[0] <= j6 + i14 && wave_on && !lowMem && anInt1062 < 50) {
-                anIntArray1207[anInt1062] = i9;
-                anIntArray1241[anInt1062] = i16;
+                songIDs[anInt1062] = i9;
+                songVolumes[anInt1062] = i16;
                 anIntArray1250[anInt1062] = Track.anIntArray326[i9];
                 anInt1062++;
             }
@@ -9524,9 +9524,10 @@ public class Client extends GameShell {
                 int volume = inStream.g1();
                 int delay = inStream.g2();
                 if (wave_on && !lowMem && anInt1062 < 50) {
-                    anIntArray1207[anInt1062] = songID;
-                    anIntArray1241[anInt1062] = volume;
-                    anIntArray1250[anInt1062] = delay + Track.anIntArray326[songID];
+                    songIDs[anInt1062] = songID;
+                    songVolumes[anInt1062] = volume;
+                    anIntArray1250[anInt1062] = delay + Track.anIntArray326[songID];//
+                    //TODO is array326 song duration? if so 1250 is fullDuration
                     anInt1062++;
                 }
                 pktType = -1;
@@ -10255,7 +10256,7 @@ public class Client extends GameShell {
         user_experience = new int[Skills.COUNT];
         aBoolean872 = false;
         anIntArray873 = new int[5];//customcamera slots
-        anInt874 = -1;//sound stuff
+        currentSongID = -1;//sound stuff
         useCustomCamera = new boolean[5];
         drawFlames = false;
         reportAbuseInput = "";
@@ -10363,7 +10364,7 @@ public class Client extends GameShell {
         stream = Packet.create();
         menuActionName = new String[500];
         customLowestYaw = new int[5];
-        anIntArray1207 = new int[50];
+        songIDs = new int[50];
         nextMinimapRotationOffset = 2;
         scrollMax = 78;
         promptInput = "";
@@ -10375,7 +10376,7 @@ public class Client extends GameShell {
         tileSettings = new TileSetting[4];
         chatOptionsNeedUpdating = false;
         anIntArray1240 = new int[100];
-        anIntArray1241 = new int[50];
+        songVolumes = new int[50];
         aBoolean1242 = false;
         anIntArray1250 = new int[50];
         rsAlreadyLoaded = false;
@@ -10387,7 +10388,7 @@ public class Client extends GameShell {
         nextXOffsetChange = 2;
         bigX = new int[4000];
         bigY = new int[4000];
-        anInt1289 = -1;
+        currentSongVolume = -1;
 
     }
 
@@ -10510,7 +10511,7 @@ public class Client extends GameShell {
     private RgbImage mapMarker;
     private boolean aBoolean872;
     private final int[] anIntArray873;
-    private int anInt874;
+    private int currentSongID;
     private final boolean[] useCustomCamera;
     private int user_weight;
     private MouseDetection mouseDetection;
@@ -10815,7 +10816,7 @@ public class Client extends GameShell {
     private final int[] customLowestYaw;
     static final int[] skinColours = {9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 58654, 5027, 1457, 16565, 34991, 25486};
     private static boolean flagged;
-    private final int[] anIntArray1207;
+    private final int[] songIDs;
     private int flameCycle;
     private int minimapRotation;
     private int nextMinimapRotationOffset;
@@ -10844,7 +10845,7 @@ public class Client extends GameShell {
     private int oldY;
     //public final int anInt1239 = 100;
     private final int[] anIntArray1240;
-    private final int[] anIntArray1241;
+    private final int[] songVolumes;
     private boolean aBoolean1242;
     private int atInventoryLoopCycle;
     private int atInventoryInterface;
@@ -10888,7 +10889,7 @@ public class Client extends GameShell {
     private String selectedItemName;
     private int publicChatMode;
     private static int anticheat9;
-    private int anInt1289;//music stuff, BEWARE
+    private int currentSongVolume;//music stuff, BEWARE
     public String server = "";
     public int playerBitAmmount = 12;//12 for 317, 14 for pi
     public static boolean guiLaunch = true;
