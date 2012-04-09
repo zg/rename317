@@ -23,15 +23,17 @@ public class IdentityKit {
             int opcode = stream.g1();
             if(opcode == 0)
                 return;
-            if(opcode == 1)
+            if(opcode == 1){
                 bodyPartID = stream.g1();
-            else
+            }else
             if(opcode == 2)
             {
                 int modelCount = stream.g1();
                 bodyModelIDs = new int[modelCount];
                 for(int ptr = 0; ptr < modelCount; ptr++)
                     bodyModelIDs[ptr] = stream.g2();
+                //if(bodyPartID == 0)//230 is head
+                //	System.out.println(modelCount+" "+bodyModelIDs[0]);
 
             } else
             if(opcode == 3){
