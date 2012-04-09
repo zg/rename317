@@ -5,14 +5,14 @@ public class Track {
 
     private Track()
     {
-        samples = new Sample[10];
+        samples = new Synthesizer[10];
     }
 
     public static void unpack(Packet data)
     {
         output = new byte[0x6baa8];
         riff_data = new Packet(output);
-        Sample.initialise();
+        Synthesizer.initialise();
         do
         {
             int j = data.g2();
@@ -44,7 +44,7 @@ public class Track {
             if(j != 0)
             {
                 stream.pos--;
-                samples[i] = new Sample();
+                samples[i] = new Synthesizer();
                 samples[i].decode(stream);
             }
         }
@@ -153,7 +153,7 @@ public class Track {
     public static final int[] anIntArray326 = new int[5000];
     private static byte[] output;
     private static Packet riff_data;
-    private final Sample[] samples;
+    private final Synthesizer[] samples;
     private int anInt330;
     private int anInt331;
 

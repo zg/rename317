@@ -1,7 +1,7 @@
 package rs2;
 
 
-public class Sample
+public class Synthesizer
 {//sample
 
     public static void initialise()
@@ -17,16 +17,16 @@ public class Sample
         for(int j = 0; j < 32768; j++)
             SINE[j] = (int)(Math.sin((double)j / 5215.1903000000002D) * 16384D);
 
-        encoded = new int[0x35d54];
+        samples = new int[0x35d54];
     }
 
     public int[] synthesize(int sampleLength, int j)
     {
         for(int k = 0; k < sampleLength; k++)
-            encoded[k] = 0;
+            samples[k] = 0;
 
         if(j < 10)
-            return encoded;
+            return samples;
         double rate = (double)sampleLength / ((double)j + 0.0D);
         samp1.resetValues();
         samp2.resetValues();
@@ -53,7 +53,7 @@ public class Sample
         for(int j2 = 0; j2 < 5; j2++)
             if(anIntArray106[j2] != 0)
             {
-                Sample.phase[j2] = 0;
+                Synthesizer.phase[j2] = 0;
                 anIntArray119[j2] = (int)((double)anIntArray108[j2] * rate);
                 anIntArray120[j2] = (anIntArray106[j2] << 14) / 100;
                 anIntArray121[j2] = (int)(((double)(samp1.anInt539 - samp1.anInt538) * 32.768000000000001D * Math.pow(1.0057929410678534D, cents[j2])) / rate);
@@ -84,8 +84,8 @@ public class Sample
                     int l6 = k2 + anIntArray119[l5];
                     if(l6 < sampleLength)
                     {
-                        encoded[l6] += evaluate(j4 * anIntArray120[l5] >> 15, Sample.phase[l5], samp1.form);
-                        Sample.phase[l5] += (l2 * anIntArray121[l5] >> 16) + anIntArray122[l5];
+                        samples[l6] += evaluate(j4 * anIntArray120[l5] >> 15, Synthesizer.phase[l5], samp1.form);
+                        Synthesizer.phase[l5] += (l2 * anIntArray121[l5] >> 16) + anIntArray122[l5];
                     }
                 }
 
@@ -113,7 +113,7 @@ public class Sample
                     flag1 = !flag1;
                 }
                 if(flag1)
-                    encoded[i7] = 0;
+                    samples[i7] = 0;
             }
 
         }
@@ -121,31 +121,31 @@ public class Sample
         {
             int j3 = (int)((double)anInt109 * rate);
             for(int l4 = j3; l4 < sampleLength; l4++)
-                encoded[l4] += (encoded[l4 - j3] * gain) / 100;
+                samples[l4] += (samples[l4 - j3] * gain) / 100;
 
         }
         if(aClass39_111.anIntArray665[0] > 0 || aClass39_111.anIntArray665[1] > 0)
         {
             aClass29_112.resetValues();
             int k3 = aClass29_112.evaluate(sampleLength + 1);
-            int i5 = aClass39_111.method544(0, (float)k3 / 65536F);
+            int M = aClass39_111.method544(0, (float)k3 / 65536F);
             int i6 = aClass39_111.method544(1, (float)k3 / 65536F);
-            if(sampleLength >= i5 + i6)
+            if(sampleLength >= M + i6)
             {
-                int j7 = 0;
+                int p = 0;
                 int l7 = i6;
-                if(l7 > sampleLength - i5)
-                    l7 = sampleLength - i5;
-                for(; j7 < l7; j7++)
+                if(l7 > sampleLength - M)
+                    l7 = sampleLength - M;
+                for(; p < l7; p++)
                 {
-                    int j8 = (int)((long) encoded[j7 + i5] * (long)Filter.attenuation16Bit >> 16);
-                    for(int k8 = 0; k8 < i5; k8++)
-                        j8 += (int)((long) encoded[(j7 + i5) - 1 - k8] * (long)Filter.anIntArrayArray670[0][k8] >> 16);
+                    int j8 = (int)((long) samples[p + M] * (long)Filter.attenuation16Bit >> 16);
+                    for(int k8 = 0; k8 < M; k8++)
+                        j8 += (int)((long) samples[(p + M) - 1 - k8] * (long)Filter.anIntArrayArray670[0][k8] >> 16);
 
-                    for(int j9 = 0; j9 < j7; j9++)
-                        j8 -= (int)((long) encoded[j7 - 1 - j9] * (long)Filter.anIntArrayArray670[1][j9] >> 16);
+                    for(int j9 = 0; j9 < p; j9++)
+                        j8 -= (int)((long) samples[p - 1 - j9] * (long)Filter.anIntArrayArray670[1][j9] >> 16);
 
-                    encoded[j7] = j8;
+                    samples[p] = j8;
                     k3 = aClass29_112.evaluate(sampleLength + 1);
                 }
 
@@ -153,37 +153,37 @@ public class Sample
                 l7 = c;
                 do
                 {
-                    if(l7 > sampleLength - i5)
-                        l7 = sampleLength - i5;
-                    for(; j7 < l7; j7++)
+                    if(l7 > sampleLength - M)
+                        l7 = sampleLength - M;
+                    for(; p < l7; p++)
                     {
-                        int l8 = (int)((long) encoded[j7 + i5] * (long)Filter.attenuation16Bit >> 16);
-                        for(int k9 = 0; k9 < i5; k9++)
-                            l8 += (int)((long) encoded[(j7 + i5) - 1 - k9] * (long)Filter.anIntArrayArray670[0][k9] >> 16);
+                        int l8 = (int)((long) samples[p + M] * (long)Filter.attenuation16Bit >> 16);
+                        for(int k9 = 0; k9 < M; k9++)
+                            l8 += (int)((long) samples[(p + M) - 1 - k9] * (long)Filter.anIntArrayArray670[0][k9] >> 16);
 
                         for(int i10 = 0; i10 < i6; i10++)
-                            l8 -= (int)((long) encoded[j7 - 1 - i10] * (long)Filter.anIntArrayArray670[1][i10] >> 16);
+                            l8 -= (int)((long) samples[p - 1 - i10] * (long)Filter.anIntArrayArray670[1][i10] >> 16);
 
-                        encoded[j7] = l8;
+                        samples[p] = l8;
                         k3 = aClass29_112.evaluate(sampleLength + 1);
                     }
 
-                    if(j7 >= sampleLength - i5)
+                    if(p >= sampleLength - M)
                         break;
-                    i5 = aClass39_111.method544(0, (float)k3 / 65536F);
+                    M = aClass39_111.method544(0, (float)k3 / 65536F);
                     i6 = aClass39_111.method544(1, (float)k3 / 65536F);
                     l7 += c;
                 } while(true);
-                for(; j7 < sampleLength; j7++)
+                for(; p < sampleLength; p++)
                 {
-                    int i9 = 0;
-                    for(int l9 = (j7 + i5) - sampleLength; l9 < i5; l9++)
-                        i9 += (int)((long) encoded[(j7 + i5) - 1 - l9] * (long)Filter.anIntArrayArray670[0][l9] >> 16);
+                    int y = 0;
+                    for(int k = (p + M) - sampleLength; k < M; k++)
+                        y += (int)((long) samples[(p + M) - 1 - k] * (long)Filter.anIntArrayArray670[0][k] >> 16);
 
-                    for(int j10 = 0; j10 < i6; j10++)
-                        i9 -= (int)((long) encoded[j7 - 1 - j10] * (long)Filter.anIntArrayArray670[1][j10] >> 16);
+                    for(int k = 0; k < i6; k++)
+                        y -= (int)((long) samples[p - 1 - k] * (long)Filter.anIntArrayArray670[1][k] >> 16);
 
-                    encoded[j7] = i9;
+                    samples[p] = y;
                     int l3 = aClass29_112.evaluate(sampleLength + 1);//never used - think its needed tho
 
                 }
@@ -192,13 +192,13 @@ public class Sample
         }
         for(int i4 = 0; i4 < sampleLength; i4++)
         {
-            if(encoded[i4] < -32768)
-                encoded[i4] = -32768;
-            if(encoded[i4] > 32767)
-                encoded[i4] = 32767;
+            if(samples[i4] < -32768)
+                samples[i4] = -32768;
+            if(samples[i4] > 32767)
+                samples[i4] = 32767;
         }
 
-        return encoded;
+        return samples;
     }
 
     private int evaluate(int amplitude, int phase, int form)
@@ -270,7 +270,7 @@ public class Sample
         aClass39_111.method545(data, aClass29_112);
     }
 
-    public Sample()
+    public Synthesizer()
     {
         anIntArray106 = new int[5];
         cents = new int[5];
@@ -296,7 +296,7 @@ public class Sample
     private Envelope aClass29_112;
     int offset;
     int remaining;
-    private static int[] encoded;
+    private static int[] samples;
     private static int[] NOISE;
     private static int[] SINE;
     private static final int[] phase = new int[5];

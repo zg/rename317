@@ -43,10 +43,10 @@ public class Model extends Entity {
     }
 
 
-    public Model(int modelId, int j) {
+    public Model(int modelId, int j) {//unused :/
         byte[] is = modelHeaderCache[modelId].modelData;
-    
-       // if(new File(Signlink.findcachedir()+"/converted633Items/"+modelId+".dat").exists()){
+        
+        	// if(new File(Signlink.findcachedir()+"/converted633Items/"+modelId+".dat").exists()){
        // 	readCustomFormat(FileOperations.ReadFile(Signlink.findcachedir()+"/converted633Items/"+modelId+".dat"),modelId);
         	//readCustomFormat(FileOperations.ReadFile(Signlink.findcachedir()+"/converted633Items/534.dat"),modelId);
       //  }        else{
@@ -782,17 +782,20 @@ public class Model extends Entity {
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.facePriorityBasePos = -l - 1;
+        
         modelHeader_1.tskinBasepos = l2;
         if (hasChangedColours == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.tskinBasepos = -1;
+        
         modelHeader_1.drawTypeBasePos = l2;
         if (isTextured == 1)
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.drawTypeBasePos = -1;
         modelHeader_1.vskinBasePos = l2;
+        
         if (hasAnimations == 1)
             l2 += modelHeader_1.modelVerticeCount;
         else
@@ -802,6 +805,8 @@ public class Model extends Entity {
             l2 += modelHeader_1.modelTriangleCount;
         else
             modelHeader_1.alphaBasepos = -1;
+        
+        
         modelHeader_1.triVPointOffset = l2;
         l2 += tDataLength;
         modelHeader_1.triColourOffset = l2;
@@ -821,20 +826,20 @@ public class Model extends Entity {
         modelHeaderCache[id] = null;
     }
 
-    public static Model getModel(int j) {
+    public static Model getModel(int modelID) {
         if (modelHeaderCache == null)
             return null;
-        ModelHeader modelHeader = modelHeaderCache[j];
+        ModelHeader modelHeader = modelHeaderCache[modelID];
         if (modelHeader == null) {
             if (((OnDemandFetcher)abstractODFetcher).clientInstance == null){
-                readHeader(((OnDemandFetcher)abstractODFetcher).getDataFromCache(j,0), j);
-                return new Model(j, 0);//edited for new engine
+                readHeader(((OnDemandFetcher)abstractODFetcher).getDataFromCache(modelID,0), modelID);
+                return new Model(modelID, 0);//edited for new engine
             } else {
-                abstractODFetcher.requestData(j);
+                abstractODFetcher.requestData(modelID);
                 return null;
             }
         } else {
-            return new Model(j, 0);//edited for new engine
+            return new Model(modelID, 0);//edited for new engine
         }
     }
 
