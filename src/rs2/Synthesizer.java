@@ -138,12 +138,12 @@ public class Synthesizer
                     l7 = sampleLength - M;
                 for(; p < l7; p++)
                 {
-                    int j8 = (int)((long) samples[p + M] * (long)Filter.attenuation16Bit >> 16);
+                    int j8 = (int)((long) samples[p + M] * (long)Filter.inv_g0_fixedpt >> 16);
                     for(int k8 = 0; k8 < M; k8++)
-                        j8 += (int)((long) samples[(p + M) - 1 - k8] * (long)Filter.anIntArrayArray670[0][k8] >> 16);
+                        j8 += (int)((long) samples[(p + M) - 1 - k8] * (long)Filter.coef_fixedpt[0][k8] >> 16);
 
                     for(int j9 = 0; j9 < p; j9++)
-                        j8 -= (int)((long) samples[p - 1 - j9] * (long)Filter.anIntArrayArray670[1][j9] >> 16);
+                        j8 -= (int)((long) samples[p - 1 - j9] * (long)Filter.coef_fixedpt[1][j9] >> 16);
 
                     samples[p] = j8;
                     k3 = aClass29_112.evaluate(sampleLength + 1);
@@ -157,14 +157,14 @@ public class Synthesizer
                         l7 = sampleLength - M;
                     for(; p < l7; p++)
                     {
-                        int l8 = (int)((long) samples[p + M] * (long)Filter.attenuation16Bit >> 16);
-                        for(int k9 = 0; k9 < M; k9++)
-                            l8 += (int)((long) samples[(p + M) - 1 - k9] * (long)Filter.anIntArrayArray670[0][k9] >> 16);
+                        int y = (int)((long) samples[p + M] * (long)Filter.inv_g0_fixedpt >> 16);
+                        for(int k = 0; k < M; k++)
+                            y += (int)((long) samples[(p + M) - 1 - k] * (long)Filter.coef_fixedpt[0][k] >> 16);
 
-                        for(int i10 = 0; i10 < i6; i10++)
-                            l8 -= (int)((long) samples[p - 1 - i10] * (long)Filter.anIntArrayArray670[1][i10] >> 16);
+                        for(int k = 0; k < i6; k++)
+                            y -= (int)((long) samples[p - 1 - k] * (long)Filter.coef_fixedpt[1][k] >> 16);
 
-                        samples[p] = l8;
+                        samples[p] = y;
                         k3 = aClass29_112.evaluate(sampleLength + 1);
                     }
 
@@ -178,10 +178,10 @@ public class Synthesizer
                 {
                     int y = 0;
                     for(int k = (p + M) - sampleLength; k < M; k++)
-                        y += (int)((long) samples[(p + M) - 1 - k] * (long)Filter.anIntArrayArray670[0][k] >> 16);
+                        y += (int)((long) samples[(p + M) - 1 - k] * (long)Filter.coef_fixedpt[0][k] >> 16);
 
                     for(int k = 0; k < i6; k++)
-                        y -= (int)((long) samples[p - 1 - k] * (long)Filter.anIntArrayArray670[1][k] >> 16);
+                        y -= (int)((long) samples[p - 1 - k] * (long)Filter.coef_fixedpt[1][k] >> 16);
 
                     samples[p] = y;
                     int l3 = aClass29_112.evaluate(sampleLength + 1);//never used - think its needed tho

@@ -8,7 +8,7 @@ package rs2;
 public class Filter
 {
 
-    private float decrementFactor(int i, int j, float f)
+    private float interpolateGain(int i, int j, float f)
     {
         float ratio = (float)lowpassSamples[i][0][j] + f * (float)(lowpassSamples[i][1][j] - lowpassSamples[i][0][j]);
             ratio *= 0.001525879F;/* convert fixed- to floating-point: ratio * 100 / 65536 */
@@ -38,7 +38,7 @@ public class Filter
       */
         }
 
-    private float method543(float f, int i, int j)
+    private float poleFreq(float f, int i, int j)
     {
         float f1 = (float)anIntArrayArrayArray666[j][0][i] + f * (float)(anIntArrayArrayArray666[j][1][i] - anIntArrayArrayArray666[j][0][i]);
         f1 *= 0.0001220703F;/* convert fixed- to floating-point: f1 / 8192 */
@@ -52,35 +52,35 @@ public class Filter
             float f1 = (float)anIntArray668[0] + (float)(anIntArray668[1] - anIntArray668[0]) * smoothing;
             f1 *= 0.003051758F;// some kind of transformer?
             attenuation = (float)Math.pow(0.10000000000000001D, f1 / 20F);
-            attenuation16Bit = (int)(attenuation * 65536F);
+            inv_g0_fixedpt = (int)(attenuation * 65536F);
         }
         if(anIntArray665[i] == 0)
             return 0;
-        float f2 = decrementFactor(i, 0, smoothing);
-        aFloatArrayArray669[i][0] = -2F * f2 * (float)Math.cos(method543(smoothing, 0, i));
-        aFloatArrayArray669[i][1] = f2 * f2;
+        float f2 = interpolateGain(i, 0, smoothing);
+        coef[i][0] = -2F * f2 * (float)Math.cos(poleFreq(smoothing, 0, i));
+        coef[i][1] = f2 * f2;
         for(int k = 1; k < anIntArray665[i]; k++)
         {
-            float f3 = decrementFactor(i, k, smoothing);
-            float f4 = -2F * f3 * (float)Math.cos(method543(smoothing, k, i));
+            float f3 = interpolateGain(i, k, smoothing);
+            float f4 = -2F * f3 * (float)Math.cos(poleFreq(smoothing, k, i));
             float f5 = f3 * f3;
-            aFloatArrayArray669[i][k * 2 + 1] = aFloatArrayArray669[i][k * 2 - 1] * f5;
-            aFloatArrayArray669[i][k * 2] = aFloatArrayArray669[i][k * 2 - 1] * f4 + aFloatArrayArray669[i][k * 2 - 2] * f5;
+            coef[i][k * 2 + 1] = coef[i][k * 2 - 1] * f5;
+            coef[i][k * 2] = coef[i][k * 2 - 1] * f4 + coef[i][k * 2 - 2] * f5;
             for(int j1 = k * 2 - 1; j1 >= 2; j1--)
-                aFloatArrayArray669[i][j1] += aFloatArrayArray669[i][j1 - 1] * f4 + aFloatArrayArray669[i][j1 - 2] * f5;
+                coef[i][j1] += coef[i][j1 - 1] * f4 + coef[i][j1 - 2] * f5;
 
-            aFloatArrayArray669[i][1] += aFloatArrayArray669[i][0] * f4 + f5;
-            aFloatArrayArray669[i][0] += f4;
+            coef[i][1] += coef[i][0] * f4 + f5;
+            coef[i][0] += f4;
         }
 
         if(i == 0)
         {
             for(int l = 0; l < anIntArray665[0] * 2; l++)
-                aFloatArrayArray669[0][l] *= attenuation;
+                coef[0][l] *= attenuation;
 
         }
         for(int i1 = 0; i1 < anIntArray665[i] * 2; i1++)
-            anIntArrayArray670[i][i1] = (int)(aFloatArrayArray669[i][i1] * 65536F);
+            coef_fixedpt[i][i1] = (int)(coef[i][i1] * 65536F);
 
         return anIntArray665[i] * 2;
     }
@@ -141,9 +141,9 @@ public class Filter
     private final int[][][] anIntArrayArrayArray666;
     private final int[][][] lowpassSamples;
     private final int[] anIntArray668;
-    private static final float[][] aFloatArrayArray669 = new float[2][8];
-    static final int[][] anIntArrayArray670 = new int[2][8];
+    private static final float[][] coef = new float[2][8];
+    static final int[][] coef_fixedpt = new int[2][8];
     private static float attenuation;
-    static int attenuation16Bit;
+    static int inv_g0_fixedpt;
 
 }
