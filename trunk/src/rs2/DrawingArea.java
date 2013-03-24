@@ -1,7 +1,9 @@
 package rs2;
 
 
-public class DrawingArea extends NodeSub {
+import rs2.util.collection.QueueNode;
+
+public class DrawingArea extends QueueNode {
 
 	public static void setTarget(int height, int width, int pixels[]) {
 		DrawingArea.pixels = pixels;

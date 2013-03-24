@@ -1,6 +1,8 @@
 package rs2;
 
 
+import rs2.util.collection.Node;
+
 public class Tile extends Node {
 
     public boolean highlighted = false;

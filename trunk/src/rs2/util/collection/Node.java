@@ -1,18 +1,17 @@
-package rs2;
-
+package rs2.util.collection;
 
 public class Node {
 
     public final void unlink()
     {
-        if(previous == null)
+        if(prev == null)
         {
         } else
         {
-            previous.next = next;
-            next.previous = previous;
+            prev.next = next;
+            next.prev = prev;
             next = null;
-            previous = null;
+            prev = null;
         }
     }
 
@@ -22,5 +21,5 @@ public class Node {
 
     public long hash;
     public Node next;
-    public Node previous;
+    public Node prev;
 }

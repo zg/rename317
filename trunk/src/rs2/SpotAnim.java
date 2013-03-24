@@ -1,6 +1,8 @@
 package rs2;
 
 
+import rs2.util.collection.MemCache;
+
 public class SpotAnim {
 
     public static void unpackConfig(JagexArchive jagexArchive)

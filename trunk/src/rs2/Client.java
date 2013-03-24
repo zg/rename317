@@ -8,6 +8,8 @@ import java.net.*;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import pgle.PglCallClientNode;
 import pgle.PglWrapper;
+import rs2.util.collection.Deque;
+import rs2.util.collection.Node;
 import rt4.Class7_Sub1;
 
 
@@ -573,7 +575,7 @@ public class Client extends GameShell {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-        ObjectDef.modelCache.unlinkAll();
+        ObjectDef.modelCache.clear();
         if (super.gameFrame != null) {
             stream.p1isaac(210);
             stream.p4(0x3f008edd);
@@ -616,13 +618,13 @@ public class Client extends GameShell {
     }
 
     private void unlinkMRUNodes() {
-        ObjectDef.modelCache.unlinkAll();
-        ObjectDef.modelCache2.unlinkAll();
-        NpcDef.modelCache.unlinkAll();
-        ItemDef.modelCache.unlinkAll();
-        ItemDef.rgbImageCache.unlinkAll();
-        Player.modelCache.unlinkAll();
-        SpotAnim.modelCache.unlinkAll();
+        ObjectDef.modelCache.clear();
+        ObjectDef.modelCache2.clear();
+        NpcDef.modelCache.clear();
+        ItemDef.modelCache.clear();
+        ItemDef.rgbImageCache.clear();
+        Player.modelCache.clear();
+        SpotAnim.modelCache.clear();
         Entity.cleanPglPool();
     }
 
@@ -1095,7 +1097,7 @@ public class Client extends GameShell {
                 Rasterizer.calculatePalette(0.69999999999999996D);
             if (k == 4)
                 Rasterizer.calculatePalette(0.59999999999999998D);
-            ItemDef.rgbImageCache.unlinkAll();
+            ItemDef.rgbImageCache.clear();
             repaintRequested = true;
         }
         if (j == 3) {

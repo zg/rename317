@@ -1,6 +1,8 @@
 package rs2;
 
 
+import rs2.util.collection.MemCache;
+
 public class RSInterface
 {
 
@@ -287,7 +289,7 @@ public class RSInterface
     {
         int id = 0;//was parameter
         int type = 5;//was parameter
-        modelCache.unlinkAll();
+        modelCache.clear();
         if(model != null && type != 4)
             modelCache.put(model, (type << 16) + id);
     }
