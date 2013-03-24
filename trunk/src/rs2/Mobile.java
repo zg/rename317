@@ -1,6 +1,8 @@
 package rs2;
 
 
+import rs2.model.entity.Entity;
+
 //mobile -super_
 public class Mobile extends Entity {
 

@@ -1,8 +1,7 @@
 package rs2;
 
 
-import java.io.File;
-
+import rs2.model.entity.Entity;
 import rt4.TriangleNormal;
 
 public class Model extends Entity {
@@ -2216,19 +2215,19 @@ public class Model extends Entity {
             return;
         int j3 = z * xCurveSine + x * xCurveCosine >> 16;
         int k3 = j3 - diagonal2DAboveorigin << 9;
-        if (k3 / i3 >= DrawingArea.viewportCx)
+        if (k3 / i3 >= DrawingArea.viewport_center_x)
             return;
         int l3 = j3 + diagonal2DAboveorigin << 9;
-        if (l3 / i3 <= -DrawingArea.viewportCx)
+        if (l3 / i3 <= -DrawingArea.viewport_center_x)
             return;
         int i4 = y * yCameraCosine - j2 * yCameraSine >> 16;
         int j4 = diagonal2DAboveorigin * yCameraSine >> 16;
         int k4 = i4 + j4 << 9;
-        if (k4 / i3 <= -DrawingArea.viewportCy)
+        if (k4 / i3 <= -DrawingArea.viewport_center_y)
             return;
         int l4 = j4 + (super.modelHeight * yCameraCosine >> 16);
         int i5 = i4 - l4 << 9;
-        if (i5 / i3 >= DrawingArea.viewportCy)
+        if (i5 / i3 >= DrawingArea.viewport_center_y)
             return;
         int j5 = l2 + (super.modelHeight * yCameraSine >> 16);
         boolean flag = false;

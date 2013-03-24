@@ -1,15 +1,14 @@
-package rs2;
+package rs2.model.entity;
 
 import org.lwjgl.util.Color;
 import org.lwjgl.util.vector.Vector3f;
 import org.peterbjornx.pgl2.light.OpenGLLight;
 import org.peterbjornx.pgl2.model.GeometryNode;
 import pgle.PglModelNode;
+import rs2.*;
 import rs2.util.collection.QueueNode;
 
 import java.util.HashMap;
-
-import static org.lwjgl.opengl.GL11.glLightModel;
 
 public class Entity extends QueueNode {
 
@@ -52,12 +51,12 @@ public class Entity extends QueueNode {
         root.renderAtPoint(-(xRotLocal * 0.17578125f),0,0,0,x,-y,z);
     }
 
-    Model getRotatedModel()
+    public Model getRotatedModel()
     {
         return null;
     }
 
-    Entity()
+    public Entity()
     {
         modelHeight = 1000;
     }

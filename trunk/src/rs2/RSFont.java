@@ -289,29 +289,29 @@ public class RSFont extends DrawingArea {
         int k1 = width - k;
         int l1 = 0;
         int i2 = 0;
-        if(j < topY)
+        if(j < viewport_top)
         {
-            int j2 = topY - j;
+            int j2 = viewport_top - j;
             l -= j2;
-            j = topY;
+            j = viewport_top;
             i2 += j2 * k;
             j1 += j2 * width;
         }
-        if(j + l >= viewport_h)
-            l -= ((j + l) - viewport_h) + 1;
-        if(i < topX)
+        if(j + l >= viewport_bottom)
+            l -= ((j + l) - viewport_bottom) + 1;
+        if(i < viewport_left)
         {
-            int k2 = topX - i;
+            int k2 = viewport_left - i;
             k -= k2;
-            i = topX;
+            i = viewport_left;
             i2 += k2;
             j1 += k2;
             l1 += k2;
             k1 += k2;
         }
-        if(i + k >= viewport_w)
+        if(i + k >= viewport_right)
         {
-            int l2 = ((i + k) - viewport_w) + 1;
+            int l2 = ((i + k) - viewport_right) + 1;
             k -= l2;
             l1 += l2;
             k1 += l2;
@@ -368,29 +368,29 @@ public class RSFont extends DrawingArea {
         int l1 = width - k;
         int i2 = 0;
         int j2 = 0;
-        if(l < topY)
+        if(l < viewport_top)
         {
-            int k2 = topY - l;
+            int k2 = viewport_top - l;
             i1 -= k2;
-            l = topY;
+            l = viewport_top;
             j2 += k2 * k;
             k1 += k2 * width;
         }
-        if(l + i1 >= viewport_h)
-            i1 -= ((l + i1) - viewport_h) + 1;
-        if(j < topX)
+        if(l + i1 >= viewport_bottom)
+            i1 -= ((l + i1) - viewport_bottom) + 1;
+        if(j < viewport_left)
         {
-            int l2 = topX - j;
+            int l2 = viewport_left - j;
             k -= l2;
-            j = topX;
+            j = viewport_left;
             j2 += l2;
             k1 += l2;
             i2 += l2;
             l1 += l2;
         }
-        if(j + k >= viewport_w)
+        if(j + k >= viewport_right)
         {
-            int i3 = ((j + k) - viewport_w) + 1;
+            int i3 = ((j + k) - viewport_right) + 1;
             k -= i3;
             i2 += i3;
             l1 += i3;

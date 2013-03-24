@@ -3,7 +3,7 @@ package pgle;
 import org.lwjgl.opengl.GL11;
 import org.peterbjornx.pgl2.camera.Camera;
 import org.peterbjornx.pgl2.model.GeometryNode;
-import rs2.Entity;
+import rs2.model.entity.Entity;
 import rs2.SceneGraph;
 
 /**

@@ -3,7 +3,6 @@ package rs2;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -28,7 +27,7 @@ public class GraphicsBuffer
 	}
 
 	public void initDrawingArea() {
-		DrawingArea.setTarget(canvasHeight, canvasWidth, componentPixels);
+		DrawingArea.setTarget(canvasWidth, canvasHeight, componentPixels);
 	}
 
 	public void drawGraphics(int y, Graphics g, int x) {

@@ -1,6 +1,7 @@
 package rs2;
 
 
+import rs2.media.image.RgbImage;
 import rs2.util.collection.MemCache;
 
 public class ItemDef
@@ -251,7 +252,7 @@ public class ItemDef
         if(k == 0)
         {
             RgbImage rgbImage = (RgbImage) rgbImageCache.get(itemID);
-            if(rgbImage != null && rgbImage.h2 != stackSize && rgbImage.h2 != -1)
+            if(rgbImage != null && rgbImage.library_height != stackSize && rgbImage.library_height != -1)
             {
                 rgbImage.unlink();
                 rgbImage = null;
@@ -289,12 +290,12 @@ public class ItemDef
         int pixels[] = DrawingArea.pixels;
         int width = DrawingArea.width;
         int height = DrawingArea.height;
-        int topX = DrawingArea.topX;
-        int width_ = DrawingArea.viewport_w;
-        int topY = DrawingArea.topY;
-        int height_ = DrawingArea.viewport_h;
+        int topX = DrawingArea.viewport_left;
+        int width_ = DrawingArea.viewport_right;
+        int topY = DrawingArea.viewport_top;
+        int height_ = DrawingArea.viewport_bottom;
         Rasterizer.notTextured = false;
-        DrawingArea.setTarget(32, 32, sprite2.myPixels);
+        DrawingArea.setTarget(32, 32, sprite2.image_pixels);
         DrawingArea.fillRect(0, 0, 32, 32, 0);
         Rasterizer.setDefaultBounds();
         int k3 = definition.modelZoom;
@@ -308,18 +309,18 @@ public class ItemDef
         for(int i5 = 31; i5 >= 0; i5--)
         {
             for(int j4 = 31; j4 >= 0; j4--)
-                if(sprite2.myPixels[i5 + j4 * 32] == 0)
-                    if(i5 > 0 && sprite2.myPixels[(i5 - 1) + j4 * 32] > 1)
-                        sprite2.myPixels[i5 + j4 * 32] = 1;
+                if(sprite2.image_pixels[i5 + j4 * 32] == 0)
+                    if(i5 > 0 && sprite2.image_pixels[(i5 - 1) + j4 * 32] > 1)
+                        sprite2.image_pixels[i5 + j4 * 32] = 1;
                     else
-                    if(j4 > 0 && sprite2.myPixels[i5 + (j4 - 1) * 32] > 1)
-                        sprite2.myPixels[i5 + j4 * 32] = 1;
+                    if(j4 > 0 && sprite2.image_pixels[i5 + (j4 - 1) * 32] > 1)
+                        sprite2.image_pixels[i5 + j4 * 32] = 1;
                     else
-                    if(i5 < 31 && sprite2.myPixels[i5 + 1 + j4 * 32] > 1)
-                        sprite2.myPixels[i5 + j4 * 32] = 1;
+                    if(i5 < 31 && sprite2.image_pixels[i5 + 1 + j4 * 32] > 1)
+                        sprite2.image_pixels[i5 + j4 * 32] = 1;
                     else
-                    if(j4 < 31 && sprite2.myPixels[i5 + (j4 + 1) * 32] > 1)
-                        sprite2.myPixels[i5 + j4 * 32] = 1;
+                    if(j4 < 31 && sprite2.image_pixels[i5 + (j4 + 1) * 32] > 1)
+                        sprite2.image_pixels[i5 + j4 * 32] = 1;
 
         }
 
@@ -328,18 +329,18 @@ public class ItemDef
             for(int j5 = 31; j5 >= 0; j5--)
             {
                 for(int k4 = 31; k4 >= 0; k4--)
-                    if(sprite2.myPixels[j5 + k4 * 32] == 0)
-                        if(j5 > 0 && sprite2.myPixels[(j5 - 1) + k4 * 32] == 1)
-                            sprite2.myPixels[j5 + k4 * 32] = k;
+                    if(sprite2.image_pixels[j5 + k4 * 32] == 0)
+                        if(j5 > 0 && sprite2.image_pixels[(j5 - 1) + k4 * 32] == 1)
+                            sprite2.image_pixels[j5 + k4 * 32] = k;
                         else
-                        if(k4 > 0 && sprite2.myPixels[j5 + (k4 - 1) * 32] == 1)
-                            sprite2.myPixels[j5 + k4 * 32] = k;
+                        if(k4 > 0 && sprite2.image_pixels[j5 + (k4 - 1) * 32] == 1)
+                            sprite2.image_pixels[j5 + k4 * 32] = k;
                         else
-                        if(j5 < 31 && sprite2.myPixels[j5 + 1 + k4 * 32] == 1)
-                            sprite2.myPixels[j5 + k4 * 32] = k;
+                        if(j5 < 31 && sprite2.image_pixels[j5 + 1 + k4 * 32] == 1)
+                            sprite2.image_pixels[j5 + k4 * 32] = k;
                         else
-                        if(k4 < 31 && sprite2.myPixels[j5 + (k4 + 1) * 32] == 1)
-                            sprite2.myPixels[j5 + k4 * 32] = k;
+                        if(k4 < 31 && sprite2.image_pixels[j5 + (k4 + 1) * 32] == 1)
+                            sprite2.image_pixels[j5 + k4 * 32] = k;
 
             }
 
@@ -349,35 +350,35 @@ public class ItemDef
             for(int k5 = 31; k5 >= 0; k5--)
             {
                 for(int l4 = 31; l4 >= 0; l4--)
-                    if(sprite2.myPixels[k5 + l4 * 32] == 0 && k5 > 0 && l4 > 0 && sprite2.myPixels[(k5 - 1) + (l4 - 1) * 32] > 0)
-                        sprite2.myPixels[k5 + l4 * 32] = 0x302020;
+                    if(sprite2.image_pixels[k5 + l4 * 32] == 0 && k5 > 0 && l4 > 0 && sprite2.image_pixels[(k5 - 1) + (l4 - 1) * 32] > 0)
+                        sprite2.image_pixels[k5 + l4 * 32] = 0x302020;
 
             }
 
         }
         if(definition.certTemplateID != -1)
         {
-            int l5 = rgbImage.w2;
-            int j6 = rgbImage.h2;
-            rgbImage.w2 = 32;
-            rgbImage.h2 = 32;
-            rgbImage.drawSprite(0, 0);
-            rgbImage.w2 = l5;
-            rgbImage.h2 = j6;
+            int l5 = rgbImage.library_width;
+            int j6 = rgbImage.library_height;
+            rgbImage.library_width = 32;
+            rgbImage.library_height = 32;
+            rgbImage.draw_trans(0, 0);
+            rgbImage.library_width = l5;
+            rgbImage.library_height = j6;
         }
         if(k == 0)
             rgbImageCache.put(sprite2, itemID);
-        DrawingArea.setTarget(height, width, pixels);
-        DrawingArea.setBounds(height_, topX, width_, topY);
+        DrawingArea.setTarget(width, height, pixels);
+        DrawingArea.setClip(topX, topY, width_, height_);
         Rasterizer.centerX = centerX;
         Rasterizer.centerY = centerY;
         Rasterizer.lineOffsets = lineOffsets;
         Rasterizer.notTextured = true;
         if(definition.stackable)
-            sprite2.w2 = 33;
+            sprite2.library_width = 33;
         else
-            sprite2.w2 = 32;
-        sprite2.h2 = stackSize;
+            sprite2.library_width = 32;
+        sprite2.library_height = stackSize;
         return sprite2;
     }
 

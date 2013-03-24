@@ -1,7 +1,7 @@
 package rs2;
 
-import org.peterbjornx.pgl2.model.*;
 import org.peterbjornx.pgl2.model.Node;
+import rs2.model.entity.Entity;
 
 public class WallObject
 {

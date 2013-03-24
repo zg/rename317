@@ -1,6 +1,8 @@
 package rs2;
 
 
+import rs2.model.entity.Entity;
+
 public class ObjectOnTile extends Entity {
                      //ObjectAnimation
     public Model getRotatedModel()

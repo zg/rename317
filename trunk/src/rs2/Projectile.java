@@ -1,6 +1,8 @@
 package rs2;
 
 
+import rs2.model.entity.Entity;
+
 public class Projectile extends Entity {
 
     public void method455(int currentTime, int offsetX, int drawHeight, int offsetY)

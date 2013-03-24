@@ -1,6 +1,7 @@
 package rs2;
 
 
+import rs2.media.image.RgbImage;
 import rs2.util.collection.MemCache;
 
 public class RSInterface
@@ -8,12 +9,12 @@ public class RSInterface
 
     public void swapInventoryItems(int firstSlot, int secondSlot)
     {
-        int ammountofItem = inv[firstSlot];
+        int item_amount = inv[firstSlot];
         inv[firstSlot] = inv[secondSlot];
-        inv[secondSlot] = ammountofItem;
-        ammountofItem = invStackSizes[firstSlot];
-        invStackSizes[firstSlot] = invStackSizes[secondSlot];
-        invStackSizes[secondSlot] = ammountofItem;
+        inv[secondSlot] = item_amount;
+        item_amount = inv_amount[firstSlot];
+        inv_amount[firstSlot] = inv_amount[secondSlot];
+        inv_amount[secondSlot] = item_amount;
     }
 
     public static void unpack(JagexArchive interfaceArchive, RSFont RSFonts[], JagexArchive mediaArchive)
@@ -95,7 +96,7 @@ public class RSInterface
             if(rsInterface.type == 2)
             {
                 rsInterface.inv = new int[rsInterface.width * rsInterface.height];
-                rsInterface.invStackSizes = new int[rsInterface.width * rsInterface.height];
+                rsInterface.inv_amount = new int[rsInterface.width * rsInterface.height];
                 rsInterface.aBoolean259 = interfaceData.g1() == 1;
                 rsInterface.isInventoryInterface = interfaceData.g1() == 1;
                 rsInterface.usableItemInterface = interfaceData.g1() == 1;
@@ -199,7 +200,7 @@ public class RSInterface
             if(rsInterface.type == 7)
             {
                 rsInterface.inv = new int[rsInterface.width * rsInterface.height];
-                rsInterface.invStackSizes = new int[rsInterface.width * rsInterface.height];
+                rsInterface.inv_amount = new int[rsInterface.width * rsInterface.height];
                 rsInterface.textCentered = interfaceData.g1() == 1;
                 int fontID = interfaceData.g1();
                 if(RSFonts != null)
@@ -249,7 +250,7 @@ public class RSInterface
 
     private Model getModel(int type, int id)
     {
-        Model model = (Model) modelCache.get((type << 16) + id);
+        Model model = (Model) model_cache.get((type << 16) + id);
         if(model != null)
             return model;
         if(type == 1)
@@ -263,19 +264,19 @@ public class RSInterface
         if(type == 5)
             model = null;
         if(model != null)
-            modelCache.put(model, (type << 16) + id);
+            model_cache.put(model, (type << 16) + id);
         return model;
     }
 
-    private static RgbImage getSprite(int i, JagexArchive jagexArchive, String s)
+    private static RgbImage getSprite(int i, JagexArchive jagexArchive, String name)
     {
-        long l = (TextClass.encodeSpriteName(s) << 8) + (long)i;
+        long l = (TextClass.encodeSpriteName(name) << 8) + (long)i;
         RgbImage rgbImage = (RgbImage) spriteCache.get(l);
         if(rgbImage != null)
             return rgbImage;
         try
         {
-            rgbImage = new RgbImage(jagexArchive, s, i);
+            rgbImage = new RgbImage(jagexArchive, name, i);
             spriteCache.put(rgbImage, l);
         }
         catch(Exception _ex)
@@ -285,13 +286,11 @@ public class RSInterface
         return rgbImage;
     }
 
-    public static void setCustomModel(Model model)
+    public static void setModel(Model model, int type, int id)
     {
-        int id = 0;//was parameter
-        int type = 5;//was parameter
-        modelCache.clear();
+        model_cache.clear();
         if(model != null && type != 4)
-            modelCache.put(model, (type << 16) + id);
+            model_cache.put(model, (type << 16) + id);
     }
 
     public Model getAnimatedModel(int frame1ID, int frame2ID, boolean flag)
@@ -361,7 +360,7 @@ public class RSInterface
     public String textConditionFalse;
     public boolean isInventoryInterface;
     public int id;
-    public int invStackSizes[];
+    public int inv_amount[];
     public int inv[];
     public byte alpha;
     private int enabledMediaType;
@@ -373,7 +372,7 @@ public class RSInterface
     public int scrollMax;
     public int type;
     public int xOffset;
-    private static final MemCache modelCache = new MemCache(30);
+    private static final MemCache model_cache = new MemCache(30);
     public int yOffset;
     public boolean hiddenUntilMouseover;
     public int height;

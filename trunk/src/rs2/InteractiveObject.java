@@ -1,9 +1,11 @@
 package rs2;
 
-public class InteractableObject
+import rs2.model.entity.Entity;
+
+public class InteractiveObject
 {
 
-    public InteractableObject()
+    public InteractiveObject()
     {
     }
 

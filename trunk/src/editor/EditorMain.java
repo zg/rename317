@@ -6,6 +6,7 @@ import editor.renderer.GameViewPanel;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import rs2.*;
 import rs2.DrawingArea;
+import rs2.media.image.RgbImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -260,7 +261,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             drawLoadingText(100, "Preparing game engine");
 
 			for (int x = 0; x < compassShape2.length; x++) {
-				compassShape2[x] = compass.myWidth;
+				compassShape2[x] = compass.image_width;
 				compassShape1[x] = 1;
 			}
 			for (int x = 0; x < minimapShape2.length; x++) {
@@ -640,7 +641,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             int lineColour = k;
             if (interactableObjectUID > 0)
                 lineColour = i1;
-            @SuppressWarnings({"MismatchedReadAndWriteOfArray"}) int minimapPixels[] = minimapImage.myPixels;
+            @SuppressWarnings({"MismatchedReadAndWriteOfArray"}) int minimapPixels[] = minimapImage.image_pixels;
             int pixelOffset = (128 + 128 * 786) +  x * 4 + ((mhTile - 1) - y) * 786 * 4;
             int objectID = interactableObjectUID >> 14 & 0x7fff;
             ObjectDef object = ObjectDef.forID(objectID);
@@ -725,7 +726,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 int l4 = 0xeeeeee;
                 if (interactableObjectUID > 0)
                     l4 = 0xee0000;
-                @SuppressWarnings({"MismatchedReadAndWriteOfArray"}) int ai1[] = minimapImage.myPixels;
+                @SuppressWarnings({"MismatchedReadAndWriteOfArray"}) int ai1[] = minimapImage.image_pixels;
                 int l5 = (128 + 128 * 786) + x * 4 + ((mhTile - 1) - y) * 786 * 4;
                 if (l2 == 0 || l2 == 2) {
                     ai1[l5 + 786*3] = l4;
@@ -820,7 +821,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
     }
 
     private void renderMinimap(int _y) {
-        int ai[] = minimapImage.myPixels;
+        int ai[] = minimapImage.image_pixels;
         int j = ai.length;
         for (int k = 0; k < j; k++)
             ai[k] = 0;
@@ -902,18 +903,18 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         cosine = (cosine * 256) / (256);
         int xthing = y * sine + x * cosine >> 16;
         int ything = y * cosine - x * sine >> 16;
-        rgbImage.drawSprite((((minimapIP.canvasWidth/2 - 5) + xthing) - rgbImage.w2 / 2) + 4, (minimapIP.canvasHeight/2-3) - ything - rgbImage.h2 / 2 - 4);
+        rgbImage.draw_trans((((minimapIP.canvasWidth / 2 - 5) + xthing) - rgbImage.library_width / 2) + 4, (minimapIP.canvasHeight / 2 - 3) - ything - rgbImage.library_height / 2 - 4);
     }
 
     private void drawMinimap() {
         minimapIP.initDrawingArea();
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         int i = xCameraCurve & 0x7ff;
         int j = 128+xCameraPos / 32;
         int l2 = (786-128) - yCameraPos / 32;
         l2 -= 4*4;
-        minimapImage.rotate(j, l2, minimapIP.canvasWidth, minimapIP.canvasHeight, xCameraCurve, 0, 0);
-        compass.rotate(25, 25, 33, 33, xCameraCurve, 0, 0);
+        minimapImage.rotate(j, l2, minimapIP.canvasWidth, minimapIP.canvasHeight, xCameraCurve, 0, 0, 256);
+        compass.rotate(25, 25, 33, 33, xCameraCurve, 0, 0, 256);
         for (int j5 = 0; j5 < numOfMapMarkers; j5++) {
             int mapX = (markPosX[j5] * 4 + 2) - xCameraPos / 32;
             int mapY = (markPosY[j5] * 4 + 2) - yCameraPos / 32;
@@ -937,7 +938,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         Model.cursorXPos = super.mouseEventX - 4;
         Model.cursorYPos = super.mouseEventY - 4;
         gameScreenCanvas.initDrawingArea();
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         //xxx disables graphics            if(graphicsEnabled){
         //pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);
         //pglWrapper.setCameraRotation(-xCameraCurve, 0, yCameraCurve);
