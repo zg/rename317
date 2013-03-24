@@ -1,21 +1,17 @@
 package pgle;
 
-import org.lwjgl.opengl.ARBBufferObject;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 import org.lwjgl.util.vector.Vector3f;
 import org.peterbjornx.pgl2.buffer.ElementBuffer;
 import org.peterbjornx.pgl2.buffer.GeometryBuffer;
 import org.peterbjornx.pgl2.buffer.OpenGLBufferFactory;
-import org.peterbjornx.pgl2.buffer.impl.ARBGeometryBuffer;
 import org.peterbjornx.pgl2.buffer.impl.ArbElementBuffer;
 import org.peterbjornx.pgl2.texture.Texture2D;
 import org.peterbjornx.pgl2.util.PglException;
 import rs2.Model;
 import rs2.Rasterizer;
 import rt4.Class7_Sub1;
-import rt4.ModelRendererGL;
-import rt4.TextureSource;
 
 import java.util.*;
 
@@ -74,10 +70,10 @@ public class PglModel {
     		return;
     	}
 //    	System.out.println(rsModel.triPIndex.length);
-        texcoordA = new Vector3f[rsModel.triangleCount];
-        texcoordB = new Vector3f[rsModel.triangleCount];
-        texcoordC = new Vector3f[rsModel.triangleCount];
-        for (int tri = 0;tri < rsModel.triangleCount;tri++){
+        texcoordA = new Vector3f[rsModel.triangle_count];
+        texcoordB = new Vector3f[rsModel.triangle_count];
+        texcoordC = new Vector3f[rsModel.triangle_count];
+        for (int tri = 0;tri < rsModel.triangle_count;tri++){
             int sourceTexture = -1;
             int i_340_;
             float tcAU = 0.0F;
@@ -104,30 +100,30 @@ public class PglModel {
                     tcCV = 0.0F;
                 } else {
                     i_340_ &= 0xff;
-                        int i_351_ = rsModel.triangleA[tri];
-                        int i_352_ = rsModel.triangleB[tri];
-                        int i_353_ = rsModel.triangleC[tri];
+                        int i_351_ = rsModel.triangle_a[tri];
+                        int i_352_ = rsModel.triangle_b[tri];
+                        int i_353_ = rsModel.triangle_c[tri];
                         int pI = rsModel.triPIndex[i_340_];
                         int mI = rsModel.triMIndex[i_340_];
                         int nI = rsModel.triNIndex[i_340_];
-                        float Px = (float) rsModel.vertexX[pI];
-                        float Py = (float) rsModel.vertexY[pI];
-                        float Pz = (float) rsModel.vertexZ[pI];
-                        float f_360_ = (float) rsModel.vertexX[mI] - Px;
-                        float f_361_ = (float) rsModel.vertexY[mI] - Py;
-                        float f_362_ = (float) rsModel.vertexZ[mI] - Pz;
-                        float f_363_ = (float) rsModel.vertexX[nI] - Px;
-                        float f_364_ = (float) rsModel.vertexY[nI] - Py;
-                        float f_365_ = (float) rsModel.vertexZ[nI] - Pz;
-                        float f_366_ = (float) rsModel.vertexX[i_351_] - Px;
-                        float f_367_ = (float) rsModel.vertexY[i_351_] - Py;
-                        float f_368_ = (float) rsModel.vertexZ[i_351_] - Pz;
-                        float f_369_ = (float) rsModel.vertexX[i_352_] - Px;
-                        float f_370_ = (float) rsModel.vertexY[i_352_] - Py;
-                        float f_371_ = (float) rsModel.vertexZ[i_352_] - Pz;
-                        float f_372_ = (float) rsModel.vertexX[i_353_] - Px;
-                        float f_373_ = (float) rsModel.vertexY[i_353_] - Py;
-                        float f_374_ = (float) rsModel.vertexZ[i_353_] - Pz;
+                        float Px = (float) rsModel.vertex_x[pI];
+                        float Py = (float) rsModel.vertex_y[pI];
+                        float Pz = (float) rsModel.vertex_z[pI];
+                        float f_360_ = (float) rsModel.vertex_x[mI] - Px;
+                        float f_361_ = (float) rsModel.vertex_y[mI] - Py;
+                        float f_362_ = (float) rsModel.vertex_z[mI] - Pz;
+                        float f_363_ = (float) rsModel.vertex_x[nI] - Px;
+                        float f_364_ = (float) rsModel.vertex_y[nI] - Py;
+                        float f_365_ = (float) rsModel.vertex_z[nI] - Pz;
+                        float f_366_ = (float) rsModel.vertex_x[i_351_] - Px;
+                        float f_367_ = (float) rsModel.vertex_y[i_351_] - Py;
+                        float f_368_ = (float) rsModel.vertex_z[i_351_] - Pz;
+                        float f_369_ = (float) rsModel.vertex_x[i_352_] - Px;
+                        float f_370_ = (float) rsModel.vertex_y[i_352_] - Py;
+                        float f_371_ = (float) rsModel.vertex_z[i_352_] - Pz;
+                        float f_372_ = (float) rsModel.vertex_x[i_353_] - Px;
+                        float f_373_ = (float) rsModel.vertex_y[i_353_] - Py;
+                        float f_374_ = (float) rsModel.vertex_z[i_353_] - Pz;
                         float f_375_ = f_361_ * f_365_ - f_362_ * f_364_;
                         float f_376_ = f_362_ * f_363_ - f_360_ * f_365_;
                         float f_377_ = f_360_ * f_364_ - f_361_ * f_363_;
@@ -154,21 +150,21 @@ public class PglModel {
     }
 
     private void addTriangles(){
-        geometry = OpenGLBufferFactory.createGeometryBuffer(rsModel.triangleCount*3, false);
-        element = OpenGLBufferFactory.createElementBuffer(rsModel.triangleCount, GL11.GL_TRIANGLES);
-        textureTriangles = new int[rsModel.triangleCount];
-        textureTypes = new int[rsModel.triangleCount];
-        rsModel.vns = rsModel.vertexNormals;
+        geometry = OpenGLBufferFactory.createGeometryBuffer(rsModel.triangle_count *3, false);
+        element = OpenGLBufferFactory.createElementBuffer(rsModel.triangle_count, GL11.GL_TRIANGLES);
+        textureTriangles = new int[rsModel.triangle_count];
+        textureTypes = new int[rsModel.triangle_count];
+        rsModel.vns = rsModel.vertex_normals;
         rsModel.calculateNormals508();
         rsModel.lightHD(64,850,-30,-50,-30,true);
         generateTexCoords();
         try{
-            for (int triPtr = 0;triPtr < rsModel.triangleCount;triPtr++)
+            for (int triPtr = 0;triPtr < rsModel.triangle_count;triPtr++)
                 addTriangle(triPtr);
         } catch (Exception e){
             e.printStackTrace();
         }
-        rsModel.vertexNormals = rsModel.vns;
+        rsModel.vertex_normals = rsModel.vns;
     }
 
     private void addTriangle(int triPtr) throws PglException {
@@ -199,21 +195,21 @@ public class PglModel {
     }
 
     private void addTexTriangleFlat(int triIdx) throws PglException {
-        int verAIdx = rsModel.triangleA[triIdx];
-        int verBIdx = rsModel.triangleB[triIdx];
-        int verCIdx = rsModel.triangleC[triIdx];
+        int verAIdx = rsModel.triangle_a[triIdx];
+        int verBIdx = rsModel.triangle_b[triIdx];
+        int verCIdx = rsModel.triangle_c[triIdx];
         int texture = rsModel.triangleColourOrTexture[triIdx];
         int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
         Vector3f normalT = new Vector3f(rsModel.triangleNormals[triIdx].x / 255.0f,-(rsModel.triangleNormals[triIdx].y / 255.0f),rsModel.triangleNormals[triIdx].z / 255.0f);
-        Color colorT = Class7_Sub1.useLighting ? fromRgb(0x808080,alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
+        Color colorT = Class7_Sub1.useLighting ? fromRgb(0x808080,alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangle_hsl_a[triIdx]],alpha);
         int bufAIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
+                        new Vector3f(rsModel.vertex_x[verAIdx], -rsModel.vertex_y[verAIdx], rsModel.vertex_z[verAIdx])
                         , normalT, texcoordA[triIdx], colorT);
         int bufBIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verBIdx], -rsModel.vertexY[verBIdx], rsModel.vertexZ[verBIdx])
+                        new Vector3f(rsModel.vertex_x[verBIdx], -rsModel.vertex_y[verBIdx], rsModel.vertex_z[verBIdx])
                         , normalT, texcoordB[triIdx], colorT);
         int bufCIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verCIdx], -rsModel.vertexY[verCIdx], rsModel.vertexZ[verCIdx])
+                        new Vector3f(rsModel.vertex_x[verCIdx], -rsModel.vertex_y[verCIdx], rsModel.vertex_z[verCIdx])
                         , normalT, texcoordC[triIdx], colorT);
         List<Integer> polylist = new LinkedList<Integer>();
         polylist.add(bufAIdx);
@@ -229,27 +225,27 @@ public class PglModel {
     }
 
     private void addTexTriangleShaded(int triIdx) throws PglException {
-        int verAIdx = rsModel.triangleA[triIdx];
-        int verBIdx = rsModel.triangleB[triIdx];
-        int verCIdx = rsModel.triangleC[triIdx];
+        int verAIdx = rsModel.triangle_a[triIdx];
+        int verBIdx = rsModel.triangle_b[triIdx];
+        int verCIdx = rsModel.triangle_c[triIdx];
         int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
-        Vector3f normalA = new Vector3f(rsModel.vertexNormals[verAIdx].getX(), rsModel.vertexNormals[verAIdx].getY(), rsModel.vertexNormals[verAIdx].getZ());
-        Vector3f normalB = new Vector3f(rsModel.vertexNormals[verBIdx].getX(), rsModel.vertexNormals[verBIdx].getY(), rsModel.vertexNormals[verBIdx].getZ());
-        Vector3f normalC = new Vector3f(rsModel.vertexNormals[verCIdx].getX(), rsModel.vertexNormals[verCIdx].getY(), rsModel.vertexNormals[verCIdx].getZ());
+        Vector3f normalA = new Vector3f(rsModel.vertex_normals[verAIdx].getX(), rsModel.vertex_normals[verAIdx].getY(), rsModel.vertex_normals[verAIdx].getZ());
+        Vector3f normalB = new Vector3f(rsModel.vertex_normals[verBIdx].getX(), rsModel.vertex_normals[verBIdx].getY(), rsModel.vertex_normals[verBIdx].getZ());
+        Vector3f normalC = new Vector3f(rsModel.vertex_normals[verCIdx].getX(), rsModel.vertex_normals[verCIdx].getY(), rsModel.vertex_normals[verCIdx].getZ());
         Color colorT = fromRgb(0x808080,alpha);
-        Color colorA = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
-        Color colorB = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslB[triIdx]],alpha);
-        Color colorC = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslC[triIdx]],alpha);
+        Color colorA = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangle_hsl_a[triIdx]],alpha);
+        Color colorB = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangle_hsl_b[triIdx]],alpha);
+        Color colorC = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangle_hsl_c[triIdx]],alpha);
         int texture = rsModel.triangleColourOrTexture[triIdx];
 
         int bufAIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
+                        new Vector3f(rsModel.vertex_x[verAIdx], -rsModel.vertex_y[verAIdx], rsModel.vertex_z[verAIdx])
                         , normalA, texcoordA[triIdx], colorA);
         int bufBIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verBIdx], -rsModel.vertexY[verBIdx], rsModel.vertexZ[verBIdx])
+                        new Vector3f(rsModel.vertex_x[verBIdx], -rsModel.vertex_y[verBIdx], rsModel.vertex_z[verBIdx])
                         , normalB, texcoordB[triIdx], colorB);
         int bufCIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verCIdx], -rsModel.vertexY[verCIdx], rsModel.vertexZ[verCIdx])
+                        new Vector3f(rsModel.vertex_x[verCIdx], -rsModel.vertex_y[verCIdx], rsModel.vertex_z[verCIdx])
                         , normalC, texcoordC[triIdx], colorC);
         List<Integer> polylist = new LinkedList<Integer>();
         polylist.add(bufAIdx);
@@ -265,20 +261,20 @@ public class PglModel {
     }
 
     private void addTriangleFlat(int triIdx) throws PglException {
-        int verAIdx = rsModel.triangleA[triIdx];
-        int verBIdx = rsModel.triangleB[triIdx];
-        int verCIdx = rsModel.triangleC[triIdx];
+        int verAIdx = rsModel.triangle_a[triIdx];
+        int verBIdx = rsModel.triangle_b[triIdx];
+        int verCIdx = rsModel.triangle_c[triIdx];
         int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
         Vector3f normalT = new Vector3f(rsModel.triangleNormals[triIdx].x / 255.0f,-(rsModel.triangleNormals[triIdx].y / 255.0f),rsModel.triangleNormals[triIdx].z / 255.0f);
-        Color colorT = Class7_Sub1.useLighting ? fromRgb(Rasterizer.hsl2rgb[rsModel.triangleColourOrTexture[triIdx]],alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
+        Color colorT = Class7_Sub1.useLighting ? fromRgb(Rasterizer.hsl2rgb[rsModel.triangleColourOrTexture[triIdx]],alpha) : fromRgb(Rasterizer.hsl2rgb[rsModel.triangle_hsl_a[triIdx]],alpha);
         int bufAIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
+                        new Vector3f(rsModel.vertex_x[verAIdx], -rsModel.vertex_y[verAIdx], rsModel.vertex_z[verAIdx])
                         , normalT, new Vector3f(0, 0, 0), colorT);
         int bufBIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verBIdx], -rsModel.vertexY[verBIdx], rsModel.vertexZ[verBIdx])
+                        new Vector3f(rsModel.vertex_x[verBIdx], -rsModel.vertex_y[verBIdx], rsModel.vertex_z[verBIdx])
                         , normalT, new Vector3f(0, 0, 0), colorT);
         int bufCIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verCIdx], -rsModel.vertexY[verCIdx], rsModel.vertexZ[verCIdx])
+                        new Vector3f(rsModel.vertex_x[verCIdx], -rsModel.vertex_y[verCIdx], rsModel.vertex_z[verCIdx])
                         , normalT, new Vector3f(0, 0, 0), colorT);
         List<Integer> polylist = new LinkedList<Integer>();
         polylist.add(bufAIdx);
@@ -294,25 +290,25 @@ public class PglModel {
     }
 
     private void addTriangleShaded(int triIdx) throws PglException {
-        int verAIdx = rsModel.triangleA[triIdx];
-        int verBIdx = rsModel.triangleB[triIdx];
-        int verCIdx = rsModel.triangleC[triIdx];
+        int verAIdx = rsModel.triangle_a[triIdx];
+        int verBIdx = rsModel.triangle_b[triIdx];
+        int verCIdx = rsModel.triangle_c[triIdx];
         int alpha = rsModel.triangleAlpha==null ? 255 : (255 - rsModel.triangleAlpha[triIdx]);
-        Vector3f normalA = new Vector3f(rsModel.vertexNormals[verAIdx].getX(), -rsModel.vertexNormals[verAIdx].getY(), rsModel.vertexNormals[verAIdx].getZ());
-        Vector3f normalB = new Vector3f(rsModel.vertexNormals[verBIdx].getX(), -rsModel.vertexNormals[verBIdx].getY(), rsModel.vertexNormals[verBIdx].getZ());
-        Vector3f normalC = new Vector3f(rsModel.vertexNormals[verCIdx].getX(), -rsModel.vertexNormals[verCIdx].getY(), rsModel.vertexNormals[verCIdx].getZ());
+        Vector3f normalA = new Vector3f(rsModel.vertex_normals[verAIdx].getX(), -rsModel.vertex_normals[verAIdx].getY(), rsModel.vertex_normals[verAIdx].getZ());
+        Vector3f normalB = new Vector3f(rsModel.vertex_normals[verBIdx].getX(), -rsModel.vertex_normals[verBIdx].getY(), rsModel.vertex_normals[verBIdx].getZ());
+        Vector3f normalC = new Vector3f(rsModel.vertex_normals[verCIdx].getX(), -rsModel.vertex_normals[verCIdx].getY(), rsModel.vertex_normals[verCIdx].getZ());
         Color colorT = fromRgb(Rasterizer.hsl2rgb[rsModel.triangleColourOrTexture[triIdx]],alpha);
-        Color colorA = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslA[triIdx]],alpha);
-        Color colorB = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslB[triIdx]],alpha);
-        Color colorC = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangleHslC[triIdx]],alpha);
+        Color colorA = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangle_hsl_a[triIdx]],alpha);
+        Color colorB = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangle_hsl_b[triIdx]],alpha);
+        Color colorC = Class7_Sub1.useLighting ? colorT : fromRgb(Rasterizer.hsl2rgb[rsModel.triangle_hsl_c[triIdx]],alpha);
         int bufAIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verAIdx], -rsModel.vertexY[verAIdx], rsModel.vertexZ[verAIdx])
+                        new Vector3f(rsModel.vertex_x[verAIdx], -rsModel.vertex_y[verAIdx], rsModel.vertex_z[verAIdx])
                         , normalA, new Vector3f(0, 0, 0), colorA);
         int bufBIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verBIdx], -rsModel.vertexY[verBIdx], rsModel.vertexZ[verBIdx])
+                        new Vector3f(rsModel.vertex_x[verBIdx], -rsModel.vertex_y[verBIdx], rsModel.vertex_z[verBIdx])
                         , normalB, new Vector3f(0, 0, 0), colorB);
         int bufCIdx = geometry.addVertex(
-                        new Vector3f(rsModel.vertexX[verCIdx], -rsModel.vertexY[verCIdx], rsModel.vertexZ[verCIdx])
+                        new Vector3f(rsModel.vertex_x[verCIdx], -rsModel.vertex_y[verCIdx], rsModel.vertex_z[verCIdx])
                         , normalC, new Vector3f(0, 0, 0), colorC);
         List<Integer> polylist = new LinkedList<Integer>();
         polylist.add(bufAIdx);

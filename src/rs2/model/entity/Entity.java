@@ -78,7 +78,7 @@ public class Entity extends QueueNode {
     public static OpenGLLight effectLight = new OpenGLLight();
     private int mismatchCounter = 0;
     private static HashMap<Model,PglModelNode> modelPool = new HashMap<Model, PglModelNode>();
-    public VertexNormal[] vertexNormals;
+    public VertexNormal[] vertex_normals;
     public int modelHeight;
 
     static {

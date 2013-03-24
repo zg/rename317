@@ -261,7 +261,7 @@ public class RSInterface
         if(type == 3)
             model = Client.session_player.getHeadModel();
         if(type == 4)
-            model = ItemDef.forID(id).getInventoryModel(50);
+            model = ItemDef.forID(id).getUnshadedModel(50);
         if(type == 5)
             model = null;
         if(model != null)

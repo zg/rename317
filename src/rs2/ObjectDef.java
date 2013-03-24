@@ -130,14 +130,14 @@ public class ObjectDef
         if(adjustToTerrain)
         {
             int l1 = (zA + zB + zD + zC) / 4;
-            for(int v = 0; v < model.vertexCount; v++)
+            for(int v = 0; v < model.vertex_count; v++)
             {
-                int vertexX = model.vertexX[v];
-                int vertexY = model.vertexZ[v];
+                int vertexX = model.vertex_x[v];
+                int vertexY = model.vertex_z[v];
                 int l2 = zA + ((zB - zA) * (vertexX + 64)) / 128;
                 int i3 = zC + ((zD - zC) * (vertexX + 64)) / 128;
                 int j3 = l2 + ((i3 - l2) * (vertexY + 64)) / 128;
-                model.vertexY[v] += j3 - l1;
+                model.vertex_y[v] += j3 - l1;
             }
             model.normalise();
         }

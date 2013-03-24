@@ -295,7 +295,7 @@ public class Client extends GameShell {
 		else
 			setHighMem();
 		String s1 = getParameter("free");
-		isMembers = !(s1 != null && s1.equals("1"));
+		enable_members_items = !(s1 != null && s1.equals("1"));
 		initialize(503, 765);
 		*/
         network_worldid = 9;
@@ -624,7 +624,7 @@ public class Client extends GameShell {
         ObjectDef.modelCache2.clear();
         NpcDef.modelCache.clear();
         ItemDef.model_cache.clear();
-        ItemDef.rgbImageCache.clear();
+        ItemDef.image_cache.clear();
         Player.modelCache.clear();
         SpotAnim.modelCache.clear();
         Entity.cleanPglPool();
@@ -1100,7 +1100,7 @@ public class Client extends GameShell {
                 Rasterizer.calculatePalette(0.69999999999999996D);
             if (k == 4)
                 Rasterizer.calculatePalette(0.59999999999999998D);
-            ItemDef.rgbImageCache.clear();
+            ItemDef.image_cache.clear();
             repaintRequested = true;
         }
         if (j == 3) {
@@ -3996,8 +3996,8 @@ public class Client extends GameShell {
                             }
                         } else {
                             for (int j3 = 4; j3 >= 0; j3--)
-                                if (itemDef.groundActions != null && itemDef.groundActions[j3] != null) {
-                                    menuActionName[menuActionRow] = itemDef.groundActions[j3] + " @lre@" + itemDef.name;
+                                if (itemDef.actions_dropped != null && itemDef.actions_dropped[j3] != null) {
+                                    menuActionName[menuActionRow] = itemDef.actions_dropped[j3] + " @lre@" + itemDef.name;
                                     if (j3 == 0)
                                         menuActionID[menuActionRow] = 652;
                                     if (j3 == 1)
@@ -6179,7 +6179,7 @@ public class Client extends GameShell {
             SpotAnim.unpackConfig(configArchive);
             SettingUsagePointers.unpackConfig(configArchive);
             VarBit.unpackConfig(configArchive);
-            ItemDef.isMembers = isMembers;
+            ItemDef.enable_members_items = isMembers;
             /*if (!lowMem) {
                 drawLoadingText(90, "Unpacking sounds");
                 byte soundData[] = soundArchive.getDataForName("sounds.dat");
@@ -7158,7 +7158,7 @@ public class Client extends GameShell {
                     model = child.getAnimatedModel(sequence.frame1IDS[child.animFrame], sequence.frame2IDS[child.animFrame], flag2);
                 }
                 if (model != null)
-                    model.rendersingle(child.rotation2, 0, child.rotation1, 0, sine, cosine);
+                    model.rendersingle(0, child.rotation2, 0, 0, sine, cosine, child.rotation1);
                 Rasterizer.center_x = k3;
                 Rasterizer.center_y = j4;
             } else if (child.type == 7) {
@@ -7956,7 +7956,7 @@ public class Client extends GameShell {
                 if (opcode == 4) {
                     RSInterface inv_inter = RSInterface.interfaces[formula[ptr++]];
                     int item_id = formula[ptr++];
-                    if (item_id >= 0 && item_id < ItemDef.totalItems && (!ItemDef.forID(item_id).membersObject || isMembers)) {
+                    if (item_id >= 0 && item_id < ItemDef.item_count && (!ItemDef.forID(item_id).is_members_only || isMembers)) {
                         for (int item_ptr = 0; item_ptr < inv_inter.inv.length; item_ptr++)
                             if (inv_inter.inv[item_ptr] == item_id + 1)
                                 _inter_val += inv_inter.inv_amount[item_ptr];
@@ -7980,7 +7980,7 @@ public class Client extends GameShell {
                 if (opcode == 10) {
                     RSInterface inv_inter = RSInterface.interfaces[formula[ptr++]];
                     int item_id = formula[ptr++] + 1;
-                    if (item_id >= 0 && item_id < ItemDef.totalItems && (!ItemDef.forID(item_id).membersObject || isMembers)) {
+                    if (item_id >= 0 && item_id < ItemDef.item_count && (!ItemDef.forID(item_id).is_members_only || isMembers)) {
                         for (int item_ptr = 0; item_ptr < inv_inter.inv.length; item_ptr++) {
                             if (inv_inter.inv[item_ptr] != item_id)
                                 continue;
@@ -9816,9 +9816,9 @@ public class Client extends GameShell {
                     ItemDef itemDef = ItemDef.forID(itemID);
                     RSInterface.interfaces[interfaceID].content_default_type = 4;
                     RSInterface.interfaces[interfaceID].content_default_id = itemID;
-                    RSInterface.interfaces[interfaceID].rotation1 = itemDef.rotationY;
-                    RSInterface.interfaces[interfaceID].rotation2 = itemDef.rotationX;
-                    RSInterface.interfaces[interfaceID].zoom = (itemDef.modelZoom * 100) / itemScale;
+                    RSInterface.interfaces[interfaceID].rotation1 = itemDef.rotation_x_world;
+                    RSInterface.interfaces[interfaceID].rotation2 = itemDef.rotation_y;
+                    RSInterface.interfaces[interfaceID].zoom = (itemDef.rotation_length * 100) / itemScale;
                     pktType = -1;
                     return true;
                 }
