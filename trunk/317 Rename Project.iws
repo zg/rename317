@@ -8,44 +8,35 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/rt4/ModelRendererGL.java" line="738" />
     <bookmark url="file://$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorPreviewPanel.java" line="66" />
-    <bookmark url="file://$PROJECT_DIR$/src/editor/EditorMain.java" line="101" mnemonic="8" />
+    <bookmark url="file://$PROJECT_DIR$/src/editor/EditorMain.java" line="102" mnemonic="8" />
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rs2/config" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/rs2/ItemDef.java" afterPath="$PROJECT_DIR$/src/rs2/config/ItemDef.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Client.java" afterPath="$PROJECT_DIR$/src/rs2/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/DrawingArea.java" afterPath="$PROJECT_DIR$/src/rs2/DrawingArea.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/EditorMain.java" afterPath="$PROJECT_DIR$/src/editor/EditorMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Item.java" afterPath="$PROJECT_DIR$/src/rs2/Item.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ItemDef.java" afterPath="$PROJECT_DIR$/src/rs2/ItemDef.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Model.java" afterPath="$PROJECT_DIR$/src/rs2/Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Npc.java" afterPath="$PROJECT_DIR$/src/rs2/Npc.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/NpcDef.java" afterPath="$PROJECT_DIR$/src/rs2/NpcDef.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ObjectDef.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectDef.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ObjectOnTile.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectOnTile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Player.java" afterPath="$PROJECT_DIR$/src/rs2/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Projectile.java" afterPath="$PROJECT_DIR$/src/rs2/Projectile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSInterface.java" afterPath="$PROJECT_DIR$/src/rs2/RSInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Rasterizer.java" afterPath="$PROJECT_DIR$/src/rs2/Rasterizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/StillGraphic.java" afterPath="$PROJECT_DIR$/src/rs2/StillGraphic.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/VarBit.java" afterPath="$PROJECT_DIR$/src/rs2/VarBit.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/fragment.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364147557844" ignored="false" />
+    <file path="/fragment.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364156248884" ignored="false" />
     <file path="/QueueNode.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130827332" ignored="false" />
     <file path="/HashTable.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130593183" ignored="false" />
     <file path="/MemCache.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130710501" ignored="false" />
     <file path="/Queue.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130795469" ignored="false" />
-    <file path="/Dummy.txt" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364149813780" ignored="false" />
+    <file path="/Dummy.txt" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364156289787" ignored="false" />
     <file path="/Entity.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364131884440" ignored="false" />
     <file path="/RSInterface.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364149539553" ignored="false" />
     <file path="/RgbImage.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364142495036" ignored="false" />
     <file path="/DrawingArea.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364143927993" ignored="false" />
     <file path="/a.dummy" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364144156662" ignored="false" />
     <file path="/Client.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364148253635" ignored="false" />
-    <file path="/ItemDef.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364146724303" ignored="false" />
-    <file path="/Model.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364146101521" ignored="false" />
+    <file path="/ItemDef.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364156217154" ignored="false" />
+    <file path="/Model.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364155963773" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +254,7 @@
                   <point x="0.0" y="0.0" />
                 </edge>
               </edges>
-              <settings layout="Hierarchic Group" zoom="1.3000000000000003" x="112.61538461538458" y="259.6153846153846" />
+              <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="-164.42857142857162" y="268.9523809523809" />
               <SelectedNodes>
                 <node>rs2.model.entity.Entity</node>
               </SelectedNodes>
@@ -274,27 +265,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RSInterface.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/rs2/RSInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="14" selection-start="100" selection-end="100" vertical-scroll-proportion="0.15625">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#swapInventoryItems#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#unpack#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#getModel#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#getSprite#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#setModel#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#getAnimatedModel#0;class#RSInterface#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="817" column="82" selection-start="33970" selection-end="33970" vertical-scroll-proportion="0.0">
+            <state line="818" column="82" selection-start="34006" selection-end="34006" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -302,10 +276,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ItemDef.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/ItemDef.java">
+      <file leaf-file-name="ItemDef.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rs2/config/ItemDef.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="240" column="11" selection-start="7460" selection-end="7460" vertical-scroll-proportion="0.0">
+            <state line="7" column="20" selection-start="127" selection-end="127" vertical-scroll-proportion="0.13274336">
               <folding />
             </state>
           </provider>
@@ -314,8 +288,24 @@
       <file leaf-file-name="Model.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1803" column="51" selection-start="65858" selection-end="65858" vertical-scroll-proportion="0.0">
+            <state line="1936" column="16" selection-start="72405" selection-end="72405" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RSInterface.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/RSInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="264" column="38" selection-start="11580" selection-end="11580" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#swapInventoryItems#0;class#RSInterface#0" expanded="false" />
+                <element signature="method#unpack#0;class#RSInterface#0" expanded="false" />
+                <element signature="method#getSprite#0;class#RSInterface#0" expanded="false" />
+                <element signature="method#setModel#0;class#RSInterface#0" expanded="false" />
+                <element signature="method#getAnimatedModel#0;class#RSInterface#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -330,7 +320,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/rs2/util/collection/HashTable.java" />
         <option value="$PROJECT_DIR$/src/rs2/util/collection/MemCache.java" />
         <option value="$PROJECT_DIR$/src/rs2/util/collection/QueueNode.java" />
         <option value="$PROJECT_DIR$/src/rs2/util/collection/Deque.java" />
@@ -342,10 +331,11 @@
         <option value="$PROJECT_DIR$/src/rs2/RgbImage.java" />
         <option value="$PROJECT_DIR$/src/rs2/media/image/RgbImage.java" />
         <option value="$PROJECT_DIR$/src/rs2/DrawingArea.java" />
-        <option value="$PROJECT_DIR$/src/rs2/Model.java" />
-        <option value="$PROJECT_DIR$/src/rs2/ItemDef.java" />
         <option value="$PROJECT_DIR$/src/rs2/Client.java" />
         <option value="$PROJECT_DIR$/src/rs2/RSInterface.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Model.java" />
+        <option value="$PROJECT_DIR$/src/rs2/ItemDef.java" />
+        <option value="$PROJECT_DIR$/src/rs2/config/ItemDef.java" />
       </list>
     </option>
   </component>
@@ -537,6 +527,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rs317" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rs2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Favorites" />
@@ -580,6 +592,7 @@
       <recent name="rt4" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="rs2.config" />
       <recent name="rs2.media.image" />
       <recent name="rs2.model.tile" />
       <recent name="rs2" />
@@ -815,7 +828,15 @@
       <created>1364144242119</created>
       <updated>1364144242119</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="100% Refactored RSInterface&#10;">
+      <created>1364149842107</created>
+      <updated>1364149842107</updated>
+    </task>
+    <task id="LOCAL-00004" summary="100% Refactored ItemDef&#10;">
+      <created>1364156156104</created>
+      <updated>1364156156104</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -840,34 +861,34 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="24" width="1282" height="976" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.310219" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14013709" sideWeight="0.72203946" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26277372" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14013709" sideWeight="0.72203946" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26034063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38322368" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32360098" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272506" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19268292" sideWeight="0.73722625" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951945" sideWeight="0.69983685" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992278" sideWeight="0.7336683" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19268292" sideWeight="0.73965937" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951945" sideWeight="0.69983685" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992278" sideWeight="0.7336683" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32846716" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25447154" sideWeight="0.73722625" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25447154" sideWeight="0.73965937" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.346395" sideWeight="0.99834985" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20182787" sideWeight="0.72203946" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.725938" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.725938" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989726" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -909,7 +930,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="100% Refactored RSInterface&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved ItemDef to proper package" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -932,6 +953,8 @@
     <MESSAGE value="100% Refactored collections:D" />
     <MESSAGE value="100% Refactored DrawingArea:D" />
     <MESSAGE value="100% Refactored RSInterface&#10;" />
+    <MESSAGE value="100% Refactored ItemDef&#10;" />
+    <MESSAGE value="Moved ItemDef to proper package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -941,13 +964,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Deque.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="14" selection-start="2157" selection-end="2157" vertical-scroll-proportion="0.9479167">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Queue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="23" selection-start="571" selection-end="571" vertical-scroll-proportion="0.6424581">
@@ -1094,6 +1110,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/DrawingArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="278" column="23" selection-start="9717" selection-end="9717" vertical-scroll-proportion="2.4245114">
+          <folding>
+            <element signature="method#setTarget#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#resetClip#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#setClip#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#clear#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#fillRect#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#fillRect#1;class#DrawingArea#0" expanded="false" />
+            <element signature="method#drawRect#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#drawRect#1;class#DrawingArea#0" expanded="false" />
+            <element signature="method#drawHLine#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#drawHLine#1;class#DrawingArea#0" expanded="false" />
+            <element signature="method#drawVLine#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#drawVLine#1;class#DrawingArea#0" expanded="false" />
+            <element signature="method#fillCircleAlpha#0;class#DrawingArea#0" expanded="false" />
+            <element signature="method#fillCircle#0;class#DrawingArea#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/media/image/RgbImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="534" column="81" selection-start="18829" selection-end="18829" vertical-scroll-proportion="0.38543516">
+          <folding>
+            <element signature="method#RgbImage#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#RgbImage#1;class#RgbImage#0" expanded="false" />
+            <element signature="method#RgbImage#2;class#RgbImage#0" expanded="false" />
+            <element signature="method#RgbImage#3;class#RgbImage#0" expanded="false" />
+            <element signature="method#initDrawingArea#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#add_rgb#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#method345#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#draw#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#draw#1;class#RgbImage#0" expanded="false" />
+            <element signature="method#draw#2;class#RgbImage#0" expanded="false" />
+            <element signature="method#draw_trans#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#draw_height#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#block_copy#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#block_copy_alpha#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#block_copy_trans#0;class#RgbImage#0" expanded="false" />
+            <element signature="method#block_copy_mask#0;class#RgbImage#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="uml://JAVA/rs2.model.entity.Entity">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -1191,7 +1253,7 @@
               <point x="0.0" y="0.0" />
             </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="1.3000000000000003" x="112.61538461538458" y="259.6153846153846" />
+          <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="-164.42857142857162" y="268.9523809523809" />
           <SelectedNodes>
             <node>rs2.model.entity.Entity</node>
           </SelectedNodes>
@@ -1201,69 +1263,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/DrawingArea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="278" column="23" selection-start="9717" selection-end="9717" vertical-scroll-proportion="2.4245114">
-          <folding>
-            <element signature="method#setTarget#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#resetClip#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#setClip#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#clear#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#fillRect#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#fillRect#1;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawRect#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawRect#1;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawHLine#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawHLine#1;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawVLine#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawVLine#1;class#DrawingArea#0" expanded="false" />
-            <element signature="method#fillCircleAlpha#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#fillCircle#0;class#DrawingArea#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/media/image/RgbImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="534" column="81" selection-start="18829" selection-end="18829" vertical-scroll-proportion="0.38543516">
-          <folding>
-            <element signature="method#RgbImage#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#RgbImage#1;class#RgbImage#0" expanded="false" />
-            <element signature="method#RgbImage#2;class#RgbImage#0" expanded="false" />
-            <element signature="method#RgbImage#3;class#RgbImage#0" expanded="false" />
-            <element signature="method#initDrawingArea#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#add_rgb#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#method345#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw#1;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw#2;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw_trans#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw_height#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#block_copy#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#block_copy_alpha#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#block_copy_trans#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#block_copy_mask#0;class#RgbImage#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1803" column="51" selection-start="65858" selection-end="65858" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/ItemDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="240" column="11" selection-start="7460" selection-end="7460" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="817" column="82" selection-start="33970" selection-end="33970" vertical-scroll-proportion="0.0">
+        <state line="818" column="82" selection-start="34006" selection-end="34006" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1272,16 +1274,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/RSInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="14" selection-start="100" selection-end="100" vertical-scroll-proportion="0.15625">
+        <state line="264" column="38" selection-start="11580" selection-end="11580" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#swapInventoryItems#0;class#RSInterface#0" expanded="false" />
             <element signature="method#unpack#0;class#RSInterface#0" expanded="false" />
-            <element signature="method#getModel#0;class#RSInterface#0" expanded="false" />
             <element signature="method#getSprite#0;class#RSInterface#0" expanded="false" />
             <element signature="method#setModel#0;class#RSInterface#0" expanded="false" />
             <element signature="method#getAnimatedModel#0;class#RSInterface#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="835" column="48" selection-start="32578" selection-end="32578" vertical-scroll-proportion="0.5833333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1936" column="16" selection-start="72405" selection-end="72405" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/config/ItemDef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="20" selection-start="127" selection-end="127" vertical-scroll-proportion="0.13274336">
+          <folding />
         </state>
       </provider>
     </entry>

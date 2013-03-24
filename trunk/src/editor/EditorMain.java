@@ -6,6 +6,7 @@ import editor.renderer.GameViewPanel;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import rs2.*;
 import rs2.DrawingArea;
+import rs2.config.ItemDef;
 import rs2.media.image.RgbImage;
 
 import javax.swing.*;

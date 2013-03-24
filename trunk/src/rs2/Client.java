@@ -8,6 +8,7 @@ import java.net.*;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import pgle.PglCallClientNode;
 import pgle.PglWrapper;
+import rs2.config.ItemDef;
 import rs2.media.image.RgbImage;
 import rs2.model.entity.Entity;
 import rs2.util.collection.Deque;
