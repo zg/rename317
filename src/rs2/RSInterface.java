@@ -1,6 +1,7 @@
 package rs2;
 
 
+import rs2.config.ItemDef;
 import rs2.media.image.RgbImage;
 import rs2.util.collection.MemCache;
 

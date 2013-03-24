@@ -1,6 +1,7 @@
-package rs2;
+package rs2.config;
 
 
+import rs2.*;
 import rs2.media.image.RgbImage;
 import rs2.util.collection.MemCache;
 
@@ -434,82 +435,82 @@ public class ItemDef
     {
         do
         {
-            int opCode = stream.g1();
-            if(opCode == 0)
+            int opcode = stream.g1();
+            if(opcode == 0)
                 return;
-            if(opCode == 1)
+            if(opcode == 1)
                 inventory_model = stream.g2();
             else
-            if(opCode == 2)
+            if(opcode == 2)
                 name = stream.gstr();
             else
-            if(opCode == 3)
+            if(opcode == 3)
                 description = stream.gstrbyte();
             else
-            if(opCode == 4)
+            if(opcode == 4)
                 rotation_length = stream.g2();
             else
-            if(opCode == 5)
+            if(opcode == 5)
                 rotation_x_world = stream.g2();
             else
-            if(opCode == 6)
+            if(opcode == 6)
                 rotation_y = stream.g2();
             else
-            if(opCode == 7)
+            if(opcode == 7)
             {
                 translate_x = stream.g2();
                 if(translate_x > 32767)
                     translate_x -= 0x10000;
             } else
-            if(opCode == 8)
+            if(opcode == 8)
             {
                 translate_yz = stream.g2();
                 if(translate_yz > 32767)
                     translate_yz -= 0x10000;
             } else
-            if(opCode == 10)
+            if(opcode == 10)
                 stream.g2();
             else
-            if(opCode == 11)
+            if(opcode == 11)
                 stackable = true;
             else
-            if(opCode == 12)
+            if(opcode == 12)
                 value = stream.g4();
             else
-            if(opCode == 16)
+            if(opcode == 16)
                 is_members_only = true;
             else
-            if(opCode == 23)
+            if(opcode == 23)
             {
                 equipped_model_male_1 = stream.g2();
                 equipped_model_male_translation_y = stream.g1b();
             } else
-            if(opCode == 24)
+            if(opcode == 24)
                 equipped_model_male_2 = stream.g2();
             else
-            if(opCode == 25)
+            if(opcode == 25)
             {
                 equipped_model_female_1 = stream.g2();
                 equipped_model_female_translation_y = stream.g1b();
             } else
-            if(opCode == 26)
+            if(opcode == 26)
                 equipped_model_female_2 = stream.g2();
             else
-            if(opCode >= 30 && opCode < 35)
+            if(opcode >= 30 && opcode < 35)
             {
                 if(actions_dropped == null)
                     actions_dropped = new String[5];
-                actions_dropped[opCode - 30] = stream.gstr();
-                if(actions_dropped[opCode - 30].equalsIgnoreCase("hidden"))
-                    actions_dropped[opCode - 30] = null;
+                actions_dropped[opcode - 30] = stream.gstr();
+                if(actions_dropped[opcode - 30].equalsIgnoreCase("hidden"))
+                    actions_dropped[opcode - 30] = null;
             } else
-            if(opCode >= 35 && opCode < 40)
+            if(opcode >= 35 && opcode < 40)
             {
                 if(actions == null)
                     actions = new String[5];
-                actions[opCode - 35] = stream.gstr();
+                actions[opcode - 35] = stream.gstr();
             } else
-            if(opCode == 40)
+            if(opcode == 40)
             {
                 int colours = stream.g1();
                 model_recolour_original = new int[colours];
@@ -521,62 +522,62 @@ public class ItemDef
                 }
 
             } else
-            if(opCode == 78)
+            if(opcode == 78)
                 equipped_model_male_3 = stream.g2();
             else
-            if(opCode == 79)
+            if(opcode == 79)
                 equipped_model_female_3 = stream.g2();
             else
-            if(opCode == 90)
+            if(opcode == 90)
                 equipped_model_male_dialogue_1 = stream.g2();
             else
-            if(opCode == 91)
+            if(opcode == 91)
                 equipped_model_female_dialogue_1 = stream.g2();
             else
-            if(opCode == 92)
+            if(opcode == 92)
                 equipped_model_male_dialogue_2 = stream.g2();
             else
-            if(opCode == 93)
+            if(opcode == 93)
                 equipped_model_female_dialogue_2 = stream.g2();
             else
-            if(opCode == 95)
+            if(opcode == 95)
                 rotation_z = stream.g2();
             else
-            if(opCode == 97)
+            if(opcode == 97)
                 unnoted_item_id = stream.g2();
             else
-            if(opCode == 98)
+            if(opcode == 98)
                 noted_item_id = stream.g2();
             else
-            if(opCode >= 100 && opCode < 110)
+            if(opcode >= 100 && opcode < 110)
             {
                 if(stack_variant_id == null)
                 {
                     stack_variant_id = new int[10];
                     stack_variant_size = new int[10];
                 }
-                stack_variant_id[opCode - 100] = stream.g2();
-                stack_variant_size[opCode - 100] = stream.g2();
+                stack_variant_id[opcode - 100] = stream.g2();
+                stack_variant_size[opcode - 100] = stream.g2();
             } else
-            if(opCode == 110)
+            if(opcode == 110)
                 model_scale_x = stream.g2();
             else
-            if(opCode == 111)
+            if(opcode == 111)
                 model_scale_y = stream.g2();
             else
-            if(opCode == 112)
+            if(opcode == 112)
                 model_scale_z = stream.g2();
             else
-            if(opCode == 113)
+            if(opcode == 113)
                 light_intensity = stream.g1b();
             else
-            if(opCode == 114)
+            if(opcode == 114)
                 light_mag = stream.g1b() * 5;
-            else if(opCode == 115)
+            else if(opcode == 115)
                 team = stream.g1();
-			else if (opCode == 116)
+			else if (opcode == 116)
 				lendID = stream.g2();
-			else if (opCode == 117)
+			else if (opcode == 117)
 				lentItemID = stream.g2();
         } while(true);
     }
