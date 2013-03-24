@@ -768,8 +768,8 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         //Clean region-local caches
         Rasterizer.clearTextureCache();
         sceneGraph.initToNull();
-        ObjectDef.modelCache.unlinkAll();
-        ObjectDef.modelCache2.unlinkAll();
+        ObjectDef.modelCache.clear();
+        ObjectDef.modelCache2.clear();
         System.gc();
         for (int i = 0; i < 4; i++)
             tileSettings[i].init();

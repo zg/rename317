@@ -1,7 +1,9 @@
 package rs2;
 
 
-public class OnDemandData extends NodeSub {
+import rs2.util.collection.QueueNode;
+
+public class OnDemandData extends QueueNode {
 
     public OnDemandData()
     {

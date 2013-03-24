@@ -2,9 +2,12 @@ package rs2;
 
 // Decompiler options: packimporsts(3)
 
+import rs2.util.collection.Deque;
+import rs2.util.collection.QueueNode;
+
 import java.math.BigInteger;
 
-public class Packet extends NodeSub {
+public class Packet extends QueueNode {
 
     public static Packet create()
     {

@@ -3,6 +3,7 @@ package rs2;
 import org.peterbjornx.pgl2.model.*;
 import pgle.PglCubeStub;
 import pgle.PglModelNode;
+import rs2.util.collection.Deque;
 
 import java.util.LinkedList;
 

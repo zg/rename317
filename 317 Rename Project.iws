@@ -12,14 +12,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rs2/util/collection" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rs2/util" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/rs2/Deque.java" afterPath="$PROJECT_DIR$/src/rs2/util/collection/Deque.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/rs2/HashTable.java" afterPath="$PROJECT_DIR$/src/rs2/util/collection/HashTable.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/rs2/MemCache.java" afterPath="$PROJECT_DIR$/src/rs2/util/collection/MemCache.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/rs2/Node.java" afterPath="$PROJECT_DIR$/src/rs2/util/collection/Node.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/rs2/NodeSub.java" afterPath="$PROJECT_DIR$/src/rs2/util/collection/QueueNode.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/rs2/Queue.java" afterPath="$PROJECT_DIR$/src/rs2/util/collection/Queue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iml" afterPath="$PROJECT_DIR$/317 Rename Project.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.ipr" afterPath="$PROJECT_DIR$/317 Rename Project.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorEditorWindow.java" afterPath="$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorEditorWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Client.java" afterPath="$PROJECT_DIR$/src/rs2/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/DrawingArea.java" afterPath="$PROJECT_DIR$/src/rs2/DrawingArea.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/EditorMain.java" afterPath="$PROJECT_DIR$/src/editor/EditorMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Entity.java" afterPath="$PROJECT_DIR$/src/rs2/Entity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/GameObjectSpawnRequest.java" afterPath="$PROJECT_DIR$/src/rs2/GameObjectSpawnRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ItemDef.java" afterPath="$PROJECT_DIR$/src/rs2/ItemDef.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/NpcDef.java" afterPath="$PROJECT_DIR$/src/rs2/NpcDef.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ObjectDef.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectDef.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/OnDemandData.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Packet.java" afterPath="$PROJECT_DIR$/src/rs2/Packet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Player.java" afterPath="$PROJECT_DIR$/src/rs2/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSInterface.java" afterPath="$PROJECT_DIR$/src/rs2/RSInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SceneGraph.java" afterPath="$PROJECT_DIR$/src/rs2/SceneGraph.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SpotAnim.java" afterPath="$PROJECT_DIR$/src/rs2/SpotAnim.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Tile.java" afterPath="$PROJECT_DIR$/src/rs2/Tile.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
+    <file path="/fragment.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364129826410" ignored="false" />
+    <file path="/QueueNode.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130827332" ignored="false" />
+    <file path="/HashTable.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130593183" ignored="false" />
+    <file path="/MemCache.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130710501" ignored="false" />
+    <file path="/Queue.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130795469" ignored="false" />
+    <file path="/Dummy.txt" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364131284561" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +67,14 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" line="513" class="rs2.OnDemandFetcher" package="rs2">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" line="515" class="rs2.OnDemandFetcher" package="rs2">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
         <option name="COUNT_FILTER" value="0" />
         <option name="CONDITION_ENABLED" value="false" />
@@ -53,11 +83,12 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/rs2/ObjectDef.java" line="230" class="rs2.ObjectDef" package="rs2">
+      <breakpoint url="file://$PROJECT_DIR$/src/rs2/ObjectDef.java" line="232" class="rs2.ObjectDef" package="rs2">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
         <option name="COUNT_FILTER" value="0" />
         <option name="CONDITION_ENABLED" value="false" />
@@ -66,11 +97,12 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/rs2/ObjectDef.java" line="244" class="rs2.ObjectDef" package="rs2">
+      <breakpoint url="file://$PROJECT_DIR$/src/rs2/ObjectDef.java" line="246" class="rs2.ObjectDef" package="rs2">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
         <option name="COUNT_FILTER" value="0" />
         <option name="CONDITION_ENABLED" value="false" />
@@ -80,7 +112,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
-    <breakpoint_any>
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="false" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
@@ -88,6 +120,7 @@
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
         <option name="COUNT_FILTER" value="0" />
         <option name="CONDITION_ENABLED" value="false" />
@@ -103,6 +136,7 @@
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
         <option name="COUNT_FILTER" value="0" />
         <option name="CONDITION_ENABLED" value="false" />
@@ -113,49 +147,45 @@
       </breakpoint>
     </breakpoint_any>
     <breakpoint_rules />
-    <ui_properties>
-      <property name="line_breakpoints_groupByMethods" value="false" />
-      <property name="line_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_flattenPackages" value="true" />
-      <property name="method_breakpoints_flattenPackages" value="true" />
-      <property name="field_breakpoints_flattenPackages" value="true" />
-      <property name="exception_breakpoints_groupByMethods" value="false" />
-      <property name="line_breakpoints_groupByClasses" value="true" />
-      <property name="method_breakpoints_viewId" value="TABLE" />
-      <property name="field_breakpoints_groupByMethods" value="false" />
-      <property name="line_breakpoints_flattenPackages" value="true" />
-      <property name="field_breakpoints_groupByClasses" value="true" />
-      <property name="method_breakpoints_groupByClasses" value="true" />
-      <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
-      <property name="field_breakpoints_viewId" value="TABLE" />
-      <property name="method_breakpoints_groupByMethods" value="false" />
-    </ui_properties>
+    <ui_properties />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="317 Rename Project" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Client.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+      <file leaf-file-name="MemCache.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/MemCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10410" column="12" selection-start="449077" selection-end="449077" vertical-scroll-proportion="0.33150685">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#240#267#0" expanded="true" />
-                <element signature="e#95917#95944#1" expanded="true" />
-                <element signature="e#106156#106183#0" expanded="true" />
-                <element signature="e#445980#446007#0" expanded="true" />
-              </folding>
+            <state line="74" column="34" selection-start="1930" selection-end="1930" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Npc.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/Npc.java">
+      <file leaf-file-name="Node.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="13" selection-start="28" selection-end="28" vertical-scroll-proportion="0.0">
+            <state line="2" column="13" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueueNode.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/QueueNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="29" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Queue.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Queue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="23" selection-start="571" selection-end="571" vertical-scroll-proportion="0.6424581">
               <folding />
             </state>
           </provider>
@@ -168,22 +198,9 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
-  <component name="Git.Settings">
-    <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
-    <option name="UPDATE_CHANGES_POLICY" value="STASH" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/rt4/Class26_Sub1.java" />
-        <option value="$PROJECT_DIR$/src/rt4/Class26_Sub2.java" />
-        <option value="$PROJECT_DIR$/src/rt4/ErrorHandling.java" />
-        <option value="$PROJECT_DIR$/src/rt4/LightingShit.java" />
-        <option value="$PROJECT_DIR$/src/rt4/GlEffect3.java" />
-        <option value="$PROJECT_DIR$/src/rt4/testcase.java" />
-        <option value="$PROJECT_DIR$/src/rt4/Class119.java" />
-        <option value="$PROJECT_DIR$/src/rs2/Floor.java" />
-        <option value="$PROJECT_DIR$/src/rt4/Class26_Sub2_Sub1.java" />
         <option value="$PROJECT_DIR$/src/rt4/OpenGLManager.java" />
         <option value="$PROJECT_DIR$/src/pgle/PglWrapper.java" />
         <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
@@ -191,6 +208,15 @@
         <option value="$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java" />
         <option value="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" />
         <option value="$PROJECT_DIR$/src/rs2/Client.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Node.java" />
+        <option value="$PROJECT_DIR$/src/rs2/NodeSub.java" />
+        <option value="$PROJECT_DIR$/src/rs2/util/collection/Node.java" />
+        <option value="$PROJECT_DIR$/src/rs2/MemCache.java" />
+        <option value="$PROJECT_DIR$/src/rs2/util/collection/HashTable.java" />
+        <option value="$PROJECT_DIR$/src/rs2/util/collection/MemCache.java" />
+        <option value="$PROJECT_DIR$/src/rs2/util/collection/QueueNode.java" />
+        <option value="$PROJECT_DIR$/src/rs2/util/collection/Deque.java" />
+        <option value="$PROJECT_DIR$/src/rs2/util/collection/Queue.java" />
       </list>
     </option>
   </component>
@@ -205,10 +231,10 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="424" />
-    <option name="y" value="192" />
-    <option name="width" value="1287" />
-    <option name="height" value="797" />
+    <option name="x" value="-1" />
+    <option name="y" value="24" />
+    <option name="width" value="1282" />
+    <option name="height" value="976" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -217,6 +243,8 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
+    <OptionsSetting value="true" id="Undo Check Out" />
+    <OptionsSetting value="true" id="Get Latest Version" />
     <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="2" id="Remove" />
   </component>
@@ -236,6 +264,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -250,7 +280,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NewRename" />
+              <option name="myItemId" value="rs317" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -260,7 +290,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NewRename" />
+              <option name="myItemId" value="rs317" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -274,7 +304,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NewRename" />
+              <option name="myItemId" value="rs317" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -286,10 +316,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rs317" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rs2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="collection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="Favorites" />
     </panes>
   </component>
@@ -300,12 +350,13 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="preferences.lookFeel" />
+    <property name="options.lastSelected" value="vcs.Subversion" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="last_opened_file_path" value="D:/Development/Librarys/mydoggy" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
@@ -350,6 +401,7 @@
       <method />
     </configuration>
     <configuration default="false" name="testcase" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="rt4.testcase" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
@@ -377,11 +429,7 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
@@ -394,14 +442,10 @@
       <option name="VM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
@@ -413,14 +457,10 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -438,12 +478,7 @@
       </option>
       <envs />
       <patterns />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
+      <method />
     </configuration>
     <configuration default="false" name="SwingUI" type="Applet" factoryName="Applet">
       <module name="317 Rename Project" />
@@ -461,6 +496,7 @@
       <method />
     </configuration>
     <configuration default="false" name="EditorMain" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="editor.EditorMain" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -483,6 +519,7 @@
       <method />
     </configuration>
     <configuration default="false" name="Client" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="rs2.Client" />
       <option name="VM_PARAMETERS" value="-Djava.library.path=.\lib\native\windows -Xmx512m" />
       <option name="PROGRAM_PARAMETERS" value="1 0 highmem members 32" />
@@ -505,11 +542,11 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Applet.EditorMain" />
-      <item index="1" class="java.lang.String" itemvalue="Application.testcase" />
-      <item index="2" class="java.lang.String" itemvalue="Applet.SwingUI" />
-      <item index="3" class="java.lang.String" itemvalue="Application.EditorMain" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Client" />
+      <item index="0" class="java.lang.String" itemvalue="Applet.SwingUI" />
+      <item index="1" class="java.lang.String" itemvalue="Application.EditorMain" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Client" />
+      <item index="3" class="java.lang.String" itemvalue="Applet.EditorMain" />
+      <item index="4" class="java.lang.String" itemvalue="Application.testcase" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -517,10 +554,15 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED,ALPHA_COMPARATOR" />
   </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -535,7 +577,8 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">C:\Users\a\AppData\Roaming\Subversion</configuration>
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="true">$USER_HOME$/.subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -543,16 +586,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\NewRename" />
-          <option name="myCopyRoot" value="C:\NewRename" />
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\NewRename" />
-          <option name="myCopyRoot" value="C:\NewRename" />
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -586,30 +629,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="424" y="192" width="1287" height="797" extended-state="0" />
-    <editor active="true" />
+    <frame x="-1" y="24" width="1282" height="976" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31085527" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.310219" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14013709" sideWeight="0.72203946" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2633229" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26277372" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38322368" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32445142" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283082" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32360098" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272506" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1926885" sideWeight="0.8042763" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951945" sideWeight="0.69983685" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992278" sideWeight="0.7336683" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2561375" sideWeight="0.6755486" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32846716" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25447154" sideWeight="0.689781" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.346395" sideWeight="0.99834985" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20182787" sideWeight="0.72203946" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24942791" sideWeight="0.725938" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.725938" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989726" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -635,7 +683,6 @@
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
-    <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
@@ -645,9 +692,14 @@
     <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Model rendering :D:D:D" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="100% Refactored collections:D" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -667,6 +719,7 @@
     <MESSAGE value="Another try at packaging everything&#10;" />
     <MESSAGE value="- Renamed some stuff in scenegraph" />
     <MESSAGE value="- Model rendering :D:D:D" />
+    <MESSAGE value="100% Refactored collections:D" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -676,56 +729,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rt4/ErrorHandling.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="52" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rt4/GlEffect3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="39" selection-start="4453" selection-end="4456" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Floor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="98" selection-start="3014" selection-end="3014" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rt4/Class119.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="70" selection-start="2497" selection-end="2507" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rt4/Class26_Sub2_Sub1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="31" selection-start="587" selection-end="587" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="437" column="20" selection-start="19719" selection-end="19719" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgle/PglTerrainModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="0" selection-start="6262" selection-end="6262" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/ObjectDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="207" column="0" selection-start="5901" selection-end="5901" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgle/RsTerrainSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="68" selection-start="1276" selection-end="1276" vertical-scroll-proportion="0.030909091" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/ShapedTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="267" column="32" selection-start="9166" selection-end="9166" vertical-scroll-proportion="0.029929578" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="15" selection-start="68" selection-end="68" vertical-scroll-proportion="0.029929578" />
@@ -748,21 +751,341 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Npc.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="28" selection-end="28" vertical-scroll-proportion="0.0">
+        <state line="3" column="13" selection-start="28" selection-end="28" vertical-scroll-proportion="-0.32462686">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/rs2">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>rs2</OriginalElement>
+          <nodes>
+            <node x="1334.0" y="412.0">rs2.ObjectOnTile</node>
+            <node x="348.6354166666665" y="224.0">rs2.DrawingArea</node>
+            <node x="2047.0" y="412.0">rs2.Projectile</node>
+            <node x="352.0" y="1093.0">rs2.RSSocket</node>
+            <node x="1233.0" y="1093.0">rs2.MouseDetection</node>
+            <node x="0.0" y="891.0">rs2.SwingUI</node>
+            <node x="0.0" y="1194.0">rs2.SettingUsagePointers</node>
+            <node x="1230.0" y="1194.0">rs2.IsaacCipher</node>
+            <node x="536.0" y="1497.0">rs2.ItemDef</node>
+            <node x="946.4374999999999" y="212.0">rs2.Packet</node>
+            <node x="0.0" y="992.0">rs2.JagexFileStore</node>
+            <node x="511.0" y="1194.0">rs2.InteractableObject</node>
+            <node x="0.0" y="1093.0">rs2.GraphicsBuffer</node>
+            <node x="518.0" y="1699.0">rs2.Midi</node>
+            <node x="1370.6875" y="106.0">rs2.GameObjectSpawnRequest</node>
+            <node x="706.0" y="1497.0">rs2.NpcDef</node>
+            <node x="221.0" y="1295.0">rs2.WallDecoration</node>
+            <node x="1189.6875" y="106.0">rs2.Tile</node>
+            <node x="0.0" y="424.0">rs2.Rasterizer</node>
+            <node x="264.0" y="1194.0">rs2.JagexArchive</node>
+            <node x="0.0" y="1598.0">rs2.Filter</node>
+            <node x="1314.0" y="1396.0">rs2.Animation</node>
+            <node x="1383.0" y="1598.0">rs2.TextInput</node>
+            <node x="1102.4375" y="224.0">rs2.OnDemandData</node>
+            <node x="820.9999999999999" y="376.0">rs2.RgbImage</node>
+            <node x="1080.0" y="412.0">rs2.Mobile</node>
+            <node x="756.0" y="1194.0">rs2.GroundDecoration</node>
+            <node x="514.0" y="679.0">rs2.Signlink</node>
+            <node x="883.0" y="992.0">rs2.SceneGraph</node>
+            <node x="386.0" y="1396.0">rs2.WallObject</node>
+            <node x="441.0" y="1295.0">rs2.FileOperations</node>
+            <node x="1194.0" y="1497.0">rs2.VarBit</node>
+            <node x="219.0" y="679.0">rs2.OnDemandFetcherParent</node>
+            <node x="948.0" y="1396.0">rs2.IdentityKit</node>
+            <node x="2469.0" y="412.0">rs2.StillGraphic</node>
+            <node x="1349.0" y="1497.0">rs2.Track</node>
+            <node x="680.0" y="679.0">rs2.ShapedTile</node>
+            <node x="1020.2499999999999" y="578.0">rs2.Player</node>
+            <node x="1131.0" y="1396.0">rs2.Sequence</node>
+            <node x="658.0" y="1093.0">rs2.RSFrame</node>
+            <node x="1079.0" y="1295.0">rs2.MemCache</node>
+            <node x="0.0" y="1497.0">rs2.BZ2Block</node>
+            <node x="999.0" y="1194.0">rs2.TileSetting</node>
+            <node x="656.0" y="1295.0">rs2.CullingCluster</node>
+            <node x="402.0" y="1699.0">rs2.Skills</node>
+            <node x="1217.1875" y="0.0">rs2.Node</node>
+            <node x="358.0" y="1497.0">rs2.Envelope</node>
+            <node x="147.0" y="1699.0">rs2.Censor</node>
+            <node x="1259.0" y="992.0">rs2.MapRegion</node>
+            <node x="868.0" y="1295.0">rs2.VertexNormal</node>
+            <node x="16.0" y="679.0">rs2.GameShell</node>
+            <node x="1037.6875" y="106.0">rs2.NodeSub</node>
+            <node x="1215.0" y="412.0">rs2.Item</node>
+            <node x="1034.0" y="1497.0">rs2.Deque</node>
+            <node x="1230.0" y="1598.0">rs2.MapUtility</node>
+            <node x="32.5" y="785.0">rs2.Client</node>
+            <node x="1070.0" y="1598.0">rs2.StaticLogic</node>
+            <node x="903.0" y="1598.0">rs2.PacketSizes</node>
+            <node x="298.0" y="1598.0">rs2.AbstractDrawingArea</node>
+            <node x="0.0" y="1396.0">rs2.RSInterface</node>
+            <node x="1289.0" y="1295.0">rs2.ModelHeader</node>
+            <node x="179.0" y="1497.0">rs2.SpotAnim</node>
+            <node x="242.5" y="785.0">rs2.OnDemandFetcher</node>
+            <node x="1772.0" y="352.0">rs2.Model</node>
+            <node x="0.0" y="1699.0">rs2.TextClass</node>
+            <node x="1667.25" y="224.0">rs2.Entity</node>
+            <node x="193.0" y="1396.0">rs2.Synthesizer</node>
+            <node x="955.0" y="1093.0">rs2.ModelTransform</node>
+            <node x="480.0" y="412.0">rs2.RSFont</node>
+            <node x="532.0" y="1598.0">rs2.BZ2InputStream</node>
+            <node x="505.0" y="992.0">rs2.PlainTile</node>
+            <node x="575.0" y="1396.0">rs2.HashTable</node>
+            <node x="1151.25" y="578.0">rs2.Npc</node>
+            <node x="276.0" y="1699.0">rs2.Config</node>
+            <node x="873.0" y="1497.0">rs2.Queue</node>
+            <node x="762.0" y="1396.0">rs2.ObjectDef</node>
+            <node x="728.0" y="1598.0">rs2.GZIPWrapper</node>
+            <node x="149.0" y="1598.0">rs2.Floor</node>
+            <node x="128.0" y="412.0">rs2.IndexedImage</node>
+            <node x="528.0" y="785.0">rs2.Signlink.Position</node>
+            <node x="0.0" y="1295.0">rs2.GroundItemTile</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="rs2.Tile" target="rs2.Node">
+              <point x="0.0" y="-28.0" />
+              <point x="0.0" y="28.0" />
+            </edge>
+            <edge source="rs2.Npc" target="rs2.Mobile">
+              <point x="0.0" y="-28.0" />
+              <point x="1199.25" y="553.0" />
+              <point x="1166.25" y="553.0" />
+              <point x="28.75" y="28.0" />
+            </edge>
+            <edge source="rs2.NodeSub" target="rs2.Node">
+              <point x="0.0" y="-28.0" />
+              <point x="1103.6875" y="81.0" />
+              <point x="1234.8541666666665" y="81.0" />
+              <point x="-35.33333333333326" y="28.0" />
+            </edge>
+            <edge source="rs2.StillGraphic" target="rs2.Entity">
+              <point x="0.0" y="-28.0" />
+              <point x="2626.0" y="312.0" />
+              <point x="1766.25" y="312.0" />
+              <point x="45.0" y="28.0" />
+            </edge>
+            <edge source="rs2.Mobile" target="rs2.Entity">
+              <point x="0.0" y="-28.0" />
+              <point x="1137.5" y="312.0" />
+              <point x="1676.25" y="312.0" />
+              <point x="-45.0" y="28.0" />
+            </edge>
+            <edge source="rs2.DrawingArea" target="rs2.NodeSub">
+              <point x="0.0" y="-28.0" />
+              <point x="428.1354166666665" y="182.0" />
+              <point x="1054.1875" y="182.0" />
+              <point x="-49.5" y="28.0" />
+            </edge>
+            <edge source="rs2.Rasterizer" target="rs2.DrawingArea">
+              <point x="0.0" y="-16.0" />
+              <point x="54.0" y="322.0" />
+              <point x="368.5104166666665" y="322.0" />
+              <point x="-59.625" y="28.0" />
+            </edge>
+            <edge source="rs2.ObjectOnTile" target="rs2.Entity">
+              <point x="0.0" y="-28.0" />
+              <point x="1543.0" y="332.0" />
+              <point x="1712.25" y="332.0" />
+              <point x="-9.0" y="28.0" />
+            </edge>
+            <edge source="rs2.Signlink.Position" target="rs2.Signlink">
+              <point x="0.0" y="-16.0" />
+              <point x="0.0" y="28.0" />
+            </edge>
+            <edge source="rs2.OnDemandFetcher" target="rs2.OnDemandFetcherParent">
+              <point x="0.0" y="-28.0" />
+              <point x="0.0" y="28.0" />
+            </edge>
+            <edge source="rs2.RgbImage" target="rs2.DrawingArea">
+              <point x="0.0" y="-64.0" />
+              <point x="940.4999999999999" y="322.0" />
+              <point x="487.7604166666665" y="322.0" />
+              <point x="59.625" y="28.0" />
+            </edge>
+            <edge source="rs2.RSFont" target="rs2.DrawingArea">
+              <point x="0.0" y="-28.0" />
+              <point x="640.4999999999999" y="332.0" />
+              <point x="448.0104166666665" y="332.0" />
+              <point x="19.875" y="28.0" />
+            </edge>
+            <edge source="rs2.GameObjectSpawnRequest" target="rs2.Node">
+              <point x="0.0" y="-28.0" />
+              <point x="1500.1875" y="81.0" />
+              <point x="1305.520833333333" y="81.0" />
+              <point x="35.33333333333326" y="28.0" />
+            </edge>
+            <edge source="rs2.SwingUI" target="rs2.Client">
+              <point x="0.0" y="-28.0" />
+              <point x="0.0" y="28.0" />
+            </edge>
+            <edge source="rs2.Item" target="rs2.Entity">
+              <point x="0.0" y="-28.0" />
+              <point x="1264.5" y="322.0" />
+              <point x="1694.25" y="322.0" />
+              <point x="-27.0" y="28.0" />
+            </edge>
+            <edge source="rs2.OnDemandData" target="rs2.NodeSub">
+              <point x="0.0" y="-28.0" />
+              <point x="1192.9375" y="192.0" />
+              <point x="1120.1875" y="192.0" />
+              <point x="16.5" y="28.0" />
+            </edge>
+            <edge source="rs2.Player" target="rs2.Mobile">
+              <point x="0.0" y="-28.0" />
+              <point x="1075.75" y="553.0" />
+              <point x="1108.75" y="553.0" />
+              <point x="-28.75" y="28.0" />
+            </edge>
+            <edge source="rs2.Packet" target="rs2.NodeSub">
+              <point x="0.0" y="-40.0" />
+              <point x="1014.4374999999999" y="192.0" />
+              <point x="1087.1875" y="192.0" />
+              <point x="-16.5" y="28.0" />
+            </edge>
+            <edge source="rs2.Projectile" target="rs2.Entity">
+              <point x="0.0" y="-28.0" />
+              <point x="2248.0" y="322.0" />
+              <point x="1748.25" y="322.0" />
+              <point x="27.0" y="28.0" />
+            </edge>
+            <edge source="rs2.Entity" target="rs2.NodeSub">
+              <point x="0.0" y="-28.0" />
+              <point x="1721.25" y="182.0" />
+              <point x="1153.1875" y="182.0" />
+              <point x="49.5" y="28.0" />
+            </edge>
+            <edge source="rs2.IndexedImage" target="rs2.DrawingArea">
+              <point x="0.0" y="-28.0" />
+              <point x="294.0" y="332.0" />
+              <point x="408.2604166666665" y="332.0" />
+              <point x="-19.875" y="28.0" />
+            </edge>
+            <edge source="rs2.Model" target="rs2.Entity">
+              <point x="0.0" y="-88.0" />
+              <point x="1899.5" y="332.0" />
+              <point x="1730.25" y="332.0" />
+              <point x="9.0" y="28.0" />
+            </edge>
+            <edge source="rs2.Client" target="rs2.GameShell">
+              <point x="0.0" y="-28.0" />
+              <point x="0.0" y="28.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.4134723336006414" x="1011.175493858862" y="0.3072801164549901" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Constructors</Category>
+            <Category>Inner Classes</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/rs2.Client">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>rs2.Client</OriginalElement>
+          <nodes>
+            <node x="" y="">java.lang.Runnable</node>
+            <node x="" y="">javax.accessibility.Accessible</node>
+            <node x="" y="">java.awt.MenuContainer</node>
+            <node x="" y="">java.awt.image.ImageObserver</node>
+            <node x="" y="">java.awt.event.MouseListener</node>
+            <node x="" y="">java.awt.event.MouseMotionListener</node>
+            <node x="" y="">java.awt.Panel</node>
+            <node x="" y="">java.awt.Component</node>
+            <node x="" y="">rs2.GameShell</node>
+            <node x="" y="">rs2.Client</node>
+            <node x="" y="">java.awt.event.FocusListener</node>
+            <node x="" y="">java.awt.event.KeyListener</node>
+            <node x="" y="">java.awt.Container</node>
+            <node x="" y="">java.applet.Applet</node>
+            <node x="" y="">java.io.Serializable</node>
+            <node x="" y="">java.util.EventListener</node>
+            <node x="" y="">java.awt.event.WindowListener</node>
+            <node x="" y="">java.lang.SuppressWarnings</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.1" x="29.66666666666606" y="13625.115079365078" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Constructors</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10410" column="12" selection-start="449077" selection-end="449077" vertical-scroll-proportion="0.33150685">
+        <state line="10460" column="27" selection-start="453462" selection-end="453462" vertical-scroll-proportion="0.23106547">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#240#267#0" expanded="true" />
-            <element signature="e#95917#95944#1" expanded="true" />
-            <element signature="e#106156#106183#0" expanded="true" />
-            <element signature="e#445980#446007#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Filter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="13" selection-start="105" selection-end="105" vertical-scroll-proportion="0.13478819">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Sequence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="27" selection-end="27" vertical-scroll-proportion="0.03787879">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/HashTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="42" selection-start="463" selection-end="463" vertical-scroll-proportion="0.5729167">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Deque.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="14" selection-start="2157" selection-end="2157" vertical-scroll-proportion="0.9479167">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/MemCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="34" selection-start="1930" selection-end="1930" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/QueueNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="29" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Queue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="23" selection-start="571" selection-end="571" vertical-scroll-proportion="0.6424581">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -809,7 +1132,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>1.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -826,6 +1149,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

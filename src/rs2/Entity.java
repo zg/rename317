@@ -1,21 +1,17 @@
 package rs2;
 
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 import org.lwjgl.util.vector.Vector3f;
-import org.peterbjornx.pgl2.gl.GLQM;
 import org.peterbjornx.pgl2.light.OpenGLLight;
 import org.peterbjornx.pgl2.model.GeometryNode;
-import pgle.PglModel;
 import pgle.PglModelNode;
+import rs2.util.collection.QueueNode;
 
-import java.awt.color.ICC_ColorSpace;
 import java.util.HashMap;
-import java.util.UnknownFormatConversionException;
 
 import static org.lwjgl.opengl.GL11.glLightModel;
 
-public class Entity extends NodeSub {
+public class Entity extends QueueNode {
 
 
     public void renderAtPoint(int i, int j, int k, int l, int i1, int x, int y,

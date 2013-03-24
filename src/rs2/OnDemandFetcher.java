@@ -2,6 +2,8 @@ package rs2;
 
 
 import editor.EditorMain;
+import rs2.util.collection.Deque;
+import rs2.util.collection.Queue;
 
 import java.io.*;
 import java.net.Socket;
@@ -531,7 +533,7 @@ public class OnDemandFetcher extends OnDemandFetcherParent
             return null;
         synchronized(queue)
         {
-            onDemandData.unlinkSub();
+            onDemandData.unlinkQueue();
         }
         if(onDemandData.buffer == null)
             return onDemandData;
