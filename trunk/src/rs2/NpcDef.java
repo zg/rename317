@@ -161,7 +161,7 @@ public class NpcDef
         model_1.triangleSkin = null;
         model_1.vertexSkin = null;
         if(boundDim == 1)
-            model_1.oneSquareModel = true;
+            model_1.fits_on_single_square = true;
         return model_1;
     }
 

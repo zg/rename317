@@ -239,7 +239,7 @@ public class ModelRendererGL {
     }
      /*
     public Class148_Sub1 method1889(Class148_Sub1 arg0) {
-        if (vertexCount == 0)
+        if (vertex_count == 0)
             return null;
         if (!bounds.upToDate)
             updateBounds();
@@ -273,13 +273,13 @@ public class ModelRendererGL {
             class148_sub1 = new Class148_Sub1(i_13_, i_14_, 0);
         class148_sub1.x_offset = i;
         class148_sub1.y_offset = i_11_;
-        if (anIntArray5061.length < vertexCount) {
-            anIntArray5061 = new int[vertexCount];
-            anIntArray5057 = new int[vertexCount];
+        if (anIntArray5061.length < vertex_count) {
+            anIntArray5061 = new int[vertex_count];
+            anIntArray5057 = new int[vertex_count];
         }
         for (int i_15_ = 0; i_15_ < realVertexCount; i_15_++) {
-            int i_16_ = (((vertexX[i_15_] - (vertexY[i_15_] * PglSun.anInt934 >> 8)) >> 3) - i);
-            int i_17_ = (((vertexZ[i_15_] - (vertexY[i_15_] * PglSun.anInt928 >> 8)) >> 3) - i_11_);
+            int i_16_ = (((vertex_x[i_15_] - (vertex_y[i_15_] * PglSun.anInt934 >> 8)) >> 3) - i);
+            int i_17_ = (((vertex_z[i_15_] - (vertex_y[i_15_] * PglSun.anInt928 >> 8)) >> 3) - i_11_);
             int i_18_ = vertexUsageCount[i_15_];
             int i_19_ = vertexUsageCount[i_15_ + 1];
             for (int i_20_ = i_18_; i_20_ < i_19_; i_20_++) {
@@ -290,11 +290,11 @@ public class ModelRendererGL {
                 anIntArray5057[i_21_] = i_17_;
             }
         }
-        for (int i_22_ = 0; i_22_ < triangleCount; i_22_++) {
+        for (int i_22_ = 0; i_22_ < triangle_count; i_22_++) {
             if (triangleAlpha[i_22_] <= 128) {
-                short i_23_ = triangleA[i_22_];
-                short i_24_ = triangleB[i_22_];
-                short i_25_ = triangleC[i_22_];
+                short i_23_ = triangle_a[i_22_];
+                short i_24_ = triangle_b[i_22_];
+                short i_25_ = triangle_c[i_22_];
                 int i_26_ = anIntArray5061[i_23_];
                 int i_27_ = anIntArray5061[i_24_];
                 int i_28_ = anIntArray5061[i_25_];
@@ -1502,7 +1502,7 @@ public class ModelRendererGL {
     }
     /*
     public void method1792(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, long arg8) {
-        if (vertexCount != 0) {
+        if (vertex_count != 0) {
             if (!bounds.upToDate)
                 updateBounds();
             int i = bounds.diagonal;
@@ -1598,16 +1598,16 @@ public class ModelRendererGL {
                                                     if (aBoolean3687)
                                                         Class7_Sub3.aLongArray2685[Class14_Sub15.anInt2996++] = arg8;
                                                     else {
-                                                        if (anIntArray5061.length < vertexCount) {
+                                                        if (anIntArray5061.length < vertex_count) {
                                                             anIntArray5061 = (new int
-                                                                    [vertexCount]);
+                                                                    [vertex_count]);
                                                             anIntArray5057 = (new int
-                                                                    [vertexCount]);
+                                                                    [vertex_count]);
                                                         }
                                                         for (int i_221_ = 0; (i_221_ < realVertexCount); i_221_++) {
-                                                            int i_222_ = (vertexX[i_221_]);
-                                                            int i_223_ = (vertexY[i_221_]);
-                                                            int i_224_ = (vertexZ[i_221_]);
+                                                            int i_222_ = (vertex_x[i_221_]);
+                                                            int i_223_ = (vertex_y[i_221_]);
+                                                            int i_224_ = (vertex_z[i_221_]);
                                                             if (arg0 != 0) {
                                                                 int i_225_ = (((i_224_ * i_201_) + (i_222_ * i_202_)) >> 16);
                                                                 i_224_ = (((i_224_ * i_202_) - (i_222_ * i_201_)) >> 16);
@@ -1636,10 +1636,10 @@ public class ModelRendererGL {
                                                                 anIntArray5057[i_232_] = i_228_;
                                                             }
                                                         }
-                                                        for (int i_233_ = 0; (i_233_ < triangleCount); i_233_++) {
-                                                            short i_234_ = (triangleA[i_233_]);
-                                                            short i_235_ = (triangleB[i_233_]);
-                                                            short i_236_ = (triangleC[i_233_]);
+                                                        for (int i_233_ = 0; (i_233_ < triangle_count); i_233_++) {
+                                                            short i_234_ = (triangle_a[i_233_]);
+                                                            short i_235_ = (triangle_b[i_233_]);
+                                                            short i_236_ = (triangle_c[i_233_]);
                                                             if (method1920((Class14_Sub2.anInt2726), (anInt2622), (anIntArray5057[i_234_]), (anIntArray5057[i_235_]), (anIntArray5057[i_236_]), (anIntArray5061[i_234_]), (anIntArray5061[i_235_]), (anIntArray5061[i_236_]))) {
                                                                 Class7_Sub3.aLongArray2685[Class14_Sub15.anInt2996++] = arg8;
                                                                 break;
@@ -2046,14 +2046,14 @@ public class ModelRendererGL {
         vertexCount = 0;
         aByte5026 = (byte) 0;
         realVertexCount = 0;
-        int[] is = new int[model.triangleCount];
-        vertexUsageCount = new int[model.vertexCount + 1];
-        for (int i = 0; i < model.triangleCount; i++) {
+        int[] is = new int[model.triangle_count];
+        vertexUsageCount = new int[model.vertex_count + 1];
+        for (int i = 0; i < model.triangle_count; i++) {
             if ((model.triangleDrawType == null || (model.triangleDrawType[i] & 1 )!= 2) && (model.triangleTexture == null || model.triangleTexture[i] == -1 )) {
                 is[triangleCount++] = i;
-                vertexUsageCount[model.triangleA[i]]++;
-                vertexUsageCount[model.triangleB[i]]++;
-                vertexUsageCount[model.triangleC[i]]++;
+                vertexUsageCount[model.triangle_a[i]]++;
+                vertexUsageCount[model.triangle_b[i]]++;
+                vertexUsageCount[model.triangle_c[i]]++;
             }
         }
         long[] ls = new long[triangleCount];
@@ -2083,10 +2083,10 @@ public class ModelRendererGL {
             ls[i] = ((long) i_304_ << 32) + (long) i_305_;
         }
         //Class117.method1602(is, (byte) 125, ls);
-        realVertexCount = model.vertexCount;
-        vertexX = model.vertexX;
-        vertexY = model.vertexY;
-        vertexZ = model.vertexZ;
+        realVertexCount = model.vertex_count;
+        vertexX = model.vertex_x;
+        vertexY = model.vertex_y;
+        vertexZ = model.vertex_z;
         vertexVSkin = model.vertexVSkin;
         int vertexCount = triangleCount * 3;
         normalX = new short[vertexCount];
@@ -2115,12 +2115,12 @@ public class ModelRendererGL {
         vertexIndexes = new short[vertexCount];
         aLongArray5048 = new long[vertexCount];
         int totalVertexUsageCount = 0;
-        for (int vertexIndex = 0; vertexIndex < model.vertexCount; vertexIndex++) {
+        for (int vertexIndex = 0; vertexIndex < model.vertex_count; vertexIndex++) {
             int vertexUsageCount = this.vertexUsageCount[vertexIndex];
             this.vertexUsageCount[vertexIndex] = totalVertexUsageCount;
             totalVertexUsageCount += vertexUsageCount;
         }
-        vertexUsageCount[model.vertexCount] = totalVertexUsageCount;
+        vertexUsageCount[model.vertex_count] = totalVertexUsageCount;
         int[] is_312_ = null;
         int[] is_313_ = null;
         int[] is_314_ = null;
@@ -2148,14 +2148,14 @@ public class ModelRendererGL {
                     for (int trianglePointPtr = 0; trianglePointPtr < 3; trianglePointPtr++) {
                         int vertexPointer;
                         if (trianglePointPtr == 0)
-                            vertexPointer = model.triangleA[i_324_];
+                            vertexPointer = model.triangle_a[i_324_];
                         else if (trianglePointPtr == 1)
-                            vertexPointer = model.triangleB[i_324_];
+                            vertexPointer = model.triangle_b[i_324_];
                         else
-                            vertexPointer = model.triangleC[i_324_];
-                        int i_328_ = model.vertexX[vertexPointer];
-                        int i_329_ = model.vertexY[vertexPointer];
-                        int i_330_ = model.vertexZ[vertexPointer];
+                            vertexPointer = model.triangle_c[i_324_];
+                        int i_328_ = model.vertex_x[vertexPointer];
+                        int i_329_ = model.vertex_y[vertexPointer];
+                        int i_330_ = model.vertex_z[vertexPointer];
                         if (i_328_ < is_316_[i_325_])
                             is_316_[i_325_] = i_328_;
                         if (i_328_ > is_317_[i_325_])
@@ -2251,30 +2251,30 @@ public class ModelRendererGL {
                     i_340_ &= 0xff;
                     byte i_350_ = 0;//model.aByteArray3514[i_340_];
                     if (i_350_ == 0) {
-                        int i_351_ = model.triangleA[sourceTriangleIndex];
-                        int i_352_ = model.triangleB[sourceTriangleIndex];
-                        int i_353_ = model.triangleC[sourceTriangleIndex];
+                        int i_351_ = model.triangle_a[sourceTriangleIndex];
+                        int i_352_ = model.triangle_b[sourceTriangleIndex];
+                        int i_353_ = model.triangle_c[sourceTriangleIndex];
                         int pI = model.triPIndex[i_340_];
                         int mI = model.triMIndex[i_340_];
                         int nI = model.triNIndex[i_340_];
-                        float Px = (float) model.vertexX[pI];
-                        float Py = (float) model.vertexY[pI];
-                        float Pz = (float) model.vertexZ[pI];
-                        float f_360_ = (float) model.vertexX[mI] - Px;
-                        float f_361_ = (float) model.vertexY[mI] - Py;
-                        float f_362_ = (float) model.vertexZ[mI] - Pz;
-                        float f_363_ = (float) model.vertexX[nI] - Px;
-                        float f_364_ = (float) model.vertexY[nI] - Py;
-                        float f_365_ = (float) model.vertexZ[nI] - Pz;
-                        float f_366_ = (float) model.vertexX[i_351_] - Px;
-                        float f_367_ = (float) model.vertexY[i_351_] - Py;
-                        float f_368_ = (float) model.vertexZ[i_351_] - Pz;
-                        float f_369_ = (float) model.vertexX[i_352_] - Px;
-                        float f_370_ = (float) model.vertexY[i_352_] - Py;
-                        float f_371_ = (float) model.vertexZ[i_352_] - Pz;
-                        float f_372_ = (float) model.vertexX[i_353_] - Px;
-                        float f_373_ = (float) model.vertexY[i_353_] - Py;
-                        float f_374_ = (float) model.vertexZ[i_353_] - Pz;
+                        float Px = (float) model.vertex_x[pI];
+                        float Py = (float) model.vertex_y[pI];
+                        float Pz = (float) model.vertex_z[pI];
+                        float f_360_ = (float) model.vertex_x[mI] - Px;
+                        float f_361_ = (float) model.vertex_y[mI] - Py;
+                        float f_362_ = (float) model.vertex_z[mI] - Pz;
+                        float f_363_ = (float) model.vertex_x[nI] - Px;
+                        float f_364_ = (float) model.vertex_y[nI] - Py;
+                        float f_365_ = (float) model.vertex_z[nI] - Pz;
+                        float f_366_ = (float) model.vertex_x[i_351_] - Px;
+                        float f_367_ = (float) model.vertex_y[i_351_] - Py;
+                        float f_368_ = (float) model.vertex_z[i_351_] - Pz;
+                        float f_369_ = (float) model.vertex_x[i_352_] - Px;
+                        float f_370_ = (float) model.vertex_y[i_352_] - Py;
+                        float f_371_ = (float) model.vertex_z[i_352_] - Pz;
+                        float f_372_ = (float) model.vertex_x[i_353_] - Px;
+                        float f_373_ = (float) model.vertex_y[i_353_] - Py;
+                        float f_374_ = (float) model.vertex_z[i_353_] - Pz;
                         float f_375_ = f_361_ * f_365_ - f_362_ * f_364_;
                         float f_376_ = f_362_ * f_363_ - f_360_ * f_365_;
                         float f_377_ = f_360_ * f_364_ - f_361_ * f_363_;
@@ -2293,9 +2293,9 @@ public class ModelRendererGL {
                         tcBV = (f_378_ * f_369_ + f_379_ * f_370_ + f_380_ * f_371_) * f_381_;
                         tcCV = (f_378_ * f_372_ + f_379_ * f_373_ + f_380_ * f_374_) * f_381_;
                     } /*else {
-                        int i_382_ = model.triangleA[sourceTriangleIndex];
-                        int i_383_ = model.triangleB[sourceTriangleIndex];
-                        int i_384_ = model.triangleC[sourceTriangleIndex];
+                        int i_382_ = model.triangle_a[sourceTriangleIndex];
+                        int i_383_ = model.triangle_b[sourceTriangleIndex];
+                        int i_384_ = model.triangle_c[sourceTriangleIndex];
                         int i_385_ = is_312_[i_340_];
                         int i_386_ = is_313_[i_340_];
                         int i_387_ = is_314_[i_340_];
@@ -2304,13 +2304,13 @@ public class ModelRendererGL {
                         float f_390_ = (float) model.aByteArray3554[i_340_] / 256.0F;
                         if (i_350_ == 1) {
                             float f_391_ = ((float) (model.aShortArray3527[i_340_] & 0xffff) / 1024.0F);
-                            method1921(model.vertexX[i_382_], model.vertexY[i_382_], model.vertexZ[i_382_], i_385_, i_386_, i_387_, fs_388_, f_391_, i_389_, f_390_);
+                            method1921(model.vertex_x[i_382_], model.vertex_y[i_382_], model.vertex_z[i_382_], i_385_, i_386_, i_387_, fs_388_, f_391_, i_389_, f_390_);
                             tcAU = aFloat5064;
                             tcAV = aFloat5060;
-                            method1921(model.vertexX[i_383_], model.vertexY[i_383_], model.vertexZ[i_383_], i_385_, i_386_, i_387_, fs_388_, f_391_, i_389_, f_390_);
+                            method1921(model.vertex_x[i_383_], model.vertex_y[i_383_], model.vertex_z[i_383_], i_385_, i_386_, i_387_, fs_388_, f_391_, i_389_, f_390_);
                             tcBU = aFloat5064;
                             tcBV = aFloat5060;
-                            method1921(model.vertexX[i_384_], model.vertexY[i_384_], model.vertexZ[i_384_], i_385_, i_386_, i_387_, fs_388_, f_391_, i_389_, f_390_);
+                            method1921(model.vertex_x[i_384_], model.vertex_y[i_384_], model.vertex_z[i_384_], i_385_, i_386_, i_387_, fs_388_, f_391_, i_389_, f_390_);
                             tcCU = aFloat5064;
                             tcCV = aFloat5060;
                             float f_392_ = f_391_ / 2.0F;
@@ -2348,12 +2348,12 @@ public class ModelRendererGL {
                         } else if (i_350_ == 2) {
                             float f_393_ = (float) model.aByteArray3518[i_340_] / 256.0F;
                             float f_394_ = (float) model.aByteArray3529[i_340_] / 256.0F;
-                            int i_395_ = (model.vertexX[i_383_] - model.vertexX[i_382_]);
-                            int i_396_ = (model.vertexY[i_383_] - model.vertexY[i_382_]);
-                            int i_397_ = (model.vertexZ[i_383_] - model.vertexZ[i_382_]);
-                            int i_398_ = (model.vertexX[i_384_] - model.vertexX[i_382_]);
-                            int i_399_ = (model.vertexY[i_384_] - model.vertexY[i_382_]);
-                            int i_400_ = (model.vertexZ[i_384_] - model.vertexZ[i_382_]);
+                            int i_395_ = (model.vertex_x[i_383_] - model.vertex_x[i_382_]);
+                            int i_396_ = (model.vertex_y[i_383_] - model.vertex_y[i_382_]);
+                            int i_397_ = (model.vertex_z[i_383_] - model.vertex_z[i_382_]);
+                            int i_398_ = (model.vertex_x[i_384_] - model.vertex_x[i_382_]);
+                            int i_399_ = (model.vertex_y[i_384_] - model.vertex_y[i_382_]);
+                            int i_400_ = (model.vertex_z[i_384_] - model.vertex_z[i_382_]);
                             int i_401_ = i_396_ * i_400_ - i_399_ * i_397_;
                             int i_402_ = i_397_ * i_398_ - i_400_ * i_395_;
                             int i_403_ = i_395_ * i_399_ - i_398_ * i_396_;
@@ -2364,23 +2364,23 @@ public class ModelRendererGL {
                             float f_408_ = (((float) i_401_ * fs_388_[3] + (float) i_402_ * fs_388_[4] + (float) i_403_ * fs_388_[5]) / f_405_);
                             float f_409_ = (((float) i_401_ * fs_388_[6] + (float) i_402_ * fs_388_[7] + (float) i_403_ * fs_388_[8]) / f_406_);
                             i_349_ = method1898(f_407_, f_408_, f_409_);
-                            method1888(model.vertexX[i_382_], model.vertexY[i_382_], model.vertexZ[i_382_], i_385_, i_386_, i_387_, i_349_, fs_388_, i_389_, f_390_, f_393_, f_394_);
+                            method1888(model.vertex_x[i_382_], model.vertex_y[i_382_], model.vertex_z[i_382_], i_385_, i_386_, i_387_, i_349_, fs_388_, i_389_, f_390_, f_393_, f_394_);
                             tcAU = aFloat5056;
                             tcAV = aFloat5063;
-                            method1888(model.vertexX[i_383_], model.vertexY[i_383_], model.vertexZ[i_383_], i_385_, i_386_, i_387_, i_349_, fs_388_, i_389_, f_390_, f_393_, f_394_);
+                            method1888(model.vertex_x[i_383_], model.vertex_y[i_383_], model.vertex_z[i_383_], i_385_, i_386_, i_387_, i_349_, fs_388_, i_389_, f_390_, f_393_, f_394_);
                             tcBU = aFloat5056;
                             tcBV = aFloat5063;
-                            method1888(model.vertexX[i_384_], model.vertexY[i_384_], model.vertexZ[i_384_], i_385_, i_386_, i_387_, i_349_, fs_388_, i_389_, f_390_, f_393_, f_394_);
+                            method1888(model.vertex_x[i_384_], model.vertex_y[i_384_], model.vertex_z[i_384_], i_385_, i_386_, i_387_, i_349_, fs_388_, i_389_, f_390_, f_393_, f_394_);
                             tcCU = aFloat5056;
                             tcCV = aFloat5063;
                         } else if (i_350_ == 3) {
-                            method1916(model.vertexX[i_382_], model.vertexY[i_382_], model.vertexZ[i_382_], i_385_, i_386_, i_387_, fs_388_, i_389_, f_390_);
+                            method1916(model.vertex_x[i_382_], model.vertex_y[i_382_], model.vertex_z[i_382_], i_385_, i_386_, i_387_, fs_388_, i_389_, f_390_);
                             tcAU = aFloat5062;
                             tcAV = aFloat5058;
-                            method1916(model.vertexX[i_383_], model.vertexY[i_383_], model.vertexZ[i_383_], i_385_, i_386_, i_387_, fs_388_, i_389_, f_390_);
+                            method1916(model.vertex_x[i_383_], model.vertex_y[i_383_], model.vertex_z[i_383_], i_385_, i_386_, i_387_, fs_388_, i_389_, f_390_);
                             tcBU = aFloat5062;
                             tcBV = aFloat5058;
-                            method1916(model.vertexX[i_384_], model.vertexY[i_384_], model.vertexZ[i_384_], i_385_, i_386_, i_387_, fs_388_, i_389_, f_390_);
+                            method1916(model.vertex_x[i_384_], model.vertex_y[i_384_], model.vertex_z[i_384_], i_385_, i_386_, i_387_, fs_388_, i_389_, f_390_);
                             tcCU = aFloat5062;
                             tcCV = aFloat5058;
                             if ((i_389_ & 0x1) == 0) {
@@ -2426,21 +2426,21 @@ public class ModelRendererGL {
                 i_410_ = (byte) ((byte) model.triangleDrawType[sourceTriangleIndex] & 1);
             if (i_410_ == 0) {
                 long arg2ofAV = ((long) (i_340_ << 2) + (((long) (i_349_ << 24) + (long) (sourceColour << 8) + (long) sourceAlpha) << 32));
-                int sourceTriangleA = model.triangleA[sourceTriangleIndex];
-                VertexNormal sourceNormalA = model.vertexNormals[sourceTriangleA];
+                int sourceTriangleA = model.triangle_a[sourceTriangleIndex];
+                VertexNormal sourceNormalA = model.vertex_normals[sourceTriangleA];
                 triangleA[destTriangleIdx] = addVertex(model, sourceTriangleA, arg2ofAV, sourceNormalA.x, sourceNormalA.y, sourceNormalA.z, sourceNormalA.magnitude, tcAU, tcAV);
-                int sourceTriangleB = model.triangleB[sourceTriangleIndex];
-                VertexNormal sourceNormalB = model.vertexNormals[sourceTriangleB];
+                int sourceTriangleB = model.triangle_b[sourceTriangleIndex];
+                VertexNormal sourceNormalB = model.vertex_normals[sourceTriangleB];
                 triangleB[destTriangleIdx] = addVertex(model, sourceTriangleB, arg2ofAV + (long) i_347_, sourceNormalB.x, sourceNormalB.y, sourceNormalB.z, sourceNormalB.magnitude, tcBU, tcBV);
-                int sourceTriangleC = model.triangleC[sourceTriangleIndex];
-                VertexNormal sourceNormalC = model.vertexNormals[sourceTriangleC];
+                int sourceTriangleC = model.triangle_c[sourceTriangleIndex];
+                VertexNormal sourceNormalC = model.vertex_normals[sourceTriangleC];
                 triangleC[destTriangleIdx] = addVertex(model, sourceTriangleC, arg2ofAV + (long) i_348_, sourceNormalC.x, sourceNormalC.y, sourceNormalC.z, sourceNormalC.magnitude, tcCU, tcCV);
             } else if (i_410_ == 1) {
                 TriangleNormal triangleNormal = model.triangleNormals[sourceTriangleIndex];
                 long l = ((long) ((i_340_ << 2) + (triangleNormal.x > 0 ? 1024 : 2048) + (triangleNormal.y + 256 << 12) + (triangleNormal.z + 256 << 22)) + (((long) (i_349_ << 24) + (long) (sourceColour << 8) + (long) sourceAlpha) << 32));
-                triangleA[destTriangleIdx] = addVertex(model, model.triangleA[sourceTriangleIndex], l, triangleNormal.x, triangleNormal.y, triangleNormal.z, 0, tcAU, tcAV);
-                triangleB[destTriangleIdx] = addVertex(model, model.triangleB[sourceTriangleIndex], l + (long) i_347_, triangleNormal.x, triangleNormal.y, triangleNormal.z, 0, tcBU, tcBV);
-                triangleC[destTriangleIdx] = addVertex(model, model.triangleC[sourceTriangleIndex], l + (long) i_348_, triangleNormal.x, triangleNormal.y, triangleNormal.z, 0, tcCU, tcCV);
+                triangleA[destTriangleIdx] = addVertex(model, model.triangle_a[sourceTriangleIndex], l, triangleNormal.x, triangleNormal.y, triangleNormal.z, 0, tcAU, tcAV);
+                triangleB[destTriangleIdx] = addVertex(model, model.triangle_b[sourceTriangleIndex], l + (long) i_347_, triangleNormal.x, triangleNormal.y, triangleNormal.z, 0, tcBU, tcBV);
+                triangleC[destTriangleIdx] = addVertex(model, model.triangle_c[sourceTriangleIndex], l + (long) i_348_, triangleNormal.x, triangleNormal.y, triangleNormal.z, 0, tcCU, tcCV);
             }
             if (model.triangleTexture != null)
                 triangleTexture[destTriangleIdx] = model.triangleTexture[sourceTriangleIndex];

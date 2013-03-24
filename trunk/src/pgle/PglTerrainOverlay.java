@@ -365,12 +365,12 @@ public class PglTerrainOverlay {
                 triangleHslB[triangleCount] = vertexColourUnderlay[idxB];
                 triangleHslC[triangleCount++] = vertexColourUnderlay[idxC];
             } /*else {
-                triangleAlphaA[triangleCount] = 0;
-                triangleAlphaB[triangleCount] = 0;
-                triangleAlphaC[triangleCount] = 0;
-                triangleHslA[triangleCount]   = vertexColourUnderlay[idxA];
-                triangleHslB[triangleCount]   = vertexColourUnderlay[idxB];
-                triangleHslC[triangleCount++] = vertexColourUnderlay[idxC];
+                triangleAlphaA[triangle_count] = 0;
+                triangleAlphaB[triangle_count] = 0;
+                triangleAlphaC[triangle_count] = 0;
+                triangle_hsl_a[triangle_count]   = vertexColourUnderlay[idxA];
+                triangle_hsl_b[triangle_count]   = vertexColourUnderlay[idxB];
+                triangle_hsl_c[triangle_count++] = vertexColourUnderlay[idxC];
             }  */
         }
     }

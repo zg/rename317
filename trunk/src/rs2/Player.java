@@ -14,7 +14,7 @@ public class Player extends Mobile
         if(model == null)
             return null;
         super.height = model.modelHeight;
-        model.oneSquareModel = true;
+        model.fits_on_single_square = true;
         if(aBoolean1699)
             return model;
         if(super.gfxId != -1 && super.currentAnim != -1)
@@ -80,7 +80,7 @@ public class Player extends Mobile
                 model_1.translate(super.boundExtentX - anInt1711, drawHeight - anInt1712, super.boundExtentY - anInt1713);
             }
         }
-        model.oneSquareModel = true;
+        model.fits_on_single_square = true;
         return model;
     }
 
@@ -106,7 +106,7 @@ public class Player extends Mobile
                 desc = NpcDef.forID(stream.g2());
                 break;
             }
-            if(appearanceModels[part] >= 512 && appearanceModels[part] - 512 < ItemDef.totalItems)
+            if(appearanceModels[part] >= 512 && appearanceModels[part] - 512 < ItemDef.item_count)
             {
                 int l1 = ItemDef.forID(appearanceModels[part] - 512).team;
                 if(l1 != 0)
@@ -219,7 +219,7 @@ public class Player extends Mobile
                     k2 = j1;
                 if(k2 >= 256 && k2 < 512 && !IdentityKit.cache[k2 - 256].isBodyDownloaded())
                     flag = true;
-                if(k2 >= 512 && !ItemDef.forID(k2 - 512).hasItemEquipped(playerGender))
+                if(k2 >= 512 && !ItemDef.forID(k2 - 512).isEquippedModelCached(playerGender))
                     flag = true;
             }
 
@@ -250,7 +250,7 @@ public class Player extends Mobile
                 }
                 if(i3 >= 512)
                 {
-                    Model model_4 = ItemDef.forID(i3 - 512).getModelEquipedForGender(playerGender);
+                    Model model_4 = ItemDef.forID(i3 - 512).getEquippedModel(playerGender);
                     if(model_4 != null)
                         aclass30_sub2_sub4_sub6s[j2++] = model_4;
                 }
@@ -303,7 +303,7 @@ public class Player extends Mobile
             int j = appearanceModels[i];
             if(j >= 256 && j < 512 && !IdentityKit.cache[j - 256].isHeadDownloaded())
                 isDownloaded = true;
-            if(j >= 512 && !ItemDef.forID(j - 512).isDownloaded(playerGender))
+            if(j >= 512 && !ItemDef.forID(j - 512).isDialogueModelCached(playerGender))
                 isDownloaded = true;
         }
 
@@ -322,7 +322,7 @@ public class Player extends Mobile
             }
             if(modelID >= 512)
             {
-                Model itemModel = ItemDef.forID(modelID - 512).getHeadModel(playerGender);
+                Model itemModel = ItemDef.forID(modelID - 512).getChatEquipModel(playerGender);
                 if(itemModel != null)
                     subModels[modelPointer++] = itemModel;
             }

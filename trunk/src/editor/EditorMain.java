@@ -257,7 +257,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             SpotAnim.unpackConfig(configArchive);
             SettingUsagePointers.unpackConfig(configArchive);
             VarBit.unpackConfig(configArchive);
-            ItemDef.isMembers = true;
+            ItemDef.enable_members_items = true;
             drawLoadingText(100, "Preparing game engine");
 
 			for (int x = 0; x < compassShape2.length; x++) {

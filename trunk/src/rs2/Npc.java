@@ -51,7 +51,7 @@ public class Npc extends Mobile
             }
         }
         if(desc.boundDim == 1)
-            model.oneSquareModel = true;
+            model.fits_on_single_square = true;
         return model;
     }
 
