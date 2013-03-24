@@ -160,21 +160,21 @@ public class ObjectDef
         if(configId_1 != -1)
         {
             VarBit varBit = VarBit.cache[configId_1];
-            int j = varBit.configId;
+            int j = varBit.variable;
             int k = varBit.leastSignificantBit;
             int l = varBit.mostSignificantBit;
             int i1 = StaticLogic.BITFIELD_MAX_VALUE[l - k];
             if (clientInstance == null)
                 i = 0;
             else
-                i = clientInstance.sessionSettings[j] >> k & i1;
+                i = clientInstance.session_variables[j] >> k & i1;
 
         } else
         if(configID != -1)
             if (clientInstance == null)
                 i = 0;
             else
-                i = clientInstance.sessionSettings[configID];
+                i = clientInstance.session_variables[configID];
         if(i < 0 || i >= configObjectIDs.length || configObjectIDs[i] == -1)
             return null;
         else
@@ -271,7 +271,7 @@ public class ObjectDef
 
         }
         if(needsScaling)
-            model_3.scaleT(modelSizeX, modelSizeY, modelSizeH);
+            model_3.scale(modelSizeX, modelSizeH, modelSizeY);
         if(modelIsOffset)
             model_3.translate(offsetX, offsetH, offsetY);
         model_3.light(64 + brightness, 768 + contrast * 5, -50, -10, -50, !nonFlatShading);

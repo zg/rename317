@@ -2168,14 +2168,14 @@ label0:
         zC = l4;
         if(yC < 50)
             return;
-        int screenXA = Rasterizer.centerX + (xA << 9) / yA;
-        int screenYA = Rasterizer.centerY + (zA << 9) / yA;
-        int screenXB = Rasterizer.centerX + (xB << 9) / yB;
-        int screenYB = Rasterizer.centerY + (zB << 9) / yB;
-        int screenXD = Rasterizer.centerX + (xD << 9) / yD;
-        int screenYD = Rasterizer.centerY + (zD << 9) / yD;
-        int screenXC = Rasterizer.centerX + (xC << 9) / yC;
-        int screenYC = Rasterizer.centerY + (zC << 9) / yC;
+        int screenXA = Rasterizer.center_x + (xA << 9) / yA;
+        int screenYA = Rasterizer.center_y + (zA << 9) / yA;
+        int screenXB = Rasterizer.center_x + (xB << 9) / yB;
+        int screenYB = Rasterizer.center_y + (zB << 9) / yB;
+        int screenXD = Rasterizer.center_x + (xD << 9) / yD;
+        int screenYD = Rasterizer.center_y + (zD << 9) / yD;
+        int screenXC = Rasterizer.center_x + (xC << 9) / yC;
+        int screenYC = Rasterizer.center_y + (zC << 9) / yC;
         if (plainTile.colourA != 0xbc614d) {
             Rasterizer.alpha = 0;
         } else if (heightHighlight)
@@ -2262,8 +2262,8 @@ label0:
                 rs2.ShapedTile.viewSpaceY[vID] = viewspaceY;
                 rs2.ShapedTile.viewSpaceZ[vID] = viewspaceZ;
             }
-            rs2.ShapedTile.screenX[vID] = Rasterizer.centerX + (viewspaceX << 9) / viewspaceZ;
-            rs2.ShapedTile.screenY[vID] = Rasterizer.centerY + (viewspaceY << 9) / viewspaceZ;
+            rs2.ShapedTile.screenX[vID] = Rasterizer.center_x + (viewspaceX << 9) / viewspaceZ;
+            rs2.ShapedTile.screenY[vID] = Rasterizer.center_y + (viewspaceY << 9) / viewspaceZ;
         }
 
         Rasterizer.alpha = 0;

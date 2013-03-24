@@ -310,7 +310,7 @@ public class DrawingArea extends QueueNode {
 
     }
 
-    public static void fillCircle(int posX, int y, int radius, int colour) {
+    public static void fillCircle(int x, int y, int radius, int colour) {
         int start_y = y - radius;
         if (start_y < 0)
             start_y = 0;
@@ -320,10 +320,10 @@ public class DrawingArea extends QueueNode {
         for (int _y = start_y; _y <= end_y; _y++) {
             int y_from_center = _y - y;
             int x_from_center = (int) Math.sqrt(radius * radius - y_from_center * y_from_center);
-            int start_x = posX - x_from_center;
+            int start_x = x - x_from_center;
             if (start_x < 0)
                 start_x = 0;
-            int end_x = posX + x_from_center;
+            int end_x = x + x_from_center;
             if (end_x >= width)
                 end_x = width - 1;
             int pixel_offset = start_x + _y * width;

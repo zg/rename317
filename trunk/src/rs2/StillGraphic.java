@@ -32,7 +32,7 @@ public class StillGraphic extends Entity {
             model_1.vertexSkin = null;
         }
         if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
-            model_1.scaleT(spotAnim.resizeXY, spotAnim.resizeXY, spotAnim.resizeZ);
+            model_1.scale(spotAnim.resizeXY, spotAnim.resizeZ, spotAnim.resizeXY);
         if(spotAnim.rotation != 0)
         {
             if(spotAnim.rotation == 90)

@@ -31,8 +31,8 @@ public class Rasterizer extends DrawingArea {
 		for (int i = 0; i < height; i++) {
 			lineOffsets[i] = width * i;
 		}
-		centerX = width / 2;
-		centerY = height / 2;
+		center_x = width / 2;
+		center_y = height / 2;
 	}
 
 	public static void setBounds(int width, int height) {
@@ -40,8 +40,8 @@ public class Rasterizer extends DrawingArea {
 		for (int i = 0; i < height; i++) {
 			lineOffsets[i] = width * i;
 		}
-		centerX = width / 2;
-		centerY = height / 2;
+		center_x = width / 2;
+		center_y = height / 2;
 	}
 
 	public static void clearTextureCache() {
@@ -1637,7 +1637,7 @@ public class Rasterizer extends DrawingArea {
 					grad_b -= grad_b_off * y_b;
 					y_b = 0;
 				}
-				int jA = y_a - centerY;
+				int jA = y_a - center_y;
 				Oa += Va * jA;
 				Ob += Vb * jA;
 				Oc += Vc * jA;
@@ -1712,7 +1712,7 @@ public class Rasterizer extends DrawingArea {
 				grad_c -= grad_b_off * y_c;
 				y_c = 0;
 			}
-			int l8 = y_a - centerY;
+			int l8 = y_a - center_y;
 			Oa += Va * l8;
 			Ob += Vb * l8;
 			Oc += Vc * l8;
@@ -1798,7 +1798,7 @@ public class Rasterizer extends DrawingArea {
 					grad_c -= grad_c_off * y_c;
 					y_c = 0;
 				}
-				int i9 = y_b - centerY;
+				int i9 = y_b - center_y;
 				Oa += Va * i9;
 				Ob += Vb * i9;
 				Oc += Vc * i9;
@@ -1873,7 +1873,7 @@ public class Rasterizer extends DrawingArea {
 				grad_a -= grad_c_off * y_a;
 				y_a = 0;
 			}
-			int j9 = y_b - centerY;
+			int j9 = y_b - center_y;
 			Oa += Va * j9;
 			Ob += Vb * j9;
 			Oc += Vc * j9;
@@ -1958,7 +1958,7 @@ public class Rasterizer extends DrawingArea {
 				grad_a -= grad_a_off * y_a;
 				y_a = 0;
 			}
-			int k9 = y_c - centerY;
+			int k9 = y_c - center_y;
 			Oa += Va * k9;
 			Ob += Vb * k9;
 			Oc += Vc * k9;
@@ -2033,7 +2033,7 @@ public class Rasterizer extends DrawingArea {
 			grad_b -= grad_a_off * y_b;
 			y_b = 0;
 		}
-		int l9 = y_c - centerY;
+		int l9 = y_c - center_y;
 		Oa += Va * l9;
 		Ob += Vb * l9;
 		Oc += Vc * l9;
@@ -2131,7 +2131,7 @@ public class Rasterizer extends DrawingArea {
 		if (lowMem) {
 			int i4 = 0;
 			int k4 = 0;
-			int k6 = start_x - centerX;
+			int k6 = start_x - center_x;
 			arg7 += (arg10 >> 3) * k6;
 			arg8 += (arg11 >> 3) * k6;
 			arg9 += (arg12 >> 3) * k6;
@@ -2298,7 +2298,7 @@ public class Rasterizer extends DrawingArea {
 		}
 		int j4 = 0;
 		int l4 = 0;
-		int l6 = start_x - centerX;
+		int l6 = start_x - center_x;
 		arg7 += (arg10 >> 3) * l6;
 		arg8 += (arg11 >> 3) * l6;
 		arg9 += (arg12 >> 3) * l6;
@@ -2469,8 +2469,8 @@ public class Rasterizer extends DrawingArea {
 	private static boolean opaque;
 	public static boolean notTextured = true;//true;
 	public static int alpha;
-	public static int centerX;
-	public static int centerY;
+	public static int center_x;
+	public static int center_y;
 	private static int[] shadowDecay;
 	public static final int[] anIntArray1469;
 	public static int SINE[];

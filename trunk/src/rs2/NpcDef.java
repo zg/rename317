@@ -63,20 +63,20 @@ public class NpcDef
         if(varBitID != -1)
         {
             VarBit varBit = VarBit.cache[varBitID];
-            int k = varBit.configId;
+            int k = varBit.variable;
             int l = varBit.leastSignificantBit;
             int i1 = varBit.mostSignificantBit;
             int j1 = StaticLogic.BITFIELD_MAX_VALUE[i1 - l];
             if (clientInstance == null)
                 j = 0;
             else
-                j = clientInstance.sessionSettings[k] >> l & j1;
+                j = clientInstance.session_variables[k] >> l & j1;
         } else
         if(sessionSettingID != -1)
             if (clientInstance == null)
                 j = 0;
             else
-                j = clientInstance.sessionSettings[sessionSettingID];
+                j = clientInstance.session_variables[sessionSettingID];
         if(j < 0 || j >= childrenIDs.length || childrenIDs[j] == -1)
             return null;
         else
@@ -156,7 +156,7 @@ public class NpcDef
         if(frameId != -1)
             model_1.applyTransform(frameId);
         if(scaleXZ != 128 || scaleY != 128)
-            model_1.scaleT(scaleXZ, scaleXZ, scaleY);
+            model_1.scale(scaleXZ, scaleY, scaleXZ);
         model_1.calculateDiagonals();
         model_1.triangleSkin = null;
         model_1.vertexSkin = null;
