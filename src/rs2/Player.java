@@ -30,7 +30,7 @@ public class Player extends Mobile
                 model_3.triangleSkin = null;
                 model_3.vertexSkin = null;
                 if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
-                    model_3.scaleT(spotAnim.resizeXY, spotAnim.resizeXY, spotAnim.resizeZ);
+                    model_3.scale(spotAnim.resizeXY, spotAnim.resizeZ, spotAnim.resizeXY);
                 model_3.light(64 + spotAnim.modelBrightness, 850 + spotAnim.modelShadow, -30, -50, -30, true);
                 Model aclass30_sub2_sub4_sub6_1s[] = {
                         model, model_3

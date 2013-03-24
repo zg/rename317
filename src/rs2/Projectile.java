@@ -42,7 +42,7 @@ public class Projectile extends Entity {
             model_1.vertexSkin = null;
         }
         if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
-            model_1.scaleT(spotAnim.resizeXY, spotAnim.resizeXY, spotAnim.resizeZ);
+            model_1.scale(spotAnim.resizeXY, spotAnim.resizeZ, spotAnim.resizeXY);
         model_1.method474(anInt1596);
         model_1.light(64 + spotAnim.modelBrightness, 850 + spotAnim.modelShadow, -30, -50, -30, true);
             return model_1;

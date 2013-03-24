@@ -29,7 +29,7 @@ public class VarBit {
                 return;
             if(opCode == 1)
             {
-                configId = stream.g2();
+                variable = stream.g2();
                 leastSignificantBit = stream.g1();
                 mostSignificantBit = stream.g1();
             } else
@@ -54,7 +54,7 @@ public class VarBit {
     }
 
     public static VarBit cache[];
-    public int configId;
+    public int variable;
     public int leastSignificantBit;
     public int mostSignificantBit;
 }

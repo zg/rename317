@@ -1799,12 +1799,12 @@ public class Model extends Entity {
         }
     }
 
-    public void scaleT(int scaleX, int scaleZ, int scaleY) {
-        hash *= scaleX*scaleZ*scaleY;
-        for (int i1 = 0; i1 < vertexCount; i1++) {
-            vertexX[i1] = (vertexX[i1] * scaleX) / 128;
-            vertexY[i1] = (vertexY[i1] * scaleY) / 128;
-            vertexZ[i1] = (vertexZ[i1] * scaleZ) / 128;
+    public void scale(int x, int y, int z) {
+        hash *= x*y*z;
+        for (int _ctr = 0; _ctr < vertexCount; _ctr++) {
+            vertexX[_ctr] = (vertexX[_ctr] * x) / 128;
+            vertexY[_ctr] = (vertexY[_ctr] * y) / 128;
+            vertexZ[_ctr] = (vertexZ[_ctr] * z) / 128;
         }
 
     }
@@ -2153,8 +2153,8 @@ public class Model extends Entity {
 
     public void rendersingle(int j, int diagionalRotation, int l, int i1, int sine, int cosine) {//todo figure if i has any significence to its value.
         int i = 0; //was a parameters
-        int l1 = Rasterizer.centerX;
-        int i2 = Rasterizer.centerY;
+        int l1 = Rasterizer.center_x;
+        int i2 = Rasterizer.center_y;
         int j2 = SINE[i];//[i]
         int k2 = COSINE[i];//[i]
         int l2 = SINE[j];
@@ -2252,16 +2252,16 @@ public class Model extends Entity {
                 k4 /= i3;
                 i5 /= k5;
             }
-            int i6 = cursorXPos - Rasterizer.centerX;
-            int k6 = cursorYPos - Rasterizer.centerY;
+            int i6 = cursorXPos - Rasterizer.center_x;
+            int k6 = cursorYPos - Rasterizer.center_y;
             if (i6 > k3 && i6 < l3 && k6 > i5 && k6 < k4)
                 if (oneSquareModel)
                     resourceIDTAG[resourceCount++] = i2;
                 else
                     flag1 = true;
         }
-        int l5 = Rasterizer.centerX;
-        int j6 = Rasterizer.centerY;
+        int l5 = Rasterizer.center_x;
+        int j6 = Rasterizer.center_y;
         int l6 = 0;
         int i7 = 0;
         if (i != 0) {
@@ -2505,8 +2505,8 @@ public class Model extends Entity {
     }
 
     private void method485(int i) {
-        int j = Rasterizer.centerX;
-        int k = Rasterizer.centerY;
+        int j = Rasterizer.center_x;
+        int k = Rasterizer.center_y;
         int l = 0;
         int i1 = triangleA[i];
         int j1 = triangleB[i];

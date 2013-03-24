@@ -9,7 +9,7 @@ public class ItemDef
 
     public static void clearCache()
     {
-        modelCache = null;
+        model_cache = null;
         rgbImageCache = null;
         streamIndices = null;
         cache = null;
@@ -77,10 +77,10 @@ public class ItemDef
             };
             dialogueModel_ = new Model(2, models);
         }
-        if(originalModelColours != null)
+        if(model_recolour_original != null)
         {
-            for(int colourPtr = 0; colourPtr < originalModelColours.length; colourPtr++)
-                dialogueModel_.recolour(originalModelColours[colourPtr], modifiedModelColours[colourPtr]);
+            for(int colourPtr = 0; colourPtr < model_recolour_original.length; colourPtr++)
+                dialogueModel_.recolour(model_recolour_original[colourPtr], model_recolour_target[colourPtr]);
 
         }
         return dialogueModel_;
@@ -144,10 +144,10 @@ public class ItemDef
             primaryModel_.translate(0, maleYOffset, 0);
         if(gender == 1 && femaleYOffset != 0)
             primaryModel_.translate(0, femaleYOffset, 0);
-        if(originalModelColours != null)
+        if(model_recolour_original != null)
         {
-            for(int colourPtr = 0; colourPtr < originalModelColours.length; colourPtr++)
-                primaryModel_.recolour(originalModelColours[colourPtr], modifiedModelColours[colourPtr]);
+            for(int colourPtr = 0; colourPtr < model_recolour_original.length; colourPtr++)
+                primaryModel_.recolour(model_recolour_original[colourPtr], model_recolour_target[colourPtr]);
 
         }
         return primaryModel_;
@@ -155,11 +155,11 @@ public class ItemDef
 
     private void setDefaults()
     {
-        modelID = 0;
+        model_id = 0;
         name = null;
         description = null;
-        originalModelColours = null;
-        modifiedModelColours = null;
+        model_recolour_original = null;
+        model_recolour_target = null;
         modelZoom = 2000;
         rotationY = 0;
         rotationX = 0;
@@ -183,13 +183,13 @@ public class ItemDef
         maleDialogueHat = -1;
         femaleDialogue = -1;
         femaleDialogueHat = -1;
-        stackIDs = null;
-        stackAmounts = null;
-        certID = -1;
-        certTemplateID = -1;
-        modelSizeX = 128;
-        modelSizeY = 128;
-        modelSizeZ = 128;
+        stack_variant_id = null;
+        stack_variant_size = null;
+        unnoted_item_id = -1;
+        noted_item_id = -1;
+        model_scale_x = 128;
+        model_scale_y = 128;
+        model_scale_z = 128;
         lightModifier = 0;
         shadowModifier = 0;
         team = 0;
@@ -209,7 +209,7 @@ public class ItemDef
         itemDef.id = itemID;
         itemDef.setDefaults();
         itemDef.readValues(itemData);
-        if(itemDef.certTemplateID != -1)
+        if(itemDef.noted_item_id != -1)
             itemDef.toNote();
         if(!isMembers && itemDef.membersObject)
         {
@@ -224,8 +224,8 @@ public class ItemDef
 
     private void toNote()
     {
-        ItemDef itemDef = forID(certTemplateID);
-        modelID = itemDef.modelID;
+        ItemDef itemDef = forID(noted_item_id);
+        model_id = itemDef.model_id;
         modelZoom = itemDef.modelZoom;
         rotationY = itemDef.rotationY;
         rotationX = itemDef.rotationX;
@@ -233,9 +233,9 @@ public class ItemDef
         diagionalRotation = itemDef.diagionalRotation;
         modelOffset1 = itemDef.modelOffset1;
         modelOffset2 = itemDef.modelOffset2;
-        originalModelColours = itemDef.originalModelColours;
-        modifiedModelColours = itemDef.modifiedModelColours;
-        ItemDef itemDef_1 = forID(certID);
+        model_recolour_original = itemDef.model_recolour_original;
+        model_recolour_target = itemDef.model_recolour_target;
+        ItemDef itemDef_1 = forID(unnoted_item_id);
         name = itemDef_1.name;
         membersObject = itemDef_1.membersObject;
         value = itemDef_1.value;
@@ -247,11 +247,11 @@ public class ItemDef
         stackable = true;
     }
 
-    public static RgbImage getSprite(int itemID, int stackSize, int k)
+    public static RgbImage getSprite(int item_id, int stackSize, int outline_colour)
     {
-        if(k == 0)
+        if(outline_colour == 0)
         {
-            RgbImage rgbImage = (RgbImage) rgbImageCache.get(itemID);
+            RgbImage rgbImage = (RgbImage) rgbImageCache.get(item_id);
             if(rgbImage != null && rgbImage.library_height != stackSize && rgbImage.library_height != -1)
             {
                 rgbImage.unlink();
@@ -260,118 +260,114 @@ public class ItemDef
             if(rgbImage != null)
                 return rgbImage;
         }
-        ItemDef definition = forID(itemID);
-        if(definition.stackIDs == null)
+        ItemDef definition = forID(item_id);
+        if(definition.stack_variant_id == null)
             stackSize = -1;
         if(stackSize > 1)
         {
-            int itemId = -1;
+            int stack_item_id = -1;
             for(int stackPtr = 0; stackPtr < 10; stackPtr++)
-                if(stackSize >= definition.stackAmounts[stackPtr] && definition.stackAmounts[stackPtr] != 0)
-                    itemId = definition.stackIDs[stackPtr];
+                if(stackSize >= definition.stack_variant_size[stackPtr] && definition.stack_variant_size[stackPtr] != 0)
+                    stack_item_id = definition.stack_variant_id[stackPtr];
 
-            if(itemId != -1)
-                definition = forID(itemId);
+            if(stack_item_id != -1)
+                definition = forID(stack_item_id);
         }
-        Model model = definition.getModelForAmmount(1);
+        Model model = definition.getModel(1);
         if(model == null)
             return null;
-        RgbImage rgbImage = null;
-        if(definition.certTemplateID != -1)
+        RgbImage cert_image = null;
+        if(definition.noted_item_id != -1)
         {
-            rgbImage = getSprite(definition.certID, 10, -1);
-            if(rgbImage == null)
+            cert_image = getSprite(definition.unnoted_item_id, 10, -1);
+            if(cert_image == null)
                 return null;
         }
         RgbImage sprite2 = new RgbImage(32, 32);
-        int centerX = Rasterizer.centerX;
-        int centerY = Rasterizer.centerY;
+        int centerX = Rasterizer.center_x;
+        int centerY = Rasterizer.center_y;
         int lineOffsets[] = Rasterizer.lineOffsets;
         int pixels[] = DrawingArea.pixels;
         int width = DrawingArea.width;
         int height = DrawingArea.height;
-        int topX = DrawingArea.viewport_left;
-        int width_ = DrawingArea.viewport_right;
-        int topY = DrawingArea.viewport_top;
-        int height_ = DrawingArea.viewport_bottom;
+        int vp_left = DrawingArea.viewport_left;
+        int vp_right = DrawingArea.viewport_right;
+        int vp_top = DrawingArea.viewport_top;
+        int vp_bottom = DrawingArea.viewport_bottom;
         Rasterizer.notTextured = false;
         DrawingArea.setTarget(32, 32, sprite2.image_pixels);
         DrawingArea.fillRect(0, 0, 32, 32, 0);
         Rasterizer.setDefaultBounds();
         int k3 = definition.modelZoom;
-        if(k == -1)
+        if(outline_colour == -1)
             k3 = (int)((double)k3 * 1.5D);
-        if(k > 0)
+        if(outline_colour > 0)
             k3 = (int)((double)k3 * 1.04D);
         int l3 = Rasterizer.SINE[definition.rotationY] * k3 >> 16;
         int i4 = Rasterizer.COSINE[definition.rotationY] * k3 >> 16;
         model.rendersingle(definition.rotationX, definition.diagionalRotation, definition.rotationY, definition.modelOffset1, l3 + model.modelHeight / 2 + definition.modelOffset2, i4 + definition.modelOffset2);
-        for(int i5 = 31; i5 >= 0; i5--)
+        for(int _x = 31; _x >= 0; _x--)
         {
-            for(int j4 = 31; j4 >= 0; j4--)
-                if(sprite2.image_pixels[i5 + j4 * 32] == 0)
-                    if(i5 > 0 && sprite2.image_pixels[(i5 - 1) + j4 * 32] > 1)
-                        sprite2.image_pixels[i5 + j4 * 32] = 1;
-                    else
-                    if(j4 > 0 && sprite2.image_pixels[i5 + (j4 - 1) * 32] > 1)
-                        sprite2.image_pixels[i5 + j4 * 32] = 1;
-                    else
-                    if(i5 < 31 && sprite2.image_pixels[i5 + 1 + j4 * 32] > 1)
-                        sprite2.image_pixels[i5 + j4 * 32] = 1;
-                    else
-                    if(j4 < 31 && sprite2.image_pixels[i5 + (j4 + 1) * 32] > 1)
-                        sprite2.image_pixels[i5 + j4 * 32] = 1;
+            for(int _y = 31; _y >= 0; _y--)
+                if(sprite2.image_pixels[_x + _y * 32] == 0)
+                    if(_x > 0 && sprite2.image_pixels[(_x - 1) + _y * 32] > 1)
+                        sprite2.image_pixels[_x + _y * 32] = 1;
+                    else if(_y > 0 && sprite2.image_pixels[_x + (_y - 1) * 32] > 1)
+                        sprite2.image_pixels[_x + _y * 32] = 1;
+                    else if(_x < 31 && sprite2.image_pixels[_x + 1 + _y * 32] > 1)
+                        sprite2.image_pixels[_x + _y * 32] = 1;
+                    else if(_y < 31 && sprite2.image_pixels[_x + (_y + 1) * 32] > 1)
+                        sprite2.image_pixels[_x + _y * 32] = 1;
 
         }
 
-        if(k > 0)
+        if(outline_colour > 0)
         {
-            for(int j5 = 31; j5 >= 0; j5--)
+            for(int _x = 31; _x >= 0; _x--)
             {
-                for(int k4 = 31; k4 >= 0; k4--)
-                    if(sprite2.image_pixels[j5 + k4 * 32] == 0)
-                        if(j5 > 0 && sprite2.image_pixels[(j5 - 1) + k4 * 32] == 1)
-                            sprite2.image_pixels[j5 + k4 * 32] = k;
+                for(int _y = 31; _y >= 0; _y--)
+                    if(sprite2.image_pixels[_x + _y * 32] == 0)
+                        if(_x > 0 && sprite2.image_pixels[(_x - 1) + _y * 32] == 1)
+                            sprite2.image_pixels[_x + _y * 32] = outline_colour;
                         else
-                        if(k4 > 0 && sprite2.image_pixels[j5 + (k4 - 1) * 32] == 1)
-                            sprite2.image_pixels[j5 + k4 * 32] = k;
+                        if(_y > 0 && sprite2.image_pixels[_x + (_y - 1) * 32] == 1)
+                            sprite2.image_pixels[_x + _y * 32] = outline_colour;
                         else
-                        if(j5 < 31 && sprite2.image_pixels[j5 + 1 + k4 * 32] == 1)
-                            sprite2.image_pixels[j5 + k4 * 32] = k;
+                        if(_x < 31 && sprite2.image_pixels[_x + 1 + _y * 32] == 1)
+                            sprite2.image_pixels[_x + _y * 32] = outline_colour;
                         else
-                        if(k4 < 31 && sprite2.image_pixels[j5 + (k4 + 1) * 32] == 1)
-                            sprite2.image_pixels[j5 + k4 * 32] = k;
+                        if(_y < 31 && sprite2.image_pixels[_x + (_y + 1) * 32] == 1)
+                            sprite2.image_pixels[_x + _y * 32] = outline_colour;
 
             }
 
-        } else
-        if(k == 0)
+        } else if(outline_colour == 0)
         {
-            for(int k5 = 31; k5 >= 0; k5--)
+            for(int _x = 31; _x >= 0; _x--)
             {
-                for(int l4 = 31; l4 >= 0; l4--)
-                    if(sprite2.image_pixels[k5 + l4 * 32] == 0 && k5 > 0 && l4 > 0 && sprite2.image_pixels[(k5 - 1) + (l4 - 1) * 32] > 0)
-                        sprite2.image_pixels[k5 + l4 * 32] = 0x302020;
+                for(int _y = 31; _y >= 0; _y--)
+                    if(sprite2.image_pixels[_x + _y * 32] == 0 && _x > 0 && _y > 0 && sprite2.image_pixels[(_x - 1) + (_y - 1) * 32] > 0)
+                        sprite2.image_pixels[_x + _y * 32] = 0x302020;
 
             }
 
         }
-        if(definition.certTemplateID != -1)
+        if(definition.noted_item_id != -1)
         {
-            int l5 = rgbImage.library_width;
-            int j6 = rgbImage.library_height;
-            rgbImage.library_width = 32;
-            rgbImage.library_height = 32;
-            rgbImage.draw_trans(0, 0);
-            rgbImage.library_width = l5;
-            rgbImage.library_height = j6;
+            int old_w = cert_image.library_width;
+            int old_h = cert_image.library_height;
+            cert_image.library_width = 32;
+            cert_image.library_height = 32;
+            cert_image.draw_trans(0, 0);
+            cert_image.library_width = old_w;
+            cert_image.library_height = old_h;
         }
-        if(k == 0)
-            rgbImageCache.put(sprite2, itemID);
+        if(outline_colour == 0)
+            rgbImageCache.put(sprite2, item_id);
         DrawingArea.setTarget(width, height, pixels);
-        DrawingArea.setClip(topX, topY, width_, height_);
-        Rasterizer.centerX = centerX;
-        Rasterizer.centerY = centerY;
+        DrawingArea.setClip(vp_left, vp_top, vp_right, vp_bottom);
+        Rasterizer.center_x = centerX;
+        Rasterizer.center_y = centerY;
         Rasterizer.lineOffsets = lineOffsets;
         Rasterizer.notTextured = true;
         if(definition.stackable)
@@ -382,57 +378,57 @@ public class ItemDef
         return sprite2;
     }
 
-    public Model getModelForAmmount(int i)
+    public Model getModel(int stack_size)
     {
-        if(stackIDs != null && i > 1)
+        if(stack_variant_id != null && stack_size > 1)
         {
-            int j = -1;
+            int stack_item_id = -1;
             for(int k = 0; k < 10; k++)
-                if(i >= stackAmounts[k] && stackAmounts[k] != 0)
-                    j = stackIDs[k];
+                if(stack_size >= stack_variant_size[k] && stack_variant_size[k] != 0)
+                    stack_item_id = stack_variant_id[k];
 
-            if(j != -1)
-                return forID(j).getModelForAmmount(1);
+            if(stack_item_id != -1)
+                return forID(stack_item_id).getModel(1);
         }
-        Model model = (Model) modelCache.get(id);
+        Model model = (Model) model_cache.get(id);
         if(model != null)
             return model;
-        model = Model.getModel(modelID);
+        model = Model.getModel(model_id);
         if(model == null)
             return null;
-        if(modelSizeX != 128 || modelSizeY != 128 || modelSizeZ != 128)
-            model.scaleT(modelSizeX, modelSizeZ, modelSizeY);
-        if(originalModelColours != null)
+        if(model_scale_x != 128 || model_scale_y != 128 || model_scale_z != 128)
+            model.scale(model_scale_x, model_scale_y, model_scale_z);
+        if(model_recolour_original != null)
         {
-            for(int colourPtr = 0; colourPtr < originalModelColours.length; colourPtr++)
-                model.recolour(originalModelColours[colourPtr], modifiedModelColours[colourPtr]);
+            for(int colour_ptr = 0; colour_ptr < model_recolour_original.length; colour_ptr++)
+                model.recolour(model_recolour_original[colour_ptr], model_recolour_target[colour_ptr]);
 
         }
         model.light(64 + lightModifier, 768 + shadowModifier, -50, -10, -50, true);
         model.oneSquareModel = true;
-        modelCache.put(model, id);
+        model_cache.put(model, id);
         return model;
     }
 
     public Model getInventoryModel(int i)
     {
-        if(stackIDs != null && i > 1)
+        if(stack_variant_id != null && i > 1)
         {
             int j = -1;
             for(int k = 0; k < 10; k++)
-                if(i >= stackAmounts[k] && stackAmounts[k] != 0)
-                    j = stackIDs[k];
+                if(i >= stack_variant_size[k] && stack_variant_size[k] != 0)
+                    j = stack_variant_id[k];
 
             if(j != -1)
                 return forID(j).getInventoryModel(1);
         }
-        Model model = Model.getModel(modelID);
+        Model model = Model.getModel(model_id);
         if(model == null)
             return null;
-        if(originalModelColours != null)
+        if(model_recolour_original != null)
         {
-            for(int colourPtr = 0; colourPtr < originalModelColours.length; colourPtr++)
-                model.recolour(originalModelColours[colourPtr], modifiedModelColours[colourPtr]);
+            for(int colourPtr = 0; colourPtr < model_recolour_original.length; colourPtr++)
+                model.recolour(model_recolour_original[colourPtr], model_recolour_target[colourPtr]);
 
         }
         return model;
@@ -446,7 +442,7 @@ public class ItemDef
             if(opCode == 0)
                 return;
             if(opCode == 1)
-                modelID = stream.g2();
+                model_id = stream.g2();
             else
             if(opCode == 2)
                 name = stream.gstr();
@@ -520,12 +516,12 @@ public class ItemDef
             if(opCode == 40)
             {
                 int colours = stream.g1();
-                originalModelColours = new int[colours];
-                modifiedModelColours = new int[colours];
+                model_recolour_original = new int[colours];
+                model_recolour_target = new int[colours];
                 for(int colourPtr = 0; colourPtr < colours; colourPtr++)
                 {
-                    originalModelColours[colourPtr] = stream.g2();
-                    modifiedModelColours[colourPtr] = stream.g2();
+                    model_recolour_original[colourPtr] = stream.g2();
+                    model_recolour_target[colourPtr] = stream.g2();
                 }
 
             } else
@@ -551,29 +547,29 @@ public class ItemDef
                 diagionalRotation = stream.g2();
             else
             if(opCode == 97)
-                certID = stream.g2();
+                unnoted_item_id = stream.g2();
             else
             if(opCode == 98)
-                certTemplateID = stream.g2();
+                noted_item_id = stream.g2();
             else
             if(opCode >= 100 && opCode < 110)
             {
-                if(stackIDs == null)
+                if(stack_variant_id == null)
                 {
-                    stackIDs = new int[10];
-                    stackAmounts = new int[10];
+                    stack_variant_id = new int[10];
+                    stack_variant_size = new int[10];
                 }
-                stackIDs[opCode - 100] = stream.g2();
-                stackAmounts[opCode - 100] = stream.g2();
+                stack_variant_id[opCode - 100] = stream.g2();
+                stack_variant_size[opCode - 100] = stream.g2();
             } else
             if(opCode == 110)
-                modelSizeX = stream.g2();
+                model_scale_x = stream.g2();
             else
             if(opCode == 111)
-                modelSizeY = stream.g2();
+                model_scale_y = stream.g2();
             else
             if(opCode == 112)
-                modelSizeZ = stream.g2();
+                model_scale_z = stream.g2();
             else
             if(opCode == 113)
                 lightModifier = stream.g1b();
@@ -597,28 +593,28 @@ public class ItemDef
 
     private byte femaleYOffset;
     public int value;
-    private int[] originalModelColours;
+    private int[] model_recolour_original;
     public int id;
     public static MemCache rgbImageCache = new MemCache(100);
-    public static MemCache modelCache = new MemCache(50);
-    private int[] modifiedModelColours;
+    public static MemCache model_cache = new MemCache(50);
+    private int[] model_recolour_target;
     public boolean membersObject;
     private int femaleEmblem;
-    private int certTemplateID;
+    private int noted_item_id;
     private int femaleEquip2;
     private int maleEquip1;
     private int maleDialogueHat;
-    private int modelSizeX;
+    private int model_scale_x;
     public String groundActions[];
     private int modelOffset1;
     public String name;
     private static ItemDef[] cache;
     private int femaleDialogueHat;
-    private int modelID;
+    private int model_id;
     private int maleDialogue;
     public boolean stackable;
     public byte description[];
-    private int certID;
+    private int unnoted_item_id;
     private static int cacheIndex;
     public int modelZoom;
     public static boolean isMembers = true;
@@ -628,16 +624,16 @@ public class ItemDef
     private int maleEquip2;
     public String actions[];
     public int rotationY;
-    private int modelSizeZ;
-    private int modelSizeY;
-    private int[] stackIDs;
+    private int model_scale_z;
+    private int model_scale_y;
+    private int[] stack_variant_id;
     private int modelOffset2;
     private static int[] streamIndices;
     private int lightModifier;
     private int femaleDialogue;
     public int rotationX;
     private int femaleEquip1;
-    private int[] stackAmounts;
+    private int[] stack_variant_size;
     public int team;
     public static int totalItems;
     private int diagionalRotation;

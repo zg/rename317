@@ -42,7 +42,7 @@ public class Npc extends Mobile
                 npcModel.triangleSkin = null;
                 npcModel.vertexSkin = null;
                 if(spotAnim.resizeXY != 128 || spotAnim.resizeZ != 128)
-                    npcModel.scaleT(spotAnim.resizeXY, spotAnim.resizeXY, spotAnim.resizeZ);
+                    npcModel.scale(spotAnim.resizeXY, spotAnim.resizeZ, spotAnim.resizeXY);
                 npcModel.light(64 + spotAnim.modelBrightness, 850 + spotAnim.modelShadow, -30, -50, -30, true);
                 Model fullModel[] = {
                         model, npcModel
