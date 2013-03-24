@@ -1,6 +1,8 @@
 package rs2;
 
 
+import rs2.model.entity.Entity;
+
 public class Item extends Entity {
 
     public final Model getRotatedModel()

@@ -2,6 +2,8 @@ package rs2;
 
 // Decompiler options: packimports(3)
 
+import rs2.model.entity.Entity;
+
 public class MapRegion {
 
     private int[][][] underlayRgb;

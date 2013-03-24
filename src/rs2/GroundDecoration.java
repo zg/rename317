@@ -1,6 +1,6 @@
 package rs2;
 
-import org.peterbjornx.pgl2.model.*;
+import rs2.model.entity.Entity;
 
 public class GroundDecoration
 {

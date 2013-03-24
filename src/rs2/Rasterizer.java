@@ -3,6 +3,8 @@ package rs2;
 
 //import javax.management.MXBean;
 
+import rs2.media.image.RgbImage;
+
 public class Rasterizer extends DrawingArea {
 
     public static RgbImage[] textureImagesHD = new RgbImage[670];
@@ -310,14 +312,14 @@ public class Rasterizer extends DrawingArea {
 			z_c_off = (z_a - z_c << 15) / (y_a - y_c);
 		}
 		if (y_a <= y_b && y_a <= y_c) {
-			if (y_a >= viewport_h) {
+			if (y_a >= viewport_bottom) {
 				return;
 			}
-			if (y_b > viewport_h) {
-				y_b = viewport_h;
+			if (y_b > viewport_bottom) {
+				y_b = viewport_bottom;
 			}
-			if (y_c > viewport_h) {
-				y_c = viewport_h;
+			if (y_c > viewport_bottom) {
+				y_c = viewport_bottom;
 			}
 			if (y_b < y_c) {
 				x_c = x_a <<= 16;
@@ -435,14 +437,14 @@ public class Rasterizer extends DrawingArea {
 			return;
 		}
 		if (y_b <= y_c) {
-			if (y_b >= viewport_h) {
+			if (y_b >= viewport_bottom) {
 				return;
 			}
-			if (y_c > viewport_h) {
-				y_c = viewport_h;
+			if (y_c > viewport_bottom) {
+				y_c = viewport_bottom;
 			}
-			if (y_a > viewport_h) {
-				y_a = viewport_h;
+			if (y_a > viewport_bottom) {
+				y_a = viewport_bottom;
 			}
 			if (y_c < y_a) {
 				x_a = x_b <<= 16;
@@ -559,14 +561,14 @@ public class Rasterizer extends DrawingArea {
 			}
 			return;
 		}
-		if (y_c >= viewport_h) {
+		if (y_c >= viewport_bottom) {
 			return;
 		}
-		if (y_a > viewport_h) {
-			y_a = viewport_h;
+		if (y_a > viewport_bottom) {
+			y_a = viewport_bottom;
 		}
-		if (y_b > viewport_h) {
-			y_b = viewport_h;
+		if (y_b > viewport_bottom) {
+			y_b = viewport_bottom;
 		}
 		if (y_a < y_b) {
 			x_b = x_c <<= 16;
@@ -1227,14 +1229,14 @@ public class Rasterizer extends DrawingArea {
 			x_c_off = (x_a - x_c << 16) / (y_a - y_c);
 		}
 		if (y_a <= y_b && y_a <= y_c) {
-			if (y_a >= viewport_h) {
+			if (y_a >= viewport_bottom) {
 				return;
 			}
-			if (y_b > viewport_h) {
-				y_b = viewport_h;
+			if (y_b > viewport_bottom) {
+				y_b = viewport_bottom;
 			}
-			if (y_c > viewport_h) {
-				y_c = viewport_h;
+			if (y_c > viewport_bottom) {
+				y_c = viewport_bottom;
 			}
 			if (y_b < y_c) {
 				x_c = x_a <<= 16;
@@ -1326,14 +1328,14 @@ public class Rasterizer extends DrawingArea {
 			return;
 		}
 		if (y_b <= y_c) {
-			if (y_b >= viewport_h) {
+			if (y_b >= viewport_bottom) {
 				return;
 			}
-			if (y_c > viewport_h) {
-				y_c = viewport_h;
+			if (y_c > viewport_bottom) {
+				y_c = viewport_bottom;
 			}
-			if (y_a > viewport_h) {
-				y_a = viewport_h;
+			if (y_a > viewport_bottom) {
+				y_a = viewport_bottom;
 			}
 			if (y_c < y_a) {
 				x_a = x_b <<= 16;
@@ -1424,14 +1426,14 @@ public class Rasterizer extends DrawingArea {
 			}
 			return;
 		}
-		if (y_c >= viewport_h) {
+		if (y_c >= viewport_bottom) {
 			return;
 		}
-		if (y_a > viewport_h) {
-			y_a = viewport_h;
+		if (y_a > viewport_bottom) {
+			y_a = viewport_bottom;
 		}
-		if (y_b > viewport_h) {
-			y_b = viewport_h;
+		if (y_b > viewport_bottom) {
+			y_b = viewport_bottom;
 		}
 		if (y_a < y_b) {
 			x_b = x_c <<= 16;
@@ -1609,14 +1611,14 @@ public class Rasterizer extends DrawingArea {
 			grad_c_off = (grad_a - grad_c << 16) / (y_a - y_c);
 		}
 		if (y_a <= y_b && y_a <= y_c) {
-			if (y_a >= viewport_h) {
+			if (y_a >= viewport_bottom) {
 				return;
 			}
-			if (y_b > viewport_h) {
-				y_b = viewport_h;
+			if (y_b > viewport_bottom) {
+				y_b = viewport_bottom;
 			}
-			if (y_c > viewport_h) {
-				y_c = viewport_h;
+			if (y_c > viewport_bottom) {
+				y_c = viewport_bottom;
 			}
 			if (y_b < y_c) {
 				x_c = x_a <<= 16;
@@ -1770,14 +1772,14 @@ public class Rasterizer extends DrawingArea {
 			return;
 		}
 		if (y_b <= y_c) {
-			if (y_b >= viewport_h) {
+			if (y_b >= viewport_bottom) {
 				return;
 			}
-			if (y_c > viewport_h) {
-				y_c = viewport_h;
+			if (y_c > viewport_bottom) {
+				y_c = viewport_bottom;
 			}
-			if (y_a > viewport_h) {
-				y_a = viewport_h;
+			if (y_a > viewport_bottom) {
+				y_a = viewport_bottom;
 			}
 			if (y_c < y_a) {
 				x_a = x_b <<= 16;
@@ -1930,14 +1932,14 @@ public class Rasterizer extends DrawingArea {
 			}
 			return;
 		}
-		if (y_c >= viewport_h) {
+		if (y_c >= viewport_bottom) {
 			return;
 		}
-		if (y_a > viewport_h) {
-			y_a = viewport_h;
+		if (y_a > viewport_bottom) {
+			y_a = viewport_bottom;
 		}
-		if (y_b > viewport_h) {
-			y_b = viewport_h;
+		if (y_b > viewport_bottom) {
+			y_b = viewport_bottom;
 		}
 		if (y_a < y_b) {
 			x_b = x_c <<= 16;

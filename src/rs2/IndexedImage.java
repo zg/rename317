@@ -157,29 +157,29 @@ public class IndexedImage extends DrawingArea {
         int k1 = imgWidth;
         int l1 = width - k1;
         int i2 = 0;
-        if(y < topY)
+        if(y < viewport_top)
         {
-            int j2 = topY - y;
+            int j2 = viewport_top - y;
             j1 -= j2;
-            y = topY;
+            y = viewport_top;
             i1 += j2 * k1;
             l += j2 * width;
         }
-        if(y + j1 > viewport_h)
-            j1 -= (y + j1) - viewport_h;
-        if(x < topX)
+        if(y + j1 > viewport_bottom)
+            j1 -= (y + j1) - viewport_bottom;
+        if(x < viewport_left)
         {
-            int k2 = topX - x;
+            int k2 = viewport_left - x;
             k1 -= k2;
-            x = topX;
+            x = viewport_left;
             i1 += k2;
             l += k2;
             i2 += k2;
             l1 += k2;
         }
-        if(x + k1 > viewport_w)
+        if(x + k1 > viewport_right)
         {
-            int l2 = (x + k1) - viewport_w;
+            int l2 = (x + k1) - viewport_right;
             k1 -= l2;
             i2 += l2;
             l1 += l2;

@@ -8,6 +8,8 @@ import java.net.*;
 import org.peterbjornx.pgl2.util.ServerMemoryManager;
 import pgle.PglCallClientNode;
 import pgle.PglWrapper;
+import rs2.media.image.RgbImage;
+import rs2.model.entity.Entity;
 import rs2.util.collection.Deque;
 import rs2.util.collection.Node;
 import rt4.Class7_Sub1;
@@ -46,17 +48,17 @@ public class Client extends GameShell {
     private boolean connectserver = false;
 
     public void preloadModels() {
-    	String modelFolder = "/633items--/";
-        File file = new File(Signlink.findcachedir()+modelFolder);
+        String modelFolder = "/633items--/";
+        File file = new File(Signlink.findcachedir() + modelFolder);
         File[] fileArray = file.listFiles();
         for (int y = 0; y < fileArray.length; y++) {
             try {
                 String sss = fileArray[y].getName();
-                System.out.println("Parsing model file "+sss);
-                byte[] buffer = ReadFile(Signlink.findcachedir()+modelFolder + sss);
+                System.out.println("Parsing model file " + sss);
+                byte[] buffer = ReadFile(Signlink.findcachedir() + modelFolder + sss);
                 Model.readHeader(buffer, Integer.parseInt(getFileNameWithoutExtension(sss)));
             } catch (Exception e) {
-            	System.out.println(fileArray[y].getName());
+                System.out.println(fileArray[y].getName());
                 e.printStackTrace();
             }
 
@@ -183,7 +185,7 @@ public class Client extends GameShell {
         } else {
             RSFont RSFont = plainFont;
             int j = 0;
-            DrawingArea.setBounds(77, 0, 463, 0);
+            DrawingArea.setClip(0, 0, 463, 77);
             for (int k = 0; k < 100; k++)
                 if (chatMessages[k] != null) {
                     int l = chatTypes[k];
@@ -263,7 +265,7 @@ public class Client extends GameShell {
                     }
                 }
 
-            DrawingArea.setDefaultBounds();
+            DrawingArea.resetClip();
             scrollMax = j * 14 + 7;
             if (scrollMax < 78)
                 scrollMax = 78;
@@ -285,7 +287,7 @@ public class Client extends GameShell {
     }
 
     public void init() {  /*
-		network_worldid = Integer.parseInt(getParameter("nodeid"));
+        network_worldid = Integer.parseInt(getParameter("nodeid"));
 		portOff = Integer.parseInt(getParameter("portoff"));
 		String s = getParameter("lowmem");
 		if(s != null && s.equals("1"))
@@ -629,7 +631,7 @@ public class Client extends GameShell {
     }
 
     private void rendedMapScene(int z) {
-        int pixels[] = minimapImage.myPixels;
+        int pixels[] = minimapImage.image_pixels;
         int pixelAmmount = pixels.length;
         for (int k = 0; k < pixelAmmount; k++)
             pixels[k] = 0;
@@ -966,6 +968,7 @@ public class Client extends GameShell {
         }
 
     }
+
     private void renderChatInterface(int height, int scrollPosition, int y, int x, int scrollMax) {
         scrollBar1.drawImage(x, y);
         scrollBar2.drawImage(x, (y + height) - 16);
@@ -1080,11 +1083,11 @@ public class Client extends GameShell {
 
     private void applyConfigChange(int i) {
         int j = SettingUsagePointers.cache[i].usage;
-        
+
 //        System.out.println("length "+SettingUsagePointers.cache.length);
-  //      for(int y = 0; y < SettingUsagePointers.cache.length; y++)
-    //    	System.out.println(y+" "+SettingUsagePointers.cache[y].usage);
-        
+        //      for(int y = 0; y < SettingUsagePointers.cache.length; y++)
+        //    	System.out.println(y+" "+SettingUsagePointers.cache[y].usage);
+
         if (j == 0)
             return;
         int k = sessionSettings[i];
@@ -1153,8 +1156,8 @@ public class Client extends GameShell {
         }
         if (j == 5)
             oneMouseButton = k;//mouse buttons
-        
-        System.out.println(j+" "+k);
+
+        System.out.println(j + " " + k);
         if (j == 6)//chat effects
             chatEffectsEnabled = k;
         if (j == 8) {
@@ -1193,29 +1196,29 @@ public class Client extends GameShell {
                         if (spriteDrawX > -1) {
                             for (int i2 = 0; i2 < 8; i2++)
                                 if ((player.headIcon & 1 << i2) != 0) {
-                                    headIcons[i2].drawSprite(spriteDrawX - 12, spriteDrawY - l);
+                                    headIcons[i2].draw_trans(spriteDrawX - 12, spriteDrawY - l);
                                     l -= 25;
                                 }
-                            modIcons[1].drawImage(spriteDrawX-12,spriteDrawY-l);
+                            modIcons[1].drawImage(spriteDrawX - 12, spriteDrawY - l);
 
                         }
                     }
                     if (j >= 0 && headiconDrawType == 10 && otherPlayerID == session_player_list[j]) {
                         npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
                         if (spriteDrawX > -1)
-                            headIcons[7].drawSprite(spriteDrawX - 12, spriteDrawY - l);
+                            headIcons[7].draw_trans(spriteDrawX - 12, spriteDrawY - l);
                     }
                 } else {
                     NpcDef npcDef = ((Npc) obj).desc;
                     if (npcDef.headIcon >= 0 && npcDef.headIcon < headIcons.length) {
                         npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
                         if (spriteDrawX > -1)
-                            headIcons[npcDef.headIcon].drawSprite(spriteDrawX - 12, spriteDrawY - 30);
+                            headIcons[npcDef.headIcon].draw_trans(spriteDrawX - 12, spriteDrawY - 30);
                     }
                     if (headiconDrawType == 1 && headiconNpcID == sessionNpcList[j - session_player_count] && currentTime % 20 < 10) {
                         npcScreenPos(((Mobile) (obj)), ((Mobile) (obj)).height + 15);
                         if (spriteDrawX > -1)
-                            headIcons[2].drawSprite(spriteDrawX - 12, spriteDrawY - 28);
+                            headIcons[2].draw_trans(spriteDrawX - 12, spriteDrawY - 28);
                     }
                 }
                 if (((Mobile) (obj)).textSpoken != null && (j >= session_player_count || publicChatMode == 0 || publicChatMode == 3 || publicChatMode == 1 && isFriendOrSelf(((Player) obj).name))) {
@@ -1266,7 +1269,7 @@ public class Client extends GameShell {
                                 spriteDrawX += 15;
                                 spriteDrawY -= 10;
                             }
-                            hitMarks[((Mobile) (obj)).hitMarkTypes[j1]].drawSprite(spriteDrawX - 12, spriteDrawY - 12);
+                            hitMarks[((Mobile) (obj)).hitMarkTypes[j1]].draw_trans(spriteDrawX - 12, spriteDrawY - 12);
                             smallFont.drawTextHMidVTop(String.valueOf(((Mobile) (obj)).hitDamages[j1]), spriteDrawX, spriteDrawY + 4, 0);
                             smallFont.drawTextHMidVTop(String.valueOf(((Mobile) (obj)).hitDamages[j1]), spriteDrawX - 1, spriteDrawY + 3, 0xffffff);
                         }
@@ -1347,10 +1350,10 @@ public class Client extends GameShell {
                     if (textDrawType[chatPtr] == 4) {//scroll:
                         int i4 = boldFont.getStringWidth(chatText);
                         int k4 = ((150 - anIntArray982[chatPtr]) * (i4 + 100)) / 150;
-                        DrawingArea.setBounds(334, spriteDrawX - 50, spriteDrawX + 50, 0);
+                        DrawingArea.setClip(spriteDrawX - 50, 0, spriteDrawX + 50, 334);
                         boldFont.drawTextHLeftVTop(chatText, (spriteDrawX + 50) - k4, spriteDrawY + 1, 0);
                         boldFont.drawTextHLeftVTop(chatText, (spriteDrawX + 50) - k4, spriteDrawY, textColour);
-                        DrawingArea.setDefaultBounds();
+                        DrawingArea.resetClip();
                     }
                     if (textDrawType[chatPtr] == 5) {//slide:
                         int j4 = 150 - anIntArray982[chatPtr];
@@ -1359,10 +1362,10 @@ public class Client extends GameShell {
                             l4 = j4 - 25;
                         else if (j4 > 125)
                             l4 = j4 - 125;
-                        DrawingArea.setBounds(spriteDrawY + 5, 0, 512, spriteDrawY - boldFont.charHeight - 1);
+                        DrawingArea.setClip(0, spriteDrawY - boldFont.charHeight - 1, 512, spriteDrawY + 5);
                         boldFont.drawTextHMidVTop(chatText, spriteDrawX, spriteDrawY + 1 + l4, 0);
                         boldFont.drawTextHMidVTop(chatText, spriteDrawX, spriteDrawY + l4, textColour);
-                        DrawingArea.setDefaultBounds();
+                        DrawingArea.resetClip();
                     }
                 } else {
                     boldFont.drawTextHMidVTop(chatText, spriteDrawX, spriteDrawY + 1, 0);
@@ -1666,7 +1669,7 @@ public class Client extends GameShell {
         int i2 = intGroundArray[groundZ][groundX][groundY] * (128 - k1) + intGroundArray[groundZ][groundX + 1][groundY] * k1 >> 7;
         int j2 = intGroundArray[groundZ][groundX][groundY + 1] * (128 - k1) + intGroundArray[groundZ][groundX + 1][groundY + 1] * k1 >> 7;
         return i2 * (128 - l1) + j2 * l1 >> 7;
-                        
+
     }
 
     private static String logic_get_amount_string(int ammount) {
@@ -1750,11 +1753,11 @@ public class Client extends GameShell {
     }
 
     public int getPlayerBitAmmount() {//this isnt techinacly used, it uses the method from swingui
-    	return 0;
-	}
+        return 0;
+    }
 
 
-	public void doLogic() {
+    public void doLogic() {
         if (rsAlreadyLoaded || loadingError || genericLoadingError)
             return;
         currentTime++;
@@ -1926,7 +1929,7 @@ public class Client extends GameShell {
             int colour = lineColour_;
             if (interactableObjectUID > 0)
                 colour = secondaryColour_;
-            int mapPixels[] = minimapImage.myPixels;
+            int mapPixels[] = minimapImage.image_pixels;
             int pixel = 24624 + x * 4 + (103 - y) * 512 * 4;
             int objectID = interactableObjectUID >> 14 & 0x7fff;
             ObjectDef object = ObjectDef.forID(objectID);
@@ -2011,7 +2014,7 @@ public class Client extends GameShell {
                 int l4 = 0xeeeeee;
                 if (interactableObjectUID > 0)
                     l4 = 0xee0000;
-                int mapPixels[] = minimapImage.myPixels;
+                int mapPixels[] = minimapImage.image_pixels;
                 int l5 = 24624 + x * 4 + (103 - y) * 512 * 4;
                 if (l2 == 0 || l2 == 2) {
                     mapPixels[l5 + 1536] = l4;
@@ -2063,9 +2066,9 @@ public class Client extends GameShell {
         }
         aClass30_Sub2_Sub1_Sub1_1201 = new RgbImage(128, 265);
         aClass30_Sub2_Sub1_Sub1_1202 = new RgbImage(128, 265);
-        System.arraycopy(aRSImageProducer_1110.componentPixels, 0, aClass30_Sub2_Sub1_Sub1_1201.myPixels, 0, 33920);
+        System.arraycopy(aRSImageProducer_1110.componentPixels, 0, aClass30_Sub2_Sub1_Sub1_1201.image_pixels, 0, 33920);
 
-        System.arraycopy(aRSImageProducer_1111.componentPixels, 0, aClass30_Sub2_Sub1_Sub1_1202.myPixels, 0, 33920);
+        System.arraycopy(aRSImageProducer_1111.componentPixels, 0, aClass30_Sub2_Sub1_Sub1_1202.image_pixels, 0, 33920);
 
         flameColourBuffer1 = new int[256];
         for (int k1 = 0; k1 < 64; k1++)
@@ -2280,54 +2283,54 @@ public class Client extends GameShell {
         byte abyte0[] = titleJagexArchive.getDataForName("title.dat");
         RgbImage rgbImage = new RgbImage(abyte0, this);
         aRSImageProducer_1110.initDrawingArea();
-        rgbImage.method346(0, 0);
+        rgbImage.draw(0, 0);
         aRSImageProducer_1111.initDrawingArea();
-        rgbImage.method346(-637, 0);
+        rgbImage.draw(-637, 0);
         aRSImageProducer_1107.initDrawingArea();
-        rgbImage.method346(-128, 0);
+        rgbImage.draw(-128, 0);
         aRSImageProducer_1108.initDrawingArea();
-        rgbImage.method346(-202, -371);
+        rgbImage.draw(-202, -371);
         aRSImageProducer_1109.initDrawingArea();
-        rgbImage.method346(-202, -171);
+        rgbImage.draw(-202, -171);
         aRSImageProducer_1112.initDrawingArea();
-        rgbImage.method346(0, -265);
+        rgbImage.draw(0, -265);
         aRSImageProducer_1113.initDrawingArea();
-        rgbImage.method346(-562, -265);
+        rgbImage.draw(-562, -265);
         aRSImageProducer_1114.initDrawingArea();
-        rgbImage.method346(-128, -171);
+        rgbImage.draw(-128, -171);
         aRSImageProducer_1115.initDrawingArea();
-        rgbImage.method346(-562, -171);
-        int ai[] = new int[rgbImage.myWidth];
-        for (int j = 0; j < rgbImage.myHeight; j++) {
-            for (int k = 0; k < rgbImage.myWidth; k++)
-                ai[k] = rgbImage.myPixels[(rgbImage.myWidth - k - 1) + rgbImage.myWidth * j];
+        rgbImage.draw(-562, -171);
+        int ai[] = new int[rgbImage.image_width];
+        for (int j = 0; j < rgbImage.image_height; j++) {
+            for (int k = 0; k < rgbImage.image_width; k++)
+                ai[k] = rgbImage.image_pixels[(rgbImage.image_width - k - 1) + rgbImage.image_width * j];
 
-            System.arraycopy(ai, 0, rgbImage.myPixels, rgbImage.myWidth * j, rgbImage.myWidth);
+            System.arraycopy(ai, 0, rgbImage.image_pixels, rgbImage.image_width * j, rgbImage.image_width);
 
         }
 
         aRSImageProducer_1110.initDrawingArea();
-        rgbImage.method346(382, 0);
+        rgbImage.draw(382, 0);
         aRSImageProducer_1111.initDrawingArea();
-        rgbImage.method346(-255, 0);
+        rgbImage.draw(-255, 0);
         aRSImageProducer_1107.initDrawingArea();
-        rgbImage.method346(254, 0);
+        rgbImage.draw(254, 0);
         aRSImageProducer_1108.initDrawingArea();
-        rgbImage.method346(180, -371);
+        rgbImage.draw(180, -371);
         aRSImageProducer_1109.initDrawingArea();
-        rgbImage.method346(180, -171);
+        rgbImage.draw(180, -171);
         aRSImageProducer_1112.initDrawingArea();
-        rgbImage.method346(382, -265);
+        rgbImage.draw(382, -265);
         aRSImageProducer_1113.initDrawingArea();
-        rgbImage.method346(-180, -265);
+        rgbImage.draw(-180, -265);
         aRSImageProducer_1114.initDrawingArea();
-        rgbImage.method346(254, -171);
+        rgbImage.draw(254, -171);
         aRSImageProducer_1115.initDrawingArea();
-        rgbImage.method346(-180, -171);
+        rgbImage.draw(-180, -171);
 
         rgbImage = new RgbImage(titleJagexArchive, "logo", 0);
         aRSImageProducer_1107.initDrawingArea();
-        //rgbImage.drawSprite(382 - rgbImage.myWidth / 2 - 128, 18);
+        //rgbImage.draw_trans(382 - rgbImage.image_width / 2 - 128, 18);
         rgbImage = null;
         //Object obj = null;//never used
         //Object obj1 = null;//never used
@@ -2358,11 +2361,11 @@ public class Client extends GameShell {
                 if (onDemandData.dataType == 3 && loadingStage == 1) {
                     for (int i = 0; i < terrainData.length; i++) {
                         if (terrainIndices[i] == onDemandData.ID) {
-                        	if(useNewTerrain)
-                            terrainData[i] = FileOperations.ReadFile("./hddata/maps/"+onDemandData.ID);//onDemandData.buffer;
-                        	else
-                        	terrainData[i] = onDemandData.buffer;
-                        		if (onDemandData.buffer == null)
+                            if (useNewTerrain)
+                                terrainData[i] = FileOperations.ReadFile("./hddata/maps/" + onDemandData.ID);//onDemandData.buffer;
+                            else
+                                terrainData[i] = onDemandData.buffer;
+                            if (onDemandData.buffer == null)
                                 terrainIndices[i] = -1;
                             break;
                         }
@@ -2458,7 +2461,7 @@ public class Client extends GameShell {
             return;
         calcEntityScreenPos((headiconX - baseX << 7) + arrowDrawTileX, headiconHeight * 2, (headiconY - baseY << 7) + arrowDrawTileY);
         if (spriteDrawX > -1 && currentTime % 20 < 10)
-            headIcons[2].drawSprite(spriteDrawX - 12, spriteDrawY - 28);
+            headIcons[2].draw_trans(spriteDrawX - 12, spriteDrawY - 28);
     }
 
     private void client_process() {
@@ -2627,8 +2630,8 @@ public class Client extends GameShell {
                     if (lastActiveInvInterface == moveItemFrameID && moveItemEndSlot != moveItemStartSlot) {
                         RSInterface class9 = RSInterface.interfaceCache[moveItemFrameID];
                         int swapItem = 0;
-                        
-                        System.out.println("913= "+bankInsertMode+" con "+class9.contentType);
+
+                        System.out.println("913= " + bankInsertMode + " con " + class9.contentType);
                         if (bankInsertMode == 1 && class9.contentType == 206)//206 is bank
                             swapItem = 1;
                         if (class9.inv[moveItemEndSlot] <= 0)
@@ -2637,9 +2640,9 @@ public class Client extends GameShell {
                             int startSlot = moveItemStartSlot;
                             int endSlot = moveItemEndSlot;
                             class9.inv[endSlot] = class9.inv[startSlot];
-                            class9.invStackSizes[endSlot] = class9.invStackSizes[startSlot];
+                            class9.inv_amount[endSlot] = class9.inv_amount[startSlot];
                             class9.inv[startSlot] = -1;
-                            class9.invStackSizes[startSlot] = 0;
+                            class9.inv_amount[startSlot] = 0;
                         } else if (swapItem == 1) {
                             int startSlot = moveItemStartSlot;
                             for (int endSlot = moveItemEndSlot; startSlot != endSlot; )
@@ -2785,23 +2788,23 @@ public class Client extends GameShell {
         aRSImageProducer_1124 = null;
         aRSImageProducer_1125 = null;
         aRSImageProducer_1110 = new GraphicsBuffer(128, 265, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1111 = new GraphicsBuffer(128, 265, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1107 = new GraphicsBuffer(509, 171, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1108 = new GraphicsBuffer(360, 255, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1109 = new GraphicsBuffer(360, 264, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1112 = new GraphicsBuffer(202, 238, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1113 = new GraphicsBuffer(203, 238, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1114 = new GraphicsBuffer(74, 94, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1115 = new GraphicsBuffer(75, 94, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         if (titleJagexArchive != null) {
             drawLogo();
             loadTitleScreen();
@@ -2821,30 +2824,27 @@ public class Client extends GameShell {
         char c = '\u0168';//what are these?
         char c1 = '\310';
         byte byte1 = 20;
-        if(!circleLoadingBar)
-        {
-        	boldFont.drawTextHMidVTop("RuneScape is loading - please wait...", c / 2, c1 / 2 - 26 - byte1, 0xffffff);
-        	int j = c1 / 2 - 18 - byte1;
-        	DrawingArea.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
-        	DrawingArea.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
-        	DrawingArea.fillRect(c / 2 - 150, j + 2, percentage * 3, 30, 0x8c1111);
-        	DrawingArea.fillRect((c / 2 - 150) + percentage * 3, j + 2, 300 - percentage * 3, 30, 0);
-        	boldFont.drawTextHMidVTop(text, c / 2, (c1 / 2 + 5) - byte1, 0xffffff);
+        if (!circleLoadingBar) {
+            boldFont.drawTextHMidVTop("RuneScape is loading - please wait...", c / 2, c1 / 2 - 26 - byte1, 0xffffff);
+            int j = c1 / 2 - 18 - byte1;
+            DrawingArea.drawRect(c / 2 - 152, j, 304, 34, 0x8c1111);
+            DrawingArea.drawRect(c / 2 - 151, j + 1, 302, 32, 0);
+            DrawingArea.fillRect(c / 2 - 150, j + 2, percentage * 3, 30, 0x8c1111);
+            DrawingArea.fillRect((c / 2 - 150) + percentage * 3, j + 2, 300 - percentage * 3, 30, 0);
+            boldFont.drawTextHMidVTop(text, c / 2, (c1 / 2 + 5) - byte1, 0xffffff);
+        } else {
+            DrawingArea.fillCircle(50, 50, percentage / 2, 0xff00ff);
+            DrawingArea.fillCircle(100, 50, percentage / 2, 0xff0000);
+            DrawingArea.fillCircle(150, 50, percentage / 2, 0xff00ff);
+            DrawingArea.fillCircle(200, 50, percentage / 2, 0xff0000);
+            DrawingArea.fillCircle(250, 50, percentage / 2, 0xff00ff);
+            //minimapImage = new RgbImage("C:/640.png");
+            //DrawingArea.blockImageTransfer(128, 128, 1500, 1500, minimapImage.image_pixels);
         }
-        else
-        	{
-        	DrawingArea.fillCircle(50,50,  percentage/2, 0xff00ff);
-        	DrawingArea.fillCircle(100,50, percentage/2, 0xff0000);
-        	DrawingArea.fillCircle(150,50, percentage/2, 0xff00ff);
-        	DrawingArea.fillCircle(200,50, percentage/2, 0xff0000);
-        	DrawingArea.fillCircle(250,50, percentage/2, 0xff00ff);
-        	//minimapImage = new RgbImage("C:/640.png");
-        	//DrawingArea.blockImageTransfer(128, 128, 1500, 1500, minimapImage.myPixels);
-        	}
-        	aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
+        aRSImageProducer_1109.drawGraphics(171, super.graphics, 202);
         if (repaintRequested) {
             repaintRequested = false;
-           if (!currentlyDrawingFlames) {
+            if (!currentlyDrawingFlames) {
                 aRSImageProducer_1110.drawGraphics(0, super.graphics, 0);
                 aRSImageProducer_1111.drawGraphics(0, super.graphics, 637);
             }
@@ -2859,7 +2859,7 @@ public class Client extends GameShell {
 
     private void scrollInterface(int i, int j, int k, int l, RSInterface class9, int i1, boolean flag, int j1) {
         int anInt992;
-        
+
         if (aBoolean972)
             anInt992 = 32;
         else
@@ -3478,7 +3478,7 @@ public class Client extends GameShell {
                 if (sessionSettings[i2] != class9_2.conditionValueToCompare[0]) {
                     sessionSettings[i2] = class9_2.conditionValueToCompare[0];
                     applyConfigChange(i2);
-                    System.out.println("1 "+i2);
+                    System.out.println("1 " + i2);
                     needDrawTabArea = true;
                 }
             }
@@ -3778,8 +3778,8 @@ public class Client extends GameShell {
             ItemDef itemDef = ItemDef.forID(itemID);
             RSInterface class9_4 = RSInterface.interfaceCache[k];
             String s5;
-            if (class9_4 != null && class9_4.invStackSizes[j] >= 0x186a0)
-                s5 = class9_4.invStackSizes[j] + " x " + itemDef.name;
+            if (class9_4 != null && class9_4.inv_amount[j] >= 0x186a0)
+                s5 = class9_4.inv_amount[j] + " x " + itemDef.name;
             else if (itemDef.description != null)
                 s5 = new String(itemDef.description);
             else
@@ -3794,7 +3794,7 @@ public class Client extends GameShell {
                 int l2 = class9_3.dynamicValueFormulas[0][1];
                 sessionSettings[l2] = 1 - sessionSettings[l2];
                 applyConfigChange(l2);
-                System.out.println("2 "+l2);
+                System.out.println("2 " + l2);
                 needDrawTabArea = true;
             }
         }
@@ -4296,31 +4296,28 @@ public class Client extends GameShell {
                 }
                 if ((j == 13 || j == 10) && inputString.length() > 0) {
 
-                	if(inputString.equals("::seton"))
-                		isDialogueInterface = true;
-                	if(inputString.equals("::setoff"))
-                		isDialogueInterface = false;
-                	
-                	if(inputString.startsWith("::setzoom"))
-                	{
-                		String[] test = inputString.split(" ");
-                		int zoom = Integer.parseInt(test[1]);
-                		minimapZoom = zoom;
-                	}
-                	
-                	if(inputString.startsWith("::setvar"))
-                	{
-                		String[] test = inputString.split(" ");
-                		int settingID = Integer.parseInt(test[1]);
-                		int settingState = Integer.parseInt(test[2]);
-                		if(settingID < 701)
-                		{
-                        anIntArray1045[settingID] = settingState;
-                        sessionSettings[settingID] = settingState;
-                        applyConfigChange(settingID);
-                        System.out.println("setting "+settingID+" to "+settingState);
-                		}
-                		}
+                    if (inputString.equals("::seton"))
+                        isDialogueInterface = true;
+                    if (inputString.equals("::setoff"))
+                        isDialogueInterface = false;
+
+                    if (inputString.startsWith("::setzoom")) {
+                        String[] test = inputString.split(" ");
+                        int zoom = Integer.parseInt(test[1]);
+                        minimapZoom = zoom;
+                    }
+
+                    if (inputString.startsWith("::setvar")) {
+                        String[] test = inputString.split(" ");
+                        int settingID = Integer.parseInt(test[1]);
+                        int settingState = Integer.parseInt(test[2]);
+                        if (settingID < 701) {
+                            anIntArray1045[settingID] = settingState;
+                            sessionSettings[settingID] = settingState;
+                            applyConfigChange(settingID);
+                            System.out.println("setting " + settingID + " to " + settingState);
+                        }
+                    }
                     if (inputString.equals("::noclip")) {
                         for (int k1 = 0; k1 < 4; k1++) {
                             for (int i2 = 1; i2 < 103; i2++) {
@@ -4338,11 +4335,11 @@ public class Client extends GameShell {
                         dropClient();
                     if (inputString.equals("::lag"))
                         printDebug();
-                    if (inputString.startsWith("::sun")){
+                    if (inputString.startsWith("::sun")) {
                         try {
                             String[] t = inputString.split(" ");
-                            pglWrapper.getSun().setSunColor(new org.lwjgl.util.Color(0xFf,0xff,0xff),Float.parseFloat(t[1]),Float.parseFloat(t[2]),Float.parseFloat(t[3]));
-                        } catch (Exception e){
+                            pglWrapper.getSun().setSunColor(new org.lwjgl.util.Color(0xFf, 0xff, 0xff), Float.parseFloat(t[1]), Float.parseFloat(t[2]), Float.parseFloat(t[3]));
+                        } catch (Exception e) {
                             pushMessage("Error executing command", 2, "@cr2@RuneScape Client");
                             e.printStackTrace();
                         }
@@ -4460,9 +4457,7 @@ public class Client extends GameShell {
     }
 
 
-
-
-	private void buildChatAreaMenu(int j) {
+    private void buildChatAreaMenu(int j) {
         int l = 0;
         for (int i1 = 0; i1 < 100; i1++) {
             if (chatMessages[i1] == null)
@@ -4665,7 +4660,7 @@ public class Client extends GameShell {
                 model.light(64, 850, -30, -50, -30, true);
                 class9.mediaType = 5;
                 class9.mediaID = 0;
-                RSInterface.setCustomModel(model);
+                RSInterface.setModel(model, 5, 0);
             }
             return;
         }
@@ -4955,11 +4950,11 @@ public class Client extends GameShell {
         aRSImageProducer_1115 = null;
         aRSImageProducer_1166 = new GraphicsBuffer(479, 96, getGameComponent());
         minimapIP = new GraphicsBuffer(172, 156, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         mapBack.drawImage(0, 0);
         tabAreaDrawingTarget = new GraphicsBuffer(190, 261, getGameComponent());
         gameScreenCanvas = new GraphicsBuffer(512, 334, getGameComponent());
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         aRSImageProducer_1123 = new GraphicsBuffer(496, 50, getGameComponent());
         aRSImageProducer_1124 = new GraphicsBuffer(269, 37, getGameComponent());
         aRSImageProducer_1125 = new GraphicsBuffer(249, 45, getGameComponent());
@@ -5233,10 +5228,9 @@ public class Client extends GameShell {
                 //int anInt1260 = 0;//never used
                 resetImageProducers2();
                 stopMidi();//stop music on login
-                if(glEnabled)
-                {
-                pglWrapper = new PglWrapper();
-                pglWrapper.initJgle();
+                if (glEnabled) {
+                    pglWrapper = new PglWrapper();
+                    pglWrapper.initJgle();
                 }
                 return;
             }
@@ -5827,8 +5821,7 @@ public class Client extends GameShell {
         gameObjectSpawnRequest.face = face;
     }
 
-    private void handleMusicEvents()
-    {
+    private void handleMusicEvents() {
         for (int i = 0; i < anInt1062; i++)
             if (anIntArray1250[i] <= 0) {
                 boolean flag1 = false;
@@ -5932,7 +5925,7 @@ public class Client extends GameShell {
             JagexArchive soundArchive = streamLoaderForName(8, "sound effects", "sounds", expectedCRCs[8], 55);
             tileSettingBits = new byte[4][104][104];
             intGroundArray = new int[4][105][105];
-            sceneGraph = new SceneGraph(4, 104, 104, intGroundArray,null);
+            sceneGraph = new SceneGraph(4, 104, 104, intGroundArray, null);
             for (int j = 0; j < 4; j++)
                 tileSettings[j] = new TileSetting(104, 104);
 
@@ -6135,39 +6128,39 @@ public class Client extends GameShell {
                 modIcons[l4] = new IndexedImage(mediaArchive, "mod_icons", l4);
 
             RgbImage rgbImage = new RgbImage(mediaArchive, "backleft1", 0);
-            backLeftIP1 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backLeftIP1 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             rgbImage = new RgbImage(mediaArchive, "backleft2", 0);
-            backLeftIP2 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backLeftIP2 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             rgbImage = new RgbImage(mediaArchive, "backright1", 0);
-            backRightIP1 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backRightIP1 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             rgbImage = new RgbImage(mediaArchive, "backright2", 0);
-            backRightIP2 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backRightIP2 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             rgbImage = new RgbImage(mediaArchive, "backtop1", 0);
-            backTopIP1 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backTopIP1 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             rgbImage = new RgbImage(mediaArchive, "backvmid1", 0);
-            backVmidIP1 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backVmidIP1 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             rgbImage = new RgbImage(mediaArchive, "backvmid2", 0);
-            backVmidIP2 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backVmidIP2 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             rgbImage = new RgbImage(mediaArchive, "backvmid3", 0);
-            backVmidIP3 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backVmidIP3 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             rgbImage = new RgbImage(mediaArchive, "backhmid2", 0);
-            backVmidIP2_2 = new GraphicsBuffer(rgbImage.myWidth, rgbImage.myHeight, getGameComponent());
-            rgbImage.method346(0, 0);
+            backVmidIP2_2 = new GraphicsBuffer(rgbImage.image_width, rgbImage.image_height, getGameComponent());
+            rgbImage.draw(0, 0);
             int i5 = (int) (Math.random() * 21D) - 10;
             int j5 = (int) (Math.random() * 21D) - 10;
             int k5 = (int) (Math.random() * 21D) - 10;
             int l5 = (int) (Math.random() * 41D) - 20;
             for (int i6 = 0; i6 < 100; i6++) {
                 if (mapFunctions[i6] != null)
-                    mapFunctions[i6].shiftColours(i5 + l5, j5 + l5, k5 + l5);
+                    mapFunctions[i6].add_rgb(i5 + l5, j5 + l5, k5 + l5);
                 if (mapScenes[i6] != null)
                     mapScenes[i6].shiftColours(i5 + l5, j5 + l5, k5 + l5);
             }
@@ -6258,8 +6251,8 @@ public class Client extends GameShell {
             SceneGraph.clientInstance = this;
             ObjectDef.clientInstance = this;
             NpcDef.clientInstance = this;
-         //   pglWrapper.initJgle();
-           // EditorMain.main(null);
+            //   pglWrapper.initJgle();
+            // EditorMain.main(null);
             return;
         } catch (Exception exception) {
             Signlink.reporterror("loaderror " + loadingBarText + " " + loadingBarPercantage);
@@ -6937,11 +6930,11 @@ public class Client extends GameShell {
             return;
         if (inter.hiddenUntilMouseover && anInt1026 != inter.id && anInt1048 != inter.id && anInt1039 != inter.id)
             return;
-        int i1 = DrawingArea.topX;
-        int j1 = DrawingArea.topY;
-        int k1 = DrawingArea.viewport_w;
-        int l1 = DrawingArea.viewport_h;
-        DrawingArea.setBounds(scroll_position + inter.height, x, x + inter.width, scroll_position);
+        int i1 = DrawingArea.viewport_left;
+        int j1 = DrawingArea.viewport_top;
+        int k1 = DrawingArea.viewport_right;
+        int l1 = DrawingArea.viewport_bottom;
+        DrawingArea.setClip(x, scroll_position, x + inter.width, scroll_position + inter.height);
         int i2 = inter.children.length;
         for (int j2 = 0; j2 < i2; j2++) {
             int xx = inter.childX[j2] + x;
@@ -6974,11 +6967,11 @@ public class Client extends GameShell {
                                 int k6 = 0;
                                 int j7 = 0;
                                 int j9 = rsInterface.inv[i3] - 1;
-                                if (spriteX > DrawingArea.topX - 32 && spriteX < DrawingArea.viewport_w && spriteY > DrawingArea.topY - 32 && spriteY < DrawingArea.viewport_h || activeInterfaceType != 0 && moveItemStartSlot == i3) {
+                                if (spriteX > DrawingArea.viewport_left - 32 && spriteX < DrawingArea.viewport_right && spriteY > DrawingArea.viewport_top - 32 && spriteY < DrawingArea.viewport_bottom || activeInterfaceType != 0 && moveItemStartSlot == i3) {
                                     int l9 = 0;
                                     if (itemSelected == 1 && lastItemSelectedSlot == i3 && lastItemSelectedInterface == rsInterface.id)
                                         l9 = 0xffffff;
-                                    RgbImage class30_sub2_sub1_sub1_2 = ItemDef.getSprite(j9, rsInterface.invStackSizes[i3], l9);
+                                    RgbImage class30_sub2_sub1_sub1_2 = ItemDef.getSprite(j9, rsInterface.inv_amount[i3], l9);
                                     if (class30_sub2_sub1_sub1_2 != null) {
                                         if (activeInterfaceType != 0 && moveItemStartSlot == i3 && moveItemFrameID == rsInterface.id) {
                                             k6 = super.mouseEventX - anInt1087;
@@ -6991,9 +6984,9 @@ public class Client extends GameShell {
                                                 k6 = 0;
                                                 j7 = 0;
                                             }
-                                            class30_sub2_sub1_sub1_2.drawSprite1(spriteX + k6, spriteY + j7);
-                                            if (spriteY + j7 < DrawingArea.topY && inter.scrollPosition > 0) {
-                                                int i10 = (animationTimePassed * (DrawingArea.topY - spriteY - j7)) / 3;
+                                            class30_sub2_sub1_sub1_2.draw(spriteX + k6, spriteY + j7, 128);
+                                            if (spriteY + j7 < DrawingArea.viewport_top && inter.scrollPosition > 0) {
+                                                int i10 = (animationTimePassed * (DrawingArea.viewport_top - spriteY - j7)) / 3;
                                                 if (i10 > animationTimePassed * 10)
                                                     i10 = animationTimePassed * 10;
                                                 if (i10 > inter.scrollPosition)
@@ -7001,8 +6994,8 @@ public class Client extends GameShell {
                                                 inter.scrollPosition -= i10;
                                                 anInt1088 += i10;
                                             }
-                                            if (spriteY + j7 + 32 > DrawingArea.viewport_h && inter.scrollPosition < inter.scrollMax - inter.height) {
-                                                int j10 = (animationTimePassed * ((spriteY + j7 + 32) - DrawingArea.viewport_h)) / 3;
+                                            if (spriteY + j7 + 32 > DrawingArea.viewport_bottom && inter.scrollPosition < inter.scrollMax - inter.height) {
+                                                int j10 = (animationTimePassed * ((spriteY + j7 + 32) - DrawingArea.viewport_bottom)) / 3;
                                                 if (j10 > animationTimePassed * 10)
                                                     j10 = animationTimePassed * 10;
                                                 if (j10 > inter.scrollMax - inter.height - inter.scrollPosition)
@@ -7011,11 +7004,11 @@ public class Client extends GameShell {
                                                 anInt1088 -= j10;
                                             }
                                         } else if (atInventoryInterfaceType != 0 && atInventoryIndex == i3 && atInventoryInterface == rsInterface.id)
-                                            class30_sub2_sub1_sub1_2.drawSprite1(spriteX, spriteY);
+                                            class30_sub2_sub1_sub1_2.draw(spriteX, spriteY, 128);
                                         else
-                                            class30_sub2_sub1_sub1_2.drawSprite(spriteX, spriteY);
-                                        if (class30_sub2_sub1_sub1_2.w2 == 33 || rsInterface.invStackSizes[i3] != 1) {
-                                            int k10 = rsInterface.invStackSizes[i3];
+                                            class30_sub2_sub1_sub1_2.draw_trans(spriteX, spriteY);
+                                        if (class30_sub2_sub1_sub1_2.library_width == 33 || rsInterface.inv_amount[i3] != 1) {
+                                            int k10 = rsInterface.inv_amount[i3];
                                             smallFont.drawTextHLeftVTop(logic_get_amount_string(k10), spriteX + 1 + k6, spriteY + 10 + j7, 0);
                                             smallFont.drawTextHLeftVTop(logic_get_amount_string(k10), spriteX + k6, spriteY + 9 + j7, 0xffff00);
                                         }
@@ -7024,7 +7017,7 @@ public class Client extends GameShell {
                             } else if (rsInterface.rgbImages != null && i3 < 20) {
                                 RgbImage class30_sub2_sub1_sub1_1 = rsInterface.rgbImages[i3];
                                 if (class30_sub2_sub1_sub1_1 != null)
-                                    class30_sub2_sub1_sub1_1.drawSprite(spriteX, spriteY);
+                                    class30_sub2_sub1_sub1_1.draw_trans(spriteX, spriteY);
                             }
                             i3++;
                         }
@@ -7138,7 +7131,7 @@ public class Client extends GameShell {
                     else
                         rgbImage = rsInterface.imageConditionFalse;
                     if (rgbImage != null)
-                        rgbImage.drawSprite(xx, yy);
+                        rgbImage.draw_trans(xx, yy);
                 } else if (rsInterface.type == 6) {
                     int k3 = Rasterizer.centerX;
                     int j4 = Rasterizer.centerY;
@@ -7171,8 +7164,8 @@ public class Client extends GameShell {
                             if (rsInterface.inv[k4] > 0) {
                                 ItemDef itemDef = ItemDef.forID(rsInterface.inv[k4] - 1);
                                 String s2 = itemDef.name;
-                                if (itemDef.stackable || rsInterface.invStackSizes[k4] != 1)
-                                    s2 = s2 + " x" + logicGetAmountString(rsInterface.invStackSizes[k4]);
+                                if (itemDef.stackable || rsInterface.inv_amount[k4] != 1)
+                                    s2 = s2 + " x" + logicGetAmountString(rsInterface.inv_amount[k4]);
                                 int i9 = xx + i6 * (115 + rsInterface.invSpritePadX);
                                 int k9 = yy + j5 * (12 + rsInterface.invSpritePadY);
                                 if (rsInterface.textCentered)
@@ -7188,7 +7181,7 @@ public class Client extends GameShell {
                 }
         }
 
-        DrawingArea.setBounds(l1, i1, k1, j1);
+        DrawingArea.setClip(i1, j1, k1, l1);
     }
 
     private void randomizeBackground(IndexedImage indexedImage) {
@@ -7232,7 +7225,7 @@ public class Client extends GameShell {
     }
 
     private void appendPlayerUpdateMask(int i, int j, Packet stream, Player player) {
-    	
+
         if ((i & 0x400) != 0) {
             player.anInt1543 = stream.sg1();
             player.anInt1545 = stream.sg1();
@@ -7373,12 +7366,12 @@ public class Client extends GameShell {
         try {
             int j = sessionPlayer.boundExtentX + cameraOffsetX;
             int k = sessionPlayer.boundExtentY + cameraOffsetY;
-             if (anInt1014 - j < -500 || anInt1014 - j > 500 || anInt1015 - k < -500 || anInt1015 - k > 500) {
+            if (anInt1014 - j < -500 || anInt1014 - j > 500 || anInt1015 - k < -500 || anInt1015 - k > 500) {
                 anInt1014 = j;//set to 1000 for lols
                 anInt1015 = k;
             }
-            
-            
+
+
             if (anInt1014 != j)
                 anInt1014 += (j - anInt1014) / 16;
             if (anInt1015 != k)
@@ -7508,7 +7501,7 @@ public class Client extends GameShell {
     private void draw3dScreen() {
         drawSplitPrivateChat();
         if (crossType == 1) {
-            crosses[crossIndex / 100].drawSprite(crossX - 8 - 4, crossY - 8 - 4);
+            crosses[crossIndex / 100].draw_trans(crossX - 8 - 4, crossY - 8 - 4);
             anticheat4++;
             if (anticheat4 > 67) {
                 anticheat4 = 0;
@@ -7516,7 +7509,7 @@ public class Client extends GameShell {
             }
         }
         if (crossType == 2)
-            crosses[4 + crossIndex / 100].drawSprite(crossX - 8 - 4, crossY - 8 - 4);
+            crosses[4 + crossIndex / 100].draw_trans(crossX - 8 - 4, crossY - 8 - 4);
         if (currentStatusInterface != -1) {
             animateRSInterface(animationTimePassed, currentStatusInterface);
             interface_render(0, 0, 0, RSInterface.interfaceCache[currentStatusInterface]);
@@ -7532,7 +7525,7 @@ public class Client extends GameShell {
         } else if (menuScreenArea == 0)
             drawMenu();
         if (anInt1055 == 1)
-            headIcons[1].drawSprite(472, 296);
+            headIcons[1].draw_trans(472, 296);
         if (fpsOn) {
             char x = '\u01FB';
             int y = 20;
@@ -7776,24 +7769,21 @@ public class Client extends GameShell {
 
     private boolean animateRSInterface(int timePassed, int j) {
         boolean flag1 = false;
-        
-        
-        
-        if(j > RSInterface.interfaceCache.length)
-        {
-        	System.out.println("INVALID INTERFACE "+j+" max is "+RSInterface.interfaceCache.length);
-        	return false;
+
+
+        if (j > RSInterface.interfaceCache.length) {
+            System.out.println("INVALID INTERFACE " + j + " max is " + RSInterface.interfaceCache.length);
+            return false;
         }
-        
-        
+
+
         RSInterface class9 = RSInterface.interfaceCache[j];
-        
-        if(class9.children == null)
-        {
-        	System.out.println("INVALID INTERFACE "+j);
-        	return false;
+
+        if (class9.children == null) {
+            System.out.println("INVALID INTERFACE " + j);
+            return false;
         }
-        
+
         for (int k = 0; k < class9.children.length; k++) {
             if (class9.children[k] == -1)
                 break;
@@ -7964,7 +7954,7 @@ public class Client extends GameShell {
                     if (k2 >= 0 && k2 < ItemDef.totalItems && (!ItemDef.forID(k2).membersObject || isMembers)) {
                         for (int j3 = 0; j3 < class9_1.inv.length; j3++)
                             if (class9_1.inv[j3] == k2 + 1)
-                                k1 += class9_1.invStackSizes[j3];
+                                k1 += class9_1.inv_amount[j3];
 
                     }
                 }
@@ -8135,8 +8125,8 @@ public class Client extends GameShell {
                     markMinimap(mapDotTeam, j1, l3);
                 else
                     markMinimap(mapDotPlayer, j1, l3);
-                
-                }
+
+            }
         }
 
         if (headiconDrawType != 0 && currentTime % 20 < 10) {
@@ -8350,7 +8340,7 @@ public class Client extends GameShell {
             System.arraycopy(flameColourBuffer1, 0, currentFlameColours, 0, 256);
 
         }
-        System.arraycopy(aClass30_Sub2_Sub1_Sub1_1201.myPixels, 0, aRSImageProducer_1110.componentPixels, 0, 33920);
+        System.arraycopy(aClass30_Sub2_Sub1_Sub1_1201.image_pixels, 0, aRSImageProducer_1110.componentPixels, 0, 33920);
 
         int i1 = 0;
         int j1 = 1152;
@@ -8377,7 +8367,7 @@ public class Client extends GameShell {
         }
 
         aRSImageProducer_1110.drawGraphics(0, super.graphics, 0);
-        System.arraycopy(aClass30_Sub2_Sub1_Sub1_1202.myPixels, 0, aRSImageProducer_1111.componentPixels, 0, 33920);
+        System.arraycopy(aClass30_Sub2_Sub1_Sub1_1202.image_pixels, 0, aRSImageProducer_1111.componentPixels, 0, 33920);
 
         i1 = 0;
         j1 = 1176;
@@ -8458,30 +8448,30 @@ public class Client extends GameShell {
         resetImageProducers();
         aRSImageProducer_1109.initDrawingArea();
         if (stage != 1) {
-            titlebox.drawSprite(0, 0);
+            titlebox.draw_trans(0, 0);
         } else {
-            DrawingArea.resetImage();//need to redraw titlescreen (black space)
+            DrawingArea.clear();//need to redraw titlescreen (black space)
             drawLogo();
             aRSImageProducer_1109.initDrawingArea();
-            loadingBox1.drawSprite(60, 20);
+            loadingBox1.draw_trans(60, 20);
         }
         char c = '\u0168';//TODO change these to ints or something
         char c1 = '\310';
         if (loginScreenState == 0 && stage != 1) {
             int j = c1 / 2 - 40;
             if (super.mouseEventX >= 291 && super.mouseEventX <= 467 && super.mouseEventY >= 333 && super.mouseEventY <= 355)
-                loginhover.drawSprite(88, 161); // click here to play
+                loginhover.draw_trans(88, 161); // click here to play
             if (super.mouseEventX >= 273 && super.mouseEventX <= 486 && super.mouseEventY >= 276 && super.mouseEventY <= 300)
-                passwordhover.drawSprite(68, 104); // pass hover
+                passwordhover.draw_trans(68, 104); // pass hover
             if (super.mouseEventX >= 273 && super.mouseEventX <= 486 && super.mouseEventY >= 230 && super.mouseEventY <= 254)
-                passwordhover.drawSprite(68, 58); // user hover
+                passwordhover.draw_trans(68, 58); // user hover
             if (loginMessage1.length() > 0) {
-                //loadingBox1.drawSprite(0, 0);
+                //loadingBox1.draw_trans(0, 0);
                 plainFont.drawShadowTextHMidVTop(0xffff00, c / 2, loginMessage1, j - 6, true);
                 plainFont.drawShadowTextHMidVTop(0xffff00, c / 2, loginMessage2, j - 6, true);
                 j += 30;
             } else {
-                //loadingBox1.drawSprite(0, 0);
+                //loadingBox1.draw_trans(0, 0);
                 boldFont.drawShadowTextHMidVTop(0xffff00, c / 2, loginMessage2, j - 6, true);
                 j += 30;
             }
@@ -8651,7 +8641,7 @@ public class Client extends GameShell {
                         wallDecoration.myMob = new ObjectOnTile(wallDecoration.uid >> 14 & 0x7fff, 0, 4, i19, l19, j18, k20, j17, false);
                 }
                 if (j16 == 2) {
-                    InteractableObject class28 = sceneGraph.getInteractableObject(x, y, plane);
+                    InteractiveObject class28 = sceneGraph.getInteractableObject(x, y, plane);
                     if (j12 == 11)
                         j12 = 10;
                     if (class28 != null)
@@ -8938,14 +8928,14 @@ public class Client extends GameShell {
         int k1 = j * sine + i * cosine >> 16;
         int l1 = j * cosine - i * sine >> 16;
         if (l > 2500) {
-            rgbImage.method354(mapBack, 83 - l1 - rgbImage.h2 / 2 - 4, ((94 + k1) - rgbImage.w2 / 2) + 4);
+            rgbImage.draw(((94 + k1) - rgbImage.library_width / 2) + 4, 83 - l1 - rgbImage.library_height / 2 - 4, mapBack);
         } else {
-            rgbImage.drawSprite(((94 + k1) - rgbImage.w2 / 2) + 4, 83 - l1 - rgbImage.h2 / 2 - 4);
+            rgbImage.draw_trans(((94 + k1) - rgbImage.library_width / 2) + 4, 83 - l1 - rgbImage.library_height / 2 - 4);
         }
     }
 
     private void method142(int y, int z, int k, int l, int x, int j1, int objectID) {//wtf is this?
-    	if (x >= 1 && y >= 1 && x <= 102 && y <= 102) {
+        if (x >= 1 && y >= 1 && x <= 102 && y <= 102) {
             if (lowMem && z != plane)
                 return;
             int i2 = 0;
@@ -9308,7 +9298,7 @@ public class Client extends GameShell {
                 tutorialIsland = (anInt1069 / 8 == 48 || anInt1069 / 8 == 49) && anInt1070 / 8 == 48;
                 if (anInt1069 / 8 == 48 && anInt1070 / 8 == 148)
                     tutorialIsland = true;
-                
+
                 loadingStage = 1;
                 aLong824 = System.currentTimeMillis();
                 gameScreenCanvas.initDrawingArea();
@@ -9677,7 +9667,7 @@ public class Client extends GameShell {
                     headiconNpcID = inStream.g2();//npc unique id
                 if (headiconDrawType >= 2 && headiconDrawType <= 6) {//draw icon on a tile
                     if (headiconDrawType == 2) {//middle of tile
-                    	arrowDrawTileX = 64;
+                        arrowDrawTileX = 64;
                         arrowDrawTileY = 64;
                     }
                     if (headiconDrawType == 3) {//west of tile
@@ -9744,7 +9734,7 @@ public class Client extends GameShell {
                     if (sessionSettings[k5] != anIntArray1045[k5]) {
                         sessionSettings[k5] = anIntArray1045[k5];
                         applyConfigChange(k5);
-                        System.out.println("3 "+k5);
+                        System.out.println("3 " + k5);
                         needDrawTabArea = true;
                     }
 
@@ -9907,12 +9897,12 @@ public class Client extends GameShell {
                     if (itemCount == 255)
                         itemCount = inStream.biig4();
                     rsInterface.inv[itemPtr] = inStream.isg2();
-                    rsInterface.invStackSizes[itemPtr] = itemCount;
+                    rsInterface.inv_amount[itemPtr] = itemCount;
                 }
 
                 for (int itemPtr = itemAmmount; itemPtr < rsInterface.inv.length; itemPtr++) {
                     rsInterface.inv[itemPtr] = 0;
-                    rsInterface.invStackSizes[itemPtr] = 0;
+                    rsInterface.inv_amount[itemPtr] = 0;
                 }
 
                 pktType = -1;
@@ -10022,7 +10012,7 @@ public class Client extends GameShell {
                 if (sessionSettings[settingID] != settingState) {
                     sessionSettings[settingID] = settingState;
                     applyConfigChange(settingID);
-                    System.out.println("4 "+settingID);
+                    System.out.println("4 " + settingID);
                     needDrawTabArea = true;
                     if (dialogID != -1)
                         inputTaken = true;
@@ -10037,7 +10027,7 @@ public class Client extends GameShell {
                 if (sessionSettings[settingID] != settingValue) {
                     sessionSettings[settingID] = settingValue;
                     applyConfigChange(settingID);
-                    System.out.println("5 "+settingID);
+                    System.out.println("5 " + settingID);
                     needDrawTabArea = true;
                     if (dialogID != -1)
                         inputTaken = true;
@@ -10093,7 +10083,7 @@ public class Client extends GameShell {
                         itemCount = inStream.g4();
                     if (itemSlot >= 0 && itemSlot < rsInterface.inv.length) {
                         rsInterface.inv[itemSlot] = itemID;
-                        rsInterface.invStackSizes[itemSlot] = itemCount;
+                        rsInterface.inv_amount[itemSlot] = itemCount;
                     }
                 }
                 pktType = -1;
@@ -10198,7 +10188,7 @@ public class Client extends GameShell {
         Model.resourceCount = 0;
         Model.cursorXPos = super.mouseEventX - 4;
         Model.cursorYPos = super.mouseEventY - 4;
-        DrawingArea.resetImage();
+        DrawingArea.clear();
         //xxx disables graphics            if(graphicsEnabled){
         if (pglWrapper != null) {
             pglWrapper.setCameraPosition(xCameraPos, yCameraPos, zCameraPos);
@@ -10209,7 +10199,7 @@ public class Client extends GameShell {
         if (pglWrapper != null && renderNode == null) {
             renderNode = new PglCallClientNode();
             pglWrapper.scene.add(renderNode);
-        }  else
+        } else
             renderscene();
         if (pglWrapper != null)
             pglWrapper.process();
@@ -10416,50 +10406,50 @@ public class Client extends GameShell {
         // Hit-points
         System.out.println("draw orb");
         int hpPercent = 100 * user_levels[3] / user_stats[3];
-        statusGlobes[0].drawSprite(171, 11);
-        statusGlobes[1].drawSprite(174, 14);
-        statusGlobes[0].drawSpriteWithDimens(171, 11, 34 - (user_levels[3] * 34 / user_stats[3]));
+        statusGlobes[0].draw_trans(171, 11);
+        statusGlobes[1].draw_trans(174, 14);
+        statusGlobes[0].draw_height(171, 11, 34 - (user_levels[3] * 34 / user_stats[3]));
         if (hpPercent > 25) {
-            statusGlobes[5].drawSprite(180, 22);
+            statusGlobes[5].draw_trans(180, 22);
         } else {
             if (currentTime % 20 <= 10)
-                statusGlobes[5].drawSprite(180, 22);
+                statusGlobes[5].draw_trans(180, 22);
             if (currentTime % 20 <= 5)
-                statusGlobes[6].drawSprite(180, 22);
+                statusGlobes[6].draw_trans(180, 22);
         }
         smallFont.drawShadowTextHMidVTop(calcGlobeTextColor(hpPercent), 215, "" + user_levels[3], 39, true);
         // Prayer
         int prayerPercent = 100 * user_levels[5] / user_stats[5];
-        statusGlobes[0].drawSprite(187, 50);
-        statusGlobes[2].drawSprite(190, 53);
-        statusGlobes[0].drawSpriteWithDimens(187, 50, 34 - (user_levels[5] * 34 / user_stats[5]));
-        statusGlobes[7].drawSprite(193, 57);
+        statusGlobes[0].draw_trans(187, 50);
+        statusGlobes[2].draw_trans(190, 53);
+        statusGlobes[0].draw_height(187, 50, 34 - (user_levels[5] * 34 / user_stats[5]));
+        statusGlobes[7].draw_trans(193, 57);
         smallFont.drawShadowTextHMidVTop(calcGlobeTextColor(prayerPercent), 232, "" + user_levels[5], 78, true);
         // Run
         int runPercent = user_energy;
         if (statusGlobesHover == -1) {
             if (runIsOn == false) {
-                statusGlobes[0].drawSprite(187, 89);
-                statusGlobes[3].drawSprite(190, 92);
-                statusGlobes[0].drawSpriteWithDimens(187, 89, 34 - (runPercent * 34 / 100));
-                statusGlobes[8].drawSprite(197, 95);
+                statusGlobes[0].draw_trans(187, 89);
+                statusGlobes[3].draw_trans(190, 92);
+                statusGlobes[0].draw_height(187, 89, 34 - (runPercent * 34 / 100));
+                statusGlobes[8].draw_trans(197, 95);
             } else if (runIsOn == true) {
-                statusGlobes[0].drawSprite(187, 89);
-                statusGlobes[4].drawSprite(190, 92);
-                statusGlobes[0].drawSpriteWithDimens(187, 89, 34 - (runPercent * 34 / 100));
-                statusGlobes[9].drawSprite(197, 96);
+                statusGlobes[0].draw_trans(187, 89);
+                statusGlobes[4].draw_trans(190, 92);
+                statusGlobes[0].draw_height(187, 89, 34 - (runPercent * 34 / 100));
+                statusGlobes[9].draw_trans(197, 96);
             }
         } else if (statusGlobesHover == 0) {
             if (runIsOn == false) {
-                statusGlobes[10].drawSprite(187, 89);
-                statusGlobes[3].drawSprite(190, 92);
-                statusGlobes[10].drawSpriteWithDimens(187, 89, 34 - (runPercent * 34 / 100));
-                statusGlobes[8].drawSprite(197, 95);
+                statusGlobes[10].draw_trans(187, 89);
+                statusGlobes[3].draw_trans(190, 92);
+                statusGlobes[10].draw_height(187, 89, 34 - (runPercent * 34 / 100));
+                statusGlobes[8].draw_trans(197, 95);
             } else if (runIsOn == true) {
-                statusGlobes[10].drawSprite(187, 89);
-                statusGlobes[4].drawSprite(190, 92);
-                statusGlobes[10].drawSpriteWithDimens(187, 89, 34 - (runPercent * 34 / 100));
-                statusGlobes[9].drawSprite(197, 96);
+                statusGlobes[10].draw_trans(187, 89);
+                statusGlobes[4].draw_trans(190, 92);
+                statusGlobes[10].draw_height(187, 89, 34 - (runPercent * 34 / 100));
+                statusGlobes[9].draw_trans(197, 96);
             }
         }
         smallFont.drawShadowTextHMidVTop(calcGlobeTextColor(runPercent), 232, "" + user_energy, 117, true);
@@ -10898,6 +10888,7 @@ public class Client extends GameShell {
     public static boolean circleLoadingBar = false;
     public static final boolean glEnabled = false;
     public static final boolean useNewTerrain = false;
+
     static {
         XP_FOR_LEVEL = new int[99];
         int i = 0;

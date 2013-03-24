@@ -1,6 +1,8 @@
 package rs2;
 
 
+import rs2.model.entity.Entity;
+
 public class StillGraphic extends Entity {
 
     public StillGraphic(int z, int currentTime, int l, int i1, int drawHeight, int y,
