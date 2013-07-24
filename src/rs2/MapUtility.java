@@ -4,54 +4,54 @@ package rs2;
 public class MapUtility
 {//Thanks Xaves
 
-    public static int getRotatedMapChunkX(int rotation, int y, int x)
+    public static int rotate_terrain_block_x(int x, int z, int orientation)
     {
-        rotation &= 3;
-        if(rotation == 0)
+        orientation &= 3;
+        if(orientation == 0)
             return x;
-        if(rotation == 1)
-            return y;
-        if(rotation == 2)
+        if(orientation == 1)
+            return z;
+        if(orientation == 2)
             return 7 - x;
         else
-            return 7 - y;
+            return 7 - z;
     }
 
-    public static int getRotatedMapChunkY(int y, int rotation, int x)
+    public static int rotate_terrain_block_z(int x, int z, int orientation)
     {
-        rotation &= 3;
-        if(rotation == 0)
-            return y;
-        if(rotation == 1)
+        orientation &= 3;
+        if(orientation == 0)
+            return z;
+        if(orientation == 1)
             return 7 - x;
-        if(rotation == 2)
-            return 7 - y;
+        if(orientation == 2)
+            return 7 - z;
         else
             return x;
     }
 
-    public static int getRotatedLandscapeChunkX(int rotation, int objectSizeY, int x, int y, int objectSizeX)
+    public static int rotate_object_block_x(int x, int z, int width, int height, int orientation)
     {
-        rotation &= 3;
-        if(rotation == 0)
+        orientation &= 3;
+        if(orientation == 0)
             return x;
-        if(rotation == 1)
-            return y;
-        if(rotation == 2)
-            return 7 - x - (objectSizeX - 1);
+        if(orientation == 1)
+            return z;
+        if(orientation == 2)
+            return 7 - x - (width - 1);
         else
-            return 7 - y - (objectSizeY - 1);
+            return 7 - z - (height - 1);
     }
 
-    public static int getRotatedLandscapeChunkY(int y, int objectSizeY, int rotation, int objectSizeX, int x)
+    public static int rotate_object_block_z(int x, int z, int width, int height, int orientation)
     {
-        rotation &= 3;
-        if(rotation == 0)
-            return y;
-        if(rotation == 1)
-            return 7 - x - (objectSizeX - 1);
-        if(rotation == 2)
-            return 7 - y - (objectSizeY - 1);
+        orientation &= 3;
+        if(orientation == 0)
+            return z;
+        if(orientation == 1)
+            return 7 - x - (width - 1);
+        if(orientation == 2)
+            return 7 - z - (height - 1);
         else
             return x;
     }

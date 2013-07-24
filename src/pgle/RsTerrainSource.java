@@ -28,9 +28,9 @@ public class RsTerrainSource implements TerrainSource {
     }
 
     public void updateMap(){
-        byte[][] underlays = mapRegion.getUnderLay()[heightLevel];
-        int[][] underlaysRgb = mapRegion.getUnderlayRgb()[heightLevel];
-        int[][] heightmap = mapRegion.getHeightMap()[heightLevel];
+        byte[][] underlays = mapRegion.get_tile_layer0_type()[heightLevel];
+        int[][] underlaysRgb = mapRegion.get_tile_layer0_colour()[heightLevel];
+        int[][] heightmap = mapRegion.get_tile_height()[heightLevel];
         for (int x = 0;x < 104;x++)
             for (int z = 0;z < 104;z++){
                 if (underlays[x][z] == 0)
@@ -39,7 +39,7 @@ public class RsTerrainSource implements TerrainSource {
                 int underlayRgb = underlaysRgb[x][z];
                 colourMap[x][z] = new Color(underlayRgb >> 16,underlayRgb >> 8,underlayRgb & 0xFF);
                 textureMap[x][z] = underlay.hdUlTexture;
-                heightMap[x][z] = (((!(mapRegion.getOverLay()[heightLevel][x][z] == 6 && mapRegion.getTileShape()[heightLevel][x][z] != 1)) || heightmap[x][z] != 0) ? -heightmap[x][z] : -200)-9;
+                heightMap[x][z] = (((!(mapRegion.get_tile_layer1_type()[heightLevel][x][z] == 6 && mapRegion.get_tile_layer1_shape()[heightLevel][x][z] != 1)) || heightmap[x][z] != 0) ? -heightmap[x][z] : -200)-9;
 
             }
         model = new PglTerrainModel(mapRegion,0);

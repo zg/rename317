@@ -66,9 +66,9 @@ public class SpotAnim {
 	private void readValues(Packet stream) {//new format type
 	do {
 		modelID = stream.g2();
-		animationID = stream.g2();
-        if(Sequence.anims != null && animationID != 65535 && animationID != -1)
-			aSequence_407 = Sequence.anims[animationID];
+		animation_id = stream.g2();
+        if(Sequence.anims != null && animation_id != 65535 && animation_id != -1)
+			aSequence_407 = Sequence.anims[animation_id];
         	resizeXY = stream.g1();
         	resizeZ = stream.g1();
 			int j = stream.g1();

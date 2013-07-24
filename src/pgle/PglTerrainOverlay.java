@@ -1,6 +1,5 @@
 package pgle;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.YearDV;
 //import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
@@ -14,9 +13,7 @@ import org.peterbjornx.pgl2.util.PglException;
 import rs2.*;
 import rt4.*;
 
-import java.rmi.NotBoundException;
-import java.util.HashMap;
-import java.util.LinkedList;
+        import java.util.LinkedList;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -87,13 +84,13 @@ public class PglTerrainOverlay {
         try {
             for (int x = 0; x < 103; x++)
                 for (int z = 0; z < 103; z++) {
-                    int shapeA = mapRegion.getTileShape()[heightLevel][x][z] + 1;
-                    int shapeB = mapRegion.getShapeRotation()[heightLevel][x][z];
-                    int overlay = mapRegion.getOverLay()[heightLevel][x][z] & 0xff;
-                    int yA = -mapRegion.getHeightMap()[heightLevel][x][z];
-                    int yB = -mapRegion.getHeightMap()[heightLevel][x + 1][z];
-                    int yD = -mapRegion.getHeightMap()[heightLevel][x + 1][z + 1];
-                    int yC = -mapRegion.getHeightMap()[heightLevel][x][z + 1];
+                    int shapeA = mapRegion.get_tile_layer1_shape()[heightLevel][x][z] + 1;
+                    int shapeB = mapRegion.get_tile_layer1_orientation()[heightLevel][x][z];
+                    int overlay = mapRegion.get_tile_layer1_type()[heightLevel][x][z] & 0xff;
+                    int yA = -mapRegion.get_tile_height()[heightLevel][x][z];
+                    int yB = -mapRegion.get_tile_height()[heightLevel][x + 1][z];
+                    int yD = -mapRegion.get_tile_height()[heightLevel][x + 1][z + 1];
+                    int yC = -mapRegion.get_tile_height()[heightLevel][x][z + 1];
                     if (overlay != 0) {
                         Floor overlayFloor = Floor.cache[overlay - 1];
                         if (overlayFloor.colour2 != 0xFF00FF)
@@ -102,13 +99,13 @@ public class PglTerrainOverlay {
                 }
             for (int x = 0; x < 103; x++)
                 for (int z = 0; z < 103; z++) {
-                    int shapeA = mapRegion.getTileShape()[heightLevel][x][z] + 1;
-                    int shapeB = mapRegion.getShapeRotation()[heightLevel][x][z];
-                    int overlay = mapRegion.getOverLay()[heightLevel][x][z] & 0xff;
-                    int yA = -mapRegion.getHeightMap()[heightLevel][x][z];
-                    int yB = -mapRegion.getHeightMap()[heightLevel][x + 1][z];
-                    int yD = -mapRegion.getHeightMap()[heightLevel][x + 1][z + 1];
-                    int yC = -mapRegion.getHeightMap()[heightLevel][x][z + 1];
+                    int shapeA = mapRegion.get_tile_layer1_shape()[heightLevel][x][z] + 1;
+                    int shapeB = mapRegion.get_tile_layer1_orientation()[heightLevel][x][z];
+                    int overlay = mapRegion.get_tile_layer1_type()[heightLevel][x][z] & 0xff;
+                    int yA = -mapRegion.get_tile_height()[heightLevel][x][z];
+                    int yB = -mapRegion.get_tile_height()[heightLevel][x + 1][z];
+                    int yD = -mapRegion.get_tile_height()[heightLevel][x + 1][z + 1];
+                    int yC = -mapRegion.get_tile_height()[heightLevel][x][z + 1];
                     if (overlay != 0) {
                         Floor overlayFloor = Floor.cache[overlay - 1];
                         if (overlayFloor.colour2 != 0xFF00FF)

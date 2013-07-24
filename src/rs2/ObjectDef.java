@@ -24,21 +24,21 @@ public class ObjectDef
 
     private void setDefaults()
     {
-        objectModelIDs = null;
-        types = null;
+        object_model_ids = null;
+        object_model_type = null;
         name = null;
         description = null;
         modifiedModelColors = null;
         originalModelColors = null;
-        sizeX = 1;
-        sizeY = 1;
+        width = 1;
+        height = 1;
         isUnwalkable = true;
         aBoolean757 = true;
         hasActions = false;
         adjustToTerrain = false;
         nonFlatShading = false;
         aBoolean764 = false;
-        animationID = -1;
+        animation_id = -1;
         anInt775 = 16;
         brightness = 0;
         contrast = 0;
@@ -57,17 +57,17 @@ public class ObjectDef
         aBoolean736 = false;
         isSolidObject = false;
         anInt760 = -1;
-        configId_1 = -1;
-        configID = -1;
-        configObjectIDs = null;
+        variable_id_bitfield = -1;
+        variable_id = -1;
+        alternative_ids = null;
     }
 
-    public void method574(OnDemandFetcher class42_sub1)
+    public void request_models(OnDemandFetcher class42_sub1)
     {
-        if(objectModelIDs == null)
+        if(object_model_ids == null)
             return;
-        for(int j = 0; j < objectModelIDs.length; j++)
-            class42_sub1.method560(objectModelIDs[j] & 0xffff, 0);
+        for(int j = 0; j < object_model_ids.length; j++)
+            class42_sub1.method560(object_model_ids[j] & 0xffff, 0);
     }
 
     public static void clearCache()
@@ -98,30 +98,30 @@ public class ObjectDef
 
     }
 
-    public boolean method577(int i)
+    public boolean is_type_cached(int i)
     {
-        if(types == null)
+        if(object_model_type == null)
         {
-            if(objectModelIDs == null)
+            if(object_model_ids == null)
                 return true;
             if(i != 10)
                 return true;
             boolean flag1 = true;
-            for(int k = 0; k < objectModelIDs.length; k++)
-                flag1 &= Model.isCached(objectModelIDs[k] & 0xffff);
+            for(int k = 0; k < object_model_ids.length; k++)
+                flag1 &= Model.isCached(object_model_ids[k] & 0xffff);
 
             return flag1;
         }
-        for(int j = 0; j < types.length; j++)
-            if(types[j] == i)
-                return Model.isCached(objectModelIDs[j] & 0xffff);
+        for(int j = 0; j < object_model_type.length; j++)
+            if(object_model_type[j] == i)
+                return Model.isCached(object_model_ids[j] & 0xffff);
 
         return true;
     }
 
-    public Model renderObject(int objectType, int face, int zA, int zB, int zD, int zC, int currentAnimID)
+    public Model generate_model(int object_type, int orientation, int a_y, int b_y, int d_y, int c_y, int currentAnimID)
     {
-        Model model = getAnimatedModel(objectType, currentAnimID, face);
+        Model model = getAnimatedModel(object_type, currentAnimID, orientation);
         if(model == null)
             return null;
         if(adjustToTerrain || nonFlatShading)
@@ -129,63 +129,63 @@ public class ObjectDef
         adjustToTerrain = true;
         if(adjustToTerrain)
         {
-            int l1 = (zA + zB + zD + zC) / 4;
-            for(int v = 0; v < model.vertex_count; v++)
+            int avg_y = (a_y + b_y + d_y + c_y) / 4;
+            for(int vertex_ptr = 0; vertex_ptr < model.vertex_count; vertex_ptr++)
             {
-                int vertexX = model.vertex_x[v];
-                int vertexY = model.vertex_z[v];
-                int l2 = zA + ((zB - zA) * (vertexX + 64)) / 128;
-                int i3 = zC + ((zD - zC) * (vertexX + 64)) / 128;
-                int j3 = l2 + ((i3 - l2) * (vertexY + 64)) / 128;
-                model.vertex_y[v] += j3 - l1;
+                int vertex_x = model.vertex_x[vertex_ptr];
+                int vertex_z = model.vertex_z[vertex_ptr];
+                int l2 = a_y + ((b_y - a_y) * (vertex_x + 64)) / 128;
+                int i3 = c_y + ((d_y - c_y) * (vertex_x + 64)) / 128;
+                int j3 = l2 + ((i3 - l2) * (vertex_z + 64)) / 128;
+                model.vertex_y[vertex_ptr] += j3 - avg_y;
             }
             model.normalise();
         }
         return model;
     }
 
-    public boolean method579()
+    public boolean is_cached()
     {
-        if(objectModelIDs == null)
+        if(object_model_ids == null)
             return true;
-        boolean flag1 = true;
-        for(int i = 0; i < objectModelIDs.length; i++)
-            flag1 &= Model.isCached(objectModelIDs[i] & 0xffff);
-            return flag1;
+        boolean complete = true;
+        for(int i = 0; i < object_model_ids.length; i++)
+            complete &= Model.isCached(object_model_ids[i] & 0xffff);
+            return complete;
     }
 
     public ObjectDef method580()
     {
         int i = -1;
-        if(configId_1 != -1)
+        if(variable_id_bitfield != -1)
         {
-            VarBit varBit = VarBit.cache[configId_1];
+            VarBit varBit = VarBit.cache[variable_id_bitfield];
             int j = varBit.variable;
             int k = varBit.leastSignificantBit;
             int l = varBit.mostSignificantBit;
-            int i1 = StaticLogic.BITFIELD_MAX_VALUE[l - k];
+            int i1 = StaticLogic.BITFIELD_MASK[l - k];
             if (clientInstance == null)
                 i = 0;
             else
                 i = clientInstance.session_variables[j] >> k & i1;
 
         } else
-        if(configID != -1)
+        if(variable_id != -1)
             if (clientInstance == null)
                 i = 0;
             else
-                i = clientInstance.session_variables[configID];
-        if(i < 0 || i >= configObjectIDs.length || configObjectIDs[i] == -1)
+                i = clientInstance.session_variables[variable_id];
+        if(i < 0 || i >= alternative_ids.length || alternative_ids[i] == -1)
             return null;
         else
-            return forID(configObjectIDs[i]);
+            return forID(alternative_ids[i]);
     }
 
     private Model getAnimatedModel(int objectType, int currentAnimID, int face)
     {
         Model model = null;
         long hash;
-        if(types == null)
+        if(object_model_type == null)
         {
             if(objectType != 10)
                 return null;
@@ -193,13 +193,13 @@ public class ObjectDef
             Model model_1 = (Model) modelCache2.get(hash);
             if(model_1 != null)
                 return model_1;
-            if(objectModelIDs == null)
+            if(object_model_ids == null)
                 return null;
             boolean mirror = aBoolean751 ^ (face > 3);
-            int numberOfModels = objectModelIDs.length;
+            int numberOfModels = object_model_ids.length;
             for(int i2 = 0; i2 < numberOfModels; i2++)
             {
-                int subModelID = objectModelIDs[i2];
+                int subModelID = object_model_ids[i2];
                 if(mirror)
                     subModelID += 0x10000;
                 model = (Model) modelCache.get(subModelID);
@@ -221,9 +221,9 @@ public class ObjectDef
         } else
         {
             int i1 = -1;
-            for(int j1 = 0; j1 < types.length; j1++)
+            for(int j1 = 0; j1 < object_model_type.length; j1++)
             {
-                if(types[j1] != objectType)
+                if(object_model_type[j1] != objectType)
                     continue;
                 i1 = j1;
                 break;
@@ -235,7 +235,7 @@ public class ObjectDef
             Model model_2 = (Model) modelCache2.get(hash);
             if(model_2 != null)
                 return model_2;
-            int j2 = objectModelIDs[i1];
+            int j2 = object_model_ids[i1];
             boolean mirrorModel = aBoolean751 ^ (face > 3);
             if(mirrorModel)
                 j2 += 0x10000;
@@ -297,15 +297,15 @@ label0:
                 {
                     int k = stream.g1();
                     if(k > 0)
-                        if(objectModelIDs == null || lowMem)
+                        if(object_model_ids == null || lowMem)
                         {
-                            types = new int[k];
-                            objectModelIDs = new int[k];
+                            object_model_type = new int[k];
+                            object_model_ids = new int[k];
                             for(int k1 = 0; k1 < k; k1++)
                             {
-                                objectModelIDs[k1] = stream.g2();
+                                object_model_ids[k1] = stream.g2();
                                 
-                                types[k1] = stream.g1();
+                                object_model_type[k1] = stream.g1();
                             }
 
                         } else
@@ -323,12 +323,12 @@ label0:
                 {
                     int l = stream.g1();
                     if(l > 0)
-                        if(objectModelIDs == null || lowMem)
+                        if(object_model_ids == null || lowMem)
                         {
-                            types = null;
-                            objectModelIDs = new int[l];
+                            object_model_type = null;
+                            object_model_ids = new int[l];
                             for(int l1 = 0; l1 < l; l1++)
-                                objectModelIDs[l1] = stream.g2();
+                                object_model_ids[l1] = stream.g2();
 
                         } else
                         {
@@ -336,10 +336,10 @@ label0:
                         }
                 } else
                 if(j == 14)
-                    sizeX = stream.g1();
+                    width = stream.g1();
                 else
                 if(j == 15)
-                    sizeY = stream.g1();
+                    height = stream.g1();
                 else
                 if(j == 17)
                     isUnwalkable = false;
@@ -364,9 +364,9 @@ label0:
                 else
                 if(j == 24)
                 {
-                    animationID = stream.g2();
-                    if(animationID == 65535)
-                        animationID = -1;
+                    animation_id = stream.g2();
+                    if(animation_id == 65535)
+                        animation_id = -1;
                 } else
                 if(j == 28)
                     anInt775 = stream.g1();
@@ -444,25 +444,25 @@ label0:
                 }
                 continue label0;
             } while(j != 77);
-            configId_1 = stream.g2();
-            if(configId_1 == 65535)
-                configId_1 = -1;
-            configID = stream.g2();
-            if(configID == 65535)
-                configID = -1;
+            variable_id_bitfield = stream.g2();
+            if(variable_id_bitfield == 65535)
+                variable_id_bitfield = -1;
+            variable_id = stream.g2();
+            if(variable_id == 65535)
+                variable_id = -1;
             int j1 = stream.g1();
-            configObjectIDs = new int[j1 + 1];
+            alternative_ids = new int[j1 + 1];
             for(int j2 = 0; j2 <= j1; j2++)
             {
-                configObjectIDs[j2] = stream.g2();
-                if(configObjectIDs[j2] == 65535)
-                    configObjectIDs[j2] = -1;
+                alternative_ids[j2] = stream.g2();
+                if(alternative_ids[j2] == 65535)
+                    alternative_ids[j2] = -1;
             }
 
         } while(true);
         if(i == -1)
         {
-            hasActions = objectModelIDs != null && (types == null || types[0] == 10);
+            hasActions = object_model_ids != null && (object_model_type == null || object_model_type[0] == 10);
             if(actions != null)
                 hasActions = true;
         }
@@ -487,12 +487,12 @@ label0:
     private int modelSizeY;
     private static final Model[] modelParts = new Model[4];
     private byte contrast;
-    public int sizeX;
+    public int width;
     private int offsetH;
     public int mapFunctionID;
     private int[] originalModelColors;
     private int modelSizeX;
-    public int configID;
+    public int variable_id;
     private boolean aBoolean751;
     public static boolean lowMem;
     private static Packet stream;
@@ -500,9 +500,9 @@ label0:
     private static int[] streamIndices;
     public boolean aBoolean757;
     public int mapSceneID;
-    public int configObjectIDs[];
+    public int alternative_ids[];
     private int anInt760;
-    public int sizeY;
+    public int height;
     public boolean adjustToTerrain;
     public boolean aBoolean764;
     public static Client clientInstance;
@@ -512,15 +512,15 @@ label0:
     private boolean nonFlatShading;
     private static int cacheIndex;
     private int modelSizeH;
-    private int[] objectModelIDs;
-    public int configId_1;
+    private int[] object_model_ids;
+    public int variable_id_bitfield;
     public int anInt775;
-    private int[] types;
+    private int[] object_model_type;
     public byte description[];
     public boolean hasActions;
     public boolean aBoolean779;
     public static MemCache modelCache2 = new MemCache(30);
-    public int animationID;
+    public int animation_id;
     private static ObjectDef[] cache;
     private int offsetY;
     private int[] modifiedModelColors;
