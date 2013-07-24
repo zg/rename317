@@ -66,7 +66,7 @@ public class NpcDef
             int k = varBit.variable;
             int l = varBit.leastSignificantBit;
             int i1 = varBit.mostSignificantBit;
-            int j1 = StaticLogic.BITFIELD_MAX_VALUE[i1 - l];
+            int j1 = StaticLogic.BITFIELD_MASK[i1 - l];
             if (clientInstance == null)
                 j = 0;
             else

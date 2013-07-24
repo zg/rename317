@@ -133,7 +133,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 if (onDemandData.dataType == 1 && onDemandData.buffer != null)
                     rs2.Animation.load(onDemandData.buffer);
             } while (onDemandData.dataType != 93 || !onDemandFetcher.method564(onDemandData.ID));
-            MapRegion.prefetchObjects(new Packet(onDemandData.buffer), onDemandFetcher);
+            MapRegion.request_object_models(new Packet(onDemandData.buffer), onDemandFetcher);
         } while (true);
     }
 
@@ -431,16 +431,16 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 if (!controlDown){
                     mapRegion.setOverlay(z,x,y,editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId()+1);
                 } else if (d == 0)
-                    editorMainWindow.getFloorTypeSelectionWindow().selectFloor(mapRegion.getOverLay()[z][x][y]-1);
+                    editorMainWindow.getFloorTypeSelectionWindow().selectFloor(mapRegion.get_tile_layer1_type()[z][x][y]-1);
                 break;
             case PAINT_UNDERLAY:
                 if (!controlDown){
                     mapRegion.setUnderlay(z, x, y, editorMainWindow.getFloorTypeSelectionWindow().getSelectedFloorId() + 1);
                 } else if (d == 0)
-                    editorMainWindow.getFloorTypeSelectionWindow().selectFloor(mapRegion.getUnderLay()[z][x][y]-1);
+                    editorMainWindow.getFloorTypeSelectionWindow().selectFloor(mapRegion.get_tile_layer0_type()[z][x][y]-1);
                 break;
             case HEIGHT_EDIT:
-                mapRegion.automaticHeight[z][x][y] = false;
+                mapRegion.tile_auto_height[z][x][y] = false;
                 if (!controlDown){
                     heightMap[z][x][y]-=(heightEditingSpeed/(d * 0.25f + 1f)) % 8;
                 } else {
@@ -449,7 +449,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 }
                 break;
             case HEIGHT_SET:
-                mapRegion.automaticHeight[z][x][y] = false;
+                mapRegion.tile_auto_height[z][x][y] = false;
                 if (!controlDown && setHeight != -1){
                     heightMap[z][x][y]=setHeight;
                     editorMainWindow.getEditorToolbar().setTargetHeight(setHeight);
@@ -510,7 +510,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             return;
         }
         if (isOverlay){
-            int overlayId = mapRegion.getOverLay()[y][x][z] & 0xFF;
+            int overlayId = mapRegion.get_tile_layer1_type()[y][x][z] & 0xFF;
             if (curId == -1){
                 curId = overlayId;
             } else if (curId != overlayId || fillTraversed[y][x][z]) {
@@ -518,7 +518,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 return;
             }
         } else {
-            int underlayId = mapRegion.getUnderLay()[y][x][z] & 0xFF;
+            int underlayId = mapRegion.get_tile_layer0_type()[y][x][z] & 0xFF;
             if (curId == -1){
                 curId = underlayId;
             } else if (curId != underlayId || fillTraversed[y][x][z]) {
@@ -533,7 +533,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 heightMap[y][x+1][z+1]=setHeight;
                 heightMap[y][x][z+1]=setHeight;
             case HEIGHTFILL_UNDERLAY:
-                mapRegion.automaticHeight[y][x][z] = false;
+                mapRegion.tile_auto_height[y][x][z] = false;
                 heightMap[y][x][z]=setHeight;
                 break;
             case SETTINGSFILL_OVERLAY:
@@ -548,21 +548,21 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 break;
             case ADDSHAPES_OVERLAY:
             case ADDSHAPES_UNDERLAY:
-                boolean n = z == mapTileH - 1 || mapRegion.getOverLay()[y][x][z + 1] != 0;
-                boolean s = z == 0 || mapRegion.getOverLay()[y][x][z - 1] != 0;
-                boolean w = x == 0 || mapRegion.getOverLay()[y][x-1][z  ] != 0;
-                boolean e = x == mapTileW - 1 || mapRegion.getOverLay()[y][x+1][z  ] != 0;
-                mapRegion.tileShape[y][x][z] = 1;
+                boolean n = z == mapTileH - 1 || mapRegion.get_tile_layer1_type()[y][x][z + 1] != 0;
+                boolean s = z == 0 || mapRegion.get_tile_layer1_type()[y][x][z - 1] != 0;
+                boolean w = x == 0 || mapRegion.get_tile_layer1_type()[y][x-1][z  ] != 0;
+                boolean e = x == mapTileW - 1 || mapRegion.get_tile_layer1_type()[y][x+1][z  ] != 0;
+                mapRegion.tile_layer1_shape[y][x][z] = 1;
                 if (n && w && (!s) && (!e))
-                    mapRegion.tileShapeRotation[y][x][z] = 1;
+                    mapRegion.tile_layer1_orientation[y][x][z] = 1;
                 else if (n && e && (!s) && (!w))
-                    mapRegion.tileShapeRotation[y][x][z] = 2;
+                    mapRegion.tile_layer1_orientation[y][x][z] = 2;
                 else if (s && e && (!n) && (!w))
-                    mapRegion.tileShapeRotation[y][x][z] = 3;
+                    mapRegion.tile_layer1_orientation[y][x][z] = 3;
                 else if (s && w && (!n) && (!e))
-                    mapRegion.tileShapeRotation[y][x][z] = 0;
+                    mapRegion.tile_layer1_orientation[y][x][z] = 0;
                 else
-                    mapRegion.tileShape[y][x][z] = 0;
+                    mapRegion.tile_layer1_shape[y][x][z] = 0;
                 break;
         }
         if (recurseOMeter >= 900){
@@ -590,7 +590,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             return;
         gameScreenCanvas.drawGraphics(0, graphics, 0);
         if (selectedTileX != -1)
-            ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getTileShape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeRotation()[selectedTileY][selectedTileX][selectedTileZ]);
+            ShapedTile.drawShape(super.graphics, (byte) (mapRegion.get_tile_layer1_shape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.get_tile_layer1_orientation()[selectedTileY][selectedTileX][selectedTileZ]);
         }
 
     @Override
@@ -601,7 +601,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 drawMinimap();
             }gameScreenCanvas.drawGraphics(0, graphics, 0);
             if (selectedTileX != -1)
-                        ShapedTile.drawShape(super.graphics, (byte) (mapRegion.getTileShape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeRotation()[selectedTileY][selectedTileX][selectedTileZ]);
+                        ShapedTile.drawShape(super.graphics, (byte) (mapRegion.get_tile_layer1_shape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.get_tile_layer1_orientation()[selectedTileY][selectedTileX][selectedTileZ]);
 
         } catch (Exception e){
             System.err.println("Exception while rendering frame!");
@@ -620,7 +620,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             gameViewPanel.setGameShell(this);
             SceneGraph.lowMem = false;
             Rasterizer.lowMem = false;
-            MapRegion.lowMem = false;
+            MapRegion.low_detail = false;
             ObjectDef.lowMem = false;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Failed to start the application!", "RuneScape Map Editor", JOptionPane.ERROR_MESSAGE);
@@ -649,9 +649,9 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             if (object.mapSceneID != -1) {
                 IndexedImage mapScene = mapScenes[object.mapSceneID];
                 if (mapScene != null) {
-                    int i6 = (object.sizeX * 4 - mapScene.imgWidth) / 2;
-                    int j6 = (object.sizeY * 4 - mapScene.imgHeight) / 2;
-                    mapScene.drawImage(128 + x * 4 + i6, 128 + (mhTile - y - object.sizeY) * 4 + j6);
+                    int i6 = (object.width * 4 - mapScene.imgWidth) / 2;
+                    int j6 = (object.height * 4 - mapScene.imgHeight) / 2;
+                    mapScene.drawImage(128 + x * 4 + i6, 128 + (mhTile - y - object.height) * 4 + j6);
                 }
             } else {
                 if (lineRenderType == 0 || lineRenderType == 2)
@@ -719,9 +719,9 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             if (class46_1.mapSceneID != -1) {
                 IndexedImage indexedImage_1 = mapScenes[class46_1.mapSceneID];
                 if (indexedImage_1 != null) {
-                    int j5 = (class46_1.sizeX * 4 - indexedImage_1.imgWidth) / 2;
-                    int k5 = (class46_1.sizeY * 4 - indexedImage_1.imgHeight) / 2;
-                    indexedImage_1.drawImage(128 + x * 4 + j5,128 + (mhTile - y - class46_1.sizeY) * 4 + k5);
+                    int j5 = (class46_1.width * 4 - indexedImage_1.imgWidth) / 2;
+                    int k5 = (class46_1.height * 4 - indexedImage_1.imgHeight) / 2;
+                    indexedImage_1.drawImage(128 + x * 4 + j5,128 + (mhTile - y - class46_1.height) * 4 + k5);
                 }
             } else if (j3 == 9) {
                 int l4 = 0xeeeeee;
@@ -749,9 +749,9 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             if (class46.mapSceneID != -1) {
                 IndexedImage indexedImage = mapScenes[class46.mapSceneID];
                 if (indexedImage != null) {
-                    int i4 = (class46.sizeX * 4 - indexedImage.imgWidth) / 2;
-                    int j4 = (class46.sizeY * 4 - indexedImage.imgHeight) / 2;
-                    indexedImage.drawImage(128 + x * 4 + i4,128 +  (mhTile - y - class46.sizeY) * 4 + j4);
+                    int i4 = (class46.width * 4 - indexedImage.imgWidth) / 2;
+                    int j4 = (class46.height * 4 - indexedImage.imgHeight) / 2;
+                    indexedImage.drawImage(128 + x * 4 + i4,128 +  (mhTile - y - class46.height) * 4 + j4);
                 }
             }
         }
@@ -788,15 +788,15 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             for (int _z = 0;_z < mapHeight;_z++){
                 int terrainIdx = onDemandFetcher.getMapIndex(0,z+_z,x+_x);
                 if (terrainIdx == -1){
-                    mapRegion.initMapTables(_z*64,64,64,_x*64);
+                    mapRegion.clear_region(_z * 64, 64, 64, _x * 64);
                     continue;
                 }
                 byte[] terrainData = GZIPWrapper.decompress(jagexFileStores[4].decompress(terrainIdx));
                 if (terrainData == null){
-                    mapRegion.initMapTables(_z*64,64,64,_x*64);
+                    mapRegion.clear_region(_z * 64, 64, 64, _x * 64);
                     continue;
                 }
-                mapRegion.loadTerrain(terrainData,_z*64,_x*64,x*64,z*64,tileSettings);
+                mapRegion.load_terrain_block(terrainData, _z * 64, _x * 64, x * 64, z * 64, tileSettings);
             }
         for (int _x = 0;_x < mapWidth;_x++)
             for (int _z = 0;_z < mapHeight;_z++){
@@ -806,7 +806,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
                 byte[] objectData = GZIPWrapper.decompress(jagexFileStores[4].decompress(objectIdx));
                 if (objectData == null)
                     continue;
-                mapRegion.loadObjects(_x*64,tileSettings,_z*64,sceneGraph,objectData);
+                mapRegion.load_object_block(_x * 64, _z * 64, objectData, tileSettings, sceneGraph);
             }
         mapRegion.addTiles(tileSettings,sceneGraph, 0);
         sceneGraph.setHeightLevel(0);
@@ -955,7 +955,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
         draw3dScreen();
         gameScreenCanvas.drawGraphics(0, super.graphics, 0);
         if (selectedTileX != -1)
-               ShapedTile.drawShape(super.graphics,(byte) (mapRegion.getTileShape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.getShapeRotation()[selectedTileY][selectedTileX][selectedTileZ]);
+               ShapedTile.drawShape(super.graphics,(byte) (mapRegion.get_tile_layer1_shape()[selectedTileY][selectedTileX][selectedTileZ]+1),mapRegion.get_tile_layer1_orientation()[selectedTileY][selectedTileX][selectedTileZ]);
         xCameraPos = l;
         zCameraPos = i1;
         yCameraPos = j1;
@@ -1131,7 +1131,7 @@ public class EditorMain extends GameShell implements ComponentListener, WindowLi
             for (int _z = 0;_z < mapHeight;_z++){
                 int terrainIdx = onDemandFetcher.getMapIndex(0, z + _z, x + _x);
                 Packet mapStorage = new Packet(new byte[131072]);//128KB should be enough
-                mapRegion.writeMapRegion(_x * 64, _z * 64, mapStorage);
+                mapRegion.save_terrain_block(_x * 64, _z * 64, mapStorage);
                 byte[] terrainData = new byte[mapStorage.pos];
                 System.arraycopy(mapStorage.data,0,terrainData,0,mapStorage.pos);
                 terrainData = GZIPWrapper.compress(terrainData);

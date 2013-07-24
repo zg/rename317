@@ -9,34 +9,50 @@
     <bookmark url="file://$PROJECT_DIR$/src/rt4/ModelRendererGL.java" line="738" />
     <bookmark url="file://$PROJECT_DIR$/src/editor/gui/dockables/flooreditor/FloorPreviewPanel.java" line="66" />
     <bookmark url="file://$PROJECT_DIR$/src/editor/EditorMain.java" line="102" mnemonic="8" />
+    <bookmark url="file://$PROJECT_DIR$/src/rs2/MapRegion.java" line="556" />
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9a741ec5-3f29-4b60-89a4-e97f46ec021f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rs2/config" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/rs2/ItemDef.java" afterPath="$PROJECT_DIR$/src/rs2/config/ItemDef.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rs2/model/object" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.ipr" afterPath="$PROJECT_DIR$/317 Rename Project.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/317 Rename Project.iws" afterPath="$PROJECT_DIR$/317 Rename Project.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Client.java" afterPath="$PROJECT_DIR$/src/rs2/Client.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/editor/EditorMain.java" afterPath="$PROJECT_DIR$/src/editor/EditorMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Item.java" afterPath="$PROJECT_DIR$/src/rs2/Item.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Player.java" afterPath="$PROJECT_DIR$/src/rs2/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/RSInterface.java" afterPath="$PROJECT_DIR$/src/rs2/RSInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/Floor.java" afterPath="$PROJECT_DIR$/src/rs2/Floor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MapRegion.java" afterPath="$PROJECT_DIR$/src/rs2/MapRegion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/MapUtility.java" afterPath="$PROJECT_DIR$/src/rs2/MapUtility.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/NpcDef.java" afterPath="$PROJECT_DIR$/src/rs2/NpcDef.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/ObjectDef.java" afterPath="$PROJECT_DIR$/src/rs2/ObjectDef.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" afterPath="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/PglTerrainModel.java" afterPath="$PROJECT_DIR$/src/pgle/PglTerrainModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java" afterPath="$PROJECT_DIR$/src/pgle/PglTerrainOverlay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" afterPath="$PROJECT_DIR$/src/pgle/RsTerrainSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/SpotAnim.java" afterPath="$PROJECT_DIR$/src/rs2/SpotAnim.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rs2/StaticLogic.java" afterPath="$PROJECT_DIR$/src/rs2/StaticLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jdocs/serialized-form.html" afterPath="$PROJECT_DIR$/jdocs/serialized-form.html" />
+      <change type="MOVED" beforePath="G:\peterbjornx_homedir\Projects\Games\JAGeX\RuneScape\Clients\Build #317 (rename317)\src\rs2\ObjectOnTile.java" afterPath="$PROJECT_DIR$/src/rs2/model/object/ObjectInstance.java" />
     </list>
     <ignored path="317 Rename Project.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/fragment.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364156248884" ignored="false" />
+    <file path="/fragment.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1374424616458" ignored="false" />
     <file path="/QueueNode.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130827332" ignored="false" />
     <file path="/HashTable.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130593183" ignored="false" />
     <file path="/MemCache.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130710501" ignored="false" />
     <file path="/Queue.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364130795469" ignored="false" />
-    <file path="/Dummy.txt" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364156289787" ignored="false" />
+    <file path="/Dummy.txt" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1374705449641" ignored="false" />
     <file path="/Entity.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364131884440" ignored="false" />
     <file path="/RSInterface.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364149539553" ignored="false" />
     <file path="/RgbImage.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364142495036" ignored="false" />
     <file path="/DrawingArea.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364143927993" ignored="false" />
     <file path="/a.dummy" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364144156662" ignored="false" />
-    <file path="/Client.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364148253635" ignored="false" />
+    <file path="/Client.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1374457983195" ignored="false" />
     <file path="/ItemDef.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364156217154" ignored="false" />
     <file path="/Model.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1364155963773" ignored="false" />
+    <file path="/MapRegion.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1374438170040" ignored="false" />
+    <file path="/ObjectDef.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1374431694510" ignored="false" />
+    <file path="/ObjectOnTile.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1374432457040" ignored="false" />
+    <file path="/MapUtility.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1374437237650" ignored="false" />
+    <file path="/OnDemandFetcher.java" changelist="9a741ec5-3f29-4b60-89a4-e97f46ec021f" time="1374457924294" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,11 +73,48 @@
   </component>
   <component name="DebuggerManager">
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="false" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="false" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint url="file://$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" line="515" class="rs2.OnDemandFetcher" package="rs2">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
         <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
@@ -76,6 +129,7 @@
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
         <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
@@ -90,6 +144,7 @@
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
         <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
@@ -101,40 +156,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="false" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="false" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </breakpoint_any>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -144,168 +165,98 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Entity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/model/entity/Entity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="0" selection-start="1902" selection-end="1902" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2632#2653#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JAVA/rs2.model.entity.Entity" pinned="false" current="false" current-in-tab="false">
-        <entry file="uml://JAVA/rs2.model.entity.Entity">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>JAVA</ID>
-              <OriginalElement>rs2.model.entity.Entity</OriginalElement>
-              <nodes>
-                <node x="274.0" y="256.0">rs2.ObjectOnTile</node>
-                <node x="0.0" y="338.0">rs2.Npc</node>
-                <node x="607.0" y="256.0">rs2.Projectile</node>
-                <node x="423.0" y="256.0">rs2.Model</node>
-                <node x="35.0" y="256.0">rs2.Mobile</node>
-                <node x="521.0" y="256.0">rs2.Item</node>
-                <node x="361.75" y="164.0">rs2.model.entity.Entity</node>
-                <node x="364.25" y="0.0">rs2.util.collection.Node</node>
-                <node x="137.0" y="256.0">rs2.StillGraphic</node>
-                <node x="340.25" y="82.0">rs2.util.collection.QueueNode</node>
-                <node x="82.0" y="338.0">rs2.Player</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="rs2.Npc" target="rs2.Model">
-                  <point x="0.0" y="0.0" />
-                  <point x="0.0" y="0.0" />
-                </edge>
-                <edge source="rs2.Mobile" target="rs2.model.entity.Entity">
-                  <point x="0.0" y="-16.0" />
-                  <point x="76.0" y="216.0" />
-                  <point x="368.1666666666667" y="216.0" />
-                  <point x="-32.083333333333314" y="16.0" />
-                </edge>
-                <edge source="rs2.model.entity.Entity" target="rs2.util.collection.QueueNode">
-                  <point x="0.0" y="-16.0" />
-                  <point x="0.0" y="16.0" />
-                </edge>
-                <edge source="rs2.Npc" target="rs2.Mobile">
-                  <point x="0.0" y="-16.0" />
-                  <point x="31.0" y="313.0" />
-                  <point x="55.5" y="313.0" />
-                  <point x="-20.5" y="16.0" />
-                </edge>
-                <edge source="rs2.ObjectOnTile" target="rs2.model.entity.Entity">
-                  <point x="0.0" y="-16.0" />
-                  <point x="338.5" y="236.0" />
-                  <point x="393.8333333333333" y="236.0" />
-                  <point x="-6.416666666666686" y="16.0" />
-                </edge>
-                <edge source="rs2.util.collection.QueueNode" target="rs2.util.collection.Node">
-                  <point x="0.0" y="-16.0" />
-                  <point x="0.0" y="16.0" />
-                </edge>
-                <edge source="rs2.Projectile" target="rs2.model.entity.Entity">
-                  <point x="0.0" y="-16.0" />
-                  <point x="659.0" y="216.0" />
-                  <point x="432.3333333333333" y="216.0" />
-                  <point x="32.083333333333314" y="16.0" />
-                </edge>
-                <edge source="rs2.Player" target="rs2.Mobile">
-                  <point x="0.0" y="-16.0" />
-                  <point x="121.0" y="313.0" />
-                  <point x="96.5" y="313.0" />
-                  <point x="20.5" y="16.0" />
-                </edge>
-                <edge source="rs2.StillGraphic" target="rs2.Model">
-                  <point x="0.0" y="0.0" />
-                  <point x="0.0" y="0.0" />
-                </edge>
-                <edge source="rs2.model.entity.Entity" target="rs2.Model">
-                  <point x="0.0" y="0.0" />
-                  <point x="0.0" y="0.0" />
-                </edge>
-                <edge source="rs2.Projectile" target="rs2.Model">
-                  <point x="0.0" y="0.0" />
-                  <point x="0.0" y="0.0" />
-                </edge>
-                <edge source="rs2.Model" target="rs2.model.entity.Entity">
-                  <point x="0.0" y="-16.0" />
-                  <point x="462.0" y="236.0" />
-                  <point x="406.6666666666667" y="236.0" />
-                  <point x="6.416666666666686" y="16.0" />
-                </edge>
-                <edge source="rs2.StillGraphic" target="rs2.model.entity.Entity">
-                  <point x="0.0" y="-16.0" />
-                  <point x="195.5" y="226.0" />
-                  <point x="381.0" y="226.0" />
-                  <point x="-19.25" y="16.0" />
-                </edge>
-                <edge source="rs2.Item" target="rs2.model.entity.Entity">
-                  <point x="0.0" y="-16.0" />
-                  <point x="554.0" y="226.0" />
-                  <point x="419.5" y="226.0" />
-                  <point x="19.25" y="16.0" />
-                </edge>
-                <edge source="rs2.Player" target="rs2.Model">
-                  <point x="0.0" y="0.0" />
-                  <point x="0.0" y="0.0" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="-164.42857142857162" y="268.9523809523809" />
-              <SelectedNodes>
-                <node>rs2.model.entity.Entity</node>
-              </SelectedNodes>
-              <Categories />
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="818" column="82" selection-start="34006" selection-end="34006" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ItemDef.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/rs2/config/ItemDef.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="20" selection-start="127" selection-end="127" vertical-scroll-proportion="0.13274336">
+            <state line="6027" column="39" selection-start="261143" selection-end="261143" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Model.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/Model.java">
+      <file leaf-file-name="OnDemandFetcher.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/OnDemandFetcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1936" column="16" selection-start="72405" selection-end="72405" vertical-scroll-proportion="0.0">
+            <state line="580" column="160" selection-start="20197" selection-end="20197" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RSInterface.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rs2/RSInterface.java">
+      <file leaf-file-name="EditorMain.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="264" column="38" selection-start="11580" selection-end="11580" vertical-scroll-proportion="0.0">
+            <state line="248" column="40" selection-start="9803" selection-end="9823" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapRegion.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="327" column="69" selection-start="18016" selection-end="18016" vertical-scroll-proportion="0.020118343">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#swapInventoryItems#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#unpack#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#getSprite#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#setModel#0;class#RSInterface#0" expanded="false" />
-                <element signature="method#getAnimatedModel#0;class#RSInterface#0" expanded="false" />
+                <element signature="docComment;field#NO_BLENDING_BIT#0;class#MapRegion#0" expanded="false" />
+                <element signature="method#MapRegion#0;class#MapRegion#0" expanded="false" />
+                <element signature="method#mix_lightness_signed#0;class#MapRegion#0" expanded="false" />
+                <element signature="method#mix_lightness#0;class#MapRegion#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Packet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Packet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="62" selection-start="0" selection-end="9378" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rasterizer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Rasterizer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="192" column="33" selection-start="5556" selection-end="5556" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Floor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/Floor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="81" selection-start="248" selection-end="248" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapUtility.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/MapUtility.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="39" selection-start="0" selection-end="1412" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileSetting.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/TileSetting.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="209" column="16" selection-start="5663" selection-end="5663" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObjectDef.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rs2/ObjectDef.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="100" column="33" selection-start="2580" selection-end="2580" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -320,22 +271,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/rs2/util/collection/MemCache.java" />
-        <option value="$PROJECT_DIR$/src/rs2/util/collection/QueueNode.java" />
-        <option value="$PROJECT_DIR$/src/rs2/util/collection/Deque.java" />
-        <option value="$PROJECT_DIR$/src/rs2/util/collection/Queue.java" />
-        <option value="$PROJECT_DIR$/src/rs2/model/Entity.java" />
-        <option value="$PROJECT_DIR$/src/rs2/model/tile/Tile.java" />
-        <option value="$PROJECT_DIR$/src/rs2/model/entity/Entity.java" />
         <option value="$PROJECT_DIR$/src/rs2/model/Tile.java" />
         <option value="$PROJECT_DIR$/src/rs2/RgbImage.java" />
         <option value="$PROJECT_DIR$/src/rs2/media/image/RgbImage.java" />
         <option value="$PROJECT_DIR$/src/rs2/DrawingArea.java" />
-        <option value="$PROJECT_DIR$/src/rs2/Client.java" />
         <option value="$PROJECT_DIR$/src/rs2/RSInterface.java" />
         <option value="$PROJECT_DIR$/src/rs2/Model.java" />
         <option value="$PROJECT_DIR$/src/rs2/ItemDef.java" />
         <option value="$PROJECT_DIR$/src/rs2/config/ItemDef.java" />
+        <option value="$PROJECT_DIR$/src/rs2/ObjectOnTile.java" />
+        <option value="$PROJECT_DIR$/src/rs2/ObjectInstance.java" />
+        <option value="$PROJECT_DIR$/src/rs2/model/object/ObjectInstance.java" />
+        <option value="$PROJECT_DIR$/src/rs2/ObjectDef.java" />
+        <option value="$PROJECT_DIR$/src/rs2/MapUtility.java" />
+        <option value="$PROJECT_DIR$/src/rs2/MapRegion.java" />
+        <option value="$PROJECT_DIR$/src/rs2/OnDemandFetcher.java" />
+        <option value="$PROJECT_DIR$/src/rs2/Client.java" />
       </list>
     </option>
   </component>
@@ -350,10 +301,10 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="y" value="24" />
-    <option name="width" value="1282" />
-    <option name="height" value="976" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1692" />
+    <option name="height" value="1062" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -383,8 +334,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -399,7 +348,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rs317" />
+              <option name="myItemId" value="Build #317 (rename317)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -409,7 +358,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rs317" />
+              <option name="myItemId" value="Build #317 (rename317)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -423,25 +372,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rs317" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rs2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="317 Rename Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rs317" />
+              <option name="myItemId" value="Build #317 (rename317)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -452,10 +383,6 @@
               <option name="myItemId" value="rs2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="collection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -463,7 +390,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rs317" />
+              <option name="myItemId" value="Build #317 (rename317)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -485,7 +412,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rs317" />
+              <option name="myItemId" value="Build #317 (rename317)" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rs2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="object" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Build #317 (rename317)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -511,7 +464,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rs317" />
+              <option name="myItemId" value="Build #317 (rename317)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -533,7 +486,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="rs317" />
+              <option name="myItemId" value="Build #317 (rename317)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -549,8 +502,60 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Build #317 (rename317)" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Build #317 (rename317)" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editor_release" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="317 Rename Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Build #317 (rename317)" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editor_release" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cache" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Favorites" />
     </panes>
   </component>
@@ -776,7 +781,7 @@
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED,ALPHA_COMPARATOR" />
   </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true" SSL_PROTOCOLS="all">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -786,13 +791,12 @@
     <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
     <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
     <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="DETECT_NESTED_COPIES" value="true" />
     <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
     <option name="IGNORE_EXTERNALS" value="false" />
-    <configuration useDefault="true">$USER_HOME$/.subversion</configuration>
+    <configuration useDefault="true">C:\Users\Jon Bowsch\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -800,16 +804,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+          <option name="myVcsRoot" value="G:\peterbjornx_homedir\Projects\Games\JAGeX\RuneScape\Clients\Build #317 (rename317)" />
+          <option name="myCopyRoot" value="G:\peterbjornx_homedir\Projects\Games\JAGeX\RuneScape\Clients\Build #317 (rename317)" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+          <option name="myVcsRoot" value="G:\peterbjornx_homedir\Projects\Games\JAGeX\RuneScape\Clients\Build #317 (rename317)" />
+          <option name="myCopyRoot" value="G:\peterbjornx_homedir\Projects\Games\JAGeX\RuneScape\Clients\Build #317 (rename317)" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -860,35 +864,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="24" width="1282" height="976" extended-state="6" />
+    <frame x="-8" y="-8" width="1692" height="1062" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.310219" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14013709" sideWeight="0.72203946" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26034063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38322368" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32360098" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272506" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19268292" sideWeight="0.73965937" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19216646" sideWeight="0.65456545" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951945" sideWeight="0.69983685" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992278" sideWeight="0.7336683" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32846716" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25447154" sideWeight="0.73965937" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.346395" sideWeight="0.99834985" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25214723" sideWeight="0.65456545" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34543455" sideWeight="0.99834985" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20182787" sideWeight="0.72203946" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.725938" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Properties" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.725938" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25742576" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32233223" sideWeight="0.0" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32846716" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989726" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -918,7 +922,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
-    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
     <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
     <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
@@ -928,9 +932,13 @@
     <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
     <option name="LIMIT_HISTORY" value="true" />
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="UPDATE_FILTER_SCOPE_NAME" />
+    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
+    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved ItemDef to proper package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fully refactored perlin noise gen and terrain loading methods" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -941,6 +949,7 @@
     <option name="ACTIVE_VCS_NAME" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Refactored Rasterizer a bit further, fixed some naming" />
@@ -955,6 +964,7 @@
     <MESSAGE value="100% Refactored RSInterface&#10;" />
     <MESSAGE value="100% Refactored ItemDef&#10;" />
     <MESSAGE value="Moved ItemDef to proper package" />
+    <MESSAGE value="Fully refactored perlin noise gen and terrain loading methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -964,331 +974,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Queue.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_25/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="23" selection-start="571" selection-end="571" vertical-scroll-proportion="0.6424581">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/QueueNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="29" selection-start="99" selection-end="99" vertical-scroll-proportion="0.1396648">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="43" selection-end="43" vertical-scroll-proportion="0.05586592">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/util/collection/MemCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="34" selection-start="1930" selection-end="1930" vertical-scroll-proportion="0.849162">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Signlink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="19" selection-start="708" selection-end="708" vertical-scroll-proportion="-1.7175573">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/rs2">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>rs2</OriginalElement>
-          <nodes>
-            <node x="" y="">rs2.ObjectOnTile</node>
-            <node x="" y="">rs2.Projectile</node>
-            <node x="" y="">rs2.RSSocket</node>
-            <node x="" y="">rs2.DrawingArea</node>
-            <node x="" y="">rs2.MouseDetection</node>
-            <node x="" y="">rs2.SwingUI</node>
-            <node x="" y="">rs2.SettingUsagePointers</node>
-            <node x="" y="">rs2.IsaacCipher</node>
-            <node x="" y="">rs2.ItemDef</node>
-            <node x="" y="">rs2.Packet</node>
-            <node x="" y="">rs2.JagexFileStore</node>
-            <node x="" y="">rs2.InteractableObject</node>
-            <node x="" y="">rs2.GraphicsBuffer</node>
-            <node x="" y="">rs2.Midi</node>
-            <node x="" y="">rs2.GameObjectSpawnRequest</node>
-            <node x="" y="">rs2.NpcDef</node>
-            <node x="" y="">rs2.WallDecoration</node>
-            <node x="" y="">rs2.Rasterizer</node>
-            <node x="" y="">rs2.JagexArchive</node>
-            <node x="" y="">rs2.Filter</node>
-            <node x="" y="">rs2.Animation</node>
-            <node x="" y="">rs2.TextInput</node>
-            <node x="" y="">rs2.OnDemandData</node>
-            <node x="" y="">rs2.RgbImage</node>
-            <node x="" y="">rs2.Mobile</node>
-            <node x="" y="">rs2.GroundDecoration</node>
-            <node x="" y="">rs2.SceneGraph</node>
-            <node x="" y="">rs2.Signlink</node>
-            <node x="" y="">rs2.util</node>
-            <node x="" y="">rs2.FileOperations</node>
-            <node x="" y="">rs2.WallObject</node>
-            <node x="" y="">rs2.OnDemandFetcherParent</node>
-            <node x="" y="">rs2.VarBit</node>
-            <node x="" y="">rs2.IdentityKit</node>
-            <node x="" y="">rs2.StillGraphic</node>
-            <node x="" y="">rs2.Track</node>
-            <node x="" y="">rs2.ShapedTile</node>
-            <node x="" y="">rs2.Player</node>
-            <node x="" y="">rs2.Sequence</node>
-            <node x="" y="">rs2.RSFrame</node>
-            <node x="" y="">rs2.BZ2Block</node>
-            <node x="" y="">rs2.CullingCluster</node>
-            <node x="" y="">rs2.TileSetting</node>
-            <node x="" y="">rs2.Skills</node>
-            <node x="" y="">rs2.Envelope</node>
-            <node x="" y="">rs2.Censor</node>
-            <node x="" y="">rs2.MapRegion</node>
-            <node x="" y="">rs2.GameShell</node>
-            <node x="" y="">rs2.VertexNormal</node>
-            <node x="" y="">rs2.Item</node>
-            <node x="" y="">rs2.MapUtility</node>
-            <node x="" y="">rs2.Client</node>
-            <node x="" y="">rs2.StaticLogic</node>
-            <node x="" y="">rs2.PacketSizes</node>
-            <node x="" y="">rs2.AbstractDrawingArea</node>
-            <node x="" y="">rs2.RSInterface</node>
-            <node x="" y="">rs2.SpotAnim</node>
-            <node x="" y="">rs2.ModelHeader</node>
-            <node x="" y="">rs2.OnDemandFetcher</node>
-            <node x="" y="">rs2.Model</node>
-            <node x="" y="">rs2.TextClass</node>
-            <node x="" y="">rs2.Synthesizer</node>
-            <node x="" y="">rs2.ModelTransform</node>
-            <node x="" y="">rs2.RSFont</node>
-            <node x="" y="">rs2.BZ2InputStream</node>
-            <node x="" y="">rs2.PlainTile</node>
-            <node x="" y="">rs2.Npc</node>
-            <node x="" y="">rs2.Config</node>
-            <node x="" y="">rs2.ObjectDef</node>
-            <node x="" y="">rs2.Floor</node>
-            <node x="" y="">rs2.GZIPWrapper</node>
-            <node x="" y="">rs2.IndexedImage</node>
-            <node x="" y="">rs2.Signlink.Position</node>
-            <node x="" y="">rs2.model</node>
-            <node x="" y="">rs2.GroundItemTile</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="0.4454148471615721" x="494.37745098039204" y="537.5" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/model/entity/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="1902" selection-end="1902" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2632#2653#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/model/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="10" selection-start="252" selection-end="252" vertical-scroll-proportion="0.33854166">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/DrawingArea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="278" column="23" selection-start="9717" selection-end="9717" vertical-scroll-proportion="2.4245114">
-          <folding>
-            <element signature="method#setTarget#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#resetClip#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#setClip#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#clear#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#fillRect#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#fillRect#1;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawRect#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawRect#1;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawHLine#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawHLine#1;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawVLine#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#drawVLine#1;class#DrawingArea#0" expanded="false" />
-            <element signature="method#fillCircleAlpha#0;class#DrawingArea#0" expanded="false" />
-            <element signature="method#fillCircle#0;class#DrawingArea#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/media/image/RgbImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="534" column="81" selection-start="18829" selection-end="18829" vertical-scroll-proportion="0.38543516">
-          <folding>
-            <element signature="method#RgbImage#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#RgbImage#1;class#RgbImage#0" expanded="false" />
-            <element signature="method#RgbImage#2;class#RgbImage#0" expanded="false" />
-            <element signature="method#RgbImage#3;class#RgbImage#0" expanded="false" />
-            <element signature="method#initDrawingArea#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#add_rgb#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#method345#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw#1;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw#2;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw_trans#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#draw_height#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#block_copy#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#block_copy_alpha#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#block_copy_trans#0;class#RgbImage#0" expanded="false" />
-            <element signature="method#block_copy_mask#0;class#RgbImage#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/rs2.model.entity.Entity">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>rs2.model.entity.Entity</OriginalElement>
-          <nodes>
-            <node x="274.0" y="256.0">rs2.ObjectOnTile</node>
-            <node x="0.0" y="338.0">rs2.Npc</node>
-            <node x="607.0" y="256.0">rs2.Projectile</node>
-            <node x="423.0" y="256.0">rs2.Model</node>
-            <node x="35.0" y="256.0">rs2.Mobile</node>
-            <node x="521.0" y="256.0">rs2.Item</node>
-            <node x="361.75" y="164.0">rs2.model.entity.Entity</node>
-            <node x="364.25" y="0.0">rs2.util.collection.Node</node>
-            <node x="137.0" y="256.0">rs2.StillGraphic</node>
-            <node x="340.25" y="82.0">rs2.util.collection.QueueNode</node>
-            <node x="82.0" y="338.0">rs2.Player</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="rs2.Npc" target="rs2.Model">
-              <point x="0.0" y="0.0" />
-              <point x="0.0" y="0.0" />
-            </edge>
-            <edge source="rs2.Mobile" target="rs2.model.entity.Entity">
-              <point x="0.0" y="-16.0" />
-              <point x="76.0" y="216.0" />
-              <point x="368.1666666666667" y="216.0" />
-              <point x="-32.083333333333314" y="16.0" />
-            </edge>
-            <edge source="rs2.model.entity.Entity" target="rs2.util.collection.QueueNode">
-              <point x="0.0" y="-16.0" />
-              <point x="0.0" y="16.0" />
-            </edge>
-            <edge source="rs2.Npc" target="rs2.Mobile">
-              <point x="0.0" y="-16.0" />
-              <point x="31.0" y="313.0" />
-              <point x="55.5" y="313.0" />
-              <point x="-20.5" y="16.0" />
-            </edge>
-            <edge source="rs2.ObjectOnTile" target="rs2.model.entity.Entity">
-              <point x="0.0" y="-16.0" />
-              <point x="338.5" y="236.0" />
-              <point x="393.8333333333333" y="236.0" />
-              <point x="-6.416666666666686" y="16.0" />
-            </edge>
-            <edge source="rs2.util.collection.QueueNode" target="rs2.util.collection.Node">
-              <point x="0.0" y="-16.0" />
-              <point x="0.0" y="16.0" />
-            </edge>
-            <edge source="rs2.Projectile" target="rs2.model.entity.Entity">
-              <point x="0.0" y="-16.0" />
-              <point x="659.0" y="216.0" />
-              <point x="432.3333333333333" y="216.0" />
-              <point x="32.083333333333314" y="16.0" />
-            </edge>
-            <edge source="rs2.Player" target="rs2.Mobile">
-              <point x="0.0" y="-16.0" />
-              <point x="121.0" y="313.0" />
-              <point x="96.5" y="313.0" />
-              <point x="20.5" y="16.0" />
-            </edge>
-            <edge source="rs2.StillGraphic" target="rs2.Model">
-              <point x="0.0" y="0.0" />
-              <point x="0.0" y="0.0" />
-            </edge>
-            <edge source="rs2.model.entity.Entity" target="rs2.Model">
-              <point x="0.0" y="0.0" />
-              <point x="0.0" y="0.0" />
-            </edge>
-            <edge source="rs2.Projectile" target="rs2.Model">
-              <point x="0.0" y="0.0" />
-              <point x="0.0" y="0.0" />
-            </edge>
-            <edge source="rs2.Model" target="rs2.model.entity.Entity">
-              <point x="0.0" y="-16.0" />
-              <point x="462.0" y="236.0" />
-              <point x="406.6666666666667" y="236.0" />
-              <point x="6.416666666666686" y="16.0" />
-            </edge>
-            <edge source="rs2.StillGraphic" target="rs2.model.entity.Entity">
-              <point x="0.0" y="-16.0" />
-              <point x="195.5" y="226.0" />
-              <point x="381.0" y="226.0" />
-              <point x="-19.25" y="16.0" />
-            </edge>
-            <edge source="rs2.Item" target="rs2.model.entity.Entity">
-              <point x="0.0" y="-16.0" />
-              <point x="554.0" y="226.0" />
-              <point x="419.5" y="226.0" />
-              <point x="19.25" y="16.0" />
-            </edge>
-            <edge source="rs2.Player" target="rs2.Model">
-              <point x="0.0" y="0.0" />
-              <point x="0.0" y="0.0" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="-164.42857142857162" y="268.9523809523809" />
-          <SelectedNodes>
-            <node>rs2.model.entity.Entity</node>
-          </SelectedNodes>
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="818" column="82" selection-start="34006" selection-end="34006" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="36" column="13" selection-start="513" selection-end="513" vertical-scroll-proportion="0.33333334" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/RSInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="264" column="38" selection-start="11580" selection-end="11580" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#swapInventoryItems#0;class#RSInterface#0" expanded="false" />
-            <element signature="method#unpack#0;class#RSInterface#0" expanded="false" />
-            <element signature="method#getSprite#0;class#RSInterface#0" expanded="false" />
-            <element signature="method#setModel#0;class#RSInterface#0" expanded="false" />
-            <element signature="method#getAnimatedModel#0;class#RSInterface#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rs2/SceneGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="835" column="48" selection-start="32578" selection-end="32578" vertical-scroll-proportion="0.5833333">
+        <state line="264" column="38" selection-start="11580" selection-end="11580" vertical-scroll-proportion="0.029876977">
           <folding />
         </state>
       </provider>
@@ -1302,7 +995,97 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rs2/config/ItemDef.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="20" selection-start="127" selection-end="127" vertical-scroll-proportion="0.13274336">
+        <state line="7" column="20" selection-start="127" selection-end="127" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/model/object/ObjectInstance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="42" selection-start="2970" selection-end="2970" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/TileSetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="209" column="16" selection-start="5663" selection-end="5663" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Packet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="62" selection-start="0" selection-end="9378" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/MapUtility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="39" selection-start="0" selection-end="1412" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Floor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="81" selection-start="248" selection-end="248" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6027" column="39" selection-start="261143" selection-end="261143" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/Rasterizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="192" column="33" selection-start="5556" selection-end="5556" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/editor/EditorMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="248" column="40" selection-start="9803" selection-end="9823" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/OnDemandFetcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="580" column="160" selection-start="20197" selection-end="20197" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/MapRegion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="327" column="69" selection-start="18016" selection-end="18016" vertical-scroll-proportion="0.020118343">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;field#NO_BLENDING_BIT#0;class#MapRegion#0" expanded="false" />
+            <element signature="method#MapRegion#0;class#MapRegion#0" expanded="false" />
+            <element signature="method#mix_lightness_signed#0;class#MapRegion#0" expanded="false" />
+            <element signature="method#mix_lightness#0;class#MapRegion#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rs2/ObjectDef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="33" selection-start="2580" selection-end="2580" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1375,7 +1158,7 @@
       </state>
       <state key="ProjectJDKs.UI">
         <settings>
-          <last-edited>1.6</last-edited>
+          <last-edited>1.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

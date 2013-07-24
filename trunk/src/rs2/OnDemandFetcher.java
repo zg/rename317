@@ -561,9 +561,9 @@ public class OnDemandFetcher extends OnDemandFetcherParent
         return onDemandData;
     }
 
-    public int getMapIndex(int i, int k, int l)
+    public int getMapIndex(int i, int map_z, int map_x)
     {
-        int i1 = (l << 8) + k;
+        int i1 = (map_x << 8) + map_z;
         for(int j1 = 0; j1 < mapIndices1.length; j1++)
             if(mapIndices1[j1] == i1)
                 if(i == 0)
@@ -571,6 +571,15 @@ public class OnDemandFetcher extends OnDemandFetcherParent
                 else
                     return mapIndices3[j1];
         return -1;
+    }
+
+    public void dumpmaps(){
+        for (int ptr = 0 ; ptr < mapIndices1.length; ptr++){
+            int x = mapIndices1[ptr] >> 8;
+            int y = mapIndices1[ptr] & 0xFF;
+            FileOperations.WriteFile("G:\\store\\rsdata\\maps\\l"+x+"_"+y+".rsm",GZIPWrapper.decompress(clientInstance.jagexFileStores[4].decompress(mapIndices2[ptr])));
+            FileOperations.WriteFile("G:\\store\\rsdata\\maps\\m"+x+"_"+y+".rsm",GZIPWrapper.decompress(clientInstance.jagexFileStores[4].decompress(mapIndices3[ptr])));
+        }
     }
 
     public void requestData(int id)

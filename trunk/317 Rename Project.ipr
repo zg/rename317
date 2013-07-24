@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AntConfiguration">
-    <defaultAnt bundledAnt="true" />
-  </component>
   <component name="ArtifactManager">
     <artifact type="jar" build-on-make="true" name="MapEditor_Release">
       <output-path>$PROJECT_DIR$/classes/artifacts/MapEditor_Release</output-path>
@@ -215,6 +212,12 @@
     </group>
   </component>
   <component name="ProjectDictionaryState">
+    <dictionary name="Jon Bowsch">
+      <words>
+        <w>pseudorandom</w>
+        <w>subblock</w>
+      </words>
+    </dictionary>
     <dictionary name="Peter">
       <words>
         <w>jagex</w>
@@ -230,7 +233,7 @@
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
   <component name="SvnBranchConfigurationManager">

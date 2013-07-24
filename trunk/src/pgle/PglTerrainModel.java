@@ -2,24 +2,11 @@ package pgle;
 
 //import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.Color;
-import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.peterbjornx.pgl2.buffer.ElementBuffer;
-import org.peterbjornx.pgl2.buffer.GeometryBuffer;
-import org.peterbjornx.pgl2.buffer.OpenGLBufferFactory;
-import org.peterbjornx.pgl2.buffer.impl.ArbElementBuffer;
-import org.peterbjornx.pgl2.texture.Texture2D;
-import org.peterbjornx.pgl2.util.PglException;
 import rs2.*;
 import rt4.Class119;
-import rt4.OpenGLManager;
 
 import java.util.*;
-
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,10 +49,10 @@ public class PglTerrainModel {
         try{
             for (int x = 0;x < 103;x++)
                 for (int z = 0;z < 103;z++){
-                    int yA = -mapRegion.getHeightMap()[heightLevel][x][z];
-                    int yB = -mapRegion.getHeightMap()[heightLevel][x + 1][z];
-                    int yD = -mapRegion.getHeightMap()[heightLevel][x + 1][z + 1];
-                    int yC = -mapRegion.getHeightMap()[heightLevel][x][z + 1];
+                    int yA = -mapRegion.get_tile_height()[heightLevel][x][z];
+                    int yB = -mapRegion.get_tile_height()[heightLevel][x + 1][z];
+                    int yD = -mapRegion.get_tile_height()[heightLevel][x + 1][z + 1];
+                    int yC = -mapRegion.get_tile_height()[heightLevel][x][z + 1];
                     generateDataForTile(x,z,yA+1,yB+1,yC+1,yD+1);
 
                 }

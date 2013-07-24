@@ -79,7 +79,7 @@ public class Floor {
                         saturation = k;
                         lightness = l;
                         hue2 = i1;
-                        pCDivider = i1;
+                        hue_weight = i1;
                     }
                 return;
             } else if (opcode == 1) {
@@ -96,8 +96,8 @@ public class Floor {
                 saturation = k;
                 lightness = l;
                 hue2 = i1;
-                pCDivider = i1;
-                //rgb2hls(colour2);
+                hue_weight = i1;
+                //rgb_to_hsl(colour2);
             } else if (opcode == 2) {
                 hdTexture = stream.g1();
             } else if (opcode == 3) //Replaced by texture_word in HD
@@ -161,7 +161,7 @@ public class Floor {
                     saturation = k;
                     lightness = l;
                     hue2 = i1;
-                    pCDivider = i1;
+                    hue_weight = i1;
                     break;
                 case 8:
                     j = hue;
@@ -177,7 +177,7 @@ public class Floor {
                     saturation = k;
                     lightness = l;
                     hue2 = i1;
-                    pCDivider = i1;
+                    hue_weight = i1;
                     break;
                 case 9:
                     hdTexture = stream.g1() & 0xFF;
@@ -218,7 +218,7 @@ public class Floor {
                         saturation = k;
                         lightness = l;
                         hue2 = i1;
-                        pCDivider = i1;
+                        hue_weight = i1;
                     }
                     return;
                 default:
@@ -324,12 +324,12 @@ public class Floor {
         else if (this.lightness > 255)
             this.lightness = 255;
         if (lightness > 0.5D)
-            pCDivider = (int) ((1.0D - lightness) * saturation * 512D);
+            hue_weight = (int) ((1.0D - lightness) * saturation * 512D);
         else
-            pCDivider = (int) (lightness * saturation * 512D);
-        if (pCDivider < 1)
-            pCDivider = 1;
-        hue2 = (int) (hue * (double) pCDivider);
+            hue_weight = (int) (lightness * saturation * 512D);
+        if (hue_weight < 1)
+            hue_weight = 1;
+        hue2 = (int) (hue * (double) hue_weight);
         int huerand = (this.hue + (int) (Math.random() * 16D)) - 8;
         if (huerand < 0)
             huerand = 0;
@@ -350,7 +350,7 @@ public class Floor {
             this.saturation = k;
             this.lightness = l;
             this.hue2 = i1;
-            this.pCDivider = i1;
+            this.hue_weight = i1;
         }
         hslColour = packHSL(huerand, satrand, lightrand);
     }
@@ -383,7 +383,7 @@ public class Floor {
     public int saturation;
     public int lightness;
     public int hue2;
-    public int pCDivider;
+    public int hue_weight;
     public int hslColour;
     public int hdColour = 0xff00ff;
     public int hdUlColour = 0xff00ff;

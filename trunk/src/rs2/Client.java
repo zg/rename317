@@ -10,6 +10,7 @@ import pgle.PglCallClientNode;
 import pgle.PglWrapper;
 import rs2.config.ItemDef;
 import rs2.media.image.RgbImage;
+import rs2.model.object.ObjectInstance;
 import rs2.model.entity.Entity;
 import rs2.util.collection.Deque;
 import rs2.util.collection.Node;
@@ -455,7 +456,7 @@ public class Client extends GameShell {
                     int yOffset = (mapCoordinates[i3] & 0xff) * 64 - baseY;
                     byte data[] = terrainData[i3];
                     if (data != null)
-                        mapRegion.loadTerrain(data, yOffset, xOffset, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, tileSettings);
+                        mapRegion.load_terrain_block(data, yOffset, xOffset, (anInt1069 - 6) * 8, (anInt1070 - 6) * 8, tileSettings);
                 }
 
                 for (int j4 = 0; j4 < dataLength; j4++) {
@@ -463,7 +464,7 @@ public class Client extends GameShell {
                     int yOffset = (mapCoordinates[j4] & 0xff) * 64 - baseY;
                     byte data[] = terrainData[j4];
                     if (data == null && anInt1070 < 800)
-                        mapRegion.initMapTables(yOffset, 64, 64, xOffset);
+                        mapRegion.clear_region(yOffset, 64, 64, xOffset);
                 }
 
                 anticheat2++;
@@ -478,7 +479,7 @@ public class Client extends GameShell {
                     if (abyte1 != null) {
                         int xOffset = (mapCoordinates[i6] >> 8) * 64 - baseX;
                         int yOffset = (mapCoordinates[i6] & 0xff) * 64 - baseY;
-                        mapRegion.loadObjects(xOffset, tileSettings, yOffset, sceneGraph, abyte1);
+                        mapRegion.load_object_block(xOffset, yOffset, abyte1, tileSettings, sceneGraph);
                     }
                 }
 
@@ -497,7 +498,7 @@ public class Client extends GameShell {
                                 for (int l11 = 0; l11 < mapCoordinates.length; l11++) {
                                     if (mapCoordinates[l11] != j11 || terrainData[l11] == null)
                                         continue;
-                                    mapRegion.loadMapChunk(tileZ, tileRotation, tileSettings, x * 8, (tileX & 7) * 8, terrainData[l11], (tileY & 7) * 8, z, y * 8);
+                                    mapRegion.load_terrain_subblock(terrainData[l11], z, x * 8, y * 8, tileZ, (tileX & 7) * 8, (tileY & 7) * 8, tileRotation, tileSettings);
                                     break;
                                 }
 
@@ -512,7 +513,7 @@ public class Client extends GameShell {
                     for (int k6 = 0; k6 < 13; k6++) {
                         int i8 = constructionMapInformation[0][l4][k6];
                         if (i8 == -1)
-                            mapRegion.initMapTables(k6 * 8, 8, 8, l4 * 8);
+                            mapRegion.clear_region(k6 * 8, 8, 8, l4 * 8);
                     }
 
                 }
@@ -531,7 +532,7 @@ public class Client extends GameShell {
                                 for (int k12 = 0; k12 < mapCoordinates.length; k12++) {
                                     if (mapCoordinates[k12] != j12 || aByteArrayArray1247[k12] == null)
                                         continue;
-                                    mapRegion.method183(tileSettings, sceneGraph, k10, j8 * 8, (i12 & 7) * 8, l6, aByteArrayArray1247[k12], (k11 & 7) * 8, i11, j9 * 8);
+                                    mapRegion.load_object_subblock(aByteArrayArray1247[k12], l6, j8 * 8, j9 * 8, k10, (k11 & 7) * 8, (i12 & 7) * 8, i11, tileSettings, sceneGraph);
                                     break;
                                 }
 
@@ -1937,9 +1938,9 @@ public class Client extends GameShell {
             if (object.mapSceneID != -1) {
                 IndexedImage indexedImage_2 = mapScenes[object.mapSceneID];
                 if (indexedImage_2 != null) {
-                    int i6 = (object.sizeX * 4 - indexedImage_2.imgWidth) / 2;
-                    int j6 = (object.sizeY * 4 - indexedImage_2.imgHeight) / 2;
-                    indexedImage_2.drawImage(48 + x * 4 + i6, 48 + (104 - y - object.sizeY) * 4 + j6);
+                    int i6 = (object.width * 4 - indexedImage_2.imgWidth) / 2;
+                    int j6 = (object.height * 4 - indexedImage_2.imgHeight) / 2;
+                    indexedImage_2.drawImage(48 + x * 4 + i6, 48 + (104 - y - object.height) * 4 + j6);
                 }
             } else {
                 if (type == 0 || type == 2)
@@ -2007,9 +2008,9 @@ public class Client extends GameShell {
             if (class46_1.mapSceneID != -1) {
                 IndexedImage scene = mapScenes[class46_1.mapSceneID];
                 if (scene != null) {
-                    int j5 = (class46_1.sizeX * 4 - scene.imgWidth) / 2;
-                    int k5 = (class46_1.sizeY * 4 - scene.imgHeight) / 2;
-                    scene.drawImage(48 + x * 4 + j5, 48 + (104 - y - class46_1.sizeY) * 4 + k5);
+                    int j5 = (class46_1.width * 4 - scene.imgWidth) / 2;
+                    int k5 = (class46_1.height * 4 - scene.imgHeight) / 2;
+                    scene.drawImage(48 + x * 4 + j5, 48 + (104 - y - class46_1.height) * 4 + k5);
                 }
             } else if (j3 == 9) {
                 int l4 = 0xeeeeee;
@@ -2037,9 +2038,9 @@ public class Client extends GameShell {
             if (class46.mapSceneID != -1) {
                 IndexedImage indexedImage = mapScenes[class46.mapSceneID];
                 if (indexedImage != null) {
-                    int i4 = (class46.sizeX * 4 - indexedImage.imgWidth) / 2;
-                    int j4 = (class46.sizeY * 4 - indexedImage.imgHeight) / 2;
-                    indexedImage.drawImage(48 + x * 4 + i4, 48 + (104 - y - class46.sizeY) * 4 + j4);
+                    int i4 = (class46.width * 4 - indexedImage.imgWidth) / 2;
+                    int j4 = (class46.height * 4 - indexedImage.imgHeight) / 2;
+                    indexedImage.drawImage(48 + x * 4 + i4, 48 + (104 - y - class46.height) * 4 + j4);
                 }
             }
         }
@@ -2128,7 +2129,7 @@ public class Client extends GameShell {
         SceneGraph.lowMem = false;
         Rasterizer.lowMem = false;
         lowMem = false;
-        MapRegion.lowMem = false;
+        MapRegion.low_detail = false;
         ObjectDef.lowMem = false;
     }
 
@@ -2221,13 +2222,13 @@ public class Client extends GameShell {
         for (int j = 0; j < terrainData.length; j++) {
             byte abyte0[] = aByteArrayArray1247[j];
             if (abyte0 != null) {
-                int k = (mapCoordinates[j] >> 8) * 64 - baseX;
-                int l = (mapCoordinates[j] & 0xff) * 64 - baseY;
+                int block_x = (mapCoordinates[j] >> 8) * 64 - baseX;
+                int block_z = (mapCoordinates[j] & 0xff) * 64 - baseY;
                 if (loadGeneratedMap) {
-                    k = 10;
-                    l = 10;
+                    block_x = 10;
+                    block_z = 10;
                 }
-                flag &= MapRegion.method189(k, abyte0, l);
+                flag &= MapRegion.is_object_block_cached(block_x, block_z, abyte0);
             }
         }
 
@@ -2380,7 +2381,7 @@ public class Client extends GameShell {
 
                 }
             } while (onDemandData.dataType != 93 || !onDemandFetcher.method564(onDemandData.ID));
-            MapRegion.prefetchObjects(new Packet(onDemandData.buffer), onDemandFetcher);
+            MapRegion.request_object_models(new Packet(onDemandData.buffer), onDemandFetcher);
         } while (true);
     }
 
@@ -2902,11 +2903,11 @@ public class Client extends GameShell {
             int i2;
             int j2;
             if (l1 == 0 || l1 == 2) {
-                i2 = objectDef.sizeX;
-                j2 = objectDef.sizeY;
+                i2 = objectDef.width;
+                j2 = objectDef.height;
             } else {
-                i2 = objectDef.sizeY;
-                j2 = objectDef.sizeX;
+                i2 = objectDef.height;
+                j2 = objectDef.width;
             }
             int k2 = objectDef.anInt768;
             if (l1 != 0)
@@ -3888,7 +3889,7 @@ public class Client extends GameShell {
             j = l;
             if (k1 == 2 && sceneGraph.getIDTAGForXYZ(plane, i1, j1, l) >= 0) {
                 ObjectDef class46 = ObjectDef.forID(l1);
-                if (class46.configObjectIDs != null)
+                if (class46.alternative_ids != null)
                     class46 = class46.method580();
                 if (class46 == null)
                     continue;
@@ -5919,6 +5920,7 @@ public class Client extends GameShell {
             drawLogo();
             loadTitleScreen();
             JagexArchive configArchive = streamLoaderForName(2, "config", "config", expectedCRCs[2], 30);
+            FileOperations.WriteFile("G:\\store\\rsdata\\flo.dat",configArchive.getDataForName("flo.dat"));
             JagexArchive interfaceArchive = streamLoaderForName(3, "interface", "interface", expectedCRCs[3], 35);
             JagexArchive mediaArchive = streamLoaderForName(4, "2d graphics", "media", expectedCRCs[4], 40);
             JagexArchive textureArchive = streamLoaderForName(6, "textures", "textures", expectedCRCs[6], 45);
@@ -6023,6 +6025,7 @@ public class Client extends GameShell {
                     }
                 }
             }
+            onDemandFetcher.dumpmaps();
             k = onDemandFetcher.getVersionCount(0);
             for (int k2 = 0; k2 < k; k2++) {
                 int l2 = onDemandFetcher.getModelIndex(k2);
@@ -6181,7 +6184,7 @@ public class Client extends GameShell {
             SettingUsagePointers.unpackConfig(configArchive);
             VarBit.unpackConfig(configArchive);
             ItemDef.enable_members_items = isMembers;
-            /*if (!lowMem) {
+            /*if (!low_detail) {
                 drawLoadingText(90, "Unpacking sounds");
                 byte soundData[] = soundArchive.getDataForName("sounds.dat");
                 Packet stream = new Packet(soundData);
@@ -6248,7 +6251,7 @@ public class Client extends GameShell {
             Censor.loadConfig(wordencArchive);
             mouseDetection = new MouseDetection(this);
             startRunnable(mouseDetection, 10);
-            ObjectOnTile.clientInstance = this;
+            ObjectInstance.clientInstance = this;
             SceneGraph.clientInstance = this;
             ObjectDef.clientInstance = this;
             NpcDef.clientInstance = this;
@@ -7617,14 +7620,14 @@ public class Client extends GameShell {
                 if (gameObjectSpawnRequest.anInt1294 > 0)
                     gameObjectSpawnRequest.anInt1294--;
                 if (gameObjectSpawnRequest.anInt1294 == 0) {
-                    if (gameObjectSpawnRequest.id < 0 || MapRegion.method178(gameObjectSpawnRequest.id, gameObjectSpawnRequest.type)) {
+                    if (gameObjectSpawnRequest.id < 0 || MapRegion.is_object_type_cached(gameObjectSpawnRequest.id, gameObjectSpawnRequest.type)) {
                         method142(gameObjectSpawnRequest.y, gameObjectSpawnRequest.plane, gameObjectSpawnRequest.face, gameObjectSpawnRequest.type, gameObjectSpawnRequest.x, gameObjectSpawnRequest.anInt1296, gameObjectSpawnRequest.id);
                         gameObjectSpawnRequest.unlink();
                     }
                 } else {
                     if (gameObjectSpawnRequest.anInt1302 > 0)
                         gameObjectSpawnRequest.anInt1302--;
-                    if (gameObjectSpawnRequest.anInt1302 == 0 && gameObjectSpawnRequest.x >= 1 && gameObjectSpawnRequest.y >= 1 && gameObjectSpawnRequest.x <= 102 && gameObjectSpawnRequest.y <= 102 && (gameObjectSpawnRequest.id2 < 0 || MapRegion.method178(gameObjectSpawnRequest.id2, gameObjectSpawnRequest.type2))) {
+                    if (gameObjectSpawnRequest.anInt1302 == 0 && gameObjectSpawnRequest.x >= 1 && gameObjectSpawnRequest.y >= 1 && gameObjectSpawnRequest.x <= 102 && gameObjectSpawnRequest.y <= 102 && (gameObjectSpawnRequest.id2 < 0 || MapRegion.is_object_type_cached(gameObjectSpawnRequest.id2, gameObjectSpawnRequest.type2))) {
                         method142(gameObjectSpawnRequest.y, gameObjectSpawnRequest.plane, gameObjectSpawnRequest.face2, gameObjectSpawnRequest.type2, gameObjectSpawnRequest.x, gameObjectSpawnRequest.anInt1296, gameObjectSpawnRequest.id2);
                         gameObjectSpawnRequest.anInt1302 = -1;
                         if (gameObjectSpawnRequest.id2 == gameObjectSpawnRequest.id && gameObjectSpawnRequest.id == -1)
@@ -8006,7 +8009,7 @@ public class Client extends GameShell {
                     int variable = varBit.variable;
                     int lsb = varBit.leastSignificantBit;
                     int msb = varBit.mostSignificantBit;
-                    int mask = StaticLogic.BITFIELD_MAX_VALUE[msb - lsb];
+                    int mask = StaticLogic.BITFIELD_MASK[msb - lsb];
                     _inter_val = session_variables[variable] >> lsb & mask;
                 }
                 if (opcode == 15)
@@ -8634,29 +8637,29 @@ public class Client extends GameShell {
                     if (wallObject != null) {
                         int k21 = wallObject.uid >> 14 & 0x7fff;
                         if (j12 == 2) {
-                            wallObject.node1 = new ObjectOnTile(k21, 4 + k14, 2, i19, l19, j18, k20, j17, false);
-                            wallObject.node2 = new ObjectOnTile(k21, k14 + 1 & 3, 2, i19, l19, j18, k20, j17, false);
+                            wallObject.node1 = new ObjectInstance(k21, 4 + k14, 2, j18, i19, k20, l19, j17, false);
+                            wallObject.node2 = new ObjectInstance(k21, k14 + 1 & 3, 2, j18, i19, k20, l19, j17, false);
                         } else {
-                            wallObject.node1 = new ObjectOnTile(k21, k14, j12, i19, l19, j18, k20, j17, false);
+                            wallObject.node1 = new ObjectInstance(k21, k14, j12, j18, i19, k20, l19, j17, false);
                         }
                     }
                 }
                 if (j16 == 1) {
                     WallDecoration wallDecoration = sceneGraph.getWallDecoration(x, y, plane);
                     if (wallDecoration != null)
-                        wallDecoration.myMob = new ObjectOnTile(wallDecoration.uid >> 14 & 0x7fff, 0, 4, i19, l19, j18, k20, j17, false);
+                        wallDecoration.myMob = new ObjectInstance(wallDecoration.uid >> 14 & 0x7fff, 0, 4, j18, i19, k20, l19, j17, false);
                 }
                 if (j16 == 2) {
                     InteractiveObject class28 = sceneGraph.getInteractableObject(x, y, plane);
                     if (j12 == 11)
                         j12 = 10;
                     if (class28 != null)
-                        class28.jagexNode = new ObjectOnTile(class28.uid >> 14 & 0x7fff, k14, j12, i19, l19, j18, k20, j17, false);
+                        class28.jagexNode = new ObjectInstance(class28.uid >> 14 & 0x7fff, k14, j12, j18, i19, k20, l19, j17, false);
                 }
                 if (j16 == 3) {
                     GroundDecoration class49 = sceneGraph.getGroundDecoration(y, x, plane);
                     if (class49 != null)
-                        class49.aClass30_Sub2_Sub4_814 = new ObjectOnTile(class49.uid >> 14 & 0x7fff, k14, 22, i19, l19, j18, k20, j17, false);
+                        class49.aClass30_Sub2_Sub4_814 = new ObjectInstance(class49.uid >> 14 & 0x7fff, k14, 22, j18, i19, k20, l19, j17, false);
                 }
             }
             return;
@@ -8688,17 +8691,17 @@ public class Client extends GameShell {
                 int j22 = intGroundArray[plane][x + 1][y];
                 int k22 = intGroundArray[plane][x + 1][y + 1];
                 int l22 = intGroundArray[plane][x][y + 1];
-                Model model = class46.renderObject(j19, i20, i22, j22, k22, l22, -1);
+                Model model = class46.generate_model(j19, i20, i22, j22, k22, l22, -1);
                 if (model != null) {
                     createObjectSpawnRequest(k17 + 1, -1, 0, l20, y, 0, plane, x, l14 + 1);
                     player.anInt1707 = l14 + currentTime;
                     player.anInt1708 = k17 + currentTime;
                     player.aModel_1714 = model;
-                    int i23 = class46.sizeX;
-                    int j23 = class46.sizeY;
+                    int i23 = class46.width;
+                    int j23 = class46.height;
                     if (i20 == 1 || i20 == 3) {
-                        i23 = class46.sizeY;
-                        j23 = class46.sizeX;
+                        i23 = class46.height;
+                        j23 = class46.width;
                     }
                     player.anInt1711 = x * 128 + i23 * 64;
                     player.anInt1713 = y * 128 + j23 * 64;
@@ -8808,7 +8811,7 @@ public class Client extends GameShell {
         SceneGraph.lowMem = true;
         Rasterizer.lowMem = true;
         lowMem = true;
-        MapRegion.lowMem = true;
+        MapRegion.low_detail = true;
         ObjectDef.lowMem = true;
     }
 
@@ -8969,10 +8972,10 @@ public class Client extends GameShell {
                 if (j1 == 2) {
                     sceneGraph.method293(z, x, y);
                     ObjectDef class46_1 = ObjectDef.forID(objectID_);
-                    if (x + class46_1.sizeX > 103 || y + class46_1.sizeX > 103 || x + class46_1.sizeY > 103 || y + class46_1.sizeY > 103)
+                    if (x + class46_1.width > 103 || y + class46_1.width > 103 || x + class46_1.height > 103 || y + class46_1.height > 103)
                         return;
                     if (class46_1.isUnwalkable)
-                        tileSettings[z].method216(l2, class46_1.sizeX, x, y, class46_1.sizeY, class46_1.aBoolean757);
+                        tileSettings[z].method216(l2, class46_1.width, x, y, class46_1.height, class46_1.aBoolean757);
                 }
                 if (j1 == 3) {
                     sceneGraph.removeGroundDecoration(z, y, x);
@@ -10771,7 +10774,7 @@ public class Client extends GameShell {
     private boolean report_abuse_mute_player;
     private boolean loadGeneratedMap;
     private boolean inCutscene;
-    static int currentTime;
+    public static int currentTime;
     private static final String validUserPassChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"\243$%^&*()-_=+[{]};:'@#~,<.>/?\\| ";
     private GraphicsBuffer tabAreaDrawingTarget;
     private GraphicsBuffer minimapIP;
